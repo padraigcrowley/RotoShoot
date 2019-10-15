@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class EnemyBehaviour : MonoBehaviour {
+public abstract class EnemyBehaviour : MonoBehaviour {
 
   private float speed;
   private float hp;
@@ -76,7 +76,7 @@ public class EnemyBehaviour : MonoBehaviour {
         {
           Destroy(collision.gameObject);//destroy the missile object
           hp--;
-          ReactToPlayerMissileHit(collision.gameObject);
+          ReactToPlayerMissileHit();
         }
       }
       else if (collision.gameObject.tag.Equals("Player"))
@@ -89,8 +89,6 @@ public class EnemyBehaviour : MonoBehaviour {
     }
   }
 
-  public virtual void ReactToPlayerMissileHit(GameObject missile)
-  {
-    transform.localScale *= 1.1f; // scale slightly up to show they've been shot
-  }
+  public abstract void ReactToPlayerMissileHit();
+  
 }

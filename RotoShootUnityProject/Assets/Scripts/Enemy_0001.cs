@@ -4,8 +4,8 @@ using UnityEngine;
 
 public class Enemy_0001 : EnemyBehaviour
 {
-  public override void ReactToPlayerMissileHit(GameObject missile)
+  public override void ReactToPlayerMissileHit()
   {
-    transform.localScale *= 2f; // scale slightly up to show they've been shot
+    transform.localScale *= 1.1f; // scale slightly up to show they've been shot
   }
 }
