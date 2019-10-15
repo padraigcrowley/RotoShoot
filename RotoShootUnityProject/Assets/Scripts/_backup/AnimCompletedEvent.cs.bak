@@ -1,0 +1,16 @@
+﻿using System.Collections;
+using System.Collections.Generic;
+using UnityEngine;
+
+public class AnimCompletedEvent : MonoBehaviour
+{
+
+  public GameObject PlayerShip;
+
+  public void PlayerShipIntroAninCompletedEvent()
+  {
+    print("Player Intro AnimCompleteEventTriggered!");
+    PlayerShip.GetComponent<PlayerShip>().PlayerShipIntroAnimCompleted = true;
+    //PlayerShipGreenRotArrowObj.SetActive(true);
+  }
+}

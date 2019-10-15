@@ -1,0 +1,145 @@
+﻿using System.Collections;
+using System.Collections.Generic;
+using UnityEngine;
+
+public class PlayerShip : MonoBehaviour
+{
+  Animator PlayerShipGFXAnim;
+  private float nextActionTime = 0.0f;
+
+  public Transform barrelTip;
+  [SerializeField] private Renderer shipSpriteRenderer;
+  [SerializeField] private GameObject bullet;
+  public GameObject PlayerShipGreenRotArrowObj;
+  public GameObject PlayerShipRedRotArrowObj;
+  public bool PlayerShipIntroAnimCompleted = false;
+  private bool PlayerShipIntroAnimPlaying = false;
+  
+
+  void Start()
+  {
+    gameObject.SetActive(true);
+    PlayerShipGFXAnim = GetComponentInChildren<Animator>();
+    shipSpriteRenderer.GetComponentInChildren<Renderer>();
+    PlayerShipRedRotArrowObj.SetActive(false);
+    PlayerShipGreenRotArrowObj.SetActive(false);
+    //originalRotationValue = transform.rotation;
+  }
+
+  // Update is called once per frame
+  void Update()
+  {
+
+    if (PlayerShipIntroAnimCompleted == true)
+      PlayerShipIntroAninCompletedEvent();
+
+
+    //print("PlayerShip Pos: " + transform.position);
+    if (MyGameplayManager.Instance.currentGameState == MyGameplayManager.GameState.MISSION_INTRO_IN_PROGRESS)
+    {
+      if (PlayerShipIntroAnimPlaying == false)
+      {
+        PlayerShipIntroAnimPlaying = true;
+        shipSpriteRenderer.enabled = true;
+        print("PLAYING SHIP INTRO");
+        PlayerShipGFXAnim.Play("PlayerShipIntro", -1, 0f);
+      }
+      else if (PlayerShipIntroAnimCompleted == true)
+      {
+        PlayerShipIntroAnimPlaying = false;
+        MyGameplayManager.Instance.currentGameState = MyGameplayManager.GameState.MISSION_IN_PROGRESS;
+        print("gamestate is now set to MISSION_IN_PROGRESS!");
+      }
+    }
+    else if (MyGameplayManager.Instance.currentGameState == MyGameplayManager.GameState.MISSION_IN_PROGRESS)
+    {
+      processInputQueue();
+      if ((Time.time > nextActionTime) && (MyGameplayManager.Instance.playerShipRotating == false))
+      {
+        nextActionTime = Time.time + MyGameplayManager.Instance.currentPlayerShipFireRate;
+        CreatePlayerBullet();
+      }
+    }
+    else if (MyGameplayManager.Instance.currentGameState == MyGameplayManager.GameState.GAME_OVER_SCREEN)
+    {
+      transform.rotation = Quaternion.identity; // reset to face upwards, back to its original rotation.
+      shipSpriteRenderer.gameObject.GetComponent<Renderer>().enabled = false;
+      PlayerShipIntroAnimCompleted = false;
+      PlayerShipRedRotArrowObj.SetActive(false);
+      PlayerShipGreenRotArrowObj.SetActive(false);   
+    }
+  }
+    
+  private void processInputQueue()
+  {
+    if ((MyGameplayManager.Instance.mouseClickQueue.Count != 0) && (MyGameplayManager.Instance.playerShipRotating == false))
+    {
+      //print("Prev Ship Rotation: " + this.gameObject.transform.eulerAngles);
+      //Queue dbgQueue = MyGameplayManager.Instance.mouseClickQueue;
+      float angleToRotate = (float)MyGameplayManager.Instance.mouseClickQueue.Dequeue();
+      //print("this.gameObject.transform.eulerAngles.z + angleToRotate = " + (this.gameObject.transform.eulerAngles.z + angleToRotate));
+
+      if  ((Mathf.Round(this.gameObject.transform.eulerAngles.z + angleToRotate)) != 180)
+        StartCoroutine(RotatePlayerShip(this.gameObject, new Vector3(0, 0, angleToRotate), MyGameplayManager.Instance.currentPlayerShipRotationDuration));      
+    }
+  }
+
+  private void CreatePlayerBullet()
+  {
+    GameObject firedBullet = Instantiate(bullet, barrelTip.position, barrelTip.rotation);
+    //firedBullet.GetComponent<Rigidbody2D>().velocity = barrelTip.up * MyGameplayManager.Instance.playerMissileSpeedMultiplier;
+  }
+
+  IEnumerator RotatePlayerShip(GameObject gameObjectToMove, Vector3 eulerAngles, float duration)  //https://stackoverflow.com/questions/37586407/rotate-gameobject-over-time/37588536
+  {
+    if (MyGameplayManager.Instance.playerShipRotating)
+    {
+      yield break;
+    }
+    MyGameplayManager.Instance.playerShipRotating = true;
+    PlayerShipRedRotArrowObj.SetActive(true);
+    PlayerShipGreenRotArrowObj.SetActive(false);
+
+    Vector3 newRot = gameObjectToMove.transform.eulerAngles + eulerAngles;
+    Vector3 currentRot = gameObjectToMove.transform.eulerAngles;
+    //print("PrevRot: " + currentRot + " NewRot: " + newRot);
+
+    float counter = 0;
+    while (counter < duration)
+    {
+      counter += Time.deltaTime;
+      gameObjectToMove.transform.eulerAngles = Vector3.Lerp(currentRot, newRot, counter / duration);
+      yield return null;
+    }
+    MyGameplayManager.Instance.playerShipRotating = false;
+    if ((MyGameplayManager.Instance.mouseClickQueue.Count == 0))
+    {
+      PlayerShipRedRotArrowObj.SetActive(false);
+      PlayerShipGreenRotArrowObj.SetActive(true);
+    }
+  }
+
+  public void RotateShipArrows(float angleToRotate) //invoked by PlayerShipMoveEvent.Invoke(MyGameplayManager.Instance.angleToRotatePlayerShip) Event on InputManagerObject
+  {
+    //Output message to the console
+    //Debug.Log("Angle: " + angleToRotate );
+    if ((Mathf.Round(PlayerShipGreenRotArrowObj.gameObject.transform.eulerAngles.z + angleToRotate)) != 180)
+    {
+      PlayerShipGreenRotArrowObj.transform.Rotate(Vector3.forward * angleToRotate);
+      PlayerShipRedRotArrowObj.transform.Rotate(Vector3.forward * angleToRotate);
+    }
+  }
+
+  public void PlayerShipIntroAninStartedEvent()
+  {
+    // needed any more?
+    // PlayerShipIntroAninCompleted = false;
+    
+  }
+  public void PlayerShipIntroAninCompletedEvent()
+  {
+    //PlayerShipIntroAnimCompleted = true;
+    PlayerShipGreenRotArrowObj.SetActive(true);
+  }
+
+}

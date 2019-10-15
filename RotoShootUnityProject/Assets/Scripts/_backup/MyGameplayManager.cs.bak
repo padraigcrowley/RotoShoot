@@ -1,0 +1,88 @@
+﻿using System.Collections;
+using System.Collections.Generic;
+using UnityEngine;
+
+public class MyGameplayManager : Singleton<MyGameplayManager>
+{
+
+  public Queue mouseClickQueue;
+  [HideInInspector] public bool playerShipRotating = false;
+  [HideInInspector] public int numEnemyKills = 0;
+  [HideInInspector] public enum GameState { WAITING_FOR_START_BUTTON, MISSION_INTRO_IN_PROGRESS, MISSION_IN_PROGRESS, GAME_OVER_SCREEN } //0=waiting for startButton, 1=3,2,1 counter, 2=playing game, 3=gameover screen
+  [HideInInspector] public int currentPlayerScore = 0;
+  public int highPlayerScore = 0;
+  [HideInInspector] public int currentPlayerHP;
+   
+  public float  angleToRotatePlayerShip;
+
+  [HideInInspector] public float currentPlayerShipRotationDuration;
+  public float basePlayerShipRotationDuration;
+
+  [HideInInspector] public float currentPlayerMissileSpeedMultiplier;
+  public float basePlayerMissileSpeedMultiplier;
+
+  [HideInInspector] public float currentPlayerShipFireRate; // the lower the number, the faster the rate.
+  public float basePlayerShipFireRate; // the lower the number, the faster the rate.
+
+  public int maxEnemy0001HP; //set in the inspector
+  public float enemy0001BaseSpeed = 1.0f;
+
+  public int maxPlayerHP;
+
+  public GameState currentGameState;
+  [HideInInspector] public Vector3 playerShipPos;
+  [HideInInspector] public float levelPlayTimeElapsed;
+
+  // Start is called before the first frame update
+  void Start()
+  {
+    
+    currentGameState = GameState.MISSION_INTRO_IN_PROGRESS;
+    currentPlayerMissileSpeedMultiplier = basePlayerMissileSpeedMultiplier;
+    currentPlayerHP = maxPlayerHP;
+    currentPlayerShipFireRate = basePlayerShipFireRate;
+    mouseClickQueue = new Queue();
+    currentPlayerScore = 0;
+  }
+
+  // Update is called once per frame
+  void Update()
+  {
+    if (currentGameState == GameState.MISSION_IN_PROGRESS)
+    {
+      //TEMP GAMEPLAY - gradually increase PlayerShipRotationDuration
+      //currentPlayerShipRotationDuration = basePlayerShipRotationDuration - (numEnemyKills / 3000f);
+      //currentPlayerMissileSpeedMultiplier = basePlayerMissileSpeedMultiplier - (numEnemyKills / 500f);
+      //currentPlayerShipFireRate = basePlayerShipFireRate - (numEnemyKills / 300f);
+      //print("playerShipRotationDuration: " + currentPlayerShipRotationDuration + " currentPlayerMissileSpeedMultiplier: " + currentPlayerMissileSpeedMultiplier + " currentPlayerShipFireRate: " + currentPlayerShipFireRate);
+      levelPlayTimeElapsed += Time.deltaTime;
+
+
+      currentPlayerScore = numEnemyKills * 10;
+      if (currentPlayerScore > highPlayerScore)
+      {
+        highPlayerScore = currentPlayerScore;
+      }
+
+      if (currentPlayerHP <= 0)
+      {
+        print("Game Over!");
+        currentGameState = GameState.GAME_OVER_SCREEN;
+
+      }
+    }
+  }
+
+  public void initializeMainGameplayLoop()
+  {
+    currentPlayerHP = maxPlayerHP;
+    //gameState = 0;
+    mouseClickQueue = new Queue();
+    currentPlayerScore = 0;
+    numEnemyKills = 0;
+    enemy0001BaseSpeed = 1.0f;
+    currentPlayerShipRotationDuration = basePlayerShipRotationDuration;
+    
+  }
+
+}

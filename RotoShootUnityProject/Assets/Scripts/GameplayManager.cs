@@ -1,0 +1,109 @@
+﻿using System.Collections;
+using System.Collections.Generic;
+using UnityEngine;
+
+public class GameplayManager : Singleton<GameplayManager>
+{
+
+  public Queue mouseClickQueue;
+  [HideInInspector] public bool playerShipRotating = false;
+  
+  [HideInInspector] public enum GameState { WAITING_FOR_START_BUTTON, LEVEL_INTRO_IN_PROGRESS, LEVEL_IN_PROGRESS, LEVEL_FAILED, LEVEL_OUTRO_IN_PROGRESS, LEVEL_COMPLETE, GAME_OVER_SCREEN } 
+  [HideInInspector] public int currentPlayerScore = 0;
+  public int highPlayerScore = 0;
+  [HideInInspector] public int currentPlayerHP;
+   
+  public float  angleToRotatePlayerShip;
+
+  public float currentPlayerShipRotationDuration;
+  public float basePlayerShipRotationDuration;
+
+  public float currentPlayerMissileSpeedMultiplier;
+  public float basePlayerMissileSpeedMultiplier;
+
+  public float currentPlayerShipFireRate; // the lower the number, the faster the rate.
+  public float basePlayerShipFireRate; // the lower the number, the faster the rate.
+
+  public int maxEnemy0001HP; //set in the inspector
+  public float enemy0001BaseSpeed = 1.0f;
+
+  public int maxPlayerHP;
+
+  public GameState currentGameState;
+  [HideInInspector] public Vector3 playerShipPos;
+  
+
+  // Start is called before the first frame update
+  void Start()
+  {
+    
+    currentGameState = GameState.LEVEL_INTRO_IN_PROGRESS;
+    currentPlayerMissileSpeedMultiplier = basePlayerMissileSpeedMultiplier;
+    currentPlayerHP = maxPlayerHP;
+    currentPlayerShipFireRate = basePlayerShipFireRate;
+    mouseClickQueue = new Queue();
+    currentPlayerScore = 0;
+  }
+
+  // Update is called once per frame
+  void Update()
+  {
+
+    switch (currentGameState)
+    {
+      case GameState.LEVEL_IN_PROGRESS:
+        {
+          if (currentPlayerScore > highPlayerScore)
+          {
+            highPlayerScore = currentPlayerScore;
+          }
+
+          if (currentPlayerHP <= 0)
+          {
+            print("Game Over!");
+            currentGameState = GameState.GAME_OVER_SCREEN;
+          }
+          break;
+        }
+      case GameState.LEVEL_COMPLETE:
+        {
+          
+          print("Level Completion Criteria TRUE!, Next Level is:" + GameManagerX.Instance.currentLevel+1);
+          break;
+        }
+      case GameState.LEVEL_FAILED:
+        {
+          print("Level Failed!");
+          break;
+        }
+      default:
+        break;
+    }
+
+
+    
+    {
+      //TEMP GAMEPLAY - gradually increase PlayerShipRotationDuration
+      //currentPlayerShipRotationDuration = basePlayerShipRotationDuration - (numEnemyKills / 3000f);
+      //currentPlayerMissileSpeedMultiplier = basePlayerMissileSpeedMultiplier - (numEnemyKills / 500f);
+      //currentPlayerShipFireRate = basePlayerShipFireRate - (numEnemyKills / 300f);
+      //print("playerShipRotationDuration: " + currentPlayerShipRotationDuration + " currentPlayerMissileSpeedMultiplier: " + currentPlayerMissileSpeedMultiplier + " currentPlayerShipFireRate: " + currentPlayerShipFireRate);
+
+      //currentPlayerScore = numEnemyKills * 10;
+      
+    }
+  }
+
+  public void initializeMainGameplayLoop()
+  {
+    currentPlayerHP = maxPlayerHP;
+    //gameState = 0;
+    mouseClickQueue = new Queue();
+    currentPlayerScore = 0;
+    //numEnemyKills = 0;
+    enemy0001BaseSpeed = 1.0f;
+    currentPlayerShipRotationDuration = basePlayerShipRotationDuration;
+    
+  }
+
+}

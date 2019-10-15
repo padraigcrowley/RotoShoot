@@ -1,0 +1,86 @@
+﻿using System.Collections;
+using System.Collections.Generic;
+using UnityEngine;
+using UnityEngine.UI;
+
+public class DebugMenuUIManager : MonoBehaviour
+{
+  public Slider playerShipRotationDurationSlider;
+  public Text playerShipRotationDurationSliderTextValue;
+  public Slider playerShipFireRateSlider;
+  public Text playerShipFireRateSliderTextValue;
+  public Slider maxEnemyHPSlider;
+  public Text maxEnemyHPSliderTextValue;
+
+  public Image DebugMenuPanel;
+  private bool isDebugMenuPanelHidden;
+
+  private bool paused = false;
+
+  void Start()
+  {
+    DebugMenuPanel.gameObject.SetActive(false);
+    isDebugMenuPanelHidden = true;
+
+    playerShipRotationDurationSliderTextValue.text = MyGameplayManager.Instance.currentPlayerShipRotationDuration.ToString();
+    playerShipRotationDurationSlider.SetValueWithoutNotify(MyGameplayManager.Instance.currentPlayerShipRotationDuration);
+    playerShipFireRateSliderTextValue.text = MyGameplayManager.Instance.currentPlayerShipFireRate.ToString();
+    playerShipFireRateSlider.SetValueWithoutNotify(MyGameplayManager.Instance.currentPlayerShipFireRate);
+    maxEnemyHPSliderTextValue.text = MyGameplayManager.Instance.maxEnemy0001HP.ToString();
+    maxEnemyHPSlider.SetValueWithoutNotify(MyGameplayManager.Instance.maxEnemy0001HP);
+    /*
+    playerShipRotationDurationSliderTextValue.text = MyGameplayManager.Instance.playerShipRotationDuration.ToString();
+    playerShipRotationDurationSlider.value = MyGameplayManager.Instance.playerShipRotationDuration;
+    playerShipFireRateSliderTextValue.text = MyGameplayManager.Instance.playerShipFireRate.ToString();
+    playerShipFireRateSlider.value = MyGameplayManager.Instance.playerShipFireRate;
+    maxEnemyHPSliderTextValue.text = MyGameplayManager.Instance.maxEnemy01HP.ToString();
+    maxEnemyHPSlider.value = MyGameplayManager.Instance.maxEnemy01HP;*/
+  }
+
+  // Update is called once per frame
+  void Update()
+  {
+
+  }
+
+  public void AdjustPlayerShipRotationDuration()
+  {
+    MyGameplayManager.Instance.currentPlayerShipRotationDuration = playerShipRotationDurationSlider.value;
+    playerShipRotationDurationSliderTextValue.text = MyGameplayManager.Instance.currentPlayerShipRotationDuration.ToString();
+    //PlayerPrefs.SetFloat("musicVolume", PlayerStats.MusicVolume);
+    Debug.Log("PlayerShipRotationDurationSlider = " + MyGameplayManager.Instance.currentPlayerShipRotationDuration);
+    
+  }
+
+  public void AdjustPlayerShipFireRate()
+  {
+    MyGameplayManager.Instance.currentPlayerShipFireRate = playerShipFireRateSlider.value;
+    playerShipFireRateSliderTextValue.text = MyGameplayManager.Instance.currentPlayerShipFireRate.ToString();
+    //PlayerPrefs.SetFloat("musicVolume", PlayerStats.MusicVolume);
+    Debug.Log("playerShipFireRate = " + MyGameplayManager.Instance.currentPlayerShipFireRate);
+  }
+
+  public void AdjustMaxEnemy01HP()
+  {
+    MyGameplayManager.Instance.maxEnemy0001HP = (int)maxEnemyHPSlider.value;
+    maxEnemyHPSliderTextValue.text = MyGameplayManager.Instance.maxEnemy0001HP.ToString();
+    //PlayerPrefs.SetFloat("musicVolume", PlayerStats.MusicVolume);
+    //Debug.Log("enemyHPSlider = " + enemyHP);
+  }
+
+  public void ToggleDebugMenu()
+  {
+    if (isDebugMenuPanelHidden)
+    {
+      DebugMenuPanel.gameObject.SetActive(true);
+      isDebugMenuPanelHidden = false;
+      paused = true;
+    }
+    else
+    {
+      DebugMenuPanel.gameObject.SetActive(false);
+      isDebugMenuPanelHidden = true;
+      paused = false;
+    }
+  }
+}
