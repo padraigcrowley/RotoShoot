@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class Enemy_0002 : EnemyBehaviour
 {
-  private float knockBackAmount = 100f;
+  private float knockBackAmount = 99f;
   
 
   public override void ReactToPlayerMissileHit()
