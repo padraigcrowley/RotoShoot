@@ -3,21 +3,22 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class EnemyBehaviour : MonoBehaviour{
+public class EnemyBehaviour : MonoBehaviour {
 
   private float speed;
   private float hp;
   public float speedMultiplierFromSpawner = 1f;
   public float hpMultiplierFromSpawner = 1f;
-    
+
   private float startPosX, startPosY, startPosZ;
   private float startScaleX, startScaleY, startScaleZ;
-  
+
   private float initialHP, initialSpeed;
-  
+
   // Start is called before the first frame update
   void Start()
   {
+    //todo - move this out to GameplayManager or to sub-class?
     speed = .25f;
     hp = 1f;
 
@@ -25,7 +26,6 @@ public class EnemyBehaviour : MonoBehaviour{
     Vector3 dir = GameplayManager.Instance.playerShipPos - transform.position;
     float angle = Mathf.Atan2(dir.y, dir.x) * Mathf.Rad2Deg + 90f;
     transform.rotation = Quaternion.AngleAxis(angle, Vector3.forward);
-    
 
     startPosX = transform.position.x;
     startPosY = transform.position.y;
@@ -44,9 +44,6 @@ public class EnemyBehaviour : MonoBehaviour{
   {
     if (GameplayManager.Instance.currentGameState == GameplayManager.GameState.LEVEL_IN_PROGRESS)
     {
-      
-
-
       // Move our position a step closer to the target.
       float step = speed * Time.deltaTime; // calculate distance to move
       transform.position = Vector3.MoveTowards(transform.position, GameplayManager.Instance.playerShipPos, step);
@@ -66,7 +63,7 @@ public class EnemyBehaviour : MonoBehaviour{
     {
       if (collision.gameObject.tag.Equals("PlayerMissile"))
       {
-        if (hp <= 1)
+        if (hp <= 1) //lethal hit
         {
           Destroy(collision.gameObject);//destroy the missile object
           //Destroy(gameObject); //destroy this enemy gameobject
@@ -75,11 +72,11 @@ public class EnemyBehaviour : MonoBehaviour{
           transform.localScale = new Vector3(startScaleX, startScaleX, startScaleX); // reset its scale back to original scale        
           LevelManager.Instance.numEnemyKillsInLevel++;
         }
-        else
+        else //non-lethal hit
         {
           Destroy(collision.gameObject);//destroy the missile object
           hp--;
-          transform.localScale *= 1.1f; // scale slightly up to show they've been shot
+          ReactToPlayerMissileHit(collision.gameObject);
         }
       }
       else if (collision.gameObject.tag.Equals("Player"))
@@ -90,5 +87,10 @@ public class EnemyBehaviour : MonoBehaviour{
         transform.localScale = new Vector3(1f, 1f, 1f); // reset its scale back to 1
       }
     }
-  }  
+  }
+
+  public virtual void ReactToPlayerMissileHit(GameObject missile)
+  {
+    transform.localScale *= 1.1f; // scale slightly up to show they've been shot
+  }
 }

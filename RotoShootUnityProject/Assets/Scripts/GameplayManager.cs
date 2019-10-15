@@ -78,20 +78,7 @@ public class GameplayManager : Singleton<GameplayManager>
         }
       default:
         break;
-    }
-
-
-    
-    {
-      //TEMP GAMEPLAY - gradually increase PlayerShipRotationDuration
-      //currentPlayerShipRotationDuration = basePlayerShipRotationDuration - (numEnemyKills / 3000f);
-      //currentPlayerMissileSpeedMultiplier = basePlayerMissileSpeedMultiplier - (numEnemyKills / 500f);
-      //currentPlayerShipFireRate = basePlayerShipFireRate - (numEnemyKills / 300f);
-      //print("playerShipRotationDuration: " + currentPlayerShipRotationDuration + " currentPlayerMissileSpeedMultiplier: " + currentPlayerMissileSpeedMultiplier + " currentPlayerShipFireRate: " + currentPlayerShipFireRate);
-
-      //currentPlayerScore = numEnemyKills * 10;
-      
-    }
+    }    
   }
 
   public void initializeMainGameplayLoop()
