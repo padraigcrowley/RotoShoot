@@ -12,7 +12,7 @@ public class EnemyBehaviour : MonoBehaviour{
     
   private float startPosX, startPosY, startPosZ;
   private float startScaleX, startScaleY, startScaleZ;
-  private float startRotX, startRotY, startRotZ;
+  
   private float initialHP, initialSpeed;
   
   // Start is called before the first frame update
@@ -21,12 +21,11 @@ public class EnemyBehaviour : MonoBehaviour{
     speed = .25f;
     hp = 1f;
 
+    // rotate enemy to face player shiphttps://answers.unity.com/questions/585035/lookat-2d-equivalent-.html
     Vector3 dir = GameplayManager.Instance.playerShipPos - transform.position;
     float angle = Mathf.Atan2(dir.y, dir.x) * Mathf.Rad2Deg + 90f;
     transform.rotation = Quaternion.AngleAxis(angle, Vector3.forward);
     
-
-    //transform.up = GameplayManager.Instance.playerShipPos - transform.position; //https://answers.unity.com/questions/585035/lookat-2d-equivalent-.html
 
     startPosX = transform.position.x;
     startPosY = transform.position.y;
