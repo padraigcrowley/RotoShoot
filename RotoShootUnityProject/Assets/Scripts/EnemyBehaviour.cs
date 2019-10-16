@@ -3,7 +3,9 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
-public abstract class EnemyBehaviour : MonoBehaviour {
+public abstract class EnemyBehaviour : ExtendedBehaviour
+//https://answers.unity.com/questions/379440/a-simple-wait-function-without-coroutine-c.html
+{
 
   private float speed;
   private float hp;
@@ -14,30 +16,34 @@ public abstract class EnemyBehaviour : MonoBehaviour {
   private float startScaleX, startScaleY, startScaleZ;
 
   private float initialHP, initialSpeed;
+  private bool readyToRespawn;
 
-  // Start is called before the first frame update
+  //----------------------
+  public abstract void ReactToPlayerMissileHit();
+
   void Start()
   {
-    //todo - move this out to GameplayManager or to sub-class?
+    //todo - move this out to GameplayManager or to sub-class or prefab??
     speed = .25f;
     hp = 1f;
+    initialSpeed = speed * speedMultiplierFromSpawner; // should these be set in this class, not MyGameplayManager??
+    initialHP = hp * hpMultiplierFromSpawner;
+    speed = initialSpeed;
+    hp = initialHP;
 
-    // rotate enemy to face player shiphttps://answers.unity.com/questions/585035/lookat-2d-equivalent-.html
+    readyToRespawn = true;
+
+    // rotate enemy to face player ship https://answers.unity.com/questions/585035/lookat-2d-equivalent-.html
     Vector3 dir = GameplayManager.Instance.playerShipPos - transform.position;
     float angle = Mathf.Atan2(dir.y, dir.x) * Mathf.Rad2Deg + 90f;
     transform.rotation = Quaternion.AngleAxis(angle, Vector3.forward);
-
+        
     startPosX = transform.position.x;
     startPosY = transform.position.y;
     startPosZ = transform.position.z;
     startScaleX = transform.localScale.x;
     startScaleY = transform.localScale.y;
     startScaleZ = transform.localScale.z;
-
-    initialSpeed = speed * speedMultiplierFromSpawner; // should these be set in this class, not MyGameplayManager??
-    initialHP = hp * hpMultiplierFromSpawner;
-    speed = initialSpeed;
-    hp = initialHP;
   }
 
   void Update()
@@ -53,7 +59,7 @@ public abstract class EnemyBehaviour : MonoBehaviour {
       hp = initialHP; //reset health and position
       speed = initialSpeed;
       transform.position = new Vector3(startPosX, startPosY, startPosZ);
-      transform.localScale = new Vector3(startScaleX, startScaleX, startScaleX); // reset its scale       
+      transform.localScale = new Vector3(startScaleX, startScaleX, startScaleX); // reset its scale  
     }
   }
 
@@ -66,11 +72,20 @@ public abstract class EnemyBehaviour : MonoBehaviour {
         if (hp <= 1) //lethal hit
         {
           Destroy(collision.gameObject);//destroy the missile object
-          //Destroy(gameObject); //destroy this enemy gameobject
-          hp = initialHP; //reset health and position
-          transform.position = new Vector3(startPosX, startPosY, startPosZ);
-          transform.localScale = new Vector3(startScaleX, startScaleX, startScaleX); // reset its scale back to original scale        
           LevelManager.Instance.numEnemyKillsInLevel++;
+
+          //https://answers.unity.com/questions/379440/a-simple-wait-function-without-coroutine-c.html
+          Wait(5, () => {
+            Debug.Log("5 seconds is lost forever");
+          });
+
+          if (!readyToRespawn)
+          {
+            hp = initialHP; //reset health and position
+            transform.position = new Vector3(startPosX, startPosY, startPosZ);
+            transform.localScale = new Vector3(startScaleX, startScaleX, startScaleX); // reset its scale back to original scale
+          }
+          
         }
         else //non-lethal hit
         {
@@ -89,6 +104,6 @@ public abstract class EnemyBehaviour : MonoBehaviour {
     }
   }
 
-  public abstract void ReactToPlayerMissileHit();
+  
   
 }
