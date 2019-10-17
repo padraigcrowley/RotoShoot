@@ -7,7 +7,7 @@ public class Enemy_0002 : EnemyBehaviour
   private float knockBackAmount = 99f;
   
 
-  public override void ReactToPlayerMissileHit()
+  public override void ReactToNonLethalPlayerMissileHit()
   {
     transform.localScale *= 1.1f; // scale slightly up to show they've been shot
 

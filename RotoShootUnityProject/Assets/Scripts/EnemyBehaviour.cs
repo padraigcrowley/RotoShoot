@@ -16,10 +16,15 @@ public abstract class EnemyBehaviour : ExtendedBehaviour
   private float startScaleX, startScaleY, startScaleZ;
 
   private float initialHP, initialSpeed;
-  private bool readyToRespawn;
+  private bool enemyHitByPlayerMissile;
+
+  private GameObject missileObject;
+
+  private enum EnemyState { ALIVE, TEMPORARILY_DEAD, WAITING_TO_RESPAWN , INVINCIBLE, FULLY_DEAD, HIT_BY_PLAYER_MISSILE }
+  private EnemyState enemyState;
 
   //----------------------
-  public abstract void ReactToPlayerMissileHit();
+  public abstract void ReactToNonLethalPlayerMissileHit();
 
   void Start()
   {
@@ -31,7 +36,8 @@ public abstract class EnemyBehaviour : ExtendedBehaviour
     speed = initialSpeed;
     hp = initialHP;
 
-    readyToRespawn = true;
+    enemyState = EnemyState.ALIVE;
+    enemyHitByPlayerMissile = false;
 
     // rotate enemy to face player ship https://answers.unity.com/questions/585035/lookat-2d-equivalent-.html
     Vector3 dir = GameplayManager.Instance.playerShipPos - transform.position;
@@ -50,9 +56,65 @@ public abstract class EnemyBehaviour : ExtendedBehaviour
   {
     if (GameplayManager.Instance.currentGameState == GameplayManager.GameState.LEVEL_IN_PROGRESS)
     {
-      // Move our position a step closer to the target.
-      float step = speed * Time.deltaTime; // calculate distance to move
-      transform.position = Vector3.MoveTowards(transform.position, GameplayManager.Instance.playerShipPos, step);
+      switch (enemyState)
+      {
+        case EnemyState.ALIVE:
+        {
+            // Move our position a step closer to the target.
+            float step = speed * Time.deltaTime; // calculate distance to move
+            transform.position = Vector3.MoveTowards(transform.position, GameplayManager.Instance.playerShipPos, step);
+            break;
+        }
+        case EnemyState.TEMPORARILY_DEAD:
+        {
+
+          break;
+        }
+        case EnemyState.HIT_BY_PLAYER_MISSILE:
+        {
+            Destroy(missileObject);//destroy the missile object - should the missileObject itself be doing this or at least pass a message back to it?
+            if (hp <= 1) //lethal hit
+            {              
+              LevelManager.Instance.numEnemyKillsInLevel++;
+
+              //https://answers.unity.com/questions/379440/a-simple-wait-function-without-coroutine-c.html
+              Wait(5, () => {
+                Debug.Log("5 seconds is lost forever");
+              });
+
+              //if (!readyToRespawn)
+              {
+                hp = initialHP; //reset health and position
+                transform.position = new Vector3(startPosX, startPosY, startPosZ);
+                transform.localScale = new Vector3(startScaleX, startScaleX, startScaleX); // reset its scale back to original scale
+              }
+              enemyState = EnemyState.ALIVE;
+            }
+            else //non-lethal hit
+            {              
+              hp--;
+              ReactToNonLethalPlayerMissileHit();
+            }
+            break;
+        }
+        case EnemyState.WAITING_TO_RESPAWN:
+        {
+          break;
+        }
+        case EnemyState.INVINCIBLE:
+        {
+          break;
+        }
+        case EnemyState.FULLY_DEAD:
+        {
+          break;
+        }
+        default:
+        {
+          break;
+        }
+      }
+                 
     }
     else if (GameplayManager.Instance.currentGameState == GameplayManager.GameState.GAME_OVER_SCREEN)
     {
@@ -69,30 +131,8 @@ public abstract class EnemyBehaviour : ExtendedBehaviour
     {
       if (collision.gameObject.tag.Equals("PlayerMissile"))
       {
-        if (hp <= 1) //lethal hit
-        {
-          Destroy(collision.gameObject);//destroy the missile object
-          LevelManager.Instance.numEnemyKillsInLevel++;
-
-          //https://answers.unity.com/questions/379440/a-simple-wait-function-without-coroutine-c.html
-          Wait(5, () => {
-            Debug.Log("5 seconds is lost forever");
-          });
-
-          if (!readyToRespawn)
-          {
-            hp = initialHP; //reset health and position
-            transform.position = new Vector3(startPosX, startPosY, startPosZ);
-            transform.localScale = new Vector3(startScaleX, startScaleX, startScaleX); // reset its scale back to original scale
-          }
-          
-        }
-        else //non-lethal hit
-        {
-          Destroy(collision.gameObject);//destroy the missile object
-          hp--;
-          ReactToPlayerMissileHit();
-        }
+        missileObject = collision.gameObject;
+        enemyState = EnemyState.HIT_BY_PLAYER_MISSILE;
       }
       else if (collision.gameObject.tag.Equals("Player"))
       {
