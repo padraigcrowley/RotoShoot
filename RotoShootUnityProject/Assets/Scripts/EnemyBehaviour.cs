@@ -16,10 +16,13 @@ public abstract class EnemyBehaviour : ExtendedBehaviour
   private bool enemyHitByPlayerMissile;
 
   private GameObject missileObject;
+  private SpriteRenderer enemySpriteRenderer;
+  private CircleCollider2D enemyCircleCollider;
 
   private enum EnemyState { ALIVE, TEMPORARILY_DEAD, WAITING_TO_RESPAWN, INVINCIBLE, FULLY_DEAD, HIT_BY_PLAYER_MISSILE, HIT_BY_PLAYER_SHIP }
   private EnemyState enemyState;
-  private bool respawnWaitOver; 
+  private bool respawnWaitOver;
+  bool startedWaiting;
 
   //----------------------
   public abstract void ReactToNonLethalPlayerMissileHit();
@@ -37,11 +40,15 @@ public abstract class EnemyBehaviour : ExtendedBehaviour
     enemyState = EnemyState.ALIVE;
     enemyHitByPlayerMissile = false;
     respawnWaitOver = false;
+    startedWaiting = false;
 
     // rotate enemy to face player ship https://answers.unity.com/questions/585035/lookat-2d-equivalent-.html
     Vector3 dir = GameplayManager.Instance.playerShipPos - transform.position;
     float angle = Mathf.Atan2(dir.y, dir.x) * Mathf.Rad2Deg + 90f;
     transform.rotation = Quaternion.AngleAxis(angle, Vector3.forward);
+
+    enemySpriteRenderer = GetComponent<SpriteRenderer>();
+    enemyCircleCollider = GetComponent<CircleCollider2D>();
 
     startPosX = transform.position.x;
     startPosY = transform.position.y;
@@ -66,14 +73,14 @@ public abstract class EnemyBehaviour : ExtendedBehaviour
           }
         case EnemyState.TEMPORARILY_DEAD:
           {
-
+            TemporarilyDie();
             break;
           }
         case EnemyState.HIT_BY_PLAYER_MISSILE:
           {
             Destroy(missileObject);//destroy the missile object - should the missileObject itself be doing this or at least pass a message back to it?
             HandleDamage();
-            
+
             break;
           }
         case EnemyState.HIT_BY_PLAYER_SHIP:
@@ -88,12 +95,16 @@ public abstract class EnemyBehaviour : ExtendedBehaviour
         case EnemyState.WAITING_TO_RESPAWN:
           {
             //https://answers.unity.com/questions/379440/a-simple-wait-function-without-coroutine-c.html
-            Wait(2, () =>
+            if (!startedWaiting)
             {
-              respawnWaitOver = true;
-              Debug.Log("2 seconds is lost forever");
-            });
-            if (respawnWaitOver)
+              Wait(4, () =>
+              {
+                respawnWaitOver = true;
+                Debug.Log("4 seconds is lost forever");
+              });
+              startedWaiting = true;
+            }
+            if(respawnWaitOver)
               Respawn();
             break;
           }
@@ -126,7 +137,7 @@ public abstract class EnemyBehaviour : ExtendedBehaviour
     if (hp <= 1) //lethal hit
     {
       LevelManager.Instance.numEnemyKillsInLevel++;
-      enemyState = EnemyState.WAITING_TO_RESPAWN;
+      enemyState = EnemyState.TEMPORARILY_DEAD;
     }
     else //non-lethal hit
     {
@@ -136,12 +147,24 @@ public abstract class EnemyBehaviour : ExtendedBehaviour
     }
   }
 
+  private void TemporarilyDie()
+  {
+    enemySpriteRenderer.enabled = false;
+    enemyCircleCollider.enabled = false;
+    respawnWaitOver = false;
+    startedWaiting = false;
+    enemyState = EnemyState.WAITING_TO_RESPAWN;
+  }
+
   private void Respawn()
   {
-      hp = initialHP; //reset health and position
-      transform.position = new Vector3(startPosX, startPosY, startPosZ);
-      transform.localScale = new Vector3(startScaleX, startScaleX, startScaleX); // reset its scale back to original scale    
-      enemyState = EnemyState.ALIVE;
+
+    hp = initialHP; //reset health and position
+    transform.position = new Vector3(startPosX, startPosY, startPosZ);
+    transform.localScale = new Vector3(startScaleX, startScaleX, startScaleX); // reset its scale back to original scale    
+    enemySpriteRenderer.enabled = true;
+    enemyCircleCollider.enabled = true;
+    enemyState = EnemyState.ALIVE;
   }
 
   private void OnTriggerEnter2D(Collider2D collision)
