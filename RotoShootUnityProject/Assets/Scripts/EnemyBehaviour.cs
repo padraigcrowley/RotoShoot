@@ -24,6 +24,8 @@ public abstract class EnemyBehaviour : ExtendedBehaviour
   private bool respawnWaitOver;
   bool startedWaiting;
 
+  virtual public float RespawnWaitDelay { get; set; } = 4.0f; ////default value unless overridden in subclass
+
   //---------------------
   public abstract void ReactToNonLethalPlayerMissileHit();
 
@@ -56,6 +58,7 @@ public abstract class EnemyBehaviour : ExtendedBehaviour
     startScaleX = transform.localScale.x;
     startScaleY = transform.localScale.y;
     startScaleZ = transform.localScale.z;
+        
   }
 
   void Update()
@@ -98,7 +101,7 @@ public abstract class EnemyBehaviour : ExtendedBehaviour
             //https://answers.unity.com/questions/379440/a-simple-wait-function-without-coroutine-c.html
             if (!startedWaiting)
             {
-              Wait(4, () =>
+              Wait(RespawnWaitDelay, () =>
               {
                 respawnWaitOver = true;
                 Debug.Log("4 seconds is lost forever");

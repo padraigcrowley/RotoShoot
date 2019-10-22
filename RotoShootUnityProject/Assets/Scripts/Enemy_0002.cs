@@ -4,7 +4,17 @@ public class Enemy_0002 : EnemyBehaviour
 {
   private float knockBackAmount = 99f;
 
-
+  public override float RespawnWaitDelay
+  {
+    get
+    {
+      return RespawnWaitDelay;
+    }
+    set
+    {
+      base.RespawnWaitDelay = 1.0f; //override the base class property value
+    }
+  }
   public override void ReactToNonLethalPlayerMissileHit()
   {
     transform.localScale *= 1.1f; // scale slightly up to show they've been shot
