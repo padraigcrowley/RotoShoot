@@ -27,14 +27,14 @@ public class LevelSetup_0002 : MonoBehaviour
     // Array of EnemySpawnPoint objects (pos, speedMult, HPMult)
     LevelManager.Instance.spawnPoints = new EnemySpawnPoint[]
     {
-      new EnemySpawnPoint(LevelEnemyPrefabs[0], new Vector2 (10,-10), 5f, 3),
-      new EnemySpawnPoint(LevelEnemyPrefabs[0], new Vector2 (-10,-10), 3f, 3),
-      new EnemySpawnPoint(LevelEnemyPrefabs[0], new Vector2 (8,0), 4f, 3),
-      new EnemySpawnPoint(LevelEnemyPrefabs[0], new Vector2 (-9,0), 4f, 3),
-      new EnemySpawnPoint(LevelEnemyPrefabs[0], new Vector2 (-10,10), 2.25f, 3),
-      new EnemySpawnPoint(LevelEnemyPrefabs[0], new Vector2 (12,12), 3f, 3),
-      new EnemySpawnPoint(LevelEnemyPrefabs[0], new Vector2 (0,20), 5f, 3),
-      new EnemySpawnPoint(LevelEnemyPrefabs[0], new Vector2 (0,-15), 5f, 3)
+      new EnemySpawnPoint(LevelEnemyPrefabs[0], new Vector2 (10,-10),   2f,   3),
+      new EnemySpawnPoint(LevelEnemyPrefabs[0], new Vector2 (-10,-10),  3f,   3),
+      new EnemySpawnPoint(LevelEnemyPrefabs[0], new Vector2 (8,0),      3f,   3),
+      new EnemySpawnPoint(LevelEnemyPrefabs[0], new Vector2 (-9,0),     2f,   3),
+      new EnemySpawnPoint(LevelEnemyPrefabs[0], new Vector2 (-10,10),   2f,   3),
+      new EnemySpawnPoint(LevelEnemyPrefabs[0], new Vector2 (12,12),    3f,   3),
+      new EnemySpawnPoint(LevelEnemyPrefabs[0], new Vector2 (0,20),     2f,   3),
+      new EnemySpawnPoint(LevelEnemyPrefabs[0], new Vector2 (0,-15),    3f,   3)
     };
   }
 

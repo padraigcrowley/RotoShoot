@@ -86,10 +86,11 @@ public abstract class EnemyBehaviour : ExtendedBehaviour
         case EnemyState.HIT_BY_PLAYER_SHIP:
           {
             GameplayManager.Instance.currentPlayerHP--;
-            hp = initialHP; //reset health and position
-            transform.position = new Vector3(startPosX, startPosY, startPosZ);
-            transform.localScale = new Vector3(1f, 1f, 1f); // reset its scale back to 1
-            //TODO: THEN SET STATE TO WHAT??
+            TemporarilyDie();
+            //hp = initialHP; //reset health and position
+            //transform.position = new Vector3(startPosX, startPosY, startPosZ);
+            //transform.localScale = new Vector3(1f, 1f, 1f); // reset its scale back to 1
+            ////TODO: THEN SET STATE TO WHAT??
             break;
           }
         case EnemyState.WAITING_TO_RESPAWN:
