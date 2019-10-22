@@ -24,7 +24,7 @@ public abstract class EnemyBehaviour : ExtendedBehaviour
   private bool respawnWaitOver;
   bool startedWaiting;
 
-  virtual public float RespawnWaitDelay { get; set; } = 4.0f; ////default value unless overridden in subclass
+  virtual public float RespawnWaitDelay { get; set; } = 4.0f; //default value unless overridden in derived class
 
   //---------------------
   public abstract void ReactToNonLethalPlayerMissileHit();
