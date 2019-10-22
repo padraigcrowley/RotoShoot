@@ -24,7 +24,7 @@ public abstract class EnemyBehaviour : ExtendedBehaviour
   private bool respawnWaitOver;
   bool startedWaiting;
 
-  //----------------------
+  //---------------------
   public abstract void ReactToNonLethalPlayerMissileHit();
 
   void Start()
