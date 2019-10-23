@@ -198,6 +198,7 @@ MonoBehaviour:
   LevelEnemies: []
   LevelEnemyPrefabs: []
   levelPlayTimeElapsed: 0
+  blockedPlayerShipRotationAngles: 
 --- !u!4 &254305519
 Transform:
   m_ObjectHideFlags: 0
@@ -554,9 +555,9 @@ SpriteRenderer:
   m_AutoUVMaxDistance: 0.5
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
-  m_SortingLayerID: 0
-  m_SortingLayer: 0
-  m_SortingOrder: 0
+  m_SortingLayerID: -1624045745
+  m_SortingLayer: 1
+  m_SortingOrder: 1
   m_Sprite: {fileID: 21300000, guid: c29e78f8a78ef1c49b364dc05d265bcb, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 0.19607843}
   m_FlipX: 0

@@ -28,7 +28,7 @@ public class LevelManager : Singleton<LevelManager>
     int index = 0;
     foreach (EnemySpawnPoint sp in spawnPoints)
     {
-      LevelEnemies[index] = Instantiate(LevelEnemyPrefabs[0], sp.startPos, Quaternion.identity) as GameObject;
+      LevelEnemies[index] = Instantiate(sp.enemyPrefab, sp.startPos, Quaternion.identity) as GameObject;
       LevelEnemies[index].GetComponent<EnemyBehaviour>().speedMultiplierFromSpawner = sp.speedMultiplier;
       LevelEnemies[index].GetComponent<EnemyBehaviour>().hpMultiplierFromSpawner = sp.hpMultiplier;
       index++;

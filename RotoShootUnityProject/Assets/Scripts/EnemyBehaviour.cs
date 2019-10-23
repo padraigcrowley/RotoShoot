@@ -3,11 +3,11 @@
 public abstract class EnemyBehaviour : ExtendedBehaviour
 //https://answers.unity.com/questions/379440/a-simple-wait-function-without-coroutine-c.html
 {
-
   private float speed;
   private float hp;
   public float speedMultiplierFromSpawner = 1f;
   public float hpMultiplierFromSpawner = 1f;
+  private  float respawnWaitDelay = 2.0f; //defauly value unless overridden by derived class
 
   private float startPosX, startPosY, startPosZ;
   private float startScaleX, startScaleY, startScaleZ;
@@ -20,16 +20,16 @@ public abstract class EnemyBehaviour : ExtendedBehaviour
   private CircleCollider2D enemyCircleCollider;
 
   private enum EnemyState { ALIVE, TEMPORARILY_DEAD, WAITING_TO_RESPAWN, INVINCIBLE, FULLY_DEAD, HIT_BY_PLAYER_MISSILE, HIT_BY_PLAYER_SHIP }
+
   private EnemyState enemyState;
   private bool respawnWaitOver;
-  bool startedWaiting;
+  private bool startedWaiting;
 
-  virtual public float RespawnWaitDelay { get; set; } = 4.0f; //default value unless overridden in derived class
+  virtual public float GetRespawnWaitDelay() => respawnWaitDelay;
+ 
+  public abstract void ReactToNonLethalPlayerMissileHit(); //each enemy variant has to implement their own 
 
-  //---------------------
-  public abstract void ReactToNonLethalPlayerMissileHit();
-
-  void Start()
+  private void Start()
   {
     //todo - move this out to GameplayManager or to sub-class or prefab??
     speed = .25f;
@@ -58,10 +58,9 @@ public abstract class EnemyBehaviour : ExtendedBehaviour
     startScaleX = transform.localScale.x;
     startScaleY = transform.localScale.y;
     startScaleZ = transform.localScale.z;
-        
   }
 
-  void Update()
+  private void Update()
   {
     if (GameplayManager.Instance.currentGameState == GameplayManager.GameState.LEVEL_IN_PROGRESS)
     {
@@ -101,14 +100,14 @@ public abstract class EnemyBehaviour : ExtendedBehaviour
             //https://answers.unity.com/questions/379440/a-simple-wait-function-without-coroutine-c.html
             if (!startedWaiting)
             {
-              Wait(RespawnWaitDelay, () =>
+              Wait(GetRespawnWaitDelay(), () =>
               {
                 respawnWaitOver = true;
-                Debug.Log("4 seconds is lost forever");
+                Debug.Log(respawnWaitDelay + " seconds is lost forever");
               });
               startedWaiting = true;
             }
-            if(respawnWaitOver)
+            if (respawnWaitOver)
               Respawn();
             break;
           }
@@ -125,14 +124,13 @@ public abstract class EnemyBehaviour : ExtendedBehaviour
             break;
           }
       }
-
     }
     else if (GameplayManager.Instance.currentGameState == GameplayManager.GameState.GAME_OVER_SCREEN)
     {
       hp = initialHP; //reset health and position
       speed = initialSpeed;
       transform.position = new Vector3(startPosX, startPosY, startPosZ);
-      transform.localScale = new Vector3(startScaleX, startScaleX, startScaleX); // reset its scale  
+      transform.localScale = new Vector3(startScaleX, startScaleX, startScaleX); // reset its scale
     }
   }
 
@@ -162,10 +160,9 @@ public abstract class EnemyBehaviour : ExtendedBehaviour
 
   private void Respawn()
   {
-
     hp = initialHP; //reset health and position
     transform.position = new Vector3(startPosX, startPosY, startPosZ);
-    transform.localScale = new Vector3(startScaleX, startScaleX, startScaleX); // reset its scale back to original scale    
+    transform.localScale = new Vector3(startScaleX, startScaleX, startScaleX); // reset its scale back to original scale
     enemySpriteRenderer.enabled = true;
     enemyCircleCollider.enabled = true;
     enemyState = EnemyState.ALIVE;
@@ -186,7 +183,4 @@ public abstract class EnemyBehaviour : ExtendedBehaviour
       }
     }
   }
-
-
-
 }

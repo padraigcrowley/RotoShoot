@@ -146,10 +146,11 @@ MonoBehaviour:
   m_GameObject: {fileID: 210540832}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 75e63beade46b2842b1c281219c56db9, type: 3}
+  m_Script: {fileID: 11500000, guid: b1b2a7c7a62ec204b91ce31ae49cbe33, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   LevelEnemyPrefabs:
+  - {fileID: 4342350733379744943, guid: c0394ccadb3297349a3ed2ed08c9ffcb, type: 3}
   - {fileID: 4342350733379744943, guid: 7a2a20f8b433e0443b2f1cd01c0a7d23, type: 3}
 --- !u!4 &210540834
 Transform:
@@ -334,7 +335,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: Level0002
+  m_text: Level0003
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
