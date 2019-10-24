@@ -14,6 +14,7 @@ public class LevelManager : Singleton<LevelManager>
   public List<int> blockedPlayerShipRotationAngles = new List<int>(); // rotation angles that will be blocked. 
   void Start()
   {
+    //process the particular level completion criteria(s)
     foreach (string lccString in LevelCompletionCriteria.Keys)
     {
       print(lccString + ": " + LevelCompletionCriteria[lccString]);
@@ -35,7 +36,6 @@ public class LevelManager : Singleton<LevelManager>
     }
   }
 
-  // Update is called once per frame
   void Update()
   {
     if (GameplayManager.Instance.currentGameState == GameplayManager.GameState.LEVEL_IN_PROGRESS)
