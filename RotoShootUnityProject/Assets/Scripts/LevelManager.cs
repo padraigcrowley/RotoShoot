@@ -14,16 +14,16 @@ public class LevelManager : Singleton<LevelManager>
   public List<int> blockedPlayerShipRotationAngles = new List<int>(); // rotation angles that will be blocked. 
   void Start()
   {
+    lccMet = false;
+    numEnemyKillsInLevel = 0;
+    //process the particular level completion criteria(s)
     foreach (string lccString in LevelCompletionCriteria.Keys)
     {
       print(lccString + ": " + LevelCompletionCriteria[lccString]);
       if (lccString == "EnemyKills")
         UIManager.Instance.RequiredEnemyKillCount.text = "/"+LevelCompletionCriteria[lccString].ToString();
-    }
-
-    numEnemyKillsInLevel = 0;
-    LevelEnemies = new GameObject[spawnPoints.Length];//create as many gameobjects as array elements
-    lccMet = false;     
+    }    
+    LevelEnemies = new GameObject[spawnPoints.Length];//create as many gameobjects as array elements      
 
     int index = 0;
     foreach (EnemySpawnPoint sp in spawnPoints)
@@ -35,7 +35,6 @@ public class LevelManager : Singleton<LevelManager>
     }
   }
 
-  // Update is called once per frame
   void Update()
   {
     if (GameplayManager.Instance.currentGameState == GameplayManager.GameState.LEVEL_IN_PROGRESS)

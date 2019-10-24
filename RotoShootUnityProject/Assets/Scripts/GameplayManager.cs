@@ -35,8 +35,7 @@ public class GameplayManager : Singleton<GameplayManager>
 
   // Start is called before the first frame update
   void Start()
-  {
-    
+  {    
     currentGameState = GameState.LEVEL_INTRO_IN_PROGRESS;
     currentPlayerMissileSpeedMultiplier = basePlayerMissileSpeedMultiplier;
     currentPlayerHP = maxPlayerHP;
@@ -45,7 +44,7 @@ public class GameplayManager : Singleton<GameplayManager>
     currentPlayerScore = 0;
   }
 
-  // Update is called once per frame
+  // Update is called once peer frame
   void Update()
   {
 

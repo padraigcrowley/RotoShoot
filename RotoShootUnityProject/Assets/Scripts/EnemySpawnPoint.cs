@@ -4,11 +4,9 @@ using UnityEngine;
 
 public class EnemySpawnPoint 
 {
-
   public GameObject enemyPrefab;
   public Vector2 startPos;
   public float speedMultiplier, hpMultiplier;
-
   public EnemySpawnPoint(GameObject a, Vector2 b, float c, float d)
   {
     enemyPrefab = a;
