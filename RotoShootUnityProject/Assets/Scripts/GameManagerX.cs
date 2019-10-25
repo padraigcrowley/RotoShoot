@@ -12,7 +12,6 @@ public class GameManagerX : Singleton<GameManagerX>
     DontDestroyOnLoad(transform.gameObject);
   }
 
-  // Start is called before the first frame update
   void Start()
   {
     currentLevel = 0;
