@@ -4,7 +4,6 @@ using UnityEngine;
 
 public class GreenRotArrow : MonoBehaviour
 {
-  // Start is called before the first frame update
   void Start()
   {
     transform.position = GameplayManager.Instance.playerShipPos;
