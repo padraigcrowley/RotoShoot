@@ -38,6 +38,10 @@ public class PlayerShip : MonoBehaviour
       case GameplayManager.GameState.LEVEL_INTRO_IN_PROGRESS:
         if (PlayerShipIntroAnimPlaying == false)
         {
+          transform.rotation = Quaternion.identity;
+          PlayerShipGreenRotArrowObj.transform.rotation = Quaternion.identity;
+          PlayerShipRedRotArrowObj.transform.rotation = Quaternion.identity;
+
           PlayerShipIntroAnimPlaying = true;
           shipSpriteRenderer.enabled = true;
           PlayerShipGFXAnim.Play("PlayerShipIntro", -1, 0f);
@@ -46,7 +50,7 @@ public class PlayerShip : MonoBehaviour
         {
           PlayerShipIntroAnimPlaying = false;
           GameplayManager.Instance.currentGameState = GameplayManager.GameState.LEVEL_IN_PROGRESS;
-          print("gamestate is now set to MISSION_IN_PROGRESS!");
+          print("gamestate is now set to LEVEL_IN_PROGRESS!");
         }
         break;
 

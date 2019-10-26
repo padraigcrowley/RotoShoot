@@ -2162,7 +2162,7 @@ GameObject:
   - component: {fileID: 742868827}
   - component: {fileID: 742868826}
   m_Layer: 5
-  m_Name: GameRestartButton
+  m_Name: LevelRestartButton
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

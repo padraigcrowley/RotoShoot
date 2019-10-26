@@ -82,6 +82,7 @@ public class UIManager : Singleton<UIManager>
 
   public void handleGameExitButtonPress()
   {
+    GameManagerX.Instance.currentLevel = 0;
     SceneManager.LoadScene("MainMenu");
   }
 
