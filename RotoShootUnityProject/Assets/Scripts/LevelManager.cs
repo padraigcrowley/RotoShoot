@@ -7,7 +7,8 @@ public class LevelManager : Singleton<LevelManager>
   [HideInInspector] public int numEnemyKillsInLevel = 0;
   public Dictionary<string, int> LevelCompletionCriteria = new Dictionary<string, int>();
   private bool lccMet; //levelcompletioncriteria
-  public EnemySpawnPoint[] spawnPoints;
+  public EnemySpawnPointData[] enemySpawnPoints;
+  
   public  GameObject[] LevelEnemies;
   public GameObject [] LevelEnemyPrefabs;
   public float levelPlayTimeElapsed;
@@ -22,11 +23,11 @@ public class LevelManager : Singleton<LevelManager>
       print(lccString + ": " + LevelCompletionCriteria[lccString]);
       if (lccString == "EnemyKills")
         UIManager.Instance.RequiredEnemyKillCount.text = "/"+LevelCompletionCriteria[lccString].ToString();
-    }    
-    LevelEnemies = new GameObject[spawnPoints.Length];//create as many gameobjects as array elements      
+    }
+    LevelEnemies = new GameObject[enemySpawnPoints.Length];//create as many gameobjects as array elements      
 
     int index = 0;
-    foreach (EnemySpawnPoint sp in spawnPoints)
+    foreach (EnemySpawnPointData sp in enemySpawnPoints)
     {
       LevelEnemies[index] = Instantiate(sp.enemyPrefab, sp.startPos, Quaternion.identity) as GameObject;
       LevelEnemies[index].GetComponent<EnemyBehaviour>().speedMultiplierFromSpawner = sp.speedMultiplier;

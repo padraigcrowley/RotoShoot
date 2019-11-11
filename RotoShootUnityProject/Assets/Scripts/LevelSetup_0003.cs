@@ -21,7 +21,7 @@ public class LevelSetup_0003 : MonoBehaviour
     LevelManager.Instance.blockedPlayerShipRotationAngles.Clear();
     
     // Array of EnemySpawnPoint objects (pos, speedMult, HPMult)
-    LevelManager.Instance.spawnPoints = new EnemySpawnPoint[]
+    /**LevelManager.Instance.spawnPoints = new EnemySpawnPoint[]
     {
       new EnemySpawnPoint(LevelEnemyPrefabs[0], new Vector2 (10,-10),   3f,   3),
       new EnemySpawnPoint(LevelEnemyPrefabs[1], new Vector2 (-10,-10),  2f,   3),
@@ -31,7 +31,7 @@ public class LevelSetup_0003 : MonoBehaviour
       new EnemySpawnPoint(LevelEnemyPrefabs[1], new Vector2 (12,12),    1f,   3),
       new EnemySpawnPoint(LevelEnemyPrefabs[0], new Vector2 (0,20),     1f,   3),
       new EnemySpawnPoint(LevelEnemyPrefabs[1], new Vector2 (0,-15),    2f,   3)
-    };
+    };**/
   }
 
   private void Update()
