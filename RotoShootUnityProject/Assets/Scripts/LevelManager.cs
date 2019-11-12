@@ -9,10 +9,11 @@ public class LevelManager : Singleton<LevelManager>
   private bool lccMet; //levelcompletioncriteria
   public LevelSetupData levelSetupData;
   
-  public  GameObject[] LevelEnemies;
-  public GameObject [] LevelEnemyPrefabs;
+  public  GameObject[] levelEnemies;
+  
   public float levelPlayTimeElapsed;
-  public List<int> blockedPlayerShipRotationAngles = new List<int>(); // rotation angles that will be blocked. 
+  //public List<int> blockedPlayerShipRotationAngles = new List<int>(); // rotation angles that will be blocked. 
+  public int[] blockedPlayerShipRotationAngles;// rotation angles that will be blocked. 
 
   private void Awake()
   {
@@ -24,23 +25,37 @@ public class LevelManager : Singleton<LevelManager>
     
     lccMet = false;
     numEnemyKillsInLevel = 0;
+
+    
+    //blockedPlayerShipRotationAngles = new int[levelSetupData.blockedPlayerShipRotationAngles.Length];
+    blockedPlayerShipRotationAngles = levelSetupData.blockedPlayerShipRotationAngles;
+
+    //add the level completion criterias to the lcc dictionary
+    if (levelSetupData.lccEnemyKills!=0)
+      LevelCompletionCriteria.Add("EnemyKills", levelSetupData.lccEnemyKills);
+    if (levelSetupData.lccSurviveTime != 0)
+      LevelCompletionCriteria.Add("SurviveTime", levelSetupData.lccSurviveTime);
+
     //process the particular level completion criteria(s)
     foreach (string lccString in LevelCompletionCriteria.Keys)
     {
-      print(lccString + ": " + LevelCompletionCriteria[lccString]);
       if (lccString == "EnemyKills")
-        UIManager.Instance.RequiredEnemyKillCount.text = "/"+LevelCompletionCriteria[lccString].ToString();
+      {
+        UIManager.Instance.RequiredEnemyKillCount.text = "/" + LevelCompletionCriteria[lccString].ToString();
+      }
     }
+    
+    
     print(levelSetupData.levelEnemySpawnPointData.Length);
-    LevelEnemies = new GameObject[levelSetupData.levelEnemySpawnPointData.Length];
+    levelEnemies = new GameObject[levelSetupData.levelEnemySpawnPointData.Length];
     //create as many gameobjects as array elements      
     
     int index = 0;
     foreach (LevelSetupData.enemySpawnPointData sp in levelSetupData.levelEnemySpawnPointData)
     {
-      LevelEnemies[index] = Instantiate(sp.enemyPrefab, sp.startPos, Quaternion.identity) as GameObject;
-      LevelEnemies[index].GetComponent<EnemyBehaviour>().speedMultiplierFromSpawner = sp.speedMultiplier;
-      LevelEnemies[index].GetComponent<EnemyBehaviour>().hpMultiplierFromSpawner = sp.hpMultiplier;
+      levelEnemies[index] = Instantiate(sp.enemyPrefab, sp.startPos, Quaternion.identity) as GameObject;
+      levelEnemies[index].GetComponent<EnemyBehaviour>().speedMultiplierFromSpawner = sp.speedMultiplier;
+      levelEnemies[index].GetComponent<EnemyBehaviour>().hpMultiplierFromSpawner = sp.hpMultiplier;
       index++;
     }
   }
@@ -63,7 +78,7 @@ public class LevelManager : Singleton<LevelManager>
                 lccMet = false;
               }
               break;
-            case "SurviveForXSeconds":
+            case "SurviveTime":
               if (levelPlayTimeElapsed < LevelCompletionCriteria[lccString])
               {
                 lccMet = false;

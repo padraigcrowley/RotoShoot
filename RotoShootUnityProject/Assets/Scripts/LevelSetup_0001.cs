@@ -10,13 +10,13 @@ public class LevelSetup_0001 : MonoBehaviour
 
   void Start()
   {
-    LevelManager.Instance.LevelCompletionCriteria.Add("EnemyKills", 10);
-    LevelManager.Instance.LevelCompletionCriteria.Add("SurviveForXSeconds", 20);
+    //LevelManager.Instance.LevelCompletionCriteria.Add("EnemyKills", 10);
+    //LevelManager.Instance.LevelCompletionCriteria.Add("SurviveForXSeconds", 20);
     //LevelManager.Instance.LevelEnemyPrefabs = LevelEnemyPrefabs;
 
     //list which angles [0] - [N] you don't want to allow the player ship to rotate to.
-    LevelManager.Instance.blockedPlayerShipRotationAngles.Clear();
-    LevelManager.Instance.blockedPlayerShipRotationAngles.Add(180);
+    //LevelManager.Instance.blockedPlayerShipRotationAngles.Clear();
+    //LevelManager.Instance.blockedPlayerShipRotationAngles.Add(180);
 
     // Array of EnemySpawnPoint objects (pos, speedMult, HPMult)
     /**LevelManager.Instance.spawnPoints = new EnemySpawnPoint[]

@@ -48,4 +48,7 @@ MonoBehaviour:
     startPos: {x: 0, y: 25}
     speedMultiplier: 5
     hpMultiplier: 2
+  blockedPlayerShipRotationAngles: b4000000
   PlayerShipPos: {x: 0, y: -6, z: 0}
+  lccEnemyKills: 10
+  lccSurviveTime: 20
