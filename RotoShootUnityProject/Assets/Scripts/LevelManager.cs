@@ -7,14 +7,21 @@ public class LevelManager : Singleton<LevelManager>
   [HideInInspector] public int numEnemyKillsInLevel = 0;
   public Dictionary<string, int> LevelCompletionCriteria = new Dictionary<string, int>();
   private bool lccMet; //levelcompletioncriteria
-  public EnemySpawnPointData enemySpawnPoints;
+  public LevelSetupData levelSetupData;
   
   public  GameObject[] LevelEnemies;
   public GameObject [] LevelEnemyPrefabs;
   public float levelPlayTimeElapsed;
   public List<int> blockedPlayerShipRotationAngles = new List<int>(); // rotation angles that will be blocked. 
+
+  private void Awake()
+  {
+    GameplayManager.Instance.playerShipPos = levelSetupData.PlayerShipPos;
+  }
+
   void Start()
   {
+    
     lccMet = false;
     numEnemyKillsInLevel = 0;
     //process the particular level completion criteria(s)
@@ -24,12 +31,12 @@ public class LevelManager : Singleton<LevelManager>
       if (lccString == "EnemyKills")
         UIManager.Instance.RequiredEnemyKillCount.text = "/"+LevelCompletionCriteria[lccString].ToString();
     }
-    print(enemySpawnPoints.levelEnemySpawnPointData.Length);
-    LevelEnemies = new GameObject[enemySpawnPoints.levelEnemySpawnPointData.Length];
+    print(levelSetupData.levelEnemySpawnPointData.Length);
+    LevelEnemies = new GameObject[levelSetupData.levelEnemySpawnPointData.Length];
     //create as many gameobjects as array elements      
     
     int index = 0;
-    foreach (EnemySpawnPointData.enemySpawnPointData sp in enemySpawnPoints.levelEnemySpawnPointData)
+    foreach (LevelSetupData.enemySpawnPointData sp in levelSetupData.levelEnemySpawnPointData)
     {
       LevelEnemies[index] = Instantiate(sp.enemyPrefab, sp.startPos, Quaternion.identity) as GameObject;
       LevelEnemies[index].GetComponent<EnemyBehaviour>().speedMultiplierFromSpawner = sp.speedMultiplier;

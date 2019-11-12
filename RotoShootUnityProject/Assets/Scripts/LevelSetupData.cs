@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class EnemySpawnPointData : ScriptableObject
+public class LevelSetupData : ScriptableObject
 {
   [System.Serializable]
   public struct enemySpawnPointData
@@ -14,6 +14,7 @@ public class EnemySpawnPointData : ScriptableObject
 
   public enemySpawnPointData[] levelEnemySpawnPointData;
 
+  public Vector3 PlayerShipPos;
 
 
 

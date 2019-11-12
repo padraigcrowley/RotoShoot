@@ -4,12 +4,9 @@ using UnityEngine;
 
 public class LevelSetup_0001 : MonoBehaviour
 {
-  //public GameObject [] LevelEnemyPrefabs;
+  
 
-  private void Awake()
-  {
-    GameplayManager.Instance.playerShipPos = new Vector3(0f, -6f, .1f); // set the player ship position for this level.
-  }
+  
 
   void Start()
   {

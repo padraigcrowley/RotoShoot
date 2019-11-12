@@ -193,7 +193,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   numEnemyKillsInLevel: 0
-  enemySpawnPoints: {fileID: 11400000, guid: aac625e16a2112340be8d2c53e739f5d, type: 2}
+  levelSetupData: {fileID: 11400000, guid: aac625e16a2112340be8d2c53e739f5d, type: 2}
   LevelEnemies: []
   LevelEnemyPrefabs: []
   levelPlayTimeElapsed: 0
