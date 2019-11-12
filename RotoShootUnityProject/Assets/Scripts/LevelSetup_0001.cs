@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class LevelSetup_0001 : MonoBehaviour
 {
-  public GameObject [] LevelEnemyPrefabs;
+  //public GameObject [] LevelEnemyPrefabs;
 
   private void Awake()
   {
@@ -15,7 +15,7 @@ public class LevelSetup_0001 : MonoBehaviour
   {
     LevelManager.Instance.LevelCompletionCriteria.Add("EnemyKills", 10);
     LevelManager.Instance.LevelCompletionCriteria.Add("SurviveForXSeconds", 20);
-    LevelManager.Instance.LevelEnemyPrefabs = LevelEnemyPrefabs;
+    //LevelManager.Instance.LevelEnemyPrefabs = LevelEnemyPrefabs;
 
     //list which angles [0] - [N] you don't want to allow the player ship to rotate to.
     LevelManager.Instance.blockedPlayerShipRotationAngles.Clear();

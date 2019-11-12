@@ -4,10 +4,18 @@ using UnityEngine;
 
 public class EnemySpawnPointData : ScriptableObject
 {
-  public GameObject enemyPrefab;
-  public Vector2 startPos;
-  public float speedMultiplier, hpMultiplier;
-  
+  [System.Serializable]
+  public struct enemySpawnPointData
+  {
+    public GameObject enemyPrefab;
+    public Vector2 startPos;
+    public float speedMultiplier, hpMultiplier;
+  }
+
+  public enemySpawnPointData[] levelEnemySpawnPointData;
+
+
+
 
 
 }
