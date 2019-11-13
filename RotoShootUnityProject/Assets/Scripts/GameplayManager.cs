@@ -31,7 +31,8 @@ public class GameplayManager : Singleton<GameplayManager>
 
   public GameState currentGameState;
   [HideInInspector] public Vector3 playerShipPos;
-  
+  public int[] blockedPlayerShipRotationAngles;// rotation angles that will be blocked. 
+
 
   // Start is called before the first frame update
   void Start()

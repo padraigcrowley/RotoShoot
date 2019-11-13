@@ -104,7 +104,7 @@ public class PlayerShip : MonoBehaviour
       float angleToRotate = (float)GameplayManager.Instance.mouseClickQueue.Dequeue();
       //print("this.gameObject.transform.eulerAngles.z + angleToRotate = " + (this.gameObject.transform.eulerAngles.z + angleToRotate));
 
-      foreach (int angle in LevelManager.Instance.blockedPlayerShipRotationAngles)
+      foreach (int angle in GameplayManager.Instance.blockedPlayerShipRotationAngles)
       {
         if ((Mathf.Round(this.gameObject.transform.eulerAngles.z + angleToRotate)) == angle)
         {

@@ -8,27 +8,21 @@ public class LevelManager : Singleton<LevelManager>
   public Dictionary<string, int> LevelCompletionCriteria = new Dictionary<string, int>();
   private bool lccMet; //levelcompletioncriteria
   public LevelSetupData levelSetupData;
-  
   public  GameObject[] levelEnemies;
-  
   public float levelPlayTimeElapsed;
-  //public List<int> blockedPlayerShipRotationAngles = new List<int>(); // rotation angles that will be blocked. 
-  public int[] blockedPlayerShipRotationAngles;// rotation angles that will be blocked. 
-
+  
   private void Awake()
   {
     GameplayManager.Instance.playerShipPos = levelSetupData.PlayerShipPos;
   }
 
   void Start()
-  {
-    
+  {    
     lccMet = false;
     numEnemyKillsInLevel = 0;
         
-    //blockedPlayerShipRotationAngles = new int[levelSetupData.blockedPlayerShipRotationAngles.Length];
-    if (blockedPlayerShipRotationAngles.Length != 0)
-      blockedPlayerShipRotationAngles = levelSetupData.blockedPlayerShipRotationAngles;
+    if (levelSetupData.blockedPlayerShipRotationAngles.Length != 0)
+      GameplayManager.Instance.blockedPlayerShipRotationAngles = levelSetupData.blockedPlayerShipRotationAngles;
 
     //add the level completion criterias to the lcc dictionary
     if (levelSetupData.lccEnemyKills != -1)
@@ -44,12 +38,9 @@ public class LevelManager : Singleton<LevelManager>
         UIManager.Instance.RequiredEnemyKillCount.text = "/" + LevelCompletionCriteria[lccString].ToString();
       }
     }
-    
-    
-    print(levelSetupData.levelEnemySpawnPointData.Length);
+      
     levelEnemies = new GameObject[levelSetupData.levelEnemySpawnPointData.Length];
     //create as many gameobjects as array elements      
-    
     int index = 0;
     foreach (EnemySpawnPointData sp in levelSetupData.levelEnemySpawnPointData)
     {
