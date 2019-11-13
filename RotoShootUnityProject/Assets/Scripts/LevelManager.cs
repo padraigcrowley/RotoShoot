@@ -51,7 +51,7 @@ public class LevelManager : Singleton<LevelManager>
     //create as many gameobjects as array elements      
     
     int index = 0;
-    foreach (LevelSetupData.enemySpawnPointData sp in levelSetupData.levelEnemySpawnPointData)
+    foreach (EnemySpawnPointData sp in levelSetupData.levelEnemySpawnPointData)
     {
       levelEnemies[index] = Instantiate(sp.enemyPrefab, sp.startPos, Quaternion.identity) as GameObject;
       levelEnemies[index].GetComponent<EnemyBehaviour>().speedMultiplierFromSpawner = sp.speedMultiplier;

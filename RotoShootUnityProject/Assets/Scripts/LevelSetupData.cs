@@ -4,18 +4,9 @@ using UnityEngine;
 
 public class LevelSetupData : ScriptableObject
 {
+  public int levelNumber = 0;  
 
-  public int levelNumber = 0;
-  
-  [System.Serializable]
-  public struct enemySpawnPointData
-  {
-    public GameObject enemyPrefab;
-    public Vector2 startPos;
-    public float speedMultiplier, hpMultiplier;
-  }
-
-  public enemySpawnPointData[] levelEnemySpawnPointData;
+  public EnemySpawnPointData[] levelEnemySpawnPointData;
   public int[] blockedPlayerShipRotationAngles;// rotation angles that will be blocked. 
 
   public Vector3 PlayerShipPos;
