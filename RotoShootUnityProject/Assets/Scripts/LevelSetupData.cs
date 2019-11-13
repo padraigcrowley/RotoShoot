@@ -4,6 +4,9 @@ using UnityEngine;
 
 public class LevelSetupData : ScriptableObject
 {
+
+  public int levelNumber = 0;
+  
   [System.Serializable]
   public struct enemySpawnPointData
   {

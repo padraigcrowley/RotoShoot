@@ -25,15 +25,15 @@ public class LevelManager : Singleton<LevelManager>
     
     lccMet = false;
     numEnemyKillsInLevel = 0;
-
-    
+        
     //blockedPlayerShipRotationAngles = new int[levelSetupData.blockedPlayerShipRotationAngles.Length];
-    blockedPlayerShipRotationAngles = levelSetupData.blockedPlayerShipRotationAngles;
+    if (blockedPlayerShipRotationAngles.Length != 0)
+      blockedPlayerShipRotationAngles = levelSetupData.blockedPlayerShipRotationAngles;
 
     //add the level completion criterias to the lcc dictionary
-    if (levelSetupData.lccEnemyKills!=0)
+    if (levelSetupData.lccEnemyKills != -1)
       LevelCompletionCriteria.Add("EnemyKills", levelSetupData.lccEnemyKills);
-    if (levelSetupData.lccSurviveTime != 0)
+    if (levelSetupData.lccSurviveTime != -1)
       LevelCompletionCriteria.Add("SurviveTime", levelSetupData.lccSurviveTime);
 
     //process the particular level completion criteria(s)
