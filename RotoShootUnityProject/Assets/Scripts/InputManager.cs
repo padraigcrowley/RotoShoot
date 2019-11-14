@@ -3,7 +3,6 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Events;
 
-
 [System.Serializable] //https://docs.unity3d.com/ScriptReference/Events.UnityEvent_1.html
 public class MyFloatEvent : UnityEvent<float>
 {
@@ -11,13 +10,10 @@ public class MyFloatEvent : UnityEvent<float>
 
 public class InputManager : MonoBehaviour
 {
-
   private Vector3 startTouchPos, endTouchPos;
   private float minSwipeDistanceThreshold = 1.0f;
-
   public MyFloatEvent PlayerShipMoveEvent;
-
-
+  
   void Start()
   {
     print("Starting");
@@ -95,7 +91,6 @@ public class InputManager : MonoBehaviour
         startTouchPos = touchPosition;
         //Debug.Log("startTouchPos: " + startTouchPos);
         //print("Objects LocalRot: " + objectToRotate.transform.localRotation + "Objects Rotation: " + objectToRotate.transform.rotation);
-
 
         //Debug.Log("Q: " + mouseClickQueue.ToString());
         break;
