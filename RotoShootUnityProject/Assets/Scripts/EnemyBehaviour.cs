@@ -31,7 +31,7 @@ public abstract class EnemyBehaviour : ExtendedBehaviour
 
   private void Start()
   {
-    //todo - move this out to GameplayManager or to sub-class or prefab??
+    //todo - move this out to GameplayManager or to sub-class or enemy prefab??
     speed = .25f;
     hp = 1f;
     initialSpeed = speed * speedMultiplierFromSpawner; // todo: should these be set in this class, not MyGameplayManager??
