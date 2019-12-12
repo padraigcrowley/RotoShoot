@@ -55,7 +55,9 @@ public class PlayerShip : MonoBehaviour
         break;
 
       case GameplayManager.GameState.LEVEL_IN_PROGRESS:
-        processInputQueue();
+        
+        //ProcessInputQueue();
+        ApplyForwardThrust();
         if ((Time.time > nextActionTime) && (GameplayManager.Instance.playerShipRotating == false))
         {
           nextActionTime = Time.time + GameplayManager.Instance.currentPlayerShipFireRate;
@@ -95,7 +97,13 @@ public class PlayerShip : MonoBehaviour
     }
   }
 
-  private void processInputQueue()
+  private void ApplyForwardThrust()
+  {
+    Vector3 upDirection = GameObject.FindGameObjectWithTag("Player").transform.up;
+    this.transform.position += upDirection * (GameplayManager.Instance.currentPlayerMissileSpeedMultiplier/2) * Time.deltaTime;
+  }
+
+  private void ProcessInputQueue()
   {    
     if ((GameplayManager.Instance.mouseClickQueue.Count != 0) && (GameplayManager.Instance.playerShipRotating == false))
     {
