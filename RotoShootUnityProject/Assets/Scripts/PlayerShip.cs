@@ -56,8 +56,8 @@ public class PlayerShip : MonoBehaviour
 
       case GameplayManager.GameState.LEVEL_IN_PROGRESS:
         
-        //ProcessInputQueue();
-        ApplyForwardThrust();
+        ProcessInputQueue();
+        //ApplyForwardThrust();
         if ((Time.time > nextActionTime) && (GameplayManager.Instance.playerShipRotating == false))
         {
           nextActionTime = Time.time + GameplayManager.Instance.currentPlayerShipFireRate;
