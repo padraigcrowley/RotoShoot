@@ -10,15 +10,15 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 31c73e25130abc541bc32d54c763ae60, type: 3}
-  m_Name: LevelSetupData0002
+  m_Name: LevelSetupData0004
   m_EditorClassIdentifier: 
-  levelNumber: 2
-  levelType: 1
+  levelNumber: 4
+  levelType: 2
   levelEnemySpawnPointData:
   - enemyPrefab: {fileID: 4342350733379744943, guid: 7a2a20f8b433e0443b2f1cd01c0a7d23,
       type: 3}
     startPos: {x: -10, y: -10}
-    speedMultiplier: 1
+    speedMultiplier: 3
     hpMultiplier: 3
   - enemyPrefab: {fileID: 4342350733379744943, guid: 7a2a20f8b433e0443b2f1cd01c0a7d23,
       type: 3}
@@ -33,12 +33,12 @@ MonoBehaviour:
   - enemyPrefab: {fileID: 4342350733379744943, guid: 7a2a20f8b433e0443b2f1cd01c0a7d23,
       type: 3}
     startPos: {x: -9, y: 0}
-    speedMultiplier: 1
+    speedMultiplier: 3
     hpMultiplier: 3
   - enemyPrefab: {fileID: 4342350733379744943, guid: 7a2a20f8b433e0443b2f1cd01c0a7d23,
       type: 3}
     startPos: {x: -10, y: 10}
-    speedMultiplier: 2
+    speedMultiplier: 3
     hpMultiplier: 3
   - enemyPrefab: {fileID: 4342350733379744943, guid: 7a2a20f8b433e0443b2f1cd01c0a7d23,
       type: 3}
@@ -48,14 +48,14 @@ MonoBehaviour:
   - enemyPrefab: {fileID: 4342350733379744943, guid: 7a2a20f8b433e0443b2f1cd01c0a7d23,
       type: 3}
     startPos: {x: 0, y: 20}
-    speedMultiplier: 2
+    speedMultiplier: 3
     hpMultiplier: 3
   - enemyPrefab: {fileID: 4342350733379744943, guid: 7a2a20f8b433e0443b2f1cd01c0a7d23,
       type: 3}
     startPos: {x: 0, y: -15}
-    speedMultiplier: 1
+    speedMultiplier: 3
     hpMultiplier: 3
   blockedPlayerShipRotationAngles: 
-  PlayerShipPos: {x: 0, y: 0, z: 0}
-  lccEnemyKills: 10
-  lccSurviveTime: 20
+  PlayerShipPos: {x: -1.28, y: -6, z: 0}
+  lccEnemyKills: 2
+  lccSurviveTime: 4

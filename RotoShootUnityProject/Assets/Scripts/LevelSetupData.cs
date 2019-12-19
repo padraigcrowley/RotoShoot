@@ -4,7 +4,8 @@ using UnityEngine;
 
 public class LevelSetupData : ScriptableObject
 {
-  public int levelNumber = 0;  
+  public int levelNumber = 0;
+  public int levelType = 2;
 
   public EnemySpawnPointData[] levelEnemySpawnPointData;
   public int[] blockedPlayerShipRotationAngles;// rotation angles that will be blocked. 
