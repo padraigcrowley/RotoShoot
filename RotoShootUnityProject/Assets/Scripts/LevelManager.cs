@@ -14,6 +14,7 @@ public class LevelManager : Singleton<LevelManager>
   private void Awake()
   {
     GameplayManager.Instance.playerShipPos = levelSetupData.PlayerShipPos;
+    GameplayManager.Instance.levelControlType = levelSetupData.levelControlType;
   }
 
   void Start()

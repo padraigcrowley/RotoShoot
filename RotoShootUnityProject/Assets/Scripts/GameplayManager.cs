@@ -31,6 +31,7 @@ public class GameplayManager : Singleton<GameplayManager>
 
   public GameState currentGameState;
   [HideInInspector] public Vector3 playerShipPos;
+  [HideInInspector] public int levelControlType;
   public int[] blockedPlayerShipRotationAngles;// rotation angles that will be blocked. 
 
 

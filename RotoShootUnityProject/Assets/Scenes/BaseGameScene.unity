@@ -657,7 +657,7 @@ GameObject:
   - component: {fileID: 191098412}
   - component: {fileID: 191098411}
   m_Layer: 0
-  m_Name: MyGameplayManagerObject
+  m_Name: GameplayManagerObject
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -691,6 +691,7 @@ MonoBehaviour:
   maxPlayerHP: 3
   currentGameState: 0
   playerShipPos: {x: 0, y: 0, z: 0}
+  levelControlType: 0
   blockedPlayerShipRotationAngles: 
 --- !u!4 &191098412
 Transform:
