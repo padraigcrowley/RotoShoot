@@ -64,14 +64,11 @@ public class InputManager : MonoBehaviour
     {
       GameplayManager.Instance.mouseClickQueue.Enqueue(GameplayManager.Instance.angleToRotatePlayerShip);
       PlayerShipMoveEvent.Invoke(GameplayManager.Instance.angleToRotatePlayerShip);
-
-
     }
     if (Input.GetKeyDown("right"))
     {
       GameplayManager.Instance.mouseClickQueue.Enqueue(-GameplayManager.Instance.angleToRotatePlayerShip);
       PlayerShipMoveEvent.Invoke(-GameplayManager.Instance.angleToRotatePlayerShip);
-
     }
     if ((Input.GetKeyDown("up")) || (Input.GetKeyDown("down")) || (Input.GetKeyDown("space")))
     {
@@ -91,7 +88,6 @@ public class InputManager : MonoBehaviour
         startTouchPos = touchPosition;
         //Debug.Log("startTouchPos: " + startTouchPos);
         //print("Objects LocalRot: " + objectToRotate.transform.localRotation + "Objects Rotation: " + objectToRotate.transform.rotation);
-
         //Debug.Log("Q: " + mouseClickQueue.ToString());
         break;
       case TouchPhase.Moved:
@@ -101,7 +97,7 @@ public class InputManager : MonoBehaviour
         endTouchPos = touchPosition;
         //Debug.Log("endTouchPos" + endTouchPos);
 
-        if ((swipeDirection = DetectSwipe(startTouchPos, endTouchPos)) != 0)
+        if ((swipeDirection = DetectSwipe(startTouchPos, endTouchPos)) != 0) //swipe
         {
           Debug.Log("Swiped!");          
           if (swipeDirection == 1)
@@ -112,7 +108,7 @@ public class InputManager : MonoBehaviour
             PlayerShipGreenRotArrowObj.transform.Rotate(Vector3.forward * 180);
             PlayerShipRedRotArrowObj.transform.Rotate(Vector3.forward * 180);*/
           }
-          else
+          else 
           {
             GameplayManager.Instance.mouseClickQueue.Enqueue(-180f);
             PlayerShipMoveEvent.Invoke(-180f);
@@ -121,46 +117,19 @@ public class InputManager : MonoBehaviour
             //PlayerShipRedRotArrowObj.transform.Rotate(Vector3.forward * -180);
           }
         }
-        else
+        else // a tap, not a swipe
         {
           if (startTouchPos.x < 0)
           {
             PlayerShipMoveEvent.Invoke(GameplayManager.Instance.angleToRotatePlayerShip);
-            GameplayManager.Instance.mouseClickQueue.Enqueue(GameplayManager.Instance.angleToRotatePlayerShip); // use actual angle to rotate rather than -1 or 1
-            //PlayerShipGreenRotArrowObj.transform.Rotate(Vector3.forward * angleToRotate);
-            //PlayerShipRedRotArrowObj.transform.Rotate(Vector3.forward * angleToRotate);
-            //PlayerShipGreenRotArrowObj.transform.localRotation = Quaternion.Euler(0, 0, -angleToRotate);
-            //StartCoroutine(rotateObject(objectToRotate, new Vector3(0, 0, angleToRotate), rotationDuration));
+            GameplayManager.Instance.mouseClickQueue.Enqueue(GameplayManager.Instance.angleToRotatePlayerShip); // use actual angle to rotate rather than -1 or 1            
           }
           else
           {
             PlayerShipMoveEvent.Invoke(-GameplayManager.Instance.angleToRotatePlayerShip);
-            GameplayManager.Instance.mouseClickQueue.Enqueue(-GameplayManager.Instance.angleToRotatePlayerShip);
-            //PlayerShipGreenRotArrowObj.transform.localRotation = Quaternion.Euler(0, 0, angleToRotate);
-            //PlayerShipGreenRotArrowObj.transform.Rotate(Vector3.forward * -angleToRotate);
-            //PlayerShipRedRotArrowObj.transform.Rotate(Vector3.forward * -angleToRotate);
-            //StartCoroutine(rotateObject(objectToRotate, new Vector3(0, 0, -angleToRotate), rotationDuration));
+            GameplayManager.Instance.mouseClickQueue.Enqueue(-GameplayManager.Instance.angleToRotatePlayerShip);            
           }
-        }
-
-
-        /*endTouchPos = touchPosition;
-        //Debug.Log("endTouchPos" + endTouchPos);
-        print("Objects LocalRot: " + objectToRotate.transform.localRotation + "Objects Rotation: " + objectToRotate.transform.rotation);
-
-        if (endTouchPos.x > startTouchPos.x)
-        {
-          Debug.Log("Swiped Right");
-          StartCoroutine(rotateObject(objectToRotate, new Vector3(0, 0, angleToRotate), rotationDuration));
-          //MonkeySpriteObject.transform.Rotate(new Vector3(0,0,40));
-
-        }
-        else
-        {
-          Debug.Log("Swiped Left");
-          StartCoroutine(rotateObject(objectToRotate, new Vector3(0, 0, -angleToRotate), rotationDuration));
-          //MonkeySpriteObject.transform.Rotate(new Vector3(0, 0, -40));
-        }*/
+        }        
         break;
     }
   }

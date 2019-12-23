@@ -7,6 +7,9 @@ public class PlayerShip : MonoBehaviour
   Animator PlayerShipGFXAnim;
   private float nextActionTime = 0.0f;
 
+  Vector2[] fourShipLanes = new[] { new Vector2(-3.85f, -6f), new Vector2(-1.29f, -6f), new Vector2(1.29f, -6f), new Vector2(3.84f, -6f) };
+  private int currentShipLane = 1; // the lane number = the array index
+  
   public Transform barrelTip;
   [SerializeField] private Renderer shipSpriteRenderer;
   [SerializeField] private GameObject bullet;
@@ -104,7 +107,7 @@ public class PlayerShip : MonoBehaviour
   }
 
   private void ProcessInputQueue()
-  {    
+  {
     if ((GameplayManager.Instance.mouseClickQueue.Count != 0) && (GameplayManager.Instance.playerShipRotating == false))
     {
       //print("Prev Ship Rotation: " + this.gameObject.transform.eulerAngles);
@@ -119,7 +122,22 @@ public class PlayerShip : MonoBehaviour
           return; // don't do the rotate, exit the method
         }
       }
-      StartCoroutine(RotatePlayerShip(this.gameObject, new Vector3(0, 0, angleToRotate), GameplayManager.Instance.currentPlayerShipRotationDuration));
+
+      if (GameplayManager.Instance.levelControlType == 1)
+        StartCoroutine(RotatePlayerShip(this.gameObject, new Vector3(0, 0, angleToRotate), GameplayManager.Instance.currentPlayerShipRotationDuration));
+      else
+      {
+        if(angleToRotate<0)
+        {
+          StartCoroutine(MovePlayerShip(fourShipLanes[currentShipLane + 1]));
+          currentShipLane--;
+        }
+        else 
+        {
+          StartCoroutine(MovePlayerShip(fourShipLanes[currentShipLane - 1]));
+          currentShipLane++;
+        }
+      }
     }
   }
 
@@ -127,6 +145,18 @@ public class PlayerShip : MonoBehaviour
   {
     GameObject firedBullet = Instantiate(bullet, barrelTip.position, barrelTip.rotation);
     //firedBullet.GetComponent<Rigidbody2D>().velocity = barrelTip.up * MyGameplayManager.Instance.playerMissileSpeedMultiplier;
+  }
+
+  IEnumerator MovePlayerShip(Vector2 newPos)
+  {
+    float speed = 2.5f;
+    float step = speed * Time.deltaTime; // calculate distance to move
+    while (transform.position.x != newPos.x)
+    {
+      transform.position = Vector3.MoveTowards(transform.position, newPos, step);
+      Debug.Log($"CurrX: {transform.position.x} DestX: {newPos.x}");
+      yield return null;
+    }
   }
 
   IEnumerator RotatePlayerShip(GameObject gameObjectToMove, Vector3 eulerAngles, float duration)  //https://stackoverflow.com/questions/37586407/rotate-gameobject-over-time/37588536
