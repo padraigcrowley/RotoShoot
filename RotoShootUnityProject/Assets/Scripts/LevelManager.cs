@@ -34,7 +34,7 @@ public class LevelManager : Singleton<LevelManager>
     //process the particular level completion criteria(s)
     foreach (string lccString in LevelCompletionCriteria.Keys)
     {
-      if (lccString == "EnemyKills")
+      if (lccString == "Enemy Kills")
       {
         UIManager.Instance.RequiredEnemyKillCount.text = "/" + LevelCompletionCriteria[lccString].ToString();
       }
