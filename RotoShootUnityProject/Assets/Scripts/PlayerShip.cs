@@ -53,7 +53,7 @@ public class PlayerShip : MonoBehaviour
         {
           PlayerShipIntroAnimPlaying = false;
           GameplayManager.Instance.currentGameState = GameplayManager.GameState.LEVEL_IN_PROGRESS;
-          print("gamestate is now set to LEVEL_IN_PROGRESS!");
+          print("gamestate is now set to LEVEL_IN_PROGRESS! ");
         }
         break;
 

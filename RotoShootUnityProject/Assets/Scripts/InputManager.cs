@@ -99,7 +99,7 @@ public class InputManager : MonoBehaviour
 
         if ((swipeDirection = DetectSwipe(startTouchPos, endTouchPos)) != 0) //swipe
         {
-          Debug.Log("Swiped!");          
+          Debug.Log("Swiped!!");          
           if (swipeDirection == 1)
           {
            GameplayManager.Instance.mouseClickQueue.Enqueue(180f);
