@@ -52,6 +52,7 @@ public class PlayerShip : MonoBehaviour
         else if (PlayerShipIntroAnimCompleted == true)
         {
           PlayerShipIntroAnimPlaying = false;
+          // not needed?  PlayerShipGFXAnim.StopPlayback();// ("PlayerShipIntro", -1, 0f);
           GameplayManager.Instance.currentGameState = GameplayManager.GameState.LEVEL_IN_PROGRESS;
           print("gamestate is now set to LEVEL_IN_PROGRESS! ");
         }
@@ -130,12 +131,12 @@ public class PlayerShip : MonoBehaviour
         if(angleToRotate<0)
         {
           StartCoroutine(MovePlayerShip(fourShipLanes[currentShipLane + 1]));
-          currentShipLane--;
+          currentShipLane++;
         }
         else 
         {
           StartCoroutine(MovePlayerShip(fourShipLanes[currentShipLane - 1]));
-          currentShipLane++;
+          currentShipLane--;
         }
       }
     }
@@ -154,7 +155,7 @@ public class PlayerShip : MonoBehaviour
     while (transform.position.x != newPos.x)
     {
       transform.position = Vector3.MoveTowards(transform.position, newPos, step);
-      Debug.Log($"CurrX: {transform.position.x} DestX: {newPos.x}");
+      //Debug.Log($"CurrX: {transform.position.x} DestX: {newPos.x}");
       yield return null;
     }
   }
