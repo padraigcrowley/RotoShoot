@@ -126,7 +126,7 @@ public class PlayerShip : MonoBehaviour
 
       if (GameplayManager.Instance.levelControlType == 1)
         StartCoroutine(RotatePlayerShip(this.gameObject, new Vector3(0, 0, angleToRotate), GameplayManager.Instance.currentPlayerShipRotationDuration));
-      else
+      else if (GameplayManager.Instance.levelControlType == 2)
       {
         if(angleToRotate<0)
         {
@@ -158,6 +158,7 @@ public class PlayerShip : MonoBehaviour
       //Debug.Log($"CurrX: {transform.position.x} DestX: {newPos.x}");
       yield return null;
     }
+    GameplayManager.Instance.playerShipPos = newPos;
   }
 
   IEnumerator RotatePlayerShip(GameObject gameObjectToMove, Vector3 eulerAngles, float duration)  //https://stackoverflow.com/questions/37586407/rotate-gameobject-over-time/37588536

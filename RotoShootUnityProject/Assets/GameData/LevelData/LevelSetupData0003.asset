@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: LevelSetupData0003
   m_EditorClassIdentifier: 
   levelNumber: 3
-  levelType: 1
+  levelControlType: 1
   levelEnemySpawnPointData:
   - enemyPrefab: {fileID: 4342350733379744943, guid: c0394ccadb3297349a3ed2ed08c9ffcb,
       type: 3}

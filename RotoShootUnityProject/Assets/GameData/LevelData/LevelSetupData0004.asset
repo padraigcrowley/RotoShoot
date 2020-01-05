@@ -13,44 +13,44 @@ MonoBehaviour:
   m_Name: LevelSetupData0004
   m_EditorClassIdentifier: 
   levelNumber: 4
-  levelType: 2
+  levelControlType: 2
   levelEnemySpawnPointData:
-  - enemyPrefab: {fileID: 4342350733379744943, guid: 7a2a20f8b433e0443b2f1cd01c0a7d23,
+  - enemyPrefab: {fileID: 4342350733379744943, guid: 98337287636663844a798648967aa1c7,
       type: 3}
     startPos: {x: -10, y: -10}
     speedMultiplier: 3
     hpMultiplier: 3
-  - enemyPrefab: {fileID: 4342350733379744943, guid: 7a2a20f8b433e0443b2f1cd01c0a7d23,
+  - enemyPrefab: {fileID: 4342350733379744943, guid: 98337287636663844a798648967aa1c7,
       type: 3}
     startPos: {x: 10, y: -10}
     speedMultiplier: 2
     hpMultiplier: 3
-  - enemyPrefab: {fileID: 4342350733379744943, guid: 7a2a20f8b433e0443b2f1cd01c0a7d23,
+  - enemyPrefab: {fileID: 4342350733379744943, guid: 98337287636663844a798648967aa1c7,
       type: 3}
     startPos: {x: 8, y: 0}
     speedMultiplier: 3
     hpMultiplier: 3
-  - enemyPrefab: {fileID: 4342350733379744943, guid: 7a2a20f8b433e0443b2f1cd01c0a7d23,
+  - enemyPrefab: {fileID: 4342350733379744943, guid: 98337287636663844a798648967aa1c7,
       type: 3}
     startPos: {x: -9, y: 0}
     speedMultiplier: 3
     hpMultiplier: 3
-  - enemyPrefab: {fileID: 4342350733379744943, guid: 7a2a20f8b433e0443b2f1cd01c0a7d23,
+  - enemyPrefab: {fileID: 4342350733379744943, guid: 98337287636663844a798648967aa1c7,
       type: 3}
     startPos: {x: -10, y: 10}
     speedMultiplier: 3
     hpMultiplier: 3
-  - enemyPrefab: {fileID: 4342350733379744943, guid: 7a2a20f8b433e0443b2f1cd01c0a7d23,
+  - enemyPrefab: {fileID: 4342350733379744943, guid: 98337287636663844a798648967aa1c7,
       type: 3}
     startPos: {x: 12, y: 12}
     speedMultiplier: 3
     hpMultiplier: 3
-  - enemyPrefab: {fileID: 4342350733379744943, guid: 7a2a20f8b433e0443b2f1cd01c0a7d23,
+  - enemyPrefab: {fileID: 4342350733379744943, guid: 98337287636663844a798648967aa1c7,
       type: 3}
     startPos: {x: 0, y: 20}
     speedMultiplier: 3
     hpMultiplier: 3
-  - enemyPrefab: {fileID: 4342350733379744943, guid: 7a2a20f8b433e0443b2f1cd01c0a7d23,
+  - enemyPrefab: {fileID: 4342350733379744943, guid: 98337287636663844a798648967aa1c7,
       type: 3}
     startPos: {x: 0, y: -15}
     speedMultiplier: 3
