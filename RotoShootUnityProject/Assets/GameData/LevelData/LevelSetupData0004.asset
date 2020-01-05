@@ -17,45 +17,45 @@ MonoBehaviour:
   levelEnemySpawnPointData:
   - enemyPrefab: {fileID: 4342350733379744943, guid: 98337287636663844a798648967aa1c7,
       type: 3}
-    startPos: {x: -10, y: -10}
+    startPos: {x: -3.8, y: 10}
     speedMultiplier: 3
     hpMultiplier: 3
   - enemyPrefab: {fileID: 4342350733379744943, guid: 98337287636663844a798648967aa1c7,
       type: 3}
-    startPos: {x: 10, y: -10}
+    startPos: {x: -3.8, y: 15}
     speedMultiplier: 2
     hpMultiplier: 3
   - enemyPrefab: {fileID: 4342350733379744943, guid: 98337287636663844a798648967aa1c7,
       type: 3}
-    startPos: {x: 8, y: 0}
+    startPos: {x: -1.29, y: 10}
     speedMultiplier: 3
     hpMultiplier: 3
   - enemyPrefab: {fileID: 4342350733379744943, guid: 98337287636663844a798648967aa1c7,
       type: 3}
-    startPos: {x: -9, y: 0}
+    startPos: {x: -1.29, y: 16}
     speedMultiplier: 3
     hpMultiplier: 3
   - enemyPrefab: {fileID: 4342350733379744943, guid: 98337287636663844a798648967aa1c7,
       type: 3}
-    startPos: {x: -10, y: 10}
+    startPos: {x: 1.29, y: 10}
     speedMultiplier: 3
     hpMultiplier: 3
   - enemyPrefab: {fileID: 4342350733379744943, guid: 98337287636663844a798648967aa1c7,
       type: 3}
-    startPos: {x: 12, y: 12}
+    startPos: {x: 1.29, y: 12}
     speedMultiplier: 3
     hpMultiplier: 3
   - enemyPrefab: {fileID: 4342350733379744943, guid: 98337287636663844a798648967aa1c7,
       type: 3}
-    startPos: {x: 0, y: 20}
+    startPos: {x: 3.84, y: 16}
     speedMultiplier: 3
     hpMultiplier: 3
   - enemyPrefab: {fileID: 4342350733379744943, guid: 98337287636663844a798648967aa1c7,
       type: 3}
-    startPos: {x: 0, y: -15}
+    startPos: {x: 3.84, y: 20}
     speedMultiplier: 3
     hpMultiplier: 3
   blockedPlayerShipRotationAngles: 
   PlayerShipPos: {x: -1.28, y: -6, z: 0}
-  lccEnemyKills: 2
+  lccEnemyKills: 40
   lccSurviveTime: 4
