@@ -7,7 +7,7 @@ public class PlayerShip : MonoBehaviour
   Animator PlayerShipGFXAnim;
   private float nextActionTime = 0.0f;
 
-  Vector2[] fourShipLanes = new[] { new Vector2(-3.85f, -6f), new Vector2(-1.29f, -6f), new Vector2(1.29f, -6f), new Vector2(3.84f, -6f) };
+  Vector2[] shipLanes = new[] { new Vector2(-3.85f, -6f), new Vector2(-1.29f, -6f), new Vector2(1.29f, -6f), new Vector2(3.84f, -6f) };
   private int currentShipLane = 1; // the lane number = the array index
   
   public Transform barrelTip;
@@ -125,18 +125,21 @@ public class PlayerShip : MonoBehaviour
       }
 
       if (GameplayManager.Instance.levelControlType == 1)
+      {
         StartCoroutine(RotatePlayerShip(this.gameObject, new Vector3(0, 0, angleToRotate), GameplayManager.Instance.currentPlayerShipRotationDuration));
+      }
       else if (GameplayManager.Instance.levelControlType == 2)
       {
-        if(angleToRotate<0)
+        if ((angleToRotate < 0) && (currentShipLane + 1 < shipLanes.Length))
         {
-          StartCoroutine(MovePlayerShip(fourShipLanes[currentShipLane + 1]));
-          currentShipLane++;
+          StartCoroutine(MovePlayerShip(shipLanes[currentShipLane + 1]));
+          print($"Current Ship lane: {currentShipLane}");
         }
-        else 
+        else if ((angleToRotate > 0) && (currentShipLane - 1 >= 0))
         {
-          StartCoroutine(MovePlayerShip(fourShipLanes[currentShipLane - 1]));
-          currentShipLane--;
+          StartCoroutine(MovePlayerShip(shipLanes[currentShipLane - 1]));
+          print($"Current Ship lane: {currentShipLane}");
+
         }
       }
     }
@@ -152,6 +155,10 @@ public class PlayerShip : MonoBehaviour
   {
     float speed = 2.5f;
     float step = speed * Time.deltaTime; // calculate distance to move
+    float oldX = transform.position.x;
+    
+    //TODO: validate the possible move before it's made
+
     while (transform.position.x != newPos.x)
     {
       transform.position = Vector3.MoveTowards(transform.position, newPos, step);
@@ -159,6 +166,12 @@ public class PlayerShip : MonoBehaviour
       yield return null;
     }
     GameplayManager.Instance.playerShipPos = newPos;
+    //(oldX < newPos.x) ? currentShipLane+=1 : currentShipLane-=1;
+    
+    if (oldX < newPos.x)
+      currentShipLane++;
+    else
+      currentShipLane--;
   }
 
   IEnumerator RotatePlayerShip(GameObject gameObjectToMove, Vector3 eulerAngles, float duration)  //https://stackoverflow.com/questions/37586407/rotate-gameobject-over-time/37588536
