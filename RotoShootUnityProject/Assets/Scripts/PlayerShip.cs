@@ -19,6 +19,7 @@ public class PlayerShip : MonoBehaviour
   public bool PlayerShipOutroAnimCompleted = false;
   private bool PlayerShipIntroAnimPlaying = false;
   private bool PlayerShipOutroAnimPlaying = false;
+  private bool playerShipMoving = false;
 
   void Start()
   {
@@ -113,7 +114,13 @@ public class PlayerShip : MonoBehaviour
     {
       //print("Prev Ship Rotation: " + this.gameObject.transform.eulerAngles);
       //Queue dbgQueue = MyGameplayManager.Instance.mouseClickQueue;
-      float angleToRotate = (float)GameplayManager.Instance.mouseClickQueue.Dequeue();
+
+      float angleToRotate = 0f;
+      if ((GameplayManager.Instance.levelControlType == 2) && (playerShipMoving))
+        return;
+      
+      angleToRotate = (float)GameplayManager.Instance.mouseClickQueue.Dequeue();
+
       //print("this.gameObject.transform.eulerAngles.z + angleToRotate = " + (this.gameObject.transform.eulerAngles.z + angleToRotate));
 
       foreach (int angle in GameplayManager.Instance.blockedPlayerShipRotationAngles)
@@ -133,13 +140,12 @@ public class PlayerShip : MonoBehaviour
         if ((angleToRotate < 0) && (currentShipLane + 1 < shipLanes.Length))
         {
           StartCoroutine(MovePlayerShip(shipLanes[currentShipLane + 1]));
-          print($"Current Ship lane: {currentShipLane}");
+          //print($"Current Ship lane: {currentShipLane}");
         }
         else if ((angleToRotate > 0) && (currentShipLane - 1 >= 0))
         {
           StartCoroutine(MovePlayerShip(shipLanes[currentShipLane - 1]));
-          print($"Current Ship lane: {currentShipLane}");
-
+          //print($"Current Ship lane: {currentShipLane}");
         }
       }
     }
@@ -156,9 +162,17 @@ public class PlayerShip : MonoBehaviour
     float speed = 2.5f;
     float step = speed * Time.deltaTime; // calculate distance to move
     float oldX = transform.position.x;
-    
-    //TODO: validate the possible move before it's made
 
+    //TODO: validate the possible move before it's made
+    if (oldX < newPos.x)
+    {
+      if (currentShipLane + 1 > 3) yield break;
+    }
+    else
+      if (currentShipLane - 1 < 0) yield break;
+
+    playerShipMoving = true;
+    print($"PlayerShipMoving: {playerShipMoving }");
     while (transform.position.x != newPos.x)
     {
       transform.position = Vector3.MoveTowards(transform.position, newPos, step);
@@ -166,8 +180,9 @@ public class PlayerShip : MonoBehaviour
       yield return null;
     }
     GameplayManager.Instance.playerShipPos = newPos;
-    //(oldX < newPos.x) ? currentShipLane+=1 : currentShipLane-=1;
-    
+    playerShipMoving = false;
+    print($"PlayerShipMoving: {playerShipMoving }");
+    ////(oldX < newPos.x) ? currentShipLane+=1 : currentShipLane-=1;
     if (oldX < newPos.x)
       currentShipLane++;
     else
