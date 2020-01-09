@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using DG.Tweening;
 
 public class PlayerShip : MonoBehaviour
 {
@@ -163,8 +164,8 @@ public class PlayerShip : MonoBehaviour
     float step = speed * Time.deltaTime; // calculate distance to move
     float oldX = transform.position.x;
 
-    //TODO: validate the possible move before it's made
-    if (oldX < newPos.x)
+    //validate the possible move before it's made
+    if (oldX < newPos.x) // don't go past either boundary
     {
       if (currentShipLane + 1 > 3) yield break;
     }
@@ -172,16 +173,22 @@ public class PlayerShip : MonoBehaviour
       if (currentShipLane - 1 < 0) yield break;
 
     playerShipMoving = true;
-    print($"PlayerShipMoving: {playerShipMoving }");
-    while (transform.position.x != newPos.x)
-    {
-      transform.position = Vector3.MoveTowards(transform.position, newPos, step);
-      //Debug.Log($"CurrX: {transform.position.x} DestX: {newPos.x}");
-      yield return null;
-    }
+    //print($"PlayerShipMoving: {playerShipMoving }");
+    //while (transform.position.x != newPos.x)
+    //{
+    //  transform.position = Vector3.MoveTowards(transform.position, newPos, step);
+    //  //Debug.Log($"CurrX: {transform.position.x} DestX: {newPos.x}");
+    //  yield return null;
+    //}
+
+    Tween myTween = transform.DOMove(new Vector3(newPos.x, newPos.y, 0), .5f).SetEase(Ease.OutQuad);
+    yield return myTween.WaitForCompletion();
+    // This log will happen after the tween has completed
+    //Debug.Log("Tween completed!");
+
     GameplayManager.Instance.playerShipPos = newPos;
     playerShipMoving = false;
-    print($"PlayerShipMoving: {playerShipMoving }");
+    //print($"PlayerShipMoving: {playerShipMoving }");
     ////(oldX < newPos.x) ? currentShipLane+=1 : currentShipLane-=1;
     if (oldX < newPos.x)
       currentShipLane++;
@@ -204,6 +211,10 @@ public class PlayerShip : MonoBehaviour
     //print("PrevRot: " + currentRot + " NewRot: " + newRot);
 
     float counter = 0;
+
+    //http://dotween.demigiant.com/documentation.php
+    //DORotate(Vector3 to, float duration, RotateMode mode);
+
     while (counter < duration)
     {
       counter += Time.deltaTime;

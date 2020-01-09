@@ -103,7 +103,7 @@ public abstract class EnemyBehaviour02 : ExtendedBehaviour
               Wait(GetRespawnWaitDelay(), () =>
               {
                 respawnWaitOver = true;
-                Debug.Log(respawnWaitDelay + " seconds is lost forever");
+                //Debug.Log(respawnWaitDelay + " seconds is lost forever");
               });
               startedWaiting = true;
             }
