@@ -184,7 +184,7 @@ public class PlayerShip : MonoBehaviour
     Tween myTween = transform.DOMove(new Vector3(newPos.x, newPos.y, 0), .5f).SetEase(Ease.OutQuad);
     yield return myTween.WaitForCompletion();
     // This log will happen after the tween has completed
-    //Debug.Log("Tween completed!");
+    //Debug.Log("Move Tween completed!");
 
     GameplayManager.Instance.playerShipPos = newPos;
     playerShipMoving = false;
@@ -213,14 +213,17 @@ public class PlayerShip : MonoBehaviour
     float counter = 0;
 
     //http://dotween.demigiant.com/documentation.php
-    //DORotate(Vector3 to, float duration, RotateMode mode);
+    Tween myTween = transform.DORotate( eulerAngles,  .5f, RotateMode.LocalAxisAdd ).SetEase(Ease.OutQuad);
+    yield return myTween.WaitForCompletion();
+    // This log will happen after the tween has completed
+    Debug.Log("Rotate Tween completed!");
 
-    while (counter < duration)
-    {
-      counter += Time.deltaTime;
-      gameObjectToMove.transform.eulerAngles = Vector3.Lerp(currentRot, newRot, counter / duration);
-      yield return null;
-    }
+    //while (counter < duration)
+    //{
+    //  counter += Time.deltaTime;
+    //  gameObjectToMove.transform.eulerAngles = Vector3.Lerp(currentRot, newRot, counter / duration);
+    //  yield return null;
+    //}
     GameplayManager.Instance.playerShipRotating = false;
     if ((GameplayManager.Instance.mouseClickQueue.Count == 0))
     {
