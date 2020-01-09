@@ -19,7 +19,9 @@ So you could separate GameManger and GamePlayManager for example.
 
 
 using UnityEngine;
+using System.Diagnostics;
 
+[DebuggerStepThrough]
 public class Singleton<T> : MonoBehaviour where T : MonoBehaviour
 {
   private static T _instance = null;
