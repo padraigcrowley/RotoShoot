@@ -41,6 +41,8 @@ public abstract class EnemyBehaviour02 : ExtendedBehaviour
     hp = initialHP;
 
     enemyState = EnemyState.ALIVE;
+    Tween myTween = transform.DOMove(new Vector3(transform.position.x, -(GameplayManager.Instance.screenEdgeY/2), 0), 10f).SetEase(Ease.InOutSine);
+
     enemyHitByPlayerMissile = false;
     respawnWaitOver = false;
     startedWaiting = false;
@@ -70,9 +72,9 @@ public abstract class EnemyBehaviour02 : ExtendedBehaviour
         case EnemyState.ALIVE:
           {
             // Move our position a step closer to the target.
-            float step = speed * Time.deltaTime; // calculate distance to move
+            //float step = speed * Time.deltaTime; // calculate distance to move
             //transform.position = Vector3.MoveTowards(transform.position, GameplayManager.Instance.playerShipPos, step);
-            Tween myTween = transform.DOMove(new Vector3(transform.position.x, GameplayManager.Instance.screenEdgeY, 0), 1f).SetEase(Ease.InOutCirc);
+            
             break;
           }
         case EnemyState.TEMPORARILY_DEAD:
