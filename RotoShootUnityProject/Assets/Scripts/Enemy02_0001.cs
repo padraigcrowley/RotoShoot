@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 
 
-public class Enemy02_0001 : EnemyBehaviour
+public class Enemy02_0001 : EnemyBehaviour02
 {
   public override void ReactToNonLethalPlayerMissileHit()
   {

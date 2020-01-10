@@ -1,4 +1,5 @@
 ﻿using UnityEngine;
+using DG.Tweening;
 
 public abstract class EnemyBehaviour02 : ExtendedBehaviour
 //https://answers.unity.com/questions/379440/a-simple-wait-function-without-coroutine-c.html
@@ -70,7 +71,8 @@ public abstract class EnemyBehaviour02 : ExtendedBehaviour
           {
             // Move our position a step closer to the target.
             float step = speed * Time.deltaTime; // calculate distance to move
-            transform.position = Vector3.MoveTowards(transform.position, GameplayManager.Instance.playerShipPos, step);
+            //transform.position = Vector3.MoveTowards(transform.position, GameplayManager.Instance.playerShipPos, step);
+            Tween myTween = transform.DOMove(new Vector3(transform.position.x, GameplayManager.Instance.screenEdgeY, 0), 1f).SetEase(Ease.InOutCirc);
             break;
           }
         case EnemyState.TEMPORARILY_DEAD:

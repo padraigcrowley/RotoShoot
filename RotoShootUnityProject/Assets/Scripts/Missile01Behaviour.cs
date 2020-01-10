@@ -20,9 +20,9 @@ public class Missile01Behaviour : MonoBehaviour
 
     this.transform.position += upDirection  * GameplayManager.Instance.currentPlayerMissileSpeedMultiplier * Time.deltaTime;
 
-    if ((this.transform.position.x > 7) || (this.transform.position.x < -7) || (this.transform.position.y > 12) || (this.transform.position.y < -12))
-    {
-      Destroy(gameObject);
-    }
+    //if ((this.transform.position.x > 7) || (this.transform.position.x < -7) || (this.transform.position.y > 12) || (this.transform.position.y < -12))
+    //{
+    //  Destroy(gameObject);
+    //}
   }
 }

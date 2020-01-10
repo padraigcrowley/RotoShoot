@@ -213,7 +213,7 @@ public class PlayerShip : MonoBehaviour
     float counter = 0;
 
     //http://dotween.demigiant.com/documentation.php
-    Tween myTween = transform.DORotate( eulerAngles,  .5f, RotateMode.LocalAxisAdd ).SetEase(Ease.OutQuad);
+    Tween myTween = transform.DORotate( eulerAngles,  .35f, RotateMode.WorldAxisAdd ).SetEase(Ease.InOutSine);
     yield return myTween.WaitForCompletion();
     // This log will happen after the tween has completed
     Debug.Log("Rotate Tween completed!");

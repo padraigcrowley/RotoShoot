@@ -45,10 +45,20 @@ public class LevelManager : Singleton<LevelManager>
     int index = 0;
     foreach (EnemySpawnPointData sp in levelSetupData.levelEnemySpawnPointData)
     {
-      levelEnemies[index] = Instantiate(sp.enemyPrefab, sp.startPos, Quaternion.identity) as GameObject;
-      levelEnemies[index].GetComponent<EnemyBehaviour>().speedMultiplierFromSpawner = sp.speedMultiplier;
-      levelEnemies[index].GetComponent<EnemyBehaviour>().hpMultiplierFromSpawner = sp.hpMultiplier;
-      index++;
+      if (levelSetupData.levelControlType == 1)
+      {
+        levelEnemies[index] = Instantiate(sp.enemyPrefab, sp.startPos, Quaternion.identity) as GameObject;
+        levelEnemies[index].GetComponent<EnemyBehaviour>().speedMultiplierFromSpawner = sp.speedMultiplier;
+        levelEnemies[index].GetComponent<EnemyBehaviour>().hpMultiplierFromSpawner = sp.hpMultiplier;
+        index++;
+      }
+      else
+      {
+          levelEnemies[index] = Instantiate(sp.enemyPrefab, sp.startPos, Quaternion.identity) as GameObject;
+          levelEnemies[index].GetComponent<EnemyBehaviour02>().speedMultiplierFromSpawner = sp.speedMultiplier;
+          levelEnemies[index].GetComponent<EnemyBehaviour02>().hpMultiplierFromSpawner = sp.hpMultiplier;
+          index++;
+      }
     }
   }
 

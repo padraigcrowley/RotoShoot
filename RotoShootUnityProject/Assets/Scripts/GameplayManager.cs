@@ -12,7 +12,8 @@ public class GameplayManager : Singleton<GameplayManager>
   [HideInInspector] public int currentPlayerScore = 0;
   public int highPlayerScore = 0;
   [HideInInspector] public int currentPlayerHP;
-   
+  [HideInInspector] public float screenEdgeX, screenEdgeY;
+
   public float  angleToRotatePlayerShip; //set in inspector, maybe shouldn't be?
 
   public float currentPlayerShipRotationDuration;
@@ -28,6 +29,7 @@ public class GameplayManager : Singleton<GameplayManager>
   public float enemy0001BaseSpeed = 1.0f;
 
   public int maxPlayerHP;
+
 
   public GameState currentGameState;
   [HideInInspector] public Vector3 playerShipPos;
