@@ -6,6 +6,7 @@ TagManager:
   tags:
   - PlayerMissile
   - Enemy01
+  - ScreenBoundary
   layers:
   - Default
   - TransparentFX

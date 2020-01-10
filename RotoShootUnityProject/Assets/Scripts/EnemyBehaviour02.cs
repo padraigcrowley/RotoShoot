@@ -26,6 +26,8 @@ public abstract class EnemyBehaviour02 : ExtendedBehaviour
   private bool respawnWaitOver;
   private bool startedWaiting;
 
+  private Tween myMoveTween;
+
   virtual public float GetRespawnWaitDelay() => respawnWaitDelay;
  
   public abstract void ReactToNonLethalPlayerMissileHit(); //each enemy variant has to implement their own 
@@ -39,10 +41,7 @@ public abstract class EnemyBehaviour02 : ExtendedBehaviour
     initialHP = hp * hpMultiplierFromSpawner;
     speed = initialSpeed;
     hp = initialHP;
-
-    enemyState = EnemyState.ALIVE;
-    Tween myTween = transform.DOMove(new Vector3(transform.position.x, -(GameplayManager.Instance.screenEdgeY/2), 0), 10f).SetEase(Ease.InOutSine);
-
+    
     enemyHitByPlayerMissile = false;
     respawnWaitOver = false;
     startedWaiting = false;
@@ -61,6 +60,9 @@ public abstract class EnemyBehaviour02 : ExtendedBehaviour
     startScaleX = transform.localScale.x;
     startScaleY = transform.localScale.y;
     startScaleZ = transform.localScale.z;
+
+    enemyState = EnemyState.ALIVE;
+    myMoveTween = transform.DOMove(new Vector3(transform.position.x, -(GameplayManager.Instance.screenCollisionBoundaryY), 0), 20f).SetEase(Ease.InOutSine).SetId("myMoveTween"); ;
   }
 
   private void Update()
@@ -170,6 +172,7 @@ public abstract class EnemyBehaviour02 : ExtendedBehaviour
     enemySpriteRenderer.enabled = true;
     enemyCircleCollider.enabled = true;
     enemyState = EnemyState.ALIVE;
+    myMoveTween = transform.DOMove(new Vector3(transform.position.x, -(GameplayManager.Instance.screenCollisionBoundaryY), 0), 20f).SetEase(Ease.InOutSine).SetId("myMoveTween");
   }
 
   private void OnTriggerEnter2D(Collider2D collision)
@@ -185,6 +188,15 @@ public abstract class EnemyBehaviour02 : ExtendedBehaviour
       {
         enemyState = EnemyState.HIT_BY_PLAYER_SHIP;
       }
+    }
+  }
+
+  private void OnTriggerExit2D(Collider2D collision)
+  {
+    if (collision.tag == "ScreenBoundary")
+    {
+      enemyState = EnemyState.TEMPORARILY_DEAD;
+      DOTween.Kill("myMoveTween");
     }
   }
 }
