@@ -693,6 +693,11 @@ MonoBehaviour:
   maxEnemy0001HP: 0
   enemy0001BaseSpeed: 1
   maxPlayerHP: 3
+  shipLanes:
+  - {x: -3.85, y: -6}
+  - {x: -1.29, y: -6}
+  - {x: 1.29, y: -6}
+  - {x: 3.84, y: -6}
   currentGameState: 0
   playerShipPos: {x: 0, y: 0, z: 0}
   levelControlType: 0

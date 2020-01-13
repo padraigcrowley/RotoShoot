@@ -8,7 +8,7 @@ public class PlayerShip : MonoBehaviour
   Animator PlayerShipGFXAnim;
   private float nextActionTime = 0.0f;
 
-  Vector2[] shipLanes = new[] { new Vector2(-3.85f, -6f), new Vector2(-1.29f, -6f), new Vector2(1.29f, -6f), new Vector2(3.84f, -6f) };
+ 
   private int currentShipLane = 1; // the lane number = the array index
   
   public Transform barrelTip;
@@ -138,14 +138,14 @@ public class PlayerShip : MonoBehaviour
       }
       else if (GameplayManager.Instance.levelControlType == 2)
       {
-        if ((angleToRotate < 0) && (currentShipLane + 1 < shipLanes.Length))
+        if ((angleToRotate < 0) && (currentShipLane + 1 < GameplayManager.Instance.shipLanes.Length))
         {
-          StartCoroutine(MovePlayerShip(shipLanes[currentShipLane + 1]));
+          StartCoroutine(MovePlayerShip(GameplayManager.Instance.shipLanes[currentShipLane + 1]));
           //print($"Current Ship lane: {currentShipLane}");
         }
         else if ((angleToRotate > 0) && (currentShipLane - 1 >= 0))
         {
-          StartCoroutine(MovePlayerShip(shipLanes[currentShipLane - 1]));
+          StartCoroutine(MovePlayerShip(GameplayManager.Instance.shipLanes[currentShipLane - 1]));
           //print($"Current Ship lane: {currentShipLane}");
         }
       }

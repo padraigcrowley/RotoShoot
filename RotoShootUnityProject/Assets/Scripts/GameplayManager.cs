@@ -7,14 +7,14 @@ public class GameplayManager : Singleton<GameplayManager>
 
   public Queue mouseClickQueue;
   [HideInInspector] public bool playerShipRotating = false;
-  
-  [HideInInspector] public enum GameState { WAITING_FOR_START_BUTTON, LEVEL_INTRO_IN_PROGRESS, LEVEL_IN_PROGRESS, LEVEL_FAILED, LEVEL_OUTRO_IN_PROGRESS, LEVEL_COMPLETE, GAME_OVER_SCREEN } 
+
+  [HideInInspector] public enum GameState { WAITING_FOR_START_BUTTON, LEVEL_INTRO_IN_PROGRESS, LEVEL_IN_PROGRESS, LEVEL_FAILED, LEVEL_OUTRO_IN_PROGRESS, LEVEL_COMPLETE, GAME_OVER_SCREEN }
   [HideInInspector] public int currentPlayerScore = 0;
   public int highPlayerScore = 0;
   [HideInInspector] public int currentPlayerHP;
   [HideInInspector] public float screenEdgeX, screenEdgeY, screenCollisionBoundaryX, screenCollisionBoundaryY;
 
-  public float  angleToRotatePlayerShip; //set in inspector, maybe shouldn't be?
+  public float angleToRotatePlayerShip; //set in inspector, maybe shouldn't be?
 
   public float currentPlayerShipRotationDuration;
   public float basePlayerShipRotationDuration;
@@ -30,6 +30,7 @@ public class GameplayManager : Singleton<GameplayManager>
 
   public int maxPlayerHP;
 
+  public Vector2[] shipLanes = new[] { new Vector2(-3.85f, -6f), new Vector2(-1.29f, -6f), new Vector2(1.29f, -6f), new Vector2(3.84f, -6f) };
 
   public GameState currentGameState;
   [HideInInspector] public Vector3 playerShipPos;
@@ -39,7 +40,7 @@ public class GameplayManager : Singleton<GameplayManager>
 
   // Start is called before the first frame update
   void Start()
-  {    
+  {
     currentGameState = GameState.LEVEL_INTRO_IN_PROGRESS;
     currentPlayerMissileSpeedMultiplier = basePlayerMissileSpeedMultiplier;
     currentPlayerHP = maxPlayerHP;
@@ -70,8 +71,8 @@ public class GameplayManager : Singleton<GameplayManager>
         }
       case GameState.LEVEL_COMPLETE:
         {
-          
-          print("Level Completion Criteria TRUE!, Next Level is:" + GameManagerX.Instance.currentLevel+1);
+
+          print("Level Completion Criteria TRUE!, Next Level is:" + GameManagerX.Instance.currentLevel + 1);
           break;
         }
       case GameState.LEVEL_FAILED:
@@ -81,11 +82,15 @@ public class GameplayManager : Singleton<GameplayManager>
         }
       default:
         break;
-    }    
+    }
   }
+
 
   public void initializeMainGameplayLoop()
   {
+    
+    
+    
     currentPlayerHP = maxPlayerHP;
     //gameState = 0;
     mouseClickQueue = new Queue();

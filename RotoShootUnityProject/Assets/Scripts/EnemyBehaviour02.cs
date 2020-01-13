@@ -27,6 +27,7 @@ public abstract class EnemyBehaviour02 : ExtendedBehaviour
   private bool startedWaiting;
 
   private Tween myMoveTween;
+  private string myTweenID;
 
   virtual public float GetRespawnWaitDelay() => respawnWaitDelay;
  
@@ -62,7 +63,9 @@ public abstract class EnemyBehaviour02 : ExtendedBehaviour
     startScaleZ = transform.localScale.z;
 
     enemyState = EnemyState.ALIVE;
-    myMoveTween = transform.DOMove(new Vector3(transform.position.x, -(GameplayManager.Instance.screenCollisionBoundaryY), 0), 20f).SetEase(Ease.InOutSine).SetId("myMoveTween"); ;
+    myTweenID = "myMoveTween" + gameObject.GetInstanceID(); // give the Tween a unique-ish ID
+    myMoveTween = transform.DOMove(new Vector3(transform.position.x, -(GameplayManager.Instance.screenCollisionBoundaryY), 0), 20f).SetEase(Ease.InOutSine).SetId(myTweenID);
+    print($"TweenID: {myTweenID}");
   }
 
   private void Update()
@@ -172,7 +175,7 @@ public abstract class EnemyBehaviour02 : ExtendedBehaviour
     enemySpriteRenderer.enabled = true;
     enemyCircleCollider.enabled = true;
     enemyState = EnemyState.ALIVE;
-    myMoveTween = transform.DOMove(new Vector3(transform.position.x, -(GameplayManager.Instance.screenCollisionBoundaryY), 0), 20f).SetEase(Ease.InOutSine).SetId("myMoveTween");
+    myMoveTween = transform.DOMove(new Vector3(transform.position.x, -(GameplayManager.Instance.screenCollisionBoundaryY), 0), 20f).SetEase(Ease.InOutSine).SetId(myTweenID);
   }
 
   private void OnTriggerEnter2D(Collider2D collision)
@@ -196,7 +199,7 @@ public abstract class EnemyBehaviour02 : ExtendedBehaviour
     if (collision.tag == "ScreenBoundary")
     {
       enemyState = EnemyState.TEMPORARILY_DEAD;
-      DOTween.Kill("myMoveTween");
+      DOTween.Kill(myTweenID);
     }
   }
 }

@@ -20,6 +20,81 @@ MonoBehaviour:
     startPos: {x: -3.8, y: 10}
     speedMultiplier: 3
     hpMultiplier: 3
+  - enemyPrefab: {fileID: 4342350733379744943, guid: 98337287636663844a798648967aa1c7,
+      type: 3}
+    startPos: {x: -3.8, y: 12}
+    speedMultiplier: 3
+    hpMultiplier: 3
+  - enemyPrefab: {fileID: 4342350733379744943, guid: 98337287636663844a798648967aa1c7,
+      type: 3}
+    startPos: {x: -3.8, y: 14}
+    speedMultiplier: 3
+    hpMultiplier: 3
+  - enemyPrefab: {fileID: 4342350733379744943, guid: 98337287636663844a798648967aa1c7,
+      type: 3}
+    startPos: {x: -3.8, y: 16}
+    speedMultiplier: 3
+    hpMultiplier: 3
+  - enemyPrefab: {fileID: 4342350733379744943, guid: 98337287636663844a798648967aa1c7,
+      type: 3}
+    startPos: {x: -1.3, y: 18}
+    speedMultiplier: 3
+    hpMultiplier: 3
+  - enemyPrefab: {fileID: 4342350733379744943, guid: 98337287636663844a798648967aa1c7,
+      type: 3}
+    startPos: {x: -1.3, y: 19}
+    speedMultiplier: 3
+    hpMultiplier: 3
+  - enemyPrefab: {fileID: 4342350733379744943, guid: 98337287636663844a798648967aa1c7,
+      type: 3}
+    startPos: {x: -1.3, y: 20}
+    speedMultiplier: 3
+    hpMultiplier: 3
+  - enemyPrefab: {fileID: 4342350733379744943, guid: 98337287636663844a798648967aa1c7,
+      type: 3}
+    startPos: {x: -1.3, y: 21}
+    speedMultiplier: 3
+    hpMultiplier: 3
+  - enemyPrefab: {fileID: 4342350733379744943, guid: 98337287636663844a798648967aa1c7,
+      type: 3}
+    startPos: {x: 1.3, y: 11}
+    speedMultiplier: 3
+    hpMultiplier: 3
+  - enemyPrefab: {fileID: 4342350733379744943, guid: 98337287636663844a798648967aa1c7,
+      type: 3}
+    startPos: {x: 1.3, y: 13}
+    speedMultiplier: 3
+    hpMultiplier: 3
+  - enemyPrefab: {fileID: 4342350733379744943, guid: 98337287636663844a798648967aa1c7,
+      type: 3}
+    startPos: {x: 1.3, y: 15}
+    speedMultiplier: 3
+    hpMultiplier: 3
+  - enemyPrefab: {fileID: 4342350733379744943, guid: 98337287636663844a798648967aa1c7,
+      type: 3}
+    startPos: {x: 1.3, y: 17}
+    speedMultiplier: 3
+    hpMultiplier: 3
+  - enemyPrefab: {fileID: 4342350733379744943, guid: 98337287636663844a798648967aa1c7,
+      type: 3}
+    startPos: {x: 3.8, y: 14}
+    speedMultiplier: 3
+    hpMultiplier: 3
+  - enemyPrefab: {fileID: 4342350733379744943, guid: 98337287636663844a798648967aa1c7,
+      type: 3}
+    startPos: {x: 3.8, y: 16}
+    speedMultiplier: 3
+    hpMultiplier: 3
+  - enemyPrefab: {fileID: 4342350733379744943, guid: 98337287636663844a798648967aa1c7,
+      type: 3}
+    startPos: {x: 3.8, y: 18}
+    speedMultiplier: 3
+    hpMultiplier: 3
+  - enemyPrefab: {fileID: 4342350733379744943, guid: 98337287636663844a798648967aa1c7,
+      type: 3}
+    startPos: {x: 3.8, y: 20}
+    speedMultiplier: 3
+    hpMultiplier: 3
   blockedPlayerShipRotationAngles: 
   PlayerShipPos: {x: -1.28, y: -6, z: 0}
   lccEnemyKills: 40
