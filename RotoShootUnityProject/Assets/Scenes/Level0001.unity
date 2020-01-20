@@ -153,7 +153,6 @@ MonoBehaviour:
   levelSetupData: {fileID: 11400000, guid: 7b7f2048ba39c1f43af7e2a654f89c91, type: 2}
   levelEnemies: []
   levelPlayTimeElapsed: 0
-  blockedPlayerShipRotationAngles: 
 --- !u!4 &254305519
 Transform:
   m_ObjectHideFlags: 0
@@ -401,20 +400,25 @@ PrefabInstance:
       propertyPath: m_Name
       value: Stars_ScrollingBackground
       objectReference: {fileID: 0}
+    - target: {fileID: 7135367664147593488, guid: 5ef930fca1af90b4c987d54446a83af2,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 7135367664147593490, guid: 5ef930fca1af90b4c987d54446a83af2,
         type: 3}
       propertyPath: m_LocalPosition.x
-      value: 0.4
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 7135367664147593490, guid: 5ef930fca1af90b4c987d54446a83af2,
         type: 3}
       propertyPath: m_LocalPosition.y
-      value: -3.5
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 7135367664147593490, guid: 5ef930fca1af90b4c987d54446a83af2,
         type: 3}
       propertyPath: m_LocalPosition.z
-      value: 1
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 7135367664147593490, guid: 5ef930fca1af90b4c987d54446a83af2,
         type: 3}
@@ -532,7 +536,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1586230997}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: -1.42, z: 1}
+  m_LocalPosition: {x: 0, y: -1.42, z: 2}
   m_LocalScale: {x: 3, y: 3, z: 2.137736}
   m_Children: []
   m_Father: {fileID: 0}

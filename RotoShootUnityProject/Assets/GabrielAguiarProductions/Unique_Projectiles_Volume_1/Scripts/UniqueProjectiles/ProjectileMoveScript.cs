@@ -19,8 +19,12 @@ public class ProjectileMoveScript : MonoBehaviour {
 	private bool collided;
 	private Rigidbody rb;
 
-	void Start () {	
-		rb = GetComponent <Rigidbody> ();
+  private Vector3 upDirection;
+
+  void Start () {
+    upDirection = GameObject.FindGameObjectWithTag("Player").transform.up;
+
+    rb = GetComponent <Rigidbody> ();
 
 		//used to create a radius for the accuracy and have a very unique randomness
 		if (accuracy != 100) {
@@ -60,12 +64,15 @@ public class ProjectileMoveScript : MonoBehaviour {
 		}
 	}
 
-	void FixedUpdate () {	
-		if (speed != 0 && rb != null)
-			rb.position += (transform.forward + offset)  * (speed * Time.deltaTime);
-	}
+	void FixedUpdate () {
+    //if (speed != 0 && rb != null)
+    //rb.position += (transform.forward + offset)  * (speed * Time.deltaTime);
 
-	void OnCollisionEnter (Collision co) {
+    if (speed != 0 && rb != null)
+    rb.position += (upDirection + offset)  * (speed * Time.deltaTime);
+  }
+
+  void OnCollisionEnter (Collision co) {
 		if (co.gameObject.tag != "Bullet" && !collided) {
 			collided = true;
 			

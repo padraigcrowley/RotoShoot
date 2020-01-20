@@ -3402,7 +3402,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   barrelTip: {fileID: 2099002079}
   shipSpriteRenderer: {fileID: 191601460}
-  bullet: {fileID: 6763926857963499497, guid: 41982458586c3a64588b5e7242b21513, type: 3}
+  bullet: {fileID: 1865968712415440, guid: e1d30abeb36499148bca7bfbd6a64d43, type: 3}
   PlayerShipGreenRotArrowObj: {fileID: 903228520}
   PlayerShipRedRotArrowObj: {fileID: 1924820801}
   PlayerShipIntroAnimCompleted: 0
@@ -6035,10 +6035,10 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2099002078}
-  m_LocalRotation: {x: 0, y: 0, z: 1, w: 0}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0.79, z: 0.1}
   m_LocalScale: {x: 2.1786494, y: 2.1786494, z: 2.1786494}
   m_Children: []
   m_Father: {fileID: 1061970254}
   m_RootOrder: 0
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 180}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
