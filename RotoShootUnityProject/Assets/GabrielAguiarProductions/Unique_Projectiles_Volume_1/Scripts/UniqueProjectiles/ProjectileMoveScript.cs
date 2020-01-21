@@ -17,14 +17,14 @@ public class ProjectileMoveScript : MonoBehaviour {
 	private float speedRandomness;
 	private Vector3 offset;
 	private bool collided;
-	private Rigidbody rb;
+	private Rigidbody2D rb;
 
   private Vector3 upDirection;
 
   void Start () {
     upDirection = GameObject.FindGameObjectWithTag("Player").transform.up;
 
-    rb = GetComponent <Rigidbody> ();
+    rb = GetComponent <Rigidbody2D> ();
 
 		//used to create a radius for the accuracy and have a very unique randomness
 		if (accuracy != 100) {
@@ -65,12 +65,17 @@ public class ProjectileMoveScript : MonoBehaviour {
 	}
 
 	void FixedUpdate () {
-    //if (speed != 0 && rb != null)
-    //rb.position += (transform.forward + offset)  * (speed * Time.deltaTime);
+		//if (speed != 0 && rb != null)
+		//	rb.position += (transform.forward + offset) * (speed * Time.deltaTime);
 
-    if (speed != 0 && rb != null)
-    rb.position += (upDirection + offset)  * (speed * Time.deltaTime);
-  }
+		this.transform.position += upDirection * GameplayManager.Instance.currentPlayerMissileSpeedMultiplier * Time.deltaTime;
+
+		//if (speed != 0 && rb != null)
+		//	rb.position += (transform.up + offset) * (speed * Time.fixedDeltaTime);
+
+		//if (speed != 0 && rb != null)
+		//rb.position += (upDirection + offset)  * (speed * Time.deltaTime);
+	}
 
   void OnCollisionEnter (Collision co) {
 		if (co.gameObject.tag != "Bullet" && !collided) {
