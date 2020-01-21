@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class ProjectileMoveScript : MonoBehaviour {
+public class ProjectileMoveScript_tst : MonoBehaviour {
 
 	public float speed;
 	[Tooltip("From 0% to 100%")]
@@ -68,7 +68,7 @@ public class ProjectileMoveScript : MonoBehaviour {
 		//if (speed != 0 && rb != null)
 		//	rb.position += (transform.forward + offset) * (speed * Time.deltaTime);
 
-		this.transform.position += upDirection * GameplayManager.Instance.currentPlayerMissileSpeedMultiplier * Time.deltaTime;
+		this.transform.position += upDirection * speed * Time.deltaTime;
 
 
 		//if (speed != 0 && rb != null)
