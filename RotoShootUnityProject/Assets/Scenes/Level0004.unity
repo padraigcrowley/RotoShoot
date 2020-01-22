@@ -415,6 +415,21 @@ PrefabInstance:
       propertyPath: m_Materials.Array.data[0]
       value: 
       objectReference: {fileID: 10301, guid: 0000000000000000f000000000000000, type: 0}
+    - target: {fileID: 7135367664147593489, guid: 5ef930fca1af90b4c987d54446a83af2,
+        type: 3}
+      propertyPath: m_SortingLayerID
+      value: -1624045745
+      objectReference: {fileID: 0}
+    - target: {fileID: 7135367664147593489, guid: 5ef930fca1af90b4c987d54446a83af2,
+        type: 3}
+      propertyPath: m_SortingLayer
+      value: -1
+      objectReference: {fileID: 0}
+    - target: {fileID: 7135367664147593491, guid: 5ef930fca1af90b4c987d54446a83af2,
+        type: 3}
+      propertyPath: m_Enabled
+      value: 1
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 5ef930fca1af90b4c987d54446a83af2, type: 3}
 --- !u!1 &1285583826
@@ -470,10 +485,10 @@ SpriteRenderer:
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: -1624045745
-  m_SortingLayer: 1
+  m_SortingLayer: -1
   m_SortingOrder: 1
   m_Sprite: {fileID: 21300000, guid: 0b96bc375665c44448419ff18f22d443, type: 3}
-  m_Color: {r: 1, g: 1, b: 1, a: 1}
+  m_Color: {r: 1, g: 1, b: 1, a: 0.3019608}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
