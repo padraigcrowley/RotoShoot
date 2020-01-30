@@ -25,8 +25,8 @@ public class Boundary : MonoBehaviour
 
     GameplayManager.Instance.screenEdgeX = viewportSize.x;
     GameplayManager.Instance.screenEdgeY = viewportSize.y;
-    viewportSize.x *= 1.5f;
-    viewportSize.y *= 1.5f;
+    viewportSize.x *= 1f;
+    viewportSize.y *= 1f;
     GameplayManager.Instance.screenCollisionBoundaryX = viewportSize.x;
     GameplayManager.Instance.screenCollisionBoundaryY = viewportSize.y;
     boundareCollider.size = viewportSize;

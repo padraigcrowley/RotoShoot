@@ -164,6 +164,8 @@ public class PlayerShip : MonoBehaviour
     float step = speed * Time.deltaTime; // calculate distance to move
     float oldX = transform.position.x;
 
+    Tween myTween;
+
     if (playerShipMoving)
       yield break;
     
@@ -185,7 +187,8 @@ public class PlayerShip : MonoBehaviour
     //  yield return null;
     //}
 
-    Tween myTween = transform.DOMove(new Vector3(newPos.x, newPos.y, 0), .5f).SetEase(Ease.OutQuad);
+    myTween = transform.DOMove(new Vector3(newPos.x, newPos.y, 0), .5f).SetEase(Ease.OutQuad);
+    
     yield return myTween.WaitForCompletion();
     // This log will happen after the tween has completed
     //Debug.Log("Move Tween completed!");
