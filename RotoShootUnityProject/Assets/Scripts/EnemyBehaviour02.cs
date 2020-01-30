@@ -65,7 +65,7 @@ public abstract class EnemyBehaviour02 : ExtendedBehaviour
     enemyState = EnemyState.ALIVE;
     myTweenID = "myMoveTween" + gameObject.GetInstanceID(); // give the Tween a unique-ish ID
     myMoveTween = transform.DOMove(new Vector3(transform.position.x, -(GameplayManager.Instance.screenCollisionBoundaryY), 0), 20f).SetEase(Ease.InOutSine).SetId(myTweenID);
-    print($"TweenID: {myTweenID}");
+    //print($"TweenID: {myTweenID}");
   }
 
   private void Update()

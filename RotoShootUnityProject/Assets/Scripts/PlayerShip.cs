@@ -64,7 +64,7 @@ public class PlayerShip : MonoBehaviour
         
         ProcessInputQueue();
         //ApplyForwardThrust();
-        if ((Time.time > nextActionTime) && (GameplayManager.Instance.playerShipRotating == false))
+        if ((Time.time > nextActionTime) && (GameplayManager.Instance.playerShipRotating == false) && (playerShipMoving == false))
         {
           nextActionTime = Time.time + GameplayManager.Instance.currentPlayerShipFireRate;
           CreatePlayerBullet();
@@ -111,7 +111,7 @@ public class PlayerShip : MonoBehaviour
 
   private void ProcessInputQueue()
   {
-    if ((GameplayManager.Instance.mouseClickQueue.Count != 0) && (GameplayManager.Instance.playerShipRotating == false))
+    if ((GameplayManager.Instance.mouseClickQueue.Count != 0) && (!GameplayManager.Instance.playerShipRotating) && !playerShipMoving)
     {
       //print("Prev Ship Rotation: " + this.gameObject.transform.eulerAngles);
       //Queue dbgQueue = MyGameplayManager.Instance.mouseClickQueue;
@@ -164,6 +164,9 @@ public class PlayerShip : MonoBehaviour
     float step = speed * Time.deltaTime; // calculate distance to move
     float oldX = transform.position.x;
 
+    if (playerShipMoving)
+      yield break;
+    
     //validate the possible move before it's made
     if (oldX < newPos.x) // don't go past either boundary
     {
@@ -174,6 +177,7 @@ public class PlayerShip : MonoBehaviour
 
     playerShipMoving = true;
     //print($"PlayerShipMoving: {playerShipMoving }");
+    
     //while (transform.position.x != newPos.x)
     //{
     //  transform.position = Vector3.MoveTowards(transform.position, newPos, step);
