@@ -30,13 +30,13 @@ public abstract class EnemyBehaviour02 : ExtendedBehaviour
   private string myTweenID;
 
   virtual public float GetRespawnWaitDelay() => respawnWaitDelay;
- 
+  private Vector3 upDirection;
   public abstract void ReactToNonLethalPlayerMissileHit(); //each enemy variant has to implement their own 
 
   private void Start()
   {
     //todo - move this out to GameplayManager or to sub-class or enemy prefab??
-    speed = .25f;
+    speed = 1.0f;
     hp = 1f;
     initialSpeed = speed * speedMultiplierFromSpawner; // todo: should these be set in this class, not MyGameplayManager??
     initialHP = hp * hpMultiplierFromSpawner;
@@ -63,9 +63,11 @@ public abstract class EnemyBehaviour02 : ExtendedBehaviour
     startScaleZ = transform.localScale.z;
 
     enemyState = EnemyState.ALIVE;
-    myTweenID = "myMoveTween" + gameObject.GetInstanceID(); // give the Tween a unique-ish ID
-    myMoveTween = transform.DOMove(new Vector3(transform.position.x, -(GameplayManager.Instance.screenCollisionBoundaryY), 0), 20f).SetEase(Ease.InOutSine).SetId(myTweenID);
+    //myTweenID = "myMoveTween" + gameObject.GetInstanceID(); // give the Tween a unique-ish ID
+    //myMoveTween = transform.DOMove(new Vector3(transform.position.x, -(GameplayManager.Instance.screenCollisionBoundaryY), 0), 20f).SetEase(Ease.InOutSine).SetId(myTweenID);
     //print($"TweenID: {myTweenID}");
+
+    upDirection = GameObject.FindGameObjectWithTag("Player").transform.up;
   }
 
   private void Update()
@@ -79,7 +81,12 @@ public abstract class EnemyBehaviour02 : ExtendedBehaviour
             // Move our position a step closer to the target.
             //float step = speed * Time.deltaTime; // calculate distance to move
             //transform.position = Vector3.MoveTowards(transform.position, GameplayManager.Instance.playerShipPos, step);
-            
+
+            this.transform.position -= upDirection * speed * Time.deltaTime;
+            Wait(5, () => {
+              Debug.Log("5 seconds is lost forever");
+            });
+
             break;
           }
         case EnemyState.TEMPORARILY_DEAD:
@@ -175,7 +182,7 @@ public abstract class EnemyBehaviour02 : ExtendedBehaviour
     enemySpriteRenderer.enabled = true;
     enemyCircleCollider.enabled = true;
     enemyState = EnemyState.ALIVE;
-    myMoveTween = transform.DOMove(new Vector3(transform.position.x, -(GameplayManager.Instance.screenCollisionBoundaryY), 0), 20f).SetEase(Ease.InOutSine).SetId(myTweenID);
+    //myMoveTween = transform.DOMove(new Vector3(transform.position.x, -(GameplayManager.Instance.screenCollisionBoundaryY), 0), 20f).SetEase(Ease.InOutSine).SetId(myTweenID);
   }
 
   private void OnTriggerEnter2D(Collider2D collision)
