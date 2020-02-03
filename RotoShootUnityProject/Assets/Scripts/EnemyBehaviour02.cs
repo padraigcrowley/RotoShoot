@@ -33,6 +33,8 @@ public abstract class EnemyBehaviour02 : ExtendedBehaviour
   private Vector3 upDirection;
   public abstract void ReactToNonLethalPlayerMissileHit(); //each enemy variant has to implement their own 
 
+  private bool readyToMoveLane = false;
+
   private void Start()
   {
     //todo - move this out to GameplayManager or to sub-class or enemy prefab??
@@ -80,12 +82,31 @@ public abstract class EnemyBehaviour02 : ExtendedBehaviour
           {
             // Move our position a step closer to the target.
             //float step = speed * Time.deltaTime; // calculate distance to move
-            //transform.position = Vector3.MoveTowards(transform.position, GameplayManager.Instance.playerShipPos, step);
+            //transform.position = Vector3.MoveTowards(transform.position, GameplayManager.Instance.playerShipPos, step);            
 
-            this.transform.position -= upDirection * speed * Time.deltaTime;
-            Wait(5, () => {
-              Debug.Log("5 seconds is lost forever");
-            });
+            if (!readyToMoveLane)
+            {              
+              Wait(2, () =>
+              {
+                readyToMoveLane = true;
+                Debug.Log("5 seconds is lost forever");
+              });
+            }
+
+            if (!readyToMoveLane)
+            {
+              this.transform.position -= upDirection * speed * Time.deltaTime;
+            }
+            else
+            {
+              this.transform.position += transform.right * speed * Time.deltaTime;
+              if (this.transform.position.x >= GameplayManager.Instance.shipLanes[3].x)
+              {
+                readyToMoveLane = false;
+              }
+            }
+
+
 
             break;
           }
