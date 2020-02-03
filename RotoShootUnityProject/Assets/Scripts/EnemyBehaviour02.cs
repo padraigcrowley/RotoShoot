@@ -33,7 +33,7 @@ public abstract class EnemyBehaviour02 : ExtendedBehaviour
   private Vector3 upDirection;
   public abstract void ReactToNonLethalPlayerMissileHit(); //each enemy variant has to implement their own 
 
-  private bool readyToMoveLane = false;
+  private bool readyToMoveLane = false, waitingToMoveLane = false;
 
   private void Start()
   {
@@ -74,6 +74,8 @@ public abstract class EnemyBehaviour02 : ExtendedBehaviour
 
   private void Update()
   {
+    Vector2 dest = new Vector2(0f,0f);
+
     if (GameplayManager.Instance.currentGameState == GameplayManager.GameState.LEVEL_IN_PROGRESS)
     {
       switch (enemyState)
@@ -85,12 +87,19 @@ public abstract class EnemyBehaviour02 : ExtendedBehaviour
             //transform.position = Vector3.MoveTowards(transform.position, GameplayManager.Instance.playerShipPos, step);            
 
             if (!readyToMoveLane)
-            {              
-              Wait(2, () =>
+            {
+              if (!waitingToMoveLane)
               {
-                readyToMoveLane = true;
-                Debug.Log("5 seconds is lost forever");
-              });
+                waitingToMoveLane = true;
+                Wait(2, () =>
+                {
+                  readyToMoveLane = true;
+                  waitingToMoveLane = false;
+                  dest = new Vector2((float)GameplayManager.Instance.shipLanes[Random.Range(0, 3)].x, transform.position.y);
+                  print($"Dest: {dest}");
+                  Debug.Log("2 seconds is lost forever");
+                });
+              }
             }
 
             if (!readyToMoveLane)
@@ -99,8 +108,11 @@ public abstract class EnemyBehaviour02 : ExtendedBehaviour
             }
             else
             {
-              this.transform.position += transform.right * speed * Time.deltaTime;
-              if (this.transform.position.x >= GameplayManager.Instance.shipLanes[3].x)
+              // this.transform.position += transform.right * speed * Time.deltaTime;
+              
+              transform.position = Vector2.MoveTowards(transform.position, dest, .1f);
+
+              if (Mathf.Approximately(this.transform.position.x,dest.x))
               {
                 readyToMoveLane = false;
               }
