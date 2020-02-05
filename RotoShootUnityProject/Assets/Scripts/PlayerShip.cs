@@ -192,6 +192,7 @@ public class PlayerShip : MonoBehaviour
     yield return myTween.WaitForCompletion();
     // This log will happen after the tween has completed
     //Debug.Log("Move Tween completed!");
+    print($"New ship pos: {newPos}");
 
     GameplayManager.Instance.playerShipPos = newPos;
     playerShipMoving = false;
