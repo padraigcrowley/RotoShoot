@@ -35,6 +35,8 @@ public abstract class EnemyBehaviour02 : ExtendedBehaviour
 
   private bool readyToMoveLane = false, waitingToMoveLane = false;
 
+  private Vector2 dest = new Vector2(0f, 0f);
+
   private void Start()
   {
     //todo - move this out to GameplayManager or to sub-class or enemy prefab??
@@ -74,8 +76,7 @@ public abstract class EnemyBehaviour02 : ExtendedBehaviour
 
   private void Update()
   {
-    Vector2 dest = new Vector2(0f,0f);
-
+    
     if (GameplayManager.Instance.currentGameState == GameplayManager.GameState.LEVEL_IN_PROGRESS)
     {
       switch (enemyState)
@@ -152,7 +153,7 @@ public abstract class EnemyBehaviour02 : ExtendedBehaviour
               Wait(GetRespawnWaitDelay(), () =>
               {
                 respawnWaitOver = true;
-                //Debug.Log(respawnWaitDelay + " seconds is lost forever");
+                //Debug.Log(respawnWaitDelay + " respawnWaitOver seconds passed");
               });
               startedWaiting = true;
             }
@@ -215,6 +216,8 @@ public abstract class EnemyBehaviour02 : ExtendedBehaviour
     enemySpriteRenderer.enabled = true;
     enemyCircleCollider.enabled = true;
     enemyState = EnemyState.ALIVE;
+    readyToMoveLane = false; 
+    waitingToMoveLane = false;
     //myMoveTween = transform.DOMove(new Vector3(transform.position.x, -(GameplayManager.Instance.screenCollisionBoundaryY), 0), 20f).SetEase(Ease.InOutSine).SetId(myTweenID);
   }
 
@@ -239,7 +242,7 @@ public abstract class EnemyBehaviour02 : ExtendedBehaviour
     if (collision.tag == "ScreenBoundary")
     {
       enemyState = EnemyState.TEMPORARILY_DEAD;
-      DOTween.Kill(myTweenID);
+      //DOTween.Kill(myTweenID);
     }
   }
 }

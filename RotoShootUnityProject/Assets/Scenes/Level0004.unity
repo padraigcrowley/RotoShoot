@@ -96,6 +96,7 @@ LightmapSettings:
     m_PVRFilteringAtrousPositionSigmaAO: 1
     m_ExportTrainingData: 0
     m_TrainingDataDestination: TrainingData
+    m_LightProbeSampleCountMultiplier: 4
   m_LightingDataAsset: {fileID: 0}
   m_UseShadowmask: 1
 --- !u!196 &4
@@ -150,7 +151,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   numEnemyKillsInLevel: 0
-  levelSetupData: {fileID: 11400000, guid: ecb0fc95042de7844974c1804a7d3b8f, type: 2}
+  levelSetupData: {fileID: 11400000, guid: d8e4f31764efff24e98376419c3c3d56, type: 2}
   levelEnemies: []
   levelPlayTimeElapsed: 0
 --- !u!4 &254305519
@@ -405,11 +406,6 @@ PrefabInstance:
       propertyPath: m_IsActive
       value: 1
       objectReference: {fileID: 0}
-    - target: {fileID: 7135367664147593490, guid: 5ef930fca1af90b4c987d54446a83af2,
-        type: 3}
-      propertyPath: m_RootOrder
-      value: 3
-      objectReference: {fileID: 0}
     - target: {fileID: 7135367664147593489, guid: 5ef930fca1af90b4c987d54446a83af2,
         type: 3}
       propertyPath: m_Materials.Array.data[0]
@@ -424,6 +420,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_SortingLayer
       value: -1
+      objectReference: {fileID: 0}
+    - target: {fileID: 7135367664147593490, guid: 5ef930fca1af90b4c987d54446a83af2,
+        type: 3}
+      propertyPath: m_RootOrder
+      value: 3
       objectReference: {fileID: 0}
     - target: {fileID: 7135367664147593491, guid: 5ef930fca1af90b4c987d54446a83af2,
         type: 3}
@@ -463,6 +464,7 @@ SpriteRenderer:
   m_MotionVectors: 1
   m_LightProbeUsage: 1
   m_ReflectionProbeUsage: 1
+  m_RayTracingMode: 0
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
