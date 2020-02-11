@@ -1,7 +1,8 @@
 ﻿using UnityEngine;
 using DG.Tweening;
 
-
+namespace Mr1
+{
 
   public abstract class EnemyBehaviour02 : ExtendedBehaviour
   //https://answers.unity.com/questions/379440/a-simple-wait-function-without-coroutine-c.html
@@ -53,10 +54,10 @@ using DG.Tweening;
       respawnWaitOver = false;
       startedWaiting = false;
 
-    /*      // rotate enemy to face player ship https://answers.unity.com/questions/585035/lookat-2d-equivalent-.html
-      Vector3 dir = GameplayManager.Instance.playerShipPos - transform.position;
-      float angle = Mathf.Atan2(dir.y, dir.x) * Mathf.Rad2Deg + 90f;
-      transform.rotation = Quaternion.AngleAxis(angle, Vector3.forward); */
+      /*      // rotate enemy to face player ship https://answers.unity.com/questions/585035/lookat-2d-equivalent-.html
+        Vector3 dir = GameplayManager.Instance.playerShipPos - transform.position;
+        float angle = Mathf.Atan2(dir.y, dir.x) * Mathf.Rad2Deg + 90f;
+        transform.rotation = Quaternion.AngleAxis(angle, Vector3.forward); */
 
       enemySpriteRenderer = GetComponent<SpriteRenderer>();
       enemyCircleCollider = GetComponent<CircleCollider2D>();
@@ -74,6 +75,8 @@ using DG.Tweening;
       //print($"TweenID: {myTweenID}");
 
       upDirection = GameObject.FindGameObjectWithTag("Player").transform.up;
+
+      transform.FollowPath("Path0001", 5f, FollowType.Loop).Log(true);
     }
 
     private void Update()
@@ -156,8 +159,8 @@ using DG.Tweening;
                 Wait(GetRespawnWaitDelay(), () =>
                 {
                   respawnWaitOver = true;
-                //Debug.Log(respawnWaitDelay + " respawnWaitOver seconds passed");
-              });
+                  //Debug.Log(respawnWaitDelay + " respawnWaitOver seconds passed");
+                });
                 startedWaiting = true;
               }
               if (respawnWaitOver)
@@ -208,6 +211,8 @@ using DG.Tweening;
       enemyCircleCollider.enabled = false;
       respawnWaitOver = false;
       startedWaiting = false;
+      transform.StopFollowing(); // TODO - Then, what?
+      
       enemyState = EnemyState.WAITING_TO_RESPAWN;
     }
 
@@ -222,6 +227,7 @@ using DG.Tweening;
       readyToMoveLane = false;
       waitingToMoveLane = false;
       //myMoveTween = transform.DOMove(new Vector3(transform.position.x, -(GameplayManager.Instance.screenCollisionBoundaryY), 0), 20f).SetEase(Ease.InOutSine).SetId(myTweenID);
+      transform.FollowPath("Path0001", 5f, FollowType.Loop).Log(true);
     }
 
     private void OnTriggerEnter2D(Collider2D collision)
@@ -249,3 +255,4 @@ using DG.Tweening;
       }
     }
   }
+}

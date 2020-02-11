@@ -22,5 +22,5 @@ MonoBehaviour:
     hpMultiplier: 1
   blockedPlayerShipRotationAngles: 
   PlayerShipPos: {x: -1.28, y: -6, z: 0}
-  lccEnemyKills: 40
+  lccEnemyKills: 4000
   lccSurviveTime: 4
