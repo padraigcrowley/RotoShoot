@@ -224,7 +224,7 @@ public class PlayerShip : MonoBehaviour
     Tween myTween = transform.DORotate( eulerAngles,  .35f, RotateMode.WorldAxisAdd ).SetEase(Ease.InOutSine);
     yield return myTween.WaitForCompletion();
     // This log will happen after the tween has completed
-    Debug.Log("Rotate Tween completed!");
+    //Debug.Log("Rotate Tween completed!");
 
     //while (counter < duration)
     //{

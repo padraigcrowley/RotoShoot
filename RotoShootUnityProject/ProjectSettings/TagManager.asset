@@ -44,11 +44,11 @@ TagManager:
   - name: Background
     uniqueID: 2670921551
     locked: 0
-  - name: Default
-    uniqueID: 0
-    locked: 0
   - name: Enemy
     uniqueID: 3215884117
+    locked: 0
+  - name: Default
+    uniqueID: 0
     locked: 0
   - name: PlayerShip
     uniqueID: 2799291549
