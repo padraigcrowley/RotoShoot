@@ -15,7 +15,7 @@ public class LevelManager : Singleton<LevelManager>
   {
     GameplayManager.Instance.playerShipPos = levelSetupData.PlayerShipPos;
     GameplayManager.Instance.levelControlType = levelSetupData.levelControlType;
-    GameplayManager.Instance.shipLanes = levelSetupData.shipLanes;
+    GameplayManager.Instance.shipLanes = levelSetupData.shipLanes; 
   }
 
   void Start()

@@ -70,13 +70,10 @@ namespace Mr1
       startScaleZ = transform.localScale.z;
 
       enemyState = EnemyState.ALIVE;
-      //myTweenID = "myMoveTween" + gameObject.GetInstanceID(); // give the Tween a unique-ish ID
-      //myMoveTween = transform.DOMove(new Vector3(transform.position.x, -(GameplayManager.Instance.screenCollisionBoundaryY), 0), 20f).SetEase(Ease.InOutSine).SetId(myTweenID);
-      //print($"TweenID: {myTweenID}");
-
+      
       upDirection = GameObject.FindGameObjectWithTag("Player").transform.up;
 
-      transform.FollowPath("Path0001", 5f, FollowType.Loop).Log(true);
+      transform.FollowPath("Path0002", initialSpeed, FollowType.Loop).Log(true);
     }
 
     private void Update()
@@ -88,43 +85,7 @@ namespace Mr1
         {
           case EnemyState.ALIVE:
             {
-              // Move our position a step closer to the target.
-              //float step = speed * Time.deltaTime; // calculate distance to move
-              //transform.position = Vector3.MoveTowards(transform.position, GameplayManager.Instance.playerShipPos, step);            
-
-              /*-----------------------------
-              if (!readyToMoveLane)
-              {
-                if (!waitingToMoveLane)
-                {
-                  waitingToMoveLane = true;
-                  Wait(2, () =>
-                  {
-                    readyToMoveLane = true;
-                    waitingToMoveLane = false;
-                    dest = new Vector2((float)GameplayManager.Instance.shipLanes[Random.Range(0, 3)].x, transform.position.y);
-                    print($"Dest: {dest}");
-                    Debug.Log("2 seconds is lost forever");
-                  });
-                }
-              }
-
-              if (!readyToMoveLane)
-              {
-                this.transform.position -= upDirection * speed * Time.deltaTime;
-              }
-              else
-              {
-                // this.transform.position += transform.right * speed * Time.deltaTime;
-
-                transform.position = Vector2.MoveTowards(transform.position, dest, .1f);
-
-                if (Mathf.Approximately(this.transform.position.x, dest.x))
-                {
-                  readyToMoveLane = false;
-                }
-              }
-              -----------------------*/
+              
 
 
               break;
@@ -211,7 +172,7 @@ namespace Mr1
       enemyCircleCollider.enabled = false;
       respawnWaitOver = false;
       startedWaiting = false;
-      transform.StopFollowing(); // TODO - Then, what?
+      transform.StopFollowing(); 
       
       enemyState = EnemyState.WAITING_TO_RESPAWN;
     }
@@ -226,8 +187,7 @@ namespace Mr1
       enemyState = EnemyState.ALIVE;
       readyToMoveLane = false;
       waitingToMoveLane = false;
-      //myMoveTween = transform.DOMove(new Vector3(transform.position.x, -(GameplayManager.Instance.screenCollisionBoundaryY), 0), 20f).SetEase(Ease.InOutSine).SetId(myTweenID);
-      transform.FollowPath("Path0001", 5f, FollowType.Loop).Log(true);
+      transform.FollowPath("Path0002", initialSpeed, FollowType.Loop).Log(true);
     }
 
     private void OnTriggerEnter2D(Collider2D collision)
