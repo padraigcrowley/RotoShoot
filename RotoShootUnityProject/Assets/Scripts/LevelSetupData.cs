@@ -14,4 +14,6 @@ public class LevelSetupData : ScriptableObject
   public int lccEnemyKills;
   public int lccSurviveTime;
 
+  public Vector2[] shipLanes;
+
 }

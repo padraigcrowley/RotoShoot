@@ -30,7 +30,7 @@ public class GameplayManager : Singleton<GameplayManager>
 
   public int maxPlayerHP;
 
-  public Vector2[] shipLanes = new[] { new Vector2(-3.85f, -6f), new Vector2(-1.29f, -6f), new Vector2(1.29f, -6f), new Vector2(3.84f, -6f) };
+  public Vector2[] shipLanes;// = new[] { new Vector2(-3.85f, -6f), new Vector2(-1.29f, -6f), new Vector2(1.29f, -6f), new Vector2(3.84f, -6f) };
 
   public GameState currentGameState;
   [HideInInspector] public Vector3 playerShipPos;
