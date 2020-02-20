@@ -213,6 +213,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   pathList:
   - {fileID: 11400000, guid: 0f7f2978d19808143bd99d8259a325da, type: 2}
+  - {fileID: 11400000, guid: 1c48dabd5c43ce447a04208ea9f6fa5b, type: 2}
 --- !u!4 &627081079
 Transform:
   m_ObjectHideFlags: 0
@@ -546,7 +547,7 @@ SpriteRenderer:
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: -1624045745
-  m_SortingLayer: -1
+  m_SortingLayer: -2
   m_SortingOrder: 1
   m_Sprite: {fileID: 21300000, guid: 0b96bc375665c44448419ff18f22d443, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 0.3019608}
