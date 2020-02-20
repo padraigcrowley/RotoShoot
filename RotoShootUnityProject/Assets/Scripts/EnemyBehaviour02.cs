@@ -45,7 +45,7 @@ namespace Mr1
     {
 
       InitialSetup();
-      transform.FollowPath("Path0001", 5f, FollowType.Loop).Log(true);
+      transform.FollowPath("Path0001", initialSpeed, FollowType.Loop).Log(true);
     }
 
     private void Update()
@@ -227,7 +227,7 @@ namespace Mr1
       readyToMoveLane = false;
       waitingToMoveLane = false;
       //myMoveTween = transform.DOMove(new Vector3(transform.position.x, -(GameplayManager.Instance.screenCollisionBoundaryY), 0), 20f).SetEase(Ease.InOutSine).SetId(myTweenID);
-      transform.FollowPath("Path0001", 5f, FollowType.Loop).Log(true);
+      transform.FollowPath("Path0001", initialSpeed, FollowType.Loop).Log(true);
     }
 
     private void OnTriggerEnter2D(Collider2D collision)
