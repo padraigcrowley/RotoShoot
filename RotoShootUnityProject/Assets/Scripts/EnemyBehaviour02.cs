@@ -34,6 +34,7 @@ namespace Mr1
 
     virtual public float GetRespawnWaitDelay() => respawnWaitDelay;
     private Vector3 upDirection;
+    
     public abstract void ReactToNonLethalPlayerMissileHit(); //each enemy variant has to implement their own 
 
     private bool readyToMoveLane = false, waitingToMoveLane = false;
@@ -42,40 +43,8 @@ namespace Mr1
 
     private void Start()
     {
-      //todo - move this out to GameplayManager or to sub-class or enemy prefab??
-      speed = 1.0f;
-      hp = 1f;
-      initialSpeed = speed * speedMultiplierFromSpawner; // todo: should these be set in this class, not MyGameplayManager??
-      initialHP = hp * hpMultiplierFromSpawner;
-      speed = initialSpeed;
-      hp = initialHP;
 
-      enemyHitByPlayerMissile = false;
-      respawnWaitOver = false;
-      startedWaiting = false;
-
-      /*      // rotate enemy to face player ship https://answers.unity.com/questions/585035/lookat-2d-equivalent-.html
-        Vector3 dir = GameplayManager.Instance.playerShipPos - transform.position;
-        float angle = Mathf.Atan2(dir.y, dir.x) * Mathf.Rad2Deg + 90f;
-        transform.rotation = Quaternion.AngleAxis(angle, Vector3.forward); */
-
-      enemySpriteRenderer = GetComponent<SpriteRenderer>();
-      enemyCircleCollider = GetComponent<CircleCollider2D>();
-
-      startPosX = transform.position.x;
-      startPosY = transform.position.y;
-      startPosZ = transform.position.z;
-      startScaleX = transform.localScale.x;
-      startScaleY = transform.localScale.y;
-      startScaleZ = transform.localScale.z;
-
-      enemyState = EnemyState.ALIVE;
-      //myTweenID = "myMoveTween" + gameObject.GetInstanceID(); // give the Tween a unique-ish ID
-      //myMoveTween = transform.DOMove(new Vector3(transform.position.x, -(GameplayManager.Instance.screenCollisionBoundaryY), 0), 20f).SetEase(Ease.InOutSine).SetId(myTweenID);
-      //print($"TweenID: {myTweenID}");
-
-      upDirection = GameObject.FindGameObjectWithTag("Player").transform.up;
-
+      InitialSetup();
       transform.FollowPath("Path0001", 5f, FollowType.Loop).Log(true);
     }
 
@@ -189,6 +158,37 @@ namespace Mr1
         transform.localScale = new Vector3(startScaleX, startScaleX, startScaleX); // reset its scale
       }
     }
+
+
+    private void InitialSetup()
+    {
+      //todo - move this out to GameplayManager or to sub-class or enemy prefab??
+      speed = 1.0f;
+      hp = 1f;
+      initialSpeed = speed * speedMultiplierFromSpawner; // todo: should these be set in this class, not MyGameplayManager??
+      initialHP = hp * hpMultiplierFromSpawner;
+      speed = initialSpeed;
+      hp = initialHP;
+
+      enemyHitByPlayerMissile = false;
+      respawnWaitOver = false;
+      startedWaiting = false;
+            
+      enemySpriteRenderer = GetComponent<SpriteRenderer>();
+      enemyCircleCollider = GetComponent<CircleCollider2D>();
+
+      startPosX = transform.position.x;
+      startPosY = transform.position.y;
+      startPosZ = transform.position.z;
+      startScaleX = transform.localScale.x;
+      startScaleY = transform.localScale.y;
+      startScaleZ = transform.localScale.z;
+
+      enemyState = EnemyState.ALIVE;
+      
+      upDirection = GameObject.FindGameObjectWithTag("Player").transform.up;
+    }
+
 
     private void HandleDamage()
     {
