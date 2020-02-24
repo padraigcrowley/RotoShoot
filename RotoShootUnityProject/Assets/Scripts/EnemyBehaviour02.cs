@@ -12,6 +12,7 @@ namespace Mr1
     public float speedMultiplierFromSpawner = 1f;
     public float hpMultiplierFromSpawner = 1f;
     private float respawnWaitDelay = 2.0f; //defauly value unless overridden by derived class
+    public string wayPointPathName;
 
     private float startPosX, startPosY, startPosZ;
     private float startScaleX, startScaleY, startScaleZ;
@@ -48,7 +49,7 @@ namespace Mr1
       InitialSetup();
       Wait(3f, () =>
       {
-        transform.FollowPath("Path0001", initialSpeed, FollowType.Loop).Log(true);
+        transform.FollowPath(wayPointPathName, initialSpeed, FollowType.Loop).Log(true);
         //Debug.Log(respawnWaitDelay + " respawnWaitOver seconds passed");
       });
       
@@ -195,7 +196,7 @@ namespace Mr1
       readyToMoveLane = false;
       waitingToMoveLane = false;
       //myMoveTween = transform.DOMove(new Vector3(transform.position.x, -(GameplayManager.Instance.screenCollisionBoundaryY), 0), 20f).SetEase(Ease.InOutSine).SetId(myTweenID);
-      transform.FollowPath("Path0001", initialSpeed, FollowType.Loop).Log(true);
+      transform.FollowPath(wayPointPathName, initialSpeed, FollowType.Loop).Log(true);
     }
 
     private void OnTriggerEnter2D(Collider2D collision)

@@ -8,6 +8,7 @@ public class EnemySpawnPointData
   public GameObject enemyPrefab;
   public Vector2 startPos;
   public float speedMultiplier, hpMultiplier;
-  public ScriptableObject WayPointPath;
+  public Mr1.PathData WayPointPath;
+  //public string wayPointPathName;
 
 }

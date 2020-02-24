@@ -58,7 +58,9 @@ public class LevelManager : Singleton<LevelManager>
           levelEnemies[index] = Instantiate(sp.enemyPrefab, sp.startPos, Quaternion.identity) as GameObject;
           levelEnemies[index].GetComponent<Mr1.EnemyBehaviour02>().speedMultiplierFromSpawner = sp.speedMultiplier;
           levelEnemies[index].GetComponent<Mr1.EnemyBehaviour02>().hpMultiplierFromSpawner = sp.hpMultiplier;
-          index++;
+        levelEnemies[index].GetComponent<Mr1.EnemyBehaviour02>().wayPointPathName = sp.WayPointPath.pathName;
+
+        index++;
       }
     }
   }
