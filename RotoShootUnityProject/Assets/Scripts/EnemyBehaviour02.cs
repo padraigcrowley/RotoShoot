@@ -37,6 +37,7 @@ namespace Mr1
     
     public abstract void ReactToNonLethalPlayerMissileHit(); //each enemy variant has to implement their own 
 
+
     private bool readyToMoveLane = false, waitingToMoveLane = false;
 
     private Vector2 dest = new Vector2(0f, 0f);
@@ -45,7 +46,12 @@ namespace Mr1
     {
 
       InitialSetup();
-      transform.FollowPath("Path0001", initialSpeed, FollowType.Loop).Log(true);
+      Wait(3f, () =>
+      {
+        transform.FollowPath("Path0001", initialSpeed, FollowType.Loop).Log(true);
+        //Debug.Log(respawnWaitDelay + " respawnWaitOver seconds passed");
+      });
+      
     }
 
     private void Update()
@@ -57,45 +63,7 @@ namespace Mr1
         {
           case EnemyState.ALIVE:
             {
-              // Move our position a step closer to the target.
-              //float step = speed * Time.deltaTime; // calculate distance to move
-              //transform.position = Vector3.MoveTowards(transform.position, GameplayManager.Instance.playerShipPos, step);            
-
-              /*-----------------------------
-              if (!readyToMoveLane)
-              {
-                if (!waitingToMoveLane)
-                {
-                  waitingToMoveLane = true;
-                  Wait(2, () =>
-                  {
-                    readyToMoveLane = true;
-                    waitingToMoveLane = false;
-                    dest = new Vector2((float)GameplayManager.Instance.shipLanes[Random.Range(0, 3)].x, transform.position.y);
-                    print($"Dest: {dest}");
-                    Debug.Log("2 seconds is lost forever");
-                  });
-                }
-              }
-
-              if (!readyToMoveLane)
-              {
-                this.transform.position -= upDirection * speed * Time.deltaTime;
-              }
-              else
-              {
-                // this.transform.position += transform.right * speed * Time.deltaTime;
-
-                transform.position = Vector2.MoveTowards(transform.position, dest, .1f);
-
-                if (Mathf.Approximately(this.transform.position.x, dest.x))
-                {
-                  readyToMoveLane = false;
-                }
-              }
-              -----------------------*/
-
-
+              
               break;
             }
           case EnemyState.TEMPORARILY_DEAD:
