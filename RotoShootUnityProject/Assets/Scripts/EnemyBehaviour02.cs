@@ -7,17 +7,17 @@ namespace Mr1
   public abstract class EnemyBehaviour02 : ExtendedBehaviour
   //https://answers.unity.com/questions/379440/a-simple-wait-function-without-coroutine-c.html
   {
-    private float speed;
+    protected float speed; //"protected" to allow abstract sub-class to access it
     private float hp;
     public float speedMultiplierFromSpawner = 1f;
     public float hpMultiplierFromSpawner = 1f;
     private float respawnWaitDelay = 2.0f; //defauly value unless overridden by derived class
     public string wayPointPathName;
 
-    private float startPosX, startPosY, startPosZ;
+    protected float startPosX, startPosY, startPosZ;
     private float startScaleX, startScaleY, startScaleZ;
 
-    private float initialHP, initialSpeed;
+    protected float initialHP, initialSpeed; //"protected" to allow abstract sub-class to access it
     private bool enemyHitByPlayerMissile;
 
     private GameObject missileObject;
@@ -29,29 +29,23 @@ namespace Mr1
     private EnemyState enemyState;
     private bool respawnWaitOver;
     private bool startedWaiting;
-
-    private Tween myMoveTween;
-    private string myTweenID;
+      
 
     virtual public float GetRespawnWaitDelay() => respawnWaitDelay;
     private Vector3 upDirection;
     
     public abstract void ReactToNonLethalPlayerMissileHit(); //each enemy variant has to implement their own 
-
-
-    private bool readyToMoveLane = false, waitingToMoveLane = false;
-
-    private Vector2 dest = new Vector2(0f, 0f);
+    public abstract void DoMovement(float initialSpeed, FollowType followType);
 
     private void Start()
     {
 
       InitialSetup();
-      Wait(3f, () =>
-      {
-        transform.FollowPath(wayPointPathName, initialSpeed, FollowType.Loop).Log(true);
-        //Debug.Log(respawnWaitDelay + " respawnWaitOver seconds passed");
-      });
+      //Wait(3f, () =>
+      //{
+      //  transform.FollowPath(wayPointPathName, initialSpeed, FollowType.Loop).Log(true);
+      //  //Debug.Log(respawnWaitDelay + " respawnWaitOver seconds passed");
+      //});
       
     }
 
@@ -153,7 +147,7 @@ namespace Mr1
       startScaleY = transform.localScale.y;
       startScaleZ = transform.localScale.z;
 
-      enemyState = EnemyState.ALIVE;
+      enemyState = EnemyState.WAITING_TO_RESPAWN;
       
       upDirection = GameObject.FindGameObjectWithTag("Player").transform.up;
     }
@@ -192,11 +186,10 @@ namespace Mr1
       transform.localScale = new Vector3(startScaleX, startScaleX, startScaleX); // reset its scale back to original scale
       enemySpriteRenderer.enabled = true;
       enemyCircleCollider.enabled = true;
+     
       enemyState = EnemyState.ALIVE;
-      readyToMoveLane = false;
-      waitingToMoveLane = false;
-      //myMoveTween = transform.DOMove(new Vector3(transform.position.x, -(GameplayManager.Instance.screenCollisionBoundaryY), 0), 20f).SetEase(Ease.InOutSine).SetId(myTweenID);
-      transform.FollowPath(wayPointPathName, initialSpeed, FollowType.Loop).Log(true);
+      DoMovement(initialSpeed, FollowType.Loop);
+      //transform.FollowPath(wayPointPathName, initialSpeed, FollowType.Loop).Log(true);
     }
 
     private void OnTriggerEnter2D(Collider2D collision)
