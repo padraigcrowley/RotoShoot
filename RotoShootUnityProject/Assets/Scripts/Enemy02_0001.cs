@@ -13,6 +13,11 @@ public class Enemy02_0001 : Mr1.EnemyBehaviour02
     
   }
 
+  public override void StopMovement()
+  {
+    return;
+  }
+
   public override void ReactToNonLethalPlayerMissileHit()
   {
     transform.localScale *= 1.1f; // scale slightly up to show they've been shot

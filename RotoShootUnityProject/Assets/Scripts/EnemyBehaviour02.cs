@@ -36,6 +36,7 @@ namespace Mr1
     
     public abstract void ReactToNonLethalPlayerMissileHit(); //each enemy variant has to implement their own 
     public abstract void DoMovement(float initialSpeed, FollowType followType);
+    public abstract void StopMovement();
 
     private void Start()
     {
@@ -58,7 +59,7 @@ namespace Mr1
         {
           case EnemyState.ALIVE:
             {
-              
+              DoMovement(initialSpeed, FollowType.Loop);
               break;
             }
           case EnemyState.TEMPORARILY_DEAD:
@@ -77,6 +78,7 @@ namespace Mr1
             {
               GameplayManager.Instance.currentPlayerHP--;
               TemporarilyDie();
+              
               //hp = initialHP; //reset health and position
               //transform.position = new Vector3(startPosX, startPosY, startPosZ);
               //transform.localScale = new Vector3(1f, 1f, 1f); // reset its scale back to 1
@@ -174,8 +176,8 @@ namespace Mr1
       enemyCircleCollider.enabled = false;
       respawnWaitOver = false;
       startedWaiting = false;
-      transform.StopFollowing(); // TODO - Then, what?
-      
+
+      StopMovement();
       enemyState = EnemyState.WAITING_TO_RESPAWN;
     }
 
@@ -188,7 +190,7 @@ namespace Mr1
       enemyCircleCollider.enabled = true;
      
       enemyState = EnemyState.ALIVE;
-      DoMovement(initialSpeed, FollowType.Loop);
+     
       //transform.FollowPath(wayPointPathName, initialSpeed, FollowType.Loop).Log(true);
     }
 
