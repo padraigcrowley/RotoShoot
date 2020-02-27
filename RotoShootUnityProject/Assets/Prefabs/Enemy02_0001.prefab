@@ -13,8 +13,6 @@ GameObject:
   - component: {fileID: 4342350733379744941}
   - component: {fileID: 4342350733379744940}
   - component: {fileID: 4342350733379744942}
-  - component: {fileID: 7832125283150114999}
-  - component: {fileID: 4250679590043128060}
   m_Layer: 0
   m_Name: Enemy02_0001
   m_TagString: Enemy01
@@ -73,7 +71,7 @@ SpriteRenderer:
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: -1079083179
-  m_SortingLayer: 1
+  m_SortingLayer: -1
   m_SortingOrder: 0
   m_Sprite: {fileID: 21300000, guid: dd889509faec2174297f0dc1d692d1bb, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
@@ -116,6 +114,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   speedMultiplierFromSpawner: 1
   hpMultiplierFromSpawner: 1
+  wayPointPathName: 
 --- !u!50 &4342350733379744942
 Rigidbody2D:
   serializedVersion: 4
@@ -137,36 +136,3 @@ Rigidbody2D:
   m_SleepingMode: 1
   m_CollisionDetection: 0
   m_Constraints: 0
---- !u!114 &7832125283150114999
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4342350733379744943}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 60c46bd7c4acb804597a5b28c505c0ff, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  logMessage: 0
-  pathData: {fileID: 11400000, guid: 0f7f2978d19808143bd99d8259a325da, type: 2}
-  followType: 0
-  followDirection: 0
-  moveSpeed: 10
-  rotateSpeed: 10
-  _flip: 0
-  _lookForward: 0
-  _smoothLookForward: 0
---- !u!114 &4250679590043128060
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4342350733379744943}
-  m_Enabled: 0
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: cc7a67aaee587cd49a746cd4e2f7f752, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 

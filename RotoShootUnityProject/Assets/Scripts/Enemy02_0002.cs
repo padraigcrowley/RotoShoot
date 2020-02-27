@@ -23,7 +23,7 @@ public class Enemy02_0002 : Mr1.EnemyBehaviour02
 
   public override void ReactToNonLethalPlayerMissileHit()
   {
-    transform.localScale *= 2f; // scale slightly up to show they've been shot
+    transform.localScale *= 1.2f; // scale slightly up to show they've been shot
   }
 
 }
