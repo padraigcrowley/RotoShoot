@@ -117,6 +117,9 @@ MonoBehaviour:
   speedMultiplierFromSpawner: 1
   hpMultiplierFromSpawner: 1
   wayPointPathName: 
+  startedOnPath: 0
+  enemyMissile: {fileID: 1374267004960804, guid: ed8c5fb58e698c5418529f8aee4e4848,
+    type: 3}
 --- !u!50 &4342350733379744942
 Rigidbody2D:
   serializedVersion: 4

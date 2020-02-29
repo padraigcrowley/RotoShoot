@@ -38,7 +38,7 @@ namespace Mr1
     public abstract void DoMovement(float initialSpeed, FollowType followType);
     public abstract void StopMovement();
 
-    private void Start()
+    protected virtual void Start()
     {
 
       InitialSetup();
@@ -50,7 +50,7 @@ namespace Mr1
       
     }
 
-    private void Update()
+    protected virtual void Update()
     {
 
       if (GameplayManager.Instance.currentGameState == GameplayManager.GameState.LEVEL_IN_PROGRESS)
