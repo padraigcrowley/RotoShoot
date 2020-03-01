@@ -13,7 +13,7 @@ public class Enemy02_0002 : Mr1.EnemyBehaviour02
   {
     base.Start();
     //Debug.Log("Enemy02_0002 START method");
-    InvokeRepeating("FireMissileAtPlayerPos", 3, 5);
+    //InvokeRepeating("FireMissileAtPlayerPos", 3, 5);
   }
   protected override  void Update()
   {
