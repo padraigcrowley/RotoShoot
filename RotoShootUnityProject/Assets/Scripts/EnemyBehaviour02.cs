@@ -24,9 +24,9 @@ namespace Mr1
     private SpriteRenderer enemySpriteRenderer;
     private CircleCollider2D enemyCircleCollider;
 
-    private enum EnemyState { ALIVE, TEMPORARILY_DEAD, WAITING_TO_RESPAWN, INVINCIBLE, FULLY_DEAD, HIT_BY_PLAYER_MISSILE, HIT_BY_PLAYER_SHIP }
+    public enum EnemyState { ALIVE, TEMPORARILY_DEAD, WAITING_TO_RESPAWN, INVINCIBLE, FULLY_DEAD, HIT_BY_PLAYER_MISSILE, HIT_BY_PLAYER_SHIP }
 
-    private EnemyState enemyState;
+    public EnemyState enemyState;
     private bool respawnWaitOver;
     private bool startedWaiting;
       
