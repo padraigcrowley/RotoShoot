@@ -30,11 +30,11 @@ public class Enemy02_0002 : Mr1.EnemyBehaviour02
     }
   }
 
-  private void FireMissileAtPlayerPos()
-  {
-    GameObject firedBullet = Instantiate(enemyMissile, transform.position, transform.rotation);
-    Debug.Log("FireMissileAtPlayerPos()");
-  }
+  //private void FireMissileAtPlayerPos()
+  //{
+  //  GameObject firedBullet = Instantiate(enemyMissile, transform.position, transform.rotation);
+  //  Debug.Log("FireMissileAtPlayerPos()");
+  //}
 
   public override void StopMovement()
   {

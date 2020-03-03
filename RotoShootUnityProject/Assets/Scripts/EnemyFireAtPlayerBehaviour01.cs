@@ -10,7 +10,9 @@ public class EnemyFireAtPlayerBehaviour01 : MonoBehaviour
   void Start()
   {
     eb = GetComponent<Mr1.EnemyBehaviour02>();
-    InvokeRepeating("FireMissileAtPlayerPos", 3, 5);
+    
+		//InvokeRepeating("FireMissileAtPlayerPos", 3, 5);
+		InvokeRepeating(nameof(this.FireMissileAtPlayerPos), 3, 5);
   }
 
   // Update is called once per frame
@@ -28,7 +30,7 @@ public class EnemyFireAtPlayerBehaviour01 : MonoBehaviour
       if (transform.position.y - 3 > GameplayManager.Instance.playerShipPos.y)
       {
         firedBullet = Instantiate(enemyMissile, transform.position, transform.rotation);
-        Debug.Log("FireMissileAtPlayerPos()");
+        //Debug.Log("FireMissileAtPlayerPos()");
       }
 
   }
