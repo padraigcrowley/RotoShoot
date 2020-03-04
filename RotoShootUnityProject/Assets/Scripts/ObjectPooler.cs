@@ -14,14 +14,14 @@ public class ObjectPooler : MonoBehaviour
 {
   public const string DefaultRootObjectPoolName = "Pooled Objects";
 
-  public static ObjectPooler Instance;
+  public static ObjectPooler SharedInstance;
   public string rootPoolName = DefaultRootObjectPoolName;
   public List<GameObject> pooledObjects;
   public List<ObjectPoolItem> itemsToPool;
 
   void Awake()
   {
-    Instance = this;
+    SharedInstance = this;
   }
 
   private void Start()

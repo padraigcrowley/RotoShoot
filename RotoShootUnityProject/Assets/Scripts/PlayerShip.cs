@@ -154,8 +154,16 @@ public class PlayerShip : MonoBehaviour
 
   private void CreatePlayerBullet()
   {
-    GameObject firedBullet = Instantiate(bullet, barrelTip.position, barrelTip.rotation);
-    //firedBullet.GetComponent<Rigidbody2D>().velocity = barrelTip.up * MyGameplayManager.Instance.playerMissileSpeedMultiplier;
+    //GameObject firedBullet = Instantiate(bullet, barrelTip.position, barrelTip.rotation);
+
+    GameObject playerMissile = ObjectPooler.SharedInstance.GetPooledObject("PlayerMissile");
+    if (bullet != null)
+    {
+      playerMissile.transform.position = barrelTip.transform.position;
+      playerMissile.transform.rotation = barrelTip.transform.rotation;
+      playerMissile.SetActive(true);
+    }
+
   }
 
   IEnumerator MovePlayerShip(Vector2 newPos)

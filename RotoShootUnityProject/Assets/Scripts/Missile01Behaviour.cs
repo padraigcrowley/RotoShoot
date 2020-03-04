@@ -9,7 +9,7 @@ public class Missile01Behaviour : MonoBehaviour
   private Vector3 upDirection;
 
   // Start is called before the first frame update
-  void Start()
+  void OnEnable()
   {
     upDirection = GameObject.FindGameObjectWithTag("Player").transform.up;
   }
