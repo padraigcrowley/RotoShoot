@@ -13,6 +13,7 @@ GameObject:
   - component: {fileID: 218031005165642894}
   - component: {fileID: 1431308587526826971}
   - component: {fileID: 7514020882730438453}
+  - component: {fileID: 2287262951108365117}
   m_Layer: 0
   m_Name: beam_red_01
   m_TagString: PlayerMissile
@@ -48,6 +49,7 @@ SpriteRenderer:
   m_MotionVectors: 1
   m_LightProbeUsage: 1
   m_ReflectionProbeUsage: 1
+  m_RayTracingMode: 0
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
@@ -70,7 +72,7 @@ SpriteRenderer:
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: -1495675747
-  m_SortingLayer: 3
+  m_SortingLayer: 1
   m_SortingOrder: 0
   m_Sprite: {fileID: 21300000, guid: 06a05b3e4c17e4a40864c9373c3fe68b, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
@@ -142,3 +144,15 @@ Rigidbody2D:
   m_SleepingMode: 1
   m_CollisionDetection: 0
   m_Constraints: 0
+--- !u!114 &2287262951108365117
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6763926857963499497}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 31fb2a44cc362f5499abd4c0ba727656, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 

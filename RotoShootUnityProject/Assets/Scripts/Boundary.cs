@@ -1,46 +1,65 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿/*
+ * Copyright (c) 2015 Razeware LLC 
+ */
 
-/// <summary>
-/// This script defines the size of the ‘Boundary’ depending on Viewport. When objects go beyond the ‘Boundary’, they are destroyed or deactivated.
-/// </summary>
+using UnityEngine;
+using System.Collections;
+
+// This is a handy little script I adapted from one I found ages ago on Stack Overflow. 
+// By assigning it to four "Boundary" GameObjects with BoxCollider2D components attached, you can create trigger areas to deal with objects that try to, or move off screen.
+// Just assign each of your four barriers a Left, Top, Right or Bottom direction from the Inspector. 
+
 public class Boundary : MonoBehaviour
 {
 
-  BoxCollider2D boundareCollider;
-
-  //receiving collider's component and changing boundary borders
-  private void Start()
+  public enum BoundaryLocation
   {
-    boundareCollider = GetComponent<BoxCollider2D>();
-    ResizeCollider();
-  }
-
-  //changing the collider's size up to Viewport's size multiply 1.5
-  void ResizeCollider()
+    LEFT, TOP, RIGHT, BOTTOM
+  };
+  public BoundaryLocation direction;
+  private BoxCollider2D barrier;
+  public float boundaryWidth = 0.8f;
+  public float overhang = 1.0f; // We add this to the length of the boundaries to ensure there are no gaps at the corners of the screen
+                                // If we lose any object pooled bullets they will never be returned to the pool. 
+  void Start()
   {
-    Vector2 viewportSize = Camera.main.ViewportToWorldPoint(new Vector2(1, 1)) * 2;
-    print($"Screen Boundary X: {viewportSize.x} Screen Boundary Y: {viewportSize.y}");
 
-    GameplayManager.Instance.screenEdgeX = viewportSize.x;
-    GameplayManager.Instance.screenEdgeY = viewportSize.y;
-    viewportSize.x *= 1f;
-    viewportSize.y *= 1f;
-    GameplayManager.Instance.screenCollisionBoundaryX = viewportSize.x;
-    GameplayManager.Instance.screenCollisionBoundaryY = viewportSize.y;
-    boundareCollider.size = viewportSize;
-  }
+    // Get the the world coordinates of the corners of the camera viewport.
 
-  //when another object leaves collider
-  private void OnTriggerExit2D(Collider2D collision)
-  {
-    if (collision.tag == "PlayerMissile")
+    Vector3 topLeft = Camera.main.ScreenToWorldPoint(new Vector3(0, Camera.main.pixelHeight, 0));
+    Vector3 topRight = Camera.main.ScreenToWorldPoint(new Vector3(Camera.main.pixelWidth, Camera.main.pixelHeight, 0));
+    Vector3 lowerLeft = Camera.main.ScreenToWorldPoint(new Vector3(0, 0, 0));
+    Vector3 lowerRight = Camera.main.ScreenToWorldPoint(new Vector3(Camera.main.pixelWidth, 0, 0));
+
+    // Get this game objects BoxCollider2D
+
+    barrier = GetComponent<BoxCollider2D>();
+
+    // Depending on the assigned 'direction' of the Boundary we adjust the size and position based on the camera viewport as obtained above
+
+    if (direction == BoundaryLocation.TOP)
     {
-      Destroy(collision.gameObject);
+      barrier.size = new Vector2(Mathf.Abs(topLeft.x) + Mathf.Abs(topRight.x) + overhang, boundaryWidth);
+      barrier.offset = new Vector2(0, boundaryWidth / 2);
+      transform.position = Camera.main.ScreenToWorldPoint(new Vector3(Camera.main.pixelWidth / 2, Camera.main.pixelHeight, 1));
     }
-    else if (collision.tag == "Bonus")
-      Destroy(collision.gameObject);
+    if (direction == BoundaryLocation.BOTTOM)
+    {
+      barrier.size = new Vector2(Mathf.Abs(topLeft.x) + Mathf.Abs(topRight.x) + overhang, boundaryWidth);
+      barrier.offset = new Vector2(0, -boundaryWidth / 2);
+      transform.position = Camera.main.ScreenToWorldPoint(new Vector3(Camera.main.pixelWidth / 2, 0, 1));
+    }
+    if (direction == BoundaryLocation.LEFT)
+    {
+      barrier.size = new Vector2(boundaryWidth, Mathf.Abs(lowerLeft.y) + Mathf.Abs(lowerRight.y) + overhang);
+      barrier.offset = new Vector2(-boundaryWidth / 2, 0);
+      transform.position = Camera.main.ScreenToWorldPoint(new Vector3(0, Camera.main.pixelHeight / 2, 1));
+    }
+    if (direction == BoundaryLocation.RIGHT)
+    {
+      barrier.size = new Vector2(boundaryWidth, Mathf.Abs(lowerLeft.y) + Mathf.Abs(lowerRight.y) + overhang);
+      barrier.offset = new Vector2(boundaryWidth / 2, 0);
+      transform.position = Camera.main.ScreenToWorldPoint(new Vector3(Camera.main.pixelWidth, Camera.main.pixelHeight / 2, 1));
+    }
   }
-
 }

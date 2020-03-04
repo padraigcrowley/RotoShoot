@@ -13,6 +13,11 @@ public class GameplayManager : Singleton<GameplayManager>
   public int highPlayerScore = 0;
   [HideInInspector] public int currentPlayerHP;
   [HideInInspector] public float screenEdgeX, screenEdgeY, screenCollisionBoundaryX, screenCollisionBoundaryY;
+  
+  public GameObject leftBoundary;                   //
+  public GameObject rightBoundary;                  // References to the screen bounds: Used to ensure the player
+  public GameObject topBoundary;                    // is not able to leave the screen.
+  public GameObject bottomBoundary;
 
   public float angleToRotatePlayerShip; //set in inspector, maybe shouldn't be?
 
