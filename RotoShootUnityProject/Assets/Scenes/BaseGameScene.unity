@@ -737,9 +737,9 @@ MonoBehaviour:
   rootPoolName: Pooled Objects
   pooledObjects: []
   itemsToPool:
-  - objectToPool: {fileID: 6763926857963499497, guid: 41982458586c3a64588b5e7242b21513,
+  - objectToPool: {fileID: 1865968712415440, guid: e1d30abeb36499148bca7bfbd6a64d43,
       type: 3}
-    poolName: playermissiles_beam_red
+    poolName: Player Missile Pool
     amountToPool: 5
     shouldExpand: 0
 --- !u!1 &191601459
@@ -1309,7 +1309,7 @@ GameObject:
   - component: {fileID: 409266187}
   - component: {fileID: 409266186}
   m_Layer: 0
-  m_Name: ScreenBoundary
+  m_Name: ScreenBoundary_old
   m_TagString: ScreenBoundary
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -2489,6 +2489,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: Screen Bounds
       objectReference: {fileID: 0}
+    - target: {fileID: 1907907852192479033, guid: 1caa033e3f7a75b4f93bebf2fa5f752c,
+        type: 3}
+      propertyPath: m_TagString
+      value: Boundary
+      objectReference: {fileID: 0}
     - target: {fileID: 3050290197636079533, guid: 1caa033e3f7a75b4f93bebf2fa5f752c,
         type: 3}
       propertyPath: m_RootOrder
@@ -3520,7 +3525,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   barrelTip: {fileID: 2099002079}
   shipSpriteRenderer: {fileID: 191601460}
-  bullet: {fileID: 6763926857963499497, guid: 41982458586c3a64588b5e7242b21513, type: 3}
+  bullet: {fileID: 1865968712415440, guid: e1d30abeb36499148bca7bfbd6a64d43, type: 3}
   PlayerShipGreenRotArrowObj: {fileID: 903228520}
   PlayerShipRedRotArrowObj: {fileID: 1924820801}
   PlayerShipIntroAnimCompleted: 0
@@ -4703,7 +4708,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: 23.700012, y: -27.300049}
+  m_AnchoredPosition: {x: 23.699951, y: -27.300049}
   m_SizeDelta: {x: 346.3, y: 269.3}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1442814580

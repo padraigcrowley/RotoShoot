@@ -1,4 +1,6 @@
-﻿using System.Collections;
+﻿/// Just for the player missile, separate script for EnemyMissile
+
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -21,7 +23,8 @@ public class ProjectileMoveScript : MonoBehaviour {
 
   private Vector3 upDirection;
 
-  void Start () {
+  void OnEnable () //instead of Start() because of object pooling system
+  { 
     upDirection = GameObject.FindGameObjectWithTag("Player").transform.up;
 
     rb = GetComponent <Rigidbody2D> ();
@@ -81,9 +84,9 @@ public class ProjectileMoveScript : MonoBehaviour {
 
   private void OnTriggerEnter2D(Collider2D co)
   {
-    //print("OnTriggerEnter2D in ProjectileMoveScript"); 
+    print("OnTriggerEnter2D in ProjectileMoveScript"); 
   
-		if (co.gameObject.tag != "ScreenBoundary" && co.gameObject.tag != "Player" && co.gameObject.tag != "Bullet" && !collided) 
+		if (co.gameObject.tag == "Boundary" && !collided) 
     {
 			collided = true;
 			
@@ -103,12 +106,7 @@ public class ProjectileMoveScript : MonoBehaviour {
 			}
 		
 			speed = 0;
-			//GetComponent<Rigidbody2D> ().isKinematic = true;
-
-      //ContactPoint contact = co.contacts [0];
-      //Quaternion rot = Quaternion.FromToRotation (Vector3.up, contact.normal);
-      //Vector3 pos = contact.point;
-
+			
       Vector3 pos = co.gameObject.transform.position;
 
       if (hitPrefab != null) {
@@ -145,6 +143,7 @@ public class ProjectileMoveScript : MonoBehaviour {
 		}
 		
 		yield return new WaitForSeconds (waitTime);
-		Destroy (gameObject);
+    //Destroy (gameObject);
+    gameObject.SetActive(false);
 	}
 }
