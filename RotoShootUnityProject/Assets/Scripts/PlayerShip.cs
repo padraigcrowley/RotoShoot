@@ -13,7 +13,7 @@ public class PlayerShip : MonoBehaviour
   
   public Transform barrelTip;
   [SerializeField] private Renderer shipSpriteRenderer;
-  [SerializeField] private GameObject bullet;
+  //[SerializeField] private GameObject bullet;
   public GameObject PlayerShipGreenRotArrowObj;
   public GameObject PlayerShipRedRotArrowObj;
   public bool PlayerShipIntroAnimCompleted = false;
@@ -157,7 +157,7 @@ public class PlayerShip : MonoBehaviour
     //GameObject firedBullet = Instantiate(bullet, barrelTip.position, barrelTip.rotation);
 
     GameObject playerMissile = ObjectPooler.SharedInstance.GetPooledObject("PlayerMissile");
-    if (bullet != null)
+    if (playerMissile != null)
     {
       playerMissile.transform.position = barrelTip.transform.position;
       playerMissile.transform.rotation = barrelTip.transform.rotation;

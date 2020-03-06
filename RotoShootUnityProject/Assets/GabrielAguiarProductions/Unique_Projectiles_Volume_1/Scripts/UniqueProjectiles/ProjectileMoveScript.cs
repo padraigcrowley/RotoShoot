@@ -26,6 +26,7 @@ public class ProjectileMoveScript : MonoBehaviour {
   void OnEnable () //instead of Start() because of object pooling system
   { 
     upDirection = GameObject.FindGameObjectWithTag("Player").transform.up;
+    collided = false;
 
     rb = GetComponent <Rigidbody2D> ();
 
