@@ -95,17 +95,21 @@ public class ProjectileMoveScript : MonoBehaviour {
 				GetComponent<AudioSource> ().PlayOneShot (hitSFX);
 			}
 
-			if (trails.Count > 0) {
-				for (int i = 0; i < trails.Count; i++) {
-					trails [i].transform.parent = null;
-					var ps = trails [i].GetComponent<ParticleSystem> ();
-					if (ps != null) {
-						ps.Stop ();
-						Destroy (ps.gameObject, ps.main.duration + ps.main.startLifetime.constantMax);
+			if (trails.Count > 0)
+			{
+				for (int i = 0; i < trails.Count; i++)
+				{
+					trails[i].transform.parent = null;
+					var ps = trails[i].GetComponent<ParticleSystem>();
+					if (ps != null)
+					{
+						ps.Stop();
+						//ps.gameObject.SetActive(false);
+						Destroy(ps.gameObject, ps.main.duration + ps.main.startLifetime.constantMax);
 					}
 				}
 			}
-		
+
 			speed = 0;
 			
       Vector3 pos = co.gameObject.transform.position;
@@ -144,7 +148,7 @@ public class ProjectileMoveScript : MonoBehaviour {
 		}
 		
 		yield return new WaitForSeconds (waitTime);
-    //Destroy (gameObject);
-    gameObject.SetActive(false);
+    Destroy (gameObject);
+    //gameObject.SetActive(false);
 	}
 }
