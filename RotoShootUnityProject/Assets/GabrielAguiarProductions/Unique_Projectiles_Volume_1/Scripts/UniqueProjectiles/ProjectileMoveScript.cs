@@ -148,7 +148,7 @@ public class ProjectileMoveScript : MonoBehaviour {
 		}
 		
 		yield return new WaitForSeconds (waitTime);
-    Destroy (gameObject);
-    //gameObject.SetActive(false);
+    //Destroy (gameObject);
+    gameObject.SetActive(false);
 	}
 }
