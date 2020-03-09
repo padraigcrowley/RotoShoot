@@ -56,7 +56,8 @@ public class ProjectileMoveScript : MonoBehaviour {
 			muzzleVFX.transform.forward = gameObject.transform.forward + offset;
 			var ps = muzzleVFX.GetComponent<ParticleSystem>();
 			if (ps != null)
-				Destroy (muzzleVFX, ps.main.duration);
+				//print("delme");
+			Destroy (muzzleVFX, ps.main.duration);
 			else {
 				var psChild = muzzleVFX.transform.GetChild(0).GetComponent<ParticleSystem>();
 				Destroy (muzzleVFX, psChild.main.duration);
@@ -99,7 +100,7 @@ public class ProjectileMoveScript : MonoBehaviour {
 			{
 				for (int i = 0; i < trails.Count; i++)
 				{
-					trails[i].transform.parent = null;
+					//trails[i].transform.parent = null;
 					var ps = trails[i].GetComponent<ParticleSystem>();
 					if (ps != null)
 					{
@@ -118,10 +119,12 @@ public class ProjectileMoveScript : MonoBehaviour {
 				var hitVFX = Instantiate (hitPrefab, pos, Quaternion.identity) as GameObject;
 
 				var ps = hitVFX.GetComponent<ParticleSystem> ();
-				if (ps == null) {
-					var psChild = hitVFX.transform.GetChild (0).GetComponent<ParticleSystem> ();
+				if (ps == null)
+				{
+					var psChild = hitVFX.transform.GetChild(0).GetComponent<ParticleSystem>();
 					Destroy (hitVFX, psChild.main.duration);
-				} else
+				}
+				else
 					Destroy (hitVFX, ps.main.duration);
 			}
 
