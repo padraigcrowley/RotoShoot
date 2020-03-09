@@ -692,10 +692,10 @@ MonoBehaviour:
   angleToRotatePlayerShip: 45
   currentPlayerShipRotationDuration: 0.07300001
   basePlayerShipRotationDuration: 0.23
-  currentPlayerMissileSpeedMultiplier: 70
-  basePlayerMissileSpeedMultiplier: 70
-  currentPlayerShipFireRate: 0.1
-  basePlayerShipFireRate: 0.1
+  currentPlayerMissileSpeedMultiplier: 30
+  basePlayerMissileSpeedMultiplier: 30
+  currentPlayerShipFireRate: 0.4
+  basePlayerShipFireRate: 0.41
   maxEnemy0001HP: 0
   enemy0001BaseSpeed: 1
   maxPlayerHP: 9999
@@ -738,6 +738,11 @@ MonoBehaviour:
   pooledObjects: []
   itemsToPool:
   - objectToPool: {fileID: 1865968712415440, guid: e1d30abeb36499148bca7bfbd6a64d43,
+      type: 3}
+    poolName: Player Missile Projectile Pool
+    amountToPool: 1
+    shouldExpand: 0
+  - objectToPool: {fileID: 1888018191284372, guid: 83edc97d2ab35b84fbe85b929507592e,
       type: 3}
     poolName: Player Missile Projectile Pool
     amountToPool: 1

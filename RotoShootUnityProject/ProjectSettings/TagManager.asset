@@ -9,6 +9,7 @@ TagManager:
   - ScreenBoundary
   - EnemyMissile
   - Boundary
+  - EnemyMuzzleFlash
   layers:
   - Default
   - TransparentFX

@@ -50,9 +50,19 @@ public class ProjectileMoveScript : MonoBehaviour {
 				}
 			}
 		}
+
+    //GameObject playerMissile = ObjectPooler.SharedInstance.GetPooledObject("EnemyMuzzleFlash");
+    //if (playerMissile != null)
+    //{
+    //  playerMissile.transform.position = barrelTip.transform.position;
+    //  playerMissile.transform.rotation = barrelTip.transform.rotation;
+    //  playerMissile.SetActive(true);
+    //}
+
+    if (muzzlePrefab != null) {
 			
-		if (muzzlePrefab != null) {
-			var muzzleVFX = Instantiate (muzzlePrefab, transform.position, Quaternion.identity);
+
+      var muzzleVFX = Instantiate (muzzlePrefab, transform.position, Quaternion.identity);
 			muzzleVFX.transform.forward = gameObject.transform.forward + offset;
 			var ps = muzzleVFX.GetComponent<ParticleSystem>();
 			if (ps != null)
@@ -86,50 +96,56 @@ public class ProjectileMoveScript : MonoBehaviour {
 
   private void OnTriggerEnter2D(Collider2D co)
   {
-    print("OnTriggerEnter2D in ProjectileMoveScript"); 
-  
-		if (co.gameObject.tag == "Boundary" && !collided) 
+    print("OnTriggerEnter2D in ProjectileMoveScript");
+
+    if (!collided && (co.gameObject.tag != "EnemyMissile"))
     {
-			collided = true;
-			
-			if (shotSFX != null && GetComponent<AudioSource>()) {
-				GetComponent<AudioSource> ().PlayOneShot (hitSFX);
-			}
+      collided = true;
 
-			if (trails.Count > 0)
-			{
-				for (int i = 0; i < trails.Count; i++)
-				{
-					//trails[i].transform.parent = null;
-					var ps = trails[i].GetComponent<ParticleSystem>();
-					if (ps != null)
-					{
-						ps.Stop();
-						//ps.gameObject.SetActive(false);
-						Destroy(ps.gameObject, ps.main.duration + ps.main.startLifetime.constantMax);
-					}
-				}
-			}
+      if (shotSFX != null && GetComponent<AudioSource>())
+      {
+        GetComponent<AudioSource>().PlayOneShot(hitSFX);
+      }
+      //// Commented out by PC, don't think it's needed due to pooling.
+      //if (trails.Count > 0) 
+      //{
+      //	for (int i = 0; i < trails.Count; i++)
+      //	{
+      //		trails[i].transform.parent = null;
+      //		var ps = trails[i].GetComponent<ParticleSystem>();
+      //		if (ps != null) // never seems to do this block of code?
+      //       {
+      //			ps.Stop();
+      //		  Destroy(ps.gameObject, ps.main.duration + ps.main.startLifetime.constantMax);
+      //		}
+      //	}
+      //}
 
-			speed = 0;
-			
-      Vector3 pos = co.gameObject.transform.position;
 
-      if (hitPrefab != null) {
-				var hitVFX = Instantiate (hitPrefab, pos, Quaternion.identity) as GameObject;
+      if (co.gameObject.tag != "Boundary" && co.gameObject.tag != "EnemyMissile")
+      {
+        speed = 0;
 
-				var ps = hitVFX.GetComponent<ParticleSystem> ();
-				if (ps == null)
-				{
-					var psChild = hitVFX.transform.GetChild(0).GetComponent<ParticleSystem>();
-					Destroy (hitVFX, psChild.main.duration);
-				}
-				else
-					Destroy (hitVFX, ps.main.duration);
-			}
+        Vector3 pos = co.gameObject.transform.position;
 
-			StartCoroutine (DestroyParticle (0f));
-		}
+        if (hitPrefab != null)
+        {
+          var hitVFX = Instantiate(hitPrefab, pos, Quaternion.identity) as GameObject;
+
+          var ps = hitVFX.GetComponent<ParticleSystem>();
+          if (ps == null)
+          {
+            var psChild = hitVFX.transform.GetChild(0).GetComponent<ParticleSystem>();
+            Destroy(hitVFX, psChild.main.duration);
+          }
+          else
+            Destroy(hitVFX, ps.main.duration);
+        }
+      }
+    
+      StartCoroutine(DestroyParticle(0f));
+
+    }
 	}
 
 	public IEnumerator DestroyParticle (float waitTime) {
