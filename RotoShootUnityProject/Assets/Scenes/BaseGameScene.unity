@@ -692,10 +692,10 @@ MonoBehaviour:
   angleToRotatePlayerShip: 45
   currentPlayerShipRotationDuration: 0.07300001
   basePlayerShipRotationDuration: 0.23
-  currentPlayerMissileSpeedMultiplier: 30
-  basePlayerMissileSpeedMultiplier: 30
-  currentPlayerShipFireRate: 0.4
-  basePlayerShipFireRate: 0.41
+  currentPlayerMissileSpeedMultiplier: 10
+  basePlayerMissileSpeedMultiplier: 10
+  currentPlayerShipFireRate: 2
+  basePlayerShipFireRate: 2
   maxEnemy0001HP: 0
   enemy0001BaseSpeed: 1
   maxPlayerHP: 9999

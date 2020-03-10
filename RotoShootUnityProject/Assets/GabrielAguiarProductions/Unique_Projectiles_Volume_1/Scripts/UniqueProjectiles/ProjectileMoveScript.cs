@@ -4,7 +4,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class ProjectileMoveScript : MonoBehaviour {
+public class ProjectileMoveScript : ExtendedBehaviour {
 
 	public float speed;
 	[Tooltip("From 0% to 100%")]
@@ -51,7 +51,7 @@ public class ProjectileMoveScript : MonoBehaviour {
 			}
 		}
 
-    //GameObject playerMissile = ObjectPooler.SharedInstance.GetPooledObject("EnemyMuzzleFlash");
+    //GameObject muzzlePrefab = ObjectPooler.SharedInstance.GetPooledObject("EnemyMuzzleFlash");
     //if (playerMissile != null)
     //{
     //  playerMissile.transform.position = barrelTip.transform.position;
@@ -59,19 +59,27 @@ public class ProjectileMoveScript : MonoBehaviour {
     //  playerMissile.SetActive(true);
     //}
 
-    if (muzzlePrefab != null) {
-			
-
-      var muzzleVFX = Instantiate (muzzlePrefab, transform.position, Quaternion.identity);
-			muzzleVFX.transform.forward = gameObject.transform.forward + offset;
-			var ps = muzzleVFX.GetComponent<ParticleSystem>();
-			if (ps != null)
-				//print("delme");
-			Destroy (muzzleVFX, ps.main.duration);
-			else {
-				var psChild = muzzleVFX.transform.GetChild(0).GetComponent<ParticleSystem>();
-				Destroy (muzzleVFX, psChild.main.duration);
-			}
+    GameObject muzzleVFX = ObjectPooler.SharedInstance.GetPooledObject("EnemyMuzzleFlash");
+    if (muzzleVFX != null)
+    {
+      //var muzzleVFX = Instantiate (muzzlePrefab, transform.position, Quaternion.identity);
+      muzzleVFX.transform.position = new Vector3 (GameplayManager.Instance.playerShipPos.x, GameplayManager.Instance.playerShipPos.y+0.8f, GameplayManager.Instance.playerShipPos.z) ;
+      muzzleVFX.transform.rotation = Quaternion.identity;
+      muzzleVFX.transform.forward = gameObject.transform.forward + offset;
+      muzzleVFX.SetActive(true);
+      
+      {
+        var psChild = muzzleVFX.transform.GetChild(0).GetComponent<ParticleSystem>();
+        psChild.Play();
+        //muzzleVFX.SetActive(false);
+        //Destroy(muzzleVFX, psChild.main.duration);
+        Wait(1.5f, () =>
+        {
+          //psChild.Stop();
+          print($"muzzleVFX.SetActive(false);");
+          muzzleVFX.SetActive(false);
+        });
+      }
 		}
 
 		if (shotSFX != null && GetComponent<AudioSource>()) {
@@ -96,7 +104,7 @@ public class ProjectileMoveScript : MonoBehaviour {
 
   private void OnTriggerEnter2D(Collider2D co)
   {
-    print("OnTriggerEnter2D in ProjectileMoveScript");
+    //print($"OnTriggerEnter2D in ProjectileMoveScript - {co.gameObject.tag}");
 
     if (!collided && (co.gameObject.tag != "EnemyMissile"))
     {
