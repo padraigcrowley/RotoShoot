@@ -19,7 +19,7 @@ public class ProjectileMoveScript : ExtendedBehaviour {
 	private float speedRandomness;
 	private Vector3 offset;
 	private bool collided;
-	private Rigidbody2D rb;
+	
 
   private Vector3 upDirection;
 
@@ -27,30 +27,7 @@ public class ProjectileMoveScript : ExtendedBehaviour {
   { 
     upDirection = GameObject.FindGameObjectWithTag("Player").transform.up;
     collided = false;
-
-    rb = GetComponent <Rigidbody2D> ();
-
-		//used to create a radius for the accuracy and have a very unique randomness
-		if (accuracy != 100) {
-			accuracy = 1 - (accuracy / 100);
-
-			for (int i = 0; i < 2; i++) {
-				var val = 1 * Random.Range (-accuracy, accuracy);
-				var index = Random.Range (0, 2);
-				if (i == 0) {
-					if (index == 0)
-						offset = new Vector3 (0, -val, 0);
-					else
-						offset = new Vector3 (0, val, 0);
-				} else {
-					if (index == 0)
-						offset = new Vector3 (0, offset.y, -val);
-					else
-						offset = new Vector3 (0, offset.y, val);
-				}
-			}
-		}
-
+        
     GameObject muzzleVFX = ObjectPooler.SharedInstance.GetPooledObject("EnemyMuzzleFlash");
     if (muzzleVFX != null)
     {
@@ -80,17 +57,9 @@ public class ProjectileMoveScript : ExtendedBehaviour {
 	}
 
 	void FixedUpdate () {
-		//if (speed != 0 && rb != null)
-		//	rb.position += (transform.forward + offset) * (speed * Time.deltaTime);
-
+		
 		this.transform.position += upDirection * GameplayManager.Instance.currentPlayerMissileSpeedMultiplier * Time.deltaTime;
-
-
-		//if (speed != 0 && rb != null)
-		//	rb.position += (transform.up + offset) * (speed * Time.fixedDeltaTime);
-
-		//if (speed != 0 && rb != null)
-		//rb.position += (upDirection + offset)  * (speed * Time.deltaTime);
+    
 	}
 
 
