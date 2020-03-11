@@ -10,53 +10,57 @@ public class ProjectileMoveScript : ExtendedBehaviour {
 	[Tooltip("From 0% to 100%")]
 	public float accuracy;
 	public float fireRate;
-	public GameObject muzzlePrefab;
-	public GameObject hitPrefab;
+  public GameObject muzzlePrefab;
+  public GameObject hitPrefab;
 	public AudioClip shotSFX;
 	public AudioClip hitSFX;
 	public List<GameObject> trails;
-
-	private float speedRandomness;
-	private Vector3 offset;
-	private bool collided;
-	
+  private ParticleSystem[] muzzleParticleSystems;
+  private GameObject muzzleVFX;
+  private bool collided;
 
   private Vector3 upDirection;
 
-  void OnEnable () //instead of Start() because of object pooling system
-  { 
-    upDirection = GameObject.FindGameObjectWithTag("Player").transform.up;
+  void Start()
+  {
+    print("-----------ProjectileMoveScript Start()-----------");
+  }
+
+  void OnEnable() //instead of Start() because of object pooling system
+  {
+    print("-----------ProjectileMoveScript OnEnable()-----------");
     collided = false;
-        
-    GameObject muzzleVFX = ObjectPooler.SharedInstance.GetPooledObject("EnemyMuzzleFlash");
+    upDirection = GameObject.FindGameObjectWithTag("Player").transform.up;
+
+    muzzleVFX = ObjectPooler.SharedInstance.GetPooledObject("PlayerMuzzleFlash");
+
     if (muzzleVFX != null)
     {
-      //var muzzleVFX = Instantiate (muzzlePrefab, transform.position, Quaternion.identity);
-      muzzleVFX.transform.position = new Vector3 (GameplayManager.Instance.playerShipPos.x, GameplayManager.Instance.playerShipPos.y+0.8f, GameplayManager.Instance.playerShipPos.z) ;
-      muzzleVFX.transform.rotation = Quaternion.identity;
-      muzzleVFX.transform.forward = gameObject.transform.forward + offset;
+      muzzleParticleSystems = muzzleVFX.transform.GetComponentsInChildren<ParticleSystem>(); 
+    
+     
       muzzleVFX.SetActive(true);
-      
+    
+      foreach (ParticleSystem ps in muzzleParticleSystems)
       {
-        var psChild = muzzleVFX.transform.GetChild(0).GetComponent<ParticleSystem>();
-        psChild.Play();
-        //muzzleVFX.SetActive(false);
-        //Destroy(muzzleVFX, psChild.main.duration);
-        Wait(1.5f, () =>
-        {
-          //psChild.Stop();
-          print($"muzzleVFX.SetActive(false);");
-          muzzleVFX.SetActive(false);
-        });
+        ps.transform.position = new Vector3(GameplayManager.Instance.playerShipPos.x, GameplayManager.Instance.playerShipPos.y + 0.8f, GameplayManager.Instance.playerShipPos.z);
+        ps.transform.rotation = Quaternion.identity;
+        ps.transform.forward = gameObject.transform.forward;
+        ps.Play();
+
+        
       }
-		}
+         
 
-		if (shotSFX != null && GetComponent<AudioSource>()) {
-			GetComponent<AudioSource> ().PlayOneShot (shotSFX);
-		}
-	}
+      if (shotSFX != null && GetComponent<AudioSource>())
+      {
+        GetComponent<AudioSource>().PlayOneShot(shotSFX);
+      }
+    }
+  }
 
-	void FixedUpdate () {
+	void FixedUpdate () 
+    {
 		
 		this.transform.position += upDirection * GameplayManager.Instance.currentPlayerMissileSpeedMultiplier * Time.deltaTime;
     
@@ -137,6 +141,8 @@ public class ProjectileMoveScript : ExtendedBehaviour {
 		
 		yield return new WaitForSeconds (waitTime);
     //Destroy (gameObject);
+    if (muzzleVFX != null) 
+      muzzleVFX.SetActive(false);
     gameObject.SetActive(false);
 	}
 }

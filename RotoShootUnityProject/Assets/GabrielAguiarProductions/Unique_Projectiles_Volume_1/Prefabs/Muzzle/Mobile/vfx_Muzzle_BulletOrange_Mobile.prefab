@@ -19011,11 +19011,11 @@ GameObject:
   - component: {fileID: 4477333373221436}
   m_Layer: 0
   m_Name: vfx_Muzzle_BulletOrange_Mobile
-  m_TagString: Untagged
+  m_TagString: PlayerMuzzleFlash
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &4477333373221436
 Transform:
   m_ObjectHideFlags: 0

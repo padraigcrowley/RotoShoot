@@ -744,7 +744,7 @@ MonoBehaviour:
     shouldExpand: 0
   - objectToPool: {fileID: 1888018191284372, guid: 83edc97d2ab35b84fbe85b929507592e,
       type: 3}
-    poolName: Player Missile Projectile Pool
+    poolName: Player Muzzle Projectile Pool
     amountToPool: 1
     shouldExpand: 0
 --- !u!1 &191601459
