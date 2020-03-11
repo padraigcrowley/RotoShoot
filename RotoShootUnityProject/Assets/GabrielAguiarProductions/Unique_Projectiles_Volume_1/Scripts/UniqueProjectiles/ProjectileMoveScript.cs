@@ -51,14 +51,6 @@ public class ProjectileMoveScript : ExtendedBehaviour {
 			}
 		}
 
-    //GameObject muzzlePrefab = ObjectPooler.SharedInstance.GetPooledObject("EnemyMuzzleFlash");
-    //if (playerMissile != null)
-    //{
-    //  playerMissile.transform.position = barrelTip.transform.position;
-    //  playerMissile.transform.rotation = barrelTip.transform.rotation;
-    //  playerMissile.SetActive(true);
-    //}
-
     GameObject muzzleVFX = ObjectPooler.SharedInstance.GetPooledObject("EnemyMuzzleFlash");
     if (muzzleVFX != null)
     {
