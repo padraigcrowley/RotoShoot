@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class ProjectileMoveScript_tst : MonoBehaviour {
+public class ProjectileMoveScript_tst_old : MonoBehaviour {
 
 	public float speed;
 	[Tooltip("From 0% to 100%")]

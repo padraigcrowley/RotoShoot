@@ -5,7 +5,9 @@ using UnityEngine;
 public class projectile_Test : ExtendedBehaviour
 {
   // Start is called before the first frame update
-  public GameObject myVFX;
+  public GameObject myVFX; 
+  public GameObject VFXprojectile;
+
   private Vector3 upDirection;
   private ParticleSystem psChild0;
   private ParticleSystem [] psChildren;
@@ -27,6 +29,8 @@ public class projectile_Test : ExtendedBehaviour
     {
     if (Input.GetKeyDown(KeyCode.Space))
     {
+      
+      
       //psChild.Stop();
       //print($"muzzleVFX.SetActive(false);");
       //muzzleVFX.SetActive(true);
@@ -36,11 +40,13 @@ public class projectile_Test : ExtendedBehaviour
       //print("PSCHILD = " + psChild0);
       //ParticleSystem.EmissionModule module0 = psChild0.emission;
       //module0.enabled = true;
-      foreach (ParticleSystem ps in psChildren)
-      {
-        ps.Play(true);
-        print("ps.isEmitting " + ps.isEmitting);
-      }
+      
+    //foreach (ParticleSystem ps in psChildren)
+      //{
+      //  ps.Play(true);
+      //  print("ps.isEmitting " + ps.isEmitting);
+      //}
+
       //print ("psChild0.isEmitting " + psChild0.isEmitting);
 
       //var ps = transform.GetComponent<ParticleSystem>();
