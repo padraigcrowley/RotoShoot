@@ -143,6 +143,7 @@ public class ProjectileMoveScript : ExtendedBehaviour {
     //Destroy (gameObject);
     if (muzzleVFX != null) 
       muzzleVFX.SetActive(false);
-    gameObject.SetActive(false);
-	}
+    //gameObject.SetActive(false);
+    SimplePool.Despawn(gameObject);
+  }
 }

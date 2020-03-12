@@ -156,13 +156,16 @@ public class PlayerShip : MonoBehaviour
   {
     //GameObject firedBullet = Instantiate(bullet, barrelTip.position, barrelTip.rotation);
 
-    GameObject playerMissile = ObjectPooler.SharedInstance.GetPooledObject("PlayerMissile");
-    if (playerMissile != null)
-    {
-      playerMissile.transform.position = barrelTip.transform.position;
-      playerMissile.transform.rotation = barrelTip.transform.rotation;
-      playerMissile.SetActive(true);
-    }
+    //GameObject playerMissile = ObjectPooler.SharedInstance.GetPooledObject("PlayerMissile");
+    //if (playerMissile != null)
+    //{
+    //  playerMissile.transform.position = barrelTip.transform.position;
+    //  playerMissile.transform.rotation = barrelTip.transform.rotation;
+    //  playerMissile.SetActive(true);
+    //}
+
+    SimplePool.Spawn(bullet, barrelTip.position, barrelTip.rotation);
+
 
   }
 
