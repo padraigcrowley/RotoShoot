@@ -2,7 +2,8 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class ProjectileMoveScript_tst : MonoBehaviour {
+public class ProjectileMoveScript_tst : ExtendedBehaviour
+{
 
 	public float speed;
 	[Tooltip("From 0% to 100%")]
@@ -48,15 +49,22 @@ public class ProjectileMoveScript_tst : MonoBehaviour {
 		}
 			
 		if (muzzlePrefab != null) {
-			var muzzleVFX = Instantiate (muzzlePrefab, transform.position, Quaternion.identity);
+			var muzzleVFX = SimplePool.Spawn(muzzlePrefab, transform.position, Quaternion.identity);
 			muzzleVFX.transform.forward = gameObject.transform.forward + offset;
 			var ps = muzzleVFX.GetComponent<ParticleSystem>();
 			if (ps != null)
-				Destroy (muzzleVFX, ps.main.duration);
+      {
+        Wait(ps.main.duration, () => {
+          SimplePool.Despawn(muzzleVFX);
+        });
+      }
+				
 			else {
 				var psChild = muzzleVFX.transform.GetChild(0).GetComponent<ParticleSystem>();
-				Destroy (muzzleVFX, psChild.main.duration);
-			}
+        Wait(psChild.main.duration, () => {
+          SimplePool.Despawn(muzzleVFX);
+        });
+      }
 		}
 
 		if (shotSFX != null && GetComponent<AudioSource>()) {
@@ -97,7 +105,10 @@ public class ProjectileMoveScript_tst : MonoBehaviour {
 					var ps = trails [i].GetComponent<ParticleSystem> ();
 					if (ps != null) {
 						ps.Stop ();
-						Destroy (ps.gameObject, ps.main.duration + ps.main.startLifetime.constantMax);
+            Wait(ps.main.duration + ps.main.startLifetime.constantMax, () => {
+              SimplePool.Despawn(ps.gameObject);
+            });
+            
 					}
 				}
 			}
@@ -112,15 +123,27 @@ public class ProjectileMoveScript_tst : MonoBehaviour {
       Vector3 pos = co.gameObject.transform.position;
 
       if (hitPrefab != null) {
-				var hitVFX = Instantiate (hitPrefab, pos, Quaternion.identity) as GameObject;
+				var hitVFX = SimplePool.Spawn(hitPrefab, pos, Quaternion.identity) as GameObject;
 
 				var ps = hitVFX.GetComponent<ParticleSystem> ();
-				if (ps == null) {
-					var psChild = hitVFX.transform.GetChild (0).GetComponent<ParticleSystem> ();
-					Destroy (hitVFX, psChild.main.duration);
-				} else
-					Destroy (hitVFX, ps.main.duration);
-			}
+        if (ps == null)
+        {
+          var psChild = hitVFX.transform.GetChild(0).GetComponent<ParticleSystem>();
+
+          Wait(psChild.main.duration, () =>
+          {
+            SimplePool.Despawn(hitVFX);
+          });
+
+        }
+        else
+        {
+          Wait(ps.main.duration, () =>
+          {
+            SimplePool.Despawn(hitVFX);
+          });
+        }
+      }
 
 			StartCoroutine (DestroyParticle (0f));
 		}
@@ -145,6 +168,6 @@ public class ProjectileMoveScript_tst : MonoBehaviour {
 		}
 		
 		yield return new WaitForSeconds (waitTime);
-		Destroy (gameObject);
+    SimplePool.Despawn(gameObject);
 	}
 }
