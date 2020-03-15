@@ -9,16 +9,17 @@ public class PlayerMissileMovement : ExtendedBehaviour
   public float speed = 5;
   public GameObject vfxMuzzleFlash;
 
-  void Start()
+  void OnEnable()
   {
     upDirection = GameObject.FindGameObjectWithTag("Player").transform.up;
-    EditorApplication.isPaused = true;
-    SimplePool.Spawn(vfxMuzzleFlash, transform.position, transform.rotation);
+    //EditorApplication.isPaused = true;
+    //SimplePool.Spawn(vfxMuzzleFlash, transform.position, transform.rotation);
 
     if (vfxMuzzleFlash != null)
     {
       var muzzleVFX = SimplePool.Spawn(vfxMuzzleFlash, transform.position, Quaternion.identity);
       muzzleVFX.transform.forward = gameObject.transform.forward;// + offset;
+
       var ps = muzzleVFX.GetComponent<ParticleSystem>();
       if (ps != null)
       {
@@ -30,7 +31,7 @@ public class PlayerMissileMovement : ExtendedBehaviour
       else
       {
         var psChild = muzzleVFX.transform.GetChild(0).GetComponent<ParticleSystem>();
-        Wait(.3f, () => {
+        Wait(0.5f, () => {
           print($"Waited {psChild.main.duration} before Despawn");
           SimplePool.Despawn(muzzleVFX);
         });
