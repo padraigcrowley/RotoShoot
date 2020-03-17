@@ -5,37 +5,47 @@ using UnityEngine;
 
 public class PlayerMissileMovement : ExtendedBehaviour
 {
+  private const float DESPAWN_DELAY_TIME = 0.3F; //not 100% sure what this should be
+
   private Vector3 upDirection;
   public float speed = 5;
-  public GameObject vfxMuzzleFlash;
+  public GameObject MuzzleFlashPrefab,HitFXPrefab;
+  private GameObject muzzleVFX,hitVFX;
+  private bool despawnTriggered = false, hitFXTriggered = false;
 
   void OnEnable()
   {
     upDirection = GameObject.FindGameObjectWithTag("Player").transform.up;
     //EditorApplication.isPaused = true;
-    //SimplePool.Spawn(vfxMuzzleFlash, transform.position, transform.rotation);
+    despawnTriggered = false;
+    hitFXTriggered = false;
 
-    if (vfxMuzzleFlash != null)
+    DoMuzzleFlash();
+   
+  }
+  private void DoMuzzleFlash()
+  {
+    if (MuzzleFlashPrefab != null)
     {
-      var muzzleVFX = SimplePool.Spawn(vfxMuzzleFlash, transform.position, Quaternion.identity);
+      muzzleVFX = SimplePool.Spawn(MuzzleFlashPrefab, transform.position, Quaternion.identity);
       muzzleVFX.transform.forward = gameObject.transform.forward;// + offset;
 
-      var ps = muzzleVFX.GetComponent<ParticleSystem>();
-      if (ps != null)
-      {
-        Wait(ps.main.duration, () => {
-          SimplePool.Despawn(muzzleVFX);
-        });
-      }
+      //var ps = muzzleVFX.GetComponent<ParticleSystem>();
+      //if (ps != null)
+      //{
+      //  Wait(ps.main.duration, () => {
+      //    SimplePool.Despawn(muzzleVFX);
+      //  });
+      //}
 
-      else
-      {
-        var psChild = muzzleVFX.transform.GetChild(0).GetComponent<ParticleSystem>();
-        Wait(0.5f, () => {
-          print($"Waited {psChild.main.duration} before Despawn");
-          SimplePool.Despawn(muzzleVFX);
-        });
-      }
+      //else
+      //{
+      //  var psChild = muzzleVFX.transform.GetChild(0).GetComponent<ParticleSystem>();
+      //  Wait(.3f, () => {
+      //    //print($"Waited {psChild.main.duration} before Despawn");
+      //    //SimplePool.Despawn(muzzleVFX);
+      //  });
+      //}
     }
   }
 
@@ -49,7 +59,24 @@ public class PlayerMissileMovement : ExtendedBehaviour
   {
     if (transform.position.y >= 6f)
     {
-      SimplePool.Despawn(gameObject);
+      if ((HitFXPrefab != null) && (!hitFXTriggered))
+      {
+        hitFXTriggered = true;
+        hitVFX = SimplePool.Spawn(HitFXPrefab, transform.position, Quaternion.identity);
+        hitVFX.transform.forward = gameObject.transform.forward;// + offset;
+      }
+
+
+      Wait(DESPAWN_DELAY_TIME, () =>
+      {
+        if (!despawnTriggered)
+        {
+          despawnTriggered = true;
+          SimplePool.Despawn(muzzleVFX);
+          SimplePool.Despawn(hitVFX);
+          SimplePool.Despawn(gameObject);
+        }
+      });
     }
   }
 }

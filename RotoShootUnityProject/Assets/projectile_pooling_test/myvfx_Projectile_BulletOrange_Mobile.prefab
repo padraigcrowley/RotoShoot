@@ -4963,7 +4963,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   speed: 10
-  vfxMuzzleFlash: {fileID: 1888018191284372, guid: b2b27b11bf87cde439e14b82c0c52f55,
+  MuzzleFlashPrefab: {fileID: 1888018191284372, guid: b2b27b11bf87cde439e14b82c0c52f55,
+    type: 3}
+  HitFXPrefab: {fileID: 1124335935880280, guid: 6b95105190128904c85331c3fbd51588,
     type: 3}
 --- !u!199 &199343996646498640
 ParticleSystemRenderer:
