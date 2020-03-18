@@ -8,7 +8,7 @@ public class PlayerMissileMovement : ExtendedBehaviour
   private const float DESPAWN_DELAY_TIME = 0.3F; //not 100% sure what this should be
 
   private Vector3 upDirection;
-  public float speed = 5;
+  //public float speed = 5;
   public GameObject MuzzleFlashPrefab,HitFXPrefab;
   private GameObject muzzleVFX,hitVFX;
   private bool despawnTriggered = false, hitFXTriggered = false;
@@ -51,7 +51,7 @@ public class PlayerMissileMovement : ExtendedBehaviour
 
   void FixedUpdate()
   {
-    this.transform.position += upDirection * speed * Time.deltaTime;
+    this.transform.position += upDirection * GameplayManager.Instance.currentPlayerMissileSpeedMultiplier * Time.deltaTime;
   }
 
   // Update is called once per frame

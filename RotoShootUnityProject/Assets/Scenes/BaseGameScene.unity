@@ -657,7 +657,6 @@ GameObject:
   m_Component:
   - component: {fileID: 191098412}
   - component: {fileID: 191098411}
-  - component: {fileID: 191098413}
   m_Layer: 0
   m_Name: GameplayManagerObject
   m_TagString: Untagged
@@ -722,31 +721,6 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &191098413
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 191098410}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 435f7ceccfa7ca54892ed49b673664a7, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  rootPoolName: Pooled Objects
-  pooledObjects: []
-  itemsToPool:
-  - objectToPool: {fileID: 1865968712415440, guid: e1d30abeb36499148bca7bfbd6a64d43,
-      type: 3}
-    poolName: Player Missile Projectile Pool
-    amountToPool: 1
-    shouldExpand: 0
-  - objectToPool: {fileID: 1888018191284372, guid: 83edc97d2ab35b84fbe85b929507592e,
-      type: 3}
-    poolName: Player Muzzle Projectile Pool
-    amountToPool: 1
-    shouldExpand: 0
 --- !u!1 &191601459
 GameObject:
   m_ObjectHideFlags: 0
@@ -3530,7 +3504,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   barrelTip: {fileID: 2099002079}
   shipSpriteRenderer: {fileID: 191601460}
-  bullet: {fileID: 1865968712415440, guid: e1d30abeb36499148bca7bfbd6a64d43, type: 3}
+  playerMissilePrefab: {fileID: 1865968712415440, guid: e1d30abeb36499148bca7bfbd6a64d43,
+    type: 3}
   PlayerShipGreenRotArrowObj: {fileID: 903228520}
   PlayerShipRedRotArrowObj: {fileID: 1924820801}
   PlayerShipIntroAnimCompleted: 0
@@ -4940,7 +4915,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   barrelTip: {fileID: 247800109}
   shipSpriteRenderer: {fileID: 1377789682}
-  bullet: {fileID: 0}
+  playerMissilePrefab: {fileID: 0}
   PlayerShipGreenRotArrowObj: {fileID: 903228520}
   PlayerShipRedRotArrowObj: {fileID: 1924820801}
   PlayerShipIntroAnimCompleted: 0

@@ -20,59 +20,71 @@ public class ProjectileMoveScript_tst : ExtendedBehaviour
 	private bool collided;
 	private Rigidbody2D rb;
 
-  private Vector3 upDirection;
+	private Vector3 upDirection;
 
-  void Start () {
-    upDirection = GameObject.FindGameObjectWithTag("Player").transform.up;
+	void Start()
+	{
+		upDirection = GameObject.FindGameObjectWithTag("Player").transform.up;
 
-    rb = GetComponent <Rigidbody2D> ();
+		rb = GetComponent<Rigidbody2D>();
 
 		//used to create a radius for the accuracy and have a very unique randomness
-		if (accuracy != 100) {
+		if (accuracy != 100)
+		{
 			accuracy = 1 - (accuracy / 100);
 
-			for (int i = 0; i < 2; i++) {
-				var val = 1 * Random.Range (-accuracy, accuracy);
-				var index = Random.Range (0, 2);
-				if (i == 0) {
+			for (int i = 0; i < 2; i++)
+			{
+				var val = 1 * Random.Range(-accuracy, accuracy);
+				var index = Random.Range(0, 2);
+				if (i == 0)
+				{
 					if (index == 0)
-						offset = new Vector3 (0, -val, 0);
+						offset = new Vector3(0, -val, 0);
 					else
-						offset = new Vector3 (0, val, 0);
-				} else {
+						offset = new Vector3(0, val, 0);
+				}
+				else
+				{
 					if (index == 0)
-						offset = new Vector3 (0, offset.y, -val);
+						offset = new Vector3(0, offset.y, -val);
 					else
-						offset = new Vector3 (0, offset.y, val);
+						offset = new Vector3(0, offset.y, val);
 				}
 			}
 		}
-			
-		if (muzzlePrefab != null) {
+
+		if (muzzlePrefab != null)
+		{
 			var muzzleVFX = SimplePool.Spawn(muzzlePrefab, transform.position, Quaternion.identity);
 			muzzleVFX.transform.forward = gameObject.transform.forward + offset;
 			var ps = muzzleVFX.GetComponent<ParticleSystem>();
 			if (ps != null)
-      {
-        Wait(ps.main.duration, () => {
-          SimplePool.Despawn(muzzleVFX);
-        });
-      }
-				
-			else {
+			{
+				Wait(ps.main.duration, () =>
+				{
+					SimplePool.Despawn(muzzleVFX);
+				});
+			}
+
+			else
+			{
 				var psChild = muzzleVFX.transform.GetChild(0).GetComponent<ParticleSystem>();
-        Wait(psChild.main.duration, () => {
-          SimplePool.Despawn(muzzleVFX);
-        });
-      }
+				Wait(psChild.main.duration, () =>
+				{
+					SimplePool.Despawn(muzzleVFX);
+				});
+			}
 		}
 
-		if (shotSFX != null && GetComponent<AudioSource>()) {
-			GetComponent<AudioSource> ().PlayOneShot (shotSFX);
+		if (shotSFX != null && GetComponent<AudioSource>())
+		{
+			GetComponent<AudioSource>().PlayOneShot(shotSFX);
 		}
 	}
 
-	void FixedUpdate () {
+	void FixedUpdate()
+	{
 		//if (speed != 0 && rb != null)
 		//	rb.position += (transform.forward + offset) * (speed * Time.deltaTime);
 
@@ -87,87 +99,98 @@ public class ProjectileMoveScript_tst : ExtendedBehaviour
 	}
 
 
-  private void OnTriggerEnter2D(Collider2D co)
-  {
-    //print("OnTriggerEnter2D in ProjectileMoveScript"); 
-  
-		if (co.gameObject.tag != "ScreenBoundary" && co.gameObject.tag != "Player" && co.gameObject.tag != "Bullet" && !collided) 
-    {
+	private void OnTriggerEnter2D(Collider2D co)
+	{
+		//print("OnTriggerEnter2D in ProjectileMoveScript"); 
+
+		if (co.gameObject.tag != "ScreenBoundary" && co.gameObject.tag != "Player" && co.gameObject.tag != "Bullet" && !collided)
+		{
 			collided = true;
-			
-			if (shotSFX != null && GetComponent<AudioSource>()) {
-				GetComponent<AudioSource> ().PlayOneShot (hitSFX);
+
+			if (shotSFX != null && GetComponent<AudioSource>())
+			{
+				GetComponent<AudioSource>().PlayOneShot(hitSFX);
 			}
 
-			if (trails.Count > 0) {
-				for (int i = 0; i < trails.Count; i++) {
-					trails [i].transform.parent = null;
-					var ps = trails [i].GetComponent<ParticleSystem> ();
-					if (ps != null) {
-						ps.Stop ();
-            Wait(ps.main.duration + ps.main.startLifetime.constantMax, () => {
-              SimplePool.Despawn(ps.gameObject);
-            });
-            
+			if (trails.Count > 0)
+			{
+				for (int i = 0; i < trails.Count; i++)
+				{
+					trails[i].transform.parent = null;
+					var ps = trails[i].GetComponent<ParticleSystem>();
+					if (ps != null)
+					{
+						ps.Stop();
+						Wait(ps.main.duration + ps.main.startLifetime.constantMax, () =>
+						{
+							SimplePool.Despawn(ps.gameObject);
+						});
+
 					}
 				}
 			}
-		
+
 			speed = 0;
 			//GetComponent<Rigidbody2D> ().isKinematic = true;
 
-      //ContactPoint contact = co.contacts [0];
-      //Quaternion rot = Quaternion.FromToRotation (Vector3.up, contact.normal);
-      //Vector3 pos = contact.point;
+			//ContactPoint contact = co.contacts [0];
+			//Quaternion rot = Quaternion.FromToRotation (Vector3.up, contact.normal);
+			//Vector3 pos = contact.point;
 
-      Vector3 pos = co.gameObject.transform.position;
+			Vector3 pos = co.gameObject.transform.position;
 
-      if (hitPrefab != null) {
+			if (hitPrefab != null)
+			{
 				var hitVFX = SimplePool.Spawn(hitPrefab, pos, Quaternion.identity) as GameObject;
 
-				var ps = hitVFX.GetComponent<ParticleSystem> ();
-        if (ps == null)
-        {
-          var psChild = hitVFX.transform.GetChild(0).GetComponent<ParticleSystem>();
+				var ps = hitVFX.GetComponent<ParticleSystem>();
+				if (ps == null)
+				{
+					var psChild = hitVFX.transform.GetChild(0).GetComponent<ParticleSystem>();
 
-          Wait(psChild.main.duration, () =>
-          {
-            SimplePool.Despawn(hitVFX);
-          });
+					Wait(psChild.main.duration, () =>
+					{
+						SimplePool.Despawn(hitVFX);
+					});
 
-        }
-        else
-        {
-          Wait(ps.main.duration, () =>
-          {
-            SimplePool.Despawn(hitVFX);
-          });
-        }
-      }
+				}
+				else
+				{
+					Wait(ps.main.duration, () =>
+					{
+						SimplePool.Despawn(hitVFX);
+					});
+				}
+			}
 
-			StartCoroutine (DestroyParticle (0f));
+			StartCoroutine(DestroyParticle(0f));
 		}
 	}
 
-	public IEnumerator DestroyParticle (float waitTime) {
+	public IEnumerator DestroyParticle(float waitTime)
+	{
 
-		if (transform.childCount > 0 && waitTime != 0) {
-			List<Transform> tList = new List<Transform> ();
+		if (transform.childCount > 0 && waitTime != 0)
+		{
+			List<Transform> tList = new List<Transform>();
 
-			foreach (Transform t in transform.GetChild(0).transform) {
-				tList.Add (t);
-			}		
+			foreach (Transform t in transform.GetChild(0).transform)
+			{
+				tList.Add(t);
+			}
 
-			while (transform.GetChild(0).localScale.x > 0) {
-				yield return new WaitForSeconds (0.01f);
-				transform.GetChild(0).localScale -= new Vector3 (0.1f, 0.1f, 0.1f);
-				for (int i = 0; i < tList.Count; i++) {
-					tList[i].localScale -= new Vector3 (0.1f, 0.1f, 0.1f);
+			while (transform.GetChild(0).localScale.x > 0)
+			{
+				yield return new WaitForSeconds(0.01f);
+				transform.GetChild(0).localScale -= new Vector3(0.1f, 0.1f, 0.1f);
+				for (int i = 0; i < tList.Count; i++)
+				{
+					tList[i].localScale -= new Vector3(0.1f, 0.1f, 0.1f);
 				}
 			}
 		}
-		
-		yield return new WaitForSeconds (waitTime);
-    SimplePool.Despawn(gameObject);
+
+		yield return new WaitForSeconds(waitTime);
+		SimplePool.Despawn(gameObject);
 	}
 }

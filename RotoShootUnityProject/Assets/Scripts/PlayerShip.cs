@@ -13,7 +13,7 @@ public class PlayerShip : MonoBehaviour
   
   public Transform barrelTip;
   [SerializeField] private Renderer shipSpriteRenderer;
-  [SerializeField] private GameObject bullet;
+  [SerializeField] private GameObject playerMissilePrefab;
   public GameObject PlayerShipGreenRotArrowObj;
   public GameObject PlayerShipRedRotArrowObj;
   public bool PlayerShipIntroAnimCompleted = false;
@@ -164,7 +164,8 @@ public class PlayerShip : MonoBehaviour
     //  playerMissile.SetActive(true);
     //}
 
-    SimplePool.Spawn(bullet, barrelTip.position, barrelTip.rotation);
+    SimplePool.Spawn(playerMissilePrefab, barrelTip.position, barrelTip.rotation);
+    //SimplePool.Spawn(vfxProjectile, transform.position, transform.rotation);
 
 
   }
