@@ -13,9 +13,17 @@ public class PlayerMissileMovement : ExtendedBehaviour
   private GameObject muzzleVFX,hitVFX;
   private bool despawnTriggered = false, hitFXTriggered = false;
 
+  private void Start()
+  {
+    print("---Start()---");
+    upDirection = GameObject.FindGameObjectWithTag("Player").transform.up;
+    ParticleSystem ps = this.GetComponent<ParticleSystem>();
+    print($"PS= {ps}");
+  }
+
   void OnEnable()
   {
-    upDirection = GameObject.FindGameObjectWithTag("Player").transform.up;
+    print("---OnEnable()---");
     //EditorApplication.isPaused = true;
     despawnTriggered = false;
     hitFXTriggered = false;
@@ -65,8 +73,7 @@ public class PlayerMissileMovement : ExtendedBehaviour
         hitVFX = SimplePool.Spawn(HitFXPrefab, transform.position, Quaternion.identity);
         hitVFX.transform.forward = gameObject.transform.forward;// + offset;
       }
-
-
+      
       Wait(DESPAWN_DELAY_TIME, () =>
       {
         if (!despawnTriggered)
