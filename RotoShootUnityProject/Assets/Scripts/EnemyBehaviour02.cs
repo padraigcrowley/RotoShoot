@@ -70,7 +70,7 @@ namespace Mr1
           case EnemyState.HIT_BY_PLAYER_MISSILE:
             {
               //Destroy(missileObject);//destroy the missile object - should the missileObject itself be doing this or at least pass a message back to it?
-              missileObject.SetActive(false);
+              //missileObject.SetActive(false);
               HandleDamage();
 
               break;
