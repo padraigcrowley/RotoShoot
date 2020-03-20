@@ -15,29 +15,33 @@ public class PlayerMissileMovement : ExtendedBehaviour
   private bool readyToDespawn = false;
   private ParticleSystem ps;
   private bool collided;
-  private ParticleSystem[] psChildren;
+  private GameObject trailObj;
 
 
   private void Start()
   {
-    print("---Start()---");
+    //print("---Start()---");
     upDirection = GameObject.FindGameObjectWithTag("Player").transform.up;
-    //ps = this.GetComponent<ParticleSystem>();
-    //psChildren = transform.GetComponentsInChildren<ParticleSystem>();
-    //print($"PS= {ps}");
-    
-  }
 
+    //manually have to turn the trail render object off/on after collisions coz other it's quick position change makes it glitch
+    Transform trans = this.transform;
+    Transform childTrans = trans.Find("Trail");
+    if (childTrans != null)
+    {
+      trailObj =  childTrans.gameObject;
+    }
+  }
   void OnEnable()
   {
-    print("---OnEnable()---");
+    //print("---OnEnable()---");
     //EditorApplication.isPaused = true;
     despawnTriggered = false;
     hitFXTriggered = false;
     readyToDespawn = false;
     collided = false;
     transform.localScale = new Vector3(1f, 1f, 1f);
-
+    if (trailObj != null)
+      trailObj.SetActive(true);
     DoMuzzleFlash();
    
   }
@@ -115,8 +119,11 @@ public class PlayerMissileMovement : ExtendedBehaviour
         hitVFX = SimplePool.Spawn(HitFXPrefab, transform.position, Quaternion.identity);
         hitVFX.transform.forward = gameObject.transform.forward;// + offset;
         transform.localScale = new Vector3(.001f, .001f, .001f);// urgh, pretty hacky way to stop the missile projectile bullet being "drawn". 
+        trailObj.SetActive(false);
         //foreach (ParticleSystem psChild in psChildren)
-        //  psChild.Stop();
+        //{
+        //  if (ps.GetComponent<TrailRenderer>
+        //}
       }
 
       Wait(DESPAWN_DELAY_TIME, () =>
@@ -129,6 +136,7 @@ public class PlayerMissileMovement : ExtendedBehaviour
 
     if (co.gameObject.tag == "Boundary")
     {
+      trailObj.SetActive(false);
       Wait(DESPAWN_DELAY_TIME, () =>
       {
         SimplePool.Despawn(muzzleVFX);
