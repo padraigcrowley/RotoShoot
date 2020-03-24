@@ -15,15 +15,27 @@ public class MissileMovement : ExtendedBehaviour
   private ParticleSystem ps;
   private bool collided;
   private GameObject trailObj;
+  private List<GameObject> projectileChildrenObjects = new List<GameObject>();
 
   void Start()
     {
     //print("---Start()---");
     upDirection = GameObject.FindGameObjectWithTag("Player").transform.up;
 
+    foreach (Transform childTransform in this.transform)
+    {     
+      if (childTransform != null)
+      {
+        projectileChildrenObjects.Add(childTransform.gameObject);     
+      }
+    }
+
+
+
     //manually have to turn the trail render object off/on after collisions coz other it's quick position change makes it glitch
     Transform trans = this.transform;
     Transform childTrans = trans.Find("Trail");
+        
     if (childTrans != null)
     {
       trailObj = childTrans.gameObject;
@@ -70,7 +82,7 @@ public class MissileMovement : ExtendedBehaviour
         hitFXTriggered = true;
         hitVFX = SimplePool.Spawn(HitFXPrefab, transform.position, Quaternion.identity);
         hitVFX.transform.forward = gameObject.transform.forward;// + offset;
-        transform.localScale = new Vector3(.001f, .001f, .001f);// urgh, pretty hacky way to stop the missile projectile bullet being "drawn". 
+        transform.localScale = new Vector3(.001f, .001f, .001f);// urgh, pretty hacky way to stop the missile projectile bullet being "drawn". Because can't SetActive(false) the missile object cos that will kill this script as well?
         trailObj.SetActive(false);
         //foreach (ParticleSystem psChild in psChildren)
         //{
