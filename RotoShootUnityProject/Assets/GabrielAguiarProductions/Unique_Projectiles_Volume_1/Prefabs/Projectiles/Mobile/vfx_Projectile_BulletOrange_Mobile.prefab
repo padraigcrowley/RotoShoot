@@ -9750,7 +9750,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 1865968712415440}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 96e8ed466c0dd21469b4a6caa89e3955, type: 3}
+  m_Script: {fileID: 11500000, guid: fda56774912c510498234bde2b4fa6f0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   MuzzleFlashPrefab: {fileID: 1888018191284372, guid: 83edc97d2ab35b84fbe85b929507592e,

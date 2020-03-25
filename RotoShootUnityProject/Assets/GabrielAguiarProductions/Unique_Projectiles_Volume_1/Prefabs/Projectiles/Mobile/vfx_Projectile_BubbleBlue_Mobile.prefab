@@ -5024,19 +5024,14 @@ MonoBehaviour:
   m_GameObject: {fileID: 1374267004960804}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: f8b1b53f7005a81499c8be0c5706d7a7, type: 3}
+  m_Script: {fileID: 11500000, guid: 18fb63097782f97458f0ce9919d3e2c5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  speed: 5
-  accuracy: 100
-  fireRate: 2
-  muzzlePrefab: {fileID: 1236000582994584, guid: 8e417708bcf584e4ab8755c8fd013e66,
+  MuzzleFlashPrefab: {fileID: 1236000582994584, guid: 8e417708bcf584e4ab8755c8fd013e66,
     type: 3}
-  hitPrefab: {fileID: 1873612019324734, guid: 9d351059817a8d54bb93b55ed62f08dd, type: 3}
-  shotSFX: {fileID: 0}
-  hitSFX: {fileID: 0}
-  trails:
-  - {fileID: 1264819656396196}
+  HitFXPrefab: {fileID: 1873612019324734, guid: 9d351059817a8d54bb93b55ed62f08dd,
+    type: 3}
+  speed: 5
 --- !u!199 &199329164939455274
 ParticleSystemRenderer:
   serializedVersion: 6
