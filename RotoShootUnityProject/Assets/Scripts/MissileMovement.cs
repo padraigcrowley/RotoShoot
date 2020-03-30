@@ -4,24 +4,26 @@ using UnityEngine;
 
 public class MissileMovement : ExtendedBehaviour
 {
-  private const float DESPAWN_DELAY_TIME = 0.5F; //not 100% sure what this should be
+  protected const float DESPAWN_DELAY_TIME = 0.5F; //not 100% sure what this should be
 
   protected Vector3 upDirection;
   //public float speed = 5;
   public GameObject MuzzleFlashPrefab, HitFXPrefab;
-  private GameObject muzzleVFX, hitVFX;
-  private bool despawnTriggered = false, hitFXTriggered = false;
+  protected  GameObject muzzleVFX;
+  protected GameObject hitVFX;
+  private bool despawnTriggered = false;
+  protected bool hitFXTriggered = false;
   private bool readyToDespawn = false;
   private ParticleSystem ps;
   protected bool collided;
   private GameObject trailObj;
-  private List<GameObject> projectileChildrenObjects = new List<GameObject>();
+  protected List<GameObject> projectileChildrenObjects = new List<GameObject>();
 
   virtual protected void Start()
     {
     print("---Missilemovement Start()---");
 
-    //manually have to turn the child objects off/on after collisions coz otherwise it's quick position change makes it glitch
+    //manually have to turn the child objects off/on after collisions coz otherwise e.g. the trail's quick position change makes it glitch
     foreach (Transform childTransform in this.transform)
     {     
       if (childTransform != null)
@@ -31,7 +33,7 @@ public class MissileMovement : ExtendedBehaviour
     }
   }
 
-  void OnEnable()
+  virtual protected void OnEnable()
   {
     //print("---OnEnable()---");
     //EditorApplication.isPaused = true;
@@ -42,6 +44,7 @@ public class MissileMovement : ExtendedBehaviour
     transform.localScale = new Vector3(1f, 1f, 1f);
     foreach (GameObject childObj in projectileChildrenObjects)
     {
+      if(childObj!=null)
       childObj.SetActive(true);
     }
     //if (trailObj != null)
@@ -62,41 +65,17 @@ public class MissileMovement : ExtendedBehaviour
     }
 
 
-  private void OnTriggerEnter2D(Collider2D co)
+  
+
+  private void OnTriggerExit2D(Collider2D co)
   {
-    print($"Collided with {co.gameObject.tag}");
-    if (!co.gameObject.CompareTag("Boundary") && !co.gameObject.CompareTag("EnemyMissile") && !co.gameObject.CompareTag("Enemy01") )
-    {
-      Vector3 colPos = co.gameObject.transform.position;
-
-      if ((HitFXPrefab != null) && (!hitFXTriggered))
-      {
-        collided = true;
-        hitFXTriggered = true;
-        hitVFX = SimplePool.Spawn(HitFXPrefab, transform.position, Quaternion.identity);
-        hitVFX.transform.forward = gameObject.transform.forward;// + offset;
-        transform.localScale = new Vector3(.001f, .001f, .001f);// urgh, pretty hacky way to stop the missile projectile bullet being "drawn". Because can't SetActive(false) the missile object cos that will kill this script as well?
-
-        foreach (GameObject childObj in projectileChildrenObjects)
-        {
-          childObj.SetActive(false);
-        }
-        //trailObj.SetActive(false);
-      }
-
-      Wait(DESPAWN_DELAY_TIME, () =>
-      {
-        SimplePool.Despawn(muzzleVFX);
-        SimplePool.Despawn(hitVFX);
-        SimplePool.Despawn(gameObject);
-      });
-    }
-
+    print($"Collision exited with {co.gameObject.tag}");
     if (co.gameObject.CompareTag("Boundary"))
     {
       foreach (GameObject childObj in projectileChildrenObjects)
       {
-        childObj.SetActive(false);
+        if (childObj != null)
+          childObj.SetActive(false);
       }
       //trailObj.SetActive(false);
 
@@ -107,9 +86,9 @@ public class MissileMovement : ExtendedBehaviour
         SimplePool.Despawn(gameObject);
       });
     }
-
   }
-  private void DoMuzzleFlash()
+
+    private void DoMuzzleFlash()
   {
     if (MuzzleFlashPrefab != null)
     {

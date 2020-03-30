@@ -692,9 +692,9 @@ MonoBehaviour:
   currentPlayerShipRotationDuration: 0.07300001
   basePlayerShipRotationDuration: 0.23
   currentPlayerMissileSpeedMultiplier: 10
-  basePlayerMissileSpeedMultiplier: 25
+  basePlayerMissileSpeedMultiplier: 3
   currentPlayerShipFireRate: 2
-  basePlayerShipFireRate: 0.4
+  basePlayerShipFireRate: 2
   maxEnemy0001HP: 0
   enemy0001BaseSpeed: 1
   maxPlayerHP: 9999
@@ -3477,7 +3477,7 @@ BoxCollider2D:
   m_IsTrigger: 1
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: 0.022084534, y: -0.051114082}
+  m_Offset: {x: 0.022084534, y: -0.22417736}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0.5, y: 0.5}
@@ -3488,7 +3488,7 @@ BoxCollider2D:
     adaptiveTiling: 0
   m_AutoTiling: 0
   serializedVersion: 2
-  m_Size: {x: 1.3700858, y: 1.3498268}
+  m_Size: {x: 1.3700858, y: 1.0037003}
   m_EdgeRadius: 0
 --- !u!114 &1061970253
 MonoBehaviour:

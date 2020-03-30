@@ -29,7 +29,8 @@ public class EnemyFireAtPlayerBehaviour01 : MonoBehaviour
       //Dont shoot if the y pos is almost same as playership
       if (transform.position.y - 3 > GameplayManager.Instance.playerShipPos.y)
       {
-        firedBullet = Instantiate(enemyMissile, transform.position, transform.rotation);
+        //firedBullet = Instantiate(enemyMissile, transform.position, transform.rotation);
+        firedBullet = SimplePool.Spawn(enemyMissile, transform.position, transform.rotation);
         //Debug.Log("FireMissileAtPlayerPos()");
       }
 
