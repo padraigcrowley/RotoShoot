@@ -213,8 +213,9 @@ namespace Mr1
 
     private void OnTriggerExit2D(Collider2D collision)
     {
-      if (collision.tag == "ScreenBoundary")
-      {
+      
+        if (collision.gameObject.CompareTag("Boundary") && collision.gameObject.name != "Top Boundary")
+        {
         enemyState = EnemyState.TEMPORARILY_DEAD;
         //DOTween.Kill(myTweenID);
       }
