@@ -17,6 +17,7 @@ public class PlayerMissileMovement : MissileMovement
     base.FixedUpdate();
     if (!collided)
       this.transform.position += upDirection * GameplayManager.Instance.currentPlayerMissileSpeedMultiplier * Time.fixedDeltaTime;
+    //this.transform.position += upDirection * 10 * Time.fixedDeltaTime;
   }
   private void OnTriggerEnter2D(Collider2D co)
   {
