@@ -42,11 +42,7 @@ namespace Mr1
     {
 
       InitialSetup();
-      //Wait(3f, () =>
-      //{
-      //  transform.FollowPath(wayPointPathName, initialSpeed, FollowType.Loop).Log(true);
-      //  //Debug.Log(respawnWaitDelay + " respawnWaitOver seconds passed");
-      //});
+      
       
     }
 
@@ -213,11 +209,13 @@ namespace Mr1
 
     private void OnTriggerExit2D(Collider2D collision)
     {
-      
+      if (GameplayManager.Instance.levelControlType == 0) // this doean't apply to circular enemies moving towards centre 
+      {
         if (collision.gameObject.CompareTag("Boundary") && collision.gameObject.name != "Top Boundary")
         {
-        enemyState = EnemyState.TEMPORARILY_DEAD;
-        //DOTween.Kill(myTweenID);
+          enemyState = EnemyState.TEMPORARILY_DEAD;
+          //DOTween.Kill(myTweenID);
+        }
       }
     }
   }

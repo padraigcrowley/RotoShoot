@@ -10,5 +10,7 @@ public class EnemySpawnPointData
   public float speedMultiplier, hpMultiplier;
   public Mr1.PathData WayPointPath;
   //public string wayPointPathName;
+  public float numEnemiesInWave = 1;
+  public float timeBetweenSpawn = .5f;
 
 }
