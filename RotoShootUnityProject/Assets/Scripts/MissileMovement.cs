@@ -69,7 +69,7 @@ public class MissileMovement : ExtendedBehaviour
 
   private void OnTriggerExit2D(Collider2D co)
   {
-    print($"Collision exited with {co.gameObject.tag}");
+    //print($"Collision exited with {co.gameObject.tag}");
     if (co.gameObject.CompareTag("Boundary"))
     {
       foreach (GameObject childObj in projectileChildrenObjects)

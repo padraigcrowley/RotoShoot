@@ -16,15 +16,18 @@ public class DestroyByBoundary : MonoBehaviour
     //if (other.gameObject.tag == "Boundary") {
     //Destroy(gameObject);
     //}
-    if (other.gameObject.tag == "Boundary")
+    if (GameplayManager.Instance.levelControlType != 1)
     {
-      if (gameObject.tag == "PlayerMissile")
+      if (other.gameObject.tag == "Boundary")
       {
-        gameObject.SetActive(false);
-      }
-      else
-      {
-        Destroy(gameObject);
+        if (gameObject.tag == "PlayerMissile")
+        {
+          gameObject.SetActive(false);
+        }
+        else
+        {
+          Destroy(gameObject);
+        }
       }
     }
   }

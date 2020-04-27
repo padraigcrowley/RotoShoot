@@ -21,7 +21,7 @@ public class PlayerMissileMovement : MissileMovement
   }
   private void OnTriggerEnter2D(Collider2D co)
   {
-    print($"Collision entered with {co.gameObject.tag}");
+    //print($"Collision entered with {co.gameObject.tag}");
     if ((!co.gameObject.CompareTag("EnemyMissile")) && (co.gameObject.CompareTag("Enemy01")))
     {
       Vector3 colPos = co.gameObject.transform.position;

@@ -110,11 +110,13 @@ MonoBehaviour:
   m_GameObject: {fileID: 4342350733379744943}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 801b213f3d58ff64fa083476847867a0, type: 3}
+  m_Script: {fileID: 11500000, guid: fdd808fbe59a58145a9992ffd5f498fe, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   speedMultiplierFromSpawner: 1
   hpMultiplierFromSpawner: 1
+  wayPointPathName: 
+  enemyState: 0
 --- !u!50 &4342350733379744942
 Rigidbody2D:
   serializedVersion: 4

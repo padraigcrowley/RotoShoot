@@ -209,7 +209,7 @@ namespace Mr1
 
     private void OnTriggerExit2D(Collider2D collision)
     {
-      if (GameplayManager.Instance.levelControlType == 0) // this doean't apply to circular enemies moving towards centre 
+      if (GameplayManager.Instance.levelControlType != 1) // this doean't apply to circular enemies moving towards centre 
       {
         if (collision.gameObject.CompareTag("Boundary") && collision.gameObject.name != "Top Boundary")
         {
