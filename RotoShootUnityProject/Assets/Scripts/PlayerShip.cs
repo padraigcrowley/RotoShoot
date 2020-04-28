@@ -178,8 +178,7 @@ public class PlayerShip : MonoBehaviour
 
     Tween myTween;
 
-    if (playerShipMoving)
-      yield break;
+    if (playerShipMoving)      yield break;
     
     //validate the possible move before it's made
     if (oldX < newPos.x) // don't go past either boundary
@@ -199,7 +198,7 @@ public class PlayerShip : MonoBehaviour
     //  yield return null;
     //}
 
-    myTween = transform.DOMove(new Vector3(newPos.x, newPos.y, 0), .5f).SetEase(Ease.OutQuad);
+    myTween = transform.DOMove(new Vector3(newPos.x, newPos.y, 0), .25f).SetEase(Ease.OutQuad);
     
     yield return myTween.WaitForCompletion();
     // This log will happen after the tween has completed

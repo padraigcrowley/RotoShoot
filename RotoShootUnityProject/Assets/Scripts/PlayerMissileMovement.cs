@@ -11,13 +11,19 @@ public class PlayerMissileMovement : MissileMovement
     base.Start();
     print("---PlayerMissilemovement Start()---");
   }
-  
-   protected override void FixedUpdate()
+
+  protected override void OnEnable()
+  {
+    base.OnEnable();
+    upDirection = GameObject.FindGameObjectWithTag("Player").transform.up;
+  }
+
+  protected override void FixedUpdate()
   {
     base.FixedUpdate();
+    
     if (!collided)
       this.transform.position += upDirection * GameplayManager.Instance.currentPlayerMissileSpeedMultiplier * Time.fixedDeltaTime;
-    //this.transform.position += upDirection * 10 * Time.fixedDeltaTime;
   }
   private void OnTriggerEnter2D(Collider2D co)
   {

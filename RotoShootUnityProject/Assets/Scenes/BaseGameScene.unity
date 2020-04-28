@@ -692,9 +692,9 @@ MonoBehaviour:
   currentPlayerShipRotationDuration: 0.07300001
   basePlayerShipRotationDuration: 0.23
   currentPlayerMissileSpeedMultiplier: 10
-  basePlayerMissileSpeedMultiplier: 3
+  basePlayerMissileSpeedMultiplier: 21
   currentPlayerShipFireRate: 2
-  basePlayerShipFireRate: 2
+  basePlayerShipFireRate: 0.3
   maxEnemy0001HP: 0
   enemy0001BaseSpeed: 1
   maxPlayerHP: 9999
@@ -777,7 +777,7 @@ SpriteRenderer:
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: -1495675747
-  m_SortingLayer: 1
+  m_SortingLayer: -1
   m_SortingOrder: 0
   m_Sprite: {fileID: 21300000, guid: 65c5e42ef9502a3459daad37ab9a94bf, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
@@ -2760,7 +2760,7 @@ SpriteRenderer:
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: -1495675747
-  m_SortingLayer: 1
+  m_SortingLayer: -1
   m_SortingOrder: 0
   m_Sprite: {fileID: 21300000, guid: 37e310e1cae89cc4aab8b47b82faa566, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
@@ -4416,7 +4416,7 @@ SpriteRenderer:
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: -1495675747
-  m_SortingLayer: 1
+  m_SortingLayer: -1
   m_SortingOrder: 1
   m_Sprite: {fileID: 21300000, guid: 6bd376e23a9eb5345a913b8e023f5afb, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
@@ -5758,7 +5758,7 @@ SpriteRenderer:
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: -1495675747
-  m_SortingLayer: 1
+  m_SortingLayer: -1
   m_SortingOrder: 0
   m_Sprite: {fileID: 21300000, guid: ac4c34d952471ab41ae878c4ee625148, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}

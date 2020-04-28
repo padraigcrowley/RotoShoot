@@ -5,7 +5,14 @@ using UnityEngine;
 
 public class Enemy02_0000 : Mr1.EnemyBehaviour02
 {
+  protected override void Start()
+  {
+    base.Start();
+    Vector3 dir = GameplayManager.Instance.playerShipPos - transform.position;
+    float angle = Mathf.Atan2(dir.y, dir.x) * Mathf.Rad2Deg + 90f;
+    transform.rotation = Quaternion.AngleAxis(angle, Vector3.forward);
 
+  }
   public override void DoMovement(float initialSpeed, Mr1.FollowType followType)
   {
     
