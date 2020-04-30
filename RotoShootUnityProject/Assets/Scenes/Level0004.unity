@@ -151,9 +151,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   numEnemyKillsInLevel: 0
-  levelSetupData: {fileID: 11400000, guid: ecb0fc95042de7844974c1804a7d3b8f, type: 2}
+  levelSetupData: {fileID: 11400000, guid: d8e4f31764efff24e98376419c3c3d56, type: 2}
   levelEnemies: []
   levelPlayTimeElapsed: 0
+  verticalDistBetweenEnemies: 2
 --- !u!4 &254305519
 Transform:
   m_ObjectHideFlags: 0
@@ -547,7 +548,7 @@ SpriteRenderer:
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: -1624045745
-  m_SortingLayer: -2
+  m_SortingLayer: -3
   m_SortingOrder: 1
   m_Sprite: {fileID: 21300000, guid: 0b96bc375665c44448419ff18f22d443, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 0.3019608}

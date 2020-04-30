@@ -10,7 +10,9 @@ public class LevelManager : Singleton<LevelManager>
   public LevelSetupData levelSetupData;
   public  GameObject[] levelEnemies;
   public float levelPlayTimeElapsed;
-  
+  public float verticalDistBetweenEnemies = 2.0f;
+
+
   private void Awake()
   {
     GameplayManager.Instance.playerShipPos = levelSetupData.PlayerShipPos;
@@ -46,23 +48,25 @@ public class LevelManager : Singleton<LevelManager>
     int index = 0;
     foreach (EnemySpawnPointData sp in levelSetupData.levelEnemySpawnPointData)
     {
-      //if (levelSetupData.levelControlType == 1)
+      //for (int i = 0; i < sp.numEnemiesInWave; i++)
       //{
-      //  levelEnemies[index] = Instantiate(sp.enemyPrefab, sp.startPos, Quaternion.identity) as GameObject;
-      //  levelEnemies[index].GetComponent<EnemyBehaviour>().speedMultiplierFromSpawner = sp.speedMultiplier;
-      //  levelEnemies[index].GetComponent<EnemyBehaviour>().hpMultiplierFromSpawner = sp.hpMultiplier;
-      //  index++;
+      //  levelEnemies[index] = Instantiate(sp.enemyPrefab, new Vector3(sp.startPos.x, sp.startPos.y+1), Quaternion.identity) as GameObject;
       //}
-      //else
+      //levelEnemies[index].GetComponent<Mr1.EnemyBehaviour02>().speedMultiplierFromSpawner = sp.speedMultiplier;
+      //levelEnemies[index].GetComponent<Mr1.EnemyBehaviour02>().hpMultiplierFromSpawner = sp.hpMultiplier;
+      //if (sp.WayPointPath != null)
+      //  levelEnemies[index].GetComponent<Mr1.EnemyBehaviour02>().wayPointPathName = sp.WayPointPath.pathName;
+      //index++;
+      GameObject enemy = new GameObject();
+      for (int i = 0; i < sp.numEnemiesInWave; i++)
       {
-          levelEnemies[index] = Instantiate(sp.enemyPrefab, sp.startPos, Quaternion.identity) as GameObject;
-          levelEnemies[index].GetComponent<Mr1.EnemyBehaviour02>().speedMultiplierFromSpawner = sp.speedMultiplier;
-          levelEnemies[index].GetComponent<Mr1.EnemyBehaviour02>().hpMultiplierFromSpawner = sp.hpMultiplier;
-          if(sp.WayPointPath != null)
-            levelEnemies[index].GetComponent<Mr1.EnemyBehaviour02>().wayPointPathName = sp.WayPointPath.pathName;
-
-        index++;
+        enemy = Instantiate(sp.enemyPrefab, new Vector3(sp.startPos.x, sp.startPos.y + (i*verticalDistBetweenEnemies)), Quaternion.identity) as GameObject;
+        enemy.GetComponent<Mr1.EnemyBehaviour02>().speedMultiplierFromSpawner = sp.speedMultiplier;
+        enemy.GetComponent<Mr1.EnemyBehaviour02>().hpMultiplierFromSpawner = sp.hpMultiplier;
+        if (sp.WayPointPath != null)
+          enemy.GetComponent<Mr1.EnemyBehaviour02>().wayPointPathName = sp.WayPointPath.pathName;
       }
+      index++;
     }
   }
 

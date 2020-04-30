@@ -3508,6 +3508,8 @@ MonoBehaviour:
     type: 3}
   PlayerShipGreenRotArrowObj: {fileID: 903228520}
   PlayerShipRedRotArrowObj: {fileID: 1924820801}
+  playerShipTweenMoveSpeed: 0.45
+  playerShipTweenRotateSpeed: 0.25
   PlayerShipIntroAnimCompleted: 0
   PlayerShipOutroAnimCompleted: 0
 --- !u!4 &1061970254
@@ -4918,6 +4920,8 @@ MonoBehaviour:
   playerMissilePrefab: {fileID: 0}
   PlayerShipGreenRotArrowObj: {fileID: 903228520}
   PlayerShipRedRotArrowObj: {fileID: 1924820801}
+  playerShipTweenMoveSpeed: 0.25
+  playerShipTweenRotateSpeed: 0.25
   PlayerShipIntroAnimCompleted: 0
   PlayerShipOutroAnimCompleted: 0
 --- !u!4 &1596802969

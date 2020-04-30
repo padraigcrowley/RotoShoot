@@ -16,6 +16,8 @@ public class PlayerShip : MonoBehaviour
   [SerializeField] private GameObject playerMissilePrefab;
   public GameObject PlayerShipGreenRotArrowObj;
   public GameObject PlayerShipRedRotArrowObj;
+  public float playerShipTweenMoveSpeed = .25f;
+  public float playerShipTweenRotateSpeed = .25f;
   public bool PlayerShipIntroAnimCompleted = false;
   public bool PlayerShipOutroAnimCompleted = false;
   private bool PlayerShipIntroAnimPlaying = false;
@@ -190,7 +192,7 @@ public class PlayerShip : MonoBehaviour
 
     playerShipMoving = true;
     //print($"PlayerShipMoving: {playerShipMoving }");
-    
+
     //while (transform.position.x != newPos.x)
     //{
     //  transform.position = Vector3.MoveTowards(transform.position, newPos, step);
@@ -198,8 +200,9 @@ public class PlayerShip : MonoBehaviour
     //  yield return null;
     //}
 
-    myTween = transform.DOMove(new Vector3(newPos.x, newPos.y, 0), .25f).SetEase(Ease.OutQuad);
-    
+    myTween = transform.DOMove(new Vector3(newPos.x, newPos.y, 0), playerShipTweenMoveSpeed);
+    //myTween = transform.DOMove(new Vector3(newPos.x, newPos.y, 0), .25f).SetEase(Ease.OutQuad);
+
     yield return myTween.WaitForCompletion();
     // This log will happen after the tween has completed
     //Debug.Log("Move Tween completed!");

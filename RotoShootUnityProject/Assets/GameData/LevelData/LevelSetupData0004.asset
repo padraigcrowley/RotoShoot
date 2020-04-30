@@ -15,69 +15,105 @@ MonoBehaviour:
   levelNumber: 4
   levelControlType: 2
   levelEnemySpawnPointData:
-  - enemyPrefab: {fileID: 4342350733379744943, guid: 98337287636663844a798648967aa1c7,
+  - enemyPrefab: {fileID: 4342350733379744943, guid: 3bf3914ccf51ea64aa01feaa452f98f3,
       type: 3}
     startPos: {x: -3.8, y: 10}
     speedMultiplier: 3
     hpMultiplier: 1
+    WayPointPath: {fileID: 11400000, guid: 0f7f2978d19808143bd99d8259a325da, type: 2}
+    numEnemiesInWave: 3
+    timeBetweenSpawn: 0.5
   - enemyPrefab: {fileID: 4342350733379744943, guid: 98337287636663844a798648967aa1c7,
       type: 3}
     startPos: {x: -3.8, y: 12}
     speedMultiplier: 3
     hpMultiplier: 1
-  - enemyPrefab: {fileID: 4342350733379744943, guid: 98337287636663844a798648967aa1c7,
+    WayPointPath: {fileID: 0}
+    numEnemiesInWave: 3
+    timeBetweenSpawn: 0.5
+  - enemyPrefab: {fileID: 4342350733379744943, guid: 3bf3914ccf51ea64aa01feaa452f98f3,
       type: 3}
     startPos: {x: -3.8, y: 14}
     speedMultiplier: 3
     hpMultiplier: 1
+    WayPointPath: {fileID: 11400000, guid: 1c48dabd5c43ce447a04208ea9f6fa5b, type: 2}
+    numEnemiesInWave: 4
+    timeBetweenSpawn: 0.5
   - enemyPrefab: {fileID: 4342350733379744943, guid: 98337287636663844a798648967aa1c7,
       type: 3}
     startPos: {x: -3.8, y: 16}
     speedMultiplier: 3
     hpMultiplier: 1
+    WayPointPath: {fileID: 0}
+    numEnemiesInWave: 4
+    timeBetweenSpawn: 0.5
   - enemyPrefab: {fileID: 4342350733379744943, guid: 98337287636663844a798648967aa1c7,
       type: 3}
     startPos: {x: 1.3, y: 11}
     speedMultiplier: 3
     hpMultiplier: 1
+    WayPointPath: {fileID: 0}
+    numEnemiesInWave: 1
+    timeBetweenSpawn: 0.5
   - enemyPrefab: {fileID: 4342350733379744943, guid: 98337287636663844a798648967aa1c7,
       type: 3}
     startPos: {x: 1.3, y: 13}
     speedMultiplier: 2
     hpMultiplier: 1
+    WayPointPath: {fileID: 0}
+    numEnemiesInWave: 1
+    timeBetweenSpawn: 0.5
   - enemyPrefab: {fileID: 4342350733379744943, guid: 98337287636663844a798648967aa1c7,
       type: 3}
     startPos: {x: 1.3, y: 15}
     speedMultiplier: 4
     hpMultiplier: 1
+    WayPointPath: {fileID: 0}
+    numEnemiesInWave: 1
+    timeBetweenSpawn: 0.5
   - enemyPrefab: {fileID: 4342350733379744943, guid: 98337287636663844a798648967aa1c7,
       type: 3}
     startPos: {x: 1.3, y: 17}
     speedMultiplier: 3
     hpMultiplier: 1
+    WayPointPath: {fileID: 0}
+    numEnemiesInWave: 1
+    timeBetweenSpawn: 0.5
   - enemyPrefab: {fileID: 4342350733379744943, guid: 98337287636663844a798648967aa1c7,
       type: 3}
     startPos: {x: 3.8, y: 14}
     speedMultiplier: 2
     hpMultiplier: 1
-  - enemyPrefab: {fileID: 4342350733379744943, guid: 98337287636663844a798648967aa1c7,
+    WayPointPath: {fileID: 0}
+    numEnemiesInWave: 3
+    timeBetweenSpawn: 0.5
+  - enemyPrefab: {fileID: 4342350733379744943, guid: 3bf3914ccf51ea64aa01feaa452f98f3,
       type: 3}
     startPos: {x: 3.8, y: 16}
     speedMultiplier: 5
     hpMultiplier: 1
-  - enemyPrefab: {fileID: 4342350733379744943, guid: 98337287636663844a798648967aa1c7,
+    WayPointPath: {fileID: 11400000, guid: 0f7f2978d19808143bd99d8259a325da, type: 2}
+    numEnemiesInWave: 3
+    timeBetweenSpawn: 0.5
+  - enemyPrefab: {fileID: 4342350733379744943, guid: 3bf3914ccf51ea64aa01feaa452f98f3,
       type: 3}
     startPos: {x: 3.8, y: 18}
     speedMultiplier: 3
     hpMultiplier: 1
-  - enemyPrefab: {fileID: 4342350733379744943, guid: 98337287636663844a798648967aa1c7,
+    WayPointPath: {fileID: 0}
+    numEnemiesInWave: 3
+    timeBetweenSpawn: 0.5
+  - enemyPrefab: {fileID: 4342350733379744943, guid: 3bf3914ccf51ea64aa01feaa452f98f3,
       type: 3}
     startPos: {x: 3.8, y: 20}
     speedMultiplier: 2
     hpMultiplier: 1
+    WayPointPath: {fileID: 11400000, guid: 1c48dabd5c43ce447a04208ea9f6fa5b, type: 2}
+    numEnemiesInWave: 3
+    timeBetweenSpawn: 0.5
   blockedPlayerShipRotationAngles: 
   PlayerShipPos: {x: -1.28, y: -6, z: 0}
-  lccEnemyKills: 40
+  lccEnemyKills: 400
   lccSurviveTime: 4
   shipLanes:
   - {x: -3.85, y: -6}
