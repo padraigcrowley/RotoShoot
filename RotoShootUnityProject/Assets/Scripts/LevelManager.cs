@@ -8,7 +8,6 @@ public class LevelManager : Singleton<LevelManager>
   public Dictionary<string, int> LevelCompletionCriteria = new Dictionary<string, int>();
   private bool lccMet; //levelcompletioncriteria
   public LevelSetupData levelSetupData;
-  public  GameObject[] levelEnemies;
   public float levelPlayTimeElapsed;
   public float verticalDistBetweenEnemies = 2.0f;
 
@@ -20,14 +19,9 @@ public class LevelManager : Singleton<LevelManager>
     GameplayManager.Instance.shipLanes = levelSetupData.shipLanes;
   }
 
-  void Start()
-  {    
+  void InitializeLCC()
+  {
     lccMet = false;
-    numEnemyKillsInLevel = 0;
-        
-    if (levelSetupData.blockedPlayerShipRotationAngles.Length != 0)
-      GameplayManager.Instance.blockedPlayerShipRotationAngles = levelSetupData.blockedPlayerShipRotationAngles;
-
     //add the level completion criterias to the lcc dictionary
     if (levelSetupData.lccEnemyKills != -1)
       LevelCompletionCriteria.Add("EnemyKills", levelSetupData.lccEnemyKills);
@@ -42,9 +36,16 @@ public class LevelManager : Singleton<LevelManager>
         UIManager.Instance.RequiredEnemyKillCount.text = "/" + LevelCompletionCriteria[lccString].ToString();
       }
     }
-      
-    levelEnemies = new GameObject[levelSetupData.levelEnemySpawnPointData.Length];
-    //create as many gameobjects as array elements      
+  }
+  void Start()
+  {    
+    numEnemyKillsInLevel = 0;
+        
+    if (levelSetupData.blockedPlayerShipRotationAngles.Length != 0)
+      GameplayManager.Instance.blockedPlayerShipRotationAngles = levelSetupData.blockedPlayerShipRotationAngles;
+
+    InitializeLCC();
+
     int index = 0;
     foreach (EnemySpawnPointData sp in levelSetupData.levelEnemySpawnPointData)
     {
@@ -71,6 +72,12 @@ public class LevelManager : Singleton<LevelManager>
   }
 
   void Update()
+  {
+    CheckLCC(); // check LevelCompletionCriteria
+  }
+
+  
+  void CheckLCC() // check LevelCompletionCriteria
   {
     if (GameplayManager.Instance.currentGameState == GameplayManager.GameState.LEVEL_IN_PROGRESS)
     {
@@ -105,5 +112,7 @@ public class LevelManager : Singleton<LevelManager>
         GameplayManager.Instance.currentGameState = GameplayManager.GameState.LEVEL_OUTRO_IN_PROGRESS;
       }
     }    
+
   }
+
 }
