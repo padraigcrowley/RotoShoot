@@ -2,6 +2,9 @@
 using System.Collections.Generic;
 using UnityEngine;
 
+/// <summary>
+/// Enemy type that follows waypoint path
+/// </summary>
 
 public class Enemy02_0002 : Mr1.EnemyBehaviour02
 {

@@ -2,6 +2,9 @@
 using System.Collections.Generic;
 using UnityEngine;
 
+/// <summary>
+/// Enemy type that starts at top of screen, flys straight down lane to bottom of screen.
+/// </summary>
 
 public class Enemy02_0001 : Mr1.EnemyBehaviour02
 {

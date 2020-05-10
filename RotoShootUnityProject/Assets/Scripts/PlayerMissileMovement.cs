@@ -9,7 +9,7 @@ public class PlayerMissileMovement : MissileMovement
   {
     upDirection = GameObject.FindGameObjectWithTag("Player").transform.up; 
     base.Start();
-    print("---PlayerMissilemovement Start()---");
+    //print("---PlayerMissilemovement Start()---");
   }
 
   protected override void OnEnable()

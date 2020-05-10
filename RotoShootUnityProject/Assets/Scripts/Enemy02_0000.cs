@@ -2,6 +2,9 @@
 using System.Collections.Generic;
 using UnityEngine;
 
+/// <summary>
+/// Enemy type that flys into centre of screen (or wherever playership is), towards player ship
+/// </summary>
 
 public class Enemy02_0000 : Mr1.EnemyBehaviour02
 {

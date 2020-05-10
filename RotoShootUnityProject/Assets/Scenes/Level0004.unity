@@ -154,6 +154,8 @@ MonoBehaviour:
   levelSetupData: {fileID: 11400000, guid: ecb0fc95042de7844974c1804a7d3b8f, type: 2}
   levelPlayTimeElapsed: 0
   verticalDistBetweenEnemies: 2
+  timeBetwweenFiringAtPlayer: 3
+  timeToFireAtPlayer: 0
 --- !u!4 &254305519
 Transform:
   m_ObjectHideFlags: 0

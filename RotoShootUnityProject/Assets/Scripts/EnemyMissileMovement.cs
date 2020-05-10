@@ -14,7 +14,7 @@ public class EnemyMissileMovement : MissileMovement
   {
     movementVector = (GameplayManager.Instance.playerShipPos - transform.position).normalized * speed;
     base.OnEnable();
-    print("---PlayerMissilemovement OnEnable()---");
+    //print("---PlayerMissilemovement OnEnable()---");
   }
   private void OnTriggerEnter2D(Collider2D co)
   {

@@ -40,10 +40,7 @@ namespace Mr1
 
     protected virtual void Start()
     {
-
       InitialSetup();
-      
-      
     }
 
     protected virtual void Update()

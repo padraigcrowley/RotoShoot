@@ -10,16 +10,19 @@ public class EnemyFireAtPlayerBehaviour01 : MonoBehaviour
   void Start()
   {
     eb = GetComponent<Mr1.EnemyBehaviour02>();
-    
-		//InvokeRepeating("FireMissileAtPlayerPos", 3, 5);
-		InvokeRepeating(nameof(this.FireMissileAtPlayerPos), 3, 5);
+		//InvokeRepeating(nameof(this.FireMissileAtPlayerPos), 3, 5);
   }
 
   // Update is called once per frame
   void Update()
   {
-
-  }
+    if(LevelManager.Instance.timeToFireAtPlayer == true)
+    {
+      FireMissileAtPlayerPos();
+      LevelManager.Instance.timeToFireAtPlayer = false;
+      LevelManager.Instance.timeBetwweenFiringAtPlayer = 3.0f;//todo: magic number
+    }
+  } 
 
   private void FireMissileAtPlayerPos()
   {

@@ -58,7 +58,7 @@ public class PlayerShip : MonoBehaviour
           PlayerShipIntroAnimPlaying = false;
           // not needed?  PlayerShipGFXAnim.StopPlayback();// ("PlayerShipIntro", -1, 0f);
           GameplayManager.Instance.currentGameState = GameplayManager.GameState.LEVEL_IN_PROGRESS;
-          print("gamestate is now set to LEVEL_IN_PROGRESS! ");
+          //print("gamestate is now set to LEVEL_IN_PROGRESS! ");
         }
         break;
 

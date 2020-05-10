@@ -21,7 +21,7 @@ public class MissileMovement : ExtendedBehaviour
 
   virtual protected void Start()
     {
-    print("---Missilemovement Start()---");
+    //print("---Missilemovement Start()---");
 
     //manually have to turn the child objects off/on after collisions coz otherwise e.g. the trail's quick position change makes it glitch
     foreach (Transform childTransform in this.transform)
