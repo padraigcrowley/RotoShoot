@@ -200,7 +200,7 @@ public class PlayerShip : MonoBehaviour
     //  yield return null;
     //}
 
-    myTween = transform.DOMove(new Vector3(newPos.x, newPos.y, 0), playerShipTweenMoveSpeed);
+    myTween = transform.DOMove(new Vector3(newPos.x, newPos.y, 0), playerShipTweenMoveSpeed).SetEase(Ease.Linear);
     //myTween = transform.DOMove(new Vector3(newPos.x, newPos.y, 0), .25f).SetEase(Ease.OutQuad);
 
     yield return myTween.WaitForCompletion();
