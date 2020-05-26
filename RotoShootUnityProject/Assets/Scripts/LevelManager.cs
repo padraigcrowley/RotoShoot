@@ -13,6 +13,7 @@ public class LevelManager : Singleton<LevelManager>
   public float verticalDistBetweenEnemies = 2.0f;
   public float timeBetwweenFiringAtPlayer = 3.0f; //todo: magic number
   public bool timeToFireAtPlayer = false;
+  private List<GameObject> enemyWaves = new List<GameObject>();
 
   private void Awake()
   {
@@ -51,9 +52,11 @@ public class LevelManager : Singleton<LevelManager>
     int index = 0;
     foreach (EnemySpawnPointData sp in levelSetupData.levelEnemySpawnPointData)
     {
+      var waveParentObject = new GameObject("EnemyWave_"+index);
+      enemyWaves.Add(waveParentObject);
       for (int i = 0; i < sp.numEnemiesInWave; i++)
       {
-        GameObject enemy = Instantiate(sp.enemyPrefab, new Vector3(sp.startPos.x, sp.startPos.y + (i*verticalDistBetweenEnemies)), Quaternion.identity);
+        GameObject enemy = Instantiate(sp.enemyPrefab, new Vector3(sp.startPos.x, sp.startPos.y + (i*verticalDistBetweenEnemies)), Quaternion.identity, waveParentObject.transform);
         enemy.GetComponent<Mr1.EnemyBehaviour02>().speedMultiplierFromSpawner = sp.speedMultiplier;
         enemy.GetComponent<Mr1.EnemyBehaviour02>().hpMultiplierFromSpawner = sp.hpMultiplier;
         if (sp.WayPointPath != null)
@@ -71,7 +74,7 @@ public class LevelManager : Singleton<LevelManager>
       if (timeBetwweenFiringAtPlayer <= 0f)
       {
         timeToFireAtPlayer = true;
-        //print("timeToFireAtPlayer = true");
+        // print("timeToFireAtPlayer = true");
       }
     }
     else
