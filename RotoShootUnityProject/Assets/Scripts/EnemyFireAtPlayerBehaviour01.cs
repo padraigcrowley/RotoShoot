@@ -16,10 +16,10 @@ public class EnemyFireAtPlayerBehaviour01 : MonoBehaviour
   // Update is called once per frame
   void Update()
   {
-    if(LevelManager.Instance.timeToFireAtPlayer == true)
+    if(LevelManager.Instance.readyToFireAtPlayer == true)
     {
       FireMissileAtPlayerPos();
-      LevelManager.Instance.timeToFireAtPlayer = false;
+      LevelManager.Instance.readyToFireAtPlayer = false;
       LevelManager.Instance.timeBetwweenFiringAtPlayer = 3.0f;//todo: magic number
     }
   } 

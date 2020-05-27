@@ -12,7 +12,7 @@ public class LevelManager : Singleton<LevelManager>
   public float levelPlayTimeElapsed;
   public float verticalDistBetweenEnemies = 2.0f;
   public float timeBetwweenFiringAtPlayer = 3.0f; //todo: magic number
-  public bool timeToFireAtPlayer = false;
+  public bool readyToFireAtPlayer = false;
   private List<GameObject> enemyWaves = new List<GameObject>();
 
   private void Awake()
@@ -68,23 +68,17 @@ public class LevelManager : Singleton<LevelManager>
 
   void Update()
   {
-    if (timeToFireAtPlayer == false)
+    if (readyToFireAtPlayer == false)
     {
       timeBetwweenFiringAtPlayer -= Time.deltaTime;
       if (timeBetwweenFiringAtPlayer <= 0f)
       {
-        timeToFireAtPlayer = true;
-        // print("timeToFireAtPlayer = true");
+        readyToFireAtPlayer = true; // this is set back to false in Update() of EnemyFireAtPlayerBehaviour01.cs
       }
     }
-    else
-    {
-      //timeBetwweenFiringAtPlayer = 10.0f; 
 
-    }
     CheckLCC(); // check LevelCompletionCriteria
   }
-
   
   void CheckLCC() // check LevelCompletionCriteria
   {

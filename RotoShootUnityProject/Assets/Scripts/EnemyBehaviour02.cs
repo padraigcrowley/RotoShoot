@@ -81,18 +81,18 @@ namespace Mr1
             }
           case EnemyState.WAITING_TO_RESPAWN:
             {
-              //https://answers.unity.com/questions/379440/a-simple-wait-function-without-coroutine-c.html
-              if (!startedWaiting)
-              {
-                Wait(GetRespawnWaitDelay(), () =>
-                {
-                  respawnWaitOver = true;
-                  //Debug.Log(respawnWaitDelay + " respawnWaitOver seconds passed");
-                });
-                startedWaiting = true;
-              }
-              if (respawnWaitOver)
-                Respawn();
+              ////https://answers.unity.com/questions/379440/a-simple-wait-function-without-coroutine-c.html
+              //if (!startedWaiting)
+              //{
+              //  Wait(GetRespawnWaitDelay(), () =>
+              //  {
+              //    respawnWaitOver = true;
+              //    //Debug.Log(respawnWaitDelay + " respawnWaitOver seconds passed");
+              //  });
+              //  startedWaiting = true;
+              //}
+              //if (respawnWaitOver)
+              //  Respawn();
               break;
             }
           case EnemyState.INVINCIBLE:
