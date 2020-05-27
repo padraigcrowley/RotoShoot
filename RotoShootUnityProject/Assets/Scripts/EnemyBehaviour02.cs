@@ -27,7 +27,7 @@ namespace Mr1
     public enum EnemyState { ALIVE, TEMPORARILY_DEAD, WAITING_TO_RESPAWN, INVINCIBLE, FULLY_DEAD, HIT_BY_PLAYER_MISSILE, HIT_BY_PLAYER_SHIP }
 
     public EnemyState enemyState;
-    private bool respawnWaitOver;
+    public bool respawnWaitOver;
     private bool startedWaiting;
       
 
@@ -38,9 +38,13 @@ namespace Mr1
     public abstract void DoMovement(float initialSpeed, FollowType followType);
     public abstract void StopMovement();
 
-    protected virtual void Start()
+    private void Awake()
     {
       InitialSetup();
+    }
+    protected virtual void Start()
+    {
+      
     }
 
     protected virtual void Update()
@@ -91,8 +95,8 @@ namespace Mr1
               //  });
               //  startedWaiting = true;
               //}
-              //if (respawnWaitOver)
-              //  Respawn();
+              if (respawnWaitOver)
+                Respawn();
               break;
             }
           case EnemyState.INVINCIBLE:

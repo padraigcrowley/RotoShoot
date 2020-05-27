@@ -1,4 +1,5 @@
 ﻿using JetBrains.Annotations;
+using Mr1;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -53,6 +54,7 @@ public class LevelManager : Singleton<LevelManager>
     foreach (EnemySpawnPointData sp in levelSetupData.levelEnemySpawnPointData)
     {
       var waveParentObject = new GameObject("EnemyWave_"+index);
+      waveParentObject.transform.position = new Vector2(sp.startPos.x, sp.startPos.y);
       enemyWaves.Add(waveParentObject);
       for (int i = 0; i < sp.numEnemiesInWave; i++)
       {
@@ -64,6 +66,16 @@ public class LevelManager : Singleton<LevelManager>
       }
       index++;
     }
+    // START just test stuff
+    //print($"Number of waves (not zero based) {enemyWaves.Count}");
+    //print($"Wave 0: {enemyWaves[0]}");
+    foreach (Transform enemyShipObjectTransform in enemyWaves[0].transform)
+    {
+      //enemyShipObjectTransform.gameObject.GetComponent<EnemyBehaviour02>().enemyState = EnemyBehaviour02.EnemyState.ALIVE;
+      print($"enemy ship object: {enemyShipObjectTransform.gameObject}");
+      enemyShipObjectTransform.gameObject.GetComponent<EnemyBehaviour02>().respawnWaitOver = true;
+    }
+    // END just test stuff
   }
 
   void Update()

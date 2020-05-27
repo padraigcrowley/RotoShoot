@@ -72,19 +72,21 @@ public class MissileMovement : ExtendedBehaviour
     //print($"Collision exited with {co.gameObject.tag}");
     if (co.gameObject.CompareTag("Boundary"))
     {
-      foreach (GameObject childObj in projectileChildrenObjects)
+      //this.gameObject.SetActive(false);
+      /*foreach (GameObject childObj in projectileChildrenObjects)
       {
         if (childObj != null)
           childObj.SetActive(false);
-      }
+      }*/
       //trailObj.SetActive(false);
 
-      Wait(DESPAWN_DELAY_TIME, () =>
+     // Wait(DESPAWN_DELAY_TIME, () =>
       {
         SimplePool.Despawn(muzzleVFX);
         //SimplePool.Despawn(hitVFX);
         SimplePool.Despawn(gameObject);
-      });
+      }
+      //);
     }
   }
 

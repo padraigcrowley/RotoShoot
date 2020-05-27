@@ -155,7 +155,7 @@ MonoBehaviour:
   levelPlayTimeElapsed: 0
   verticalDistBetweenEnemies: 2
   timeBetwweenFiringAtPlayer: 3
-  timeToFireAtPlayer: 0
+  readyToFireAtPlayer: 0
 --- !u!4 &254305519
 Transform:
   m_ObjectHideFlags: 0
