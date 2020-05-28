@@ -65,14 +65,13 @@ public class MissileMovement : ExtendedBehaviour
     }
 
 
-  
+
 
   private void OnTriggerExit2D(Collider2D co)
   {
     //print($"Collision exited with {co.gameObject.tag}");
     if (co.gameObject.CompareTag("Boundary"))
     {
-      //this.gameObject.SetActive(false);
       foreach (GameObject childObj in projectileChildrenObjects)
       {
         if (childObj != null)
@@ -80,17 +79,16 @@ public class MissileMovement : ExtendedBehaviour
       }
       //trailObj.SetActive(false);
 
-     // Wait(DESPAWN_DELAY_TIME, () =>
+      Wait(DESPAWN_DELAY_TIME, () =>
       {
         SimplePool.Despawn(muzzleVFX);
         //SimplePool.Despawn(hitVFX);
         SimplePool.Despawn(gameObject);
-      }
-      //);
+      });
     }
   }
 
-    private void DoMuzzleFlash()
+  private void DoMuzzleFlash()
   {
     if (MuzzleFlashPrefab != null)
     {
