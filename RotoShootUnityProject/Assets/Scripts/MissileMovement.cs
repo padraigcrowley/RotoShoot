@@ -73,11 +73,11 @@ public class MissileMovement : ExtendedBehaviour
     if (co.gameObject.CompareTag("Boundary"))
     {
       //this.gameObject.SetActive(false);
-      /*foreach (GameObject childObj in projectileChildrenObjects)
+      foreach (GameObject childObj in projectileChildrenObjects)
       {
         if (childObj != null)
           childObj.SetActive(false);
-      }*/
+      }
       //trailObj.SetActive(false);
 
      // Wait(DESPAWN_DELAY_TIME, () =>
