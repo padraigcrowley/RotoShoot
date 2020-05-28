@@ -44,7 +44,7 @@ public class LevelManager : Singleton<LevelManager>
   void Start()
   {
     numEnemyKillsInLevel = 0;
-        
+
     if (levelSetupData.blockedPlayerShipRotationAngles.Length != 0)
       GameplayManager.Instance.blockedPlayerShipRotationAngles = levelSetupData.blockedPlayerShipRotationAngles;
 
@@ -53,12 +53,12 @@ public class LevelManager : Singleton<LevelManager>
     int index = 0;
     foreach (EnemySpawnPointData sp in levelSetupData.levelEnemySpawnPointData)
     {
-      var waveParentObject = new GameObject("EnemyWave_"+index);
+      var waveParentObject = new GameObject("EnemyWave_" + index);
       waveParentObject.transform.position = new Vector2(sp.startPos.x, sp.startPos.y);
       enemyWaves.Add(waveParentObject);
       for (int i = 0; i < sp.numEnemiesInWave; i++)
       {
-        GameObject enemy = Instantiate(sp.enemyPrefab, new Vector3(sp.startPos.x, sp.startPos.y + (i*verticalDistBetweenEnemies)), Quaternion.identity, waveParentObject.transform);
+        GameObject enemy = Instantiate(sp.enemyPrefab, new Vector3(sp.startPos.x, sp.startPos.y + (i * verticalDistBetweenEnemies)), Quaternion.identity, waveParentObject.transform);
         enemy.GetComponent<Mr1.EnemyBehaviour02>().speedMultiplierFromSpawner = sp.speedMultiplier;
         enemy.GetComponent<Mr1.EnemyBehaviour02>().hpMultiplierFromSpawner = sp.hpMultiplier;
         if (sp.WayPointPath != null)
@@ -72,7 +72,7 @@ public class LevelManager : Singleton<LevelManager>
     foreach (Transform enemyShipObjectTransform in enemyWaves[0].transform)
     {
       //enemyShipObjectTransform.gameObject.GetComponent<EnemyBehaviour02>().enemyState = EnemyBehaviour02.EnemyState.ALIVE;
-      print($"enemy ship object: {enemyShipObjectTransform.gameObject}");
+      //print($"enemy ship object: {enemyShipObjectTransform.gameObject}");
       enemyShipObjectTransform.gameObject.GetComponent<EnemyBehaviour02>().respawnWaitOver = true;
     }
     // END just test stuff
@@ -80,6 +80,7 @@ public class LevelManager : Singleton<LevelManager>
 
   void Update()
   {
+    print ($"NumActiveWaves = { GetNumActiveWaves()}");
     if (readyToFireAtPlayer == false)
     {
       timeBetwweenFiringAtPlayer -= Time.deltaTime;
@@ -91,7 +92,31 @@ public class LevelManager : Singleton<LevelManager>
 
     CheckLCC(); // check LevelCompletionCriteria
   }
-  
+
+  /// <summary>
+  /// loop through each of the enemywave parent gameobjects in the list, if any of the parent's children's state is ALIVE, increnent the number of active waves.
+  /// </summary> 
+  /// <returns>numActiveWaves</returns>
+  private int GetNumActiveWaves()
+  {
+    int numActiveWaves = 0;
+    bool activeWave = false;
+    foreach (GameObject enemyWaveParentObject in enemyWaves)
+    {
+      activeWave = false;
+      foreach (Transform enemyShipObjectTransform in enemyWaveParentObject.transform)
+      {
+        if (enemyShipObjectTransform.gameObject.GetComponent<EnemyBehaviour02>().enemyState == EnemyBehaviour02.EnemyState.ALIVE)
+        {
+          activeWave = true;
+        }
+      }
+      if (activeWave)
+        numActiveWaves++;
+    }
+    return numActiveWaves;
+  }
+
   void CheckLCC() // check LevelCompletionCriteria
   {
     if (GameplayManager.Instance.currentGameState == GameplayManager.GameState.LEVEL_IN_PROGRESS)

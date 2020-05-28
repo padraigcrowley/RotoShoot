@@ -14,6 +14,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   levelNumber: 4
   levelControlType: 2
+  numMaxActiveWaves: 2
+  minTimeBetweenWaves: 2
+  maxTimeBetweenWaves: 5
   levelEnemySpawnPointData:
   - enemyPrefab: {fileID: 4342350733379744943, guid: 98337287636663844a798648967aa1c7,
       type: 3}
@@ -30,6 +33,14 @@ MonoBehaviour:
     hpMultiplier: 1
     WayPointPath: {fileID: 11400000, guid: 1c48dabd5c43ce447a04208ea9f6fa5b, type: 2}
     numEnemiesInWave: 5
+    timeBetweenSpawn: 0.5
+  - enemyPrefab: {fileID: 4342350733379744943, guid: 3bf3914ccf51ea64aa01feaa452f98f3,
+      type: 3}
+    startPos: {x: 1.29, y: 10}
+    speedMultiplier: 2
+    hpMultiplier: 5
+    WayPointPath: {fileID: 11400000, guid: 0f7f2978d19808143bd99d8259a325da, type: 2}
+    numEnemiesInWave: 3
     timeBetweenSpawn: 0.5
   blockedPlayerShipRotationAngles: 
   PlayerShipPos: {x: -1.28, y: -6, z: 0}

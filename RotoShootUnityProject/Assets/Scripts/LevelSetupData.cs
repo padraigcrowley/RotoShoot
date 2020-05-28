@@ -6,6 +6,8 @@ public class LevelSetupData : ScriptableObject
 {
   public int levelNumber = 0;
   public int levelControlType = 2;
+  public float numMaxActiveWaves;
+  public float minTimeBetweenWaves, maxTimeBetweenWaves;
 
   public EnemySpawnPointData[] levelEnemySpawnPointData;
   public int[] blockedPlayerShipRotationAngles;// rotation angles that will be blocked. 
