@@ -69,6 +69,18 @@ public class MissileMovement : ExtendedBehaviour
 
   private void OnTriggerExit2D(Collider2D co)
   {
+    print($"Collision exited with {co.gameObject.tag}");
+    if (co.gameObject.CompareTag("Boundary"))
+    {
+      
+      SimplePool.Despawn(gameObject);
+      SimplePool.Despawn(muzzleVFX);
+
+    }
+  }
+
+  /*private void OnTriggerExit2D(Collider2D co)
+  {
     //print($"Collision exited with {co.gameObject.tag}");
     if (co.gameObject.CompareTag("Boundary"))
     {
@@ -88,7 +100,7 @@ public class MissileMovement : ExtendedBehaviour
         SimplePool.Despawn(gameObject);
       });
     }
-  }
+  }*/
 
   private void DoMuzzleFlash()
   {

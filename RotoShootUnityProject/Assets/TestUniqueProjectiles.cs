@@ -5,7 +5,7 @@ using UnityEngine;
 public class TestUniqueProjectiles : MonoBehaviour
 {
   // Start is called before the first frame update
-  public GameObject effectToSpawn;
+  public GameObject effectToSpawn, playerMissilePrefab;
 
 
   void Start()
@@ -25,7 +25,10 @@ public class TestUniqueProjectiles : MonoBehaviour
   {
     GameObject vfx;
     //vfx = Instantiate(effectToSpawn);
-    vfx = Instantiate(effectToSpawn, new Vector3(0f, -8f, 0f), Quaternion.identity);
+    
+    SimplePool.Spawn(playerMissilePrefab, new Vector3(0f, -8f, 0f), Quaternion.identity);
+    //vfx = Instantiate(effectToSpawn, new Vector3(0f, -8f, 0f), Quaternion.identity);
+    
     //vfx.transform.localRotation = ;
   }
 
