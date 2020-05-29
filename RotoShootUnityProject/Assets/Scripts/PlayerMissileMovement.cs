@@ -26,7 +26,7 @@ public class PlayerMissileMovement : MissileMovement
     
     if (!collided)
       //this.transform.position += upDirection * GameplayManager.Instance.currentPlayerMissileSpeedMultiplier * Time.fixedDeltaTime;
-      this.transform.position += upDirection * 20.0f * Time.fixedDeltaTime;
+      this.transform.position += upDirection * 10.0f * Time.fixedDeltaTime;
   }
   private void OnTriggerEnter2D(Collider2D co)
   {

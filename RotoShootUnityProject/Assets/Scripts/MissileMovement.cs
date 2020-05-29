@@ -67,25 +67,25 @@ public class MissileMovement : ExtendedBehaviour
 
 
 
-  private void OnTriggerExit2D(Collider2D co)
-  {
-    print($"Collision exited with {co.gameObject.tag}");
-    if (co.gameObject.CompareTag("Boundary"))
-    {
+  //private void OnTriggerExit2D(Collider2D co)
+  //{
+  //  print($"Collision exited with {co.gameObject.tag}");
+  //  if (co.gameObject.CompareTag("Boundary"))
+  //  {
       
-      SimplePool.Despawn(gameObject);
-      SimplePool.Despawn(muzzleVFX);
+  //    SimplePool.Despawn(gameObject);
+  //    SimplePool.Despawn(muzzleVFX);
 
-    }
-  }
+  //  }
+  //}
 
-  /*private void OnTriggerExit2D(Collider2D co)
+  private void OnTriggerExit2D(Collider2D co)
   {
     //print($"Collision exited with {co.gameObject.tag}");
     if (co.gameObject.CompareTag("Boundary"))
     {
-      //why not just do:  this.gameObject.SetActive(false);
-
+      collided = true; // let FixedUpdate know to stop moving it upwards the screen.
+      transform.localScale = new Vector3(.001f, .001f, .001f);// urgh, pretty hacky way to stop the missile projectile bullet being "drawn". Because can't SetActive(false) the missile object cos that will kill this script as well?
       foreach (GameObject childObj in projectileChildrenObjects)
       {
         if (childObj != null)
@@ -100,7 +100,7 @@ public class MissileMovement : ExtendedBehaviour
         SimplePool.Despawn(gameObject);
       });
     }
-  }*/
+  }
 
   private void DoMuzzleFlash()
   {
