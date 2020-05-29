@@ -72,7 +72,7 @@ public class MissileMovement : ExtendedBehaviour
     //print($"Collision exited with {co.gameObject.tag}");
     if (co.gameObject.CompareTag("Boundary"))
     {
-      //why not just do  this.gameObject.SetActive(false);
+      //why not just do:  this.gameObject.SetActive(false);
 
       foreach (GameObject childObj in projectileChildrenObjects)
       {
