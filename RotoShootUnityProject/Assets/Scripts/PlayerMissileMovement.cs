@@ -7,7 +7,7 @@ public class PlayerMissileMovement : MissileMovement
 {
     protected override void Start()
   {
-    print("REMIOVE THE TEST STUFF FROM FIXEDUPDATE!!!");
+    //print("REMIOVE THE TEST STUFF FROM FIXEDUPDATE!!!");
 
     upDirection = GameObject.FindGameObjectWithTag("Player").transform.up; 
     base.Start();
@@ -25,8 +25,8 @@ public class PlayerMissileMovement : MissileMovement
     base.FixedUpdate();
     
     if (!collided)
-      //this.transform.position += upDirection * GameplayManager.Instance.currentPlayerMissileSpeedMultiplier * Time.fixedDeltaTime;
-      this.transform.position += upDirection * 10.0f * Time.fixedDeltaTime;
+      this.transform.position += upDirection * GameplayManager.Instance.currentPlayerMissileSpeedMultiplier * Time.fixedDeltaTime;
+      //this.transform.position += upDirection * 10.0f * Time.fixedDeltaTime;
   }
   private void OnTriggerEnter2D(Collider2D co)
   {

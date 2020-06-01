@@ -89,7 +89,7 @@ public class LevelManager : Singleton<LevelManager>
 
   void Update()
   {
-    print ($"NumActiveWaves = { GetNumActiveWaves()}");
+    //print ($"NumActiveWaves = { GetNumActiveWaves()}");
     //if there are less than the number of maxwaves, activate another (random) wave
     if(GetNumActiveWaves() < levelSetupData.numMaxActiveWaves)
     {

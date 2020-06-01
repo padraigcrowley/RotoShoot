@@ -37,7 +37,7 @@ MonoBehaviour:
   - enemyPrefab: {fileID: 4342350733379744943, guid: 3bf3914ccf51ea64aa01feaa452f98f3,
       type: 3}
     startPos: {x: 1.29, y: 10}
-    speedMultiplier: 2
+    speedMultiplier: 4
     hpMultiplier: 5
     WayPointPath: {fileID: 11400000, guid: 0f7f2978d19808143bd99d8259a325da, type: 2}
     numEnemiesInWave: 3

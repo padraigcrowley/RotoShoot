@@ -18,7 +18,7 @@ public class Boundary : MonoBehaviour
   };
   public BoundaryLocation direction;
   private BoxCollider2D barrier;
-  public float boundaryWidth = 0.8f;
+  public float boundaryWidth = 0.4f;
   public float overhang = 1.0f; // We add this to the length of the boundaries to ensure there are no gaps at the corners of the screen
                                 // If we lose any object pooled bullets they will never be returned to the pool. 
   void Start()

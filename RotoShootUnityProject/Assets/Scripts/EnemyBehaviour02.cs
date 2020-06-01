@@ -40,11 +40,11 @@ namespace Mr1
 
     private void Awake()
     {
-      InitialSetup();
+      
     }
     protected virtual void Start()
     {
-      
+      InitialSetup();
     }
 
     protected virtual void Update()

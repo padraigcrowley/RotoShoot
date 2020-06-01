@@ -28,7 +28,7 @@ public class Enemy02_0002 : Mr1.EnemyBehaviour02
   {
     if (!startedOnPath)
     {
-      transform.FollowPath(wayPointPathName, initialSpeed, Mr1.FollowType.Loop).Log(true);
+      transform.FollowPath(wayPointPathName, initialSpeed, Mr1.FollowType.Loop).Log(false);
       startedOnPath = true;
     }
   }
