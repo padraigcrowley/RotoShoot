@@ -188,8 +188,6 @@ namespace Mr1
       enemyCircleCollider.enabled = true;
      
       enemyState = EnemyState.ALIVE;
-     
-      //transform.FollowPath(wayPointPathName, initialSpeed, FollowType.Loop).Log(true);
     }
 
     private void OnTriggerEnter2D(Collider2D collision)

@@ -154,7 +154,7 @@ MonoBehaviour:
   levelSetupData: {fileID: 11400000, guid: ecb0fc95042de7844974c1804a7d3b8f, type: 2}
   levelPlayTimeElapsed: 0
   verticalDistBetweenEnemies: 2
-  timeBetwweenFiringAtPlayer: 3
+  timeBetweenFiringAtPlayer: 3
   readyToFireAtPlayer: 0
 --- !u!4 &254305519
 Transform:
@@ -216,6 +216,7 @@ MonoBehaviour:
   pathList:
   - {fileID: 11400000, guid: 0f7f2978d19808143bd99d8259a325da, type: 2}
   - {fileID: 11400000, guid: 1c48dabd5c43ce447a04208ea9f6fa5b, type: 2}
+  - {fileID: 11400000, guid: 0243fbd1c3264a744aa8c9a201f59797, type: 2}
 --- !u!4 &627081079
 Transform:
   m_ObjectHideFlags: 0

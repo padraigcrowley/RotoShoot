@@ -20,7 +20,7 @@ public class EnemyFireAtPlayerBehaviour01 : MonoBehaviour
     {
       FireMissileAtPlayerPos();
       LevelManager.Instance.readyToFireAtPlayer = false;
-      LevelManager.Instance.timeBetwweenFiringAtPlayer = 3.0f;//todo: magic number
+      LevelManager.Instance.timeBetweenFiringAtPlayer = 3.0f;//todo: magic number
     }
   } 
 

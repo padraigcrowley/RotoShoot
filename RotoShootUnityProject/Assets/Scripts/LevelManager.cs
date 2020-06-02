@@ -12,7 +12,7 @@ public class LevelManager : Singleton<LevelManager>
   public LevelSetupData levelSetupData;
   public float levelPlayTimeElapsed;
   public float verticalDistBetweenEnemies = 2.0f;
-  public float timeBetwweenFiringAtPlayer = 3.0f; //todo: magic number
+  public float timeBetweenFiringAtPlayer = 3.0f; //todo: magic number
   public bool readyToFireAtPlayer = false;
   private List<GameObject> enemyWaves = new List<GameObject>();
 
@@ -78,36 +78,39 @@ public class LevelManager : Singleton<LevelManager>
     // END just test stuff
 
     // make numMaxActiveWaves of the waves active by setting their respawnWaitOver = true
-    for (int i = 0; i < levelSetupData.numMaxActiveWaves ; i++)
-    {
-      foreach(Transform enemyShipObjectTransform in enemyWaves[i].transform)
-      {
-        enemyShipObjectTransform.gameObject.GetComponent<EnemyBehaviour02>().respawnWaitOver = true;
-      }
-    }
+    //for (int i = 0; i < levelSetupData.numMaxActiveWaves; i++)
+    //{
+      //foreach (Transform enemyShipObjectTransform in enemyWaves[0].transform)
+      //{
+      //  enemyShipObjectTransform.gameObject.GetComponent<EnemyBehaviour02>().respawnWaitOver = true;
+      //}
+    //}
   }
 
   void Update()
   {
-    //print ($"NumActiveWaves = { GetNumActiveWaves()}");
-    //if there are less than the number of maxwaves, activate another (random) wave
-    if(GetNumActiveWaves() < levelSetupData.numMaxActiveWaves)
+    if (GameplayManager.Instance.currentGameState == GameplayManager.GameState.LEVEL_IN_PROGRESS)
     {
-      foreach (Transform enemyShipObjectTransform in enemyWaves[Random.Range(0,enemyWaves.Count)].transform)
+      //print($"NumActiveWaves = { GetNumActiveWaves()}");
+      //if there are less than the number of maxwaves, activate another (random) wave
+      if (GetNumActiveWaves() < levelSetupData.numMaxActiveWaves)
       {
-        enemyShipObjectTransform.gameObject.GetComponent<EnemyBehaviour02>().respawnWaitOver = true;
+        foreach (Transform enemyShipObjectTransform in enemyWaves[Random.Range(0, enemyWaves.Count)].transform)
+        {
+          enemyShipObjectTransform.gameObject.GetComponent<EnemyBehaviour02>().respawnWaitOver = true;
+        }
       }
-    }
 
-    if (readyToFireAtPlayer == false)
-    {
-      timeBetwweenFiringAtPlayer -= Time.deltaTime;
-      if (timeBetwweenFiringAtPlayer <= 0f)
+      if (readyToFireAtPlayer == false)
       {
-        readyToFireAtPlayer = true; // this is set back to false in Update() of EnemyFireAtPlayerBehaviour01.cs
+        timeBetweenFiringAtPlayer -= Time.deltaTime;
+        if (timeBetweenFiringAtPlayer <= 0f)
+        {
+          readyToFireAtPlayer = true; // this is set back to false in Update() of EnemyFireAtPlayerBehaviour01.cs
+        }
       }
+      CheckLCC(); // check LevelCompletionCriteria
     }
-    CheckLCC(); // check LevelCompletionCriteria
   }
 
   /// <summary>
