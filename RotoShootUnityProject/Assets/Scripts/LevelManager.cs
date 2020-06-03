@@ -7,12 +7,14 @@ using UnityEngine;
 public class LevelManager : Singleton<LevelManager>
 {
   [HideInInspector] public int numEnemyKillsInLevel = 0;
+  public float TIME_BETWEEN_FIRING_AT_PLAYER = .05f; //todo: magic number
+
   public Dictionary<string, int> LevelCompletionCriteria = new Dictionary<string, int>();
   private bool lccMet; //levelcompletioncriteria
   public LevelSetupData levelSetupData;
   public float levelPlayTimeElapsed;
-  public float verticalDistBetweenEnemies = 2.0f;
-  public float timeBetweenFiringAtPlayer = 3.0f; //todo: magic number
+  public float verticalDistBetweenEnemies = 2.0f; //todo: magic number
+  public float currentTimeBetweenFiringAtPlayer; //todo: magic number
   public bool readyToFireAtPlayer = false;
   private List<GameObject> enemyWaves = new List<GameObject>();
 
@@ -44,6 +46,7 @@ public class LevelManager : Singleton<LevelManager>
   void Start()
   {
     numEnemyKillsInLevel = 0;
+    currentTimeBetweenFiringAtPlayer = TIME_BETWEEN_FIRING_AT_PLAYER;
 
     if (levelSetupData.blockedPlayerShipRotationAngles.Length != 0)
       GameplayManager.Instance.blockedPlayerShipRotationAngles = levelSetupData.blockedPlayerShipRotationAngles;
@@ -103,9 +106,10 @@ public class LevelManager : Singleton<LevelManager>
 
       if (readyToFireAtPlayer == false)
       {
-        timeBetweenFiringAtPlayer -= Time.deltaTime;
-        if (timeBetweenFiringAtPlayer <= 0f)
+        currentTimeBetweenFiringAtPlayer -= Time.deltaTime;
+        if (currentTimeBetweenFiringAtPlayer <= 0f)
         {
+          print($"readyToFireAtPlayer = true");
           readyToFireAtPlayer = true; // this is set back to false in Update() of EnemyFireAtPlayerBehaviour01.cs
         }
       }

@@ -16,26 +16,21 @@ public class EnemyFireAtPlayerBehaviour01 : MonoBehaviour
   // Update is called once per frame
   void Update()
   {
-    if(LevelManager.Instance.readyToFireAtPlayer == true)
+    //Dont shoot if the y pos is almost same as playership
+    if ((LevelManager.Instance.readyToFireAtPlayer == true) && (eb.enemyState == Mr1.EnemyBehaviour02.EnemyState.ALIVE) && (transform.position.y - 3 > GameplayManager.Instance.playerShipPos.y))
     {
       FireMissileAtPlayerPos();
       LevelManager.Instance.readyToFireAtPlayer = false;
-      LevelManager.Instance.timeBetweenFiringAtPlayer = 3.0f;//todo: magic number
+      LevelManager.Instance.currentTimeBetweenFiringAtPlayer = LevelManager.Instance.TIME_BETWEEN_FIRING_AT_PLAYER;//todo: magic number
     }
   } 
 
   private void FireMissileAtPlayerPos()
   {
     GameObject firedBullet;
-
-    if(eb.enemyState == Mr1.EnemyBehaviour02.EnemyState.ALIVE)
-      //Dont shoot if the y pos is almost same as playership
-      if (transform.position.y - 3 > GameplayManager.Instance.playerShipPos.y)
-      {
+      
         //firedBullet = Instantiate(enemyMissile, transform.position, transform.rotation);
         firedBullet = SimplePool.Spawn(enemyMissile, transform.position, transform.rotation);
-        //Debug.Log("FireMissileAtPlayerPos()");
-      }
-
+        //Debug.Log("FireMissileAtPlayerPos()");      
   }
 }
