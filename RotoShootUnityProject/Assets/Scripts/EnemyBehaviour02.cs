@@ -210,7 +210,7 @@ namespace Mr1
     {
       if (GameplayManager.Instance.levelControlType != 1) // this doean't apply to circular enemies moving towards centre 
       {
-        if (collision.gameObject.CompareTag("Boundary") && collision.gameObject.name != "Top Boundary")
+        if (collision.gameObject.name == "Bottom Boundary")
         {
           enemyState = EnemyState.TEMPORARILY_DEAD;
           //DOTween.Kill(myTweenID);

@@ -7,15 +7,15 @@ using UnityEngine;
 public class LevelManager : Singleton<LevelManager>
 {
   [HideInInspector] public int numEnemyKillsInLevel = 0;
-  public float TIME_BETWEEN_FIRING_AT_PLAYER = .05f; //todo: magic number
+  public float TIME_BETWEEN_FIRING_AT_PLAYER = 1f; //todo: magic number
+  [HideInInspector] public float currentTimeBetweenFiringAtPlayer; //todo: magic number
 
   public Dictionary<string, int> LevelCompletionCriteria = new Dictionary<string, int>();
   private bool lccMet; //levelcompletioncriteria
   public LevelSetupData levelSetupData;
   public float levelPlayTimeElapsed;
   public float verticalDistBetweenEnemies = 2.0f; //todo: magic number
-  public float currentTimeBetweenFiringAtPlayer; //todo: magic number
-  public bool readyToFireAtPlayer = false;
+  public bool readyToFireAtPlayer = false; 
   private List<GameObject> enemyWaves = new List<GameObject>();
 
   private void Awake()
