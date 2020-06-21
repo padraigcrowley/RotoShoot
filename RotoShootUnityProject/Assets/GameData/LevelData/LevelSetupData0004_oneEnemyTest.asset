@@ -14,7 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   levelNumber: 4
   levelControlType: 2
-  numMaxActiveWaves: 1
+  numMaxActiveWaves: 3
   minTimeBetweenWaves: 2
   maxTimeBetweenWaves: 5
   levelEnemySpawnPointData:
