@@ -8,7 +8,7 @@ public class EnemyMissileMovement : MissileMovement
   
   private Vector3 destinationPos;
   private Vector3 movementVector = Vector2.zero;
-  public float speed=10;
+  public float speed;
 
   protected override void OnEnable()
   {

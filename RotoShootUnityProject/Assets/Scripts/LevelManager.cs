@@ -7,7 +7,7 @@ using UnityEngine;
 public class LevelManager : Singleton<LevelManager>
 {
   [HideInInspector] public int numEnemyKillsInLevel = 0;
-  public float TIME_BETWEEN_FIRING_AT_PLAYER = 1f; //todo: magic number
+  public float TIME_BETWEEN_FIRING_AT_PLAYER = 5f; //todo: magic number
   [HideInInspector] public float currentTimeBetweenFiringAtPlayer; //todo: magic number
 
   public Dictionary<string, int> LevelCompletionCriteria = new Dictionary<string, int>();
@@ -15,6 +15,7 @@ public class LevelManager : Singleton<LevelManager>
   public LevelSetupData levelSetupData;
   public float levelPlayTimeElapsed;
   public float verticalDistBetweenEnemies = 2.0f; //todo: magic number
+  public float horizontalDistBetweenEnemies = 2.0f; //todo: magic number
   public bool readyToFireAtPlayer = false; 
   private List<GameObject> enemyWaves = new List<GameObject>();
 
@@ -59,9 +60,13 @@ public class LevelManager : Singleton<LevelManager>
       var waveParentObject = new GameObject("EnemyWave_" + index);
       waveParentObject.transform.position = new Vector2(sp.startPos.x, sp.startPos.y);
       enemyWaves.Add(waveParentObject);
+
+      verticalDistBetweenEnemies = sp.verticalDistBetweenEnemies;
+      horizontalDistBetweenEnemies = sp.horizontalDistBetweenEnemies;
+
       for (int i = 0; i < sp.numEnemiesInWave; i++)
       {
-        GameObject enemy = Instantiate(sp.enemyPrefab, new Vector3(sp.startPos.x, sp.startPos.y + (i * verticalDistBetweenEnemies)), Quaternion.identity, waveParentObject.transform);
+        GameObject enemy = Instantiate(sp.enemyPrefab, new Vector3(sp.startPos.x + (i * horizontalDistBetweenEnemies), sp.startPos.y + (i * verticalDistBetweenEnemies)), Quaternion.identity, waveParentObject.transform);
         enemy.GetComponent<Mr1.EnemyBehaviour02>().speedMultiplierFromSpawner = sp.speedMultiplier;
         enemy.GetComponent<Mr1.EnemyBehaviour02>().hpMultiplierFromSpawner = sp.hpMultiplier;
         if (sp.WayPointPath != null)
