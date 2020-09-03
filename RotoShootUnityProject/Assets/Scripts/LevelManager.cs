@@ -114,7 +114,7 @@ public class LevelManager : Singleton<LevelManager>
         currentTimeBetweenFiringAtPlayer -= Time.deltaTime;
         if (currentTimeBetweenFiringAtPlayer <= 0f)
         {
-          print($"readyToFireAtPlayer = true");
+          //print($"readyToFireAtPlayer = true");
           readyToFireAtPlayer = true; // this is set back to false in Update() of EnemyFireAtPlayerBehaviour01.cs
         }
       }

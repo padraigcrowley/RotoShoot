@@ -41,7 +41,7 @@ ParticleSystem:
   m_GameObject: {fileID: 1222159440896900}
   serializedVersion: 6
   lengthInSec: 1
-  simulationSpeed: 0.33
+  simulationSpeed: 1
   stopAction: 0
   cullingMode: 1
   ringBufferMode: 0
@@ -5050,7 +5050,7 @@ GameObject:
   - component: {fileID: 260766703760093131}
   - component: {fileID: -876941141704554759}
   m_Layer: 0
-  m_Name: vfx_Projectile_BubbleBlue_Mobile
+  m_Name: vfx_Projectile_BubbleBlue_Mobile BAK
   m_TagString: EnemyMissile
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -5090,7 +5090,7 @@ MonoBehaviour:
     type: 3}
   HitFXPrefab: {fileID: 1873612019324734, guid: 9d351059817a8d54bb93b55ed62f08dd,
     type: 3}
-  speed: 5
+  speed: 0.5
 --- !u!199 &199329164939455274
 ParticleSystemRenderer:
   serializedVersion: 6
@@ -5166,7 +5166,7 @@ ParticleSystem:
   m_GameObject: {fileID: 1374267004960804}
   serializedVersion: 6
   lengthInSec: 1
-  simulationSpeed: 0.33
+  simulationSpeed: 1
   stopAction: 0
   cullingMode: 1
   ringBufferMode: 0
@@ -5347,7 +5347,7 @@ ParticleSystem:
       serializedVersion: 2
       minMaxState: 0
       minColor: {r: 0.7702545, g: 0.7491545, b: 0.8584906, a: 1}
-      maxColor: {r: 0.5865966, g: 0.61597043, b: 0.735849, a: 1}
+      maxColor: {r: 0.7329566, g: 0.7462865, b: 0.8584906, a: 1}
       maxGradient:
         serializedVersion: 2
         key0: {r: 0.7877358, g: 0.789541, b: 1, a: 1}
@@ -6128,25 +6128,88 @@ ParticleSystem:
         serializedVersion: 2
         m_Curve:
         - serializedVersion: 3
-          time: 0.009523808
-          value: 0.50769377
-          inSlope: 1.0338355
-          outSlope: 1.0338355
-          tangentMode: 34
-          weightedMode: 0
-          inWeight: 0
-          outWeight: 0.33333334
-        - serializedVersion: 3
-          time: 0.48571777
+          time: 0
           value: 1
-          inSlope: 1.0338355
-          outSlope: 1.0338355
-          tangentMode: 34
+          inSlope: 16.137577
+          outSlope: 16.137577
+          tangentMode: 0
           weightedMode: 0
           inWeight: 0.33333334
-          outWeight: 0
+          outWeight: 0.33333334
+        - serializedVersion: 3
+          time: 0.14631155
+          value: 0.23831531
+          inSlope: 0
+          outSlope: 0
+          tangentMode: 0
+          weightedMode: 0
+          inWeight: 0.33333334
+          outWeight: 0.33333334
+        - serializedVersion: 3
+          time: 0.24663123
+          value: 1
+          inSlope: 0
+          outSlope: 0
+          tangentMode: 0
+          weightedMode: 0
+          inWeight: 0.33333334
+          outWeight: 0.33333334
+        - serializedVersion: 3
+          time: 0.36453903
+          value: 0.5
+          inSlope: -0.03408388
+          outSlope: -0.03408388
+          tangentMode: 0
+          weightedMode: 0
+          inWeight: 0.33333334
+          outWeight: 0.33333334
+        - serializedVersion: 3
+          time: 0.5
+          value: 1
+          inSlope: 0
+          outSlope: 0
+          tangentMode: 0
+          weightedMode: 0
+          inWeight: 0.33333334
+          outWeight: 0.33333334
+        - serializedVersion: 3
+          time: 0.63
+          value: 0.5
+          inSlope: 0
+          outSlope: 0
+          tangentMode: 0
+          weightedMode: 0
+          inWeight: 0.33333334
+          outWeight: 0.33333334
+        - serializedVersion: 3
+          time: 0.7673116
+          value: 1
+          inSlope: 0
+          outSlope: 0
+          tangentMode: 0
+          weightedMode: 0
+          inWeight: 0.33333334
+          outWeight: 0.33333334
+        - serializedVersion: 3
+          time: 0.9025223
+          value: 0.22055748
+          inSlope: 0
+          outSlope: 0
+          tangentMode: 0
+          weightedMode: 0
+          inWeight: 0.33333334
+          outWeight: 0.33333334
+        - serializedVersion: 3
+          time: 1
+          value: 1
+          inSlope: -13.255132
+          outSlope: -19.403399
+          tangentMode: 1
+          weightedMode: 0
+          inWeight: 0.33333334
+          outWeight: 0.33333334
         m_PreInfinity: 2
-        m_PostInfinity: 0
+        m_PostInfinity: 2
         m_RotationOrder: 0
       minCurve:
         serializedVersion: 2
@@ -9981,7 +10044,7 @@ ParticleSystem:
   m_GameObject: {fileID: 1831172876973338}
   serializedVersion: 6
   lengthInSec: 1
-  simulationSpeed: 0.33
+  simulationSpeed: 1
   stopAction: 0
   cullingMode: 1
   ringBufferMode: 0
