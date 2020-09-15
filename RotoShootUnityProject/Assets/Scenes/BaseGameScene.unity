@@ -869,7 +869,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 1061970254}
-  m_RootOrder: 1
+  m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &231095648
 GameObject:
@@ -2253,6 +2253,36 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 690115907}
   m_CullTransparentMesh: 0
+--- !u!1 &703163057
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 703163058}
+  m_Layer: 0
+  m_Name: PlayerShipLeftTurret
+  m_TagString: PlayerShipLeftTurret
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &703163058
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 703163057}
+  m_LocalRotation: {x: 0, y: 0, z: 0.17364816, w: 0.9848078}
+  m_LocalPosition: {x: 0, y: 0.79, z: 0.1}
+  m_LocalScale: {x: 2.1786494, y: 2.1786494, z: 2.1786494}
+  m_Children: []
+  m_Father: {fileID: 1061970254}
+  m_RootOrder: 2
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 20}
 --- !u!1 &717675087
 GameObject:
   m_ObjectHideFlags: 0
@@ -3430,8 +3460,10 @@ Transform:
   m_LocalPosition: {x: -1.28, y: -6, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
-  - {fileID: 2099002079}
   - {fileID: 191601463}
+  - {fileID: 2099002079}
+  - {fileID: 703163058}
+  - {fileID: 1177337288}
   m_Father: {fileID: 0}
   m_RootOrder: 8
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -3928,6 +3960,36 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 4
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &1177337287
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1177337288}
+  m_Layer: 0
+  m_Name: PlayerShipRightTurret
+  m_TagString: PlayerShipRightTurret
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1177337288
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1177337287}
+  m_LocalRotation: {x: 0, y: 0, z: -0.17364825, w: 0.9848078}
+  m_LocalPosition: {x: 0, y: 0.79, z: 0.1}
+  m_LocalScale: {x: 2.1786494, y: 2.1786494, z: 2.1786494}
+  m_Children: []
+  m_Father: {fileID: 1061970254}
+  m_RootOrder: 3
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: -20}
 --- !u!1 &1189951691
 GameObject:
   m_ObjectHideFlags: 0
@@ -5879,8 +5941,8 @@ GameObject:
   m_Component:
   - component: {fileID: 2099002079}
   m_Layer: 0
-  m_Name: BarrelTip
-  m_TagString: Untagged
+  m_Name: PlayerShipFrontTurret
+  m_TagString: PlayerShipFrontTurret
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -5897,5 +5959,5 @@ Transform:
   m_LocalScale: {x: 2.1786494, y: 2.1786494, z: 2.1786494}
   m_Children: []
   m_Father: {fileID: 1061970254}
-  m_RootOrder: 0
+  m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
