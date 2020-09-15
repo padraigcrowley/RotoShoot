@@ -7,9 +7,7 @@ public class PlayerMissileMovement : MissileMovement
 {
     protected override void Start()
   {
-    //print("REMIOVE THE TEST STUFF FROM FIXEDUPDATE!!!");
-
-    upDirection = GameObject.FindGameObjectWithTag("Player").transform.up; 
+    upDirection = GameObject.FindGameObjectWithTag("PlayerShipFrontTurret").transform.up; 
     base.Start();
     //print("---PlayerMissilemovement Start()---");
   }
@@ -17,7 +15,7 @@ public class PlayerMissileMovement : MissileMovement
   protected override void OnEnable()
   {
     base.OnEnable();
-    upDirection = GameObject.FindGameObjectWithTag("Player").transform.up;
+    upDirection = GameObject.FindGameObjectWithTag("PlayerShipFrontTurret").transform.up;
   }
 
   protected override void FixedUpdate()

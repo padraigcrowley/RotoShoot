@@ -14,6 +14,7 @@ public class BootManager : Singleton<BootManager>
   void Awake()
   {
     //DontDestroyOnLoad(transform.gameObject); - Needed anymore????
+    Application.targetFrameRate = 60;
   }
 
   void Start()

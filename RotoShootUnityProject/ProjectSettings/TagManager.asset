@@ -10,6 +10,9 @@ TagManager:
   - EnemyMissile
   - Boundary
   - PlayerMuzzleFlash
+  - PlayerShipFrontTurret
+  - PlayerShipLeftTurret
+  - PlayerShipRightTurret
   layers:
   - Default
   - TransparentFX

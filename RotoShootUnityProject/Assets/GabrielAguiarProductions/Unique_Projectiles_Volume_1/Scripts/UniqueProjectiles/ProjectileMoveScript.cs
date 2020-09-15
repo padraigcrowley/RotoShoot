@@ -37,8 +37,6 @@ public class ProjectileMoveScript : ExtendedBehaviour {
     if (muzzleVFX != null)
     {
       muzzleParticleSystems = muzzleVFX.transform.GetComponentsInChildren<ParticleSystem>(); 
-    
-     
       muzzleVFX.SetActive(true);
     
       foreach (ParticleSystem ps in muzzleParticleSystems)
@@ -46,12 +44,9 @@ public class ProjectileMoveScript : ExtendedBehaviour {
         ps.transform.position = new Vector3(GameplayManager.Instance.playerShipPos.x, GameplayManager.Instance.playerShipPos.y + 0.8f, GameplayManager.Instance.playerShipPos.z);
         ps.transform.rotation = Quaternion.identity;
         ps.transform.forward = gameObject.transform.forward;
-        ps.Play();
-
-        
+        ps.Play();        
       }
          
-
       if (shotSFX != null && GetComponent<AudioSource>())
       {
         GetComponent<AudioSource>().PlayOneShot(shotSFX);

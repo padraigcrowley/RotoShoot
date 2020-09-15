@@ -30,8 +30,7 @@ public class PlayerShip : MonoBehaviour
     gameObject.SetActive(true);
     PlayerShipGFXAnim = GetComponentInChildren<Animator>();
     shipSpriteRenderer.GetComponentInChildren<Renderer>();
-    PlayerShipRedRotArrowObj.SetActive(false);
-    PlayerShipGreenRotArrowObj.SetActive(false);
+    
   }
 
   void Update()
@@ -46,9 +45,7 @@ public class PlayerShip : MonoBehaviour
         if (PlayerShipIntroAnimPlaying == false)
         {
           transform.rotation = Quaternion.identity;
-          PlayerShipGreenRotArrowObj.transform.rotation = Quaternion.identity;
-          PlayerShipRedRotArrowObj.transform.rotation = Quaternion.identity;
-
+ 
           PlayerShipIntroAnimPlaying = true;
           shipSpriteRenderer.enabled = true;
           PlayerShipGFXAnim.Play("PlayerShipIntro", -1, 0f);
@@ -103,12 +100,6 @@ public class PlayerShip : MonoBehaviour
       default:
         break;
     }
-  }
-
-  private void ApplyForwardThrust()
-  {
-    Vector3 upDirection = GameObject.FindGameObjectWithTag("Player").transform.up;
-    this.transform.position += upDirection * (GameplayManager.Instance.currentPlayerMissileSpeedMultiplier/2) * Time.deltaTime;
   }
 
   private void ProcessInputQueue()
@@ -200,7 +191,7 @@ public class PlayerShip : MonoBehaviour
     //  yield return null;
     //}
 
-    myTween = transform.DOMove(new Vector3(newPos.x, newPos.y, 0), playerShipTweenMoveSpeed).SetEase(Ease.Linear);
+    myTween = transform.DOMove(new Vector3(newPos.x, newPos.y, 0), playerShipTweenMoveSpeed).SetEase(Ease.OutQuad);
     //myTween = transform.DOMove(new Vector3(newPos.x, newPos.y, 0), .25f).SetEase(Ease.OutQuad);
 
     yield return myTween.WaitForCompletion();
@@ -247,23 +238,10 @@ public class PlayerShip : MonoBehaviour
     //  yield return null;
     //}
     GameplayManager.Instance.playerShipRotating = false;
-    if ((GameplayManager.Instance.mouseClickQueue.Count == 0))
-    {
-      PlayerShipRedRotArrowObj.SetActive(false);
-      PlayerShipGreenRotArrowObj.SetActive(true);
-    }
+    
   }
 
-  public void RotateShipArrows(float angleToRotate) //invoked by PlayerShipMoveEvent.Invoke(MyGameplayManager.Instance.angleToRotatePlayerShip) Event on InputManagerObject in scene
-  {
-    //Output message to the console
-    //Debug.Log("Angle: " + angleToRotate );
-    if ((Mathf.Round(PlayerShipGreenRotArrowObj.gameObject.transform.eulerAngles.z + angleToRotate)) != 180)
-    {
-      PlayerShipGreenRotArrowObj.transform.Rotate(Vector3.forward * angleToRotate);
-      PlayerShipRedRotArrowObj.transform.Rotate(Vector3.forward * angleToRotate);
-    }
-  }
+  
 
   public void PlayerShipIntroAninStartedEvent()
   {
@@ -274,7 +252,7 @@ public class PlayerShip : MonoBehaviour
   public void PlayerShipIntroAninCompletedEvent()
   {
     //PlayerShipIntroAnimCompleted = true;
-    PlayerShipGreenRotArrowObj.SetActive(true);
+
   }
 
 }

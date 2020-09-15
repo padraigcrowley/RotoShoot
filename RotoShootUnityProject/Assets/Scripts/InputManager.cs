@@ -12,14 +12,11 @@ public class InputManager : MonoBehaviour
 {
   private Vector3 startTouchPos, endTouchPos;
   private float minSwipeDistanceThreshold = 1.0f;
-  public MyFloatEvent PlayerShipMoveEvent;
+  
   
   void Start()
   {
-    print("Starting");
-
-    if (PlayerShipMoveEvent == null)
-      PlayerShipMoveEvent = new MyFloatEvent();
+    
   }
 
   // Update is called once per frame
@@ -63,17 +60,14 @@ public class InputManager : MonoBehaviour
     if (Input.GetKeyDown("left"))
     {
       GameplayManager.Instance.mouseClickQueue.Enqueue(GameplayManager.Instance.angleToRotatePlayerShip);
-      PlayerShipMoveEvent.Invoke(GameplayManager.Instance.angleToRotatePlayerShip);
     }
     if (Input.GetKeyDown("right"))
     {
       GameplayManager.Instance.mouseClickQueue.Enqueue(-GameplayManager.Instance.angleToRotatePlayerShip);
-      PlayerShipMoveEvent.Invoke(-GameplayManager.Instance.angleToRotatePlayerShip);
     }
     if ((Input.GetKeyDown("up")) || (Input.GetKeyDown("down")) || (Input.GetKeyDown("space")))
     {
       GameplayManager.Instance.mouseClickQueue.Enqueue(180f);
-      PlayerShipMoveEvent.Invoke(180f);
     }
   }
 
@@ -99,37 +93,35 @@ public class InputManager : MonoBehaviour
 
         if ((swipeDirection = DetectSwipe(startTouchPos, endTouchPos)) != 0) //swipe
         {
-          Debug.Log("Swiped!!");          
+          //Debug.Log("Swiped!!");          
           if (swipeDirection == 1)
           {
-           GameplayManager.Instance.mouseClickQueue.Enqueue(180f);
-            PlayerShipMoveEvent.Invoke(180f);
+           GameplayManager.Instance.mouseClickQueue.Enqueue(-180f);
             /*StartCoroutine(rotateObject(playerShipObj, new Vector3(0, 0, 180), rotationDuration * 2)); // have to multiply rotationDuration by something as it's very fast to do a full 180 degrees otherwise. technically it should be multiplied by 4 (4 separate rotations to reach 180) but that feels too slow
             PlayerShipGreenRotArrowObj.transform.Rotate(Vector3.forward * 180);
             PlayerShipRedRotArrowObj.transform.Rotate(Vector3.forward * 180);*/
           }
           else 
           {
-            GameplayManager.Instance.mouseClickQueue.Enqueue(-180f);
-            PlayerShipMoveEvent.Invoke(-180f);
+            GameplayManager.Instance.mouseClickQueue.Enqueue(180f);
             //StartCoroutine(rotateObject(playerShipObj, new Vector3(0, 0, -180), rotationDuration * 2)); // have to multiply rotationDuration by something as it's very fast to do a full 180 degrees otherwise. technically it should be multiplied by 4 (4 separate rotations to reach 180) but that feels too slow
             //PlayerShipGreenRotArrowObj.transform.Rotate(Vector3.forward * -180);
             //PlayerShipRedRotArrowObj.transform.Rotate(Vector3.forward * -180);
           }
         }
-        else // a tap, not a swipe
-        {
-          if (startTouchPos.x < 0)
-          {
-            PlayerShipMoveEvent.Invoke(GameplayManager.Instance.angleToRotatePlayerShip);
-            GameplayManager.Instance.mouseClickQueue.Enqueue(GameplayManager.Instance.angleToRotatePlayerShip); // use actual angle to rotate rather than -1 or 1            
-          }
-          else
-          {
-            PlayerShipMoveEvent.Invoke(-GameplayManager.Instance.angleToRotatePlayerShip);
-            GameplayManager.Instance.mouseClickQueue.Enqueue(-GameplayManager.Instance.angleToRotatePlayerShip);            
-          }
-        }        
+        //else // a tap, not a swipe
+        //{
+        //  if (startTouchPos.x < 0)
+        //  {
+        //    PlayerShipMoveEvent.Invoke(GameplayManager.Instance.angleToRotatePlayerShip);
+        //    GameplayManager.Instance.mouseClickQueue.Enqueue(GameplayManager.Instance.angleToRotatePlayerShip); // use actual angle to rotate rather than -1 or 1            
+        //  }
+        //  else
+        //  {
+        //    PlayerShipMoveEvent.Invoke(-GameplayManager.Instance.angleToRotatePlayerShip);
+        //    GameplayManager.Instance.mouseClickQueue.Enqueue(-GameplayManager.Instance.angleToRotatePlayerShip);            
+        //  }
+        //}        
         break;
     }
   }
