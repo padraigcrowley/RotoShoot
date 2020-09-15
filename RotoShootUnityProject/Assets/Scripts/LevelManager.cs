@@ -1,6 +1,4 @@
-﻿using JetBrains.Annotations;
-using Mr1;
-using System.Collections;
+﻿using Mr1;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -15,7 +13,7 @@ public class LevelManager : Singleton<LevelManager>
   public LevelSetupData levelSetupData;
   public float levelPlayTimeElapsed;
   public float verticalDistBetweenEnemies = 2.0f; //todo: magic number
-  public bool readyToFireAtPlayer = false; 
+  public bool readyToFireAtPlayer = false;
   private List<GameObject> enemyWaves = new List<GameObject>();
 
   private void Awake()
@@ -25,7 +23,7 @@ public class LevelManager : Singleton<LevelManager>
     GameplayManager.Instance.shipLanes = levelSetupData.shipLanes;
   }
 
-  void InitializeLCC()
+  private void InitializeLCC()
   {
     lccMet = false;
     //add the level completion criterias to the lcc dictionary
@@ -43,7 +41,8 @@ public class LevelManager : Singleton<LevelManager>
       }
     }
   }
-  void Start()
+
+  private void Start()
   {
     numEnemyKillsInLevel = 0;
     currentTimeBetweenFiringAtPlayer = TIME_BETWEEN_FIRING_AT_PLAYER;
@@ -83,14 +82,14 @@ public class LevelManager : Singleton<LevelManager>
     // make numMaxActiveWaves of the waves active by setting their respawnWaitOver = true
     //for (int i = 0; i < levelSetupData.numMaxActiveWaves; i++)
     //{
-      //foreach (Transform enemyShipObjectTransform in enemyWaves[0].transform)
-      //{
-      //  enemyShipObjectTransform.gameObject.GetComponent<EnemyBehaviour02>().respawnWaitOver = true;
-      //}
+    //foreach (Transform enemyShipObjectTransform in enemyWaves[0].transform)
+    //{
+    //  enemyShipObjectTransform.gameObject.GetComponent<EnemyBehaviour02>().respawnWaitOver = true;
+    //}
     //}
   }
 
-  void Update()
+  private void Update()
   {
     if (GameplayManager.Instance.currentGameState == GameplayManager.GameState.LEVEL_IN_PROGRESS)
     {
@@ -119,7 +118,7 @@ public class LevelManager : Singleton<LevelManager>
 
   /// <summary>
   /// loop through each of the enemywave parent gameobjects in the list, if any of the parent's children's state is ALIVE, increnent the number of active waves.
-  /// </summary> 
+  /// </summary>
   /// <returns>numActiveWaves</returns>
   private int GetNumActiveWaves()
   {
@@ -141,7 +140,7 @@ public class LevelManager : Singleton<LevelManager>
     return numActiveWaves;
   }
 
-  void CheckLCC() // check LevelCompletionCriteria
+  private void CheckLCC() // check LevelCompletionCriteria
   {
     if (GameplayManager.Instance.currentGameState == GameplayManager.GameState.LEVEL_IN_PROGRESS)
     {
@@ -159,12 +158,14 @@ public class LevelManager : Singleton<LevelManager>
                 lccMet = false;
               }
               break;
+
             case "SurviveTime":
               if (levelPlayTimeElapsed < LevelCompletionCriteria[lccString])
               {
                 lccMet = false;
               }
               break;
+
             default:
               //print("Default case");
               break;
@@ -172,11 +173,9 @@ public class LevelManager : Singleton<LevelManager>
         }
       }
       else
-      {        
+      {
         GameplayManager.Instance.currentGameState = GameplayManager.GameState.LEVEL_OUTRO_IN_PROGRESS;
       }
-    }    
-
+    }
   }
-
 }

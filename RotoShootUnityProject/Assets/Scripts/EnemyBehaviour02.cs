@@ -1,9 +1,7 @@
 ﻿using UnityEngine;
-using DG.Tweening;
 
 namespace Mr1
 {
-
   public abstract class EnemyBehaviour02 : ExtendedBehaviour
   //https://answers.unity.com/questions/379440/a-simple-wait-function-without-coroutine-c.html
   {
@@ -29,19 +27,21 @@ namespace Mr1
     public EnemyState enemyState;
     public bool respawnWaitOver;
     private bool startedWaiting;
-      
 
     virtual public float GetRespawnWaitDelay() => respawnWaitDelay;
+
     private Vector3 upDirection;
-    
-    public abstract void ReactToNonLethalPlayerMissileHit(); //each enemy variant has to implement their own 
+
+    public abstract void ReactToNonLethalPlayerMissileHit(); //each enemy variant has to implement their own
+
     public abstract void DoMovement(float initialSpeed, FollowType followType);
+
     public abstract void StopMovement();
 
     private void Awake()
     {
-      
     }
+
     protected virtual void Start()
     {
       InitialSetup();
@@ -49,7 +49,6 @@ namespace Mr1
 
     protected virtual void Update()
     {
-
       if (GameplayManager.Instance.currentGameState == GameplayManager.GameState.LEVEL_IN_PROGRESS)
       {
         switch (enemyState)
@@ -76,7 +75,7 @@ namespace Mr1
             {
               GameplayManager.Instance.currentPlayerHP--;
               TemporarilyDie();
-              
+
               //hp = initialHP; //reset health and position
               //transform.position = new Vector3(startPosX, startPosY, startPosZ);
               //transform.localScale = new Vector3(1f, 1f, 1f); // reset its scale back to 1
@@ -122,7 +121,6 @@ namespace Mr1
       }
     }
 
-
     private void InitialSetup()
     {
       //todo - move this out to GameplayManager or to sub-class or enemy prefab??
@@ -136,7 +134,7 @@ namespace Mr1
       enemyHitByPlayerMissile = false;
       respawnWaitOver = false;
       startedWaiting = false;
-            
+
       enemySpriteRenderer = GetComponent<SpriteRenderer>();
       enemyCircleCollider = GetComponent<CircleCollider2D>();
 
@@ -148,10 +146,9 @@ namespace Mr1
       startScaleZ = transform.localScale.z;
 
       enemyState = EnemyState.WAITING_TO_RESPAWN;
-      
+
       upDirection = GameObject.FindGameObjectWithTag("Player").transform.up;
     }
-
 
     private void HandleDamage()
     {
@@ -186,7 +183,7 @@ namespace Mr1
       transform.localScale = new Vector3(startScaleX, startScaleX, startScaleX); // reset its scale back to original scale
       enemySpriteRenderer.enabled = true;
       enemyCircleCollider.enabled = true;
-     
+
       enemyState = EnemyState.ALIVE;
     }
 
@@ -208,7 +205,7 @@ namespace Mr1
 
     private void OnTriggerExit2D(Collider2D collision)
     {
-      if (GameplayManager.Instance.levelControlType != 1) // this doean't apply to circular enemies moving towards centre 
+      if (GameplayManager.Instance.levelControlType != 1) // this doean't apply to circular enemies moving towards centre
       {
         if (collision.gameObject.name == "Bottom Boundary")
         {
