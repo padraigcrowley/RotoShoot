@@ -11,7 +11,7 @@ public class PlayerShip : MonoBehaviour
  
   private int currentShipLane = 1; // the lane number = the array index
   
-  public Transform barrelTip;
+  public Transform playerShipFrontTurret, playerShipLeftTurret, playerShipRightTurret;
   [SerializeField] private Renderer shipSpriteRenderer;
   [SerializeField] private GameObject playerMissilePrefab;
   public GameObject PlayerShipGreenRotArrowObj;
@@ -62,11 +62,11 @@ public class PlayerShip : MonoBehaviour
       case GameplayManager.GameState.LEVEL_IN_PROGRESS:
         
         ProcessInputQueue();
-        //ApplyForwardThrust();
+        
         if ((Time.time > nextActionTime) && (GameplayManager.Instance.playerShipRotating == false) && (playerShipMoving == false))
         {
           nextActionTime = Time.time + GameplayManager.Instance.currentPlayerShipFireRate;
-          CreatePlayerBullet();
+          CreatePlayerBullets();
         }
         break;
 
@@ -145,7 +145,7 @@ public class PlayerShip : MonoBehaviour
     }
   }
 
-  private void CreatePlayerBullet()
+  private void CreatePlayerBullets()
   {
     //GameObject firedBullet = Instantiate(bullet, barrelTip.position, barrelTip.rotation);
 
@@ -157,7 +157,18 @@ public class PlayerShip : MonoBehaviour
     //  playerMissile.SetActive(true);
     //}
 
-    SimplePool.Spawn(playerMissilePrefab, barrelTip.position, barrelTip.rotation);
+    switch(GameplayManager.Instance.currentPlayerFiringState)
+    {
+      case GameplayManager.PlayerFiringState.STRAIGHT_SINGLE:
+        SimplePool.Spawn(playerMissilePrefab, playerShipFrontTurret.position, playerShipFrontTurret.rotation);
+        break;
+      case GameplayManager.PlayerFiringState.ANGLED_TRIPLE:
+        SimplePool.Spawn(playerMissilePrefab, playerShipFrontTurret.position, playerShipFrontTurret.rotation);
+        SimplePool.Spawn(playerMissilePrefab, playerShipLeftTurret.position, playerShipLeftTurret.rotation);
+        SimplePool.Spawn(playerMissilePrefab, playerShipRightTurret.position, playerShipRightTurret.rotation);
+        break;
+    }
+      
     //SimplePool.Spawn(vfxProjectile, transform.position, transform.rotation);
 
 

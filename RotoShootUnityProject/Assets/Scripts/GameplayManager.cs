@@ -9,6 +9,7 @@ public class GameplayManager : Singleton<GameplayManager>
   [HideInInspector] public bool playerShipRotating = false;
 
   [HideInInspector] public enum GameState { WAITING_FOR_START_BUTTON, LEVEL_INTRO_IN_PROGRESS, LEVEL_IN_PROGRESS, LEVEL_FAILED, LEVEL_OUTRO_IN_PROGRESS, LEVEL_COMPLETE, GAME_OVER_SCREEN }
+  [HideInInspector] public enum PlayerFiringState { STRAIGHT_SINGLE, ANGLED_TRIPLE, STRAIGHT_TRIPLE}
   [HideInInspector] public int currentPlayerScore = 0;
   public int highPlayerScore = 0;
   [HideInInspector] public int currentPlayerHP;
@@ -38,6 +39,7 @@ public class GameplayManager : Singleton<GameplayManager>
   public Vector2[] shipLanes;// = new[] { new Vector2(-3.85f, -6f), new Vector2(-1.29f, -6f), new Vector2(1.29f, -6f), new Vector2(3.84f, -6f) };
 
   public GameState currentGameState;
+  public PlayerFiringState currentPlayerFiringState;
   [HideInInspector] public Vector3 playerShipPos;
   [HideInInspector] public int levelControlType;
   public int[] blockedPlayerShipRotationAngles;// rotation angles that will be blocked. 
@@ -46,6 +48,7 @@ public class GameplayManager : Singleton<GameplayManager>
   // Start is called before the first frame update
   void Start()
   {
+    currentPlayerFiringState = PlayerFiringState.STRAIGHT_SINGLE;
     currentGameState = GameState.LEVEL_INTRO_IN_PROGRESS;
     currentPlayerMissileSpeedMultiplier = basePlayerMissileSpeedMultiplier;
     currentPlayerHP = maxPlayerHP;

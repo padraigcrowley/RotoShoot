@@ -738,6 +738,7 @@ MonoBehaviour:
   - {x: 1.29, y: -6}
   - {x: 3.84, y: -6}
   currentGameState: 0
+  currentPlayerFiringState: 0
   playerShipPos: {x: 0, y: 0, z: 0}
   levelControlType: 0
   blockedPlayerShipRotationAngles: 
@@ -3439,7 +3440,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 80c1de3897c2e5649a7ae4ed777eb6dc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  barrelTip: {fileID: 2099002079}
+  playerShipFrontTurret: {fileID: 2099002079}
+  playerShipLeftTurret: {fileID: 703163058}
+  playerShipRightTurret: {fileID: 1177337288}
   shipSpriteRenderer: {fileID: 191601460}
   playerMissilePrefab: {fileID: 1865968712415440, guid: e1d30abeb36499148bca7bfbd6a64d43,
     type: 3}
@@ -4859,7 +4862,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 80c1de3897c2e5649a7ae4ed777eb6dc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  barrelTip: {fileID: 247800109}
+  playerShipFrontTurret: {fileID: 0}
+  playerShipLeftTurret: {fileID: 0}
+  playerShipRightTurret: {fileID: 0}
   shipSpriteRenderer: {fileID: 1377789682}
   playerMissilePrefab: {fileID: 0}
   PlayerShipGreenRotArrowObj: {fileID: 0}

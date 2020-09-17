@@ -7,7 +7,8 @@ public class PlayerMissileMovement : MissileMovement
 {
     protected override void Start()
   {
-    upDirection = GameObject.FindGameObjectWithTag("PlayerShipFrontTurret").transform.up; 
+    //upDirection = GameObject.FindGameObjectWithTag("PlayerShipFrontTurret").transform.up;
+    upDirection = this.transform.up;
     base.Start();
     //print("---PlayerMissilemovement Start()---");
   }
@@ -15,7 +16,8 @@ public class PlayerMissileMovement : MissileMovement
   protected override void OnEnable()
   {
     base.OnEnable();
-    upDirection = GameObject.FindGameObjectWithTag("PlayerShipFrontTurret").transform.up;
+    //upDirection = GameObject.FindGameObjectWithTag("PlayerShipFrontTurret").transform.up;
+    upDirection = this.transform.up;
   }
 
   protected override void FixedUpdate()
