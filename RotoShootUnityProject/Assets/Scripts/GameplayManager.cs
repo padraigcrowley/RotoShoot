@@ -48,7 +48,7 @@ public class GameplayManager : Singleton<GameplayManager>
   // Start is called before the first frame update
   void Start()
   {
-    currentPlayerFiringState = PlayerFiringState.STRAIGHT_SINGLE;
+    currentPlayerFiringState = PlayerFiringState.ANGLED_TRIPLE;
     currentGameState = GameState.LEVEL_INTRO_IN_PROGRESS;
     currentPlayerMissileSpeedMultiplier = basePlayerMissileSpeedMultiplier;
     currentPlayerHP = maxPlayerHP;
