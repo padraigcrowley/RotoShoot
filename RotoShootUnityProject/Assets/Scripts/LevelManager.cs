@@ -19,6 +19,9 @@ public class LevelManager : Singleton<LevelManager>
   public bool readyToFireAtPlayer = false; 
   private List<GameObject> enemyWaves = new List<GameObject>();
 
+  public int totalEnemyKillCount = 0;
+  public int enemyKillPowerUpDropFrequency = 5;
+
   private void Awake()
   {
     GameplayManager.Instance.playerShipPos = levelSetupData.PlayerShipPos;

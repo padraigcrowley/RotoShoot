@@ -14,8 +14,6 @@ public class PlayerShip : MonoBehaviour
   public Transform playerShipFrontTurret, playerShipLeftTurret, playerShipRightTurret;
   [SerializeField] private Renderer shipSpriteRenderer;
   [SerializeField] private GameObject playerMissilePrefab;
-  public GameObject PlayerShipGreenRotArrowObj;
-  public GameObject PlayerShipRedRotArrowObj;
   public float playerShipTweenMoveSpeed = .25f;
   public float playerShipTweenRotateSpeed = .25f;
   public bool PlayerShipIntroAnimCompleted = false;
@@ -93,8 +91,7 @@ public class PlayerShip : MonoBehaviour
               transform.rotation = Quaternion.identity; // reset to face upwards, back to its original rotation.
           shipSpriteRenderer.gameObject.GetComponent<Renderer>().enabled = false;
           PlayerShipIntroAnimCompleted = false;
-          PlayerShipRedRotArrowObj.SetActive(false);
-          PlayerShipGreenRotArrowObj.SetActive(false);
+          
         break;
 
       default:
@@ -227,9 +224,7 @@ public class PlayerShip : MonoBehaviour
       yield break;
     }
     GameplayManager.Instance.playerShipRotating = true;
-    PlayerShipRedRotArrowObj.SetActive(true);
-    PlayerShipGreenRotArrowObj.SetActive(false);
-
+   
     Vector3 newRot = gameObjectToMove.transform.eulerAngles + eulerAngles;
     Vector3 currentRot = gameObjectToMove.transform.eulerAngles;
     //print("PrevRot: " + currentRot + " NewRot: " + newRot);

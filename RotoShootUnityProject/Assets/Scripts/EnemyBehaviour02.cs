@@ -146,6 +146,7 @@ namespace Mr1
       if (hp <= 1) //lethal hit
       {
         LevelManager.Instance.numEnemyKillsInLevel++;
+        LevelManager.Instance.totalEnemyKillCount++;
         enemyState = EnemyState.TEMPORARILY_DEAD;
       }
       else //non-lethal hit
