@@ -145,7 +145,7 @@ public class PowerUp : MonoBehaviour
     Destroy(gameObject, 10f);
   }
 
-  private void Update()
+  protected virtual void Update()
   {
     
       DoMovement();

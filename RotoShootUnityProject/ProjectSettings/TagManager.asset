@@ -13,6 +13,8 @@ TagManager:
   - PlayerShipFrontTurret
   - PlayerShipLeftTurret
   - PlayerShipRightTurret
+  - Listener
+  - PowerUp
   layers:
   - Default
   - TransparentFX

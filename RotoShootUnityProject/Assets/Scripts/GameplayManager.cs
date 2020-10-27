@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class GameplayManager : Singleton<GameplayManager>
+public class GameplayManager : Singleton<GameplayManager>, IPowerUpEvents
 {
 
   public Queue mouseClickQueue;
@@ -96,9 +96,6 @@ public class GameplayManager : Singleton<GameplayManager>
 
   public void initializeMainGameplayLoop()
   {
-    
-    
-    
     currentPlayerHP = maxPlayerHP;
     //gameState = 0;
     mouseClickQueue = new Queue();
@@ -106,7 +103,28 @@ public class GameplayManager : Singleton<GameplayManager>
     //numEnemyKills = 0;
     enemy0001BaseSpeed = 1.0f;
     currentPlayerShipRotationDuration = basePlayerShipRotationDuration;
-    
+  }
+  void IPowerUpEvents.OnPowerUpCollected(PowerUp powerUp, PlayerShip player)
+  {
+    //// We dont bother storing those that expire immediately
+    //if (!powerUp.expiresImmediately)
+    //{
+    //  activePowerUps.Add(powerUp);
+    //  //print($"powerup type: {powerUp.GetType()} powerup name: {powerUp.name}");
+    //  //((PowerUpInvulnerability)powerUp).duration = 10.0f;
+
+    //  UpdateActivePowerUpUi();
+    //}
+
+    //uiText.text = powerUp.powerUpExplanation;
+    //uiSubtext.text = powerUp.powerUpQuote;
+    //uiTextDisplayTimer = uiTextDisplayDuration;
+  }
+
+  void IPowerUpEvents.OnPowerUpExpired(PowerUp powerUp, PlayerShip player)
+  {
+    //activePowerUps.Remove(powerUp);
+    //UpdateActivePowerUpUi();
   }
 
 }
