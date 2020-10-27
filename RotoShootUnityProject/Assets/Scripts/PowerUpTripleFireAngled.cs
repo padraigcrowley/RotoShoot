@@ -7,6 +7,7 @@ public class PowerUpTripleFireAngled : PowerUp
   protected override void PowerUpPayload()
   {
     //do stuff specific to this PU//todo
+    GameplayManager.Instance.currentPlayerFiringState = GameplayManager.PlayerFiringState.ANGLED_TRIPLE;
     base.PowerUpPayload();
   }
   
@@ -18,8 +19,8 @@ public class PowerUpTripleFireAngled : PowerUp
     //}
 
     // Update is called once per frame
-    void Update()
-    {
+    //void Update()
+    //{
         
-    }
+    //}
 }

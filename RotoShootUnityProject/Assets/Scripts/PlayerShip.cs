@@ -2,13 +2,13 @@
 using System.Collections.Generic;
 using UnityEngine;
 using DG.Tweening;
+using DG.Tweening.Plugins.Core;
 
 public class PlayerShip : MonoBehaviour
 {
   Animator PlayerShipGFXAnim;
   private float nextActionTime = 0.0f;
-
- 
+  
   private int currentShipLane = 1; // the lane number = the array index
   
   public Transform playerShipFrontTurret, playerShipLeftTurret, playerShipRightTurret;
@@ -264,6 +264,30 @@ public class PlayerShip : MonoBehaviour
   {
     //PlayerShipIntroAnimCompleted = true;
 
+  }
+  
+  private void OnTriggerEnter2D(Collider2D collision)
+  {
+    if (GameplayManager.Instance.currentGameState == GameplayManager.GameState.LEVEL_IN_PROGRESS)
+    {
+      if ((collision.gameObject.tag.Equals("Enemy01")) || (collision.gameObject.tag.Equals("EnemyMissile")))
+      {
+        DoCameraShake();
+      }
+    }
+  }
+  void DoCameraShake()
+  {
+    CameraShake cs;
+    cs = GetComponent<CameraShake>();
+    if (cs != null)
+    {
+      cs.CameraShakeOnPlayerHit();
+    }
+    else
+    {
+      Debug.LogWarning("CameraShake returned NULL");
+    }
   }
 
 }

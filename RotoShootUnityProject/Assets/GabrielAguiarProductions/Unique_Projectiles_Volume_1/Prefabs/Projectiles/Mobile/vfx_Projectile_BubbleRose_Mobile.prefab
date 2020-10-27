@@ -5051,7 +5051,7 @@ GameObject:
   - component: {fileID: 339029142651374055}
   m_Layer: 0
   m_Name: vfx_Projectile_BubbleRose_Mobile
-  m_TagString: Untagged
+  m_TagString: EnemyMissile
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0

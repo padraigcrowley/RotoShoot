@@ -1,4 +1,5 @@
 ﻿using UnityEngine;
+using DG.Tweening;
 
 namespace Mr1
 {
@@ -9,7 +10,7 @@ namespace Mr1
     private float hp;
     public float speedMultiplierFromSpawner = 1f;
     public float hpMultiplierFromSpawner = 1f;
-    private float respawnWaitDelay = 2.0f; //defauly value unless overridden by derived class
+    private float respawnWaitDelay = 2.0f; //default value unless overridden by derived class
     public string wayPointPathName;
 
     protected float startPosX, startPosY, startPosZ;
@@ -21,26 +22,21 @@ namespace Mr1
     private GameObject missileObject;
     private SpriteRenderer enemySpriteRenderer;
     private CircleCollider2D enemyCircleCollider;
+    private Vector3 upDirection;
 
     public enum EnemyState { ALIVE, TEMPORARILY_DEAD, WAITING_TO_RESPAWN, INVINCIBLE, FULLY_DEAD, HIT_BY_PLAYER_MISSILE, HIT_BY_PLAYER_SHIP }
 
     public EnemyState enemyState;
     public bool respawnWaitOver;
     private bool startedWaiting;
-
+            
     virtual public float GetRespawnWaitDelay() => respawnWaitDelay;
-
-    private Vector3 upDirection;
-
+    
     public abstract void ReactToNonLethalPlayerMissileHit(); //each enemy variant has to implement their own
 
     public abstract void DoMovement(float initialSpeed, FollowType followType);
 
     public abstract void StopMovement();
-
-    private void Awake()
-    {
-    }
 
     protected virtual void Start()
     {
@@ -75,11 +71,6 @@ namespace Mr1
             {
               GameplayManager.Instance.currentPlayerHP--;
               TemporarilyDie();
-
-              //hp = initialHP; //reset health and position
-              //transform.position = new Vector3(startPosX, startPosY, startPosZ);
-              //transform.localScale = new Vector3(1f, 1f, 1f); // reset its scale back to 1
-              ////TODO: THEN SET STATE TO WHAT??
               break;
             }
           case EnemyState.WAITING_TO_RESPAWN:
@@ -186,7 +177,7 @@ namespace Mr1
 
       enemyState = EnemyState.ALIVE;
     }
-
+    
     private void OnTriggerEnter2D(Collider2D collision)
     {
       if (GameplayManager.Instance.currentGameState == GameplayManager.GameState.LEVEL_IN_PROGRESS)
