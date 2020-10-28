@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 31c73e25130abc541bc32d54c763ae60, type: 3}
   m_Name: LevelSetupData0002
   m_EditorClassIdentifier: 
-  levelNumber: 4
+  levelNumber: 2
   levelControlType: 2
   numMaxActiveWaves: 1
   minTimeBetweenWaves: 2

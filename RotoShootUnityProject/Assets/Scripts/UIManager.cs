@@ -18,6 +18,7 @@ public class UIManager : Singleton<UIManager>
     CurrentPlayerScoreText.text = GameplayManager.Instance.currentPlayerScore.ToString();
     HighPlayerScoreText.text = GameplayManager.Instance.highPlayerScore.ToString();
     CurrentEnemyKillCount.text = LevelManager.Instance.numEnemyKillsInLevel.ToString();
+    RequiredEnemyKillCount.text = "/" + LevelManager.Instance.levelSetupData.lccEnemyKills.ToString();
   }
 
   // Update is called once per frame
