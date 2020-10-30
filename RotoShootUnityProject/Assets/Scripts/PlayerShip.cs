@@ -21,9 +21,14 @@ public class PlayerShip : MonoBehaviour
   private bool PlayerShipIntroAnimPlaying = false;
   private bool PlayerShipOutroAnimPlaying = false;
   private bool playerShipMoving = false;
+  private CameraShake camShakeScript;
 
   void Start()
   {
+    camShakeScript = GetComponent<CameraShake>();
+    if (camShakeScript == null)    
+      Debug.LogWarning("CameraShake returned NULL");
+
     transform.position = GameplayManager.Instance.playerShipPos;
     gameObject.SetActive(true);
     PlayerShipGFXAnim = GetComponentInChildren<Animator>();
@@ -273,16 +278,7 @@ public class PlayerShip : MonoBehaviour
   }
   void DoCameraShake()
   {
-    CameraShake cs;
-    cs = GetComponent<CameraShake>();
-    if (cs != null)
-    {
-      cs.CameraShakeOnPlayerHit();
-    }
-    else
-    {
-      Debug.LogWarning("CameraShake returned NULL");
-    }
+    camShakeScript.CameraShakeOnPlayerHit();
   }
 
 }

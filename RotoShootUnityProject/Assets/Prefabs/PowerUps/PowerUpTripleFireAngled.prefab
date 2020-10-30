@@ -12,6 +12,8 @@ GameObject:
   - component: {fileID: 391839744925114858}
   - component: {fileID: 5948802186322770996}
   - component: {fileID: -8244334722000346740}
+  - component: {fileID: 335474690461315135}
+  - component: {fileID: 2135768715}
   m_Layer: 0
   m_Name: PowerUpTripleFireAngled
   m_TagString: PowerUp
@@ -52,7 +54,7 @@ SpriteRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 10754, guid: 0000000000000000f000000000000000, type: 0}
+  - {fileID: 0}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -101,6 +103,7 @@ MonoBehaviour:
   specialEffect: {fileID: 0}
   soundEffect: {fileID: 0}
   travelSpeed: 2
+  durationSeconds: 5
 --- !u!61 &-8244334722000346740
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -127,3 +130,28 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 0.6478424, y: 0.69537294}
   m_EdgeRadius: 0
+--- !u!114 &335474690461315135
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6977473367615493525}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ee158225ee1e59f4791627785501d950, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!65 &2135768715
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6977473367615493525}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 1.28, y: 1.28, z: 0.2}
+  m_Center: {x: 0, y: 0, z: 0}

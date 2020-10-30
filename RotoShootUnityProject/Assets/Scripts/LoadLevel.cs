@@ -7,9 +7,13 @@ public class LoadLevel : MonoBehaviour
 {
   public void LoadSpecificLevel(int level)
   {
+    GameManagerX.Instance.currentLevel = level;
     // TODO: This needs to be expanded to handle > 0009 levels
     string levelName = "Level000";
-    SceneManager.LoadScene("BaseGameScene");
+    //if (!SceneManager.GetSceneByName("BaseGameScene").isLoaded)
+    { 
+      SceneManager.LoadScene("BaseGameScene"); 
+    }
     SceneManager.LoadScene(levelName+level.ToString(), LoadSceneMode.Additive);
     
   }
@@ -20,7 +24,10 @@ public class LoadLevel : MonoBehaviour
     string levelName = "Level000";
     GameManagerX.Instance.currentLevel++;
 
-    SceneManager.LoadScene("BaseGameScene");
+    //if(!SceneManager.GetSceneByName("BaseGameScene").isLoaded)
+    {
+      SceneManager.LoadScene("BaseGameScene");
+    }
     SceneManager.LoadScene(levelName + GameManagerX.Instance.currentLevel.ToString(), LoadSceneMode.Additive);
   }
 

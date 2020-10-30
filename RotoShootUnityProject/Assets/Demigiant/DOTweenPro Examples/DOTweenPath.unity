@@ -43,7 +43,7 @@ RenderSettings:
 --- !u!157 &4
 LightmapSettings:
   m_ObjectHideFlags: 0
-  serializedVersion: 11
+  serializedVersion: 12
   m_GIWorkflowMode: 1
   m_GISettings:
     serializedVersion: 2
@@ -96,8 +96,10 @@ LightmapSettings:
     m_PVRFilteringAtrousPositionSigmaAO: 1
     m_ExportTrainingData: 0
     m_TrainingDataDestination: TrainingData
+    m_LightProbeSampleCountMultiplier: 4
   m_LightingDataAsset: {fileID: 0}
-  m_UseShadowmask: 0
+  m_LightingSettings: {fileID: 4890085278179872738, guid: a5e05228ccae2814580e63da7cf9b0c7,
+    type: 2}
 --- !u!196 &5
 NavMeshSettings:
   serializedVersion: 2
@@ -117,6 +119,8 @@ NavMeshSettings:
     manualTileSize: 0
     tileSize: 256
     accuratePlacement: 0
+    maxJobWorkers: 0
+    preserveTilesOutsideBounds: 0
     debug:
       m_Flags: 0
   m_NavMeshData: {fileID: 0}
@@ -153,6 +157,8 @@ MeshRenderer:
   m_MotionVectors: 1
   m_LightProbeUsage: 0
   m_ReflectionProbeUsage: 1
+  m_RayTracingMode: 2
+  m_RayTraceProcedural: 0
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
@@ -177,6 +183,7 @@ MeshRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
+  m_AdditionalVertexStreams: {fileID: 0}
 --- !u!114 &118309269
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -214,6 +221,7 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls:
       - m_Target: {fileID: 1087750405}
+        m_TargetAssemblyTypeName: 
         m_MethodName: DOPlay
         m_Mode: 1
         m_Arguments:
@@ -292,9 +300,6 @@ MonoBehaviour:
     - 6.6672983
     - 7.1915474
     - 11.289525
-    type: 1
-    subdivisionsXSegment: 10
-    subdivisions: 70
     wps:
     - {x: 4.45, y: -1.83, z: 0}
     - {x: 3.8321667, y: 6.9544535, z: 0}
@@ -303,6 +308,9 @@ MonoBehaviour:
     - {x: -12.069786, y: -0.2641964, z: 0}
     - {x: -6.368099, y: -4.187376, z: 0}
     - {x: 4.45, y: -1.83, z: 0}
+    type: 1
+    subdivisionsXSegment: 10
+    subdivisions: 70
     controlPoints:
     - a: {x: -6.368099, y: -4.187376, z: 0}
       b: {x: 0, y: 0, z: 0}
@@ -497,7 +505,6 @@ GameObject:
   m_Component:
   - component: {fileID: 848136772}
   - component: {fileID: 848136771}
-  - component: {fileID: 848136770}
   - component: {fileID: 848136769}
   - component: {fileID: 848136768}
   m_Layer: 0
@@ -516,14 +523,6 @@ AudioListener:
   m_GameObject: {fileID: 848136767}
   m_Enabled: 1
 --- !u!124 &848136769
-Behaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 848136767}
-  m_Enabled: 1
---- !u!92 &848136770
 Behaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -640,6 +639,8 @@ MonoBehaviour:
   m_Material: {fileID: 0}
   m_Color: {r: 0.196, g: 0.196, b: 0.196, a: 1}
   m_RaycastTarget: 1
+  m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
+  m_Maskable: 1
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
@@ -874,9 +875,6 @@ MonoBehaviour:
     - 11.593836
     - 8.754475
     - 7.309784
-    type: 1
-    subdivisionsXSegment: 10
-    subdivisions: 100
     wps:
     - {x: 10.45, y: -1.83, z: 0}
     - {x: 13.417454, y: 2.978077, z: 0}
@@ -888,6 +886,9 @@ MonoBehaviour:
     - {x: -4.1231623, y: -1.0233588, z: 0}
     - {x: 3.7979867, y: -4.5040193, z: 0}
     - {x: 10.45, y: -1.83, z: 0}
+    type: 1
+    subdivisionsXSegment: 10
+    subdivisions: 100
     controlPoints:
     - a: {x: 3.7979867, y: -4.5040193, z: 0}
       b: {x: 0, y: 0, z: 0}
@@ -1124,6 +1125,8 @@ MeshRenderer:
   m_MotionVectors: 1
   m_LightProbeUsage: 0
   m_ReflectionProbeUsage: 1
+  m_RayTracingMode: 2
+  m_RayTraceProcedural: 0
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
@@ -1148,6 +1151,7 @@ MeshRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
+  m_AdditionalVertexStreams: {fileID: 0}
 --- !u!33 &1087750407
 MeshFilter:
   m_ObjectHideFlags: 0
@@ -1222,6 +1226,8 @@ MonoBehaviour:
   m_Material: {fileID: 0}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_RaycastTarget: 1
+  m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
+  m_Maskable: 1
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
@@ -1274,8 +1280,9 @@ Light:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1242857378}
   m_Enabled: 1
-  serializedVersion: 9
+  serializedVersion: 10
   m_Type: 1
+  m_Shape: 0
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_Intensity: 1
   m_Range: 10
@@ -1523,6 +1530,7 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls:
       - m_Target: {fileID: 118309269}
+        m_TargetAssemblyTypeName: 
         m_MethodName: DOPlay
         m_Mode: 1
         m_Arguments:
@@ -1548,6 +1556,8 @@ MonoBehaviour:
   m_Material: {fileID: 0}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_RaycastTarget: 1
+  m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
+  m_Maskable: 1
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []

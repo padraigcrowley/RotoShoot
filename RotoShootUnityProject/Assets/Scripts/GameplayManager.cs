@@ -43,6 +43,8 @@ public class GameplayManager : Singleton<GameplayManager>, IPowerUpEvents
   [HideInInspector] public Vector3 playerShipPos;
   [HideInInspector] public int levelControlType;
   public int[] blockedPlayerShipRotationAngles;// rotation angles that will be blocked. 
+  public int totalEnemyKillCount = 0;
+  public int enemyKillPowerUpDropFrequency = 5;
 
   // Start is called before the first frame update
   void Start()

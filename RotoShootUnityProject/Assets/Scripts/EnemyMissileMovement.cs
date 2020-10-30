@@ -25,6 +25,7 @@ public class EnemyMissileMovement : MissileMovement
 
       if ((HitFXPrefab != null) && (!hitFXTriggered))
       {
+        GameplayManager.Instance.currentPlayerHP--;
         collided = true;
         hitFXTriggered = true;
         hitVFX = SimplePool.Spawn(HitFXPrefab, transform.position, Quaternion.identity);
