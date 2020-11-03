@@ -120,6 +120,7 @@ public class LevelManager : Singleton<LevelManager>
           readyToFireAtPlayer = true; // this is set back to false in Update() of EnemyFireAtPlayerBehaviour01.cs
         }
       }
+
       CheckLCC(); // check LevelCompletionCriteria
     }
   }
@@ -178,7 +179,7 @@ public class LevelManager : Singleton<LevelManager>
           }
         }
       }
-      else
+      else // level completion criteria = true
       {        
         GameplayManager.Instance.currentGameState = GameplayManager.GameState.LEVEL_OUTRO_IN_PROGRESS;
       }

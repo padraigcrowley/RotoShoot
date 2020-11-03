@@ -21,13 +21,13 @@ public class PlayerShip : MonoBehaviour
   private bool PlayerShipIntroAnimPlaying = false;
   private bool PlayerShipOutroAnimPlaying = false;
   private bool playerShipMoving = false;
-  private CameraShake camShakeScript;
+  public CameraShake camShakeScript;
 
   void Start()
   {
-    camShakeScript = GetComponent<CameraShake>();
-    if (camShakeScript == null)    
-      Debug.LogWarning("CameraShake returned NULL");
+    //camShakeScript = GetComponent<CameraShake>();
+    //if (camShakeScript == null)    
+    //  Debug.LogWarning("CameraShake returned NULL");
 
     transform.position = GameplayManager.Instance.playerShipPos;
     gameObject.SetActive(true);
@@ -79,9 +79,9 @@ public class PlayerShip : MonoBehaviour
           PlayerShipOutroAnimPlaying = true;
 
           //TODO: below make sure the angle is of the ship graphic, not the parent object
-          float angle = 0f - this.gameObject.transform.eulerAngles.z;
-          print("Angle to reach zero: " + angle);
-          StartCoroutine(RotatePlayerShip(this.gameObject, new Vector3(0, 0, angle), .2f));
+          //float angle = 0f - this.gameObject.transform.eulerAngles.z;
+          //print("Angle to reach zero: " + angle);
+          //StartCoroutine(RotatePlayerShip(this.gameObject, new Vector3(0, 0, angle), .2f));
           //transform.rotation = Quaternion.identity; // reset to face upwards, back to its original rotation.
 
           PlayerShipGFXAnim.Play("PlayerShipOutro", -1, 0f);
@@ -93,7 +93,7 @@ public class PlayerShip : MonoBehaviour
         }
         break;
       case GameplayManager.GameState.LEVEL_COMPLETE:
-              transform.rotation = Quaternion.identity; // reset to face upwards, back to its original rotation.
+          //transform.rotation = Quaternion.identity; // reset to face upwards, back to its original rotation.
           shipSpriteRenderer.gameObject.GetComponent<Renderer>().enabled = false;
           PlayerShipIntroAnimCompleted = false;
           

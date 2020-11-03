@@ -941,6 +941,7 @@ MonoBehaviour:
   blockedPlayerShipRotationAngles: 
   totalEnemyKillCount: 0
   enemyKillPowerUpDropFrequency: 5
+  loadLevelScript: {fileID: 1849652819}
 --- !u!4 &191098412
 Transform:
   m_ObjectHideFlags: 0
@@ -2360,7 +2361,7 @@ MonoBehaviour:
   m_spriteAsset: {fileID: 0}
   m_tintAllSprites: 0
   m_StyleSheet: {fileID: 0}
-  m_TextStyleHashCode: 0
+  m_TextStyleHashCode: -1183493901
   m_overrideHtmlColors: 0
   m_faceColor:
     serializedVersion: 2
@@ -2372,9 +2373,9 @@ MonoBehaviour:
   m_fontSizeMin: 18
   m_fontSizeMax: 72
   m_fontStyle: 1
-  m_HorizontalAlignment: 1
-  m_VerticalAlignment: 256
-  m_textAlignment: 514
+  m_HorizontalAlignment: 2
+  m_VerticalAlignment: 512
+  m_textAlignment: 65535
   m_characterSpacing: 0
   m_wordSpacing: 0
   m_lineSpacing: 0
@@ -2994,9 +2995,9 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 1849652819}
-        m_TargetAssemblyTypeName: 
-        m_MethodName: LoadNextLevel
+      - m_Target: {fileID: 191098411}
+        m_TargetAssemblyTypeName: GameplayManager, Assembly-CSharp
+        m_MethodName: initializeMainGameplayLoopForNextLevel
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -3409,7 +3410,7 @@ MonoBehaviour:
   m_spriteAsset: {fileID: 0}
   m_tintAllSprites: 0
   m_StyleSheet: {fileID: 0}
-  m_TextStyleHashCode: 0
+  m_TextStyleHashCode: -1183493901
   m_overrideHtmlColors: 0
   m_faceColor:
     serializedVersion: 2
@@ -3421,9 +3422,9 @@ MonoBehaviour:
   m_fontSizeMin: 18
   m_fontSizeMax: 72
   m_fontStyle: 0
-  m_HorizontalAlignment: 1
-  m_VerticalAlignment: 256
-  m_textAlignment: 514
+  m_HorizontalAlignment: 2
+  m_VerticalAlignment: 512
+  m_textAlignment: 65535
   m_characterSpacing: 0
   m_wordSpacing: 0
   m_lineSpacing: 0
@@ -3797,6 +3798,7 @@ MonoBehaviour:
   playerShipTweenRotateSpeed: 0.25
   PlayerShipIntroAnimCompleted: 0
   PlayerShipOutroAnimCompleted: 0
+  camShakeScript: {fileID: 1061970255}
 --- !u!4 &1061970254
 Transform:
   m_ObjectHideFlags: 0
@@ -5439,6 +5441,7 @@ MonoBehaviour:
   playerShipTweenRotateSpeed: 0.25
   PlayerShipIntroAnimCompleted: 0
   PlayerShipOutroAnimCompleted: 0
+  camShakeScript: {fileID: 0}
 --- !u!4 &1596802969
 Transform:
   m_ObjectHideFlags: 0

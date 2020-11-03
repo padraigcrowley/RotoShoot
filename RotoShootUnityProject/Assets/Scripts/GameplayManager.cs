@@ -46,6 +46,8 @@ public class GameplayManager : Singleton<GameplayManager>, IPowerUpEvents
   public int totalEnemyKillCount = 0;
   public int enemyKillPowerUpDropFrequency = 5;
 
+  public LoadLevel loadLevelScript;
+
   // Start is called before the first frame update
   void Start()
   {
@@ -95,7 +97,7 @@ public class GameplayManager : Singleton<GameplayManager>, IPowerUpEvents
   }
 
 
-  public void initializeMainGameplayLoop()
+  public void initializeMainGameplayLoopForLevelRestart()
   {
     currentPlayerHP = maxPlayerHP;
     //gameState = 0;
@@ -104,6 +106,14 @@ public class GameplayManager : Singleton<GameplayManager>, IPowerUpEvents
     //numEnemyKills = 0;
     enemy0001BaseSpeed = 1.0f;
     currentPlayerShipRotationDuration = basePlayerShipRotationDuration;
+  }
+  public void initializeMainGameplayLoopForNextLevel()
+  {
+    //currentPlayerHP = maxPlayerHP;
+    mouseClickQueue = new Queue();
+
+    currentGameState = GameState.LEVEL_INTRO_IN_PROGRESS;
+    loadLevelScript.LoadNextLevel();
   }
   void IPowerUpEvents.OnPowerUpCollected(PowerUp powerUp, PlayerShip player)
   {

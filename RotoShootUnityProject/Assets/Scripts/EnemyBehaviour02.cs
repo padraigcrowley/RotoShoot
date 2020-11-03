@@ -103,6 +103,10 @@ namespace Mr1
             }
         }
       }
+      else if (GameplayManager.Instance.currentGameState == GameplayManager.GameState.LEVEL_OUTRO_IN_PROGRESS)
+      {
+        Destroy(gameObject);//todo, instead of just destroy, add some fancy sprite shader effect here, then destroy after delay.
+      }
       else if (GameplayManager.Instance.currentGameState == GameplayManager.GameState.GAME_OVER_SCREEN)
       {
         hp = initialHP; //reset health and position
