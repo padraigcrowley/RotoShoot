@@ -9,7 +9,7 @@ public class GameplayManager : Singleton<GameplayManager>, IPowerUpEvents
   [HideInInspector] public bool playerShipRotating = false;
 
   [HideInInspector] public enum GameState { WAITING_FOR_START_BUTTON, LEVEL_INTRO_IN_PROGRESS, LEVEL_IN_PROGRESS, LEVEL_FAILED, LEVEL_OUTRO_IN_PROGRESS, LEVEL_COMPLETE, GAME_OVER_SCREEN }
-  [HideInInspector] public enum PlayerFiringState { STRAIGHT_SINGLE, ANGLED_TRIPLE, STRAIGHT_TRIPLE}
+  [HideInInspector] public enum PlayerFiringState { STRAIGHT_SINGLE, ANGLED_TRIPLE, STRAIGHT_TRIPLE, RAPID_FIRE_SINGLE}
   [HideInInspector] public int currentPlayerScore = 0;
   public int highPlayerScore = 0;
   [HideInInspector] public int currentPlayerHP;
@@ -82,8 +82,6 @@ public class GameplayManager : Singleton<GameplayManager>, IPowerUpEvents
         }
       case GameState.LEVEL_COMPLETE:
         {
-
-          print("Level Completion Criteria TRUE!, Next Level is:" + GameManagerX.Instance.currentLevel + 1);
           break;
         }
       case GameState.LEVEL_FAILED:

@@ -149,19 +149,10 @@ public class PlayerShip : MonoBehaviour
 
   private void CreatePlayerBullets()
   {
-    //GameObject firedBullet = Instantiate(bullet, barrelTip.position, barrelTip.rotation);
-
-    //GameObject playerMissile = ObjectPooler.SharedInstance.GetPooledObject("PlayerMissile");
-    //if (playerMissile != null)
-    //{
-    //  playerMissile.transform.position = barrelTip.transform.position;
-    //  playerMissile.transform.rotation = barrelTip.transform.rotation;
-    //  playerMissile.SetActive(true);
-    //}
-
     switch(GameplayManager.Instance.currentPlayerFiringState)
     {
       case GameplayManager.PlayerFiringState.STRAIGHT_SINGLE:
+      case GameplayManager.PlayerFiringState.RAPID_FIRE_SINGLE:
         SimplePool.Spawn(playerMissilePrefab, playerShipFrontTurret.position, playerShipFrontTurret.rotation);
         break;
       case GameplayManager.PlayerFiringState.ANGLED_TRIPLE:
@@ -169,11 +160,9 @@ public class PlayerShip : MonoBehaviour
         SimplePool.Spawn(playerMissilePrefab, playerShipLeftTurret.position, playerShipLeftTurret.rotation);
         SimplePool.Spawn(playerMissilePrefab, playerShipRightTurret.position, playerShipRightTurret.rotation);
         break;
+      default:
+        break;
     }
-      
-    //SimplePool.Spawn(vfxProjectile, transform.position, transform.rotation);
-
-
   }
 
   IEnumerator MovePlayerShip(Vector2 newPos)

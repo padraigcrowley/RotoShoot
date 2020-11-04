@@ -2,24 +2,23 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class PowerUpTripleFireAngled : PowerUp
+public class PowerUpRapidFireSingle : PowerUp
 {
   public float durationSeconds = 5f;
+  public float currentPlayerShipFireRateIncrease = 3.0f;
   protected override void PowerUpPayload()
   {
-    //do stuff specific to this PU//todo
     
-    GameplayManager.Instance.currentPlayerFiringState = GameplayManager.PlayerFiringState.ANGLED_TRIPLE;
+    //do stuff specific to this PU//todo
+    GameplayManager.Instance.currentPlayerShipFireRate /= currentPlayerShipFireRateIncrease;
+    GameplayManager.Instance.currentPlayerFiringState = GameplayManager.PlayerFiringState.RAPID_FIRE_SINGLE;
     base.PowerUpPayload();
   }
-
 
   // Start is called before the first frame update
   //void Start()
   //{
-
   //}
-
 
   protected override void Update()
   {
@@ -30,13 +29,13 @@ public class PowerUpTripleFireAngled : PowerUp
       {
         PowerUpHasExpired();
       }
-      
     }
     base.Update();
   }
   protected override void PowerUpHasExpired()
   {
     GameplayManager.Instance.currentPlayerFiringState = GameplayManager.PlayerFiringState.STRAIGHT_SINGLE;
+    GameplayManager.Instance.currentPlayerShipFireRate *= currentPlayerShipFireRateIncrease;
     base.PowerUpHasExpired();
   }
 }

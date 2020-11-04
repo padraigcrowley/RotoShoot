@@ -11,6 +11,7 @@ GameObject:
   - component: {fileID: 5288227307620429712}
   - component: {fileID: 9206009594659184046}
   - component: {fileID: 7169446411325033463}
+  - component: {fileID: -1851889754244681069}
   m_Layer: 0
   m_Name: PowerUpRapidFireSingle
   m_TagString: PowerUp
@@ -109,3 +110,22 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 0.6098181, y: 0.7714219}
   m_EdgeRadius: 0
+--- !u!114 &-1851889754244681069
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2477514511899951309}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2838a1b353ae3804c9a6ccc5e584e6da, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  powerUpName: HOT TAMALE!
+  expiresImmediately: 0
+  specialEffect: {fileID: 0}
+  soundEffect: {fileID: 0}
+  travelSpeed: 2
+  durationSeconds: 5
+  currentPlayerShipFireRateIncrease: 5

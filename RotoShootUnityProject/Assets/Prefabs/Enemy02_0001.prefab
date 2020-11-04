@@ -119,6 +119,10 @@ MonoBehaviour:
   wayPointPathName: 
   enemyState: 0
   respawnWaitOver: 0
+  availablePowerUps:
+  - {fileID: 6977473367615493525, guid: b9a8e0a5335ee3e47b055b774a7f505d, type: 3}
+  - {fileID: 2477514511899951309, guid: eb9180948b5035b43b6db1ba58a5f999, type: 3}
+  powerUpInstance: {fileID: 0}
 --- !u!50 &4342350733379744942
 Rigidbody2D:
   serializedVersion: 4
