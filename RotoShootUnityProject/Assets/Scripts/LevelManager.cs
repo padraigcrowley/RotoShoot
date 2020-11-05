@@ -76,25 +76,6 @@ public class LevelManager : Singleton<LevelManager>
       }
       index++;
     }
-    // START just test stuff
-    //print($"Number of waves (not zero based) {enemyWaves.Count}");
-    //print($"Wave 0: {enemyWaves[0]}");
-    //foreach (Transform enemyShipObjectTransform in enemyWaves[0].transform)
-    //{
-    //  //enemyShipObjectTransform.gameObject.GetComponent<EnemyBehaviour02>().enemyState = EnemyBehaviour02.EnemyState.ALIVE;
-    //  //print($"enemy ship object: {enemyShipObjectTransform.gameObject}");
-    //  enemyShipObjectTransform.gameObject.GetComponent<EnemyBehaviour02>().respawnWaitOver = true;
-    //}
-    // END just test stuff
-
-    // make numMaxActiveWaves of the waves active by setting their respawnWaitOver = true
-    //for (int i = 0; i < levelSetupData.numMaxActiveWaves; i++)
-    //{
-      //foreach (Transform enemyShipObjectTransform in enemyWaves[0].transform)
-      //{
-      //  enemyShipObjectTransform.gameObject.GetComponent<EnemyBehaviour02>().respawnWaitOver = true;
-      //}
-    //}
   }
 
   void Update()
@@ -120,6 +101,7 @@ public class LevelManager : Singleton<LevelManager>
           readyToFireAtPlayer = true; // this is set back to false in Update() of EnemyFireAtPlayerBehaviour01.cs
         }
       }
+
       CheckLCC(); // check LevelCompletionCriteria
     }
   }
@@ -178,8 +160,9 @@ public class LevelManager : Singleton<LevelManager>
           }
         }
       }
-      else
-      {        
+      else // level completion criteria = true
+      {
+        print("Level Completion Criteria TRUE!, Next Level is:" + (GameManagerX.Instance.currentLevel + 1));
         GameplayManager.Instance.currentGameState = GameplayManager.GameState.LEVEL_OUTRO_IN_PROGRESS;
       }
     }    

@@ -22,12 +22,22 @@ public class LoadLevel : MonoBehaviour
   {
     // TODO: This needs to be expanded to handle > 0009 levels
     string levelName = "Level000";
-    GameManagerX.Instance.currentLevel++;
 
-    //if(!SceneManager.GetSceneByName("BaseGameScene").isLoaded)
+    //unload the current levelscene, if loaded
+    if (SceneManager.GetSceneByName(levelName + GameManagerX.Instance.currentLevel.ToString()).isLoaded)
+    {
+      SceneManager.UnloadSceneAsync(levelName + GameManagerX.Instance.currentLevel.ToString());
+    }
+    
+    
+    //Check if the base scene is already loaded, if not, load it.
+    if(!SceneManager.GetSceneByName("BaseGameScene").isLoaded)
     {
       SceneManager.LoadScene("BaseGameScene");
     }
+    
+    //set the level scene to the next level, load it
+    GameManagerX.Instance.currentLevel++;
     SceneManager.LoadScene(levelName + GameManagerX.Instance.currentLevel.ToString(), LoadSceneMode.Additive);
   }
 

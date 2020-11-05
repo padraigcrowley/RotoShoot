@@ -7,7 +7,7 @@ using UnityEngine.SceneManagement;
 
 public class UIManager : Singleton<UIManager>
 {
-  public TextMeshProUGUI HighPlayerScoreText,CurrentPlayerScoreText, CurrentEnemyKillCount, RequiredEnemyKillCount, levelPlayTimeCounterText;
+  public TextMeshProUGUI HighPlayerScoreText, CurrentPlayerScoreText, CurrentEnemyKillCount, RequiredEnemyKillCount, levelPlayTimeCounterText;
   public Button gameRestartButton, gameExitButton;
   public Image playerHealthHeart03, playerHealthHeart02, playerHealthHeart01;
   [SerializeField] private GameObject LevelCompletePanel;
@@ -26,13 +26,20 @@ public class UIManager : Singleton<UIManager>
   {
     switch (GameplayManager.Instance.currentGameState)
     {
+      case GameplayManager.GameState.LEVEL_INTRO_IN_PROGRESS:
+        {
+          LevelCompletePanel.gameObject.SetActive(false);
+          RequiredEnemyKillCount.text = "/" + LevelManager.Instance.levelSetupData.lccEnemyKills.ToString();
+          break;
+        }
       case GameplayManager.GameState.LEVEL_IN_PROGRESS:
         {
+
           CurrentPlayerScoreText.text = (GameplayManager.Instance.currentPlayerScore).ToString();
           CurrentEnemyKillCount.text = LevelManager.Instance.numEnemyKillsInLevel.ToString();
           HighPlayerScoreText.text = "HI:" + GameplayManager.Instance.highPlayerScore.ToString();
           levelPlayTimeCounterText.text = LevelManager.Instance.levelPlayTimeElapsed.ToString("0.00");
-          
+
           if (GameplayManager.Instance.currentPlayerHP == 3)
           {
             playerHealthHeart03.enabled = true;
@@ -51,13 +58,13 @@ public class UIManager : Singleton<UIManager>
           {
             playerHealthHeart01.enabled = false;
           }
-          
+
           break;
         }
       case GameplayManager.GameState.LEVEL_COMPLETE:
         {
           LevelCompletePanel.gameObject.SetActive(true);
-          
+
           break;
         }
       case GameplayManager.GameState.GAME_OVER_SCREEN:
@@ -75,10 +82,10 @@ public class UIManager : Singleton<UIManager>
   {
     print("Start Button Pressed!");
     CurrentPlayerScoreText.text = "0";
-    GameplayManager.Instance.currentGameState = GameplayManager.GameState.LEVEL_INTRO_IN_PROGRESS;
+    //GameplayManager.Instance.currentGameState = GameplayManager.GameState.LEVEL_INTRO_IN_PROGRESS;
     gameRestartButton.gameObject.SetActive(false);
     gameExitButton.gameObject.SetActive(false);
-    GameplayManager.Instance.initializeMainGameplayLoop();
+    GameplayManager.Instance.initializeMainGameplayLoopForLevelRestart();
   }
 
   public void handleGameExitButtonPress()
@@ -87,4 +94,4 @@ public class UIManager : Singleton<UIManager>
     SceneManager.LoadScene("MainMenu");
   }
 
-  }
+}

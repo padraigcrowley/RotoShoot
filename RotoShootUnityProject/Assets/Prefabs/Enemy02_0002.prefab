@@ -52,6 +52,7 @@ SpriteRenderer:
   m_LightProbeUsage: 0
   m_ReflectionProbeUsage: 0
   m_RayTracingMode: 0
+  m_RayTraceProcedural: 0
   m_RenderingLayerMask: 4294967295
   m_RendererPriority: 0
   m_Materials:
@@ -74,7 +75,7 @@ SpriteRenderer:
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: -1079083179
-  m_SortingLayer: -1
+  m_SortingLayer: -2
   m_SortingOrder: 0
   m_Sprite: {fileID: 21300000, guid: 671b275056161184d86ecabfcc822f7a, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
@@ -118,6 +119,12 @@ MonoBehaviour:
   speedMultiplierFromSpawner: 1
   hpMultiplierFromSpawner: 1
   wayPointPathName: 
+  enemyState: 0
+  respawnWaitOver: 0
+  availablePowerUps:
+  - {fileID: 6977473367615493525, guid: b9a8e0a5335ee3e47b055b774a7f505d, type: 3}
+  - {fileID: 2477514511899951309, guid: eb9180948b5035b43b6db1ba58a5f999, type: 3}
+  powerUpInstance: {fileID: 0}
   startedOnPath: 0
   enemyMissile: {fileID: 1374267004960804, guid: ed8c5fb58e698c5418529f8aee4e4848,
     type: 3}

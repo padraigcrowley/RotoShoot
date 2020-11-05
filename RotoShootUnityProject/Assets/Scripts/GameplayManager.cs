@@ -9,7 +9,7 @@ public class GameplayManager : Singleton<GameplayManager>, IPowerUpEvents
   [HideInInspector] public bool playerShipRotating = false;
 
   [HideInInspector] public enum GameState { WAITING_FOR_START_BUTTON, LEVEL_INTRO_IN_PROGRESS, LEVEL_IN_PROGRESS, LEVEL_FAILED, LEVEL_OUTRO_IN_PROGRESS, LEVEL_COMPLETE, GAME_OVER_SCREEN }
-  [HideInInspector] public enum PlayerFiringState { STRAIGHT_SINGLE, ANGLED_TRIPLE, STRAIGHT_TRIPLE}
+  [HideInInspector] public enum PlayerFiringState { STRAIGHT_SINGLE, ANGLED_TRIPLE, STRAIGHT_TRIPLE, RAPID_FIRE_SINGLE}
   [HideInInspector] public int currentPlayerScore = 0;
   public int highPlayerScore = 0;
   [HideInInspector] public int currentPlayerHP;
@@ -46,6 +46,8 @@ public class GameplayManager : Singleton<GameplayManager>, IPowerUpEvents
   public int totalEnemyKillCount = 0;
   public int enemyKillPowerUpDropFrequency = 5;
 
+  public LoadLevel loadLevelScript;
+
   // Start is called before the first frame update
   void Start()
   {
@@ -80,8 +82,6 @@ public class GameplayManager : Singleton<GameplayManager>, IPowerUpEvents
         }
       case GameState.LEVEL_COMPLETE:
         {
-
-          print("Level Completion Criteria TRUE!, Next Level is:" + GameManagerX.Instance.currentLevel + 1);
           break;
         }
       case GameState.LEVEL_FAILED:
@@ -95,15 +95,24 @@ public class GameplayManager : Singleton<GameplayManager>, IPowerUpEvents
   }
 
 
-  public void initializeMainGameplayLoop()
+  public void initializeMainGameplayLoopForLevelRestart()
   {
     currentPlayerHP = maxPlayerHP;
     //gameState = 0;
     mouseClickQueue = new Queue();
+    currentGameState = GameState.LEVEL_INTRO_IN_PROGRESS;
     currentPlayerScore = 0;
     //numEnemyKills = 0;
     enemy0001BaseSpeed = 1.0f;
     currentPlayerShipRotationDuration = basePlayerShipRotationDuration;
+  }
+  public void initializeMainGameplayLoopForNextLevel()
+  {
+    //currentPlayerHP = maxPlayerHP;
+    mouseClickQueue = new Queue();
+
+    currentGameState = GameState.LEVEL_INTRO_IN_PROGRESS;
+    loadLevelScript.LoadNextLevel();
   }
   void IPowerUpEvents.OnPowerUpCollected(PowerUp powerUp, PlayerShip player)
   {

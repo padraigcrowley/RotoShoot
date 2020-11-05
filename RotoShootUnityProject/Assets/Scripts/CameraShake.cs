@@ -13,7 +13,7 @@ public class CameraShake : MonoBehaviour
 
   public void CameraShakeOnPlayerHit()
   {
-    Vector3 shakeVector = new Vector3(0.2f, 0.2f, 0);
+    Vector3 shakeVector = new Vector3(0.4f, 0.4f, 0);
     myCamera.transform.DOShakePosition(.5f, shakeVector, 30, 10f, false, true);
   }
 }

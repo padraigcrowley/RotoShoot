@@ -21,13 +21,13 @@ public class PlayerShip : MonoBehaviour
   private bool PlayerShipIntroAnimPlaying = false;
   private bool PlayerShipOutroAnimPlaying = false;
   private bool playerShipMoving = false;
-  private CameraShake camShakeScript;
+  public CameraShake camShakeScript;
 
   void Start()
   {
-    camShakeScript = GetComponent<CameraShake>();
-    if (camShakeScript == null)    
-      Debug.LogWarning("CameraShake returned NULL");
+    //camShakeScript = GetComponent<CameraShake>();
+    //if (camShakeScript == null)    
+    //  Debug.LogWarning("CameraShake returned NULL");
 
     transform.position = GameplayManager.Instance.playerShipPos;
     gameObject.SetActive(true);
@@ -63,10 +63,10 @@ public class PlayerShip : MonoBehaviour
         break;
 
       case GameplayManager.GameState.LEVEL_IN_PROGRESS:
-        
+        PlayerShipIntroAnimCompleted = false;
         ProcessInputQueue();
         
-        if ((Time.time > nextActionTime) && (GameplayManager.Instance.playerShipRotating == false) && (playerShipMoving == false))
+        if ((Time.time > nextActionTime)  && (playerShipMoving == false))
         {
           nextActionTime = Time.time + GameplayManager.Instance.currentPlayerShipFireRate;
           CreatePlayerBullets();
@@ -79,9 +79,9 @@ public class PlayerShip : MonoBehaviour
           PlayerShipOutroAnimPlaying = true;
 
           //TODO: below make sure the angle is of the ship graphic, not the parent object
-          float angle = 0f - this.gameObject.transform.eulerAngles.z;
-          print("Angle to reach zero: " + angle);
-          StartCoroutine(RotatePlayerShip(this.gameObject, new Vector3(0, 0, angle), .2f));
+          //float angle = 0f - this.gameObject.transform.eulerAngles.z;
+          //print("Angle to reach zero: " + angle);
+          //StartCoroutine(RotatePlayerShip(this.gameObject, new Vector3(0, 0, angle), .2f));
           //transform.rotation = Quaternion.identity; // reset to face upwards, back to its original rotation.
 
           PlayerShipGFXAnim.Play("PlayerShipOutro", -1, 0f);
@@ -93,7 +93,7 @@ public class PlayerShip : MonoBehaviour
         }
         break;
       case GameplayManager.GameState.LEVEL_COMPLETE:
-              transform.rotation = Quaternion.identity; // reset to face upwards, back to its original rotation.
+          //transform.rotation = Quaternion.identity; // reset to face upwards, back to its original rotation.
           shipSpriteRenderer.gameObject.GetComponent<Renderer>().enabled = false;
           PlayerShipIntroAnimCompleted = false;
           
@@ -149,19 +149,10 @@ public class PlayerShip : MonoBehaviour
 
   private void CreatePlayerBullets()
   {
-    //GameObject firedBullet = Instantiate(bullet, barrelTip.position, barrelTip.rotation);
-
-    //GameObject playerMissile = ObjectPooler.SharedInstance.GetPooledObject("PlayerMissile");
-    //if (playerMissile != null)
-    //{
-    //  playerMissile.transform.position = barrelTip.transform.position;
-    //  playerMissile.transform.rotation = barrelTip.transform.rotation;
-    //  playerMissile.SetActive(true);
-    //}
-
     switch(GameplayManager.Instance.currentPlayerFiringState)
     {
       case GameplayManager.PlayerFiringState.STRAIGHT_SINGLE:
+      case GameplayManager.PlayerFiringState.RAPID_FIRE_SINGLE:
         SimplePool.Spawn(playerMissilePrefab, playerShipFrontTurret.position, playerShipFrontTurret.rotation);
         break;
       case GameplayManager.PlayerFiringState.ANGLED_TRIPLE:
@@ -169,11 +160,9 @@ public class PlayerShip : MonoBehaviour
         SimplePool.Spawn(playerMissilePrefab, playerShipLeftTurret.position, playerShipLeftTurret.rotation);
         SimplePool.Spawn(playerMissilePrefab, playerShipRightTurret.position, playerShipRightTurret.rotation);
         break;
+      default:
+        break;
     }
-      
-    //SimplePool.Spawn(vfxProjectile, transform.position, transform.rotation);
-
-
   }
 
   IEnumerator MovePlayerShip(Vector2 newPos)

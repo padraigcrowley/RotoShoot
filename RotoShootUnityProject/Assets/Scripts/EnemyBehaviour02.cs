@@ -1,5 +1,6 @@
 ﻿using UnityEngine;
 using DG.Tweening;
+using System;
 
 namespace Mr1
 {
@@ -29,9 +30,12 @@ namespace Mr1
     public EnemyState enemyState;
     public bool respawnWaitOver;
     private bool startedWaiting;
-            
+
+    public GameObject[] availablePowerUps;
+    public GameObject powerUpInstance;
+
     virtual public float GetRespawnWaitDelay() => respawnWaitDelay;
-    
+
     public abstract void ReactToNonLethalPlayerMissileHit(); //each enemy variant has to implement their own
 
     public abstract void DoMovement(float initialSpeed, FollowType followType);
@@ -103,6 +107,10 @@ namespace Mr1
             }
         }
       }
+      else if (GameplayManager.Instance.currentGameState == GameplayManager.GameState.LEVEL_OUTRO_IN_PROGRESS)
+      {
+        Destroy(gameObject);//todo, instead of just destroy, add some fancy sprite shader effect here, then destroy after delay.
+      }
       else if (GameplayManager.Instance.currentGameState == GameplayManager.GameState.GAME_OVER_SCREEN)
       {
         hp = initialHP; //reset health and position
@@ -145,9 +153,6 @@ namespace Mr1
     {
       if (hp <= 1) //lethal hit
       {
-        LevelManager.Instance.numEnemyKillsInLevel++;
-        GameplayManager.Instance.totalEnemyKillCount++;
-        print($"totalEnemyKillCount {GameplayManager.Instance.totalEnemyKillCount}");
         enemyState = EnemyState.TEMPORARILY_DEAD;
       }
       else //non-lethal hit
@@ -158,8 +163,21 @@ namespace Mr1
       }
     }
 
+    private void DropPowerUp()
+    {
+      print(($"totalEnemyKillCount={GameplayManager.Instance.totalEnemyKillCount} DROPPED POWERUP!"));
+      powerUpInstance = SimplePool.Spawn(availablePowerUps[UnityEngine.Random.Range(0, availablePowerUps.Length)], transform.position, transform.rotation);
+    }
+
     private void TemporarilyDie()
     {
+      LevelManager.Instance.numEnemyKillsInLevel++;
+      GameplayManager.Instance.totalEnemyKillCount++;
+      //print($"totalEnemyKillCount {GameplayManager.Instance.totalEnemyKillCount}");
+      if (GameplayManager.Instance.totalEnemyKillCount % GameplayManager.Instance.enemyKillPowerUpDropFrequency == 0)
+      {
+        DropPowerUp();
+      }
       enemySpriteRenderer.enabled = false;
       enemyCircleCollider.enabled = false;
       respawnWaitOver = false;
@@ -179,7 +197,7 @@ namespace Mr1
 
       enemyState = EnemyState.ALIVE;
     }
-    
+
     private void OnTriggerEnter2D(Collider2D collision)
     {
       if (GameplayManager.Instance.currentGameState == GameplayManager.GameState.LEVEL_IN_PROGRESS)
