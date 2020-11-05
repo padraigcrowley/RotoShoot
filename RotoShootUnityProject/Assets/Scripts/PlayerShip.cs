@@ -63,10 +63,10 @@ public class PlayerShip : MonoBehaviour
         break;
 
       case GameplayManager.GameState.LEVEL_IN_PROGRESS:
-        
+        PlayerShipIntroAnimCompleted = false;
         ProcessInputQueue();
         
-        if ((Time.time > nextActionTime) && (GameplayManager.Instance.playerShipRotating == false) && (playerShipMoving == false))
+        if ((Time.time > nextActionTime)  && (playerShipMoving == false))
         {
           nextActionTime = Time.time + GameplayManager.Instance.currentPlayerShipFireRate;
           CreatePlayerBullets();

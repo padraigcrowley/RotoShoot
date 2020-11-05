@@ -82,7 +82,7 @@ public class UIManager : Singleton<UIManager>
   {
     print("Start Button Pressed!");
     CurrentPlayerScoreText.text = "0";
-    GameplayManager.Instance.currentGameState = GameplayManager.GameState.LEVEL_INTRO_IN_PROGRESS;
+    //GameplayManager.Instance.currentGameState = GameplayManager.GameState.LEVEL_INTRO_IN_PROGRESS;
     gameRestartButton.gameObject.SetActive(false);
     gameExitButton.gameObject.SetActive(false);
     GameplayManager.Instance.initializeMainGameplayLoopForLevelRestart();

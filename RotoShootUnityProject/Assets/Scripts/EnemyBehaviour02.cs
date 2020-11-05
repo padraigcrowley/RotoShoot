@@ -166,7 +166,7 @@ namespace Mr1
     private void DropPowerUp()
     {
       print(($"totalEnemyKillCount={GameplayManager.Instance.totalEnemyKillCount} DROPPED POWERUP!"));
-      powerUpInstance = SimplePool.Spawn(availablePowerUps[1], transform.position, transform.rotation);
+      powerUpInstance = SimplePool.Spawn(availablePowerUps[UnityEngine.Random.Range(0, availablePowerUps.Length)], transform.position, transform.rotation);
     }
 
     private void TemporarilyDie()

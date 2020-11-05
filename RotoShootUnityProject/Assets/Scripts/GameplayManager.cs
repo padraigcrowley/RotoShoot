@@ -100,6 +100,7 @@ public class GameplayManager : Singleton<GameplayManager>, IPowerUpEvents
     currentPlayerHP = maxPlayerHP;
     //gameState = 0;
     mouseClickQueue = new Queue();
+    currentGameState = GameState.LEVEL_INTRO_IN_PROGRESS;
     currentPlayerScore = 0;
     //numEnemyKills = 0;
     enemy0001BaseSpeed = 1.0f;
