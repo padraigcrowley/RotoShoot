@@ -5310,6 +5310,7 @@ GameObject:
   - component: {fileID: 1665425950}
   - component: {fileID: 1665425949}
   - component: {fileID: 1665425951}
+  - component: {fileID: 1665425952}
   m_Layer: 0
   m_Name: atmosphere_surface_1080x252_01
   m_TagString: Atmosphere
@@ -5408,6 +5409,21 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 8.700047, y: 1.3203228}
   m_EdgeRadius: 0
+--- !u!114 &1665425952
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1665425948}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4ab3b122a420c3c47ad9091b2d21a26a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  atmosExplosion: {fileID: 5595871714586972966, guid: aa83ec4255e21cb4990b8016587a59ec,
+    type: 3}
+  atmosExplosionInstance: {fileID: 0}
 --- !u!1 &1671541790
 GameObject:
   m_ObjectHideFlags: 0
