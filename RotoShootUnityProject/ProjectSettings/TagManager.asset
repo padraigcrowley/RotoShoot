@@ -15,6 +15,7 @@ TagManager:
   - PlayerShipRightTurret
   - Listener
   - PowerUp
+  - Atmosphere
   layers:
   - Default
   - TransparentFX

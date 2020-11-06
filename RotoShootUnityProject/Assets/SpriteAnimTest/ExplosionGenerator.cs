@@ -13,6 +13,8 @@ public class ExplosionGenerator : MonoBehaviour
     {
     //sr = GetComponent<SpriteRenderer>();
     //sr.enabled = false;
+    //print("ALSO BOOM!");
+    boomAnim.Play("fireexplosion");
   }
 
   // Update is called once per frame
@@ -22,8 +24,8 @@ public class ExplosionGenerator : MonoBehaviour
     if (Input.GetKeyDown(KeyCode.Space))
     {
       //sr.enabled = true;
-      print("ALSO BOOM!");
-      boomAnim.Play("fireexplosion");
+      //print("ALSO BOOM!");
+      //boomAnim.Play("fireexplosion");
 
     }
   }

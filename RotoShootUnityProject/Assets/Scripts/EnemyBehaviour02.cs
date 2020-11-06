@@ -25,7 +25,7 @@ namespace Mr1
     private CircleCollider2D enemyCircleCollider;
     private Vector3 upDirection;
 
-    public enum EnemyState { ALIVE, TEMPORARILY_DEAD, WAITING_TO_RESPAWN, INVINCIBLE, FULLY_DEAD, HIT_BY_PLAYER_MISSILE, HIT_BY_PLAYER_SHIP }
+    public enum EnemyState { ALIVE, TEMPORARILY_DEAD, WAITING_TO_RESPAWN, INVINCIBLE, FULLY_DEAD, HIT_BY_PLAYER_MISSILE, HIT_BY_PLAYER_SHIP, HIT_BY_ATMOSPHERE }
 
     public EnemyState enemyState;
     public bool respawnWaitOver;
@@ -72,6 +72,12 @@ namespace Mr1
               break;
             }
           case EnemyState.HIT_BY_PLAYER_SHIP:
+            {
+              GameplayManager.Instance.currentPlayerHP--;
+              TemporarilyDie();
+              break;
+            }
+          case EnemyState.HIT_BY_ATMOSPHERE:
             {
               GameplayManager.Instance.currentPlayerHP--;
               TemporarilyDie();
@@ -210,6 +216,10 @@ namespace Mr1
         else if (collision.gameObject.tag.Equals("Player"))
         {
           enemyState = EnemyState.HIT_BY_PLAYER_SHIP;
+        }
+        else if (collision.gameObject.tag.Equals("Atmosphere"))
+        {
+          enemyState = EnemyState.HIT_BY_ATMOSPHERE;
         }
       }
     }
