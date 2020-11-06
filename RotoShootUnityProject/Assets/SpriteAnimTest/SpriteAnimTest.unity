@@ -430,7 +430,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: eaa33a7dd9df2cd488e722c65ca28177, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  boom: {fileID: 570142361}
+  boomAnim: {fileID: 570142361}
+  sr: {fileID: 570142362}
 --- !u!4 &1138091619
 Transform:
   m_ObjectHideFlags: 0
