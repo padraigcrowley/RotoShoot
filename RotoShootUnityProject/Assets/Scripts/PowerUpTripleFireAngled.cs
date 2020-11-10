@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class PowerUpTripleFireAngled : PowerUp
 {
+  
   public float durationSeconds = 5f;
   protected override void PowerUpPayload()
   {
@@ -39,4 +40,5 @@ public class PowerUpTripleFireAngled : PowerUp
     GameplayManager.Instance.currentPlayerFiringState = GameplayManager.PlayerFiringState.STRAIGHT_SINGLE;
     base.PowerUpHasExpired();
   }
+    
 }

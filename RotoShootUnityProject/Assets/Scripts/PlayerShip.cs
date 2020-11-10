@@ -261,6 +261,7 @@ public class PlayerShip : MonoBehaviour
     {
       if ((collision.gameObject.tag.Equals("Enemy01")) || (collision.gameObject.tag.Equals("EnemyMissile")))
       {
+        print($"collision between this {transform.position} and other {collision.gameObject.transform.position}");
         DoCameraShake();
       }
     }

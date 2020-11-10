@@ -7,7 +7,7 @@ using UnityEngine;
 public class ExplosionGenerator : MonoBehaviour
 {
   public Animator boomAnim;  
-  public SpriteRenderer sr;
+  //public SpriteRenderer sr;
   // Start is called before the first frame update
     void Start()
     {

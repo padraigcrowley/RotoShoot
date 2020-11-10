@@ -11,9 +11,12 @@ public class PowerUp : MonoBehaviour
   public AudioClip soundEffect;
   public float travelSpeed;
 
-  protected PlayerShip playerShip;
+  public Animator dissolveAnim;
 
+  protected PlayerShip playerShip;
   protected SpriteRenderer spriteRenderer;
+
+  private Tween pulseTween;
 
   protected enum PowerUpState
   {
@@ -31,7 +34,7 @@ public class PowerUp : MonoBehaviour
 
   protected virtual void Start()
   {
-    transform.DOScale(1.5f, 0.3f).SetLoops(50, LoopType.Yoyo);
+    pulseTween = transform.DOScale(1.5f, 0.3f).SetLoops(50, LoopType.Yoyo);
     powerUpState = PowerUpState.InAttractMode;
   }
 
@@ -45,8 +48,15 @@ public class PowerUp : MonoBehaviour
       print($"PowerUp Collected!");
       PowerUpCollected(other.gameObject);
     }
-    
-    
+    else if (other.gameObject.CompareTag("Atmosphere"))
+    {
+      print($"Collision entered with Atmos! ");
+      travelSpeed /= 3.0f;
+      dissolveAnim.Play("PowerUpDissolve");
+      Destroy(gameObject, 1);
+    }
+
+
   }
 
   /// <summary>
@@ -71,6 +81,7 @@ public class PowerUp : MonoBehaviour
       return;
     }
     powerUpState = PowerUpState.IsCollected;
+    pulseTween.Kill();
 
     // We must have been collected by a player, store handle to player for later use      
     playerShip = gameObjectCollectingPowerUp.GetComponent<PlayerShip>();
@@ -148,7 +159,8 @@ public class PowerUp : MonoBehaviour
   protected virtual void Update()
   {
     
-      DoMovement();
+      if(powerUpState == PowerUpState.InAttractMode)
+        DoMovement();
   }
 
   public void DoMovement()

@@ -49,11 +49,11 @@ MonoBehaviour:
     numEnemiesInWave: 3
     timeBetweenSpawn: 0.5
   blockedPlayerShipRotationAngles: 
-  PlayerShipPos: {x: -1.28, y: -6, z: 0}
+  PlayerShipPos: {x: -1.28, y: -5, z: 0}
   lccEnemyKills: 4000
   lccSurviveTime: 4
   shipLanes:
-  - {x: -3.85, y: -6}
-  - {x: -1.29, y: -6}
-  - {x: 1.29, y: -6}
-  - {x: 3.84, y: -6}
+  - {x: -3.85, y: -5}
+  - {x: -1.29, y: -5}
+  - {x: 1.29, y: -5}
+  - {x: 3.84, y: -5}
