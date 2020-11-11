@@ -11,7 +11,7 @@ public class MyFloatEvent : UnityEvent<float>
 public class InputManager : MonoBehaviour
 {
   private Vector3 startTouchPos, endTouchPos;
-  private float minSwipeDistanceThreshold = 1.0f;
+  private float minSwipeDistanceThreshold = 0.75f; //1.0f;
   
   
   void Start()
@@ -109,19 +109,17 @@ public class InputManager : MonoBehaviour
             //PlayerShipRedRotArrowObj.transform.Rotate(Vector3.forward * -180);
           }
         }
-        //else // a tap, not a swipe
-        //{
-        //  if (startTouchPos.x < 0)
-        //  {
-        //    PlayerShipMoveEvent.Invoke(GameplayManager.Instance.angleToRotatePlayerShip);
-        //    GameplayManager.Instance.mouseClickQueue.Enqueue(GameplayManager.Instance.angleToRotatePlayerShip); // use actual angle to rotate rather than -1 or 1            
-        //  }
-        //  else
-        //  {
-        //    PlayerShipMoveEvent.Invoke(-GameplayManager.Instance.angleToRotatePlayerShip);
-        //    GameplayManager.Instance.mouseClickQueue.Enqueue(-GameplayManager.Instance.angleToRotatePlayerShip);            
-        //  }
-        //}        
+        else // a tap, not a swipe
+        {
+          if (startTouchPos.x < 0)
+          {
+            GameplayManager.Instance.mouseClickQueue.Enqueue(180f);
+          }
+          else
+          {
+            GameplayManager.Instance.mouseClickQueue.Enqueue(-180f);
+          }
+        }
         break;
     }
   }
