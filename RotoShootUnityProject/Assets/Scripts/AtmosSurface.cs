@@ -25,6 +25,7 @@ public class AtmosSurface : MonoBehaviour
       if (collision.gameObject.tag.Equals("Enemy01"))
       {
         atmosExplosionInstance = SimplePool.Spawn(atmosExplosion, collision.transform.position, collision.transform.rotation);
+        //todo: need to despawn this somehow/where
       }
     }
   }

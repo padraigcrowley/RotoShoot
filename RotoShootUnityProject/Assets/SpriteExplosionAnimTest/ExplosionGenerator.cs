@@ -18,15 +18,15 @@ public class ExplosionGenerator : MonoBehaviour
   }
 
   // Update is called once per frame
-  void Update()
-  {
+  //void Update()
+  //{
     
-    if (Input.GetKeyDown(KeyCode.Space))
-    {
-      //sr.enabled = true;
-      //print("ALSO BOOM!");
-      //boomAnim.Play("fireexplosion");
+  //  if (Input.GetKeyDown(KeyCode.Space))
+  //  {
+  //    //sr.enabled = true;
+  //    //print("ALSO BOOM!");
+  //    //boomAnim.Play("fireexplosion");
 
-    }
-  }
+  //  }
+  //}
 }

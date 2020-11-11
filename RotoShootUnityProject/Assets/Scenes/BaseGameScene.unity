@@ -1375,6 +1375,53 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 411263050}
   m_CullTransparentMesh: 0
+--- !u!1 &426183243
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 426183245}
+  - component: {fileID: 426183244}
+  m_Layer: 0
+  m_Name: AsteroidManagerObject
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &426183244
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 426183243}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b19d7da732b523240a87b63f7c06d93d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  asteroids1Prefab: {fileID: 6032717887555322013, guid: 6360f37b25064b843a8747d8bdb7a868,
+    type: 3}
+  asteroids2Prefab: {fileID: 3202211514907023398, guid: b2d7ca24abb8c3e4aa100be1b4c99e70,
+    type: 3}
+--- !u!4 &426183245
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 426183243}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 13
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &446973556
 GameObject:
   m_ObjectHideFlags: 0
@@ -1967,7 +2014,7 @@ BoxCollider:
   m_GameObject: {fileID: 627081076}
   m_Material: {fileID: 0}
   m_IsTrigger: 1
-  m_Enabled: 1
+  m_Enabled: 0
   serializedVersion: 2
   m_Size: {x: 100, y: 100, z: 1}
   m_Center: {x: 0, y: 0, z: 0}
@@ -2564,7 +2611,7 @@ PrefabInstance:
     - target: {fileID: 5003807364923150143, guid: 1caa033e3f7a75b4f93bebf2fa5f752c,
         type: 3}
       propertyPath: m_RootOrder
-      value: 8
+      value: 7
       objectReference: {fileID: 0}
     - target: {fileID: 5003807364923150143, guid: 1caa033e3f7a75b4f93bebf2fa5f752c,
         type: 3}
@@ -4676,7 +4723,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: 23.699951, y: -27.30017}
+  m_AnchoredPosition: {x: 23.699951, y: -27.300354}
   m_SizeDelta: {x: 346.3, y: 269.3}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1442814580
@@ -5103,7 +5150,7 @@ Transform:
   - {fileID: 247800109}
   - {fileID: 1377789680}
   m_Father: {fileID: 0}
-  m_RootOrder: 7
+  m_RootOrder: 8
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!61 &1596802971
 BoxCollider2D:
