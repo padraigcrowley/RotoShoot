@@ -19,7 +19,7 @@ public class LevelManager : Singleton<LevelManager>
   public bool readyToFireAtPlayer = false; 
   private List<GameObject> enemyWaves = new List<GameObject>();
 
-  
+  public GameObject enemyMissilesParentPool;
 
   private void Awake()
   {
@@ -48,6 +48,9 @@ public class LevelManager : Singleton<LevelManager>
   }
   void Start()
   {
+    enemyMissilesParentPool = new GameObject("enemyMissilesParentPoolObject");
+    enemyMissilesParentPool.tag = "enemyMissilesParentPoolObject";
+
     numEnemyKillsInLevel = 0;
     currentTimeBetweenFiringAtPlayer = TIME_BETWEEN_FIRING_AT_PLAYER;
 

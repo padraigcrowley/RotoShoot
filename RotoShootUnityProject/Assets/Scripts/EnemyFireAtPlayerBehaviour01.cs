@@ -7,12 +7,15 @@ public class EnemyFireAtPlayerBehaviour01 : MonoBehaviour
   [SerializeField] private GameObject enemyMissile;
   private Mr1.EnemyBehaviour02 eb;
 
-  public GameObject enemyMissilesParentPool;
+  private GameObject enemyMissilesParentPool;
 
   void Start()
   {
     eb = GetComponent<Mr1.EnemyBehaviour02>();
-    enemyMissilesParentPool = new GameObject("enemyMissilesParentPoolObject");
+    enemyMissilesParentPool = GameObject.FindWithTag("enemyMissilesParentPoolObject");
+    if (enemyMissilesParentPool == null)
+      Debug.LogWarning("enemyMissilesParentPoolObject not found!");
+    //enemyMissilesParentPool = new GameObject("enemyMissilesParentPoolObject");
     //InvokeRepeating(nameof(this.FireMissileAtPlayerPos), 3, 5);
   }
 
@@ -31,9 +34,9 @@ public class EnemyFireAtPlayerBehaviour01 : MonoBehaviour
   private void FireMissileAtPlayerPos()
   {
     GameObject firedBullet;
-      
-        //firedBullet = Instantiate(enemyMissile, transform.position, transform.rotation);
-        firedBullet = SimplePool.Spawn(enemyMissile, transform.position, transform.rotation, enemyMissilesParentPool.transform);
-        //Debug.Log("FireMissileAtPlayerPos()");      
+
+    firedBullet = SimplePool.Spawn(enemyMissile, transform.position, transform.rotation, enemyMissilesParentPool.transform);
+    //firedBullet = SimplePool.Spawn(enemyMissile, transform.position, transform.rotation);
+        
   }
 }
