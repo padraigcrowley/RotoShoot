@@ -2,14 +2,16 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class AtmosSurface : MonoBehaviour
+public class AtmosSurface : ExtendedBehaviour
 {
   public GameObject atmosExplosion;
   public GameObject atmosExplosionInstance;
   // Start is called before the first frame update
+  GameObject parentPool;
+
   void Start()
   {
-
+     parentPool = new GameObject("ExplosionsParentPoolObject");
   }
 
   // Update is called once per frame
@@ -24,8 +26,14 @@ public class AtmosSurface : MonoBehaviour
     {
       if (collision.gameObject.tag.Equals("Enemy01"))
       {
-        atmosExplosionInstance = SimplePool.Spawn(atmosExplosion, collision.transform.position, collision.transform.rotation);
-        //todo: need to despawn this somehow/where
+        atmosExplosionInstance = SimplePool.Spawn(atmosExplosion, collision.transform.position, collision.transform.rotation, parentPool.transform);
+
+        //Wait(3, () => {
+        //  //Debug.Log("5 seconds is lost forever");
+        //  //SimplePool.Despawn (atmosExplosionInstance);   
+        //});
+
+
       }
     }
   }

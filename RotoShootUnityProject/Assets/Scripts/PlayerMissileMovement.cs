@@ -39,7 +39,7 @@ public class PlayerMissileMovement : MissileMovement
       {
         collided = true;
         hitFXTriggered = true;
-        hitVFX = SimplePool.Spawn(HitFXPrefab, transform.position, Quaternion.identity);
+        hitVFX = SimplePool.Spawn(HitFXPrefab, transform.position, Quaternion.identity, transform.parent);
         hitVFX.transform.forward = gameObject.transform.forward;// + offset;
         transform.localScale = new Vector3(.001f, .001f, .001f);// urgh, pretty hacky way to stop the missile projectile bullet being "drawn". Because can't SetActive(false) the missile object cos that will kill this script as well?
 

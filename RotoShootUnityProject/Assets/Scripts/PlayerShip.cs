@@ -22,6 +22,7 @@ public class PlayerShip : MonoBehaviour
   private bool PlayerShipOutroAnimPlaying = false;
   private bool playerShipMoving = false;
   public CameraShake camShakeScript;
+  public GameObject playerShipMissilesParentPool;
 
   void Start()
   {
@@ -33,7 +34,8 @@ public class PlayerShip : MonoBehaviour
     gameObject.SetActive(true);
     PlayerShipGFXAnim = GetComponentInChildren<Animator>();
     shipSpriteRenderer.GetComponentInChildren<Renderer>();
-    
+    playerShipMissilesParentPool = new GameObject("PlayerShipMissilesParentPoolObject");
+
   }
 
   void Update()
@@ -153,12 +155,12 @@ public class PlayerShip : MonoBehaviour
     {
       case GameplayManager.PlayerFiringState.STRAIGHT_SINGLE:
       case GameplayManager.PlayerFiringState.RAPID_FIRE_SINGLE:
-        SimplePool.Spawn(playerMissilePrefab, playerShipFrontTurret.position, playerShipFrontTurret.rotation);
+        SimplePool.Spawn(playerMissilePrefab, playerShipFrontTurret.position, playerShipFrontTurret.rotation,playerShipMissilesParentPool.transform);
         break;
       case GameplayManager.PlayerFiringState.ANGLED_TRIPLE:
-        SimplePool.Spawn(playerMissilePrefab, playerShipFrontTurret.position, playerShipFrontTurret.rotation);
-        SimplePool.Spawn(playerMissilePrefab, playerShipLeftTurret.position, playerShipLeftTurret.rotation);
-        SimplePool.Spawn(playerMissilePrefab, playerShipRightTurret.position, playerShipRightTurret.rotation);
+        SimplePool.Spawn(playerMissilePrefab, playerShipFrontTurret.position, playerShipFrontTurret.rotation, playerShipMissilesParentPool.transform);
+        SimplePool.Spawn(playerMissilePrefab, playerShipLeftTurret.position, playerShipLeftTurret.rotation, playerShipMissilesParentPool.transform);
+        SimplePool.Spawn(playerMissilePrefab, playerShipRightTurret.position, playerShipRightTurret.rotation, playerShipMissilesParentPool.transform);
         break;
       default:
         break;

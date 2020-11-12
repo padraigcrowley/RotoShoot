@@ -106,7 +106,7 @@ public class MissileMovement : ExtendedBehaviour
   {
     if (MuzzleFlashPrefab != null)
     {
-      muzzleVFX = SimplePool.Spawn(MuzzleFlashPrefab, transform.position, Quaternion.identity);
+      muzzleVFX = SimplePool.Spawn(MuzzleFlashPrefab, transform.position, Quaternion.identity, transform.parent);
       muzzleVFX.transform.forward = gameObject.transform.forward;// + offset;
 
       //var ps = muzzleVFX.GetComponent<ParticleSystem>();
