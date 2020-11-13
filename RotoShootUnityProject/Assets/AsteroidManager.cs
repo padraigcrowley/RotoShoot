@@ -1,5 +1,5 @@
-﻿using UnityEngine;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
+using UnityEngine;
 
 public class AsteroidManager : MonoBehaviour
 {
@@ -40,20 +40,18 @@ public class AsteroidManager : MonoBehaviour
   {
     for (int i = 0; i < 4; i++)
     {
-      Vector2 pos = new Vector2(1.28f, 4.0f + (i*2));
-      
-      int rnd = UnityEngine.Random.Range(0, 2) ;
+      Vector2 pos = new Vector2(1.28f, 4.0f + (i * 2));
+
+      int rnd = UnityEngine.Random.Range(0, 2);
       print($"RND was {rnd}");
 
-      if (rnd ==0)
+      //if (rnd == 0)
       {
-        
-        asteroids1Instance = SimplePool.Spawn(asteroids1Prefab, pos, transform.rotation, transform);
-      }
-      else
-      {
-        
         asteroids1Instance = SimplePool.Spawn(asteroids2Prefab, pos, transform.rotation, transform);
+      }
+      //else
+      {
+        //asteroids1Instance = SimplePool.Spawn(asteroids2Prefab, pos, transform.rotation, transform);
       }
       asteroidChildrenObjects.Add(asteroids1Instance);
     }
@@ -66,10 +64,6 @@ public class AsteroidManager : MonoBehaviour
     foreach (GameObject childObj in asteroidChildrenObjects)
     {
 
-      asteroids1RotationAnimator = childObj.GetComponent<Animator>();
-      asteroids1RotationAnimator.Play("asteroids_1", -1, Random.Range(0f, 1f));
-      asteroids1RotationAnimator.Play("asteroids_2", -1, Random.Range(0f, 1f)); //awful hack!!
-
       asteroid1Sprite = childObj.GetComponent<SpriteRenderer>();
       if (i == 1)
         asteroid1Sprite.flipX = true;
@@ -81,6 +75,12 @@ public class AsteroidManager : MonoBehaviour
         asteroid1Sprite.flipY = true;
       }
       asteroid1Sprite.transform.localScale *= Random.Range(.5f, 1.5f);
+      
+      asteroids1RotationAnimator = childObj.GetComponent<Animator>();
+      //asteroids1RotationAnimator.Play("asteroids_1", -1, Random.Range(0f, 1f));
+      asteroids1RotationAnimator.speed = 1+i;
+      asteroids1RotationAnimator.Play("asteroids_2", -1, Random.Range(0f, 1f)); //awful hack!!
+
       i++;
     }
   }

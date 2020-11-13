@@ -192,7 +192,7 @@ Material:
     - _GradTopRightCol: {r: 1, g: 0, b: 0, a: 1}
     - _GreyscaleTintColor: {r: 1, g: 1, b: 1, a: 1}
     - _HitEffectColor: {r: 1, g: 1, b: 1, a: 1}
-    - _InnerOutlineColor: {r: 0.029280389, g: 0.007843135, b: 0.08627451, a: 1}
+    - _InnerOutlineColor: {r: 0.007843135, g: 0.08627451, b: 0.009969941, a: 1}
     - _OutlineColor: {r: 1, g: 1, b: 1, a: 1}
     - _ShadowColor: {r: 0, g: 0, b: 0, a: 1}
     - _ShineColor: {r: 1, g: 1, b: 1, a: 1}
