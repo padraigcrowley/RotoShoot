@@ -16,6 +16,7 @@ TagManager:
   - Listener
   - PowerUp
   - Atmosphere
+  - enemyMissilesParentPoolObject
   layers:
   - Default
   - TransparentFX

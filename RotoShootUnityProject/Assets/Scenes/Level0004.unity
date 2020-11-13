@@ -160,6 +160,7 @@ MonoBehaviour:
   verticalDistBetweenEnemies: 2
   horizontalDistBetweenEnemies: 2
   readyToFireAtPlayer: 0
+  enemyMissilesParentPool: {fileID: 0}
 --- !u!4 &254305519
 Transform:
   m_ObjectHideFlags: 0

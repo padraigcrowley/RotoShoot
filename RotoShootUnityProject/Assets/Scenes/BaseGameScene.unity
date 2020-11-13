@@ -3493,6 +3493,7 @@ MonoBehaviour:
   PlayerShipIntroAnimCompleted: 0
   PlayerShipOutroAnimCompleted: 0
   camShakeScript: {fileID: 1061970255}
+  playerShipMissilesParentPool: {fileID: 0}
 --- !u!4 &1061970254
 Transform:
   m_ObjectHideFlags: 0
@@ -4723,7 +4724,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: 23.699951, y: -27.300354}
+  m_AnchoredPosition: {x: 23.699951, y: -27.300537}
   m_SizeDelta: {x: 346.3, y: 269.3}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1442814580
@@ -5136,6 +5137,7 @@ MonoBehaviour:
   PlayerShipIntroAnimCompleted: 0
   PlayerShipOutroAnimCompleted: 0
   camShakeScript: {fileID: 0}
+  playerShipMissilesParentPool: {fileID: 0}
 --- !u!4 &1596802969
 Transform:
   m_ObjectHideFlags: 0

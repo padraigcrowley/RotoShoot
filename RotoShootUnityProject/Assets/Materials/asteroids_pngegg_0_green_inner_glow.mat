@@ -73,7 +73,7 @@ Material:
     - _ClipUvUp: 0
     - _ColorChangeLuminosity: 0
     - _ColorChangeTolerance: 0.25
-    - _ColorRampLuminosity: 0
+    - _ColorRampLuminosity: -0.08
     - _ColorRampOutline: 0
     - _ColorSwapBlueLuminosity: 0.5
     - _ColorSwapGreenLuminosity: 0.5
@@ -114,9 +114,9 @@ Material:
     - _HsvBright: 1
     - _HsvSaturation: 1
     - _HsvShift: 180
-    - _InnerOutlineAlpha: 0.27
-    - _InnerOutlineGlow: 1
-    - _InnerOutlineThickness: 1.33
+    - _InnerOutlineAlpha: 0.13
+    - _InnerOutlineGlow: 68
+    - _InnerOutlineThickness: 1.1
     - _MaxXUV: 1
     - _MaxYUV: 1
     - _MinXUV: 0
@@ -145,7 +145,7 @@ Material:
     - _OutlineTexYSpeed: 0
     - _OutlineWidth: 0.004
     - _PinchUvAmount: 0.35
-    - _PixelateSize: 32
+    - _PixelateSize: 512
     - _PosterizeGamma: 0.75
     - _PosterizeNumColors: 8
     - _PosterizeOutline: 0
@@ -154,9 +154,9 @@ Material:
     - _RotateUvAmount: 0
     - _RoundWaveSpeed: 2
     - _RoundWaveStrength: 0.7
-    - _ShadowAlpha: 0.5
-    - _ShadowX: 0.1
-    - _ShadowY: -0.05
+    - _ShadowAlpha: 0.31
+    - _ShadowX: 0.5
+    - _ShadowY: -0.5
     - _ShakeUvSpeed: 2.5
     - _ShakeUvX: 1.5
     - _ShakeUvY: 1
@@ -192,7 +192,7 @@ Material:
     - _GradTopRightCol: {r: 1, g: 0, b: 0, a: 1}
     - _GreyscaleTintColor: {r: 1, g: 1, b: 1, a: 1}
     - _HitEffectColor: {r: 1, g: 1, b: 1, a: 1}
-    - _InnerOutlineColor: {r: 0.011569945, g: 0.03773582, b: 0.015127292, a: 1}
+    - _InnerOutlineColor: {r: 0.029280389, g: 0.007843135, b: 0.08627451, a: 1}
     - _OutlineColor: {r: 1, g: 1, b: 1, a: 1}
     - _ShadowColor: {r: 0, g: 0, b: 0, a: 1}
     - _ShineColor: {r: 1, g: 1, b: 1, a: 1}
