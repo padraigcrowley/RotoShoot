@@ -731,7 +731,7 @@ MonoBehaviour:
   basePlayerShipFireRate: 0.3
   maxEnemy0001HP: 0
   enemy0001BaseSpeed: 1
-  maxPlayerHP: 3
+  maxPlayerHP: 10
   shipLanes:
   - {x: -3.85, y: -6}
   - {x: -1.29, y: -6}

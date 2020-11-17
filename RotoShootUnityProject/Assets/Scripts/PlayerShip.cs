@@ -266,7 +266,16 @@ public class PlayerShip : MonoBehaviour
         print($"collision between this {transform.position} and other {collision.gameObject.transform.position}");
         DoCameraShake();
       }
+
+      if ((collision.gameObject.tag.Equals("Asteroid")))
+      {
+        print($"collision between this {transform.position} and asteroid {collision.gameObject.transform.position}");
+        DoCameraShake();
+      }
+
     }
+
+
   }
   void DoCameraShake()
   {
