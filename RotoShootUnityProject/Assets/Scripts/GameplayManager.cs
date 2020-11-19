@@ -34,7 +34,7 @@ public class GameplayManager : Singleton<GameplayManager>, IPowerUpEvents
   public int maxEnemy0001HP; //set in the inspector
   public float enemy0001BaseSpeed = 1.0f;
 
-  public int maxPlayerHP;
+  public int MAX_PLAYER_HP = 100;
 
   public Vector2[] shipLanes;// = new[] { new Vector2(-3.85f, -6f), new Vector2(-1.29f, -6f), new Vector2(1.29f, -6f), new Vector2(3.84f, -6f) };
 
@@ -54,7 +54,7 @@ public class GameplayManager : Singleton<GameplayManager>, IPowerUpEvents
     currentPlayerFiringState = PlayerFiringState.STRAIGHT_SINGLE;
     currentGameState = GameState.LEVEL_INTRO_IN_PROGRESS;
     currentPlayerMissileSpeedMultiplier = basePlayerMissileSpeedMultiplier;
-    currentPlayerHP = maxPlayerHP;
+    currentPlayerHP = MAX_PLAYER_HP;
     currentPlayerShipFireRate = basePlayerShipFireRate;
     mouseClickQueue = new Queue();
     currentPlayerScore = 0;
@@ -97,7 +97,7 @@ public class GameplayManager : Singleton<GameplayManager>, IPowerUpEvents
 
   public void initializeMainGameplayLoopForLevelRestart()
   {
-    currentPlayerHP = maxPlayerHP;
+    currentPlayerHP = MAX_PLAYER_HP;
     //gameState = 0;
     mouseClickQueue = new Queue();
     currentGameState = GameState.LEVEL_INTRO_IN_PROGRESS;
@@ -108,7 +108,7 @@ public class GameplayManager : Singleton<GameplayManager>, IPowerUpEvents
   }
   public void initializeMainGameplayLoopForNextLevel()
   {
-    //currentPlayerHP = maxPlayerHP;
+    //currentPlayerHP = MAX_PLAYER_HP;
     mouseClickQueue = new Queue();
 
     currentGameState = GameState.LEVEL_INTRO_IN_PROGRESS;

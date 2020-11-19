@@ -32,8 +32,10 @@ public class HealthBar : MonoBehaviour {
     }
 
     private void Start() {
-        healthBar = transform.Find("Health").GetComponent<Image>();
-        dropEffect = transform.Find("DropEffect").GetComponent<Image>();
+      SetMaxHealth(GameplayManager.Instance.MAX_PLAYER_HP)  ;
+      SetCurrentHealth(GameplayManager.Instance.currentPlayerHP);
+      healthBar = transform.Find("Health").GetComponent<Image>();
+      dropEffect = transform.Find("DropEffect").GetComponent<Image>();
     }
 
     private void Update() {

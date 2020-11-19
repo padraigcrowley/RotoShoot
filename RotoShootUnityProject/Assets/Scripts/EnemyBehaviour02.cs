@@ -34,6 +34,8 @@ namespace Mr1
     public GameObject[] availablePowerUps;
     public GameObject powerUpInstance;
 
+    public PlayerShip playerShip;
+
     virtual public float GetRespawnWaitDelay() => respawnWaitDelay;
 
     public abstract void ReactToNonLethalPlayerMissileHit(); //each enemy variant has to implement their own
@@ -73,13 +75,13 @@ namespace Mr1
             }
           case EnemyState.HIT_BY_PLAYER_SHIP:
             {
-              GameplayManager.Instance.currentPlayerHP--;
+              playerShip.ChangeShipHP(-20);
               TemporarilyDie();
               break;
             }
           case EnemyState.HIT_BY_ATMOSPHERE:
             {
-              GameplayManager.Instance.currentPlayerHP--;
+              playerShip.ChangeShipHP(-10);
               TemporarilyDie();
               break;
             }
@@ -152,6 +154,7 @@ namespace Mr1
 
       enemyState = EnemyState.WAITING_TO_RESPAWN;
 
+      playerShip = GameObject.FindGameObjectWithTag ("Player").GetComponent<PlayerShip>();
       upDirection = GameObject.FindGameObjectWithTag("Player").transform.up;
     }
 

@@ -119,6 +119,8 @@ MonoBehaviour:
   speedMultiplierFromSpawner: 1
   hpMultiplierFromSpawner: 1
   wayPointPathName: 
+  healthBar: {fileID: 114530257322874124, guid: 3c3f2424e239849edb89eb179429501d,
+    type: 3}
   enemyState: 0
   respawnWaitOver: 0
   availablePowerUps:

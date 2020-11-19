@@ -24,6 +24,8 @@ public class PlayerShip : MonoBehaviour
   public CameraShake camShakeScript;
   public GameObject playerShipMissilesParentPool;
 
+  public HealthBar healthBar;
+
   void Start()
   {
     //camShakeScript = GetComponent<CameraShake>();
@@ -265,18 +267,27 @@ public class PlayerShip : MonoBehaviour
       {
         print($"collision between this {transform.position} and other {collision.gameObject.transform.position}");
         DoCameraShake();
+        ChangeShipHP(-10);
       }
 
       if ((collision.gameObject.tag.Equals("Asteroid")))
       {
         print($"collision between this {transform.position} and asteroid {collision.gameObject.transform.position}");
         DoCameraShake();
+        ChangeShipHP(-25);
       }
 
     }
-
-
   }
+
+  //could be increment or decrement;
+  public void ChangeShipHP(int hpChange)
+    {
+      GameplayManager.Instance.currentPlayerHP += hpChange; //looks weird but negattive numbers are passed in for a decrease in HP
+      healthBar.SetCurrentHealth(GameplayManager.Instance.currentPlayerHP);
+    }
+
+ 
   void DoCameraShake()
   {
     camShakeScript.CameraShakeOnPlayerHit();

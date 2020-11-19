@@ -10,6 +10,8 @@ public class EnemyMissileMovement : MissileMovement
   private Vector3 movementVector = Vector2.zero;
   public float speed;
 
+  public HealthBar healthBar;
+
   protected override void OnEnable()
   {
     movementVector = (GameplayManager.Instance.playerShipPos - transform.position).normalized * speed;
@@ -25,7 +27,6 @@ public class EnemyMissileMovement : MissileMovement
 
       if ((HitFXPrefab != null) && (!hitFXTriggered))
       {
-        GameplayManager.Instance.currentPlayerHP--;
         collided = true;
         hitFXTriggered = true;
         hitVFX = SimplePool.Spawn(HitFXPrefab, transform.position, Quaternion.identity, transform.parent);
