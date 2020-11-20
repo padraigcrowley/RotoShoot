@@ -49,9 +49,10 @@ namespace GameJam.Editor.SceneSwitcher
             PlayerPrefs.SetString(PrefsKey, JsonUtility.ToJson(_sceneSwitcherData));
         }
 
-        private bool _editing = false;
+        //private bool _editing = false; - original code
+        private bool _editing = true; // my (PC) addition
 
-        private void OnGUI()
+    private void OnGUI()
         {
             if (Application.isPlaying)
             {

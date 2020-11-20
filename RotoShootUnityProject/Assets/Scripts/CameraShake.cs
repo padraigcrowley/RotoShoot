@@ -6,6 +6,7 @@ using DG.Tweening;
 public class CameraShake : MonoBehaviour
 {
   private Camera myCamera;
+ 
   private void Awake()
   {
     myCamera = FindObjectOfType<Camera>();

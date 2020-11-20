@@ -23,7 +23,7 @@ namespace Mr1
     private GameObject missileObject;
     private SpriteRenderer enemySpriteRenderer;
     private CircleCollider2D enemyCircleCollider;
-    private Vector3 upDirection;
+    protected Vector3 upDirection;
 
     public enum EnemyState { ALIVE, TEMPORARILY_DEAD, WAITING_TO_RESPAWN, INVINCIBLE, FULLY_DEAD, HIT_BY_PLAYER_MISSILE, HIT_BY_PLAYER_SHIP, HIT_BY_ATMOSPHERE }
 

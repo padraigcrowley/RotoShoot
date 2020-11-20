@@ -30,9 +30,8 @@ public class Enemy02_0000 : Mr1.EnemyBehaviour02
     Vector3 dir = GameplayManager.Instance.playerShipPos - transform.position;
     float angle = Mathf.Atan2(dir.y, dir.x) * Mathf.Rad2Deg + 90f;
     //transform.rotation = Quaternion.AngleAxis(angle, Vector3.forward);
-    transform.DORotateQuaternion(Quaternion.AngleAxis(angle, Vector3.forward),1);
-
-
+    //transform.DORotateQuaternion(Quaternion.AngleAxis(angle, Vector3.forward),1);
+    
   }
 
   public override void StopMovement()

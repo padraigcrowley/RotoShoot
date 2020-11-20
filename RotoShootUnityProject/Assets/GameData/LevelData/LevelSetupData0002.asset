@@ -13,7 +13,6 @@ MonoBehaviour:
   m_Name: LevelSetupData0002
   m_EditorClassIdentifier: 
   levelNumber: 2
-  levelControlType: 2
   numMaxActiveWaves: 1
   minTimeBetweenWaves: 2
   maxTimeBetweenWaves: 5
@@ -48,12 +47,14 @@ MonoBehaviour:
     WayPointPath: {fileID: 11400000, guid: 0243fbd1c3264a744aa8c9a201f59797, type: 2}
     numEnemiesInWave: 3
     timeBetweenSpawn: 0.5
-  blockedPlayerShipRotationAngles: 
   PlayerShipPos: {x: -1.28, y: -5, z: 0}
-  lccEnemyKills: 20
-  lccSurviveTime: 4
   shipLanes:
   - {x: -3.85, y: -5}
   - {x: -1.29, y: -5}
   - {x: 1.29, y: -5}
   - {x: 3.84, y: -5}
+  timeBetweenAsteroidShower: 30
+  lccEnemyKills: 20
+  lccSurviveTime: 4
+  levelControlType: 2
+  blockedPlayerShipRotationAngles: 

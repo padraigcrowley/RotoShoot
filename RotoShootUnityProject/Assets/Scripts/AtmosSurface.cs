@@ -9,6 +9,8 @@ public class AtmosSurface : ExtendedBehaviour
   // Start is called before the first frame update
   GameObject parentPool;
 
+  public CameraShake camShakeScript;
+
   void Start()
   {
      parentPool = new GameObject("ExplosionsParentPoolObject");
@@ -27,11 +29,8 @@ public class AtmosSurface : ExtendedBehaviour
       if (collision.gameObject.tag.Equals("Enemy01"))
       {
         atmosExplosionInstance = SimplePool.Spawn(atmosExplosion, collision.transform.position, collision.transform.rotation, parentPool.transform);
+        camShakeScript.CameraShakeOnPlayerHit();
 
-        //Wait(3, () => {
-        //  //Debug.Log("5 seconds is lost forever");
-        //  //SimplePool.Despawn (atmosExplosionInstance);   
-        //});
 
 
       }

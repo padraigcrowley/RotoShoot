@@ -20,12 +20,15 @@ public class LevelManager : Singleton<LevelManager>
   private List<GameObject> enemyWaves = new List<GameObject>();
 
   public GameObject enemyMissilesParentPool;
+  public float timeBetweenAsteroidShower;
 
   private void Awake()
   {
     GameplayManager.Instance.playerShipPos = levelSetupData.PlayerShipPos;
     GameplayManager.Instance.levelControlType = levelSetupData.levelControlType;
     GameplayManager.Instance.shipLanes = levelSetupData.shipLanes;
+    timeBetweenAsteroidShower = levelSetupData.timeBetweenAsteroidShower;
+
   }
 
   void InitializeLCC()
@@ -48,6 +51,7 @@ public class LevelManager : Singleton<LevelManager>
   }
   void Start()
   {
+
     enemyMissilesParentPool = new GameObject("enemyMissilesParentPoolObject");
     enemyMissilesParentPool.tag = "enemyMissilesParentPoolObject";
 

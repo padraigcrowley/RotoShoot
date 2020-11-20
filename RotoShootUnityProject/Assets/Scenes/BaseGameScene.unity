@@ -1456,6 +1456,7 @@ MonoBehaviour:
     type: 3}
   asteroids2Prefab: {fileID: 3202211514907023398, guid: b2d7ca24abb8c3e4aa100be1b4c99e70,
     type: 3}
+  numAsteroidLanes: 2
 --- !u!4 &426183245
 Transform:
   m_ObjectHideFlags: 0
@@ -5750,6 +5751,7 @@ GameObject:
   - component: {fileID: 1665425949}
   - component: {fileID: 1665425951}
   - component: {fileID: 1665425952}
+  - component: {fileID: 1665425953}
   m_Layer: 0
   m_Name: atmosphere_surface_1080x252_01
   m_TagString: Atmosphere
@@ -5863,6 +5865,19 @@ MonoBehaviour:
   atmosExplosion: {fileID: 5595871714586972966, guid: aa83ec4255e21cb4990b8016587a59ec,
     type: 3}
   atmosExplosionInstance: {fileID: 0}
+  camShakeScript: {fileID: 1665425953}
+--- !u!114 &1665425953
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1665425948}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: af7871c1e0b37b34183087fc737735de, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1671541790
 GameObject:
   m_ObjectHideFlags: 0

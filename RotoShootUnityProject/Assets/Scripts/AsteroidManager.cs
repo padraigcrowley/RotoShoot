@@ -5,62 +5,87 @@ public class AsteroidManager : MonoBehaviour
 {
   private GameObject asteroids1Instance, asteroids2Instance;
   public GameObject asteroids1Prefab, asteroids2Prefab;
-  private float travelSpeed = 4f;
+  private float travelSpeed = 6f;
 
-  private bool asteroidsCreated = false;
+  private bool asteroidsCanMove = false;
   private List<GameObject> asteroid1ChildrenObjects = new List<GameObject>();
   private List<GameObject> asteroid2ChildrenObjects = new List<GameObject>();
   private Animator asteroids1RotationAnimator, asteroids2RotationAnimator;
   private SpriteRenderer asteroid1Sprite, asteroid2Sprite;
 
-  private float timeBetweenAsteroidShower = 30f;
+  private float timeToNextAsteroidShower;
+  public int numAsteroidLanes = 2;
+
+  private float startingHeight = 13f;
 
   private void Start()
   {
+    timeToNextAsteroidShower = LevelManager.Instance.timeBetweenAsteroidShower;
+    CreateAsteroids();
+    GenerateAsteroidStartPositions();
+    AnimateAsteroids();
   }
 
   // Update is called once per frame
   private void Update()
   {
-    if ((Input.GetKeyDown(KeyCode.Space)) && (asteroidsCreated == false))
+    timeToNextAsteroidShower -= Time.deltaTime;
+    if (timeToNextAsteroidShower <= 0)
     {
-      CreateAsteroids();
-      AnimateAsteroids();
+      GenerateAsteroidStartPositions();
+      asteroidsCanMove = true;
+      timeToNextAsteroidShower = LevelManager.Instance.timeBetweenAsteroidShower;
     }
+    //if ((Input.GetKeyDown(KeyCode.Space)) && (asteroidsCreated == false))
+    //{
+    //}
   }
 
   private void FixedUpdate()
   {
-    if (asteroidsCreated)
+    if (asteroidsCanMove)
     {
       MoveAsteroids();
     }
+  }
+
+  private void GenerateAsteroidStartPositions()
+  {
+    int i = 0;
+    foreach (GameObject childObj in asteroid1ChildrenObjects)
+    {
+      childObj.transform.position = new Vector2(GameplayManager.Instance.shipLanes[UnityEngine.Random.Range(0, 4)].x, 14.0f + (i * 2));
+      i++;
+    }
+    i = 0;
+    foreach (GameObject childObj in asteroid2ChildrenObjects)
+    {
+      childObj.transform.position = new Vector2(GameplayManager.Instance.shipLanes[UnityEngine.Random.Range(0, 4)].x, 15.0f + (i * 2));
+      i++;
+    }
+
+
+    //  for (int i = 0; i < 4; i++)
+    //{
+    //   pos1[i] = new Vector2(GameplayManager.Instance.shipLanes[UnityEngine.Random.Range(0, 4)].x, 14.0f + (i * 2));
+    //   pos2[i] = new Vector2(GameplayManager.Instance.shipLanes[UnityEngine.Random.Range(0, 4)].x, 15.0f + (i * 2));
+    //}
   }
 
   private void CreateAsteroids()
   {
     for (int i = 0; i < 4; i++)
     {
-      Vector2 pos1 = new Vector2(1.28f, 4.0f + (i * 2));
-      Vector2 pos2 = new Vector2(3.84f, 5.0f + (i * 2));
-
       int rnd = UnityEngine.Random.Range(0, 2);
       print($"RND was {rnd}");
 
-      //if (rnd == 0)
-      {
-        asteroids1Instance = SimplePool.Spawn(asteroids1Prefab, pos1, transform.rotation, transform);
-        asteroids2Instance = SimplePool.Spawn(asteroids2Prefab, pos2, transform.rotation, transform);
-      }
-      //else
-      {
-        //asteroids1Instance = SimplePool.Spawn(asteroids2Prefab, pos, transform.rotation, transform);
-      }
+      asteroids1Instance = SimplePool.Spawn(asteroids1Prefab, new Vector2(15,0), transform.rotation, transform);
+      asteroids2Instance = SimplePool.Spawn(asteroids2Prefab, new Vector2(15, 0), transform.rotation, transform);
+      
       asteroid1ChildrenObjects.Add(asteroids1Instance);
       asteroid2ChildrenObjects.Add(asteroids2Instance);
     }
-    
-    asteroidsCreated = true;
+       
   }
 
   private void AnimateAsteroids()
