@@ -137,18 +137,38 @@ public class PlayerShip : MonoBehaviour
       }
       else if (GameplayManager.Instance.levelControlType == 2)
       {
-        if ((angleToRotate < 0) && (currentShipLane + 1 < GameplayManager.Instance.shipLanes.Length))
+        if ((angleToRotate < 0) && (currentShipLane + 1 < GameplayManager.Instance.shipLanes.Length)) //right
         {
           StartCoroutine(MovePlayerShip(GameplayManager.Instance.shipLanes[currentShipLane + 1]));
-          //print($"Current Ship lane: {currentShipLane}");
+          //print($"Turned Right. Current Ship lane: {currentShipLane}");
+          FlipSprite(1);
+          PlayerShipGFXAnim.Play("PlayerShipLeftTurn");
         }
         else if ((angleToRotate > 0) && (currentShipLane - 1 >= 0))
         {
-          StartCoroutine(MovePlayerShip(GameplayManager.Instance.shipLanes[currentShipLane - 1]));
-          //print($"Current Ship lane: {currentShipLane}");
+          StartCoroutine(MovePlayerShip(GameplayManager.Instance.shipLanes[currentShipLane - 1])); //left
+          //print($""Turned Left.Current Ship lane: {currentShipLane}");
+          FlipSprite(0);
+          PlayerShipGFXAnim.Play("PlayerShipLeftTurn");
         }
       }
     }
+  }
+
+  //left = 0, right = 1
+  void FlipSprite(int direction)
+  {
+    //https://stackoverflow.com/questions/26568542/flipping-a-2d-sprite-animation-in-unity-2d
+    // Switch the way the player is labelled as facing
+    //facingRight = !facingRight;
+
+    // Multiply the player's x local scale by -1
+    Vector3 theScale = transform.localScale;
+    if (direction == 0) 
+      theScale.x = 1;
+     else
+      theScale.x = -1;
+    transform.localScale = theScale;
   }
 
   private void CreatePlayerBullets()
@@ -177,7 +197,7 @@ public class PlayerShip : MonoBehaviour
 
     Tween myTween;
 
-    if (playerShipMoving)      yield break;
+    if (playerShipMoving)      yield break; // if playership is already moving, return, do nothing.
     
     //validate the possible move before it's made
     if (oldX < newPos.x) // don't go past either boundary

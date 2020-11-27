@@ -520,7 +520,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1513019512}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalPosition: {x: -1.29, y: -6, z: 0}
   m_LocalScale: {x: 3, y: 3, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
@@ -539,6 +539,24 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   RedShipTurning: {fileID: 1513019513}
+  shipLanes:
+  - {x: -3.85, y: -6}
+  - {x: -1.29, y: -6}
+  - {x: 1.29, y: -6}
+  - {x: 3.84, y: -6}
+  playerShipFrontTurret: {fileID: 0}
+  playerShipLeftTurret: {fileID: 0}
+  playerShipRightTurret: {fileID: 0}
+  shipSpriteRenderer: {fileID: 0}
+  playerMissilePrefab: {fileID: 0}
+  playerShipTweenMoveSpeed: 1
+  playerShipTweenRotateSpeed: 0.25
+  PlayerShipIntroAnimCompleted: 0
+  PlayerShipOutroAnimCompleted: 0
+  playerShipPos: {x: 0, y: 0, z: 0}
+  camShakeScript: {fileID: 0}
+  playerShipMissilesParentPool: {fileID: 0}
+  healthBar: {fileID: 0}
 --- !u!1 &1569754090
 GameObject:
   m_ObjectHideFlags: 0
