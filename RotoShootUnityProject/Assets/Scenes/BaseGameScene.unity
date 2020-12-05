@@ -2557,6 +2557,7 @@ MonoBehaviour:
   camShakeScript: {fileID: 730232682}
   playerShipMissilesParentPool: {fileID: 0}
   healthBar: {fileID: 1420336718}
+  PlayerShipDamageLarge: {fileID: 0}
 --- !u!4 &730232686
 Transform:
   m_ObjectHideFlags: 0
@@ -3767,6 +3768,8 @@ MonoBehaviour:
   camShakeScript: {fileID: 1061970255}
   playerShipMissilesParentPool: {fileID: 0}
   healthBar: {fileID: 1420336718}
+  PlayerShipDamageLarge: {fileID: 139844, guid: bd9cbf3a6ae77524788b4bbdb5422498,
+    type: 3}
 --- !u!4 &1061970254
 Transform:
   m_ObjectHideFlags: 0
@@ -5704,6 +5707,7 @@ MonoBehaviour:
   camShakeScript: {fileID: 0}
   playerShipMissilesParentPool: {fileID: 0}
   healthBar: {fileID: 0}
+  PlayerShipDamageLarge: {fileID: 0}
 --- !u!4 &1596802969
 Transform:
   m_ObjectHideFlags: 0

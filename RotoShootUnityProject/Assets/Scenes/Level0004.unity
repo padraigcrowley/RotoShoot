@@ -390,7 +390,7 @@ GameObject:
   - component: {fileID: 873275270}
   - component: {fileID: 873275269}
   m_Layer: 0
-  m_Name: Quad_01
+  m_Name: StarsSmall
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -741,7 +741,7 @@ GameObject:
   - component: {fileID: 1483126678}
   - component: {fileID: 1483126682}
   m_Layer: 0
-  m_Name: Quad
+  m_Name: StarsBig
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -933,7 +933,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1c547c1ff17c18349bc00c44e2e1eb5d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  scrollSpeed: 0.05
+  scrollSpeed: 0.1
   scrollSpeedMultiplier: 8.59
 --- !u!1 &1932102075
 GameObject:

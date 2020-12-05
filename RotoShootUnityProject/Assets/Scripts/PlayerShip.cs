@@ -4,7 +4,7 @@ using UnityEngine;
 using DG.Tweening;
 using DG.Tweening.Plugins.Core;
 
-public class PlayerShip : MonoBehaviour
+public class PlayerShip : ExtendedBehaviour
 {
   Animator PlayerShipGFXAnim;
   private float nextActionTime = 0.0f;
@@ -25,6 +25,8 @@ public class PlayerShip : MonoBehaviour
   public GameObject playerShipMissilesParentPool;
 
   public HealthBar healthBar;
+
+  public GameObject PlayerShipDamageLarge;
 
   void Start()
   {
@@ -285,6 +287,14 @@ public class PlayerShip : MonoBehaviour
     {
       if ((collision.gameObject.tag.Equals("Enemy01")) || (collision.gameObject.tag.Equals("EnemyMissile")))
       {
+        //GameObject newParticleEffect = GameObject.Instantiate(PlayerShipDamageLarge, transform.position, PlayerShipDamageLarge.transform.rotation, transform ) as GameObject;
+        GameObject newParticleEffect = SimplePool.Spawn(PlayerShipDamageLarge, collision.gameObject.transform.position, PlayerShipDamageLarge.transform.rotation, transform) as GameObject;
+        
+        Wait(2, () => {
+          Debug.Log("Despawn(newParticleEffect)");
+          SimplePool.Despawn(newParticleEffect);
+        });
+
         print($"collision between this {transform.position} and other {collision.gameObject.transform.position}");
         DoCameraShake();
         ChangeShipHP(-10);
@@ -292,6 +302,12 @@ public class PlayerShip : MonoBehaviour
 
       if ((collision.gameObject.tag.Equals("Asteroid")))
       {
+        GameObject newParticleEffect = SimplePool.Spawn(PlayerShipDamageLarge, collision.gameObject.transform.position, PlayerShipDamageLarge.transform.rotation, transform) as GameObject;
+
+        Wait(2, () => {
+          Debug.Log("Despawn(newParticleEffect)");
+          SimplePool.Despawn(newParticleEffect);
+        });
         print($"collision between this {transform.position} and asteroid {collision.gameObject.transform.position}");
         DoCameraShake();
         ChangeShipHP(-25);

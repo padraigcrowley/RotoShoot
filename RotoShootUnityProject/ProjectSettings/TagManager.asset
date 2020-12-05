@@ -18,6 +18,7 @@ TagManager:
   - Atmosphere
   - enemyMissilesParentPoolObject
   - Asteroid
+  - Missile
   layers:
   - Default
   - TransparentFX
@@ -63,4 +64,7 @@ TagManager:
     locked: 0
   - name: PlayerShip
     uniqueID: 2799291549
+    locked: 0
+  - name: VFX_OverPlayerShip
+    uniqueID: 1230181191
     locked: 0
