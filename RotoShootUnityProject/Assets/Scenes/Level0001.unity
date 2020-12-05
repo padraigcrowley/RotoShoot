@@ -160,8 +160,8 @@ MonoBehaviour:
   verticalDistBetweenEnemies: 2
   horizontalDistBetweenEnemies: 2
   readyToFireAtPlayer: 0
-  totalEnemyKillCount: 0
-  enemyKillPowerUpDropFrequency: 5
+  enemyMissilesParentPool: {fileID: 0}
+  timeBetweenAsteroidShower: 0
 --- !u!4 &254305519
 Transform:
   m_ObjectHideFlags: 0
@@ -566,7 +566,7 @@ SpriteRenderer:
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: -1624045745
-  m_SortingLayer: -3
+  m_SortingLayer: -1
   m_SortingOrder: 1
   m_Sprite: {fileID: 21300000, guid: c29e78f8a78ef1c49b364dc05d265bcb, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 0.19607843}
