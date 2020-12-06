@@ -23,3 +23,16 @@ public class LevelSetupData : ScriptableObject
   public int[] blockedPlayerShipRotationAngles;// rotation angles that will be blocked. 
 
 }
+
+[System.Serializable]
+public class EnemySpawnPointData
+{
+  public GameObject enemyPrefab;
+  public Vector2 startPos;
+  public float verticalDistBetweenEnemies = 2.0f, horizontalDistBetweenEnemies = 0.0f;
+  public float speedMultiplier, hpMultiplier;
+  public SWS.PathManager WaypointPathManager;
+  public float numEnemiesInWave = 1;
+  public float timeBetweenSpawn = .5f;
+
+}

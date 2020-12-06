@@ -8,7 +8,7 @@ using DG.Tweening;
 /// Enemy type that flys into centre of screen (or wherever playership is), towards player ship
 /// </summary>
 
-public class Enemy02_0000 : Mr1.EnemyBehaviour02
+public class Enemy02_0000 : EnemyBehaviour02
 {
   protected override void Start()
   {
@@ -17,7 +17,7 @@ public class Enemy02_0000 : Mr1.EnemyBehaviour02
     
 
   }
-  public override void DoMovement(float initialSpeed, Mr1.FollowType followType)
+  public override void DoMovement(float initialSpeed)
   {
     
     float step = speed * Time.deltaTime; // calculate distance to move

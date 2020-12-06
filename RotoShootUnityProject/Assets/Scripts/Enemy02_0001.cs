@@ -6,10 +6,10 @@ using UnityEngine;
 /// Enemy type that starts at top of screen, flys straight down lane to bottom of screen.
 /// </summary>
 
-public class Enemy02_0001 : Mr1.EnemyBehaviour02
+public class Enemy02_0001 : EnemyBehaviour02
 {
 
-  public override void DoMovement(float initialSpeed, Mr1.FollowType followType)
+  public override void DoMovement(float initialSpeed)
   {
     float step = initialSpeed * Time.deltaTime; // calculate distance to move
     transform.position = Vector3.MoveTowards(transform.position, new Vector2(transform.position.x, transform.position.y-20f), step);

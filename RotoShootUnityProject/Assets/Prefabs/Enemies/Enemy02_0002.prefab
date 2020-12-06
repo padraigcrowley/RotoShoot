@@ -14,8 +14,7 @@ GameObject:
   - component: {fileID: 4342350733379744940}
   - component: {fileID: 9154484834150509947}
   - component: {fileID: 4342350733379744942}
-  - component: {fileID: 7832125283150114999}
-  - component: {fileID: 4250679590043128060}
+  - component: {fileID: 3734171053722212203}
   m_Layer: 0
   m_Name: Enemy02_0002
   m_TagString: Enemy01
@@ -75,7 +74,7 @@ SpriteRenderer:
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: -1079083179
-  m_SortingLayer: -2
+  m_SortingLayer: 1
   m_SortingOrder: 1
   m_Sprite: {fileID: 21300000, guid: 671b275056161184d86ecabfcc822f7a, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
@@ -118,15 +117,14 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   speedMultiplierFromSpawner: 1
   hpMultiplierFromSpawner: 1
-  wayPointPathName: 
-  healthBar: {fileID: 114530257322874124, guid: 3c3f2424e239849edb89eb179429501d,
-    type: 3}
   enemyState: 0
   respawnWaitOver: 0
   availablePowerUps:
   - {fileID: 6977473367615493525, guid: b9a8e0a5335ee3e47b055b774a7f505d, type: 3}
   - {fileID: 2477514511899951309, guid: eb9180948b5035b43b6db1ba58a5f999, type: 3}
   powerUpInstance: {fileID: 0}
+  playerShip: {fileID: 0}
+  moveRef: {fileID: 0}
   startedOnPath: 0
   enemyMissile: {fileID: 1374267004960804, guid: ed8c5fb58e698c5418529f8aee4e4848,
     type: 3}
@@ -165,7 +163,7 @@ Rigidbody2D:
   m_SleepingMode: 1
   m_CollisionDetection: 0
   m_Constraints: 0
---- !u!114 &7832125283150114999
+--- !u!114 &3734171053722212203
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -174,27 +172,35 @@ MonoBehaviour:
   m_GameObject: {fileID: 4342350733379744943}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 60c46bd7c4acb804597a5b28c505c0ff, type: 3}
+  m_Script: {fileID: 11500000, guid: 4a2d9078dbe17bc4f966c9d2310be047, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  logMessage: 0
-  pathData: {fileID: 11400000, guid: 0f7f2978d19808143bd99d8259a325da, type: 2}
-  followType: 0
-  followDirection: 0
-  moveSpeed: 10
-  rotateSpeed: 10
-  _flip: 0
-  _lookForward: 0
-  _smoothLookForward: 0
---- !u!114 &4250679590043128060
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4342350733379744943}
-  m_Enabled: 0
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: cc7a67aaee587cd49a746cd4e2f7f752, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
+  pathContainer: {fileID: 4639713800137293240, guid: 799b3fa60793490498aaecc6ce7d6c42,
+    type: 3}
+  onStart: 0
+  moveToPath: 0
+  reverse: 0
+  startPoint: 0
+  currentPoint: 0
+  closeLoop: 0
+  localType: 0
+  lookAhead: 0
+  sizeToAdd: 0
+  timeValue: 1
+  speed: 5
+  animEaseType:
+    serializedVersion: 2
+    m_Curve: []
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  loopType: 0
+  waypoints: []
+  events: []
+  pathType: 1
+  pathMode: 2
+  easeType: 1
+  lockPosition: 0
+  lockRotation: -1
+  waypointRotation: 0
+  rotationTarget: {fileID: 0}

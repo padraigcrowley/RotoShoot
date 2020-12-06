@@ -6,7 +6,7 @@ using UnityEngine;
 /// Enemy type that follows waypoint path
 /// </summary>
 
-public class Enemy02_0002 : Mr1.EnemyBehaviour02
+public class Enemy02_0002 : EnemyBehaviour02
 {
   public bool startedOnPath = false;
   [SerializeField] private GameObject enemyMissile;
@@ -24,24 +24,18 @@ public class Enemy02_0002 : Mr1.EnemyBehaviour02
     //Debug.Log("Enemy02_0002 update method");
   }
 
-  public override void DoMovement(float initialSpeed, Mr1.FollowType followType)
+  public override void DoMovement(float initialSpeed)
   {
     if (!startedOnPath)
     {
-      transform.FollowPath(wayPointPathName, initialSpeed, Mr1.FollowType.Loop).Log(false);
+      
       startedOnPath = true;
     }
   }
 
-  //private void FireMissileAtPlayerPos()
-  //{
-  //  GameObject firedBullet = Instantiate(enemyMissile, transform.position, transform.rotation);
-  //  Debug.Log("FireMissileAtPlayerPos()");
-  //}
-
   public override void StopMovement()
   {
-    transform.StopFollowing();
+    
     startedOnPath = false;
   }
 

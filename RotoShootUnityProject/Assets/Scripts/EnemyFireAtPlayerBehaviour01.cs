@@ -5,13 +5,13 @@ using UnityEngine;
 public class EnemyFireAtPlayerBehaviour01 : MonoBehaviour
 {
   [SerializeField] private GameObject enemyMissile;
-  private Mr1.EnemyBehaviour02 eb;
+  private EnemyBehaviour02 eb;
 
   private GameObject enemyMissilesParentPool;
 
   void Start()
   {
-    eb = GetComponent<Mr1.EnemyBehaviour02>();
+    eb = GetComponent<EnemyBehaviour02>();
     enemyMissilesParentPool = GameObject.FindWithTag("enemyMissilesParentPoolObject");
     if (enemyMissilesParentPool == null)
       Debug.LogWarning("enemyMissilesParentPoolObject not found!");
@@ -23,7 +23,7 @@ public class EnemyFireAtPlayerBehaviour01 : MonoBehaviour
   void Update()
   {
     //Dont shoot if the y pos is almost same as playership
-    if ((LevelManager.Instance.readyToFireAtPlayer == true) && (eb.enemyState == Mr1.EnemyBehaviour02.EnemyState.ALIVE) && (transform.position.y - 3 > GameplayManager.Instance.playerShipPos.y))
+    if ((LevelManager.Instance.readyToFireAtPlayer == true) && (eb.enemyState == EnemyBehaviour02.EnemyState.ALIVE) && (transform.position.y - 3 > GameplayManager.Instance.playerShipPos.y))
     {
       FireMissileAtPlayerPos();
       LevelManager.Instance.readyToFireAtPlayer = false;

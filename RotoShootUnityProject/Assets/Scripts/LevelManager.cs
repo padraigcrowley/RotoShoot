@@ -1,5 +1,4 @@
 ﻿using JetBrains.Annotations;
-using Mr1;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -76,10 +75,13 @@ public class LevelManager : Singleton<LevelManager>
       for (int i = 0; i < sp.numEnemiesInWave; i++)
       {
         GameObject enemy = Instantiate(sp.enemyPrefab, new Vector3(sp.startPos.x + (i * horizontalDistBetweenEnemies), sp.startPos.y + (i * verticalDistBetweenEnemies)), Quaternion.identity, waveParentObject.transform);
-        enemy.GetComponent<Mr1.EnemyBehaviour02>().speedMultiplierFromSpawner = sp.speedMultiplier;
-        enemy.GetComponent<Mr1.EnemyBehaviour02>().hpMultiplierFromSpawner = sp.hpMultiplier;
-        if (sp.WayPointPath != null)
-          enemy.GetComponent<Mr1.EnemyBehaviour02>().wayPointPathName = sp.WayPointPath.pathName;
+        enemy.GetComponent<EnemyBehaviour02>().speedMultiplierFromSpawner = sp.speedMultiplier;
+        enemy.GetComponent<EnemyBehaviour02>().hpMultiplierFromSpawner = sp.hpMultiplier;
+        //if (sp.WayPointPath != null)
+          //enemy.GetComponent<Mr1.EnemyBehaviour02>().wayPointPathName = sp.WayPointPath.pathName;
+        //if (sp.WaypointPathManager != null)
+        //  enemy.GetComponent<EnemyBehaviour02>().moveRef.pathContainer = sp.WaypointPathManager;
+        //print($"sp.WaypointPathManager: {sp.WaypointPathManager}");
       }
       index++;
     }
