@@ -31,7 +31,7 @@ public class EnemySpawnPointData
   public Vector2 startPos;
   public float verticalDistBetweenEnemies = 2.0f, horizontalDistBetweenEnemies = 0.0f;
   public float speedMultiplier, hpMultiplier;
-  public SWS.PathManager WaypointPathManager;
+  public SWS.PathManager waypointPath;
   public float numEnemiesInWave = 1;
   public float timeBetweenSpawn = .5f;
 

@@ -77,11 +77,11 @@ public class LevelManager : Singleton<LevelManager>
         GameObject enemy = Instantiate(sp.enemyPrefab, new Vector3(sp.startPos.x + (i * horizontalDistBetweenEnemies), sp.startPos.y + (i * verticalDistBetweenEnemies)), Quaternion.identity, waveParentObject.transform);
         enemy.GetComponent<EnemyBehaviour02>().speedMultiplierFromSpawner = sp.speedMultiplier;
         enemy.GetComponent<EnemyBehaviour02>().hpMultiplierFromSpawner = sp.hpMultiplier;
-        //if (sp.WayPointPath != null)
-          //enemy.GetComponent<Mr1.EnemyBehaviour02>().wayPointPathName = sp.WayPointPath.pathName;
-        //if (sp.WaypointPathManager != null)
-        //  enemy.GetComponent<EnemyBehaviour02>().moveRef.pathContainer = sp.WaypointPathManager;
-        //print($"sp.WaypointPathManager: {sp.WaypointPathManager}");
+        if (sp.waypointPath != null)
+        {
+          //print($"In LevelManager, sp.waypointPath: {sp.waypointPath}");
+          enemy.GetComponent<EnemyBehaviour02>().waypointPath = sp.waypointPath;
+        }
       }
       index++;
     }

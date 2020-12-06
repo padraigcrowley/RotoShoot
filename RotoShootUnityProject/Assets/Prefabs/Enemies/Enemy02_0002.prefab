@@ -124,7 +124,7 @@ MonoBehaviour:
   - {fileID: 2477514511899951309, guid: eb9180948b5035b43b6db1ba58a5f999, type: 3}
   powerUpInstance: {fileID: 0}
   playerShip: {fileID: 0}
-  moveRef: {fileID: 0}
+  waypointPath: {fileID: 0}
   startedOnPath: 0
   enemyMissile: {fileID: 1374267004960804, guid: ed8c5fb58e698c5418529f8aee4e4848,
     type: 3}
@@ -175,10 +175,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4a2d9078dbe17bc4f966c9d2310be047, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  pathContainer: {fileID: 4639713800137293240, guid: 799b3fa60793490498aaecc6ce7d6c42,
+  pathContainer: {fileID: 3729171643158534044, guid: 2d06ac0a1c0e5df41a0481119688c1f4,
     type: 3}
   onStart: 0
-  moveToPath: 0
+  moveToPath: 1
   reverse: 0
   startPoint: 0
   currentPoint: 0
@@ -187,7 +187,7 @@ MonoBehaviour:
   lookAhead: 0
   sizeToAdd: 0
   timeValue: 1
-  speed: 5
+  speed: 1
   animEaseType:
     serializedVersion: 2
     m_Curve: []

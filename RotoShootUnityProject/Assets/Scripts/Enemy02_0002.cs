@@ -28,7 +28,7 @@ public class Enemy02_0002 : EnemyBehaviour02
   {
     if (!startedOnPath)
     {
-      
+      splineMoveScript.StartMove();
       startedOnPath = true;
     }
   }

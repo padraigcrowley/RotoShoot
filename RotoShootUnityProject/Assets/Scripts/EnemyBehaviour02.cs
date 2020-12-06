@@ -35,7 +35,8 @@ public abstract class EnemyBehaviour02 : ExtendedBehaviour
 
   public PlayerShip playerShip;
 
-  public splineMove moveRef;
+  public SWS.PathManager waypointPath;
+  protected splineMove splineMoveScript;
 
   virtual public float GetRespawnWaitDelay() => respawnWaitDelay;
 
@@ -47,12 +48,6 @@ public abstract class EnemyBehaviour02 : ExtendedBehaviour
 
   protected virtual void Start()
   {
-    
-    //TODO    !!!!!!!!!!!!
-    moveRef = GetComponent<splineMove>();
-    moveRef.StartMove();
-    //TODO   !!!!!!!!!!!!!!!!!!!!!!!!!!!!
-
     InitialSetup();
   }
 
@@ -138,11 +133,11 @@ public abstract class EnemyBehaviour02 : ExtendedBehaviour
   private void InitialSetup()
   {
     //todo - move this out to GameplayManager or to sub-class or enemy prefab??
-    speed = 1.0f;
+    
     hp = 1f;
-    initialSpeed = speed * speedMultiplierFromSpawner; // todo: should these be set in this class, not MyGameplayManager??
+    speed = 1f;
+    speed *= speedMultiplierFromSpawner;
     initialHP = hp * hpMultiplierFromSpawner;
-    speed = initialSpeed;
     hp = initialHP;
 
     enemyHitByPlayerMissile = false;
@@ -163,6 +158,11 @@ public abstract class EnemyBehaviour02 : ExtendedBehaviour
 
     playerShip = GameObject.FindGameObjectWithTag("Player").GetComponent<PlayerShip>();
     upDirection = GameObject.FindGameObjectWithTag("Player").transform.up;
+
+    //print($"In EnemyBehaviour02, waypointPath= {waypointPath}");
+    splineMoveScript = GetComponent<splineMove>();
+    splineMoveScript.pathContainer = waypointPath;
+    splineMoveScript.speed = this.speed;
   }
 
   private void HandleDamage()
