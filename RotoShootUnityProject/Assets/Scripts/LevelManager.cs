@@ -20,6 +20,7 @@ public class LevelManager : Singleton<LevelManager>
 
   public GameObject enemyMissilesParentPool;
   public float timeBetweenAsteroidShower;
+  private bool currentlyActivatingWave = false;
 
   private void Awake()
   {
@@ -100,23 +101,12 @@ public class LevelManager : Singleton<LevelManager>
       //print($"NumActiveWaves = { GetNumActiveWaves()}");
       //if there are less than the number of maxwaves, activate another (random) wave
       int numActiveWaves = GetNumActiveWaves();
-      if (numActiveWaves < levelSetupData.numMaxActiveWaves)
+      if ((numActiveWaves < levelSetupData.numMaxActiveWaves) && (currentlyActivatingWave == false))
       {
-        numActiveWaves++;
-        var enemyWave = enemyWaves[Random.Range(0, enemyWaves.Count)];
-        int enemyIndex = 0;
-        foreach (Transform enemyShipObjectTransform in enemyWave.transform)
-        {
-          EnemyBehaviour02 enemyShipScript = enemyShipObjectTransform.gameObject.GetComponent<EnemyBehaviour02>();
-                    
-          Wait(enemyShipScript.timeBetweenSpawn*enemyIndex, () =>
-          {
-            enemyShipScript.waveRespawnWaitOver = true;
-            print($"in LevelManager, waited for timeBetweenSpawn ({enemyShipScript.timeBetweenSpawn*enemyIndex}) seconds");
-          });
-          enemyIndex++;
-          
-        }
+        
+          StartCoroutine(ActivateEnemyWave());
+        
+        
       }
 
       if (readyToFireAtPlayer == false)
@@ -132,6 +122,23 @@ public class LevelManager : Singleton<LevelManager>
       CheckLCC(); // check LevelCompletionCriteria
     }
   }
+
+  IEnumerator ActivateEnemyWave()
+  {
+    currentlyActivatingWave = true;
+    var enemyWave = enemyWaves[Random.Range(0, enemyWaves.Count)];
+    int enemyIndex = 0;
+
+    foreach (Transform enemyShipObjectTransform in enemyWave.transform)
+    {
+      EnemyBehaviour02 enemyShipScript = enemyShipObjectTransform.gameObject.GetComponent<EnemyBehaviour02>();
+      yield return new WaitForSeconds(enemyShipScript.timeBetweenSpawn);
+      print($"in LevelManager, waited for timeBetweenSpawn ({enemyShipScript.timeBetweenSpawn}) seconds");
+      enemyShipScript.waveRespawnWaitOver = true;
+    }
+    currentlyActivatingWave = false;
+  }
+
 
   /// <summary>
   /// loop through each of the enemywave parent gameobjects in the list, if any of the parent's children's state is ALIVE, increnent the number of active waves.
