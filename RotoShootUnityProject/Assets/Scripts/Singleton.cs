@@ -22,7 +22,7 @@ using UnityEngine;
 using System.Diagnostics;
 
 [DebuggerStepThrough]
-public class Singleton<T> : MonoBehaviour where T : MonoBehaviour
+public class Singleton<T> : ExtendedBehaviour where T : ExtendedBehaviour
 {
   private static T _instance = null;
   private static object _lock = new object();

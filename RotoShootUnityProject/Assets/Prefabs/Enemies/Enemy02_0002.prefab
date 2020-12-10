@@ -117,8 +117,12 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   speedMultiplierFromSpawner: 1
   hpMultiplierFromSpawner: 1
-  enemyState: 0
+  startPosX: 0
+  startPosY: 0
+  startPosZ: 0
+  enemyState: 2
   respawnWaitOver: 0
+  timeBetweenSpawn: 0
   availablePowerUps:
   - {fileID: 6977473367615493525, guid: b9a8e0a5335ee3e47b055b774a7f505d, type: 3}
   - {fileID: 2477514511899951309, guid: eb9180948b5035b43b6db1ba58a5f999, type: 3}
@@ -175,10 +179,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4a2d9078dbe17bc4f966c9d2310be047, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  pathContainer: {fileID: 3729171643158534044, guid: 2d06ac0a1c0e5df41a0481119688c1f4,
-    type: 3}
+  pathContainer: {fileID: 0}
   onStart: 0
-  moveToPath: 1
+  moveToPath: 0
   reverse: 0
   startPoint: 0
   currentPoint: 0

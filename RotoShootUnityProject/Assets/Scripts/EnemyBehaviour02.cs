@@ -13,7 +13,7 @@ public abstract class EnemyBehaviour02 : ExtendedBehaviour
   public float hpMultiplierFromSpawner = 1f;
   private float respawnWaitDelay = 2.0f; //default value unless overridden by derived class
  
-  protected float startPosX, startPosY, startPosZ;
+  public float startPosX, startPosY, startPosZ;
   private float startScaleX, startScaleY, startScaleZ;
 
   protected float initialHP, initialSpeed; //"protected" to allow abstract sub-class to access it
@@ -27,8 +27,11 @@ public abstract class EnemyBehaviour02 : ExtendedBehaviour
   public enum EnemyState { ALIVE, TEMPORARILY_DEAD, WAITING_TO_RESPAWN, INVINCIBLE, FULLY_DEAD, HIT_BY_PLAYER_MISSILE, HIT_BY_PLAYER_SHIP, HIT_BY_ATMOSPHERE }
 
   public EnemyState enemyState;
-  public bool respawnWaitOver;
+  public bool waveRespawnWaitOver;
+  private bool timeBetweenSpawnPassed = true;
   private bool startedWaiting;
+  public float timeBetweenSpawn;
+
 
   public GameObject[] availablePowerUps;
   public GameObject powerUpInstance;
@@ -94,13 +97,18 @@ public abstract class EnemyBehaviour02 : ExtendedBehaviour
             //{
             //  Wait(GetRespawnWaitDelay(), () =>
             //  {
-            //    respawnWaitOver = true;
-            //    //Debug.Log(respawnWaitDelay + " respawnWaitOver seconds passed");
+            //    waveRespawnWaitOver = true;
+            //    //Debug.Log(respawnWaitDelay + " waveRespawnWaitOver seconds passed");
             //  });
             //  startedWaiting = true;
             //}
-            if (respawnWaitOver)
-              Respawn();
+            if (waveRespawnWaitOver)
+            {
+              //if (timeBetweenSpawnPassed)
+              {
+                Respawn();
+              }
+            }
             break;
           }
         case EnemyState.INVINCIBLE:
@@ -141,15 +149,15 @@ public abstract class EnemyBehaviour02 : ExtendedBehaviour
     hp = initialHP;
 
     enemyHitByPlayerMissile = false;
-    respawnWaitOver = false;
+    waveRespawnWaitOver = false;
     startedWaiting = false;
 
     enemySpriteRenderer = GetComponent<SpriteRenderer>();
     enemyCircleCollider = GetComponent<CircleCollider2D>();
 
-    startPosX = transform.position.x;
-    startPosY = transform.position.y;
-    startPosZ = transform.position.z;
+    transform.position = new Vector2(startPosX, startPosY);
+    
+    //startPosZ = transform.position.z;
     startScaleX = transform.localScale.x;
     startScaleY = transform.localScale.y;
     startScaleZ = transform.localScale.z;
@@ -159,7 +167,6 @@ public abstract class EnemyBehaviour02 : ExtendedBehaviour
     playerShip = GameObject.FindGameObjectWithTag("Player").GetComponent<PlayerShip>();
     upDirection = GameObject.FindGameObjectWithTag("Player").transform.up;
 
-    //print($"In EnemyBehaviour02, waypointPath= {waypointPath}");
     splineMoveScript = GetComponent<splineMove>();
     splineMoveScript.pathContainer = waypointPath;
     splineMoveScript.speed = this.speed;
@@ -196,7 +203,7 @@ public abstract class EnemyBehaviour02 : ExtendedBehaviour
     }
     enemySpriteRenderer.enabled = false;
     enemyCircleCollider.enabled = false;
-    respawnWaitOver = false;
+    waveRespawnWaitOver = false;
     startedWaiting = false;
 
     StopMovement();
@@ -205,13 +212,23 @@ public abstract class EnemyBehaviour02 : ExtendedBehaviour
 
   private void Respawn()
   {
-    hp = initialHP; //reset health and position
-    transform.position = new Vector3(startPosX, startPosY, startPosZ);
-    transform.localScale = new Vector3(startScaleX, startScaleX, startScaleX); // reset its scale back to original scale
-    enemySpriteRenderer.enabled = true;
-    enemyCircleCollider.enabled = true;
+    print ("in Respawn()");
+    //Wait(timeBetweenSpawn, () => 
+    //{
+    //  timeBetweenSpawnPassed = true;
+    //});
 
-    enemyState = EnemyState.ALIVE;
+    if (timeBetweenSpawnPassed)
+    {
+      //print($"waited for timeBetweenSpawn ({timeBetweenSpawn}) seconds");
+      hp = initialHP; //reset health and position
+      transform.position = new Vector3(startPosX, startPosY, startPosZ);
+      transform.localScale = new Vector3(startScaleX, startScaleX, startScaleX); // reset its scale back to original scale
+      enemySpriteRenderer.enabled = true;
+      enemyCircleCollider.enabled = true;
+      enemyState = EnemyState.ALIVE;
+      //timeBetweenSpawnPassed = false;
+    }
   }
 
   private void OnTriggerEnter2D(Collider2D collision)

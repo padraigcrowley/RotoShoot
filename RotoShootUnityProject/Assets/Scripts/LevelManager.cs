@@ -74,13 +74,19 @@ public class LevelManager : Singleton<LevelManager>
 
       for (int i = 0; i < sp.numEnemiesInWave; i++)
       {
-        GameObject enemy = Instantiate(sp.enemyPrefab, new Vector3(sp.startPos.x + (i * horizontalDistBetweenEnemies), sp.startPos.y + (i * verticalDistBetweenEnemies)), Quaternion.identity, waveParentObject.transform);
-        enemy.GetComponent<EnemyBehaviour02>().speedMultiplierFromSpawner = sp.speedMultiplier;
-        enemy.GetComponent<EnemyBehaviour02>().hpMultiplierFromSpawner = sp.hpMultiplier;
+        Vector3 startingPosition = new Vector3(sp.startPos.x + (i * horizontalDistBetweenEnemies), sp.startPos.y + (i * verticalDistBetweenEnemies));
+        GameObject enemy = Instantiate(sp.enemyPrefab, startingPosition, Quaternion.identity, waveParentObject.transform);
+        enemy.name = "Wave"+index+ " Enemy"+ i;
+        EnemyBehaviour02 enemyScript = enemy.GetComponent<EnemyBehaviour02>();
+        enemyScript.startPosX = startingPosition.x;
+        enemyScript.startPosY = startingPosition.y;
+        enemyScript.speedMultiplierFromSpawner = sp.speedMultiplier;
+        enemyScript.hpMultiplierFromSpawner = sp.hpMultiplier;
+        enemyScript.timeBetweenSpawn = sp.timeBetweenSpawn;
         if (sp.waypointPath != null)
         {
           //print($"In LevelManager, sp.waypointPath: {sp.waypointPath}");
-          enemy.GetComponent<EnemyBehaviour02>().waypointPath = sp.waypointPath;
+          enemyScript.waypointPath = sp.waypointPath;
         }
       }
       index++;
@@ -93,11 +99,23 @@ public class LevelManager : Singleton<LevelManager>
     {
       //print($"NumActiveWaves = { GetNumActiveWaves()}");
       //if there are less than the number of maxwaves, activate another (random) wave
-      if (GetNumActiveWaves() < levelSetupData.numMaxActiveWaves)
+      int numActiveWaves = GetNumActiveWaves();
+      if (numActiveWaves < levelSetupData.numMaxActiveWaves)
       {
-        foreach (Transform enemyShipObjectTransform in enemyWaves[Random.Range(0, enemyWaves.Count)].transform)
+        numActiveWaves++;
+        var enemyWave = enemyWaves[Random.Range(0, enemyWaves.Count)];
+        int enemyIndex = 0;
+        foreach (Transform enemyShipObjectTransform in enemyWave.transform)
         {
-          enemyShipObjectTransform.gameObject.GetComponent<EnemyBehaviour02>().respawnWaitOver = true;
+          EnemyBehaviour02 enemyShipScript = enemyShipObjectTransform.gameObject.GetComponent<EnemyBehaviour02>();
+                    
+          Wait(enemyShipScript.timeBetweenSpawn*enemyIndex, () =>
+          {
+            enemyShipScript.waveRespawnWaitOver = true;
+            print($"in LevelManager, waited for timeBetweenSpawn ({enemyShipScript.timeBetweenSpawn*enemyIndex}) seconds");
+          });
+          enemyIndex++;
+          
         }
       }
 
@@ -128,7 +146,7 @@ public class LevelManager : Singleton<LevelManager>
       activeWave = false;
       foreach (Transform enemyShipObjectTransform in enemyWaveParentObject.transform)
       {
-        if (enemyShipObjectTransform.gameObject.GetComponent<EnemyBehaviour02>().enemyState == EnemyBehaviour02.EnemyState.ALIVE)
+        if (enemyShipObjectTransform.gameObject.GetComponent<EnemyBehaviour02>().enemyState != EnemyBehaviour02.EnemyState.WAITING_TO_RESPAWN)
         {
           activeWave = true;
         }
