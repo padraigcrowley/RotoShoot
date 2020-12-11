@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class PowerUpRapidFireSingle : PowerUp
 {
-  public float durationSeconds = 5f;
+  public float durationSeconds;
   public float currentPlayerShipFireRateIncrease = 3.0f;
   protected override void PowerUpPayload()
   {
@@ -15,10 +15,11 @@ public class PowerUpRapidFireSingle : PowerUp
     base.PowerUpPayload();
   }
 
-  // Start is called before the first frame update
-  //void Start()
-  //{
-  //}
+  protected override void Start()
+  {
+    durationSeconds = GameplayManager.Instance.powerupDurationSeconds;
+    base.Start();
+  }
 
   protected override void Update()
   {

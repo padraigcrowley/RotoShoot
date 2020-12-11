@@ -5,7 +5,7 @@ using UnityEngine;
 public class PowerUpTripleFireAngled : PowerUp
 {
   
-  public float durationSeconds = 5f;
+  private float durationSeconds;
   protected override void PowerUpPayload()
   {
     //do stuff specific to this PU//todo
@@ -15,11 +15,12 @@ public class PowerUpTripleFireAngled : PowerUp
   }
 
 
-  // Start is called before the first frame update
-  //void Start()
-  //{
 
-  //}
+  protected override void Start()
+  {
+    durationSeconds = GameplayManager.Instance.powerupDurationSeconds;
+    base.Start();
+  }
 
 
   protected override void Update()

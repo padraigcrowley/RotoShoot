@@ -1,0 +1,24 @@
+Things to upgrade
+- PlayerShip: PlayerShip Tween Move Speed
+- GameplayManager: Player Ship Fire Rate
+- GameplayManager: Player Missile Speed Multiplier (not so useful)
+- GameplayManager: PlayerHP
+
+	Also:
+	- Powerup duration
+
+
+
+	Key Tweakable values
+	- Powerup duration
+	- Rate of multiplier of triple speed fire (does it need to be X3?)
+	
+	Level Difficulty Modifiers
+	- Asteroids frequency 
+	- Enemy rates of fire
+	- Enemy speed
+	- Enemy HP
+	- Enemy speed of missile
+	- Enemy missile damage
+	- enamy collision with playership damage
+	- 
