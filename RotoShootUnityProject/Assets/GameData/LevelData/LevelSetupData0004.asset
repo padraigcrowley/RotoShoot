@@ -24,7 +24,8 @@ MonoBehaviour:
     horizontalDistBetweenEnemies: 2.55
     speedMultiplier: 3
     hpMultiplier: 1
-    WayPointPath: {fileID: 0}
+    waypointPath: {fileID: 4639713800137293240, guid: 799b3fa60793490498aaecc6ce7d6c42,
+      type: 3}
     numEnemiesInWave: 8
     timeBetweenSpawn: 0.5
   - enemyPrefab: {fileID: 4342350733379744943, guid: 3bf3914ccf51ea64aa01feaa452f98f3,
@@ -34,7 +35,8 @@ MonoBehaviour:
     horizontalDistBetweenEnemies: 0
     speedMultiplier: 3
     hpMultiplier: 3
-    WayPointPath: {fileID: 11400000, guid: 1c48dabd5c43ce447a04208ea9f6fa5b, type: 2}
+    waypointPath: {fileID: 4639713800137293240, guid: 799b3fa60793490498aaecc6ce7d6c42,
+      type: 3}
     numEnemiesInWave: 5
     timeBetweenSpawn: 0.5
   - enemyPrefab: {fileID: 4342350733379744943, guid: 3bf3914ccf51ea64aa01feaa452f98f3,
@@ -44,7 +46,8 @@ MonoBehaviour:
     horizontalDistBetweenEnemies: 0
     speedMultiplier: 5
     hpMultiplier: 1
-    WayPointPath: {fileID: 11400000, guid: 0243fbd1c3264a744aa8c9a201f59797, type: 2}
+    waypointPath: {fileID: 3729171643158534044, guid: 2d06ac0a1c0e5df41a0481119688c1f4,
+      type: 3}
     numEnemiesInWave: 3
     timeBetweenSpawn: 0.5
   - enemyPrefab: {fileID: 4342350733379744943, guid: 58d6cbe3a43bc064dba7367d40efb80b,
@@ -54,7 +57,8 @@ MonoBehaviour:
     horizontalDistBetweenEnemies: 3
     speedMultiplier: 2
     hpMultiplier: 1
-    WayPointPath: {fileID: 0}
+    waypointPath: {fileID: 3729171643158534044, guid: 2d06ac0a1c0e5df41a0481119688c1f4,
+      type: 3}
     numEnemiesInWave: 2
     timeBetweenSpawn: 0.5
   PlayerShipPos: {x: -1.28, y: -5, z: 0}

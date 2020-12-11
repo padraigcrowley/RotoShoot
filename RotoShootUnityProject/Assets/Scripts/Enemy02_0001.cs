@@ -9,9 +9,9 @@ using UnityEngine;
 public class Enemy02_0001 : EnemyBehaviour02
 {
 
-  public override void DoMovement(float initialSpeed)
+  public override void DoMovement()
   {
-    float step = initialSpeed * Time.deltaTime; // calculate distance to move
+    float step = speed * Time.deltaTime; // calculate distance to move
     transform.position = Vector3.MoveTowards(transform.position, new Vector2(transform.position.x, transform.position.y-20f), step);
     
   }

@@ -45,7 +45,7 @@ public abstract class EnemyBehaviour02 : ExtendedBehaviour
 
   public abstract void ReactToNonLethalPlayerMissileHit(); //each enemy variant has to implement their own
 
-  public abstract void DoMovement(float initialSpeed);
+  public abstract void DoMovement();
 
   public abstract void StopMovement();
 
@@ -62,7 +62,7 @@ public abstract class EnemyBehaviour02 : ExtendedBehaviour
       {
         case EnemyState.ALIVE:
           {
-            DoMovement(initialSpeed);
+            DoMovement();
             break;
           }
         case EnemyState.TEMPORARILY_DEAD:
@@ -168,8 +168,22 @@ public abstract class EnemyBehaviour02 : ExtendedBehaviour
     upDirection = GameObject.FindGameObjectWithTag("Player").transform.up;
 
     splineMoveScript = GetComponent<splineMove>();
-    splineMoveScript.pathContainer = waypointPath;
-    splineMoveScript.speed = this.speed;
+    if (splineMoveScript != null)
+    {
+      splineMoveScript.pathContainer = waypointPath;
+      splineMoveScript.speed = this.speed;
+    }
+
+
+    //if (TryGetComponent<splineMove>(out splineMove splineMoveScript))
+    //{
+    //  splineMoveScript.pathContainer = waypointPath;
+    //  splineMoveScript.speed = this.speed;
+    //}
+    //else
+    //{
+    //  Debug.LogError($"ERROR! no splineMove component found on {this.name}");
+    //}
   }
 
   private void HandleDamage()

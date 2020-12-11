@@ -155,7 +155,7 @@ MonoBehaviour:
   numEnemyKillsInLevel: 0
   TIME_BETWEEN_FIRING_AT_PLAYER: 2
   currentTimeBetweenFiringAtPlayer: 0
-  levelSetupData: {fileID: 11400000, guid: bb43da6cfb2d4b540ab456a3257e8927, type: 2}
+  levelSetupData: {fileID: 11400000, guid: da53f01ad7a998a4e8cffe2526c33a6e, type: 2}
   levelPlayTimeElapsed: 0
   verticalDistBetweenEnemies: 2
   horizontalDistBetweenEnemies: 2

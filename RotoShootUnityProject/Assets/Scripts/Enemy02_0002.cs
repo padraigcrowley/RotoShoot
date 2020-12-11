@@ -24,7 +24,7 @@ public class Enemy02_0002 : EnemyBehaviour02
     //Debug.Log("Enemy02_0002 update method");
   }
 
-  public override void DoMovement(float initialSpeed)
+  public override void DoMovement()
   {
     if (!startedOnPath)
     {

@@ -17,7 +17,7 @@ public class Enemy02_0000 : EnemyBehaviour02
     
 
   }
-  public override void DoMovement(float initialSpeed)
+  public override void DoMovement()
   {
     
     float step = speed * Time.deltaTime; // calculate distance to move

@@ -103,10 +103,7 @@ public class LevelManager : Singleton<LevelManager>
       int numActiveWaves = GetNumActiveWaves();
       if ((numActiveWaves < levelSetupData.numMaxActiveWaves) && (currentlyActivatingWave == false))
       {
-        
-          StartCoroutine(ActivateEnemyWave());
-        
-        
+        StartCoroutine(ActivateEnemyWave());
       }
 
       if (readyToFireAtPlayer == false)
@@ -127,7 +124,6 @@ public class LevelManager : Singleton<LevelManager>
   {
     currentlyActivatingWave = true;
     var enemyWave = enemyWaves[Random.Range(0, enemyWaves.Count)];
-    int enemyIndex = 0;
 
     foreach (Transform enemyShipObjectTransform in enemyWave.transform)
     {
