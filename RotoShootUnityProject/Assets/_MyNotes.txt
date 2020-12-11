@@ -3,15 +3,16 @@ Things to upgrade
 - GameplayManager: Player Ship Fire Rate
 - GameplayManager: Player Missile Speed Multiplier (not so useful)
 - GameplayManager: PlayerHP
-
 	Also:
-	- Powerup duration
+	- Powerup duration (global?)
 
 
 
 	Key Tweakable values
 	- Powerup duration
 	- Rate of multiplier of triple speed fire (does it need to be X3?)
+	- Damage done by asteroid collision
+	- Damaga done by enemies hitting atmos
 	
 	Level Difficulty Modifiers
 	- Asteroids frequency 

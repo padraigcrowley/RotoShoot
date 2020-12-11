@@ -17,7 +17,7 @@ MonoBehaviour:
   minTimeBetweenWaves: 2
   maxTimeBetweenWaves: 5
   levelEnemySpawnPointData:
-  - enemyPrefab: {fileID: 4342350733379744943, guid: 3bf3914ccf51ea64aa01feaa452f98f3,
+  - enemyPrefab: {fileID: 4342350733379744943, guid: 98337287636663844a798648967aa1c7,
       type: 3}
     startPos: {x: 0, y: 12}
     verticalDistBetweenEnemies: 0
@@ -26,7 +26,7 @@ MonoBehaviour:
     hpMultiplier: 1
     waypointPath: {fileID: 4639713800137293240, guid: 799b3fa60793490498aaecc6ce7d6c42,
       type: 3}
-    numEnemiesInWave: 10
+    numEnemiesInWave: 0
     timeBetweenSpawn: 0.5
   PlayerShipPos: {x: -1.28, y: -5, z: 0}
   shipLanes:

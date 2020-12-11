@@ -102,9 +102,7 @@ public class PlayerShip : ExtendedBehaviour
           //transform.rotation = Quaternion.identity; // reset to face upwards, back to its original rotation.
           shipSpriteRenderer.gameObject.GetComponent<Renderer>().enabled = false;
           PlayerShipIntroAnimCompleted = false;
-          
         break;
-
       default:
         break;
     }
@@ -143,7 +141,7 @@ public class PlayerShip : ExtendedBehaviour
         {
           StartCoroutine(MovePlayerShip(GameplayManager.Instance.shipLanes[currentShipLane + 1]));
           //print($"Turned Right. Current Ship lane: {currentShipLane}");
-          FlipSprite(1);
+          FlipSprite(1); //need to flip the sprite coz I only have banking anim in left direction
           PlayerShipGFXAnim.Play("PlayerShipLeftTurn");
         }
         else if ((angleToRotate > 0) && (currentShipLane - 1 >= 0))
