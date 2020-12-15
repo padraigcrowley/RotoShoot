@@ -48,7 +48,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   pathContainer: {fileID: 5274756834654318759, guid: ab91d6b29252c224a9fb17e61ff10a98,
     type: 3}
-  onStart: 1
+  onStart: 0
   moveToPath: 1
   reverse: 0
   startPoint: 0
@@ -70,7 +70,7 @@ MonoBehaviour:
   events: []
   pathType: 1
   pathMode: 2
-  easeType: 13
+  easeType: 1
   lockPosition: 0
   lockRotation: -1
   waypointRotation: 0
@@ -128,7 +128,7 @@ SpriteRenderer:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 6173529639652644514}
-  m_Enabled: 1
+  m_Enabled: 0
   m_CastShadows: 0
   m_ReceiveShadows: 0
   m_DynamicOccludee: 1
@@ -201,6 +201,7 @@ GameObject:
   m_Component:
   - component: {fileID: 6173529641148437443}
   - component: {fileID: 6173529641148437442}
+  - component: {fileID: 3388044902379799271}
   m_Layer: 0
   m_Name: pngwing.com (3)
   m_TagString: Untagged
@@ -273,3 +274,22 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
+--- !u!95 &3388044902379799271
+Animator:
+  serializedVersion: 3
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6173529641148437436}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 0}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorControllerStateOnDisable: 0

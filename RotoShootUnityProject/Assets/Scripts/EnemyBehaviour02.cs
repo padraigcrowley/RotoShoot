@@ -53,6 +53,53 @@ public abstract class EnemyBehaviour02 : ExtendedBehaviour
   {
     InitialSetup();
   }
+  private void InitialSetup()
+  {
+    //todo - move this out to GameplayManager or to sub-class or enemy prefab??
+    
+    hp = 1f;
+    speed = 1f;
+    speed *= speedMultiplierFromSpawner;
+    initialHP = hp * hpMultiplierFromSpawner;
+    hp = initialHP;
+
+    enemyHitByPlayerMissile = false;
+    waveRespawnWaitOver = false;
+    startedWaiting = false;
+
+    enemySpriteRenderer = GetComponent<SpriteRenderer>();
+    enemyCircleCollider = GetComponent<CircleCollider2D>();
+
+    transform.position = new Vector2(startPosX, startPosY);
+    
+    //startPosZ = transform.position.z;
+    startScaleX = transform.localScale.x;
+    startScaleY = transform.localScale.y;
+    startScaleZ = transform.localScale.z;
+
+    enemyState = EnemyState.WAITING_TO_RESPAWN;
+
+    playerShip = GameObject.FindGameObjectWithTag("Player").GetComponent<PlayerShip>();
+    upDirection = GameObject.FindGameObjectWithTag("Player").transform.up;
+
+    splineMoveScript = GetComponent<splineMove>();
+    if (splineMoveScript != null)
+    {
+      splineMoveScript.pathContainer = waypointPath;
+      splineMoveScript.speed = this.speed;
+    }
+
+
+    //if (TryGetComponent<splineMove>(out splineMove splineMoveScript))
+    //{
+    //  splineMoveScript.pathContainer = waypointPath;
+    //  splineMoveScript.speed = this.speed;
+    //}
+    //else
+    //{
+    //  Debug.LogError($"ERROR! no splineMove component found on {this.name}");
+    //}
+  }
 
   protected virtual void Update()
   {
@@ -138,53 +185,6 @@ public abstract class EnemyBehaviour02 : ExtendedBehaviour
     }
   }
 
-  private void InitialSetup()
-  {
-    //todo - move this out to GameplayManager or to sub-class or enemy prefab??
-    
-    hp = 1f;
-    speed = 1f;
-    speed *= speedMultiplierFromSpawner;
-    initialHP = hp * hpMultiplierFromSpawner;
-    hp = initialHP;
-
-    enemyHitByPlayerMissile = false;
-    waveRespawnWaitOver = false;
-    startedWaiting = false;
-
-    enemySpriteRenderer = GetComponent<SpriteRenderer>();
-    enemyCircleCollider = GetComponent<CircleCollider2D>();
-
-    transform.position = new Vector2(startPosX, startPosY);
-    
-    //startPosZ = transform.position.z;
-    startScaleX = transform.localScale.x;
-    startScaleY = transform.localScale.y;
-    startScaleZ = transform.localScale.z;
-
-    enemyState = EnemyState.WAITING_TO_RESPAWN;
-
-    playerShip = GameObject.FindGameObjectWithTag("Player").GetComponent<PlayerShip>();
-    upDirection = GameObject.FindGameObjectWithTag("Player").transform.up;
-
-    splineMoveScript = GetComponent<splineMove>();
-    if (splineMoveScript != null)
-    {
-      splineMoveScript.pathContainer = waypointPath;
-      splineMoveScript.speed = this.speed;
-    }
-
-
-    //if (TryGetComponent<splineMove>(out splineMove splineMoveScript))
-    //{
-    //  splineMoveScript.pathContainer = waypointPath;
-    //  splineMoveScript.speed = this.speed;
-    //}
-    //else
-    //{
-    //  Debug.LogError($"ERROR! no splineMove component found on {this.name}");
-    //}
-  }
 
   private void HandleDamage()
   {

@@ -126,8 +126,14 @@ public class LevelManager : Singleton<LevelManager>
 
     if (levelSetupData.bossSpawnPointData.waypointPath != null)
     {
-      pathInstance = Instantiate(levelSetupData.bossSpawnPointData.waypointPath, new Vector3(0f, 0f, 0f), Quaternion.identity);
+      bossScript.startPosX = levelSetupData.bossSpawnPointData.startPos.x;
+      bossScript.startPosY = levelSetupData.bossSpawnPointData.startPos.y;
+      bossScript.speedMultiplierFromSpawner = levelSetupData.bossSpawnPointData.speedMultiplier;
+      bossScript.hpMultiplierFromSpawner = levelSetupData.bossSpawnPointData.hpMultiplier;
+
+      pathInstance = Instantiate(levelSetupData.bossSpawnPointData.waypointPath, Vector3.zero, Quaternion.identity);
       bossScript.waypointPath = pathInstance;
+      
     }
 
   }
