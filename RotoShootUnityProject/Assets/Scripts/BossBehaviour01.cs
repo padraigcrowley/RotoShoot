@@ -17,9 +17,9 @@ public class BossBehaviour01 : MonoBehaviour
   // Start is called before the first frame update
   void Start()
   {
-    transform.position = new Vector3 (startPosX, startPosY, 0f);
+    transform.position = new Vector3(startPosX, startPosY, 0f);
     bossHP *= hpMultiplierFromSpawner;
-    
+
     bossSpriteMaterials = GetComponentsInChildren<Renderer>();
     StartCoroutine(BossAppearEffect(5f));
 
@@ -51,7 +51,7 @@ public class BossBehaviour01 : MonoBehaviour
       yield return new WaitForEndOfFrame();
     }
 
-    yield return new WaitForSeconds(1);
+    yield return new WaitForSeconds(.3f);
     foreach (Renderer sr in bossSpriteMaterials)
     {
       sr.enabled = true;
@@ -68,4 +68,27 @@ public class BossBehaviour01 : MonoBehaviour
     }
 
   }
+
+  void OnTriggerEnter2D(Collider2D collider)
+  {
+    List<Collider2D> collisions = new List<Collider2D>();
+
+  int numCollisionContacts = -1;
+    
+    ///Collider2D[] contacts = new Collider2D[5];
+    numCollisionContacts = collider.GetContacts(collisions);
+    if (numCollisionContacts == 2)
+    {
+      print($"numCollisionContacts = {numCollisionContacts}");
+    }
+
+    foreach (Collider2D collision in collisions)
+    {
+      if(collision.gameObject.CompareTag("BossVulnerable"))
+        print("HIT BOSS ORB!");
+      if (collision.gameObject.CompareTag("BossInvulnerable"))
+        print("HIT BOSS BODY!");
+    }
+  }
+    
 }

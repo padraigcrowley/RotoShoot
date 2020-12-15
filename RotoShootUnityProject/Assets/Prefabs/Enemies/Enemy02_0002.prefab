@@ -121,7 +121,7 @@ MonoBehaviour:
   startPosY: 0
   startPosZ: 0
   enemyState: 2
-  respawnWaitOver: 0
+  waveRespawnWaitOver: 0
   timeBetweenSpawn: 0
   availablePowerUps:
   - {fileID: 6977473367615493525, guid: b9a8e0a5335ee3e47b055b774a7f505d, type: 3}
@@ -154,7 +154,7 @@ Rigidbody2D:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 4342350733379744943}
-  m_BodyType: 0
+  m_BodyType: 1
   m_Simulated: 1
   m_UseFullKinematicContacts: 0
   m_UseAutoMass: 0

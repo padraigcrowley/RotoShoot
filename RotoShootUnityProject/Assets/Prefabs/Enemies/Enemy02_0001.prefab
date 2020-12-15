@@ -73,7 +73,7 @@ SpriteRenderer:
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: -1079083179
-  m_SortingLayer: -2
+  m_SortingLayer: 1
   m_SortingOrder: 1
   m_Sprite: {fileID: 21300000, guid: dd889509faec2174297f0dc1d692d1bb, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
@@ -116,15 +116,18 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   speedMultiplierFromSpawner: 1
   hpMultiplierFromSpawner: 1
-  wayPointPathName: 
-  healthBar: {fileID: 114530257322874124, guid: 3c3f2424e239849edb89eb179429501d,
-    type: 3}
+  startPosX: 0
+  startPosY: 0
+  startPosZ: 0
   enemyState: 0
-  respawnWaitOver: 0
+  waveRespawnWaitOver: 0
+  timeBetweenSpawn: 0
   availablePowerUps:
   - {fileID: 6977473367615493525, guid: b9a8e0a5335ee3e47b055b774a7f505d, type: 3}
   - {fileID: 2477514511899951309, guid: eb9180948b5035b43b6db1ba58a5f999, type: 3}
   powerUpInstance: {fileID: 0}
+  playerShip: {fileID: 0}
+  waypointPath: {fileID: 0}
 --- !u!50 &4342350733379744942
 Rigidbody2D:
   serializedVersion: 4
@@ -133,7 +136,7 @@ Rigidbody2D:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 4342350733379744943}
-  m_BodyType: 0
+  m_BodyType: 1
   m_Simulated: 1
   m_UseFullKinematicContacts: 0
   m_UseAutoMass: 0

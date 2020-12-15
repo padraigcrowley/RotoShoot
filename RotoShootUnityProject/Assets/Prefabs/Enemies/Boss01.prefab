@@ -11,6 +11,7 @@ GameObject:
   - component: {fileID: 6173529639553121558}
   - component: {fileID: 6173529639553121557}
   - component: {fileID: 3920016667166242669}
+  - component: {fileID: 6684317151385927847}
   m_Layer: 0
   m_Name: Boss01
   m_TagString: Untagged
@@ -67,7 +68,19 @@ MonoBehaviour:
     m_RotationOrder: 4
   loopType: 3
   waypoints: []
-  events: []
+  events:
+  - m_PersistentCalls:
+      m_Calls: []
+  - m_PersistentCalls:
+      m_Calls: []
+  - m_PersistentCalls:
+      m_Calls: []
+  - m_PersistentCalls:
+      m_Calls: []
+  - m_PersistentCalls:
+      m_Calls: []
+  - m_PersistentCalls:
+      m_Calls: []
   pathType: 1
   pathMode: 2
   easeType: 1
@@ -89,6 +102,33 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   waypointPath: {fileID: 5274756834654318759, guid: ab91d6b29252c224a9fb17e61ff10a98,
     type: 3}
+  startPosX: 0
+  startPosY: 0
+  startPosZ: 0
+  bossHP: 1
+  hpMultiplierFromSpawner: 0
+  speedMultiplierFromSpawner: 0
+--- !u!50 &6684317151385927847
+Rigidbody2D:
+  serializedVersion: 4
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6173529639553121559}
+  m_BodyType: 1
+  m_Simulated: 1
+  m_UseFullKinematicContacts: 0
+  m_UseAutoMass: 0
+  m_Mass: 1
+  m_LinearDrag: 0
+  m_AngularDrag: 0.05
+  m_GravityScale: 1
+  m_Material: {fileID: 0}
+  m_Interpolate: 0
+  m_SleepingMode: 1
+  m_CollisionDetection: 0
+  m_Constraints: 0
 --- !u!1 &6173529639652644514
 GameObject:
   m_ObjectHideFlags: 0
@@ -100,9 +140,10 @@ GameObject:
   - component: {fileID: 6173529639652644513}
   - component: {fileID: 6173529639652644519}
   - component: {fileID: 6173529639652644512}
+  - component: {fileID: 7110231920400099924}
   m_Layer: 0
   m_Name: pngwing.com (3)_egg
-  m_TagString: Untagged
+  m_TagString: BossVulnerable
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -191,6 +232,22 @@ Animator:
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorControllerStateOnDisable: 0
+--- !u!58 &7110231920400099924
+CircleCollider2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6173529639652644514}
+  m_Enabled: 1
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_UsedByEffector: 0
+  m_UsedByComposite: 0
+  m_Offset: {x: 0, y: -0.075197875}
+  serializedVersion: 2
+  m_Radius: 0.40980214
 --- !u!1 &6173529641148437436
 GameObject:
   m_ObjectHideFlags: 0
@@ -201,10 +258,10 @@ GameObject:
   m_Component:
   - component: {fileID: 6173529641148437443}
   - component: {fileID: 6173529641148437442}
-  - component: {fileID: 3388044902379799271}
+  - component: {fileID: 8619066261544513695}
   m_Layer: 0
   m_Name: pngwing.com (3)
-  m_TagString: Untagged
+  m_TagString: BossInvulnerable
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -274,22 +331,40 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
---- !u!95 &3388044902379799271
-Animator:
-  serializedVersion: 3
+--- !u!68 &8619066261544513695
+EdgeCollider2D:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 6173529641148437436}
   m_Enabled: 1
-  m_Avatar: {fileID: 0}
-  m_Controller: {fileID: 0}
-  m_CullingMode: 0
-  m_UpdateMode: 0
-  m_ApplyRootMotion: 0
-  m_LinearVelocityBlending: 0
-  m_WarningMessage: 
-  m_HasTransformHierarchy: 1
-  m_AllowConstantClipSamplingOptimization: 1
-  m_KeepAnimatorControllerStateOnDisable: 0
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_UsedByEffector: 0
+  m_UsedByComposite: 0
+  m_Offset: {x: 0, y: 0}
+  m_EdgeRadius: 0
+  m_Points:
+  - {x: -2.089045, y: -1.2142715}
+  - {x: -2.9533956, y: 0.21129704}
+  - {x: -1.4927249, y: -0.7461262}
+  - {x: -0.9793464, y: -0.17952728}
+  - {x: -2.012876, y: 1.0644212}
+  - {x: -1.8587358, y: 2.1989443}
+  - {x: -1.1532993, y: 2.9873621}
+  - {x: -1.0390227, y: 1.8172698}
+  - {x: -0.63857484, y: 0.43535423}
+  - {x: 0.46621835, y: 0.39931893}
+  - {x: 0.98150325, y: 1.8456872}
+  - {x: 1.1102858, y: 2.931825}
+  - {x: 2.0632536, y: 1.5207679}
+  - {x: 1.042913, y: -0.17398643}
+  - {x: 1.3831075, y: -0.72263}
+  - {x: 2.8199914, y: 0.23144531}
+  - {x: 2.395767, y: -0.9065881}
+  m_AdjacentStartPoint: {x: 0, y: 0}
+  m_AdjacentEndPoint: {x: 0, y: 0}
+  m_UseAdjacentStartPoint: 0
+  m_UseAdjacentEndPoint: 0
