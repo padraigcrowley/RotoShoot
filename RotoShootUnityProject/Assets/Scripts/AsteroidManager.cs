@@ -21,9 +21,12 @@ public class AsteroidManager : MonoBehaviour
   private void Start()
   {
     timeToNextAsteroidShower = LevelManager.Instance.timeBetweenAsteroidShower;
-    CreateAsteroids();
-    GenerateAsteroidStartPositions();
-    AnimateAsteroids();
+    if (timeToNextAsteroidShower > 0)
+    {
+      CreateAsteroids();
+      GenerateAsteroidStartPositions();
+      AnimateAsteroids();
+    }
   }
 
   // Update is called once per frame

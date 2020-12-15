@@ -10,6 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 6173529639553121558}
   - component: {fileID: 6173529639553121557}
+  - component: {fileID: 3920016667166242669}
   m_Layer: 0
   m_Name: Boss01
   m_TagString: Untagged
@@ -48,7 +49,7 @@ MonoBehaviour:
   pathContainer: {fileID: 5274756834654318759, guid: ab91d6b29252c224a9fb17e61ff10a98,
     type: 3}
   onStart: 1
-  moveToPath: 0
+  moveToPath: 1
   reverse: 0
   startPoint: 0
   currentPoint: 0
@@ -69,11 +70,25 @@ MonoBehaviour:
   events: []
   pathType: 1
   pathMode: 2
-  easeType: 4
+  easeType: 13
   lockPosition: 0
   lockRotation: -1
   waypointRotation: 0
   rotationTarget: {fileID: 0}
+--- !u!114 &3920016667166242669
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6173529639553121559}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 97c42e0dff12717478a0f3c35e257c5d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  waypointPath: {fileID: 5274756834654318759, guid: ab91d6b29252c224a9fb17e61ff10a98,
+    type: 3}
 --- !u!1 &6173529639652644514
 GameObject:
   m_ObjectHideFlags: 0
@@ -226,7 +241,7 @@ SpriteRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 10754, guid: 0000000000000000f000000000000000, type: 0}
+  - {fileID: 2100000, guid: f5f3a692b0b8bd744a84344ada7ef9e4, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0

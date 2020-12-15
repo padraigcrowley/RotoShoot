@@ -19,6 +19,7 @@ TagManager:
   - enemyMissilesParentPoolObject
   - Asteroid
   - Missile
+  - bossMissilesParentPoolObject
   layers:
   - Default
   - TransparentFX

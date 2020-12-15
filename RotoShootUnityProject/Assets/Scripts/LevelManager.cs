@@ -18,9 +18,11 @@ public class LevelManager : Singleton<LevelManager>
   public bool readyToFireAtPlayer = false; 
   private List<GameObject> enemyWaves = new List<GameObject>();
 
-  public GameObject enemyMissilesParentPool;
+  public GameObject enemyMissilesParentPool, bossMissilesParentPool;
   public float timeBetweenAsteroidShower;
   private bool currentlyActivatingWave = false;
+    SWS.PathManager pathInstance = null;
+  public bool bossHasBeenKilled = false;
 
   private void Awake()
   {
@@ -35,10 +37,12 @@ public class LevelManager : Singleton<LevelManager>
   {
     lccMet = false;
     //add the level completion criterias to the lcc dictionary
-    if (levelSetupData.lccEnemyKills != -1)
+    if (levelSetupData.lccEnemyKills != -1) //checking if it's -1 beacase 0 could be a valid LCC number for enemykills
       LevelCompletionCriteria.Add("EnemyKills", levelSetupData.lccEnemyKills);
     if (levelSetupData.lccSurviveTime != -1)
       LevelCompletionCriteria.Add("SurviveTime", levelSetupData.lccSurviveTime);
+    if (levelSetupData.lccKillBoss == true)
+      LevelCompletionCriteria.Add("KillBoss", 1);
 
     //process the particular level completion criteria(s)
     foreach (string lccString in LevelCompletionCriteria.Keys)
@@ -51,18 +55,29 @@ public class LevelManager : Singleton<LevelManager>
   }
   void Start()
   {
+    InitializeLCC();
 
+    if (levelSetupData.lccEnemyKills != -1)
+    {
+      SetupEnemies();
+    }
+
+    if (levelSetupData.lccKillBoss)
+    {
+      SetupBoss();
+    }
+
+    
+  }
+
+  void SetupEnemies()
+  {
     enemyMissilesParentPool = new GameObject("enemyMissilesParentPoolObject");
     enemyMissilesParentPool.tag = "enemyMissilesParentPoolObject";
 
     numEnemyKillsInLevel = 0;
     currentTimeBetweenFiringAtPlayer = TIME_BETWEEN_FIRING_AT_PLAYER;
-
-    if (levelSetupData.blockedPlayerShipRotationAngles.Length != 0)
-      GameplayManager.Instance.blockedPlayerShipRotationAngles = levelSetupData.blockedPlayerShipRotationAngles;
-
-    InitializeLCC();
-
+        
     int index = 0;
     foreach (EnemySpawnPointData sp in levelSetupData.levelEnemySpawnPointData)
     {
@@ -73,49 +88,74 @@ public class LevelManager : Singleton<LevelManager>
       verticalDistBetweenEnemies = sp.verticalDistBetweenEnemies;
       horizontalDistBetweenEnemies = sp.horizontalDistBetweenEnemies;
 
+      if (sp.waypointPath != null)
+      {
+        pathInstance = Instantiate(sp.waypointPath, new Vector3(0f, 0f, 0f), Quaternion.identity);
+      }
+
       for (int i = 0; i < sp.numEnemiesInWave; i++)
       {
         Vector3 startingPosition = new Vector3(sp.startPos.x + (i * horizontalDistBetweenEnemies), sp.startPos.y + (i * verticalDistBetweenEnemies));
         GameObject enemy = Instantiate(sp.enemyPrefab, startingPosition, Quaternion.identity, waveParentObject.transform);
-        enemy.name = "Wave"+index+ " Enemy"+ i;
+        enemy.name = "Wave" + index + " Enemy" + i;
         EnemyBehaviour02 enemyScript = enemy.GetComponent<EnemyBehaviour02>();
         enemyScript.startPosX = startingPosition.x;
         enemyScript.startPosY = startingPosition.y;
         enemyScript.speedMultiplierFromSpawner = sp.speedMultiplier;
         enemyScript.hpMultiplierFromSpawner = sp.hpMultiplier;
         enemyScript.timeBetweenSpawn = sp.timeBetweenSpawn;
-        if (sp.waypointPath != null)
+
+        if (pathInstance != null)
         {
           //print($"In LevelManager, sp.waypointPath: {sp.waypointPath}");
-          enemyScript.waypointPath = sp.waypointPath;
+          enemyScript.waypointPath = pathInstance;
         }
       }
       index++;
     }
   }
 
+  void SetupBoss()
+  {
+    bossMissilesParentPool = new GameObject("bossMissilesParentPoolObject");
+    bossMissilesParentPool.tag = "bossMissilesParentPoolObject";
+
+    GameObject boss = Instantiate(levelSetupData.bossSpawnPointData.bossPrefab, new Vector2(levelSetupData.bossSpawnPointData.startPos.x, levelSetupData.bossSpawnPointData.startPos.y), Quaternion.identity);
+    
+    BossBehaviour01 bossScript = boss.GetComponent<BossBehaviour01>();
+
+    if (levelSetupData.bossSpawnPointData.waypointPath != null)
+    {
+      pathInstance = Instantiate(levelSetupData.bossSpawnPointData.waypointPath, new Vector3(0f, 0f, 0f), Quaternion.identity);
+      bossScript.waypointPath = pathInstance;
+    }
+
+  }
+
   void Update()
   {
     if (GameplayManager.Instance.currentGameState == GameplayManager.GameState.LEVEL_IN_PROGRESS)
     {
-      //print($"NumActiveWaves = { GetNumActiveWaves()}");
-      //if there are less than the number of maxwaves, activate another (random) wave
-      int numActiveWaves = GetNumActiveWaves();
-      if ((numActiveWaves < levelSetupData.numMaxActiveWaves) && (currentlyActivatingWave == false))
+      if (levelSetupData.lccEnemyKills != -1)
       {
-        StartCoroutine(ActivateEnemyWave());
-      }
-
-      if (readyToFireAtPlayer == false)
-      {
-        currentTimeBetweenFiringAtPlayer -= Time.deltaTime;
-        if (currentTimeBetweenFiringAtPlayer <= 0f)
+        //print($"NumActiveWaves = { GetNumActiveWaves()}");
+        //if there are less than the number of maxwaves, activate another (random) wave
+        int numActiveWaves = GetNumActiveWaves();
+        if ((numActiveWaves < levelSetupData.numMaxActiveWaves) && (currentlyActivatingWave == false))
         {
-          //print($"readyToFireAtPlayer = true");
-          readyToFireAtPlayer = true; // this is set back to false in Update() of EnemyFireAtPlayerBehaviour01.cs
+          StartCoroutine(ActivateEnemyWave());
+        }
+
+        if (readyToFireAtPlayer == false)
+        {
+          currentTimeBetweenFiringAtPlayer -= Time.deltaTime;
+          if (currentTimeBetweenFiringAtPlayer <= 0f)
+          {
+            //print($"readyToFireAtPlayer = true");
+            readyToFireAtPlayer = true; // this is set back to false in Update() of EnemyFireAtPlayerBehaviour01.cs
+          }
         }
       }
-
       CheckLCC(); // check LevelCompletionCriteria
     }
   }
@@ -180,6 +220,12 @@ public class LevelManager : Singleton<LevelManager>
               break;
             case "SurviveTime":
               if (levelPlayTimeElapsed < LevelCompletionCriteria[lccString])
+              {
+                lccMet = false;
+              }
+              break;
+            case "KillBoss":
+              if (!bossHasBeenKilled)
               {
                 lccMet = false;
               }
