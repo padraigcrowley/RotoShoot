@@ -84,11 +84,52 @@ public class BossBehaviour01 : MonoBehaviour
 
     foreach (Collider2D collision in collisions)
     {
-      if(collision.gameObject.CompareTag("BossVulnerable"))
+      if (collision.gameObject.CompareTag("BossVulnerable") && collider.gameObject.CompareTag("PlayerMissile"))
+      {
         print("HIT BOSS ORB!");
-      if (collision.gameObject.CompareTag("BossInvulnerable"))
-        print("HIT BOSS BODY!");
+        StartCoroutine(BossTakesDamageEffect(.5f));
+      }
+      //if (collision.gameObject.CompareTag("BossInvulnerable")&& collider.gameObject.CompareTag("PlayerMissile")))
+      //print("HIT BOSS BODY!");
     }
   }
-    
+
+  IEnumerator BossTakesDamageEffect(float duration)
+  {
+    float elapsedTime = 0f;
+    float currentVal;
+    while (elapsedTime <= duration)
+    {
+      foreach (Renderer sr in bossSpriteMaterials)
+      {
+        if (sr != null)
+        {
+          //sr.material.SetFloat("_ChromAberrAmount", 0f);
+          currentVal = Mathf.Lerp(0f, 1f, (elapsedTime / duration));
+          sr.material.SetFloat("_InnerOutlineAlpha", currentVal);
+          elapsedTime += Time.deltaTime;
+        }
+      }
+      //yield return null;
+      yield return new WaitForEndOfFrame();
+    }
+
+    elapsedTime = 0f;
+    while (elapsedTime <= duration)
+    {
+      foreach (Renderer sr in bossSpriteMaterials)
+      {
+        if (sr != null)
+        {
+          //sr.material.SetFloat("_ChromAberrAmount", 0f);
+          currentVal = Mathf.Lerp(1f, 0f, (elapsedTime / duration));
+          sr.material.SetFloat("_InnerOutlineAlpha", currentVal);
+          elapsedTime += Time.deltaTime;
+        }
+      }
+      //yield return null;
+      yield return new WaitForEndOfFrame();
+    }
+  }
+
 }

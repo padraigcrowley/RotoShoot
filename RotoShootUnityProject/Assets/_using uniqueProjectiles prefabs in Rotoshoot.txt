@@ -1,0 +1,14 @@
+[-- Note: the UniqueProjectiles Pack's projectiles need rotating 90 around Y if used in 2D games / 2D mode !!!
+When spawning the projectile, rotate it 90 around the Y, like so:
+Quaternion thisRotation = Quaternion.identity;
+thisRotation.eulerAngles = new Vector3(0, 90, 0); // !!! 
+spawnInstance = SimplePool.Spawn(playerMissilePrefab, shootingPos, thisRotation);   --]
+
+
+- Change the tag to "EnemyMisssile" or whatever relevant
+- change the Boxx Collider and Rigid Body components to their 2D equivalents.Base them on previous working ones.
+- Change/edit the above 2D fields.
+- replace the "projectile move" script with your own
+- in the scriptcomponent, fill in the relevant public fields/prefabs
+- compare the particle fx (and children particle fx) with a previous working one
+- e.g. check that "Auto-Destroy" isn't on any of the particles/sub particles systems - it shouldn't be (because we're using pooling we don't want to destroy elements, as this will throw up an error when we try to re-use/re-Enable them)

@@ -226,8 +226,8 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 563995635}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0.11, y: 8.77, z: 0}
-  m_LocalScale: {x: 2.44, y: 0.14, z: 1}
+  m_LocalPosition: {x: -1.982, y: 9.004, z: 0}
+  m_LocalScale: {x: 1.5685416, y: 0.2475068, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 3
@@ -341,7 +341,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!114 &1238899263
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -356,8 +356,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   effectToSpawn: {fileID: 1865968712415440, guid: e1d30abeb36499148bca7bfbd6a64d43,
     type: 3}
-  playerMissilePrefab: {fileID: 1865968712415440, guid: e1d30abeb36499148bca7bfbd6a64d43,
+  playerMissilePrefab: {fileID: 1607489160101874, guid: 731f5ce10c6adab4ba085268d0cfb6e1,
     type: 3}
+  spawnInstance: {fileID: 0}
 --- !u!212 &1238899264
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -441,7 +442,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!95 &1513019513
 Animator:
   serializedVersion: 3

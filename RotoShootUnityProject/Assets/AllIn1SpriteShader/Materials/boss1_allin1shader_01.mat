@@ -9,7 +9,7 @@ Material:
   m_PrefabAsset: {fileID: 0}
   m_Name: boss1_allin1shader_01
   m_Shader: {fileID: 4800000, guid: a36b7719ff0465b42ab1407d67672c5f, type: 3}
-  m_ShaderKeywords: CHROMABERR_ON ETC1_EXTERNAL_ALPHA
+  m_ShaderKeywords: CHROMABERR_ON ETC1_EXTERNAL_ALPHA INNEROUTLINE_ON
   m_LightmapFlags: 4
   m_EnableInstancingVariants: 0
   m_DoubleSidedGI: 0
@@ -104,8 +104,8 @@ Material:
     - _GreyscaleOutline: 0
     - _HandDrawnAmount: 10
     - _HandDrawnSpeed: 5
-    - _HitEffectBlend: 1
-    - _HitEffectGlow: 5
+    - _HitEffectBlend: 0
+    - _HitEffectGlow: 1
     - _HologramMaxAlpha: 1
     - _HologramMinAlpha: 0
     - _HologramStripesAmount: 0.2
@@ -114,9 +114,9 @@ Material:
     - _HsvBright: 1
     - _HsvSaturation: 1
     - _HsvShift: 180
-    - _InnerOutlineAlpha: 1
-    - _InnerOutlineGlow: 1
-    - _InnerOutlineThickness: 1
+    - _InnerOutlineAlpha: 0
+    - _InnerOutlineGlow: 2
+    - _InnerOutlineThickness: 3
     - _MaxXUV: 1
     - _MaxYUV: 1
     - _MinXUV: 0
@@ -191,7 +191,7 @@ Material:
     - _GradTopLeftCol: {r: 1, g: 0, b: 0, a: 1}
     - _GradTopRightCol: {r: 1, g: 0, b: 0, a: 1}
     - _GreyscaleTintColor: {r: 1, g: 1, b: 1, a: 1}
-    - _HitEffectColor: {r: 1, g: 1, b: 1, a: 1}
+    - _HitEffectColor: {r: 1, g: 0, b: 0, a: 1}
     - _InnerOutlineColor: {r: 1, g: 0, b: 0, a: 1}
     - _OutlineColor: {r: 1, g: 1, b: 1, a: 1}
     - _ShadowColor: {r: 0, g: 0, b: 0, a: 1}

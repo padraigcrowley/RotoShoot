@@ -41,7 +41,7 @@ ParticleSystem:
   m_GameObject: {fileID: 1222159440896900}
   serializedVersion: 6
   lengthInSec: 1
-  simulationSpeed: 1
+  simulationSpeed: 0.33
   stopAction: 0
   cullingMode: 1
   ringBufferMode: 0
@@ -5091,6 +5091,7 @@ MonoBehaviour:
   HitFXPrefab: {fileID: 1873612019324734, guid: 41d613f6a85d8a245961d2f0caa05336,
     type: 3}
   speed: 6
+  healthBar: {fileID: 0}
 --- !u!199 &199329164939455274
 ParticleSystemRenderer:
   serializedVersion: 6
@@ -5166,7 +5167,7 @@ ParticleSystem:
   m_GameObject: {fileID: 1374267004960804}
   serializedVersion: 6
   lengthInSec: 1
-  simulationSpeed: 1
+  simulationSpeed: 0.33
   stopAction: 0
   cullingMode: 1
   ringBufferMode: 0

@@ -18,7 +18,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class ProjectileMoveScript : MonoBehaviour {
+public class ProjectileMoveScript_original : MonoBehaviour {
 
     public bool rotate = false;
     public float rotateAmount = 45;

@@ -44,7 +44,7 @@ public class RotateToMouseScript : MonoBehaviour {
 			Debug.Log ("Camera not set");
 	}
 
-	void RotateToMouse (GameObject obj, Vector3 destination ) {
+	public void RotateToMouse (GameObject obj, Vector3 destination ) {
 		direction = destination - obj.transform.position;
 		rotation = Quaternion.LookRotation (direction);
 		obj.transform.localRotation = Quaternion.Lerp (obj.transform.rotation, rotation, 1);

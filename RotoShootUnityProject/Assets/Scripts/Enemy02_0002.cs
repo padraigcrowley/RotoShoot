@@ -9,8 +9,7 @@ using UnityEngine;
 public class Enemy02_0002 : EnemyBehaviour02
 {
   public bool startedOnPath = false;
-  [SerializeField] private GameObject enemyMissile;
-
+ 
 
   protected override void Start()
   {

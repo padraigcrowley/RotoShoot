@@ -5,7 +5,7 @@ using UnityEngine;
 public class TestUniqueProjectiles : MonoBehaviour
 {
   // Start is called before the first frame update
-  public GameObject effectToSpawn, playerMissilePrefab;
+  public GameObject effectToSpawn, playerMissilePrefab, spawnInstance;
   private Vector3 shootingPos;
 
   void Start()
@@ -20,20 +20,23 @@ public class TestUniqueProjectiles : MonoBehaviour
     if (Input.GetKeyDown(KeyCode.S))
       SpawnVFX();
     if (Input.GetKeyDown(KeyCode.A))
-      shootingPos.x-=.5f;
+      shootingPos.x -= .5f;
     if (Input.GetKeyDown(KeyCode.D))
       shootingPos.x += .5f;
   }
 
   public void SpawnVFX()
   {
+    Quaternion thisRotation = Quaternion.identity;
+    thisRotation.eulerAngles = new Vector3(0, 90, 0); // !!! the UniqueProjectiles Pack's projectiles need rotating 90 around Y if used in 2D games / 2D mode !!!
+    spawnInstance = SimplePool.Spawn(playerMissilePrefab, shootingPos, thisRotation);
+
     GameObject vfx;
+    //spawnInstance = SimplePool.Spawn(playerMissilePrefab, shootingPos, Quaternion.identity);
     //vfx = Instantiate(effectToSpawn);
-    
-    SimplePool.Spawn(playerMissilePrefab, shootingPos, Quaternion.identity);
     //vfx = Instantiate(effectToSpawn, shootingPos, Quaternion.identity);
-
     //vfx.transform.localRotation = ;
-  }
 
+
+  }
 }

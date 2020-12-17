@@ -57,7 +57,7 @@ MonoBehaviour:
     bossPrefab: {fileID: 6173529639553121559, guid: 6459c582cfcd1344286a7a952db94fc2,
       type: 3}
     startPos: {x: 0, y: 5}
-    speedMultiplier: 1
+    speedMultiplier: 5
     hpMultiplier: 10
     waypointPath: {fileID: 5274756834654318759, guid: ab91d6b29252c224a9fb17e61ff10a98,
       type: 3}

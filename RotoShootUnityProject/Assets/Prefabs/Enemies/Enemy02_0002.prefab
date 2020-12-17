@@ -130,8 +130,6 @@ MonoBehaviour:
   playerShip: {fileID: 0}
   waypointPath: {fileID: 0}
   startedOnPath: 0
-  enemyMissile: {fileID: 1374267004960804, guid: ed8c5fb58e698c5418529f8aee4e4848,
-    type: 3}
 --- !u!114 &9154484834150509947
 MonoBehaviour:
   m_ObjectHideFlags: 0

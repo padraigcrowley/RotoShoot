@@ -25,13 +25,13 @@ public class PlayerMissileMovement : MissileMovement
     base.FixedUpdate();
     
     if (!collided)
-      this.transform.position += upDirection * GameplayManager.Instance.currentPlayerMissileSpeedMultiplier * Time.fixedDeltaTime;
-      //this.transform.position += upDirection * 10.0f * Time.fixedDeltaTime;
+      //this.transform.position += upDirection * GameplayManager.Instance.currentPlayerMissileSpeedMultiplier * Time.fixedDeltaTime;
+      this.transform.position += upDirection * 10.0f * Time.fixedDeltaTime;
   }
   private void OnTriggerEnter2D(Collider2D co)
   {
     //print($"Collision entered with {co.gameObject.tag}");
-    if ((!co.gameObject.CompareTag("EnemyMissile")) && ((co.gameObject.CompareTag("Enemy01")) || (co.gameObject.CompareTag("BossInvulnerable"))))
+    if ((!co.gameObject.CompareTag("EnemyMissile")) && ((co.gameObject.CompareTag("Enemy01")) || (co.gameObject.CompareTag("BossInvulnerable")) || (co.gameObject.CompareTag("BossVulnerable"))))
     {
       Vector3 colPos = co.gameObject.transform.position;
 
