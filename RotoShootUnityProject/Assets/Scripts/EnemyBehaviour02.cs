@@ -21,7 +21,7 @@ public abstract class EnemyBehaviour02 : ExtendedBehaviour
 
   private GameObject missileObject;
   private SpriteRenderer enemySpriteRenderer;
-  private CircleCollider2D enemyCircleCollider;
+  private CapsuleCollider enemyCapsuleCollider;
   protected Vector3 upDirection;
     
   public enum EnemyState { ALIVE, TEMPORARILY_DEAD, WAITING_TO_RESPAWN, INVINCIBLE, FULLY_DEAD, HIT_BY_PLAYER_MISSILE, HIT_BY_PLAYER_SHIP, HIT_BY_ATMOSPHERE }
@@ -68,7 +68,7 @@ public abstract class EnemyBehaviour02 : ExtendedBehaviour
     startedWaiting = false;
 
     enemySpriteRenderer = GetComponent<SpriteRenderer>();
-    enemyCircleCollider = GetComponent<CircleCollider2D>();
+    enemyCapsuleCollider = GetComponent<CapsuleCollider>();
 
     transform.position = new Vector2(startPosX, startPosY);
     
@@ -216,7 +216,7 @@ public abstract class EnemyBehaviour02 : ExtendedBehaviour
       DropPowerUp();
     }
     enemySpriteRenderer.enabled = false;
-    enemyCircleCollider.enabled = false;
+    enemyCapsuleCollider.enabled = false;
     waveRespawnWaitOver = false;
     startedWaiting = false;
 
@@ -239,13 +239,13 @@ public abstract class EnemyBehaviour02 : ExtendedBehaviour
       transform.position = new Vector3(startPosX, startPosY, startPosZ);
       transform.localScale = new Vector3(startScaleX, startScaleX, startScaleX); // reset its scale back to original scale
       enemySpriteRenderer.enabled = true;
-      enemyCircleCollider.enabled = true;
+      enemyCapsuleCollider.enabled = true;
       enemyState = EnemyState.ALIVE;
       //timeBetweenSpawnPassed = false;
     }
   }
 
-  private void OnTriggerEnter2D(Collider2D collision)
+  private void OnTriggerEnter(Collider collision)
   {
     if (GameplayManager.Instance.currentGameState == GameplayManager.GameState.LEVEL_IN_PROGRESS)
     {
@@ -265,7 +265,7 @@ public abstract class EnemyBehaviour02 : ExtendedBehaviour
     }
   }
 
-  private void OnTriggerExit2D(Collider2D collision)
+  private void OnTriggerExit(Collider collision)
   {
     if (GameplayManager.Instance.levelControlType != 1) // this doean't apply to circular enemies moving towards centre
     {

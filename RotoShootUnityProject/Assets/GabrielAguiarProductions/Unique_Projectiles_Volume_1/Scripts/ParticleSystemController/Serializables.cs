@@ -1,4 +1,13 @@
-﻿using UnityEngine;
+﻿
+
+#pragma warning disable 0162 // unreachable code detected.
+#pragma warning disable 0168 // variable declared but not used.
+#pragma warning disable 0219 // variable assigned but not used.
+#pragma warning disable 0414 // private field assigned but not used.
+#pragma warning disable 0472 // comparing color with null is always null.
+#pragma warning disable 0618 // tangent mode obsolete warning.
+
+using UnityEngine;
 using System;
 
 namespace GAP_ParticleSystemController{
@@ -190,9 +199,11 @@ namespace GAP_ParticleSystemController{
 		public float value;
 
 		public SerializableKeyFrames (Keyframe keyFrame){
+
 			inTangent = keyFrame.inTangent;
 			outTangent = keyFrame.outTangent;
 			tangentMode = keyFrame.tangentMode;
+		
 			time = keyFrame.time;
 			value = keyFrame.value;
 		}

@@ -64,10 +64,13 @@ public class ProjectileMoveScript : MonoBehaviour {
 				}
 			}
 		}
-			
-		if (muzzlePrefab != null) {
+
+   
+    
+
+    if (muzzlePrefab != null) {
 			var muzzleVFX = Instantiate (muzzlePrefab, transform.position, Quaternion.identity);
-			muzzleVFX.transform.forward = gameObject.transform.forward + offset;
+      muzzleVFX.transform.forward = gameObject.transform.forward + offset;
 			var ps = muzzleVFX.GetComponent<ParticleSystem>();
 			if (ps != null)
 				Destroy (muzzleVFX, ps.main.duration);
@@ -84,7 +87,8 @@ public class ProjectileMoveScript : MonoBehaviour {
         if (rotate)
             transform.Rotate(0, 0, rotateAmount, Space.Self);
         if (speed != 0 && rb != null)
-			rb.position += (transform.forward + offset) * (speed * Time.deltaTime);   
+			//rb.position += (transform.forward + offset) * (speed * Time.deltaTime);   
+			rb.position += (transform.forward) * (speed * Time.deltaTime);   
     }
 
 	void OnCollisionEnter (Collision co) {

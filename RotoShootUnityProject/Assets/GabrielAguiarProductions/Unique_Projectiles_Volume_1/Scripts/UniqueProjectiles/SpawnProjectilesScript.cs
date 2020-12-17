@@ -1,17 +1,25 @@
-﻿using System.Collections;
+﻿//
+//NOTES:
+//This script is used for DEMONSTRATION porpuses of the Projectiles. I recommend everyone to create their own code for their own projects.
+//This is just a basic example.
+//
+
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
 public class SpawnProjectilesScript : MonoBehaviour {
 
+    public bool useTarget;
 	public bool use2D;
 	public bool cameraShake;
 	public Text effectName;
 	public RotateToMouseScript rotateToMouse;
 	public GameObject firePoint;
 	public GameObject cameras;
-	public List<GameObject> VFXs = new List<GameObject> ();
+    public GameObject target;
+    public List<GameObject> VFXs = new List<GameObject> ();
 
 	private int count = 0;
 	private float timeToFire = 0f;
@@ -51,7 +59,16 @@ public class SpawnProjectilesScript : MonoBehaviour {
 		}
 		else
 			Debug.Log ("Please assign one or more Cameras in inspector");
-	}
+
+        if (useTarget && target != null)
+        {
+            var collider = target.GetComponent<BoxCollider>();
+            if (!collider)
+            {
+                target.AddComponent<BoxCollider>();
+            }
+        }
+    }
 
 	void Update () {
 		if (Input.GetKey (KeyCode.Space) && Time.time >= timeToFire || Input.GetMouseButton (0) && Time.time >= timeToFire) {
@@ -83,19 +100,30 @@ public class SpawnProjectilesScript : MonoBehaviour {
 
 		if (firePoint != null) {
 			vfx = Instantiate (effectToSpawn, firePoint.transform.position, Quaternion.identity);
-			if(rotateToMouse != null){
-				vfx.transform.localRotation = rotateToMouse.GetRotation ();
-			} 
-			else Debug.Log ("No RotateToMouseScript found on firePoint.");
+            if (!useTarget)
+            {
+                if (rotateToMouse != null)
+                {
+                    vfx.transform.localRotation = rotateToMouse.GetRotation();
+                }
+                else Debug.Log("No RotateToMouseScript found on firePoint.");
+            }
+            else
+            {
+                if (target != null)
+                {                    
+                    vfx.GetComponent<ProjectileMoveScript>().SetTarget(target, rotateToMouse);
+                    rotateToMouse.RotateToMouse(vfx, target.transform.position);                    
+                }
+                else
+                {
+                    Destroy(vfx);
+                    Debug.Log("No target assigned.");
+                }
+            }
 		}
 		else
-			vfx = Instantiate (effectToSpawn);
-
-		var ps = vfx.GetComponent<ParticleSystem> ();
-
-		if (vfx.transform.childCount > 0) {
-			ps = vfx.transform.GetChild (0).GetComponent<ParticleSystem> ();
-		}
+			vfx = Instantiate (effectToSpawn);		
 	}
 
 	public void Next () {

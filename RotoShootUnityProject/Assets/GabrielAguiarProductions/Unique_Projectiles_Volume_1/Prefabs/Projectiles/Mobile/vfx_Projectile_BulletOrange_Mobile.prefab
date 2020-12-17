@@ -4906,7 +4906,7 @@ TrailRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 1
-  m_Time: 0.2
+  m_Time: 0.1
   m_Parameters:
     serializedVersion: 3
     widthMultiplier: 0.2
@@ -4981,14 +4981,14 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 4509225182090300}
+  - component: {fileID: 114193548041706924}
   - component: {fileID: 199343996646498640}
   - component: {fileID: 198100937548243844}
-  - component: {fileID: 7742288966044204441}
-  - component: {fileID: 540310581115073910}
-  - component: {fileID: 275079960158303158}
+  - component: {fileID: 3541605912010713200}
+  - component: {fileID: 7799124584577354037}
   m_Layer: 0
   m_Name: vfx_Projectile_BulletOrange_Mobile
-  m_TagString: Untagged
+  m_TagString: PlayerMissile
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -5009,6 +5009,22 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &114193548041706924
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1865968712415440}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fda56774912c510498234bde2b4fa6f0, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  MuzzleFlashPrefab: {fileID: 1888018191284372, guid: 83edc97d2ab35b84fbe85b929507592e,
+    type: 3}
+  HitFXPrefab: {fileID: 1124335935880280, guid: 316a16fa1bdae23448d3eb27eb9dedad,
+    type: 3}
 --- !u!199 &199343996646498640
 ParticleSystemRenderer:
   serializedVersion: 6
@@ -5083,13 +5099,13 @@ ParticleSystem:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1865968712415440}
   serializedVersion: 6
-  lengthInSec: 2
+  lengthInSec: 1
   simulationSpeed: 1
   stopAction: 0
   cullingMode: 1
   ringBufferMode: 0
   ringBufferLoopRange: {x: 0, y: 1}
-  looping: 0
+  looping: 1
   prewarm: 0
   playOnAwake: 1
   useUnscaledTime: 0
@@ -5158,7 +5174,7 @@ ParticleSystem:
     startLifetime:
       serializedVersion: 2
       minMaxState: 0
-      scalar: 5
+      scalar: 1
       minScalar: 5
       maxCurve:
         serializedVersion: 2
@@ -5592,7 +5608,7 @@ ParticleSystem:
     startRotation:
       serializedVersion: 2
       minMaxState: 0
-      scalar: 0
+      scalar: 1.5707963
       minScalar: 0
       maxCurve:
         serializedVersion: 2
@@ -5645,7 +5661,7 @@ ParticleSystem:
     randomizeRotationDirection: 0
     maxNumParticles: 2
     size3D: 1
-    rotation3D: 0
+    rotation3D: 1
     gravityModifier:
       serializedVersion: 2
       minMaxState: 0
@@ -6202,7 +6218,7 @@ ParticleSystem:
     x:
       serializedVersion: 2
       minMaxState: 0
-      scalar: 0
+      scalar: 25.13274
       minScalar: 0
       maxCurve:
         serializedVersion: 2
@@ -6255,7 +6271,7 @@ ParticleSystem:
     y:
       serializedVersion: 2
       minMaxState: 0
-      scalar: 25.13274
+      scalar: 0
       minScalar: 0
       maxCurve:
         serializedVersion: 2
@@ -9811,66 +9827,32 @@ ParticleSystem:
         m_PostInfinity: 2
         m_RotationOrder: 4
     vectorLabel1_3: W
---- !u!61 &7742288966044204441
-BoxCollider2D:
+--- !u!54 &3541605912010713200
+Rigidbody:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1865968712415440}
-  m_Enabled: 1
-  m_Density: 1
+  serializedVersion: 2
+  m_Mass: 1
+  m_Drag: 0
+  m_AngularDrag: 0.05
+  m_UseGravity: 0
+  m_IsKinematic: 1
+  m_Interpolate: 0
+  m_Constraints: 0
+  m_CollisionDetection: 0
+--- !u!65 &7799124584577354037
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1865968712415440}
   m_Material: {fileID: 0}
   m_IsTrigger: 1
-  m_UsedByEffector: 0
-  m_UsedByComposite: 0
-  m_Offset: {x: 0, y: 0}
-  m_SpriteTilingProperty:
-    border: {x: 0, y: 0, z: 0, w: 0}
-    pivot: {x: 0, y: 0}
-    oldSize: {x: 0, y: 0}
-    newSize: {x: 0, y: 0}
-    adaptiveTilingThreshold: 0
-    drawMode: 0
-    adaptiveTiling: 0
-  m_AutoTiling: 0
-  serializedVersion: 2
-  m_Size: {x: 0.213, y: 0.213}
-  m_EdgeRadius: 0
---- !u!50 &540310581115073910
-Rigidbody2D:
-  serializedVersion: 4
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1865968712415440}
-  m_BodyType: 1
-  m_Simulated: 1
-  m_UseFullKinematicContacts: 1
-  m_UseAutoMass: 0
-  m_Mass: 1
-  m_LinearDrag: 0
-  m_AngularDrag: 0.05
-  m_GravityScale: 1
-  m_Material: {fileID: 0}
-  m_Interpolate: 0
-  m_SleepingMode: 1
-  m_CollisionDetection: 0
-  m_Constraints: 0
---- !u!114 &275079960158303158
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1865968712415440}
   m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: fda56774912c510498234bde2b4fa6f0, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  MuzzleFlashPrefab: {fileID: 1888018191284372, guid: 83edc97d2ab35b84fbe85b929507592e,
-    type: 3}
-  HitFXPrefab: {fileID: 1124335935880280, guid: 316a16fa1bdae23448d3eb27eb9dedad,
-    type: 3}
+  serializedVersion: 2
+  m_Size: {x: 0.256, y: 0.283, z: 0.9}
+  m_Center: {x: 0.026, y: 0.0019, z: 0}

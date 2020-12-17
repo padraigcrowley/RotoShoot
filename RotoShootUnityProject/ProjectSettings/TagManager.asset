@@ -22,6 +22,7 @@ TagManager:
   - bossMissilesParentPoolObject
   - BossInvulnerable
   - BossVulnerable
+  - PlayerShipMissilesParentPoolObject
   layers:
   - Default
   - TransparentFX

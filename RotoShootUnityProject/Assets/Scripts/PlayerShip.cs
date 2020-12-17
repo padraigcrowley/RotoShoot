@@ -27,12 +27,15 @@ public class PlayerShip : ExtendedBehaviour
   public HealthBar healthBar;
 
   public GameObject PlayerShipDamageLarge;
+  Quaternion uniqueprojectileRotation = Quaternion.identity;
 
   void Start()
   {
     //camShakeScript = GetComponent<CameraShake>();
     //if (camShakeScript == null)    
     //  Debug.LogWarning("CameraShake returned NULL");
+
+    uniqueprojectileRotation.eulerAngles = new Vector3(-90, 0, 0);  
 
     transform.position = GameplayManager.Instance.playerShipPos;
     gameObject.SetActive(true);
@@ -177,12 +180,16 @@ public class PlayerShip : ExtendedBehaviour
     {
       case GameplayManager.PlayerFiringState.STRAIGHT_SINGLE:
       case GameplayManager.PlayerFiringState.RAPID_FIRE_SINGLE:
-        SimplePool.Spawn(playerMissilePrefab, playerShipFrontTurret.position, playerShipFrontTurret.rotation,playerShipMissilesParentPool.transform);
+        SimplePool.Spawn(playerMissilePrefab, playerShipFrontTurret.position, uniqueprojectileRotation, playerShipMissilesParentPool.transform);
+       //SimplePool.Spawn(playerMissilePrefab, playerShipFrontTurret.position, playerShipFrontTurret.rotation, playerShipMissilesParentPool.transform);
         break;
       case GameplayManager.PlayerFiringState.ANGLED_TRIPLE:
-        SimplePool.Spawn(playerMissilePrefab, playerShipFrontTurret.position, playerShipFrontTurret.rotation, playerShipMissilesParentPool.transform);
-        SimplePool.Spawn(playerMissilePrefab, playerShipLeftTurret.position, playerShipLeftTurret.rotation, playerShipMissilesParentPool.transform);
-        SimplePool.Spawn(playerMissilePrefab, playerShipRightTurret.position, playerShipRightTurret.rotation, playerShipMissilesParentPool.transform);
+        SimplePool.Spawn(playerMissilePrefab, playerShipFrontTurret.position, uniqueprojectileRotation, playerShipMissilesParentPool.transform);
+        SimplePool.Spawn(playerMissilePrefab, playerShipLeftTurret.position, uniqueprojectileRotation, playerShipMissilesParentPool.transform);
+        SimplePool.Spawn(playerMissilePrefab, playerShipRightTurret.position, uniqueprojectileRotation, playerShipMissilesParentPool.transform);
+        //SimplePool.Spawn(playerMissilePrefab, playerShipFrontTurret.position, playerShipFrontTurret.rotation, playerShipMissilesParentPool.transform);
+        //SimplePool.Spawn(playerMissilePrefab, playerShipLeftTurret.position, playerShipLeftTurret.rotation, playerShipMissilesParentPool.transform);
+        //SimplePool.Spawn(playerMissilePrefab, playerShipRightTurret.position, playerShipRightTurret.rotation, playerShipMissilesParentPool.transform);
         break;
       default:
         break;

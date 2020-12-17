@@ -1,14 +1,22 @@
 [-- Note: the UniqueProjectiles Pack's projectiles need rotating 90 around Y if used in 2D games / 2D mode !!!
 When spawning the projectile, rotate it 90 around the Y, like so:
+
+For PlayerMissile - (shooting up screen):
 Quaternion thisRotation = Quaternion.identity;
-thisRotation.eulerAngles = new Vector3(0, 90, 0); // !!! 
-spawnInstance = SimplePool.Spawn(playerMissilePrefab, shootingPos, thisRotation);   --]
+thisRotation.eulerAngles = new Vector3(-90, 0, 0); // !!! the UniqueProjectiles Pack's projectiles need rotating 90 if used in 2D games / 2D mode !!!
+spawnInstance = SimplePool.Spawn(playerMissilePrefab, shootingPos, thisRotation);
+//then, in PlayerMissileMovement" you also need to move it in the "forward" direction, not "up" 
+
+For EnemyMissiles - (shooting down screen):
+
+
+--]
 
 
 - Change the tag to "EnemyMisssile" or whatever relevant
-- change the Boxx Collider and Rigid Body components to their 2D equivalents.Base them on previous working ones.
-- Change/edit the above 2D fields.
-- replace the "projectile move" script with your own
-- in the scriptcomponent, fill in the relevant public fields/prefabs
+- change the Boxx Collider and Rigid Body components. (make the rigidbody kinematic, tick the boxCollider "IsTrigger" to ON).  .Base them on previous working ones.
+- Make sure what you're colliding against has a 3D (not 2D boxcollider (or whatever type))
+- replace the "projectile move" script with your own. in the scriptcomponent, fill in the relevant public fields/prefabs (e.g. Muzzle Flash and HITFX), etc (e.g. is Speed needing filling out?)
 - compare the particle fx (and children particle fx) with a previous working one
-- e.g. check that "Auto-Destroy" isn't on any of the particles/sub particles systems - it shouldn't be (because we're using pooling we don't want to destroy elements, as this will throw up an error when we try to re-use/re-Enable them)
+- e.g. check that "Auto-Destroy" isn't on any of the particles/sub particles systems - it shouldn't be (because we're using pooling we don't want to destroy elements, as this will throw up an error when we try to re-use/re-Enable them) (e.g the "AutoDestruct" tickbox on Trails prefabs)
+- for the playermissile (using Projectile_Bullet_Orange) - I didn't need/want certain elements, so deleted from the prefab (e.g. "HitMark" from vfx_Hit_BulletOrange_Mobile prefab ). Also toned down (perhaps remove) the muzzleflash (this is the "Muzzle" child prefab of vfx_Muzzle_BulletOrange_Mobile prefab). I toned down the Start Size field(s).
