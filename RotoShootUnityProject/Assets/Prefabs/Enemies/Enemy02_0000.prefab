@@ -10,10 +10,9 @@ GameObject:
   m_Component:
   - component: {fileID: 4342350733379744931}
   - component: {fileID: 4342350733379744930}
-  - component: {fileID: 4342350733379744941}
   - component: {fileID: 4342350733379744940}
-  - component: {fileID: 4342350733379744942}
   - component: {fileID: 6390746695824494001}
+  - component: {fileID: 6752770792488037292}
   m_Layer: 0
   m_Name: Enemy02_0000
   m_TagString: Enemy01
@@ -28,8 +27,8 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 4342350733379744943}
-  m_LocalRotation: {x: -0.011222504, y: 0, z: 0.7070178, w: 0.7071068}
-  m_LocalPosition: {x: 6.3, y: 0, z: 0.1}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
@@ -86,22 +85,6 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
---- !u!58 &4342350733379744941
-CircleCollider2D:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4342350733379744943}
-  m_Enabled: 1
-  m_Density: 1
-  m_Material: {fileID: 0}
-  m_IsTrigger: 1
-  m_UsedByEffector: 0
-  m_UsedByComposite: 0
-  m_Offset: {x: 0, y: 0}
-  serializedVersion: 2
-  m_Radius: 0.38
 --- !u!114 &4342350733379744940
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -128,27 +111,6 @@ MonoBehaviour:
   powerUpInstance: {fileID: 0}
   playerShip: {fileID: 0}
   waypointPath: {fileID: 0}
---- !u!50 &4342350733379744942
-Rigidbody2D:
-  serializedVersion: 4
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4342350733379744943}
-  m_BodyType: 1
-  m_Simulated: 1
-  m_UseFullKinematicContacts: 0
-  m_UseAutoMass: 0
-  m_Mass: 1
-  m_LinearDrag: 0
-  m_AngularDrag: 0.05
-  m_GravityScale: 0
-  m_Material: {fileID: 0}
-  m_Interpolate: 0
-  m_SleepingMode: 1
-  m_CollisionDetection: 0
-  m_Constraints: 0
 --- !u!114 &6390746695824494001
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -163,3 +125,17 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   enemyMissile: {fileID: 1374267004960804, guid: ea101576b4fe16348af97bd70798b596,
     type: 3}
+--- !u!136 &6752770792488037292
+CapsuleCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4342350733379744943}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_Enabled: 1
+  m_Radius: 0.45500016
+  m_Height: 1.0200002
+  m_Direction: 1
+  m_Center: {x: 0.0024164792, y: -0.2138593, z: 1.35031986e-11}

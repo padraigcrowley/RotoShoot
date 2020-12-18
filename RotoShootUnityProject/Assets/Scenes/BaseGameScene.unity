@@ -2983,70 +2983,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
-    - target: {fileID: 1407255238863242874, guid: 1caa033e3f7a75b4f93bebf2fa5f752c,
-        type: 3}
-      propertyPath: m_RootOrder
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 1738710863028081465, guid: 1caa033e3f7a75b4f93bebf2fa5f752c,
-        type: 3}
-      propertyPath: m_RootOrder
-      value: 1
-      objectReference: {fileID: 0}
     - target: {fileID: 1907907852192479033, guid: 1caa033e3f7a75b4f93bebf2fa5f752c,
         type: 3}
       propertyPath: m_Name
-      value: Screen Bounds
-      objectReference: {fileID: 0}
-    - target: {fileID: 1907907852192479033, guid: 1caa033e3f7a75b4f93bebf2fa5f752c,
-        type: 3}
-      propertyPath: m_TagString
-      value: Boundary
-      objectReference: {fileID: 0}
-    - target: {fileID: 3050290197636079533, guid: 1caa033e3f7a75b4f93bebf2fa5f752c,
-        type: 3}
-      propertyPath: m_RootOrder
-      value: 2
-      objectReference: {fileID: 0}
-    - target: {fileID: 4057564051258947919, guid: 1caa033e3f7a75b4f93bebf2fa5f752c,
-        type: 3}
-      propertyPath: m_IsActive
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 5003807364923150143, guid: 1caa033e3f7a75b4f93bebf2fa5f752c,
-        type: 3}
-      propertyPath: m_LocalPosition.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 5003807364923150143, guid: 1caa033e3f7a75b4f93bebf2fa5f752c,
-        type: 3}
-      propertyPath: m_LocalPosition.y
-      value: 8
-      objectReference: {fileID: 0}
-    - target: {fileID: 5003807364923150143, guid: 1caa033e3f7a75b4f93bebf2fa5f752c,
-        type: 3}
-      propertyPath: m_LocalPosition.z
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 5003807364923150143, guid: 1caa033e3f7a75b4f93bebf2fa5f752c,
-        type: 3}
-      propertyPath: m_LocalRotation.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 5003807364923150143, guid: 1caa033e3f7a75b4f93bebf2fa5f752c,
-        type: 3}
-      propertyPath: m_LocalRotation.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 5003807364923150143, guid: 1caa033e3f7a75b4f93bebf2fa5f752c,
-        type: 3}
-      propertyPath: m_LocalRotation.z
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 5003807364923150143, guid: 1caa033e3f7a75b4f93bebf2fa5f752c,
-        type: 3}
-      propertyPath: m_LocalRotation.w
-      value: 1
+      value: 2D Screen Bounds
       objectReference: {fileID: 0}
     - target: {fileID: 5003807364923150143, guid: 1caa033e3f7a75b4f93bebf2fa5f752c,
         type: 3}
@@ -3067,21 +3007,6 @@ PrefabInstance:
         type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 6285134783930818474, guid: 1caa033e3f7a75b4f93bebf2fa5f752c,
-        type: 3}
-      propertyPath: boundaryWidth
-      value: 0.4
-      objectReference: {fileID: 0}
-    - target: {fileID: 6608735771002503139, guid: 1caa033e3f7a75b4f93bebf2fa5f752c,
-        type: 3}
-      propertyPath: m_RootOrder
-      value: 3
-      objectReference: {fileID: 0}
-    - target: {fileID: 8950307036047339559, guid: 1caa033e3f7a75b4f93bebf2fa5f752c,
-        type: 3}
-      propertyPath: m_IsActive
-      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 1caa033e3f7a75b4f93bebf2fa5f752c, type: 3}

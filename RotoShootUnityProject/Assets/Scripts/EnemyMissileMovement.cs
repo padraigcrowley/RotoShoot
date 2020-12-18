@@ -31,7 +31,7 @@ public class EnemyMissileMovement : MissileMovement
         hitFXTriggered = true;
         hitVFX = SimplePool.Spawn(HitFXPrefab, transform.position, Quaternion.identity, transform.parent);
         hitVFX.transform.forward = gameObject.transform.forward;// + offset;
-        transform.localScale = new Vector3(.001f, .001f, .001f);// urgh, pretty hacky way to stop the missile projectile bullet being "drawn". Because can't SetActive(false) the missile object cos that will kill this script as well?
+        //transform.localScale = new Vector3(.001f, .001f, .001f);// urgh, pretty hacky way to stop the missile projectile bullet being "drawn". Because can't SetActive(false) the missile object cos that will kill this script as well?
 
         foreach (GameObject childObj in projectileChildrenObjects)
         {
@@ -49,10 +49,18 @@ public class EnemyMissileMovement : MissileMovement
       });
     }
   }
-  protected override void FixedUpdate()
+ void FixedUpdate()
   {
-    base.FixedUpdate();
+    print("---before---");
+    print($"this.transform.position {this.transform.gameObject.name } = {this.transform.position}");
+    print($"this.transform.localPosition {this.transform.gameObject.name } = {this.transform.localPosition}");
+    
     if (!collided)
-      transform.position += movementVector * Time.fixedDeltaTime;
+      //transform.position += movementVector * Time.fixedDeltaTime;
+      this.transform.position += this.transform.forward * 5 * Time.fixedDeltaTime;
+    print("---after---");
+    print($"this.transform.position {this.transform.gameObject.name } = {this.transform.position}");
+    print($"this.transform.localPosition {this.transform.gameObject.name } = {this.transform.localPosition}");
+    print("");
   }
 }

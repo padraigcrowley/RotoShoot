@@ -53,32 +53,6 @@ public class MissileMovement : ExtendedBehaviour
 
   }
 
-  protected  virtual void FixedUpdate()
-  {
-    
-  }
-
-  // Update is called once per frame
-  void Update()
-    {
-        
-    }
-
-
-
-
-  //private void OnTriggerExit2D(Collider2D co)
-  //{
-  //  print($"Collision exited with {co.gameObject.tag}");
-  //  if (co.gameObject.CompareTag("Boundary"))
-  //  {
-      
-  //    SimplePool.Despawn(gameObject);
-  //    SimplePool.Despawn(muzzleVFX);
-
-  //  }
-  //}
-
   private void OnTriggerExit(Collider co)
   {
     //print($"Collision exited with {co.gameObject.tag}");

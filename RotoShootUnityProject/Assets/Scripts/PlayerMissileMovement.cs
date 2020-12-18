@@ -20,19 +20,18 @@ public class PlayerMissileMovement : MissileMovement
     upDirection = this.transform.up;
   }
 
-  protected override void FixedUpdate()
+   void FixedUpdate()
   {
-    base.FixedUpdate();
-    
     if (!collided)
       //this.transform.position += upDirection * GameplayManager.Instance.currentPlayerMissileSpeedMultiplier * Time.fixedDeltaTime;
       //this.transform.position += upDirection * 10.0f * Time.fixedDeltaTime;
-      this.transform.position += this.transform.forward * 30.0f * Time.fixedDeltaTime;
+      this.transform.position += this.transform.forward * GameplayManager.Instance.currentPlayerMissileSpeedMultiplier * Time.fixedDeltaTime;
+    //print($"this.transform.position {this.transform.gameObject.name } = {this.transform.position}");
       
   }
   private void OnTriggerEnter(Collider co)
   {
-    print($"Collision entered with {co.gameObject.tag}");
+    //print($"Collision entered with {co.gameObject.tag}");
     if ((!co.gameObject.CompareTag("EnemyMissile")) && ((co.gameObject.CompareTag("Enemy01")) || (co.gameObject.CompareTag("BossInvulnerable")) || (co.gameObject.CompareTag("BossVulnerable"))))
     {
       Vector3 colPos = co.gameObject.transform.position;

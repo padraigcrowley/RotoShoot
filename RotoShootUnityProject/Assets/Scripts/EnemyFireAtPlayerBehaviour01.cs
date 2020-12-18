@@ -36,11 +36,11 @@ public class EnemyFireAtPlayerBehaviour01 : MonoBehaviour
     GameObject firedBullet;
 
     Quaternion thisRotation = Quaternion.identity;
-    thisRotation.eulerAngles = new Vector3(0, 90, 0); // !!! the UniqueProjectiles Pack's projectiles need rotating 90 around Y if used in 2D games / 2D mode !!!
+    thisRotation.eulerAngles = new Vector3(90, 0, 0); // !!! the UniqueProjectiles Pack's projectiles need rotating 90 around Y if used in 2D games / 2D mode !!!
     
 
     firedBullet = SimplePool.Spawn(enemyMissile, transform.position, thisRotation, enemyMissilesParentPool.transform);
-    //firedBullet = SimplePool.Spawn(enemyMissile, transform.position, transform.rotation);
-        
+    //firedBullet = SimplePool.Spawn(enemyMissile, transform.position, transform.rotation, enemyMissilesParentPool.transform);
+
   }
 }

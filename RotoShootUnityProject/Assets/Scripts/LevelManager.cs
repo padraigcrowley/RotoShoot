@@ -175,7 +175,7 @@ public class LevelManager : Singleton<LevelManager>
     {
       EnemyBehaviour02 enemyShipScript = enemyShipObjectTransform.gameObject.GetComponent<EnemyBehaviour02>();
       yield return new WaitForSeconds(enemyShipScript.timeBetweenSpawn);
-      print($"in LevelManager, waited for timeBetweenSpawn ({enemyShipScript.timeBetweenSpawn}) seconds");
+      //print($"in LevelManager, waited for timeBetweenSpawn ({enemyShipScript.timeBetweenSpawn}) seconds");
       enemyShipScript.waveRespawnWaitOver = true;
     }
     currentlyActivatingWave = false;

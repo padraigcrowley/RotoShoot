@@ -13,7 +13,7 @@ public abstract class EnemyBehaviour02 : ExtendedBehaviour
   public float hpMultiplierFromSpawner = 1f;
   private float respawnWaitDelay = 2.0f; //default value unless overridden by derived class
  
-  public float startPosX, startPosY, startPosZ;
+  public float startPosX, startPosY, startPosZ = 0f;
   private float startScaleX, startScaleY, startScaleZ;
 
   protected float initialHP, initialSpeed; //"protected" to allow abstract sub-class to access it
@@ -226,7 +226,7 @@ public abstract class EnemyBehaviour02 : ExtendedBehaviour
 
   private void Respawn()
   {
-    print ("in Respawn()");
+    //print ("in Respawn()");
     //Wait(timeBetweenSpawn, () => 
     //{
     //  timeBetweenSpawnPassed = true;
