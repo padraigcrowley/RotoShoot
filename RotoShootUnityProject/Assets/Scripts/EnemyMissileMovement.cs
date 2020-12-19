@@ -14,11 +14,13 @@ public class EnemyMissileMovement : MissileMovement
 
   protected override void OnEnable()
   {
-    movementVector = (GameplayManager.Instance.playerShipPos - transform.position).normalized * speed;
+    movementVector = (new Vector3(0f, -8f, 0f) - transform.position).normalized * speed; //test junk 
+
+    //movementVector = (GameplayManager.Instance.playerShipPos - transform.position).normalized * speed;
     base.OnEnable();
     //print("---PlayerMissilemovement OnEnable()---");
   }
-  private void OnTriggerEnter2D(Collider2D co)
+  private void OnTriggerEnter(Collider co)
   {
     //print($"Collision entered with {co.gameObject.tag}");
     if ((!co.gameObject.CompareTag("PlayerMissile")) && (co.gameObject.CompareTag("Player")))
@@ -31,7 +33,7 @@ public class EnemyMissileMovement : MissileMovement
         hitFXTriggered = true;
         hitVFX = SimplePool.Spawn(HitFXPrefab, transform.position, Quaternion.identity, transform.parent);
         hitVFX.transform.forward = gameObject.transform.forward;// + offset;
-        //transform.localScale = new Vector3(.001f, .001f, .001f);// urgh, pretty hacky way to stop the missile projectile bullet being "drawn". Because can't SetActive(false) the missile object cos that will kill this script as well?
+        transform.localScale = new Vector3(.001f, .001f, .001f);// urgh, pretty hacky way to stop the missile projectile bullet being "drawn". Because can't SetActive(false) the missile object cos that will kill this script as well?
 
         foreach (GameObject childObj in projectileChildrenObjects)
         {
@@ -51,16 +53,9 @@ public class EnemyMissileMovement : MissileMovement
   }
  void FixedUpdate()
   {
-    print("---before---");
-    print($"this.transform.position {this.transform.gameObject.name } = {this.transform.position}");
-    print($"this.transform.localPosition {this.transform.gameObject.name } = {this.transform.localPosition}");
-    
+       
     if (!collided)
-      //transform.position += movementVector * Time.fixedDeltaTime;
-      this.transform.position += this.transform.forward * 5 * Time.fixedDeltaTime;
-    print("---after---");
-    print($"this.transform.position {this.transform.gameObject.name } = {this.transform.position}");
-    print($"this.transform.localPosition {this.transform.gameObject.name } = {this.transform.localPosition}");
-    print("");
+      transform.position += movementVector * Time.fixedDeltaTime;
+    
   }
 }

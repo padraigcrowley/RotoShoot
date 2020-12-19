@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 6032717887555321984}
   - component: {fileID: 6032717887555322015}
   - component: {fileID: 6032717887555322014}
-  - component: {fileID: 2933624682960500629}
+  - component: {fileID: 2651865892675984865}
   m_Layer: 0
   m_Name: asteroids_1
   m_TagString: Asteroid
@@ -71,7 +71,7 @@ SpriteRenderer:
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: -1079083179
-  m_SortingLayer: -2
+  m_SortingLayer: 1
   m_SortingOrder: 0
   m_Sprite: {fileID: 3390946259416056725, guid: 313a6059baa10b9478a55c321ebd3c83,
     type: 3}
@@ -104,29 +104,17 @@ Animator:
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorControllerStateOnDisable: 0
---- !u!61 &2933624682960500629
-BoxCollider2D:
+--- !u!136 &2651865892675984865
+CapsuleCollider:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 6032717887555322013}
-  m_Enabled: 1
-  m_Density: 1
   m_Material: {fileID: 0}
   m_IsTrigger: 1
-  m_UsedByEffector: 0
-  m_UsedByComposite: 0
-  m_Offset: {x: 0.0061214566, y: -0.00000011920929}
-  m_SpriteTilingProperty:
-    border: {x: 0, y: 0, z: 0, w: 0}
-    pivot: {x: 0.5, y: 0.5}
-    oldSize: {x: 1.28, y: 1.28}
-    newSize: {x: 1.28, y: 1.28}
-    adaptiveTilingThreshold: 0.5
-    drawMode: 0
-    adaptiveTiling: 0
-  m_AutoTiling: 0
-  serializedVersion: 2
-  m_Size: {x: 0.67738366, y: 0.57065445}
-  m_EdgeRadius: 0
+  m_Enabled: 1
+  m_Radius: 0.39
+  m_Height: 0.19
+  m_Direction: 1
+  m_Center: {x: 0, y: 0, z: 0}

@@ -25,7 +25,11 @@ public class PlayerMissileMovement : MissileMovement
     if (!collided)
       //this.transform.position += upDirection * GameplayManager.Instance.currentPlayerMissileSpeedMultiplier * Time.fixedDeltaTime;
       //this.transform.position += upDirection * 10.0f * Time.fixedDeltaTime;
+
+      //this.transform.position += this.transform.forward * 10f * Time.fixedDeltaTime;
       this.transform.position += this.transform.forward * GameplayManager.Instance.currentPlayerMissileSpeedMultiplier * Time.fixedDeltaTime;
+    
+    
     //print($"this.transform.position {this.transform.gameObject.name } = {this.transform.position}");
       
   }

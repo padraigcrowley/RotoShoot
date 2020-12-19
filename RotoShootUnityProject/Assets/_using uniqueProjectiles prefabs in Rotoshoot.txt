@@ -14,7 +14,7 @@ For EnemyMissiles - (shooting down screen):
 
 
 - Change the tag to "EnemyMisssile" or whatever relevant
-- change the Boxx Collider and Rigid Body components. (make the rigidbody kinematic, tick the boxCollider "IsTrigger" to ON).  .Base them on previous working ones.
+- change the Boxx Collider and Rigid Body components. (make the rigidbody kinematic ON, tick the boxCollider "IsTrigger" to ON).  .Base them on previous working ones.
 - Make sure what you're colliding against has a 3D (not 2D boxcollider (or whatever type))
 - replace the "projectile move" script with your own. in the scriptcomponent, fill in the relevant public fields/prefabs (e.g. Muzzle Flash and HITFX), etc (e.g. is Speed needing filling out?)
 - compare the particle fx (and children particle fx) with a previous working one
