@@ -4887,7 +4887,7 @@ MonoBehaviour:
     type: 3}
   HitFXPrefab: {fileID: 1947288781186748, guid: 00370222f60af3740847f048c35e6401,
     type: 3}
-  speed: 10
+  speed: 30
   healthBar: {fileID: 0}
 --- !u!199 &199504960948426666
 ParticleSystemRenderer:

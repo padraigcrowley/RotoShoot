@@ -6,7 +6,7 @@ public class EnemyFireAtPlayerBehaviour01 : MonoBehaviour
 {
   [SerializeField] private GameObject enemyMissile;
   private EnemyBehaviour02 eb;
-
+  private Quaternion rotation;
   private GameObject enemyMissilesParentPool;
 
   void Start()
@@ -35,12 +35,21 @@ public class EnemyFireAtPlayerBehaviour01 : MonoBehaviour
   {
     GameObject firedBullet;
 
-    //Quaternion thisRotation = Quaternion.identity;
-    //thisRotation.eulerAngles = new Vector3(90, 0, 0); // !!! the UniqueProjectiles Pack's projectiles need rotating  if used in 2D games / 2D mode !!!
-    //firedBullet = SimplePool.Spawn(enemyMissile, transform.position, thisRotation, enemyMissilesParentPool.transform);
-    
-    
-    firedBullet = SimplePool.Spawn(enemyMissile, transform.position, transform.rotation, enemyMissilesParentPool.transform);
+    Vector2 direction = GameplayManager.Instance.playerShipPos - transform.position;  //direction is a vector2 containing the (x,y) distance from the player ship to the firing gameobject (the enemy position)
+    float angle = Mathf.Atan2(direction.y, direction.x) * Mathf.Rad2Deg;
+    /* angle is a float, and it's 90 when you're aiming/firing directly above you, 
+     * -90 when firing directly below, 
+     * 0 to the right and
+     * 180 (-180) to the left */
+    if (angle > 180) angle -= 360;
+    rotation.eulerAngles = new Vector3(-angle, 90, 0); // use different values to lock on different axis
+    //transform.rotation = rotation;
+
+    firedBullet = SimplePool.Spawn(enemyMissile, transform.position, Quaternion.identity);
+    firedBullet.transform.localRotation = rotation; //v.important line!!!
+
+
+    //firedBullet = SimplePool.Spawn(enemyMissile, transform.position, transform.rotation, enemyMissilesParentPool.transform);
 
   }
 }

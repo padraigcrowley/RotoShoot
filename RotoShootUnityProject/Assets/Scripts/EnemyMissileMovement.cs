@@ -5,18 +5,12 @@ using UnityEngine;
 
 public class EnemyMissileMovement : MissileMovement
 {
-  
-  private Vector3 destinationPos;
-  private Vector3 movementVector = Vector2.zero;
   public float speed;
-
   public HealthBar healthBar;
 
   protected override void OnEnable()
   {
-    movementVector = (new Vector3(0f, -8f, 0f) - transform.position).normalized * speed; //test junk 
-
-    //movementVector = (GameplayManager.Instance.playerShipPos - transform.position).normalized * speed;
+    
     base.OnEnable();
     //print("---PlayerMissilemovement OnEnable()---");
   }
@@ -55,7 +49,8 @@ public class EnemyMissileMovement : MissileMovement
   {
        
     if (!collided)
-      transform.position += movementVector * Time.fixedDeltaTime;
+      transform.position += transform.forward * speed * Time.fixedDeltaTime;
+      //transform.position += movementVector * Time.fixedDeltaTime;
     
   }
 }

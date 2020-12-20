@@ -465,11 +465,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 18fb63097782f97458f0ce9919d3e2c5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  MuzzleFlashPrefab: {fileID: 1411242768787088, guid: aef9ec08884f3c943af9174ae53396d5,
-    type: 3}
-  HitFXPrefab: {fileID: 1188432315835894, guid: 0f9f4119ae4039c4b8fe7a262ab73987,
-    type: 3}
-  speed: 5
+  MuzzleFlashPrefab: {fileID: 0}
+  HitFXPrefab: {fileID: 0}
+  speed: 15
   healthBar: {fileID: 0}
 --- !u!199 &199081142237376256
 ParticleSystemRenderer:
