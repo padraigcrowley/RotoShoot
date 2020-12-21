@@ -65,7 +65,19 @@ public class PowerUp : MonoBehaviour
   /// </summary>
   protected virtual void OnTriggerEnter(Collider other)
   {
-    PowerUpCollected(other.gameObject);
+    if (other.tag == "Player")
+    {
+      print($"PowerUp Collected!");
+      PowerUpCollected(other.gameObject);
+    }
+    else if (other.gameObject.CompareTag("Atmosphere"))
+    {
+      print($"Collision entered with Atmos! ");
+      pulseTween.Kill();
+      travelSpeed /= 2.0f;
+      dissolveAnim.Play("PowerUpDissolve");
+      Destroy(gameObject, 1);
+    }
   }
 
   protected virtual void PowerUpCollected(GameObject gameObjectCollectingPowerUp)

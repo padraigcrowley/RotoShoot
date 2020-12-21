@@ -6367,9 +6367,9 @@ GameObject:
   m_Component:
   - component: {fileID: 1665425950}
   - component: {fileID: 1665425949}
-  - component: {fileID: 1665425951}
   - component: {fileID: 1665425952}
   - component: {fileID: 1665425953}
+  - component: {fileID: 1665425951}
   m_Layer: 0
   m_Name: atmosphere_surface_1080x252_01
   m_TagString: Atmosphere
@@ -6442,32 +6442,19 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 12
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!61 &1665425951
-BoxCollider2D:
+--- !u!65 &1665425951
+BoxCollider:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1665425948}
-  m_Enabled: 1
-  m_Density: 1
   m_Material: {fileID: 0}
   m_IsTrigger: 1
-  m_UsedByEffector: 0
-  m_UsedByComposite: 0
-  m_Offset: {x: 0.019946575, y: -0.16490155}
-  m_SpriteTilingProperty:
-    border: {x: 0, y: 0, z: 0, w: 0}
-    pivot: {x: 0.5, y: 0.5}
-    oldSize: {x: 10.8, y: 2.52}
-    newSize: {x: 10.8, y: 2.52}
-    adaptiveTilingThreshold: 0.5
-    drawMode: 0
-    adaptiveTiling: 0
-  m_AutoTiling: 0
+  m_Enabled: 1
   serializedVersion: 2
-  m_Size: {x: 9.585786, y: 0.9884292}
-  m_EdgeRadius: 0
+  m_Size: {x: 9.5, y: 1, z: 0.2}
+  m_Center: {x: 0, y: 0, z: 0}
 --- !u!114 &1665425952
 MonoBehaviour:
   m_ObjectHideFlags: 0

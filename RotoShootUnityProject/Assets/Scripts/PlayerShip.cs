@@ -28,6 +28,8 @@ public class PlayerShip : ExtendedBehaviour
 
   public GameObject PlayerShipDamageLarge;
   Quaternion uniqueprojectileRotation = Quaternion.identity;
+  Quaternion uniqueprojectileRotationLeftTurret = Quaternion.identity;
+  Quaternion uniqueprojectileRotationRightTurret = Quaternion.identity;
 
   void Start()
   {
@@ -36,6 +38,8 @@ public class PlayerShip : ExtendedBehaviour
     //  Debug.LogWarning("CameraShake returned NULL");
 
     uniqueprojectileRotation.eulerAngles = new Vector3(-90, 0, 0);  
+    uniqueprojectileRotationLeftTurret.eulerAngles = new Vector3(-70, -90, 0);  //??
+    uniqueprojectileRotationRightTurret.eulerAngles = new Vector3(-70, 90, 0);  //??
 
     transform.position = GameplayManager.Instance.playerShipPos;
     gameObject.SetActive(true);
@@ -185,8 +189,8 @@ public class PlayerShip : ExtendedBehaviour
         break;
       case GameplayManager.PlayerFiringState.ANGLED_TRIPLE:
         SimplePool.Spawn(playerMissilePrefab, playerShipFrontTurret.position, uniqueprojectileRotation, playerShipMissilesParentPool.transform);
-        SimplePool.Spawn(playerMissilePrefab, playerShipLeftTurret.position, uniqueprojectileRotation, playerShipMissilesParentPool.transform);
-        SimplePool.Spawn(playerMissilePrefab, playerShipRightTurret.position, uniqueprojectileRotation, playerShipMissilesParentPool.transform);
+        SimplePool.Spawn(playerMissilePrefab, playerShipLeftTurret.position, uniqueprojectileRotationLeftTurret, playerShipMissilesParentPool.transform);
+        SimplePool.Spawn(playerMissilePrefab, playerShipRightTurret.position, uniqueprojectileRotationRightTurret, playerShipMissilesParentPool.transform);
         //SimplePool.Spawn(playerMissilePrefab, playerShipFrontTurret.position, playerShipFrontTurret.rotation, playerShipMissilesParentPool.transform);
         //SimplePool.Spawn(playerMissilePrefab, playerShipLeftTurret.position, playerShipLeftTurret.rotation, playerShipMissilesParentPool.transform);
         //SimplePool.Spawn(playerMissilePrefab, playerShipRightTurret.position, playerShipRightTurret.rotation, playerShipMissilesParentPool.transform);

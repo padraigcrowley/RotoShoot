@@ -22,7 +22,7 @@ public class AtmosSurface : ExtendedBehaviour
 
   }
 
-  private void OnTriggerEnter2D(Collider2D collision)
+  private void OnTriggerEnter(Collider collision)
   {
     if (GameplayManager.Instance.currentGameState == GameplayManager.GameState.LEVEL_IN_PROGRESS)
     {
