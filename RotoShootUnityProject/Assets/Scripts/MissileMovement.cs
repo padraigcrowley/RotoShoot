@@ -16,13 +16,13 @@ public class MissileMovement : ExtendedBehaviour
   private bool readyToDespawn = false;
   private ParticleSystem ps;
   protected bool collided;
-  private GameObject trailObj;
+  private TrailRenderer trailRenderer;
   protected List<GameObject> projectileChildrenObjects = new List<GameObject>();
 
   virtual protected void Start()
     {
     //print("---Missilemovement Start()---");
-
+    trailRenderer = GetComponentInChildren<TrailRenderer>();
     //manually have to turn the child objects off/on after collisions coz otherwise e.g. the trail's quick position change makes it glitch
     foreach (Transform childTransform in this.transform)
     {     
@@ -41,14 +41,16 @@ public class MissileMovement : ExtendedBehaviour
     hitFXTriggered = false;
     readyToDespawn = false;
     collided = false;
+    if (trailRenderer != null)
+      trailRenderer.Clear();
+
     transform.localScale = new Vector3(1f, 1f, 1f);
     foreach (GameObject childObj in projectileChildrenObjects)
     {
       if(childObj!=null)
       childObj.SetActive(true);
     }
-    //if (trailObj != null)
-     // trailObj.SetActive(true);
+    
     DoMuzzleFlash();
 
   }
@@ -65,7 +67,7 @@ public class MissileMovement : ExtendedBehaviour
         if (childObj != null)
           childObj.SetActive(false);
       }
-      //trailObj.SetActive(false);
+      
 
       Wait(DESPAWN_DELAY_TIME, () =>
       {

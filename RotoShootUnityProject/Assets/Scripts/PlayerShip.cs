@@ -27,19 +27,26 @@ public class PlayerShip : ExtendedBehaviour
   public HealthBar healthBar;
 
   public GameObject PlayerShipDamageLarge;
+  private GameObject playerMissileInstance, playerMissileLeftTurretInstance, playerMissileRightTurretInstance;
   Quaternion uniqueprojectileRotation = Quaternion.identity;
   Quaternion uniqueprojectileRotationLeftTurret = Quaternion.identity;
   Quaternion uniqueprojectileRotationRightTurret = Quaternion.identity;
 
   void Start()
   {
-    //camShakeScript = GetComponent<CameraShake>();
-    //if (camShakeScript == null)    
-    //  Debug.LogWarning("CameraShake returned NULL");
 
-    uniqueprojectileRotation.eulerAngles = new Vector3(-90, 0, 0);  
-    uniqueprojectileRotationLeftTurret.eulerAngles = new Vector3(-70, -90, 0);  //??
-    uniqueprojectileRotationRightTurret.eulerAngles = new Vector3(-70, 90, 0);  //??
+    /* see EnemyFireAtPlayerBehaviour01.cs
+     * "angle" is a float, and it's:
+     * 90 when you're aiming/firing directly above you, 
+     * -90 when firing directly below, 
+     * 0 to the right and
+     * 180 (-180) to the left 
+     * "angle" is the first (x) parameter in the 3 lines below, the Y is always 90 when using UniqueProjectiles in 2D 
+     Although... note, ANGLE is inverted here because the player ship is facing down. the enemymissilefiring stuff is facing down*/
+
+    uniqueprojectileRotation.eulerAngles = new Vector3(-90, 90, 0);  
+    uniqueprojectileRotationLeftTurret.eulerAngles = new Vector3(-110, 90, 0);  
+    uniqueprojectileRotationRightTurret.eulerAngles = new Vector3(-70, 90, 0);  
 
     transform.position = GameplayManager.Instance.playerShipPos;
     gameObject.SetActive(true);
@@ -148,14 +155,14 @@ public class PlayerShip : ExtendedBehaviour
         {
           StartCoroutine(MovePlayerShip(GameplayManager.Instance.shipLanes[currentShipLane + 1]));
           //print($"Turned Right. Current Ship lane: {currentShipLane}");
-          FlipSprite(1); //need to flip the sprite coz I only have banking anim in left direction
-          PlayerShipGFXAnim.Play("PlayerShipLeftTurn");
+          //FlipSprite(1); //need to flip the sprite coz I only have banking anim in left direction
+          PlayerShipGFXAnim.Play("PlayerShipRightTurn");
         }
         else if ((angleToRotate > 0) && (currentShipLane - 1 >= 0))
         {
           StartCoroutine(MovePlayerShip(GameplayManager.Instance.shipLanes[currentShipLane - 1])); //left
           //print($""Turned Left.Current Ship lane: {currentShipLane}");
-          FlipSprite(0);
+          //FlipSprite(0);
           PlayerShipGFXAnim.Play("PlayerShipLeftTurn");
         }
       }
@@ -184,16 +191,19 @@ public class PlayerShip : ExtendedBehaviour
     {
       case GameplayManager.PlayerFiringState.STRAIGHT_SINGLE:
       case GameplayManager.PlayerFiringState.RAPID_FIRE_SINGLE:
-        SimplePool.Spawn(playerMissilePrefab, playerShipFrontTurret.position, uniqueprojectileRotation, playerShipMissilesParentPool.transform);
-       //SimplePool.Spawn(playerMissilePrefab, playerShipFrontTurret.position, playerShipFrontTurret.rotation, playerShipMissilesParentPool.transform);
+        playerMissileInstance = SimplePool.Spawn(playerMissilePrefab, playerShipFrontTurret.position, Quaternion.identity, playerShipMissilesParentPool.transform);
+        playerMissileInstance.transform.localRotation = uniqueprojectileRotation; //v.important line!!!
         break;
       case GameplayManager.PlayerFiringState.ANGLED_TRIPLE:
-        SimplePool.Spawn(playerMissilePrefab, playerShipFrontTurret.position, uniqueprojectileRotation, playerShipMissilesParentPool.transform);
-        SimplePool.Spawn(playerMissilePrefab, playerShipLeftTurret.position, uniqueprojectileRotationLeftTurret, playerShipMissilesParentPool.transform);
-        SimplePool.Spawn(playerMissilePrefab, playerShipRightTurret.position, uniqueprojectileRotationRightTurret, playerShipMissilesParentPool.transform);
-        //SimplePool.Spawn(playerMissilePrefab, playerShipFrontTurret.position, playerShipFrontTurret.rotation, playerShipMissilesParentPool.transform);
-        //SimplePool.Spawn(playerMissilePrefab, playerShipLeftTurret.position, playerShipLeftTurret.rotation, playerShipMissilesParentPool.transform);
-        //SimplePool.Spawn(playerMissilePrefab, playerShipRightTurret.position, playerShipRightTurret.rotation, playerShipMissilesParentPool.transform);
+        playerMissileInstance = SimplePool.Spawn(playerMissilePrefab, playerShipFrontTurret.position, uniqueprojectileRotation, playerShipMissilesParentPool.transform);
+        playerMissileInstance.transform.localRotation = uniqueprojectileRotation; //v.important line!!!
+
+        playerMissileLeftTurretInstance = SimplePool.Spawn(playerMissilePrefab, playerShipLeftTurret.position, uniqueprojectileRotationLeftTurret, playerShipMissilesParentPool.transform);
+        playerMissileLeftTurretInstance.transform.localRotation = uniqueprojectileRotationLeftTurret; //v.important line!!!
+
+        playerMissileRightTurretInstance = SimplePool.Spawn(playerMissilePrefab, playerShipRightTurret.position, uniqueprojectileRotationRightTurret, playerShipMissilesParentPool.transform);
+        playerMissileRightTurretInstance.transform.localRotation = uniqueprojectileRotationRightTurret; //v.important line!!!
+        
         break;
       default:
         break;

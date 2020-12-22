@@ -84,6 +84,7 @@ public class BossBehaviour01 : MonoBehaviour
 
     foreach (Collider2D collision in collisions)
     {
+      // ***TODO - ADD A CHECK IT@S NOT COLLIDING AGAINST "BOUNDARY" !!
       if (collision.gameObject.CompareTag("BossVulnerable") && collider.gameObject.CompareTag("PlayerMissile"))
       {
         print("HIT BOSS ORB!");

@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class PowerUpRapidFireSingle : PowerUp
 {
-  public float durationSeconds;
+  private float durationSeconds;
   public float currentPlayerShipFireRateIncrease = 3.0f;
   protected override void PowerUpPayload()
   {
