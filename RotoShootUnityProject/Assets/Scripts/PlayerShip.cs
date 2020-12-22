@@ -154,37 +154,18 @@ public class PlayerShip : ExtendedBehaviour
         if ((angleToRotate < 0) && (currentShipLane + 1 < GameplayManager.Instance.shipLanes.Length)) //right
         {
           StartCoroutine(MovePlayerShip(GameplayManager.Instance.shipLanes[currentShipLane + 1]));
-          //print($"Turned Right. Current Ship lane: {currentShipLane}");
-          //FlipSprite(1); //need to flip the sprite coz I only have banking anim in left direction
           PlayerShipGFXAnim.Play("PlayerShipRightTurn");
         }
         else if ((angleToRotate > 0) && (currentShipLane - 1 >= 0))
         {
           StartCoroutine(MovePlayerShip(GameplayManager.Instance.shipLanes[currentShipLane - 1])); //left
-          //print($""Turned Left.Current Ship lane: {currentShipLane}");
-          //FlipSprite(0);
           PlayerShipGFXAnim.Play("PlayerShipLeftTurn");
         }
       }
     }
   }
 
-  //left = 0, right = 1
-  void FlipSprite(int direction)
-  {
-    //https://stackoverflow.com/questions/26568542/flipping-a-2d-sprite-animation-in-unity-2d
-    // Switch the way the player is labelled as facing
-    //facingRight = !facingRight;
-
-    // Multiply the player's x local scale by -1
-    Vector3 theScale = transform.localScale;
-    if (direction == 0) 
-      theScale.x = 1;
-     else
-      theScale.x = -1;
-    transform.localScale = theScale;
-  }
-
+ 
   private void CreatePlayerBullets()
   {
     switch(GameplayManager.Instance.currentPlayerFiringState)
