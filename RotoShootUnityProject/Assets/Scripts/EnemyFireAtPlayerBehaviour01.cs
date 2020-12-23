@@ -45,7 +45,7 @@ public class EnemyFireAtPlayerBehaviour01 : MonoBehaviour
     rotation.eulerAngles = new Vector3(-angle, 90, 0); // use different values to lock on different axis
     //transform.rotation = rotation;
 
-    firedBullet = SimplePool.Spawn(enemyMissile, transform.position, Quaternion.identity);
+    firedBullet = SimplePool.Spawn(enemyMissile, transform.position, Quaternion.identity, enemyMissilesParentPool.transform);
     firedBullet.transform.localRotation = rotation; //v.important line!!!
 
 
