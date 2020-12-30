@@ -299,6 +299,7 @@ MonoBehaviour:
   bossMissile: {fileID: 1607489160101874, guid: 731f5ce10c6adab4ba085268d0cfb6e1,
     type: 3}
   bossOrb: {fileID: 6173529639652644514}
+  bossEggAnimator: {fileID: 6173529639652644512}
 --- !u!54 &4304561565860451195
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -343,7 +344,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 6173529639652644514}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0.0024399757, y: -0.85, z: 0}
+  m_LocalPosition: {x: 0, y: 2, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 6173529639553121558}
@@ -413,7 +414,7 @@ Animator:
   m_Controller: {fileID: 9100000, guid: aae4f52e276c6f744b843c87d8106cb5, type: 2}
   m_CullingMode: 0
   m_UpdateMode: 0
-  m_ApplyRootMotion: 0
+  m_ApplyRootMotion: 1
   m_LinearVelocityBlending: 0
   m_WarningMessage: 
   m_HasTransformHierarchy: 1

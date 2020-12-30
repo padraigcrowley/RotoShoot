@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using SWS; //simple waypoints
 
-public class BossBehaviour01 : MonoBehaviour
+public class BossBehaviour01 : ExtendedBehaviour
 {
   public SWS.PathManager waypointPath;
   protected splineMove splineMoveScript;
@@ -19,12 +19,15 @@ public class BossBehaviour01 : MonoBehaviour
   private GameObject bossMissilesParentPool;
   private bool fireAtPlayerPos = true;
 
+  public Animator bossEggAnimator;
+
   // Start is called before the first frame update
   void Start()
   {
     transform.position = new Vector3(startPosX, startPosY, 0f);
     bossHP *= hpMultiplierFromSpawner;
 
+    bossEggAnimator = GetComponentInChildren<Animator>();
     bossSpriteMaterials = GetComponentsInChildren<Renderer>();
     StartCoroutine(BossAppearEffect(5f));
 
@@ -36,6 +39,14 @@ public class BossBehaviour01 : MonoBehaviour
     }
 
     bossMissilesParentPool = new GameObject("bossMissilesParentPoolObject");
+
+    Wait(5, () => {
+      Debug.Log("5 seconds is lost forever");
+      bossEggAnimator.Play("Boss01EggLower");
+    });
+
+    //InvokeRepeating(nameof(this.FireMissileAtPlayerPos), 4, 2f);
+    //InvokeRepeating(nameof(this.FireMissileStraightDown), 5, 2f);
   }
 
   IEnumerator BossAppearEffect(float duration)
@@ -69,12 +80,12 @@ public class BossBehaviour01 : MonoBehaviour
   void Update()
   {
 
-    if (Input.GetKeyDown(KeyCode.S))
-    {
-      fireAtPlayerPos = false;
-      FireMissile(fireAtPlayerPos);
-    }
-
+    //if (Input.GetKeyDown(KeyCode.S))
+    //{
+    //  fireAtPlayerPos = true;
+    //  FireMissile(fireAtPlayerPos);
+    //}
+    
     if (bossAppeared)
     {
       splineMoveScript.StartMove();
@@ -82,7 +93,14 @@ public class BossBehaviour01 : MonoBehaviour
     }
 
   }
-
+  void FireMissileAtPlayerPos()
+  { 
+    FireMissile(true);
+  }
+  void FireMissileStraightDown()
+  {
+    FireMissile(false);
+  }
   void FireMissile(bool fireAtPlayerPos)
   {
     GameObject firedBullet;
@@ -106,37 +124,37 @@ public class BossBehaviour01 : MonoBehaviour
 
   }
 
-  void OnTriggerEnter(Collider collider)
-  {
-    List<Collider> collisions = new List<Collider>();
+  //void OnTriggerEnter(Collider collider)
+  //{
+  //  List<Collider> collisions = new List<Collider>();
 
-  int numCollisionContacts = -1;
+  //int numCollisionContacts = -1;
     
-    ///Collider2D[] contacts = new Collider2D[5];
-   //numCollisionContacts = collider.GetCon
-    if (numCollisionContacts == 2)
-    {
-      print($"numCollisionContacts = {numCollisionContacts}");
-    }
+  //  ///Collider2D[] contacts = new Collider2D[5];
+  // //numCollisionContacts = collider.GetCon
+  //  if (numCollisionContacts == 2)
+  //  {
+  //    print($"numCollisionContacts = {numCollisionContacts}");
+  //  }
 
-    foreach (Collider collision in collisions)
-    {
-      // ***TODO - ADD A CHECK IT@S NOT COLLIDING AGAINST "BOUNDARY" !!
-      if (collision.gameObject.CompareTag("BossVulnerable") && collider.gameObject.CompareTag("PlayerMissile"))
-      {
-        print("HIT BOSS ORB!");
-        StartCoroutine(BossTakesDamageEffect(.5f));
-      }
-      //if (collision.gameObject.CompareTag("BossInvulnerable")&& collider.gameObject.CompareTag("PlayerMissile")))
-      //print("HIT BOSS BODY!");
-    }
-  }
+  //  foreach (Collider collision in collisions)
+  //  {
+  //    // ***TODO - ADD A CHECK IT@S NOT COLLIDING AGAINST "BOUNDARY" !!
+  //    if (collision.gameObject.CompareTag("BossVulnerable") && collider.gameObject.CompareTag("PlayerMissile"))
+  //    {
+  //      print("HIT BOSS ORB in OnTriggerEnter!");
+  //      StartCoroutine(BossTakesDamageEffect(.5f));
+  //    }
+  //    //if (collision.gameObject.CompareTag("BossInvulnerable")&& collider.gameObject.CompareTag("PlayerMissile")))
+  //    //print("HIT BOSS BODY!");
+  //  }
+  //}
 
   public void OnChildTriggerEntered(Collider other, string childTag)
   {
     if (other.gameObject.CompareTag("PlayerMissile") && childTag.Equals("BossVulnerable"))
     {
-      print("HIT BOSS ORB!");
+      print("HIT BOSS ORB in OnChildTriggerEntered!");
       StartCoroutine(BossTakesDamageEffect(.25f));
     }
   }
@@ -145,7 +163,7 @@ public class BossBehaviour01 : MonoBehaviour
   {
     float elapsedTime = 0f;
     float currentVal;
-    while (elapsedTime <= duration)
+    while (elapsedTime <= duration) //from normal to red
     {
       foreach (Renderer sr in bossSpriteMaterials)
       {
@@ -162,7 +180,7 @@ public class BossBehaviour01 : MonoBehaviour
     }
 
     elapsedTime = 0f;
-    while (elapsedTime <= duration)
+    while (elapsedTime <= duration) //from red back to normal
     {
       foreach (Renderer sr in bossSpriteMaterials)
       {
