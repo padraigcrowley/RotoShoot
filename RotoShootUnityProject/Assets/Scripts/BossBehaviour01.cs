@@ -21,6 +21,8 @@ public class BossBehaviour01 : ExtendedBehaviour
 
   public Animator bossEggAnimator;
 
+  enum Boss01State { BOSS_INTRO_IN_PROGRESS, BOSS_IN_PROGRESS, BOSS_OUTRO_IN_PROGRESS, BOSS_VULNERABLE, BOSS_INVULNERABLE }
+
   // Start is called before the first frame update
   void Start()
   {
@@ -45,8 +47,8 @@ public class BossBehaviour01 : ExtendedBehaviour
       bossEggAnimator.Play("Boss01EggLower");
     });
 
-    //InvokeRepeating(nameof(this.FireMissileAtPlayerPos), 4, 2f);
-    //InvokeRepeating(nameof(this.FireMissileStraightDown), 5, 2f);
+    InvokeRepeating(nameof(this.FireMissileAtPlayerPos), 4, 2f);
+    InvokeRepeating(nameof(this.FireMissileStraightDown), 5, 2f);
   }
 
   IEnumerator BossAppearEffect(float duration)
@@ -154,7 +156,7 @@ public class BossBehaviour01 : ExtendedBehaviour
   {
     if (other.gameObject.CompareTag("PlayerMissile") && childTag.Equals("BossVulnerable"))
     {
-      print("HIT BOSS ORB in OnChildTriggerEntered!");
+      //print("HIT BOSS ORB in OnChildTriggerEntered!");
       StartCoroutine(BossTakesDamageEffect(.25f));
     }
   }
