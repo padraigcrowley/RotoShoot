@@ -18,7 +18,7 @@ public class BossBehaviour01 : ExtendedBehaviour
   private bool fireAtPlayerPos = true;
 
   public Animator bossEggAnimator;
-
+  private bool waiting = false;
   enum BossState { BOSS_INTRO_IN_PROGRESS, BOSS_INTRO_COMPLETED, BOSS_IN_PROGRESS, BOSS_OUTRO_IN_PROGRESS, BOSS_VULNERABLE, BOSS_INVULNERABLE, BOSS_FIRING, BOSS_NOT_FIRING, BOSS_LOWERING_EGG, BOSS_RAISING_EGG }
 
   BossState boss01State;
@@ -76,11 +76,11 @@ public class BossBehaviour01 : ExtendedBehaviour
     }
 
     yield return new WaitForSeconds(.3f);
-    //foreach (Renderer sr in bossSpriteMaterials)
-    //{
-    //  sr.enabled = true;
-    //}
-    
+    foreach (Renderer sr in bossSpriteMaterials)
+    {
+      sr.enabled = true;
+    }
+
     boss01State = BossState.BOSS_INTRO_COMPLETED;
   }
   
@@ -92,6 +92,9 @@ public class BossBehaviour01 : ExtendedBehaviour
     //  fireAtPlayerPos = true;
     //  FireMissile(fireAtPlayerPos);
     //}
+
+
+    //NOTE TO ME - the bosses missiles are hitting up/left/right border, causing them to expire before launching towards player
 
     switch (boss01State)
     {
@@ -105,9 +108,13 @@ public class BossBehaviour01 : ExtendedBehaviour
         }
       case BossState.BOSS_NOT_FIRING:
         {
-          print("in BOSS_NOT_FIRING 1");
-          StartCoroutine(DelayedStartFiring());
-          print("in BOSS_NOT_FIRING 2");
+          if (!waiting)
+          {
+            
+            print("in BOSS_NOT_FIRING 1");
+            StartCoroutine(DelayedStartFiring());
+            print("in BOSS_NOT_FIRING 2");
+          }
           break;
         }
       case BossState.BOSS_FIRING:
@@ -130,12 +137,14 @@ public class BossBehaviour01 : ExtendedBehaviour
 
   private IEnumerator DelayedStartFiring()
   {
+    waiting = true;
     print($"just b4 the yield");
     yield return new WaitForSeconds(5f);
     boss01State = BossState.BOSS_FIRING;
     print($"Calling Invoke");
-    InvokeRepeating(nameof(this.FireMissileAtPlayerPos), 0, 1f);
-    InvokeRepeating(nameof(this.FireMissileStraightDown), 0, 2f);
+    InvokeRepeating(nameof(this.FireMissileAtPlayerPos), 0, 2f);
+    InvokeRepeating(nameof(this.FireMissileStraightDown), 1, 2f);
+    waiting = false;
   }
 
   private IEnumerator DelayedStopFiring()
