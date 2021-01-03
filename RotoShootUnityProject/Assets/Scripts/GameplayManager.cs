@@ -1,5 +1,4 @@
 ﻿using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class GameplayManager : Singleton<GameplayManager>, IPowerUpEvents
@@ -9,12 +8,12 @@ public class GameplayManager : Singleton<GameplayManager>, IPowerUpEvents
   [HideInInspector] public bool playerShipRotating = false;
 
   [HideInInspector] public enum GameState { WAITING_FOR_START_BUTTON, LEVEL_INTRO_IN_PROGRESS, LEVEL_IN_PROGRESS, LEVEL_FAILED, LEVEL_OUTRO_IN_PROGRESS, LEVEL_COMPLETE, GAME_OVER_SCREEN }
-  [HideInInspector] public enum PlayerFiringState { STRAIGHT_SINGLE, ANGLED_TRIPLE, STRAIGHT_TRIPLE, RAPID_FIRE_SINGLE}
+  [HideInInspector] public enum PlayerFiringState { STRAIGHT_SINGLE, ANGLED_TRIPLE, STRAIGHT_TRIPLE, RAPID_FIRE_SINGLE }
   [HideInInspector] public int currentPlayerScore = 0;
   public int highPlayerScore = 0;
   [HideInInspector] public int currentPlayerHP;
   [HideInInspector] public float screenEdgeX, screenEdgeY, screenCollisionBoundaryX, screenCollisionBoundaryY;
-  
+
   public GameObject leftBoundary;                   //
   public GameObject rightBoundary;                  // References to the screen bounds: Used to ensure the player
   public GameObject topBoundary;                    // is not able to leave the screen.

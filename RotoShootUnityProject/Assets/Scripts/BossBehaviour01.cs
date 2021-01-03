@@ -1,14 +1,12 @@
-﻿using System.Collections;
-using System.Collections.Generic;
+﻿using SWS; //simple waypoints
+using System.Collections;
 using UnityEngine;
-using SWS; //simple waypoints
 
 public class BossBehaviour01 : ExtendedBehaviour
 {
   public SWS.PathManager waypointPath;
   protected splineMove splineMoveScript;
   private Renderer[] bossSpriteMaterials;
-  private bool bossAppeared = false;
   public float startPosX, startPosY, startPosZ;
   public float bossHP = 1;
   public float hpMultiplierFromSpawner;
@@ -21,7 +19,9 @@ public class BossBehaviour01 : ExtendedBehaviour
 
   public Animator bossEggAnimator;
 
-  enum Boss01State { BOSS_INTRO_IN_PROGRESS, BOSS_IN_PROGRESS, BOSS_OUTRO_IN_PROGRESS, BOSS_VULNERABLE, BOSS_INVULNERABLE }
+  enum BossState { BOSS_INTRO_IN_PROGRESS, BOSS_INTRO_COMPLETED, BOSS_IN_PROGRESS, BOSS_OUTRO_IN_PROGRESS, BOSS_VULNERABLE, BOSS_INVULNERABLE, BOSS_FIRING, BOSS_NOT_FIRING, BOSS_LOWERING_EGG, BOSS_RAISING_EGG }
+
+  BossState boss01State;
 
   // Start is called before the first frame update
   void Start()
@@ -31,7 +31,7 @@ public class BossBehaviour01 : ExtendedBehaviour
 
     bossEggAnimator = GetComponentInChildren<Animator>();
     bossSpriteMaterials = GetComponentsInChildren<Renderer>();
-    StartCoroutine(BossAppearEffect(5f));
+
 
     splineMoveScript = GetComponent<splineMove>();
     if (splineMoveScript != null)
@@ -42,13 +42,17 @@ public class BossBehaviour01 : ExtendedBehaviour
 
     bossMissilesParentPool = new GameObject("bossMissilesParentPoolObject");
 
-    Wait(5, () => {
-      Debug.Log("5 seconds is lost forever");
-      bossEggAnimator.Play("Boss01EggLower");
-    });
+    boss01State = BossState.BOSS_INTRO_IN_PROGRESS;
+    StartCoroutine(BossAppearEffect(5f));
 
-    InvokeRepeating(nameof(this.FireMissileAtPlayerPos), 4, 2f);
-    InvokeRepeating(nameof(this.FireMissileStraightDown), 5, 2f);
+    //Wait(5, () =>
+    //{
+    //  Debug.Log("5 seconds is lost forever");
+    //  bossEggAnimator.Play("Boss01EggLower");
+    //});
+
+    //InvokeRepeating(nameof(this.FireMissileAtPlayerPos), 4, 2f);
+    //InvokeRepeating(nameof(this.FireMissileStraightDown), 5, 2f);
   }
 
   IEnumerator BossAppearEffect(float duration)
@@ -72,13 +76,14 @@ public class BossBehaviour01 : ExtendedBehaviour
     }
 
     yield return new WaitForSeconds(.3f);
-    foreach (Renderer sr in bossSpriteMaterials)
-    {
-      sr.enabled = true;
-    }
-    bossAppeared = true;
+    //foreach (Renderer sr in bossSpriteMaterials)
+    //{
+    //  sr.enabled = true;
+    //}
+    
+    boss01State = BossState.BOSS_INTRO_COMPLETED;
   }
-  // Update is called once per frame
+  
   void Update()
   {
 
@@ -87,16 +92,63 @@ public class BossBehaviour01 : ExtendedBehaviour
     //  fireAtPlayerPos = true;
     //  FireMissile(fireAtPlayerPos);
     //}
-    
-    if (bossAppeared)
+
+    switch (boss01State)
     {
-      splineMoveScript.StartMove();
-      bossAppeared = false; // just to make it stop executing the startmove() again
+      case BossState.BOSS_INTRO_IN_PROGRESS:
+        break;
+      case BossState.BOSS_INTRO_COMPLETED:
+        {
+          splineMoveScript.StartMove();
+          boss01State = BossState.BOSS_NOT_FIRING;
+          break;
+        }
+      case BossState.BOSS_NOT_FIRING:
+        {
+          print("in BOSS_NOT_FIRING 1");
+          StartCoroutine(DelayedStartFiring());
+          print("in BOSS_NOT_FIRING 2");
+          break;
+        }
+      case BossState.BOSS_FIRING:
+        {
+          StartCoroutine(DelayedStopFiring());
+          break;
+        }
+      default:
+        break;
     }
 
+
+    //if (bossAppeared)
+    //{
+    //  splineMoveScript.StartMove();
+    //  bossAppeared = false; // just to make it stop executing the startmove() again
+    //}
+
   }
+
+  private IEnumerator DelayedStartFiring()
+  {
+    print($"just b4 the yield");
+    yield return new WaitForSeconds(5f);
+    boss01State = BossState.BOSS_FIRING;
+    print($"Calling Invoke");
+    InvokeRepeating(nameof(this.FireMissileAtPlayerPos), 0, 1f);
+    InvokeRepeating(nameof(this.FireMissileStraightDown), 0, 2f);
+  }
+
+  private IEnumerator DelayedStopFiring()
+  {
+    yield return new WaitForSeconds(5f);
+    boss01State = BossState.BOSS_NOT_FIRING;
+    CancelInvoke();
+  }
+
+
+
   void FireMissileAtPlayerPos()
-  { 
+  {
     FireMissile(true);
   }
   void FireMissileStraightDown()
@@ -119,8 +171,8 @@ public class BossBehaviour01 : ExtendedBehaviour
      * 0 to the right and
      * 180 (-180) to the left */
     if (angle > 180) angle -= 360;
-      rotation.eulerAngles = new Vector3(-angle, 90, 0); // use different values to lock on different axis
-    
+    rotation.eulerAngles = new Vector3(-angle, 90, 0); // use different values to lock on different axis
+
     firedBullet = SimplePool.Spawn(bossMissile, bossOrb.transform.position, Quaternion.identity, bossMissilesParentPool.transform);
     firedBullet.transform.localRotation = rotation; //v.important line!!!
 
@@ -131,7 +183,7 @@ public class BossBehaviour01 : ExtendedBehaviour
   //  List<Collider> collisions = new List<Collider>();
 
   //int numCollisionContacts = -1;
-    
+
   //  ///Collider2D[] contacts = new Collider2D[5];
   // //numCollisionContacts = collider.GetCon
   //  if (numCollisionContacts == 2)
