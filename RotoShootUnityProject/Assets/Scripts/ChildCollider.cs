@@ -14,4 +14,13 @@ public class ChildCollider : MonoBehaviour
     //transform.parent.gameObject.GetComponent<BossBehaviour01>().OnChildTriggerEntered(other, transform.position);
     parentScript.OnChildTriggerEntered(other, transform.gameObject.tag);
   }
+  private void onEggRaised()
+  {
+    parentScript.eggIsMoving = false;
+  }
+
+  private void onEggLowered()
+  {
+    parentScript.eggIsMoving = false;
+  }
 }

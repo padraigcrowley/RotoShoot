@@ -68,6 +68,9 @@ public class MissileMovement : ExtendedBehaviour
   private void OnTriggerExit(Collider co)
   {
     //print($"Collision exited with {co.gameObject.tag}");
+    if(gameObject.CompareTag("EnemyMissile"))
+      print("EnemyMissile Exit Trigger");
+
     if (co.gameObject.CompareTag("Boundary"))
     {
       collided = true; // let FixedUpdate know to stop moving it upwards the screen.

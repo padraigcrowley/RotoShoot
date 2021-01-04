@@ -19,7 +19,7 @@ Things to upgrade
 	- Enemy rates of fire
 	- Enemy speed
 	- Enemy HP
-	- Enemy speed of missile
+	- Enemy speed of missile (this is currently set in the projectile prefab public inspector - needs to change)
 	- Enemy missile damage
 	- enamy collision with playership damage
 	- 

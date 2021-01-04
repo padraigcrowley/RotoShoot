@@ -19,6 +19,7 @@ public class BossBehaviour01 : ExtendedBehaviour
 
   public Animator bossEggAnimator;
   private bool waiting = false;
+  public bool eggIsMoving = false;
   enum BossState { BOSS_INTRO_IN_PROGRESS, BOSS_INTRO_COMPLETED, BOSS_IN_PROGRESS, BOSS_OUTRO_IN_PROGRESS, BOSS_VULNERABLE, BOSS_INVULNERABLE, BOSS_FIRING, BOSS_NOT_FIRING, BOSS_LOWERING_EGG, BOSS_RAISING_EGG }
 
   BossState boss01State;
@@ -83,16 +84,14 @@ public class BossBehaviour01 : ExtendedBehaviour
 
     boss01State = BossState.BOSS_INTRO_COMPLETED;
   }
-  
+
   void Update()
   {
-
     //if (Input.GetKeyDown(KeyCode.S))
     //{
     //  fireAtPlayerPos = true;
     //  FireMissile(fireAtPlayerPos);
     //}
-
 
     //NOTE TO ME - the bosses missiles are hitting up/left/right border, causing them to expire before launching towards player
 
@@ -103,55 +102,74 @@ public class BossBehaviour01 : ExtendedBehaviour
       case BossState.BOSS_INTRO_COMPLETED:
         {
           splineMoveScript.StartMove();
-          boss01State = BossState.BOSS_NOT_FIRING;
+          boss01State = BossState.BOSS_INVULNERABLE;
           break;
         }
-      case BossState.BOSS_NOT_FIRING:
+      case BossState.BOSS_INVULNERABLE:
         {
           if (!waiting)
           {
-            
-            print("in BOSS_NOT_FIRING 1");
-            StartCoroutine(DelayedStartFiring());
-            print("in BOSS_NOT_FIRING 2");
+            StartCoroutine(DelayedLowerEgg());
           }
           break;
         }
-      case BossState.BOSS_FIRING:
+      case BossState.BOSS_VULNERABLE:
         {
-          StartCoroutine(DelayedStopFiring());
+          if (!waiting)
+          {
+            StartCoroutine(DelayedRaiseEgg());
+          }
           break;
         }
       default:
         break;
     }
-
-
     //if (bossAppeared)
     //{
     //  splineMoveScript.StartMove();
     //  bossAppeared = false; // just to make it stop executing the startmove() again
     //}
-
   }
 
-  private IEnumerator DelayedStartFiring()
+  
+  private IEnumerator DelayedLowerEgg()
   {
     waiting = true;
-    print($"just b4 the yield");
     yield return new WaitForSeconds(5f);
-    boss01State = BossState.BOSS_FIRING;
-    print($"Calling Invoke");
-    InvokeRepeating(nameof(this.FireMissileAtPlayerPos), 0, 2f);
-    InvokeRepeating(nameof(this.FireMissileStraightDown), 1, 2f);
+
+    CancelInvoke();
+    bossEggAnimator.Play("Boss01EggLower"); 
+    eggIsMoving = true;
+    while (eggIsMoving)
+    {
+      yield return null;
+    }
+
+  
+    InvokeRepeating(nameof(this.FireMissileAtPlayerPos), 0, .75f);
+    //InvokeRepeating(nameof(this.FireMissileStraightDown), 1, 2f);
+    
+    boss01State = BossState.BOSS_VULNERABLE;
     waiting = false;
   }
 
-  private IEnumerator DelayedStopFiring()
+  private IEnumerator DelayedRaiseEgg()
   {
+    waiting = true;
     yield return new WaitForSeconds(5f);
-    boss01State = BossState.BOSS_NOT_FIRING;
     CancelInvoke();
+    bossEggAnimator.Play("Boss01EggRaise");
+    eggIsMoving = true;
+    while (eggIsMoving)
+    {
+      yield return null;
+    }
+    
+    //InvokeRepeating(nameof(this.FireMissileAtPlayerPos), 0, 1f);
+    InvokeRepeating(nameof(this.FireMissileStraightDown), 0f, .25f);
+
+    boss01State = BossState.BOSS_INVULNERABLE;
+    waiting = false;
   }
 
 
