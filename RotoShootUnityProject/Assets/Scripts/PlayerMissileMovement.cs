@@ -36,7 +36,7 @@ public class PlayerMissileMovement : MissileMovement
   private void OnTriggerEnter(Collider co)
   {
     //print($"Collision entered with {co.gameObject.tag}");
-    if ((!co.gameObject.CompareTag("EnemyMissile")) && ((co.gameObject.CompareTag("Enemy01")) || (co.gameObject.CompareTag("BossInvulnerable")) || (co.gameObject.CompareTag("BossVulnerable"))))
+    if ((!co.gameObject.CompareTag("EnemyMissile")) && ((co.gameObject.CompareTag("Enemy01")) || (co.gameObject.CompareTag("BossInvulnerable")) || (co.gameObject.CompareTag("BossVulnerable")) ) )
     {
       Vector3 colPos = co.gameObject.transform.position;
 
@@ -63,5 +63,29 @@ public class PlayerMissileMovement : MissileMovement
         SimplePool.Despawn(gameObject);
       });
     }
+  }
+
+  /*protected override*/ void OnTriggerExit(Collider co)
+  {
+    if (co.gameObject.CompareTag("BoundaryTop"))
+    {
+      collided = true; // let FixedUpdate know to stop moving it upwards the screen.
+      transform.localScale = new Vector3(.001f, .001f, .001f);// urgh, pretty hacky way to stop the missile projectile bullet being "drawn". Because can't SetActive(false) the missile object cos that will kill this script as well?
+
+      foreach (GameObject childObj in projectileChildrenObjects)
+      {
+        if (childObj != null)
+          childObj.SetActive(false);
+      }
+
+
+      Wait(DESPAWN_DELAY_TIME, () =>
+      {
+        SimplePool.Despawn(muzzleVFX);
+        //SimplePool.Despawn(hitVFX);
+        SimplePool.Despawn(gameObject);
+      });
+    }
+    //base.OnTriggerExit(co);
   }
 }

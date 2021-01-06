@@ -33,7 +33,6 @@ public class BossBehaviour01 : ExtendedBehaviour
     bossEggAnimator = GetComponentInChildren<Animator>();
     bossSpriteMaterials = GetComponentsInChildren<Renderer>();
 
-
     splineMoveScript = GetComponent<splineMove>();
     if (splineMoveScript != null)
     {
@@ -45,15 +44,7 @@ public class BossBehaviour01 : ExtendedBehaviour
 
     boss01State = BossState.BOSS_INTRO_IN_PROGRESS;
     StartCoroutine(BossAppearEffect(5f));
-
-    //Wait(5, () =>
-    //{
-    //  Debug.Log("5 seconds is lost forever");
-    //  bossEggAnimator.Play("Boss01EggLower");
-    //});
-
-    //InvokeRepeating(nameof(this.FireMissileAtPlayerPos), 4, 2f);
-    //InvokeRepeating(nameof(this.FireMissileStraightDown), 5, 2f);
+    
   }
 
   IEnumerator BossAppearEffect(float duration)
@@ -124,11 +115,7 @@ public class BossBehaviour01 : ExtendedBehaviour
       default:
         break;
     }
-    //if (bossAppeared)
-    //{
-    //  splineMoveScript.StartMove();
-    //  bossAppeared = false; // just to make it stop executing the startmove() again
-    //}
+    
   }
 
   
@@ -166,7 +153,8 @@ public class BossBehaviour01 : ExtendedBehaviour
     }
     
     //InvokeRepeating(nameof(this.FireMissileAtPlayerPos), 0, 1f);
-    InvokeRepeating(nameof(this.FireMissileStraightDown), 0f, .25f);
+    InvokeRepeating(nameof(this.FireMissileAtPlayerPos), 0f, .5f);
+    InvokeRepeating(nameof(this.FireMissileStraightDown), .25f, .5f);
 
     boss01State = BossState.BOSS_INVULNERABLE;
     waiting = false;

@@ -60,60 +60,16 @@ public class MissileMovement : ExtendedBehaviour
       if(childObj!=null)
       childObj.SetActive(true);
     }
-    
     DoMuzzleFlash();
-
   }
 
-  private void OnTriggerExit(Collider co)
-  {
-    //print($"Collision exited with {co.gameObject.tag}");
-    if(gameObject.CompareTag("EnemyMissile"))
-      print("EnemyMissile Exit Trigger");
-
-    if (co.gameObject.CompareTag("Boundary"))
-    {
-      collided = true; // let FixedUpdate know to stop moving it upwards the screen.
-      transform.localScale = new Vector3(.001f, .001f, .001f);// urgh, pretty hacky way to stop the missile projectile bullet being "drawn". Because can't SetActive(false) the missile object cos that will kill this script as well?
-      foreach (GameObject childObj in projectileChildrenObjects)
-      {
-        if (childObj != null)
-          childObj.SetActive(false);
-      }
-      
-
-      Wait(DESPAWN_DELAY_TIME, () =>
-      {
-        SimplePool.Despawn(muzzleVFX);
-        //SimplePool.Despawn(hitVFX);
-        SimplePool.Despawn(gameObject);
-      });
-    }
-  }
-
+  
   private void DoMuzzleFlash()
   {
     if (MuzzleFlashPrefab != null)
     {
       muzzleVFX = SimplePool.Spawn(MuzzleFlashPrefab, transform.position, Quaternion.identity, transform.parent);
       muzzleVFX.transform.forward = gameObject.transform.forward;// + offset;
-
-      //var ps = muzzleVFX.GetComponent<ParticleSystem>();
-      //if (ps != null)
-      //{
-      //  Wait(ps.main.duration, () => {
-      //    SimplePool.Despawn(muzzleVFX);
-      //  });
-      //}
-
-      //else
-      //{
-      //  var psChild = muzzleVFX.transform.GetChild(0).GetComponent<ParticleSystem>();
-      //  Wait(.3f, () => {
-      //    //print($"Waited {psChild.main.duration} before Despawn");
-      //    //SimplePool.Despawn(muzzleVFX);
-      //  });
-      //}
     }
   }
 }

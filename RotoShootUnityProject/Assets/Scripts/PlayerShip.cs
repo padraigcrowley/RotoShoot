@@ -12,7 +12,7 @@ public class PlayerShip : ExtendedBehaviour
   private int currentShipLane = 1; // the lane number = the array index
   
   public Transform playerShipFrontTurret, playerShipLeftTurret, playerShipRightTurret;
-  [SerializeField] private Renderer shipSpriteRenderer;
+  [SerializeField] private Renderer shipSpriteRenderer, playerShipExhaustSpriteRenderer;
   [SerializeField] private GameObject playerMissilePrefab;
   public float playerShipTweenMoveSpeed = .25f;
   public float playerShipTweenRotateSpeed = .25f;
@@ -43,7 +43,6 @@ public class PlayerShip : ExtendedBehaviour
      * 180 (-180) to the left 
      * "angle" is the first (x) parameter in the 3 lines below, the Y is always 90 when using UniqueProjectiles in 2D 
      Although... note, ANGLE is inverted here because the player ship is facing down. the enemymissilefiring stuff is facing down*/
-
     uniqueprojectileRotation.eulerAngles = new Vector3(-90, 90, 0);  
     uniqueprojectileRotationLeftTurret.eulerAngles = new Vector3(-110, 90, 0);  
     uniqueprojectileRotationRightTurret.eulerAngles = new Vector3(-70, 90, 0);  
@@ -51,7 +50,7 @@ public class PlayerShip : ExtendedBehaviour
     transform.position = GameplayManager.Instance.playerShipPos;
     gameObject.SetActive(true);
     PlayerShipGFXAnim = GetComponentInChildren<Animator>();
-    shipSpriteRenderer.GetComponentInChildren<Renderer>();
+    //shipSpriteRenderer.GetComponentInChildren<Renderer>();
     playerShipMissilesParentPool = new GameObject("PlayerShipMissilesParentPoolObject");
 
   }
@@ -65,18 +64,22 @@ public class PlayerShip : ExtendedBehaviour
     switch (GameplayManager.Instance.currentGameState)
     {
       case GameplayManager.GameState.LEVEL_INTRO_IN_PROGRESS:
+        
+        //PlayerShipGFXAnim.Play("PlayerShipExhaust");
         if (PlayerShipIntroAnimPlaying == false)
         {
           transform.rotation = Quaternion.identity;
  
           PlayerShipIntroAnimPlaying = true;
           shipSpriteRenderer.enabled = true;
-          PlayerShipGFXAnim.Play("PlayerShipIntro", -1, 0f);
+          //PlayerShipGFXAnim.Play("PlayerShipIntro", -1, 0f);
+          PlayerShipGFXAnim.Play("PlayerShipIntro",0);
+        PlayerShipGFXAnim.Play("PlayerShipExhaust",1);
         }
         else if (PlayerShipIntroAnimCompleted == true)
         {
           PlayerShipIntroAnimPlaying = false;
-          // not needed?  PlayerShipGFXAnim.StopPlayback();// ("PlayerShipIntro", -1, 0f);
+          playerShipExhaustSpriteRenderer.enabled = false;
           GameplayManager.Instance.currentGameState = GameplayManager.GameState.LEVEL_IN_PROGRESS;
           //print("gamestate is now set to LEVEL_IN_PROGRESS! ");
         }
