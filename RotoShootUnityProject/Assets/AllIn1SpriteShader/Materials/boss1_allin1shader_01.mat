@@ -115,7 +115,7 @@ Material:
     - _HsvSaturation: 1
     - _HsvShift: 180
     - _InnerOutlineAlpha: 0
-    - _InnerOutlineGlow: 2
+    - _InnerOutlineGlow: 3
     - _InnerOutlineThickness: 3
     - _MaxXUV: 1
     - _MaxYUV: 1

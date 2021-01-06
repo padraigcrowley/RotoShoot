@@ -12,7 +12,7 @@ public class BossBehaviour01 : ExtendedBehaviour
   public float hpMultiplierFromSpawner;
   public float speedMultiplierFromSpawner;
 
-  public GameObject bossMissile, bossOrb;
+  public GameObject bossMissile, bossEgg;
   private Quaternion rotation;
   private GameObject bossMissilesParentPool;
   private bool fireAtPlayerPos = true;
@@ -20,6 +20,8 @@ public class BossBehaviour01 : ExtendedBehaviour
   public Animator bossEggAnimator;
   private bool waiting = false;
   public bool eggIsMoving = false;
+  private bool damageFXReady = true;
+
   enum BossState { BOSS_INTRO_IN_PROGRESS, BOSS_INTRO_COMPLETED, BOSS_IN_PROGRESS, BOSS_OUTRO_IN_PROGRESS, BOSS_VULNERABLE, BOSS_INVULNERABLE, BOSS_FIRING, BOSS_NOT_FIRING, BOSS_LOWERING_EGG, BOSS_RAISING_EGG }
 
   BossState boss01State;
@@ -44,7 +46,9 @@ public class BossBehaviour01 : ExtendedBehaviour
 
     boss01State = BossState.BOSS_INTRO_IN_PROGRESS;
     StartCoroutine(BossAppearEffect(5f));
-    
+
+    damageFXReady = true;
+
   }
 
   IEnumerator BossAppearEffect(float duration)
@@ -131,8 +135,7 @@ public class BossBehaviour01 : ExtendedBehaviour
     {
       yield return null;
     }
-
-  
+      
     InvokeRepeating(nameof(this.FireMissileAtPlayerPos), 0, .75f);
     //InvokeRepeating(nameof(this.FireMissileStraightDown), 1, 2f);
     
@@ -188,7 +191,7 @@ public class BossBehaviour01 : ExtendedBehaviour
     if (angle > 180) angle -= 360;
     rotation.eulerAngles = new Vector3(-angle, 90, 0); // use different values to lock on different axis
 
-    firedBullet = SimplePool.Spawn(bossMissile, bossOrb.transform.position, Quaternion.identity, bossMissilesParentPool.transform);
+    firedBullet = SimplePool.Spawn(bossMissile, bossEgg.transform.position, Quaternion.identity, bossMissilesParentPool.transform);
     firedBullet.transform.localRotation = rotation; //v.important line!!!
 
   }
@@ -223,23 +226,29 @@ public class BossBehaviour01 : ExtendedBehaviour
   {
     if (other.gameObject.CompareTag("PlayerMissile") && childTag.Equals("BossVulnerable"))
     {
-      //print("HIT BOSS ORB in OnChildTriggerEntered!");
-      StartCoroutine(BossTakesDamageEffect(.25f));
+      if (damageFXReady)
+      {
+        damageFXReady = false;
+        StartCoroutine(BossTakesDamageEffect(.25f)); //note: the param is half the overall duration
+        StartCoroutine(DamageFXCooldown(.5f));
+      }
+
     }
   }
 
-  IEnumerator BossTakesDamageEffect(float duration)
+  IEnumerator BossTakesDamageEffect(float halfDuration)
   {
     float elapsedTime = 0f;
     float currentVal;
-    while (elapsedTime <= duration) //from normal to red
+    
+    while (elapsedTime <= halfDuration) //from normal to red
     {
       foreach (Renderer sr in bossSpriteMaterials)
       {
         if (sr != null)
         {
           //sr.material.SetFloat("_ChromAberrAmount", 0f);
-          currentVal = Mathf.Lerp(0f, 1f, (elapsedTime / duration));
+          currentVal = Mathf.Lerp(0f, 1f, (elapsedTime / halfDuration));
           sr.material.SetFloat("_InnerOutlineAlpha", currentVal);
           elapsedTime += Time.deltaTime;
         }
@@ -249,21 +258,36 @@ public class BossBehaviour01 : ExtendedBehaviour
     }
 
     elapsedTime = 0f;
-    while (elapsedTime <= duration) //from red back to normal
+    while (elapsedTime <= halfDuration) //from red back to normal
     {
       foreach (Renderer sr in bossSpriteMaterials)
       {
         if (sr != null)
         {
           //sr.material.SetFloat("_ChromAberrAmount", 0f);
-          currentVal = Mathf.Lerp(1f, 0f, (elapsedTime / duration));
+          currentVal = Mathf.Lerp(1f, 0f, (elapsedTime / halfDuration));
           sr.material.SetFloat("_InnerOutlineAlpha", currentVal);
           elapsedTime += Time.deltaTime;
         }
       }
       //yield return null;
       yield return new WaitForEndOfFrame();
+
+      // just to make sure it goes back down to zero
+      foreach (Renderer sr in bossSpriteMaterials)
+      {
+        if (sr != null)
+        {
+          sr.material.SetFloat("_InnerOutlineAlpha", 0f);
+        }
+      }
     }
+  }
+
+  public IEnumerator DamageFXCooldown(float cooldownTime)
+  {
+    yield return new WaitForSeconds(cooldownTime);
+    damageFXReady = true;
   }
 
 }

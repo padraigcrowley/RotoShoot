@@ -356,7 +356,7 @@ MonoBehaviour:
   speedMultiplierFromSpawner: 0
   bossMissile: {fileID: 1607489160101874, guid: 731f5ce10c6adab4ba085268d0cfb6e1,
     type: 3}
-  bossOrb: {fileID: 6173529639652644514}
+  bossEgg: {fileID: 6173529639652644514}
   bossEggAnimator: {fileID: 6173529639652644512}
   eggIsMoving: 0
 --- !u!54 &4304561565860451195

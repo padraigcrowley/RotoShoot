@@ -17,7 +17,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!4 &472992
 Transform:
   m_ObjectHideFlags: 0
@@ -4878,7 +4878,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!4 &481214
 Transform:
   m_ObjectHideFlags: 0
@@ -9692,7 +9692,7 @@ GameObject:
   - component: {fileID: 10886134}
   - component: {fileID: 11401060}
   m_Layer: 0
-  m_Name: SoulExplosionOrange_original
+  m_Name: SoulExplosionOrange
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -14670,7 +14670,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!4 &418614
 Transform:
   m_ObjectHideFlags: 0
@@ -19352,7 +19352,7 @@ ParticleSystemRenderer:
   m_RendererPriority: 0
   m_Materials:
   - {fileID: 0}
-  - {fileID: 2100000, guid: f527801e80dd0814a9d5d318dbd03d69, type: 2}
+  - {fileID: 2100000, guid: b29e688b444288148ad46d4aae66cffc, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
