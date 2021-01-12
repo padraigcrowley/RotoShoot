@@ -21,13 +21,19 @@ public class MissileMovement : ExtendedBehaviour
 
   protected Component[] trailRenderers;
   private TrailRenderer trailRenderer;
+  protected   BoxCollider colliderComponent;
+
+  private void Awake()
+  {
+    trailRenderers = GetComponentsInChildren<TrailRenderer>();
+    colliderComponent = GetComponent<BoxCollider>();
+
+    
+  }
 
   virtual protected void Start()
     {
     //print("---Missilemovement Start()---");
-    trailRenderers = GetComponentsInChildren<TrailRenderer>();
-
-
     //manually have to turn the child objects off/on after collisions coz otherwise e.g. the trail's quick position change makes it glitch
     foreach (Transform childTransform in this.transform)
     {     
@@ -44,6 +50,8 @@ public class MissileMovement : ExtendedBehaviour
     hitFXTriggered = false;
     readyToDespawn = false;
     collided = false;
+    if (colliderComponent != null)
+      colliderComponent.enabled = true;
 
     if (trailRenderers != null)
     {
@@ -69,7 +77,7 @@ public class MissileMovement : ExtendedBehaviour
     if (MuzzleFlashPrefab != null)
     {
       muzzleVFX = SimplePool.Spawn(MuzzleFlashPrefab, transform.position, Quaternion.identity, transform.parent);
-      muzzleVFX.transform.forward = gameObject.transform.forward;// + offset;
+      //muzzleVFX.transform.forward = gameObject.transform.forward;// + offset;
     }
   }
 }

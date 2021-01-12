@@ -26,6 +26,8 @@ public class BossBehaviour01 : ExtendedBehaviour
 
   BossState boss01State;
 
+  public GameObject bossDamageFX;
+
   // Start is called before the first frame update
   void Start()
   {
@@ -226,6 +228,10 @@ public class BossBehaviour01 : ExtendedBehaviour
   {
     if (other.gameObject.CompareTag("PlayerMissile") && childTag.Equals("BossVulnerable"))
     {
+      GameObject newParticleEffect = SimplePool.Spawn(bossDamageFX, other.gameObject.transform.position, bossDamageFX.transform.rotation, transform) as GameObject;
+      Wait(2, () => {
+        SimplePool.Despawn(newParticleEffect);
+      });
       if (damageFXReady)
       {
         damageFXReady = false;

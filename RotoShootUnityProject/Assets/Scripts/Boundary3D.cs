@@ -20,7 +20,8 @@ public class Boundary3D : MonoBehaviour
   private BoxCollider barrier;
   public float boundaryWidth = 0.4f;
   public float overhang = 1.0f; // We add this to the length of the boundaries to ensure there are no gaps at the corners of the screen
-                                // If we lose any object pooled bullets they will never be returned to the pool. 
+  public float zDepth;                              
+
   void Start()
   {
 
@@ -39,29 +40,35 @@ public class Boundary3D : MonoBehaviour
 
     if (direction == BoundaryLocation.TOP)
     {
-      barrier.size = new Vector2(Mathf.Abs(topLeft.x) + Mathf.Abs(topRight.x) + overhang, boundaryWidth);
+      barrier.size = new Vector3(Mathf.Abs(topLeft.x) + Mathf.Abs(topRight.x) + overhang, boundaryWidth, zDepth);
       //barrier.size = 
       //barrier.offset = new Vector2(0, boundaryWidth / 2);
       transform.position = Camera.main.ScreenToWorldPoint(new Vector3(Camera.main.pixelWidth / 2, Camera.main.pixelHeight, 1));
+      
+      //the line bafore this leaves the Z position in the worng place, fixing this in the next line.
+      transform.position = new Vector3(transform.position.x, transform.position.y, 0f);
     }
     if (direction == BoundaryLocation.BOTTOM)
     {
-      barrier.size = new Vector2(Mathf.Abs(topLeft.x) + Mathf.Abs(topRight.x) + overhang, boundaryWidth);
+      barrier.size = new Vector3(Mathf.Abs(topLeft.x) + Mathf.Abs(topRight.x) + overhang, boundaryWidth, zDepth);
       //barrier.offset = new Vector2(0, -boundaryWidth / 2);
       transform.position = Camera.main.ScreenToWorldPoint(new Vector3(Camera.main.pixelWidth / 2, 0, 1));
+      transform.position = new Vector3(transform.position.x, transform.position.y, 0f);
     }
     if (direction == BoundaryLocation.LEFT)
     {
-      barrier.size = new Vector2(boundaryWidth, Mathf.Abs(lowerLeft.y) + Mathf.Abs(lowerRight.y) + overhang);
+      barrier.size = new Vector3(boundaryWidth, Mathf.Abs(lowerLeft.y) + Mathf.Abs(lowerRight.y) + overhang, zDepth);
       //barrier.offset = new Vector2(-boundaryWidth / 2, 0);
       //barrier.center = 
       transform.position = Camera.main.ScreenToWorldPoint(new Vector3(0, Camera.main.pixelHeight / 2, 1));
+      transform.position = new Vector3(transform.position.x, transform.position.y, 0f);
     }
     if (direction == BoundaryLocation.RIGHT)
     {
-      barrier.size = new Vector2(boundaryWidth, Mathf.Abs(lowerLeft.y) + Mathf.Abs(lowerRight.y) + overhang);
+      barrier.size = new Vector3(boundaryWidth, Mathf.Abs(lowerLeft.y) + Mathf.Abs(lowerRight.y) + overhang, zDepth);
       //barrier.offset = new Vector2(boundaryWidth / 2, 0);
       transform.position = Camera.main.ScreenToWorldPoint(new Vector3(Camera.main.pixelWidth, Camera.main.pixelHeight / 2, 1));
+      transform.position = new Vector3(transform.position.x, transform.position.y, 0f);
     }
   }
 }

@@ -359,6 +359,7 @@ MonoBehaviour:
   bossEgg: {fileID: 6173529639652644514}
   bossEggAnimator: {fileID: 6173529639652644512}
   eggIsMoving: 0
+  bossDamageFX: {fileID: 136094, guid: cbf6e26bfae3a4f48acb9bb79ce1e5da, type: 3}
 --- !u!54 &4304561565860451195
 Rigidbody:
   m_ObjectHideFlags: 0
