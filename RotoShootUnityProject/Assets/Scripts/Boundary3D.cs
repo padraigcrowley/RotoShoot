@@ -43,6 +43,7 @@ public class Boundary3D : MonoBehaviour
       barrier.size = new Vector3(Mathf.Abs(topLeft.x) + Mathf.Abs(topRight.x) + overhang, boundaryWidth, zDepth);
       //barrier.size = 
       //barrier.offset = new Vector2(0, boundaryWidth / 2);
+      barrier.center = new Vector3(barrier.center.x, barrier.center.y + 1.0f, barrier.center.z);
       transform.position = Camera.main.ScreenToWorldPoint(new Vector3(Camera.main.pixelWidth / 2, Camera.main.pixelHeight, 1));
       
       //the line bafore this leaves the Z position in the worng place, fixing this in the next line.
@@ -52,6 +53,7 @@ public class Boundary3D : MonoBehaviour
     {
       barrier.size = new Vector3(Mathf.Abs(topLeft.x) + Mathf.Abs(topRight.x) + overhang, boundaryWidth, zDepth);
       //barrier.offset = new Vector2(0, -boundaryWidth / 2);
+      barrier.center = new Vector3(barrier.center.x, barrier.center.y - 1.0f, barrier.center.z);
       transform.position = Camera.main.ScreenToWorldPoint(new Vector3(Camera.main.pixelWidth / 2, 0, 1));
       transform.position = new Vector3(transform.position.x, transform.position.y, 0f);
     }
@@ -59,7 +61,7 @@ public class Boundary3D : MonoBehaviour
     {
       barrier.size = new Vector3(boundaryWidth, Mathf.Abs(lowerLeft.y) + Mathf.Abs(lowerRight.y) + overhang, zDepth);
       //barrier.offset = new Vector2(-boundaryWidth / 2, 0);
-      //barrier.center = 
+      barrier.center = new Vector3(barrier.center.x - 1.5f, barrier.center.y, barrier.center.z);
       transform.position = Camera.main.ScreenToWorldPoint(new Vector3(0, Camera.main.pixelHeight / 2, 1));
       transform.position = new Vector3(transform.position.x, transform.position.y, 0f);
     }
@@ -67,6 +69,7 @@ public class Boundary3D : MonoBehaviour
     {
       barrier.size = new Vector3(boundaryWidth, Mathf.Abs(lowerLeft.y) + Mathf.Abs(lowerRight.y) + overhang, zDepth);
       //barrier.offset = new Vector2(boundaryWidth / 2, 0);
+      barrier.center = new Vector3(barrier.center.x + 1.5f, barrier.center.y, barrier.center.z);
       transform.position = Camera.main.ScreenToWorldPoint(new Vector3(Camera.main.pixelWidth, Camera.main.pixelHeight / 2, 1));
       transform.position = new Vector3(transform.position.x, transform.position.y, 0f);
     }
