@@ -6014,6 +6014,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: HealthBarHandDrawn
       objectReference: {fileID: 0}
+    - target: {fileID: 1838076773556994, guid: 3c3f2424e239849edb89eb179429501d, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 114100540571581324, guid: 3c3f2424e239849edb89eb179429501d,
         type: 3}
       propertyPath: m_Color.r

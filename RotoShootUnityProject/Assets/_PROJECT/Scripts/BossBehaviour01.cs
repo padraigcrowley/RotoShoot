@@ -22,17 +22,28 @@ public class BossBehaviour01 : ExtendedBehaviour
   public bool eggIsMoving = false;
   private bool damageFXReady = true;
 
+  public UltimateStatusBar statusBar;
+  private Canvas HealthBarCanvas;
+  public float bossMaxHealth = 100, bossCurrentHealth;
+
   enum BossState { BOSS_INTRO_IN_PROGRESS, BOSS_INTRO_COMPLETED, BOSS_IN_PROGRESS, BOSS_OUTRO_IN_PROGRESS, BOSS_VULNERABLE, BOSS_INVULNERABLE, BOSS_FIRING, BOSS_NOT_FIRING, BOSS_LOWERING_EGG, BOSS_RAISING_EGG }
 
   BossState boss01State;
 
   public GameObject bossDamageFX;
-
+  private void Awake()
+  {
+    HealthBarCanvas = statusBar.GetComponentInParent<Canvas>();
+    HealthBarCanvas.enabled = false;
+  }
   // Start is called before the first frame update
   void Start()
   {
     transform.position = new Vector3(startPosX, startPosY, 0f);
-    bossHP *= hpMultiplierFromSpawner;
+    bossMaxHealth *= hpMultiplierFromSpawner;
+    bossCurrentHealth = 0;// we'll set off a coroutine to fill up the healthbar later.
+    UltimateStatusBar.UpdateStatus("BossStatusBar", "BossHealthBar", bossCurrentHealth, bossMaxHealth);
+    //bossCurrentHealth = bossMaxHealth;
 
     bossEggAnimator = GetComponentInChildren<Animator>();
     bossSpriteMaterials = GetComponentsInChildren<Renderer>();
@@ -90,14 +101,14 @@ public class BossBehaviour01 : ExtendedBehaviour
     //  FireMissile(fireAtPlayerPos);
     //}
 
-    //NOTE TO ME - the bosses missiles are hitting up/left/right border, causing them to expire before launching towards player
-
     switch (boss01State)
     {
       case BossState.BOSS_INTRO_IN_PROGRESS:
         break;
       case BossState.BOSS_INTRO_COMPLETED:
         {
+          HealthBarCanvas.enabled = true;
+          StartCoroutine(FillHealthBar(5f,bossMaxHealth));
           splineMoveScript.StartMove();
           boss01State = BossState.BOSS_INVULNERABLE;
           break;
@@ -123,14 +134,32 @@ public class BossBehaviour01 : ExtendedBehaviour
     }
     
   }
+  private IEnumerator FillHealthBar(float duration, float newHealthLevel)
+  {
+    float elapsedTime = 0f;
+    //float currentVal;
+    float bossStartHealth = bossCurrentHealth;
 
+    while (elapsedTime <= duration) 
+    {
+      bossCurrentHealth = Mathf.Lerp(bossStartHealth, newHealthLevel, (elapsedTime / duration));
+      elapsedTime += Time.deltaTime;
+      //bossCurrentHealth -= 10;
+      print($"bossCurrHealth: {bossCurrentHealth}");
+      UltimateStatusBar.UpdateStatus("BossStatusBar", "BossHealthBar", bossCurrentHealth, bossMaxHealth);
+      yield return null;
+      //yield return new WaitForEndOfFrame();
+    }
+  }
   
-  private IEnumerator DelayedLowerEgg()
+
+
+    private IEnumerator DelayedLowerEgg()
   {
     waiting = true;
     yield return new WaitForSeconds(5f);
 
-    CancelInvoke();
+    CancelInvoke(); //stop firing at player
     bossEggAnimator.Play("Boss01EggLower"); 
     eggIsMoving = true;
     while (eggIsMoving)
@@ -149,7 +178,7 @@ public class BossBehaviour01 : ExtendedBehaviour
   {
     waiting = true;
     yield return new WaitForSeconds(5f);
-    CancelInvoke();
+    CancelInvoke();//stop firing at player
     bossEggAnimator.Play("Boss01EggRaise");
     eggIsMoving = true;
     while (eggIsMoving)
@@ -238,7 +267,8 @@ public class BossBehaviour01 : ExtendedBehaviour
         StartCoroutine(BossTakesDamageEffect(.25f)); //note: the param is half the overall duration
         StartCoroutine(DamageFXCooldown(.5f));
       }
-
+      bossCurrentHealth -= 10;
+      UltimateStatusBar.UpdateStatus("BossStatusBar", "BossHealthBar", bossCurrentHealth, bossMaxHealth);
     }
   }
 
