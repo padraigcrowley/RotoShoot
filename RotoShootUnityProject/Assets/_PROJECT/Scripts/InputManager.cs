@@ -57,11 +57,11 @@ public class InputManager : MonoBehaviour
 
   private void DetectKeys()
   {
-    if (Input.GetKeyDown("left"))
+    if (Input.GetKeyDown("left") || Input.GetKeyDown(KeyCode.A))
     {
       GameplayManager.Instance.mouseClickQueue.Enqueue(GameplayManager.Instance.angleToRotatePlayerShip);
     }
-    if (Input.GetKeyDown("right"))
+    if (Input.GetKeyDown("right") || Input.GetKeyDown(KeyCode.D))
     {
       GameplayManager.Instance.mouseClickQueue.Enqueue(-GameplayManager.Instance.angleToRotatePlayerShip);
     }

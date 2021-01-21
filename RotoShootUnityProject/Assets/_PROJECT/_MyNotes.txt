@@ -23,3 +23,7 @@ Things to upgrade
 	- Enemy missile damage
 	- enamy collision with playership damage
 	- 
+
+
+	WaypointManager for Bosses
+	- after setting and saving the waypoint path and creating a prefab of it, you need to edit the prefab, multi-select the children waypoints, and adjust the positions. then save the prefab.

@@ -64,7 +64,7 @@ Material:
     - _AlphaCutoffValue: 0.25
     - _BillboardY: 0
     - _BlurHD: 0
-    - _BlurIntensity: 10
+    - _BlurIntensity: 0
     - _ChromAberrAlpha: 1
     - _ChromAberrAmount: 1
     - _ClipUvDown: 0
@@ -82,18 +82,18 @@ Material:
     - _DistortTexXSpeed: 10.4
     - _DistortTexYSpeed: 11.8
     - _FadeAmount: -0.1
-    - _FadeBurnGlow: 1.3
-    - _FadeBurnTransition: 0.075
-    - _FadeBurnWidth: 0.025
+    - _FadeBurnGlow: 1
+    - _FadeBurnTransition: 0.5
+    - _FadeBurnWidth: 0.117
     - _FishEyeUvAmount: 0.35
     - _FlickerAlpha: 0
     - _FlickerFreq: 0.2
-    - _FlickerPercent: 0.05
-    - _GhostColorBoost: 1.11
+    - _FlickerPercent: 0.561
+    - _GhostColorBoost: 0
     - _GhostTransparency: 0
     - _GlitchAmount: 0
-    - _GlitchSize: 1
-    - _Glow: 10
+    - _GlitchSize: 2
+    - _Glow: 0
     - _GlowTexUsed: 0
     - _GradBlend: 1
     - _GrassManualAnim: 1
@@ -102,7 +102,7 @@ Material:
     - _GrassWind: 20
     - _GreyscaleLuminosity: 0
     - _GreyscaleOutline: 0
-    - _HandDrawnAmount: 10
+    - _HandDrawnAmount: 11.4
     - _HandDrawnSpeed: 5
     - _HitEffectBlend: 0
     - _HitEffectGlow: 1
@@ -112,8 +112,8 @@ Material:
     - _HologramStripesSpeed: 5
     - _HologramUnmodAmount: 0.4
     - _HsvBright: 1
-    - _HsvSaturation: 1
-    - _HsvShift: 180
+    - _HsvSaturation: 2
+    - _HsvShift: 0
     - _InnerOutlineAlpha: 0
     - _InnerOutlineGlow: 3
     - _InnerOutlineThickness: 3
@@ -121,8 +121,8 @@ Material:
     - _MaxYUV: 1
     - _MinXUV: 0
     - _MinYUV: 0
-    - _MotionBlurAngle: 0.1
-    - _MotionBlurDist: 1.25
+    - _MotionBlurAngle: -0.43
+    - _MotionBlurDist: 0.32
     - _MyDstMode: 10
     - _MySrcMode: 5
     - _NegativeAmount: 1
@@ -145,8 +145,8 @@ Material:
     - _OutlineTexYSpeed: 0
     - _OutlineWidth: 0.004
     - _PinchUvAmount: 0.35
-    - _PixelateSize: 32
-    - _PosterizeGamma: 0.75
+    - _PixelateSize: 512
+    - _PosterizeGamma: 1.26
     - _PosterizeNumColors: 8
     - _PosterizeOutline: 0
     - _RandomSeed: 0
@@ -184,8 +184,8 @@ Material:
     - _ColorSwapBlue: {r: 1, g: 1, b: 1, a: 1}
     - _ColorSwapGreen: {r: 1, g: 1, b: 1, a: 1}
     - _ColorSwapRed: {r: 1, g: 1, b: 1, a: 1}
-    - _FadeBurnColor: {r: 1, g: 1, b: 0, a: 1}
-    - _GlowColor: {r: 1, g: 1, b: 1, a: 1}
+    - _FadeBurnColor: {r: 1, g: 0.13333334, b: 0, a: 1}
+    - _GlowColor: {r: 0, g: 0.9622642, b: 0.15377216, a: 1}
     - _GradBotLeftCol: {r: 0, g: 0, b: 1, a: 1}
     - _GradBotRightCol: {r: 0, g: 0, b: 1, a: 1}
     - _GradTopLeftCol: {r: 1, g: 0, b: 0, a: 1}

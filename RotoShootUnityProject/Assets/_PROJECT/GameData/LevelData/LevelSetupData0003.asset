@@ -27,7 +27,7 @@ MonoBehaviour:
     horizontalDistBetweenEnemies: 2.55
     speedMultiplier: 6
     hpMultiplier: 1
-    waypointPath: {fileID: 5274756834654318759, guid: ab91d6b29252c224a9fb17e61ff10a98,
+    waypointPath: {fileID: 344927001382763780, guid: 75120d5bbe856ad4ea5a7f01d7e96593,
       type: 3}
     numEnemiesInWave: 0
     timeBetweenSpawn: 0.5

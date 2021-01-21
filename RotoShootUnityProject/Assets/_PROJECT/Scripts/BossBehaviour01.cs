@@ -16,6 +16,7 @@ public class BossBehaviour01 : ExtendedBehaviour
   private Quaternion rotation;
   private GameObject bossMissilesParentPool;
   private bool fireAtPlayerPos = true;
+  private bool firstTimeAppearance = true;
 
   public Animator bossEggAnimator;
   private bool waiting = false;
@@ -44,6 +45,9 @@ public class BossBehaviour01 : ExtendedBehaviour
     bossCurrentHealth = 0;// we'll set off a coroutine to fill up the healthbar later.
     UltimateStatusBar.UpdateStatus("BossStatusBar", "BossHealthBar", bossCurrentHealth, bossMaxHealth);
     //bossCurrentHealth = bossMaxHealth;
+
+    GameplayManager.Instance.playerShipFiring = false;
+    GameplayManager.Instance.playerShipMovementAllowed = false;
 
     bossEggAnimator = GetComponentInChildren<Animator>();
     bossSpriteMaterials = GetComponentsInChildren<Renderer>();
@@ -108,13 +112,14 @@ public class BossBehaviour01 : ExtendedBehaviour
       case BossState.BOSS_INTRO_COMPLETED:
         {
           HealthBarCanvas.enabled = true;
-          StartCoroutine(FillHealthBar(5f,bossMaxHealth));
-          splineMoveScript.StartMove();
+          StartCoroutine(FillHealthBar(2.5f,bossMaxHealth));
+          
           boss01State = BossState.BOSS_INVULNERABLE;
           break;
         }
       case BossState.BOSS_INVULNERABLE:
         {
+          
           if (!waiting)
           {
             StartCoroutine(DelayedLowerEgg());
@@ -145,7 +150,7 @@ public class BossBehaviour01 : ExtendedBehaviour
       bossCurrentHealth = Mathf.Lerp(bossStartHealth, newHealthLevel, (elapsedTime / duration));
       elapsedTime += Time.deltaTime;
       //bossCurrentHealth -= 10;
-      print($"bossCurrHealth: {bossCurrentHealth}");
+      //print($"bossCurrHealth: {bossCurrentHealth}");
       UltimateStatusBar.UpdateStatus("BossStatusBar", "BossHealthBar", bossCurrentHealth, bossMaxHealth);
       yield return null;
       //yield return new WaitForEndOfFrame();
@@ -158,6 +163,14 @@ public class BossBehaviour01 : ExtendedBehaviour
   {
     waiting = true;
     yield return new WaitForSeconds(5f);
+
+    if (firstTimeAppearance)
+    {
+      splineMoveScript.StartMove();
+      GameplayManager.Instance.playerShipFiring = true;
+      GameplayManager.Instance.playerShipMovementAllowed = true;
+      firstTimeAppearance = false;
+    }
 
     CancelInvoke(); //stop firing at player
     bossEggAnimator.Play("Boss01EggLower"); 

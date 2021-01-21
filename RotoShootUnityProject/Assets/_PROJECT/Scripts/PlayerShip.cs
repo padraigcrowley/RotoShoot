@@ -92,7 +92,8 @@ public class PlayerShip : ExtendedBehaviour
         if ((Time.time > nextActionTime)  && (playerShipMoving == false))
         {
           nextActionTime = Time.time + GameplayManager.Instance.currentPlayerShipFireRate;
-          CreatePlayerBullets();
+          if(GameplayManager.Instance.playerShipFiring)
+            CreatePlayerBullets();
         }
         break;
 
@@ -148,11 +149,11 @@ public class PlayerShip : ExtendedBehaviour
         }
       }
 
-      if (GameplayManager.Instance.levelControlType == 1)
+      if ((GameplayManager.Instance.levelControlType == 1) && (GameplayManager.Instance.playerShipMovementAllowed))
       {
         StartCoroutine(RotatePlayerShip(this.gameObject, new Vector3(0, 0, angleToRotate), GameplayManager.Instance.currentPlayerShipRotationDuration));
       }
-      else if (GameplayManager.Instance.levelControlType == 2)
+      else if ((GameplayManager.Instance.levelControlType == 2) && (GameplayManager.Instance.playerShipMovementAllowed))
       {
         if ((angleToRotate < 0) && (currentShipLane + 1 < GameplayManager.Instance.shipLanes.Length)) //right
         {
@@ -294,11 +295,11 @@ public class PlayerShip : ExtendedBehaviour
         GameObject newParticleEffect = SimplePool.Spawn(PlayerShipDamageLarge, collision.gameObject.transform.position, PlayerShipDamageLarge.transform.rotation, transform) as GameObject;
         
         Wait(2, () => {
-          Debug.Log("Despawn(newParticleEffect)");
+          //Debug.Log("Despawn(newParticleEffect)");
           SimplePool.Despawn(newParticleEffect);
         });
 
-        print($"collision between this {transform.position} and other {collision.gameObject.transform.position}");
+        //print($"collision between this {transform.position} and other {collision.gameObject.transform.position}");
         DoCameraShake();
         ChangeShipHP(-10);
       }
