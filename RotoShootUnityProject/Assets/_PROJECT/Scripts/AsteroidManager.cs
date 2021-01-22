@@ -80,7 +80,7 @@ public class AsteroidManager : MonoBehaviour
     for (int i = 0; i < 4; i++)
     {
       int rnd = UnityEngine.Random.Range(0, 2);
-      print($"RND was {rnd}");
+      //print($"RND was {rnd}");
 
       asteroids1Instance = SimplePool.Spawn(asteroids1Prefab, new Vector2(15,0), transform.rotation, transform);
       asteroids2Instance = SimplePool.Spawn(asteroids2Prefab, new Vector2(15, 0), transform.rotation, transform);

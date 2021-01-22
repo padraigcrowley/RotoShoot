@@ -1,6 +1,7 @@
 ﻿using SWS; //simple waypoints
 using System.Collections;
 using UnityEngine;
+using DG.Tweening;
 
 public class BossBehaviour01 : ExtendedBehaviour
 {
@@ -22,6 +23,7 @@ public class BossBehaviour01 : ExtendedBehaviour
   private bool waiting = false;
   public bool eggIsMoving = false;
   private bool damageFXReady = true;
+  private Tween pulseTween;
 
   public UltimateStatusBar statusBar;
   private Canvas HealthBarCanvas;
@@ -37,9 +39,10 @@ public class BossBehaviour01 : ExtendedBehaviour
     HealthBarCanvas = statusBar.GetComponentInParent<Canvas>();
     HealthBarCanvas.enabled = false;
   }
-  // Start is called before the first frame update
+
   void Start()
   {
+    
     transform.position = new Vector3(startPosX, startPosY, 0f);
     bossMaxHealth *= hpMultiplierFromSpawner;
     bossCurrentHealth = 0;// we'll set off a coroutine to fill up the healthbar later.
@@ -65,9 +68,70 @@ public class BossBehaviour01 : ExtendedBehaviour
     StartCoroutine(BossAppearEffect(5f));
 
     damageFXReady = true;
+       
 
   }
 
+  void Update()
+  {
+    //if (Input.GetKeyDown(KeyCode.S))
+    //{
+    //  fireAtPlayerPos = true;
+    //  FireMissile(fireAtPlayerPos);
+    //}
+
+    switch (boss01State)
+    {
+      case BossState.BOSS_INTRO_IN_PROGRESS:
+        break;
+      case BossState.BOSS_INTRO_COMPLETED:
+        {
+          HealthBarCanvas.enabled = true;
+          pulseTween = transform.DOScale(1.1f, 0.5f).SetLoops(50, LoopType.Yoyo );
+          StartCoroutine(FillHealthBar(5f,bossMaxHealth));
+          
+          boss01State = BossState.BOSS_INVULNERABLE;
+          break;
+        }
+      case BossState.BOSS_INVULNERABLE:
+        {
+          if (!waiting)
+          {
+            StartCoroutine(DelayedLowerEgg());
+          }
+          break;
+        }
+      case BossState.BOSS_VULNERABLE:
+        {
+          
+          if (!waiting)
+          {
+            StartCoroutine(DelayedRaiseEgg());
+          }
+          break;
+        }
+      default:
+        break;
+    }
+  }
+  private IEnumerator FillHealthBar(float duration, float newHealthLevel)
+  {
+    float elapsedTime = 0f;
+    //float currentVal;
+    float bossStartHealth = bossCurrentHealth;
+
+    while (elapsedTime <= duration) 
+    {
+      bossCurrentHealth = Mathf.Lerp(bossStartHealth, newHealthLevel, (elapsedTime / duration));
+      elapsedTime += Time.deltaTime;
+      //bossCurrentHealth -= 10;
+      //print($"bossCurrHealth: {bossCurrentHealth}");
+      UltimateStatusBar.UpdateStatus("BossStatusBar", "BossHealthBar", bossCurrentHealth, bossMaxHealth);
+      yield return null;
+      //yield return new WaitForEndOfFrame();
+    }
+  }
+  
   IEnumerator BossAppearEffect(float duration)
   {
     float elapsedTime = 0f;
@@ -97,75 +161,14 @@ public class BossBehaviour01 : ExtendedBehaviour
     boss01State = BossState.BOSS_INTRO_COMPLETED;
   }
 
-  void Update()
-  {
-    //if (Input.GetKeyDown(KeyCode.S))
-    //{
-    //  fireAtPlayerPos = true;
-    //  FireMissile(fireAtPlayerPos);
-    //}
-
-    switch (boss01State)
-    {
-      case BossState.BOSS_INTRO_IN_PROGRESS:
-        break;
-      case BossState.BOSS_INTRO_COMPLETED:
-        {
-          HealthBarCanvas.enabled = true;
-          StartCoroutine(FillHealthBar(2.5f,bossMaxHealth));
-          
-          boss01State = BossState.BOSS_INVULNERABLE;
-          break;
-        }
-      case BossState.BOSS_INVULNERABLE:
-        {
-          
-          if (!waiting)
-          {
-            StartCoroutine(DelayedLowerEgg());
-          }
-          break;
-        }
-      case BossState.BOSS_VULNERABLE:
-        {
-          if (!waiting)
-          {
-            StartCoroutine(DelayedRaiseEgg());
-          }
-          break;
-        }
-      default:
-        break;
-    }
-    
-  }
-  private IEnumerator FillHealthBar(float duration, float newHealthLevel)
-  {
-    float elapsedTime = 0f;
-    //float currentVal;
-    float bossStartHealth = bossCurrentHealth;
-
-    while (elapsedTime <= duration) 
-    {
-      bossCurrentHealth = Mathf.Lerp(bossStartHealth, newHealthLevel, (elapsedTime / duration));
-      elapsedTime += Time.deltaTime;
-      //bossCurrentHealth -= 10;
-      //print($"bossCurrHealth: {bossCurrentHealth}");
-      UltimateStatusBar.UpdateStatus("BossStatusBar", "BossHealthBar", bossCurrentHealth, bossMaxHealth);
-      yield return null;
-      //yield return new WaitForEndOfFrame();
-    }
-  }
-  
-
-
-    private IEnumerator DelayedLowerEgg()
+  private IEnumerator DelayedLowerEgg()
   {
     waiting = true;
     yield return new WaitForSeconds(5f);
 
     if (firstTimeAppearance)
     {
+      pulseTween.Pause();
       splineMoveScript.StartMove();
       GameplayManager.Instance.playerShipFiring = true;
       GameplayManager.Instance.playerShipMovementAllowed = true;
@@ -191,6 +194,13 @@ public class BossBehaviour01 : ExtendedBehaviour
   {
     waiting = true;
     yield return new WaitForSeconds(5f);
+    
+    //calculate how much to add back onto healthbar - half of what health the boss DOESN'T have (maxHealth - currentHealth)
+    float amountToRaiseTo = bossCurrentHealth + ((bossMaxHealth - bossCurrentHealth) / 2.0f);
+    print("StartCoroutine(FillHealthBar)");
+    pulseTween.Restart();
+    StartCoroutine(FillHealthBar(2.5f, amountToRaiseTo)); 
+    
     CancelInvoke();//stop firing at player
     bossEggAnimator.Play("Boss01EggRaise");
     eggIsMoving = true;
@@ -198,91 +208,14 @@ public class BossBehaviour01 : ExtendedBehaviour
     {
       yield return null;
     }
-    
+    pulseTween.Pause();
+
     //InvokeRepeating(nameof(this.FireMissileAtPlayerPos), 0, 1f);
     InvokeRepeating(nameof(this.FireMissileAtPlayerPos), 0f, .5f);
     InvokeRepeating(nameof(this.FireMissileStraightDown), .25f, .5f);
 
     boss01State = BossState.BOSS_INVULNERABLE;
     waiting = false;
-  }
-
-
-
-  void FireMissileAtPlayerPos()
-  {
-    FireMissile(true);
-  }
-  void FireMissileStraightDown()
-  {
-    FireMissile(false);
-  }
-  void FireMissile(bool fireAtPlayerPos)
-  {
-    GameObject firedBullet;
-    float angle;
-
-    Vector2 direction = GameplayManager.Instance.playerShipPos - transform.position;  //direction is a vector2 containing the (x,y) distance from the player ship to the firing gameobject (the enemy position)
-    if (fireAtPlayerPos)
-      angle = Mathf.Atan2(direction.y, direction.x) * Mathf.Rad2Deg;
-    else
-      angle = -90f;
-
-    /* angle is a float, and it's 90 when you're aiming/firing directly above you, 
-     * -90 when firing directly below, 
-     * 0 to the right and
-     * 180 (-180) to the left */
-    if (angle > 180) angle -= 360;
-    rotation.eulerAngles = new Vector3(-angle, 90, 0); // use different values to lock on different axis
-
-    firedBullet = SimplePool.Spawn(bossMissile, bossEgg.transform.position, Quaternion.identity, bossMissilesParentPool.transform);
-    firedBullet.transform.localRotation = rotation; //v.important line!!!
-
-  }
-
-  //void OnTriggerEnter(Collider collider)
-  //{
-  //  List<Collider> collisions = new List<Collider>();
-
-  //int numCollisionContacts = -1;
-
-  //  ///Collider2D[] contacts = new Collider2D[5];
-  // //numCollisionContacts = collider.GetCon
-  //  if (numCollisionContacts == 2)
-  //  {
-  //    print($"numCollisionContacts = {numCollisionContacts}");
-  //  }
-
-  //  foreach (Collider collision in collisions)
-  //  {
-  //    // ***TODO - ADD A CHECK IT@S NOT COLLIDING AGAINST "BOUNDARY" !!
-  //    if (collision.gameObject.CompareTag("BossVulnerable") && collider.gameObject.CompareTag("PlayerMissile"))
-  //    {
-  //      print("HIT BOSS ORB in OnTriggerEnter!");
-  //      StartCoroutine(BossTakesDamageEffect(.5f));
-  //    }
-  //    //if (collision.gameObject.CompareTag("BossInvulnerable")&& collider.gameObject.CompareTag("PlayerMissile")))
-  //    //print("HIT BOSS BODY!");
-  //  }
-  //}
-
-  public void OnChildTriggerEntered(Collider other, string childTag)
-  {
-    if (other.gameObject.CompareTag("PlayerMissile") && childTag.Equals("BossVulnerable"))
-    {
-      GameObject newParticleEffect = SimplePool.Spawn(bossDamageFX, other.gameObject.transform.position, bossDamageFX.transform.rotation, transform) as GameObject;
-      Wait(2, () => {
-        SimplePool.Despawn(newParticleEffect);
-      });
-      if (damageFXReady)
-      {
-        damageFXReady = false;
-        StartCoroutine(BossTakesDamageEffect(.25f)); //note: the param is half the overall duration
-        StartCoroutine(DamageFXCooldown(.5f));
-      }
-      bossCurrentHealth -= 10;
-      UltimateStatusBar.UpdateStatus("BossStatusBar", "BossHealthBar", bossCurrentHealth, bossMaxHealth);
-    }
   }
 
   IEnumerator BossTakesDamageEffect(float halfDuration)
@@ -337,6 +270,54 @@ public class BossBehaviour01 : ExtendedBehaviour
   {
     yield return new WaitForSeconds(cooldownTime);
     damageFXReady = true;
+  }
+  public void OnChildTriggerEntered(Collider other, string childTag)
+  {
+    if (other.gameObject.CompareTag("PlayerMissile") && childTag.Equals("BossVulnerable"))
+    {
+      GameObject newParticleEffect = SimplePool.Spawn(bossDamageFX, other.gameObject.transform.position, bossDamageFX.transform.rotation, transform) as GameObject;
+      Wait(2, () => {
+        SimplePool.Despawn(newParticleEffect);
+      });
+      if (damageFXReady)
+      {
+        damageFXReady = false;
+        StartCoroutine(BossTakesDamageEffect(.25f)); //note: the param is half the overall duration
+        StartCoroutine(DamageFXCooldown(.5f));
+      }
+      bossCurrentHealth -= 10;
+      UltimateStatusBar.UpdateStatus("BossStatusBar", "BossHealthBar", bossCurrentHealth, bossMaxHealth);
+    }
+  }
+  void FireMissileAtPlayerPos()
+  {
+    FireMissile(true);
+  }
+  void FireMissileStraightDown()
+  {
+    FireMissile(false);
+  }
+  void FireMissile(bool fireAtPlayerPos)
+  {
+    GameObject firedBullet;
+    float angle;
+
+    Vector2 direction = GameplayManager.Instance.playerShipPos - transform.position;  //direction is a vector2 containing the (x,y) distance from the player ship to the firing gameobject (the enemy position)
+    if (fireAtPlayerPos)
+      angle = Mathf.Atan2(direction.y, direction.x) * Mathf.Rad2Deg;
+    else
+      angle = -90f;
+
+    /* angle is a float, and it's 90 when you're aiming/firing directly above you, 
+     * -90 when firing directly below, 
+     * 0 to the right and
+     * 180 (-180) to the left */
+    if (angle > 180) angle -= 360;
+    rotation.eulerAngles = new Vector3(-angle, 90, 0); // use different values to lock on different axis
+
+    firedBullet = SimplePool.Spawn(bossMissile, bossEgg.transform.position, Quaternion.identity, bossMissilesParentPool.transform);
+    firedBullet.transform.localRotation = rotation; //v.important line!!!
+
   }
 
 }

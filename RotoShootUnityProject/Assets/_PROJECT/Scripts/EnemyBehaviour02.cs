@@ -202,7 +202,7 @@ public abstract class EnemyBehaviour02 : ExtendedBehaviour
 
   private void DropPowerUp()
   {
-    print(($"totalEnemyKillCount={GameplayManager.Instance.totalEnemyKillCount} DROPPED POWERUP!"));
+    //print(($"totalEnemyKillCount={GameplayManager.Instance.totalEnemyKillCount} DROPPED POWERUP!"));
     powerUpInstance = SimplePool.Spawn(availablePowerUps[UnityEngine.Random.Range(0, availablePowerUps.Length)], transform.position, transform.rotation);
   }
 

@@ -67,7 +67,7 @@ public class PowerUp : MonoBehaviour
   {
     if (other.tag == "Player")
     {
-      print($"PowerUp Collected!");
+      //print($"PowerUp Collected!");
       PowerUpCollected(other.gameObject);
     }
     else if (other.gameObject.CompareTag("Atmosphere"))
@@ -122,7 +122,7 @@ public class PowerUp : MonoBehaviour
 
   protected virtual void PickupEffects()
   {
-    print("POWERUP EFFECTS!"); //todo
+    //print("POWERUP EFFECTS!"); //todo
     //  if (specialEffect != null)
   //  {
   //    Instantiate(specialEffect, transform.position, transform.rotation, transform);
@@ -136,7 +136,7 @@ public class PowerUp : MonoBehaviour
 
   protected virtual void PowerUpPayload()
   {
-    Debug.Log("Power Up collected, issuing payload for: " + gameObject.name);
+    //Debug.Log("Power Up collected, issuing payload for: " + gameObject.name);
 
     // If we're instant use we also expire self immediately
     if (expiresImmediately)
