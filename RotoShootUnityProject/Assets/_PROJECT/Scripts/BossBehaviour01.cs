@@ -153,6 +153,8 @@ public class BossBehaviour01 : ExtendedBehaviour
     }
 
     yield return new WaitForSeconds(.3f);
+
+    //this is just to turn the Orb sprite on, but i'm too lazy so I just set them set all to enable (even tho some are are already enabled :-)
     foreach (Renderer sr in bossSpriteMaterials)
     {
       sr.enabled = true;
