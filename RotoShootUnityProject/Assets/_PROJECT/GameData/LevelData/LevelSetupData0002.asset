@@ -13,10 +13,10 @@ MonoBehaviour:
   m_Name: LevelSetupData0002
   m_EditorClassIdentifier: 
   levelNumber: 2
-  lccEnemyKills: 20
+  lccEnemyKills: 2000
   lccSurviveTime: 4
   lccKillBoss: 0
-  numMaxActiveWaves: 1
+  numMaxActiveWaves: 3
   minTimeBetweenWaves: 2
   maxTimeBetweenWaves: 5
   levelEnemySpawnPointData:

@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using SWS; //simple waypoints
 
 public class SpinningMineBehaviour : MonoBehaviour
 {
@@ -10,11 +11,20 @@ public class SpinningMineBehaviour : MonoBehaviour
   private Renderer spriteMaterial, spriteRenderer;
   private float minX = -3.22f, maxX = 3.2f, minY = -2f, maxY = 8f; //(topleft: -3.22, 8.0) (bottomright: 3.2, -2.0)
   private float xDelta = 2f, yDelta = 2f;
+  public SWS.PathManager waypointPath;
+  public splineMove splineMoveScript;
+
+  public GameObject spinningMineMissile;
+  private Quaternion rotation;
+  private GameObject spinningMineMissilesParentPool;
+
+  private Transform [] ShootingPointTransforms;
 
   private void Awake()
   {
     spriteMaterial = GetComponent<Renderer>();
     spriteRenderer = GetComponent<SpriteRenderer>();
+    ShootingPointTransforms = GetComponentsInChildren<Transform>();
   }
 
 
@@ -25,7 +35,7 @@ public class SpinningMineBehaviour : MonoBehaviour
     spriteMaterial.material.SetFloat("_BlurIntensity", 100f);
     enemyState = EnemyState.WAITING_TO_SPAWN;
 
-
+    spinningMineMissilesParentPool = new GameObject("spinningMineMissilesParentPoolObject");
   }
   IEnumerator AlphaFadeTo(float aValue, float aTime)
   {
@@ -54,6 +64,7 @@ public class SpinningMineBehaviour : MonoBehaviour
     spriteMaterial.material.SetFloat("_TwistUvAmount", 3.14f);
     spriteMaterial.material.SetFloat("_BlurIntensity", 0f);
     enemyState = EnemyState.SPINNING_IN_COMPLETED;
+    //splineMoveScript.StartMove();
   }
 
 
@@ -78,19 +89,46 @@ public class SpinningMineBehaviour : MonoBehaviour
       case EnemyState.SPINNING_IN_IN_PROGRESS:
         break;
       case EnemyState.SPINNING_IN_COMPLETED:
-        transform.Rotate(new Vector3(0, 0, 100 * Time.deltaTime));
+        //transform.Rotate(new Vector3(0, 0, 150 * Time.deltaTime));
 
-        if ((transform.position.x >= maxX) || (transform.position.x <= minX))
-          xDelta = -xDelta;
-        if ((transform.position.y >= maxY) || (transform.position.y <= minY))
-          yDelta = -yDelta;
-        transform.position = new Vector2(transform.position.x + (xDelta * Time.deltaTime), transform.position.y + (yDelta * Time.deltaTime));
+        if (Input.GetKeyDown(KeyCode.F))
+          FireMissile(false);
+
+        //if ((transform.position.x >= maxX) || (transform.position.x <= minX))
+        //  xDelta = -xDelta;
+        //if ((transform.position.y >= maxY) || (transform.position.y <= minY))
+        //  yDelta = -yDelta;
+        //transform.position = new Vector2(transform.position.x + (xDelta * Time.deltaTime), transform.position.y + (yDelta * Time.deltaTime));
         break;
       
       default:
         break;
     }
   }
+
+  void FireMissile(bool fireAtPlayerPos)
+  {
+    GameObject firedBullet;
+    float angle;
+
+    Vector2 direction = GameplayManager.Instance.playerShipPos - transform.position;  //direction is a vector2 containing the (x,y) distance from the player ship to the firing gameobject (the enemy position)
+    if (fireAtPlayerPos)
+      angle = Mathf.Atan2(direction.y, direction.x) * Mathf.Rad2Deg;
+    else
+      angle = ShootingPointTransforms[1].transform.rotation.z; //angle = -90f;
+
+    /* angle is a float, and it's 90 when you're aiming/firing directly above you, 
+     * -90 when firing directly below, 
+     * 0 to the right and
+     * 180 (-180) to the left */
+    if (angle > 180) angle -= 360;
+    rotation.eulerAngles = new Vector3(-angle, 90, 0); // use different values to lock on different axis
+
+    firedBullet = SimplePool.Spawn(spinningMineMissile, ShootingPointTransforms[1].transform.position, Quaternion.identity, spinningMineMissilesParentPool.transform);
+    firedBullet.transform.localRotation = rotation; //v.important line!!!
+
+  }
+
 }
 
 
