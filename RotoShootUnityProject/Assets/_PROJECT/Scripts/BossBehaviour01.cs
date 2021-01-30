@@ -315,6 +315,7 @@ public class BossBehaviour01 : ExtendedBehaviour
      * 0 to the right and
      * 180 (-180) to the left */
     if (angle > 180) angle -= 360;
+    
     rotation.eulerAngles = new Vector3(-angle, 90, 0); // use different values to lock on different axis
 
     firedBullet = SimplePool.Spawn(bossMissile, bossEgg.transform.position, Quaternion.identity, bossMissilesParentPool.transform);

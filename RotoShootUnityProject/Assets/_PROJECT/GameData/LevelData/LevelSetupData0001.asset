@@ -29,7 +29,7 @@ MonoBehaviour:
     hpMultiplier: 1
     waypointPath: {fileID: 4639713800137293240, guid: 799b3fa60793490498aaecc6ce7d6c42,
       type: 3}
-    numEnemiesInWave: 5
+    numEnemiesInWave: 0
     timeBetweenSpawn: 0.5
   - enemyPrefab: {fileID: 4342350733379744943, guid: 3bf3914ccf51ea64aa01feaa452f98f3,
       type: 3}
@@ -40,7 +40,7 @@ MonoBehaviour:
     hpMultiplier: 1
     waypointPath: {fileID: 3729171643158534044, guid: 2d06ac0a1c0e5df41a0481119688c1f4,
       type: 3}
-    numEnemiesInWave: 5
+    numEnemiesInWave: 0
     timeBetweenSpawn: 0.5
   bossSpawnPointData:
     bossPrefab: {fileID: 0}
@@ -56,4 +56,3 @@ MonoBehaviour:
   - {x: 3.84, y: -5}
   timeBetweenAsteroidShower: 30
   levelControlType: 2
-  blockedPlayerShipRotationAngles: 

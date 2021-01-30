@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using SWS; //simple waypoints
+using System.Linq;
 
 public class SpinningMineBehaviour : MonoBehaviour
 {
@@ -17,23 +18,26 @@ public class SpinningMineBehaviour : MonoBehaviour
   public GameObject spinningMineMissile;
   private Quaternion rotation;
   private GameObject spinningMineMissilesParentPool;
-
-  private Transform [] ShootingPointTransforms;
+  public float angle;
+  private List<Transform> ShootingPointTransforms;
 
   private void Awake()
   {
-    spriteMaterial = GetComponent<Renderer>();
-    spriteRenderer = GetComponent<SpriteRenderer>();
-    ShootingPointTransforms = GetComponentsInChildren<Transform>();
+    //spriteMaterial = GetComponent<Renderer>();
+    //spriteRenderer = GetComponent<SpriteRenderer>();
+
+    //Note that parent Transform ALSO gets returned from GetComponentsInChildren, so need to do the following LINQ weirdness (from one of the answers here: https://forum.unity.com/threads/getcomponentsinchildren-not-parent-and-children.222009/#post-2955910 )
+    //ShootingPointTransforms.AddRange(GetComponentsInChildren<Transform>().Where(x => x != this.transform));
+
   }
 
 
   void Start()
   {
-    spriteRenderer.material.color = new Color(1, 1, 1, 0);
-    spriteMaterial.material.SetFloat("_TwistUvAmount", 1f);
-    spriteMaterial.material.SetFloat("_BlurIntensity", 100f);
-    enemyState = EnemyState.WAITING_TO_SPAWN;
+    //spriteRenderer.material.color = new Color(1, 1, 1, 0);
+    //spriteMaterial.material.SetFloat("_TwistUvAmount", 1f);
+    //spriteMaterial.material.SetFloat("_BlurIntensity", 100f);
+    //enemyState = EnemyState.WAITING_TO_SPAWN;
 
     spinningMineMissilesParentPool = new GameObject("spinningMineMissilesParentPoolObject");
   }
@@ -68,11 +72,12 @@ public class SpinningMineBehaviour : MonoBehaviour
   }
 
 
-
-  // Update is called once per frame
-  void Update()
+    void Update()
   {
-    switch(enemyState)
+    if (Input.GetKeyDown(KeyCode.W))
+      FireMissile(false);
+
+    switch (enemyState)
     {
       case EnemyState.WAITING_TO_SPAWN:
         if (Input.GetKeyDown(KeyCode.S))
@@ -94,11 +99,6 @@ public class SpinningMineBehaviour : MonoBehaviour
         if (Input.GetKeyDown(KeyCode.F))
           FireMissile(false);
 
-        //if ((transform.position.x >= maxX) || (transform.position.x <= minX))
-        //  xDelta = -xDelta;
-        //if ((transform.position.y >= maxY) || (transform.position.y <= minY))
-        //  yDelta = -yDelta;
-        //transform.position = new Vector2(transform.position.x + (xDelta * Time.deltaTime), transform.position.y + (yDelta * Time.deltaTime));
         break;
       
       default:
@@ -109,22 +109,28 @@ public class SpinningMineBehaviour : MonoBehaviour
   void FireMissile(bool fireAtPlayerPos)
   {
     GameObject firedBullet;
-    float angle;
+    
 
-    Vector2 direction = GameplayManager.Instance.playerShipPos - transform.position;  //direction is a vector2 containing the (x,y) distance from the player ship to the firing gameobject (the enemy position)
-    if (fireAtPlayerPos)
-      angle = Mathf.Atan2(direction.y, direction.x) * Mathf.Rad2Deg;
-    else
-      angle = ShootingPointTransforms[1].transform.rotation.z; //angle = -90f;
+      //angle  = -90f;
+      //angle = transform.rotation.z * Mathf.Rad2Deg; //angle = -90f;
 
     /* angle is a float, and it's 90 when you're aiming/firing directly above you, 
      * -90 when firing directly below, 
      * 0 to the right and
      * 180 (-180) to the left */
-    if (angle > 180) angle -= 360;
-    rotation.eulerAngles = new Vector3(-angle, 90, 0); // use different values to lock on different axis
+    if (angle > 180)
+      angle -= 360;
 
-    firedBullet = SimplePool.Spawn(spinningMineMissile, ShootingPointTransforms[1].transform.position, Quaternion.identity, spinningMineMissilesParentPool.transform);
+    rotation.eulerAngles = new Vector3( (transform.eulerAngles.z-90), 90, 0); // use different values to lock on different axis
+
+    print($"transform.rotation.z:{ transform.rotation.z}");
+    print($"transform.eulerAngles: {transform.eulerAngles}");
+    print($"rotation:{ rotation}");
+    print ($"rotation.eulerAngles:{ rotation.eulerAngles}");
+    print($"angle:{ angle}");
+
+    firedBullet = SimplePool.Spawn(spinningMineMissile, transform.position, Quaternion.identity, spinningMineMissilesParentPool.transform);
+    //firedBullet = SimplePool.Spawn(spinningMineMissile, transform.position, transform.rotation, spinningMineMissilesParentPool.transform);
     firedBullet.transform.localRotation = rotation; //v.important line!!!
 
   }
