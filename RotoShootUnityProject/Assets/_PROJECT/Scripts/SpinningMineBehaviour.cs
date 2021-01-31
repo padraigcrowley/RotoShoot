@@ -23,21 +23,21 @@ public class SpinningMineBehaviour : MonoBehaviour
 
   private void Awake()
   {
-    //spriteMaterial = GetComponent<Renderer>();
-    //spriteRenderer = GetComponent<SpriteRenderer>();
+    spriteMaterial = GetComponent<Renderer>();
+    spriteRenderer = GetComponent<SpriteRenderer>();
 
     //Note that parent Transform ALSO gets returned from GetComponentsInChildren, so need to do the following LINQ weirdness (from one of the answers here: https://forum.unity.com/threads/getcomponentsinchildren-not-parent-and-children.222009/#post-2955910 )
-    //ShootingPointTransforms.AddRange(GetComponentsInChildren<Transform>().Where(x => x != this.transform));
 
+    ShootingPointTransforms.AddRange(GetComponentsInChildren<Transform>().Where(x => x != this.transform));
   }
 
 
   void Start()
   {
-    //spriteRenderer.material.color = new Color(1, 1, 1, 0);
-    //spriteMaterial.material.SetFloat("_TwistUvAmount", 1f);
-    //spriteMaterial.material.SetFloat("_BlurIntensity", 100f);
-    //enemyState = EnemyState.WAITING_TO_SPAWN;
+    spriteRenderer.material.color = new Color(1, 1, 1, 0);
+    spriteMaterial.material.SetFloat("_TwistUvAmount", 1f);
+    spriteMaterial.material.SetFloat("_BlurIntensity", 100f);
+    enemyState = EnemyState.WAITING_TO_SPAWN;
 
     spinningMineMissilesParentPool = new GameObject("spinningMineMissilesParentPoolObject");
   }
@@ -68,15 +68,12 @@ public class SpinningMineBehaviour : MonoBehaviour
     spriteMaterial.material.SetFloat("_TwistUvAmount", 3.14f);
     spriteMaterial.material.SetFloat("_BlurIntensity", 0f);
     enemyState = EnemyState.SPINNING_IN_COMPLETED;
-    //splineMoveScript.StartMove();
+    splineMoveScript.StartMove();
   }
 
 
     void Update()
   {
-    if (Input.GetKeyDown(KeyCode.W))
-      FireMissile(false);
-
     switch (enemyState)
     {
       case EnemyState.WAITING_TO_SPAWN:
@@ -94,9 +91,9 @@ public class SpinningMineBehaviour : MonoBehaviour
       case EnemyState.SPINNING_IN_IN_PROGRESS:
         break;
       case EnemyState.SPINNING_IN_COMPLETED:
-        //transform.Rotate(new Vector3(0, 0, 150 * Time.deltaTime));
+        transform.Rotate(new Vector3(0, 0, 50 * Time.deltaTime));
 
-        if (Input.GetKeyDown(KeyCode.F))
+        if (Input.GetKeyDown(KeyCode.W))
           FireMissile(false);
 
         break;
@@ -121,17 +118,23 @@ public class SpinningMineBehaviour : MonoBehaviour
     if (angle > 180)
       angle -= 360;
 
-    rotation.eulerAngles = new Vector3( (transform.eulerAngles.z-90), 90, 0); // use different values to lock on different axis
+    //shoot missile 90degrees to the right of (i.e. perpindicular to) the rotation direction of the transform
+    //rotation.eulerAngles = new Vector3( -ShootingPointTransforms[1].transform.eulerAngles.z, 90, 0); 
+    
+    //shoot missile in the rotation direction of the transform
+    //rotation.eulerAngles = new Vector3( (-90 - transform.eulerAngles.z), 90, 0); 
+    
+    //firedBullet = SimplePool.Spawn(spinningMineMissile, ShootingPointTransforms[1].transform.position, Quaternion.identity, spinningMineMissilesParentPool.transform);
+    
+    //firedBullet.transform.localRotation = rotation; //v.important line!!!
 
-    print($"transform.rotation.z:{ transform.rotation.z}");
-    print($"transform.eulerAngles: {transform.eulerAngles}");
-    print($"rotation:{ rotation}");
-    print ($"rotation.eulerAngles:{ rotation.eulerAngles}");
-    print($"angle:{ angle}");
+    foreach( Transform tr in ShootingPointTransforms)
+    {
+      rotation.eulerAngles = new Vector3(-tr.transform.eulerAngles.z, 90, 0); 
+      firedBullet = SimplePool.Spawn(spinningMineMissile, tr.transform.position, Quaternion.identity, spinningMineMissilesParentPool.transform);
 
-    firedBullet = SimplePool.Spawn(spinningMineMissile, transform.position, Quaternion.identity, spinningMineMissilesParentPool.transform);
-    //firedBullet = SimplePool.Spawn(spinningMineMissile, transform.position, transform.rotation, spinningMineMissilesParentPool.transform);
-    firedBullet.transform.localRotation = rotation; //v.important line!!!
+      firedBullet.transform.localRotation = rotation; //v.important line!!!
+    }
 
   }
 
