@@ -16,7 +16,7 @@ GameObject:
   - component: {fileID: 7293371302599007437}
   m_Layer: 0
   m_Name: vfx_Projectile_LaserRed_Mobile
-  m_TagString: Untagged
+  m_TagString: EnemyMissile
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
