@@ -1,8 +1,8 @@
-﻿using System.Collections;
+﻿using System.Linq;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using SWS; //simple waypoints
-using System.Linq;
 
 public class SpinningMineBehaviour : MonoBehaviour
 {
@@ -20,15 +20,16 @@ public class SpinningMineBehaviour : MonoBehaviour
   private GameObject spinningMineMissilesParentPool;
   public float angle;
   private List<Transform> ShootingPointTransforms;
+  private Transform [] ShootingPointTransformsArray;
 
   private void Awake()
   {
     spriteMaterial = GetComponent<Renderer>();
     spriteRenderer = GetComponent<SpriteRenderer>();
+    ShootingPointTransformsArray = (GetComponentsInChildren<Transform>());
 
     //Note that parent Transform ALSO gets returned from GetComponentsInChildren, so need to do the following LINQ weirdness (from one of the answers here: https://forum.unity.com/threads/getcomponentsinchildren-not-parent-and-children.222009/#post-2955910 )
-
-    ShootingPointTransforms.AddRange(GetComponentsInChildren<Transform>().Where(x => x != this.transform));
+    //ShootingPointTransforms.AddRange(GetComponentsInChildren<Transform>().Where(x => x != this.transform));
   }
 
 
@@ -69,6 +70,7 @@ public class SpinningMineBehaviour : MonoBehaviour
     spriteMaterial.material.SetFloat("_BlurIntensity", 0f);
     enemyState = EnemyState.SPINNING_IN_COMPLETED;
     splineMoveScript.StartMove();
+    InvokeRepeating("RepeatBurstFire",0f,2f);
   }
 
 
@@ -92,18 +94,27 @@ public class SpinningMineBehaviour : MonoBehaviour
         break;
       case EnemyState.SPINNING_IN_COMPLETED:
         transform.Rotate(new Vector3(0, 0, 50 * Time.deltaTime));
-
-        if (Input.GetKeyDown(KeyCode.W))
-          FireMissile(false);
-
         break;
       
       default:
         break;
     }
   }
+  void RepeatBurstFire()
+  {
+    StartCoroutine(BurstFire(15, .05f));
+  }
+  IEnumerator BurstFire(int numShots, float timeBetweenShots)
+  {
+    for (int i = 0; i < numShots; i++)
+    {
+      FireMissile(false);
+      yield return new WaitForSeconds(timeBetweenShots);
+    }
+    //yield return new WaitForSeconds(timeBetweenBursts);
+  }
 
-  void FireMissile(bool fireAtPlayerPos)
+    public void FireMissile(bool fireAtPlayerPos)
   {
     GameObject firedBullet;
     
@@ -128,12 +139,14 @@ public class SpinningMineBehaviour : MonoBehaviour
     
     //firedBullet.transform.localRotation = rotation; //v.important line!!!
 
-    foreach( Transform tr in ShootingPointTransforms)
+    foreach( Transform tr in ShootingPointTransformsArray)
     {
-      rotation.eulerAngles = new Vector3(-tr.transform.eulerAngles.z, 90, 0); 
-      firedBullet = SimplePool.Spawn(spinningMineMissile, tr.transform.position, Quaternion.identity, spinningMineMissilesParentPool.transform);
-
-      firedBullet.transform.localRotation = rotation; //v.important line!!!
+      if (tr != this.transform)
+      {
+        rotation.eulerAngles = new Vector3(-tr.transform.eulerAngles.z, 90, 0);
+        firedBullet = SimplePool.Spawn(spinningMineMissile, tr.transform.position, Quaternion.identity, spinningMineMissilesParentPool.transform);
+        firedBullet.transform.localRotation = rotation; //v.important line!!!
+      }
     }
 
   }

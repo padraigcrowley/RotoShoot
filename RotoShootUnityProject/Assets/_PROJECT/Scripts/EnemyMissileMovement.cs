@@ -56,7 +56,7 @@ public class EnemyMissileMovement : MissileMovement
 
   void OnTriggerExit(Collider co)
   {
-    if ( co.gameObject.CompareTag("BoundaryBottom") || co.gameObject.CompareTag("BoundaryRight") || co.gameObject.CompareTag("BoundaryLeft") )
+    if ( co.gameObject.CompareTag("BoundaryBottom") || co.gameObject.CompareTag("BoundaryRight") || co.gameObject.CompareTag("BoundaryLeft") || co.gameObject.CompareTag("BoundaryTop"))
     {
       collided = true; // let FixedUpdate know to stop moving it upwards the screen.
       transform.localScale = new Vector3(.001f, .001f, .001f);// urgh, pretty hacky way to stop the missile projectile bullet being "drawn". Because can't SetActive(false) the missile object cos that will kill this script as well?

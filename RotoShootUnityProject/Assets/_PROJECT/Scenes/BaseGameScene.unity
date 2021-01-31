@@ -3107,7 +3107,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 1}
   m_AnchorMax: {x: 0.5, y: 1}
-  m_AnchoredPosition: {x: 408, y: -32.515}
+  m_AnchoredPosition: {x: 408, y: -32.514893}
   m_SizeDelta: {x: 204.09, y: 40.73}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &776476760
@@ -8398,7 +8398,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   waypointPath: {fileID: 1869298898}
   splineMoveScript: {fileID: 3430951250321406756}
-  spinningMineMissile: {fileID: 1961964258596952, guid: 79f8456e85651a546beea68204404972,
+  spinningMineMissile: {fileID: 1262846755526404, guid: 83f808e7008b9e24282aa16360bdba7a,
     type: 3}
   angle: 0
 --- !u!114 &3430951250321406756
@@ -8424,7 +8424,7 @@ MonoBehaviour:
   lookAhead: 0
   sizeToAdd: 0
   timeValue: 1
-  speed: 5
+  speed: 3
   animEaseType:
     serializedVersion: 2
     m_Curve: []
@@ -8563,7 +8563,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   direction: 0
   boundaryWidth: 0.8
-  overhang: 1
+  overhang: 2
   zDepth: 1
 --- !u!1 &5639817313181133967
 GameObject:
@@ -8610,7 +8610,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   direction: 1
   boundaryWidth: 0.8
-  overhang: 1
+  overhang: 2
   zDepth: 1
 --- !u!136 &6450717534768513892
 CapsuleCollider:
@@ -8671,7 +8671,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   direction: 2
   boundaryWidth: 0.8
-  overhang: 1
+  overhang: 2
   zDepth: 1
 --- !u!1 &8281371461660487912
 GameObject:
@@ -8752,5 +8752,5 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   direction: 3
   boundaryWidth: 0.8
-  overhang: 1
+  overhang: 2
   zDepth: 1
