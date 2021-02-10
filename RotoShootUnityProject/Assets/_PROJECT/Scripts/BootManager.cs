@@ -19,6 +19,8 @@ public class BootManager : Singleton<BootManager>
 
   void Start()
   {
+    Debug.Log("The next word is <color=red>red</color>");
+    print("The next word is <color=blue>blue</color>");
     //Load first game scene (probably main menu)
     SceneManager.LoadScene("MainMenu", LoadSceneMode.Additive); // TODO: Does this need to be additive?
   }

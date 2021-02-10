@@ -93,7 +93,7 @@ public class SpinningMineBehaviour : MonoBehaviour
       case EnemyState.SPINNING_IN_IN_PROGRESS:
         break;
       case EnemyState.SPINNING_IN_COMPLETED:
-        transform.Rotate(new Vector3(0, 0, 50 * Time.deltaTime));
+        transform.Rotate(new Vector3(0, 0, 40 * Time.deltaTime));
         break;
       
       default:
@@ -139,9 +139,9 @@ public class SpinningMineBehaviour : MonoBehaviour
     
     //firedBullet.transform.localRotation = rotation; //v.important line!!!
 
-    foreach( Transform tr in ShootingPointTransformsArray)
+    foreach( Transform tr in ShootingPointTransformsArray) 
     {
-      if (tr != this.transform)
+      if (tr != this.transform) //Note that parent Transform ALSO gets returned from GetComponentsInChildren(), so need to check it and skip it
       {
         rotation.eulerAngles = new Vector3(-tr.transform.eulerAngles.z, 90, 0);
         firedBullet = SimplePool.Spawn(spinningMineMissile, tr.transform.position, Quaternion.identity, spinningMineMissilesParentPool.transform);
