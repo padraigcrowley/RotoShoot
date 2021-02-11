@@ -7,13 +7,14 @@ using SWS; //simple waypoints
 public class SpinningMineBehaviour : MonoBehaviour
 {
 
-  enum EnemyState { WAITING_TO_SPAWN, SPINNING_IN_STARTED, SPINNING_IN_IN_PROGRESS, SPINNING_IN_COMPLETED, FIRING, NOT_FIRING, SPINNING_OUT_IN_PROGRESS, SPINNING_OUT_COMPLETED }
+  enum EnemyState { WAITING_TO_SPAWN, SPINNING_IN_STARTED, SPINNING_IN_IN_PROGRESS, SPINNING_IN_COMPLETED, FIRING, NOT_FIRING, SPINNING_OUT_STARTED, SPINNING_OUT_IN_PROGRESS, SPINNING_OUT_COMPLETED }
   EnemyState enemyState;
   private Renderer spriteMaterial, spriteRenderer;
   private float minX = -3.22f, maxX = 3.2f, minY = -2f, maxY = 8f; //(topleft: -3.22, 8.0) (bottomright: 3.2, -2.0)
   private float xDelta = 2f, yDelta = 2f;
   public SWS.PathManager waypointPath;
   public splineMove splineMoveScript;
+  public int numBurstFires = 0, numBurstFiresBeforePause = 4;
 
   public GameObject spinningMineMissile;
   private Quaternion rotation;
@@ -21,12 +22,14 @@ public class SpinningMineBehaviour : MonoBehaviour
   public float angle;
   private List<Transform> ShootingPointTransforms;
   private Transform [] ShootingPointTransformsArray;
+  private CapsuleCollider[] ShootingPointCollidersArray;
 
   private void Awake()
   {
     spriteMaterial = GetComponent<Renderer>();
     spriteRenderer = GetComponent<SpriteRenderer>();
     ShootingPointTransformsArray = (GetComponentsInChildren<Transform>());
+    ShootingPointCollidersArray = (GetComponentsInChildren<CapsuleCollider>());
 
     //Note that parent Transform ALSO gets returned from GetComponentsInChildren, so need to do the following LINQ weirdness (from one of the answers here: https://forum.unity.com/threads/getcomponentsinchildren-not-parent-and-children.222009/#post-2955910 )
     //ShootingPointTransforms.AddRange(GetComponentsInChildren<Transform>().Where(x => x != this.transform));
@@ -66,23 +69,61 @@ public class SpinningMineBehaviour : MonoBehaviour
 
       yield return new WaitForEndOfFrame();
     }
+    print("Got Here 0");
     spriteMaterial.material.SetFloat("_TwistUvAmount", 3.14f);
     spriteMaterial.material.SetFloat("_BlurIntensity", 0f);
-    enemyState = EnemyState.SPINNING_IN_COMPLETED;
     splineMoveScript.StartMove();
     InvokeRepeating("RepeatBurstFire",0f,2f);
+    enemyState = EnemyState.SPINNING_IN_COMPLETED;
+
+    foreach (CapsuleCollider collider in ShootingPointCollidersArray)
+    {
+      collider.enabled = true;
+    }
+  }
+  
+  IEnumerator SpinOutEffect(float duration)
+  {
+    float elapsedTime = 0f;
+    float currentTwistVal, currentBlurVal;
+    while (elapsedTime <= duration)
+    {
+      currentTwistVal = Mathf.Lerp(3.14f, 1f, (elapsedTime / duration));
+      spriteMaterial.material.SetFloat("_TwistUvAmount", currentTwistVal);
+      currentBlurVal = Mathf.Lerp(0f, 100f, (elapsedTime / duration));
+      spriteMaterial.material.SetFloat("_BlurIntensity", currentBlurVal);
+      elapsedTime += Time.deltaTime;
+
+      yield return new WaitForEndOfFrame();
+    }
+    print("Got Here 1");
+    spriteMaterial.material.SetFloat("_TwistUvAmount", 1f);
+    spriteMaterial.material.SetFloat("_BlurIntensity", 100f);
+    enemyState = EnemyState.SPINNING_OUT_COMPLETED;
+    //splineMoveScript.StartMove();
+    foreach (CapsuleCollider collider in ShootingPointCollidersArray)
+    {
+      collider.enabled = false;
+    }
+
   }
 
 
     void Update()
   {
+
+    if (numBurstFires >= numBurstFiresBeforePause)
+    {
+      enemyState = EnemyState.SPINNING_OUT_STARTED;
+      numBurstFires = 0;
+    }
+    
     switch (enemyState)
     {
       case EnemyState.WAITING_TO_SPAWN:
-        if (Input.GetKeyDown(KeyCode.S))
+        //if (Input.GetKeyDown(KeyCode.S))
         {
-          transform.position = new Vector2((UnityEngine.Random.Range(-3.2f, 3.2f)), (UnityEngine.Random.Range(2f, 8f)));
-          enemyState = EnemyState.SPINNING_IN_STARTED;
+          Spawn();
         }
         break;
       case EnemyState.SPINNING_IN_STARTED:
@@ -95,14 +136,30 @@ public class SpinningMineBehaviour : MonoBehaviour
       case EnemyState.SPINNING_IN_COMPLETED:
         transform.Rotate(new Vector3(0, 0, 40 * Time.deltaTime));
         break;
-      
+      case EnemyState.SPINNING_OUT_STARTED:
+        CancelInvoke();
+        StartCoroutine(SpinOutEffect(2f));
+        enemyState = EnemyState.SPINNING_OUT_IN_PROGRESS;
+        break;
+      case EnemyState.SPINNING_OUT_IN_PROGRESS:
+        break;
+      case EnemyState.SPINNING_OUT_COMPLETED:
+        StartCoroutine(AlphaFadeTo(0f, .50f));
+        break;
       default:
         break;
     }
   }
+  void Spawn()
+  {
+    transform.position = new Vector2((UnityEngine.Random.Range(-3.2f, 3.2f)), (UnityEngine.Random.Range(2f, 8f)));
+    enemyState = EnemyState.SPINNING_IN_STARTED;
+  }
+
   void RepeatBurstFire()
   {
     StartCoroutine(BurstFire(15, .05f));
+    numBurstFires++;
   }
   IEnumerator BurstFire(int numShots, float timeBetweenShots)
   {
@@ -117,7 +174,6 @@ public class SpinningMineBehaviour : MonoBehaviour
     public void FireMissile(bool fireAtPlayerPos)
   {
     GameObject firedBullet;
-    
 
       //angle  = -90f;
       //angle = transform.rotation.z * Mathf.Rad2Deg; //angle = -90f;
