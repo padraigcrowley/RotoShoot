@@ -24,8 +24,6 @@ public class PlayerShip : ExtendedBehaviour
   public CameraShake camShakeScript;
   public GameObject playerShipMissilesParentPool;
 
-  public HealthBar healthBar;
-
   public GameObject PlayerShipDamageLarge;
   private GameObject playerMissileInstance, playerMissileLeftTurretInstance, playerMissileRightTurretInstance;
   Quaternion uniqueprojectileRotation = Quaternion.identity;
@@ -324,7 +322,6 @@ public class PlayerShip : ExtendedBehaviour
   public void ChangeShipHP(int hpChange)
     {
       GameplayManager.Instance.currentPlayerHP += hpChange; //looks weird but negattive numbers are passed in for a decrease in HP
-      healthBar.SetCurrentHealth(GameplayManager.Instance.currentPlayerHP);
     }
 
  

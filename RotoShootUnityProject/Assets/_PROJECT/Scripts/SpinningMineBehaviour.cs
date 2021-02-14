@@ -138,7 +138,7 @@ public class SpinningMineBehaviour : MonoBehaviour
         break;
       case EnemyState.SPINNING_OUT_STARTED:
         CancelInvoke();
-        StartCoroutine(SpinOutEffect(2f));
+        StartCoroutine(SpinOutEffect(1f));
         enemyState = EnemyState.SPINNING_OUT_IN_PROGRESS;
         break;
       case EnemyState.SPINNING_OUT_IN_PROGRESS:

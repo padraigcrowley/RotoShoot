@@ -26,8 +26,6 @@ public class tst_PlayerShipTurn : MonoBehaviour
   public CameraShake camShakeScript;
   public GameObject playerShipMissilesParentPool;
 
-  public HealthBar healthBar;
-
   // Start is called before the first frame update
   void Start()
     {

@@ -6,7 +6,6 @@ using UnityEngine;
 public class EnemyMissileMovement : MissileMovement
 {
   public float speed;
-  public HealthBar healthBar;
 
   protected override void OnEnable()
   {
