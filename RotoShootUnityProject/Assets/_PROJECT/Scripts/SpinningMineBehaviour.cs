@@ -4,10 +4,10 @@ using System.Collections.Generic;
 using UnityEngine;
 using SWS; //simple waypoints
 
-public class SpinningMineBehaviour : MonoBehaviour
+public class SpinningMineBehaviour : ExtendedBehaviour
 {
 
-  enum EnemyState { WAITING_TO_SPAWN, SPINNING_IN_STARTED, SPINNING_IN_IN_PROGRESS, SPINNING_IN_COMPLETED, FIRING, NOT_FIRING, SPINNING_OUT_STARTED, SPINNING_OUT_IN_PROGRESS, SPINNING_OUT_COMPLETED }
+  enum EnemyState { WAITING_TO_SPAWN, SPAWNING, SPINNING_IN_STARTED, SPINNING_IN_IN_PROGRESS, SPINNING_IN_COMPLETED, FIRING, NOT_FIRING, SPINNING_OUT_STARTED, SPINNING_OUT_IN_PROGRESS, SPINNING_OUT_COMPLETED }
   EnemyState enemyState;
   private Renderer spriteMaterial, spriteRenderer;
   private float minX = -3.22f, maxX = 3.2f, minY = -2f, maxY = 8f; //(topleft: -3.22, 8.0) (bottomright: 3.2, -2.0)
@@ -23,6 +23,8 @@ public class SpinningMineBehaviour : MonoBehaviour
   private List<Transform> ShootingPointTransforms;
   private Transform [] ShootingPointTransformsArray;
   private CapsuleCollider[] ShootingPointCollidersArray;
+  private bool waiting = false;
+  private bool firstTime = true;
 
   private void Awake()
   {
@@ -41,7 +43,9 @@ public class SpinningMineBehaviour : MonoBehaviour
     spriteRenderer.material.color = new Color(1, 1, 1, 0);
     spriteMaterial.material.SetFloat("_TwistUvAmount", 1f);
     spriteMaterial.material.SetFloat("_BlurIntensity", 100f);
-    enemyState = EnemyState.WAITING_TO_SPAWN;
+    enemyState = EnemyState.SPAWNING;
+    transform.position = new Vector2((UnityEngine.Random.Range(-3.2f, 3.2f)), (UnityEngine.Random.Range(2f, 8f)));
+
 
     spinningMineMissilesParentPool = new GameObject("spinningMineMissilesParentPoolObject");
   }
@@ -72,7 +76,11 @@ public class SpinningMineBehaviour : MonoBehaviour
     print("Got Here 0");
     spriteMaterial.material.SetFloat("_TwistUvAmount", 3.14f);
     spriteMaterial.material.SetFloat("_BlurIntensity", 0f);
-    splineMoveScript.StartMove();
+    if (firstTime)
+    {
+      splineMoveScript.StartMove();
+      firstTime = false;
+    }
     InvokeRepeating("RepeatBurstFire",0f,2f);
     enemyState = EnemyState.SPINNING_IN_COMPLETED;
 
@@ -100,7 +108,7 @@ public class SpinningMineBehaviour : MonoBehaviour
     spriteMaterial.material.SetFloat("_TwistUvAmount", 1f);
     spriteMaterial.material.SetFloat("_BlurIntensity", 100f);
     enemyState = EnemyState.SPINNING_OUT_COMPLETED;
-    //splineMoveScript.StartMove();
+    //splineMoveScript.Stop();
     foreach (CapsuleCollider collider in ShootingPointCollidersArray)
     {
       collider.enabled = false;
@@ -121,6 +129,16 @@ public class SpinningMineBehaviour : MonoBehaviour
     switch (enemyState)
     {
       case EnemyState.WAITING_TO_SPAWN:
+        if (waiting == true)
+        {
+          waiting = false;
+          Wait(10, () => {
+            //Debug.Log("2 seconds is lost forever");
+            enemyState = EnemyState.SPAWNING;
+          });
+        }
+        break;
+      case EnemyState.SPAWNING:
         //if (Input.GetKeyDown(KeyCode.S))
         {
           Spawn();
@@ -137,14 +155,19 @@ public class SpinningMineBehaviour : MonoBehaviour
         transform.Rotate(new Vector3(0, 0, 40 * Time.deltaTime));
         break;
       case EnemyState.SPINNING_OUT_STARTED:
+        transform.Rotate(new Vector3(0, 0, 40 * Time.deltaTime));
         CancelInvoke();
         StartCoroutine(SpinOutEffect(1f));
         enemyState = EnemyState.SPINNING_OUT_IN_PROGRESS;
         break;
       case EnemyState.SPINNING_OUT_IN_PROGRESS:
+        transform.Rotate(new Vector3(0, 0, 40 * Time.deltaTime));
         break;
       case EnemyState.SPINNING_OUT_COMPLETED:
+        transform.Rotate(new Vector3(0, 0, 40 * Time.deltaTime));
         StartCoroutine(AlphaFadeTo(0f, .50f));
+        waiting = true;
+        enemyState = EnemyState.WAITING_TO_SPAWN;
         break;
       default:
         break;
@@ -152,7 +175,6 @@ public class SpinningMineBehaviour : MonoBehaviour
   }
   void Spawn()
   {
-    transform.position = new Vector2((UnityEngine.Random.Range(-3.2f, 3.2f)), (UnityEngine.Random.Range(2f, 8f)));
     enemyState = EnemyState.SPINNING_IN_STARTED;
   }
 
