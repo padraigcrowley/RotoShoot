@@ -24,6 +24,9 @@ public class LevelManager : Singleton<LevelManager>
     SWS.PathManager pathInstance = null;
   public bool bossHasBeenKilled = false;
 
+  public SpinningMineBehaviour spinningMine;
+  private SpinningMineBehaviour spinningMissileInstance;
+
   private void Awake()
   {
     GameplayManager.Instance.playerShipPos = levelSetupData.PlayerShipPos;
@@ -61,13 +64,10 @@ public class LevelManager : Singleton<LevelManager>
     {
       SetupEnemies();
     }
-
     if (levelSetupData.lccKillBoss)
     {
       SetupBoss();
     }
-
-    
   }
 
   void SetupEnemies()
@@ -140,6 +140,9 @@ public class LevelManager : Singleton<LevelManager>
 
   void Update()
   {
+    if (Input.GetKeyDown(KeyCode.S))
+      spinningMissileInstance = Instantiate(spinningMine);
+
     if (GameplayManager.Instance.currentGameState == GameplayManager.GameState.LEVEL_IN_PROGRESS)
     {
       if (levelSetupData.lccEnemyKills != -1)

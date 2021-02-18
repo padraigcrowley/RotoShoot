@@ -45,8 +45,6 @@ public class SpinningMineBehaviour : ExtendedBehaviour
     spriteMaterial.material.SetFloat("_BlurIntensity", 100f);
     enemyState = EnemyState.SPAWNING;
     transform.position = new Vector2((UnityEngine.Random.Range(-3.2f, 3.2f)), (UnityEngine.Random.Range(2f, 8f)));
-
-
     spinningMineMissilesParentPool = new GameObject("spinningMineMissilesParentPoolObject");
   }
   IEnumerator AlphaFadeTo(float aValue, float aTime)
