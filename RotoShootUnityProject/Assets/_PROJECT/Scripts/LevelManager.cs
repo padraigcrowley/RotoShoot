@@ -25,7 +25,7 @@ public class LevelManager : Singleton<LevelManager>
   public bool bossHasBeenKilled = false;
 
   public SpinningMineBehaviour spinningMine;
-  private SpinningMineBehaviour spinningMissileInstance;
+  private GameObject spinningMineInstance;
 
   private void Awake()
   {
@@ -67,6 +67,10 @@ public class LevelManager : Singleton<LevelManager>
     if (levelSetupData.lccKillBoss)
     {
       SetupBoss();
+    }
+    if(levelSetupData.spinningMineSpawnPointData.levelHasSpinningMine)
+    {
+      SetupSpinningMine();
     }
   }
 
@@ -138,10 +142,32 @@ public class LevelManager : Singleton<LevelManager>
 
   }
 
+  void SetupSpinningMine()
+  {
+    
+    spinningMineInstance = Instantiate(levelSetupData.spinningMineSpawnPointData.spinningMinePrefab);
+
+    SpinningMineBehaviour spinningMineScript = spinningMineInstance.GetComponent<SpinningMineBehaviour>();
+
+    if (levelSetupData.spinningMineSpawnPointData.waypointPath != null)
+    {
+      spinningMineScript.waitTimeBeforeFirstSpawn   = levelSetupData.spinningMineSpawnPointData.waitTimeBeforeFirstSpawn;
+      spinningMineScript.waitTimeBetweenSpawns      = levelSetupData.spinningMineSpawnPointData.waitTimeBetweenSpawns;
+      spinningMineScript.speedMultiplierFromSpawner = levelSetupData.spinningMineSpawnPointData.speedMultiplier;
+      spinningMineScript.hpMultiplierFromSpawner    = levelSetupData.spinningMineSpawnPointData.hpMultiplier;
+      spinningMineScript.numBurstFiresBeforePause = levelSetupData.spinningMineSpawnPointData.numBurstFiresBeforePause;
+
+      pathInstance = Instantiate(levelSetupData.spinningMineSpawnPointData.waypointPath, Vector3.zero, Quaternion.identity);
+      spinningMineScript.waypointPath = pathInstance;
+
+    }
+
+  }
+
   void Update()
   {
-    if (Input.GetKeyDown(KeyCode.S))
-      spinningMissileInstance = Instantiate(spinningMine);
+    //if (Input.GetKeyDown(KeyCode.S))
+      //spinningMineInstance = Instantiate(spinningMine);
 
     if (GameplayManager.Instance.currentGameState == GameplayManager.GameState.LEVEL_IN_PROGRESS)
     {

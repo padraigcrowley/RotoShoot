@@ -15,10 +15,10 @@ public class LevelSetupData : ScriptableObject
   [Header("ENEMY WAVES DATA")]
   public EnemySpawnPointData[] levelEnemySpawnPointData;
   [Space(10)]
-  [Header("SPINNING MINE DATA")]
+  [Header("BOSS DATA")]
   public BossSpawnPointData bossSpawnPointData;
   [Space(10)]
-  [Header("BOSS DATA")]
+  [Header("SPINNING MINE DATA")]
   public SpinningMineSpawnPointData spinningMineSpawnPointData;
   [Space(10)]
   public Vector3 PlayerShipPos;
@@ -58,5 +58,8 @@ public class SpinningMineSpawnPointData
   public bool levelHasSpinningMine;
   public GameObject spinningMinePrefab;
   public float speedMultiplier, hpMultiplier;
+  public float waitTimeBeforeFirstSpawn;
+  public float waitTimeBetweenSpawns;
+  public int numBurstFiresBeforePause;
   public SWS.PathManager waypointPath;
 }

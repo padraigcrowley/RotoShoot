@@ -31,16 +31,16 @@ MonoBehaviour:
       type: 3}
     numEnemiesInWave: 4
     timeBetweenSpawn: 0.5
-  - enemyPrefab: {fileID: 2411896081061765972, guid: 41a1b7e89cfaebb4e9e25449413c44bd,
+  - enemyPrefab: {fileID: 4342350733379744943, guid: 98337287636663844a798648967aa1c7,
       type: 3}
-    startPos: {x: 0, y: 12}
+    startPos: {x: 1.29, y: 12}
     verticalDistBetweenEnemies: 0
     horizontalDistBetweenEnemies: 0
-    speedMultiplier: 4
+    speedMultiplier: 8
     hpMultiplier: 1
     waypointPath: {fileID: 6067551397367185325, guid: e459773c5f4515341b709336466a6969,
       type: 3}
-    numEnemiesInWave: 1
+    numEnemiesInWave: 8
     timeBetweenSpawn: 0.5
   bossSpawnPointData:
     bossPrefab: {fileID: 0}
@@ -48,6 +48,16 @@ MonoBehaviour:
     speedMultiplier: 0
     hpMultiplier: 0
     waypointPath: {fileID: 0}
+  spinningMineSpawnPointData:
+    levelHasSpinningMine: 1
+    spinningMinePrefab: {fileID: 2411896081061765972, guid: 41a1b7e89cfaebb4e9e25449413c44bd,
+      type: 3}
+    speedMultiplier: 2
+    hpMultiplier: 0
+    waitTimeBeforeFirstSpawn: 5
+    waitTimeBetweenSpawns: 5
+    waypointPath: {fileID: 6067551397367185325, guid: e459773c5f4515341b709336466a6969,
+      type: 3}
   PlayerShipPos: {x: -1.28, y: -5, z: 0}
   shipLanes:
   - {x: -3.85, y: -5}

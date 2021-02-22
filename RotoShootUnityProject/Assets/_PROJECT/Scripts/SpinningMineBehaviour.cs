@@ -7,14 +7,18 @@ using SWS; //simple waypoints
 public class SpinningMineBehaviour : ExtendedBehaviour
 {
 
-  enum EnemyState { WAITING_TO_SPAWN, SPAWNING, SPINNING_IN_STARTED, SPINNING_IN_IN_PROGRESS, SPINNING_IN_COMPLETED, FIRING, NOT_FIRING, SPINNING_OUT_STARTED, SPINNING_OUT_IN_PROGRESS, SPINNING_OUT_COMPLETED }
+  enum EnemyState { DOING_NOTHING, WAITING_TO_SPAWN, SPAWNING, SPINNING_IN_STARTED, SPINNING_IN_IN_PROGRESS, SPINNING_IN_COMPLETED, FIRING, NOT_FIRING, SPINNING_OUT_STARTED, SPINNING_OUT_IN_PROGRESS, SPINNING_OUT_COMPLETED }
   EnemyState enemyState;
   private Renderer spriteMaterial, spriteRenderer;
   private float minX = -3.22f, maxX = 3.2f, minY = -2f, maxY = 8f; //(topleft: -3.22, 8.0) (bottomright: 3.2, -2.0)
   private float xDelta = 2f, yDelta = 2f;
   public SWS.PathManager waypointPath;
   public splineMove splineMoveScript;
-  public int numBurstFires = 0, numBurstFiresBeforePause = 4;
+  private int numBurstFires = 0;
+  public int numBurstFiresBeforePause;
+  public float waitTimeBeforeFirstSpawn, waitTimeBetweenSpawns;
+  public float hpMultiplierFromSpawner;
+  public float speedMultiplierFromSpawner;
 
   public GameObject spinningMineMissile;
   private Quaternion rotation;
@@ -23,7 +27,7 @@ public class SpinningMineBehaviour : ExtendedBehaviour
   private List<Transform> ShootingPointTransforms;
   private Transform [] ShootingPointTransformsArray;
   private CapsuleCollider[] ShootingPointCollidersArray;
-  private bool waiting = false;
+  private bool waitingToRespawn = true, waitingBeforeFirstSpawn = true;
   private bool firstTime = true;
 
   private void Awake()
@@ -43,9 +47,16 @@ public class SpinningMineBehaviour : ExtendedBehaviour
     spriteRenderer.material.color = new Color(1, 1, 1, 0);
     spriteMaterial.material.SetFloat("_TwistUvAmount", 1f);
     spriteMaterial.material.SetFloat("_BlurIntensity", 100f);
-    enemyState = EnemyState.SPAWNING;
+    enemyState = EnemyState.DOING_NOTHING;
     transform.position = new Vector2((UnityEngine.Random.Range(-3.2f, 3.2f)), (UnityEngine.Random.Range(2f, 8f)));
     spinningMineMissilesParentPool = new GameObject("spinningMineMissilesParentPoolObject");
+    
+    splineMoveScript = GetComponent<splineMove>();
+    if (splineMoveScript != null)
+    {
+      splineMoveScript.pathContainer = waypointPath;
+      splineMoveScript.speed *= this.speedMultiplierFromSpawner;
+    }
   }
   IEnumerator AlphaFadeTo(float aValue, float aTime)
   {
@@ -126,13 +137,23 @@ public class SpinningMineBehaviour : ExtendedBehaviour
     
     switch (enemyState)
     {
-      case EnemyState.WAITING_TO_SPAWN:
-        if (waiting == true)
+      case EnemyState.DOING_NOTHING:
+        if (waitingBeforeFirstSpawn == true)
         {
-          waiting = false;
-          Wait(10, () => {
-            //Debug.Log("2 seconds is lost forever");
+          waitingBeforeFirstSpawn = false;
+          Wait(waitTimeBeforeFirstSpawn, () => {
             enemyState = EnemyState.SPAWNING;
+            print($"Waited {waitTimeBeforeFirstSpawn} to first spawn");
+          });
+        }
+        break;
+      case EnemyState.WAITING_TO_SPAWN:
+        if (waitingToRespawn == true)
+        {
+          waitingToRespawn = false;
+          Wait(waitTimeBetweenSpawns, () => {
+            enemyState = EnemyState.SPAWNING;
+            print($"Waited {waitTimeBetweenSpawns} to re-spawn");
           });
         }
         break;
@@ -164,7 +185,7 @@ public class SpinningMineBehaviour : ExtendedBehaviour
       case EnemyState.SPINNING_OUT_COMPLETED:
         transform.Rotate(new Vector3(0, 0, 40 * Time.deltaTime));
         StartCoroutine(AlphaFadeTo(0f, .50f));
-        waiting = true;
+        waitingToRespawn = true;
         enemyState = EnemyState.WAITING_TO_SPAWN;
         break;
       default:

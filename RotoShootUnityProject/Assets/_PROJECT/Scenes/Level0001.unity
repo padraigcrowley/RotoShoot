@@ -164,6 +164,8 @@ MonoBehaviour:
   bossMissilesParentPool: {fileID: 0}
   timeBetweenAsteroidShower: 0
   bossHasBeenKilled: 0
+  spinningMine: {fileID: 2411896081061765975, guid: 41a1b7e89cfaebb4e9e25449413c44bd,
+    type: 3}
 --- !u!4 &254305519
 Transform:
   m_ObjectHideFlags: 0

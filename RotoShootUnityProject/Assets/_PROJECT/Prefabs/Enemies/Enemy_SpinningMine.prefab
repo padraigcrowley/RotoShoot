@@ -102,14 +102,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4a2d9078dbe17bc4f966c9d2310be047, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  pathContainer: {fileID: 6067551397367185325, guid: e459773c5f4515341b709336466a6969,
-    type: 3}
+  pathContainer: {fileID: 0}
   onStart: 0
   moveToPath: 1
   reverse: 0
   startPoint: 0
   currentPoint: 0
-  closeLoop: 0
+  closeLoop: 1
   localType: 0
   lookAhead: 0
   sizeToAdd: 0
@@ -121,7 +120,7 @@ MonoBehaviour:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
-  loopType: 3
+  loopType: 1
   waypoints: []
   events: []
   pathType: 1
@@ -143,11 +142,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2253caf25c3d7b943846a379aabb5f93, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  waypointPath: {fileID: 6067551397367185325, guid: e459773c5f4515341b709336466a6969,
-    type: 3}
+  waypointPath: {fileID: 0}
   splineMoveScript: {fileID: 2411896081061765968}
   numBurstFires: 0
   numBurstFiresBeforePause: 4
+  waitTimeBeforeFirstSpawn: 0
+  waitTimeBetweenSpawns: 0
+  hpMultiplierFromSpawner: 0
+  speedMultiplierFromSpawner: 0
   spinningMineMissile: {fileID: 1262846755526404, guid: 83f808e7008b9e24282aa16360bdba7a,
     type: 3}
   angle: 0
