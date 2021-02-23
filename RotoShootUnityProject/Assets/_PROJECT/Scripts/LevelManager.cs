@@ -6,7 +6,7 @@ using UnityEngine;
 public class LevelManager : Singleton<LevelManager>
 {
   [HideInInspector] public int numEnemyKillsInLevel = 0;
-  public float TIME_BETWEEN_FIRING_AT_PLAYER = 5f; //todo: magic number
+  public float TIME_BETWEEN_FIRING_AT_PLAYER = 2f; //todo: magic number
   [HideInInspector] public float currentTimeBetweenFiringAtPlayer; //todo: magic number
 
   public Dictionary<string, int> LevelCompletionCriteria = new Dictionary<string, int>();
