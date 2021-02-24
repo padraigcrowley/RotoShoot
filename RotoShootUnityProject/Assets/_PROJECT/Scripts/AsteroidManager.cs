@@ -5,7 +5,7 @@ public class AsteroidManager : MonoBehaviour
 {
   private GameObject asteroids1Instance, asteroids2Instance;
   public GameObject asteroids1Prefab, asteroids2Prefab;
-  private float travelSpeed = 5f;
+  private float travelSpeed = 7.5f;
 
   private bool asteroidsCanMove = false;
   private List<GameObject> asteroid1ChildrenObjects = new List<GameObject>();
@@ -130,7 +130,7 @@ public class AsteroidManager : MonoBehaviour
     {
       asteroids1RotationAnimator = childObj.GetComponent<Animator>();
       asteroid1Sprite = childObj.GetComponent<SpriteRenderer>();
-      asteroid1Sprite.transform.localScale *= Random.Range(.5f, 2f);
+      asteroid1Sprite.transform.localScale *= Random.Range(.5f, 1.7f);
 
       if (i == 0)
       {

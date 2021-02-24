@@ -307,10 +307,10 @@ public class PlayerShip : ExtendedBehaviour
         GameObject newParticleEffect = SimplePool.Spawn(PlayerShipDamageLarge, collision.gameObject.transform.position, PlayerShipDamageLarge.transform.rotation, transform) as GameObject;
 
         Wait(2, () => {
-          Debug.Log("Despawn(newParticleEffect)");
+          //Debug.Log("Despawn(newParticleEffect)");
           SimplePool.Despawn(newParticleEffect);
         });
-        print($"collision between this {transform.position} and asteroid {collision.gameObject.transform.position}");
+        //print($"collision between this {transform.position} and asteroid {collision.gameObject.transform.position}");
         DoCameraShake();
         ChangeShipHP(-25);
       }

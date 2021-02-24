@@ -6,7 +6,7 @@ using UnityEngine;
 public class LevelManager : Singleton<LevelManager>
 {
   [HideInInspector] public int numEnemyKillsInLevel = 0;
-  public float TIME_BETWEEN_FIRING_AT_PLAYER = 2f; //todo: magic number
+  public float TIME_BETWEEN_FIRING_AT_PLAYER = 5f; //todo: magic number
   [HideInInspector] public float currentTimeBetweenFiringAtPlayer; //todo: magic number
 
   public Dictionary<string, int> LevelCompletionCriteria = new Dictionary<string, int>();
@@ -15,7 +15,11 @@ public class LevelManager : Singleton<LevelManager>
   public float levelPlayTimeElapsed;
   public float verticalDistBetweenEnemies = 2.0f; //todo: magic number
   public float horizontalDistBetweenEnemies = 2.0f; //todo: magic number
-  public bool readyToFireAtPlayer = false; 
+  public bool readyToFireAtPlayer = false;
+
+  // a list of lists of EnemyBehaviour02 scripts - for each enemy in each wave
+  List<List<EnemyBehaviour02>> enemyWavesParentBehaviourScripts = new List<List<EnemyBehaviour02>>();
+  
   private List<GameObject> enemyWaves = new List<GameObject>();
 
   public GameObject enemyMissilesParentPool, bossMissilesParentPool;
@@ -85,6 +89,8 @@ public class LevelManager : Singleton<LevelManager>
     int index = 0;
     foreach (EnemySpawnPointData sp in levelSetupData.levelEnemySpawnPointData)
     {
+      List<EnemyBehaviour02> enemyWavesChildrenBehaviourScripts = new List<EnemyBehaviour02>();
+
       var waveParentObject = new GameObject("EnemyWave_" + index);
       waveParentObject.transform.position = new Vector2(sp.startPos.x, sp.startPos.y);
       enemyWaves.Add(waveParentObject);
@@ -103,11 +109,14 @@ public class LevelManager : Singleton<LevelManager>
         GameObject enemy = Instantiate(sp.enemyPrefab, startingPosition, Quaternion.identity, waveParentObject.transform);
         enemy.name = "Wave" + index + " Enemy" + i;
         EnemyBehaviour02 enemyScript = enemy.GetComponent<EnemyBehaviour02>();
+        enemyWavesChildrenBehaviourScripts.Add(enemyScript);// add each of the enemies in the wave's behaviour scripts to a list
         enemyScript.startPosX = startingPosition.x;
         enemyScript.startPosY = startingPosition.y;
         enemyScript.speedMultiplierFromSpawner = sp.speedMultiplier;
         enemyScript.hpMultiplierFromSpawner = sp.hpMultiplier;
         enemyScript.timeBetweenSpawn = sp.timeBetweenSpawn;
+        
+        
 
         if (pathInstance != null)
         {
@@ -115,6 +124,7 @@ public class LevelManager : Singleton<LevelManager>
           enemyScript.waypointPath = pathInstance;
         }
       }
+      enemyWavesParentBehaviourScripts.Add(enemyWavesChildrenBehaviourScripts);
       index++;
     }
   }
@@ -186,7 +196,7 @@ public class LevelManager : Singleton<LevelManager>
           currentTimeBetweenFiringAtPlayer -= Time.deltaTime;
           if (currentTimeBetweenFiringAtPlayer <= 0f)
           {
-            //print($"readyToFireAtPlayer = true");
+            print($"readyToFireAtPlayer = true");
             readyToFireAtPlayer = true; // this is set back to false in Update() of EnemyFireAtPlayerBehaviour01.cs
           }
         }
@@ -199,40 +209,59 @@ public class LevelManager : Singleton<LevelManager>
   {
     currentlyActivatingWave = true;
     var enemyWave = enemyWaves[Random.Range(0, enemyWaves.Count)];
+    var enemyWavesChildrenBehaviourScripts = enemyWavesParentBehaviourScripts[Random.Range(0, enemyWavesParentBehaviourScripts.Count)];
 
-    foreach (Transform enemyShipObjectTransform in enemyWave.transform)
+    foreach (EnemyBehaviour02 enemyBehaviourScript in enemyWavesChildrenBehaviourScripts)
     {
-      EnemyBehaviour02 enemyShipScript = enemyShipObjectTransform.gameObject.GetComponent<EnemyBehaviour02>();
-      yield return new WaitForSeconds(enemyShipScript.timeBetweenSpawn);
-      //print($"in LevelManager, waited for timeBetweenSpawn ({enemyShipScript.timeBetweenSpawn}) seconds");
-      enemyShipScript.waveRespawnWaitOver = true;
+      yield return new WaitForSeconds(enemyBehaviourScript.timeBetweenSpawn);
+      enemyBehaviourScript.waveRespawnWaitOver = true;
     }
     currentlyActivatingWave = false;
   }
 
 
   /// <summary>
-  /// loop through each of the enemywave parent gameobjects in the list, if any of the parent's children's state is ALIVE, increnent the number of active waves.
+  /// loop through each of the enemywave's behaviour scripts, if any of the parent's children's state is ALIVE, increnent the number of active waves.
   /// </summary> 
   /// <returns>numActiveWaves</returns>
   private int GetNumActiveWaves()
   {
     int numActiveWaves = 0;
     bool activeWave = false;
-    foreach (GameObject enemyWaveParentObject in enemyWaves)
+
+    foreach (List<EnemyBehaviour02>enemyWaveParentBehaviourScripts in enemyWavesParentBehaviourScripts)
     {
       activeWave = false;
-      foreach (Transform enemyShipObjectTransform in enemyWaveParentObject.transform)
+      foreach(EnemyBehaviour02 enemyBehaviourScript in enemyWaveParentBehaviourScripts)
       {
-        if (enemyShipObjectTransform.gameObject.GetComponent<EnemyBehaviour02>().enemyState != EnemyBehaviour02.EnemyState.WAITING_TO_RESPAWN)
+        if(enemyBehaviourScript.enemyState != EnemyBehaviour02.EnemyState.WAITING_TO_RESPAWN)
         {
           activeWave = true;
+          break;// we've found at least 1 active enemy in that wave, so no need to check any further - break;
         }
       }
       if (activeWave)
         numActiveWaves++;
     }
     return numActiveWaves;
+  
+      
+    //int numActiveWaves = 0;
+    //bool activeWave = false;
+    //foreach (GameObject enemyWaveParentObject in enemyWaves)
+    //{
+    //  activeWave = false;
+    //  foreach (Transform enemyShipObjectTransform in enemyWaveParentObject.transform)
+    //  {
+    //    if (enemyShipObjectTransform.gameObject.GetComponent<EnemyBehaviour02>().enemyState != EnemyBehaviour02.EnemyState.WAITING_TO_RESPAWN)
+    //    {
+    //      activeWave = true;
+    //    }
+    //  }
+    //  if (activeWave)
+    //    numActiveWaves++;
+    //}
+    //return numActiveWaves;
   }
 
   void CheckLCC() // check LevelCompletionCriteria

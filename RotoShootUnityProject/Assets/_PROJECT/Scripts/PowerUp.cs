@@ -72,7 +72,7 @@ public class PowerUp : MonoBehaviour
     }
     else if (other.gameObject.CompareTag("Atmosphere"))
     {
-      print($"Collision entered with Atmos! ");
+      //print($"Collision entered with Atmos! ");
       pulseTween.Kill();
       travelSpeed /= 2.0f;
       dissolveAnim.Play("PowerUpDissolve");

@@ -82,7 +82,7 @@ public class SpinningMineBehaviour : ExtendedBehaviour
 
       yield return new WaitForEndOfFrame();
     }
-    print("Got Here 0");
+    //print("Got Here 0");
     spriteMaterial.material.SetFloat("_TwistUvAmount", 3.14f);
     spriteMaterial.material.SetFloat("_BlurIntensity", 0f);
     if (firstTime)
@@ -113,7 +113,7 @@ public class SpinningMineBehaviour : ExtendedBehaviour
 
       yield return new WaitForEndOfFrame();
     }
-    print("Got Here 1");
+    //print("Got Here 1");
     spriteMaterial.material.SetFloat("_TwistUvAmount", 1f);
     spriteMaterial.material.SetFloat("_BlurIntensity", 100f);
     enemyState = EnemyState.SPINNING_OUT_COMPLETED;
@@ -143,7 +143,7 @@ public class SpinningMineBehaviour : ExtendedBehaviour
           waitingBeforeFirstSpawn = false;
           Wait(waitTimeBeforeFirstSpawn, () => {
             enemyState = EnemyState.SPAWNING;
-            print($"Waited {waitTimeBeforeFirstSpawn} to first spawn");
+            //print($"Waited {waitTimeBeforeFirstSpawn} to first spawn");
           });
         }
         break;
@@ -153,7 +153,7 @@ public class SpinningMineBehaviour : ExtendedBehaviour
           waitingToRespawn = false;
           Wait(waitTimeBetweenSpawns, () => {
             enemyState = EnemyState.SPAWNING;
-            print($"Waited {waitTimeBetweenSpawns} to re-spawn");
+            //print($"Waited {waitTimeBetweenSpawns} to re-spawn");
           });
         }
         break;
