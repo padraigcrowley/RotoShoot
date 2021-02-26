@@ -7,8 +7,11 @@ using DG.Tweening.Plugins.Core;
 public class PlayerShip : ExtendedBehaviour
 {
   Animator PlayerShipGFXAnim;
+//  public Animator playerShieldAnimController;
   private float nextActionTime = 0.0f;
-  
+
+  public GameObject playerShield;
+
   private int currentShipLane = 1; // the lane number = the array index
   
   public Transform playerShipFrontTurret, playerShipLeftTurret, playerShipRightTurret;
@@ -55,6 +58,11 @@ public class PlayerShip : ExtendedBehaviour
 
   void Update()
   {
+    //if (Input.GetKeyDown(KeyCode.S))
+    //{
+    //  print($"Trying to play shield anim");
+    //  PlayerShield.SetActive(true);
+    //}
 
     if (PlayerShipIntroAnimCompleted == true)
       PlayerShipIntroAninCompletedEvent();

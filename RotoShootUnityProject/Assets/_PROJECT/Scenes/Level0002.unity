@@ -154,7 +154,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   numEnemyKillsInLevel: 0
-  TIME_BETWEEN_FIRING_AT_PLAYER: 5
+  TIME_BETWEEN_FIRING_AT_PLAYER: 1
   currentTimeBetweenFiringAtPlayer: 0
   levelSetupData: {fileID: 11400000, guid: 5b034030755b0fc448796476870db2b5, type: 2}
   levelPlayTimeElapsed: 0
@@ -165,6 +165,7 @@ MonoBehaviour:
   bossMissilesParentPool: {fileID: 0}
   timeBetweenAsteroidShower: 0
   bossHasBeenKilled: 0
+  spinningMine: {fileID: 0}
 --- !u!4 &254305519
 Transform:
   m_ObjectHideFlags: 0

@@ -6,7 +6,7 @@ using UnityEngine;
 public class LevelManager : Singleton<LevelManager>
 {
   [HideInInspector] public int numEnemyKillsInLevel = 0;
-   public float TIME_BETWEEN_FIRING_AT_PLAYER = 2f; //todo: magic number
+   public float TIME_BETWEEN_FIRING_AT_PLAYER = .2f; //todo: magic number
    public float currentTimeBetweenFiringAtPlayer; //todo: magic number
 
   public Dictionary<string, int> LevelCompletionCriteria = new Dictionary<string, int>();
@@ -196,7 +196,7 @@ public class LevelManager : Singleton<LevelManager>
           currentTimeBetweenFiringAtPlayer -= Time.deltaTime;
           if (currentTimeBetweenFiringAtPlayer <= 0f)
           {
-            print($"readyToFireAtPlayer = true");
+            //print($"readyToFireAtPlayer = true");
             readyToFireAtPlayer = true; // this is set back to false in Update() of EnemyFireAtPlayerBehaviour01.cs
           }
         }
