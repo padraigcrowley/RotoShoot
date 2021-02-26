@@ -7,19 +7,19 @@ public class PowerUpShield : PowerUp
   private float durationSeconds;
   public float currentPlayerShipFireRateIncrease = 3.0f;
   
-  public GameObject playerShip;
+  public GameObject playerShieldPrefab, playerShieldPrefabInstance;
     
   protected override void PowerUpPayload()
   {
     //do stuff specific to this PU//todo
     //playerShield.SetActive(true);
     base.PowerUpPayload();
+    playerShieldPrefabInstance = SimplePool.Spawn(playerShieldPrefab, playerShip.gameObject.transform.position, Quaternion.identity,playerShip.transform);
   }
 
   protected override void Start()
   {
     durationSeconds = GameplayManager.Instance.powerupDurationSeconds;
-    playerShip = GameObject.FindWithTag("Player");
     base.Start();
   }
 
@@ -37,7 +37,7 @@ public class PowerUpShield : PowerUp
   }
   protected override void PowerUpHasExpired()
   {
-    //playerShield.SetActive(false);
+    SimplePool.Despawn(playerShieldPrefabInstance);
     base.PowerUpHasExpired();
   }
 }

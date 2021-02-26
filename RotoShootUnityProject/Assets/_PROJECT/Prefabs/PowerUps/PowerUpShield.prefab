@@ -106,7 +106,8 @@ MonoBehaviour:
   travelSpeed: 2
   dissolveAnim: {fileID: 524294970427774196}
   currentPlayerShipFireRateIncrease: 5
-  playerShield: {fileID: 4653585619657714123, guid: f2759175ad1625948b264241c5525121,
+  playerShip: {fileID: 0}
+  playerShieldPrefab: {fileID: 4628581462396991242, guid: f2759175ad1625948b264241c5525121,
     type: 3}
 --- !u!114 &-4105950463894380294
 MonoBehaviour:
