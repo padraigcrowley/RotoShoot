@@ -26,6 +26,7 @@ public class PlayerShip : ExtendedBehaviour
   private bool playerShipMoving = false;
   public CameraShake camShakeScript;
   public GameObject playerShipMissilesParentPool;
+  public bool invulnerable = false;
 
   public GameObject PlayerShipDamageLarge;
   private GameObject playerMissileInstance, playerMissileLeftTurretInstance, playerMissileRightTurretInstance;
@@ -293,36 +294,40 @@ public class PlayerShip : ExtendedBehaviour
   
   private void OnTriggerEnter(Collider collision)
   {
-    if (GameplayManager.Instance.currentGameState == GameplayManager.GameState.LEVEL_IN_PROGRESS)
+    if(!invulnerable)
     {
-      if ((collision.gameObject.tag.Equals("Enemy01")) || (collision.gameObject.tag.Equals("EnemyMissile")))
+      if (GameplayManager.Instance.currentGameState == GameplayManager.GameState.LEVEL_IN_PROGRESS)
       {
-        //GameObject newParticleEffect = GameObject.Instantiate(PlayerShipDamageLarge, transform.position, PlayerShipDamageLarge.transform.rotation, transform ) as GameObject;
-        GameObject newParticleEffect = SimplePool.Spawn(PlayerShipDamageLarge, collision.gameObject.transform.position, PlayerShipDamageLarge.transform.rotation, transform) as GameObject;
-        
-        Wait(2, () => {
-          //Debug.Log("Despawn(newParticleEffect)");
-          SimplePool.Despawn(newParticleEffect);
-        });
+        if ((collision.gameObject.tag.Equals("Enemy01")) || (collision.gameObject.tag.Equals("EnemyMissile")))
+        {
+          //GameObject newParticleEffect = GameObject.Instantiate(PlayerShipDamageLarge, transform.position, PlayerShipDamageLarge.transform.rotation, transform ) as GameObject;
+          GameObject newParticleEffect = SimplePool.Spawn(PlayerShipDamageLarge, collision.gameObject.transform.position, PlayerShipDamageLarge.transform.rotation, transform) as GameObject;
 
-        //print($"collision between this {transform.position} and other {collision.gameObject.transform.position}");
-        DoCameraShake();
-        ChangeShipHP(-10);
+          Wait(2, () =>
+          {
+            //Debug.Log("Despawn(newParticleEffect)");
+            SimplePool.Despawn(newParticleEffect);
+          });
+
+          //print($"collision between this {transform.position} and other {collision.gameObject.transform.position}");
+          DoCameraShake();
+          ChangeShipHP(-10);
+        }
+
+        if ((collision.gameObject.tag.Equals("Asteroid")))
+        {
+          GameObject newParticleEffect = SimplePool.Spawn(PlayerShipDamageLarge, collision.gameObject.transform.position, PlayerShipDamageLarge.transform.rotation, transform) as GameObject;
+
+          Wait(2, () =>
+          {
+            //Debug.Log("Despawn(newParticleEffect)");
+            SimplePool.Despawn(newParticleEffect);
+          });
+          //print($"collision between this {transform.position} and asteroid {collision.gameObject.transform.position}");
+          DoCameraShake();
+          ChangeShipHP(-25);
+        }
       }
-
-      if ((collision.gameObject.tag.Equals("Asteroid")))
-      {
-        GameObject newParticleEffect = SimplePool.Spawn(PlayerShipDamageLarge, collision.gameObject.transform.position, PlayerShipDamageLarge.transform.rotation, transform) as GameObject;
-
-        Wait(2, () => {
-          //Debug.Log("Despawn(newParticleEffect)");
-          SimplePool.Despawn(newParticleEffect);
-        });
-        //print($"collision between this {transform.position} and asteroid {collision.gameObject.transform.position}");
-        DoCameraShake();
-        ChangeShipHP(-25);
-      }
-
     }
   }
 

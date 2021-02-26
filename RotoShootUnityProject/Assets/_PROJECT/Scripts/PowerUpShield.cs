@@ -5,21 +5,20 @@ using UnityEngine;
 public class PowerUpShield : PowerUp
 {
   private float durationSeconds;
-  public float currentPlayerShipFireRateIncrease = 3.0f;
-  
   public GameObject playerShieldPrefab, playerShieldPrefabInstance;
     
   protected override void PowerUpPayload()
   {
     //do stuff specific to this PU//todo
     //playerShield.SetActive(true);
-    base.PowerUpPayload();
     playerShieldPrefabInstance = SimplePool.Spawn(playerShieldPrefab, playerShip.gameObject.transform.position, Quaternion.identity,playerShip.transform);
+    playerShip.invulnerable = true;
+    base.PowerUpPayload();
   }
 
   protected override void Start()
   {
-    durationSeconds = GameplayManager.Instance.powerupDurationSeconds;
+    durationSeconds = GameplayManager.Instance.playerShieldPowerupDurationSeconds;
     base.Start();
   }
 
@@ -38,6 +37,7 @@ public class PowerUpShield : PowerUp
   protected override void PowerUpHasExpired()
   {
     SimplePool.Despawn(playerShieldPrefabInstance);
+    playerShip.invulnerable = false;
     base.PowerUpHasExpired();
   }
 }

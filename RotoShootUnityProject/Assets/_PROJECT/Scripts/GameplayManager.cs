@@ -49,7 +49,7 @@ public class GameplayManager : Singleton<GameplayManager>, IPowerUpEvents
 
   public LoadLevel loadLevelScript;
 
-  public float powerupDurationSeconds;
+  public float powerupDurationSeconds, playerShieldPowerupDurationSeconds;
 
   // Start is called before the first frame update
   void Start()

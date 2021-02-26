@@ -905,6 +905,7 @@ MonoBehaviour:
   enemyKillPowerUpDropFrequency: 5
   loadLevelScript: {fileID: 1849652819}
   powerupDurationSeconds: 5
+  playerShieldPowerupDurationSeconds: 10000
 --- !u!4 &191098412
 Transform:
   m_ObjectHideFlags: 0
@@ -4100,7 +4101,7 @@ CapsuleCollider:
   m_IsTrigger: 1
   m_Enabled: 1
   m_Radius: 0.52
-  m_Height: 1.7000804
+  m_Height: 1.64
   m_Direction: 1
   m_Center: {x: 0.013353825, y: -0.110000014, z: 0}
 --- !u!54 &1061970252

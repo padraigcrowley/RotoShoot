@@ -16,7 +16,7 @@ public class EnemyMissileMovement : MissileMovement
   private void OnTriggerEnter(Collider co)
   {
     //print($"Collision entered with {co.gameObject.tag}");
-    if ((!co.gameObject.CompareTag("PlayerMissile")) && (co.gameObject.CompareTag("Player")))
+    if ((co.gameObject.CompareTag("PlayerShield")) || (co.gameObject.CompareTag("Player")))
     {
       Vector3 colPos = co.gameObject.transform.position;
 
