@@ -905,7 +905,7 @@ MonoBehaviour:
   enemyKillPowerUpDropFrequency: 5
   loadLevelScript: {fileID: 1849652819}
   powerupDurationSeconds: 5
-  playerShieldPowerupDurationSeconds: 10000
+  playerShieldPowerupDurationSeconds: 5
 --- !u!4 &191098412
 Transform:
   m_ObjectHideFlags: 0
@@ -2889,6 +2889,7 @@ MonoBehaviour:
   PlayerShipOutroAnimCompleted: 0
   camShakeScript: {fileID: 730232682}
   playerShipMissilesParentPool: {fileID: 0}
+  invulnerable: 0
   PlayerShipDamageLarge: {fileID: 0}
 --- !u!4 &730232686
 Transform:
@@ -4146,6 +4147,7 @@ MonoBehaviour:
   PlayerShipOutroAnimCompleted: 0
   camShakeScript: {fileID: 1061970255}
   playerShipMissilesParentPool: {fileID: 0}
+  invulnerable: 0
   PlayerShipDamageLarge: {fileID: 139844, guid: bd9cbf3a6ae77524788b4bbdb5422498,
     type: 3}
 --- !u!4 &1061970254
@@ -6383,6 +6385,7 @@ MonoBehaviour:
   PlayerShipOutroAnimCompleted: 0
   camShakeScript: {fileID: 0}
   playerShipMissilesParentPool: {fileID: 0}
+  invulnerable: 0
   PlayerShipDamageLarge: {fileID: 0}
 --- !u!4 &1596802969
 Transform:
