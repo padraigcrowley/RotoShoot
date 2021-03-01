@@ -273,6 +273,8 @@ public class BossBehaviour01 : ExtendedBehaviour
     yield return new WaitForSeconds(cooldownTime);
     damageFXReady = true;
   }
+
+  //custom method, gets called by ChildCollider.cs
   public void OnChildTriggerEntered(Collider other, string childTag)
   {
     if (other.gameObject.CompareTag("PlayerMissile") && childTag.Equals("BossVulnerable"))

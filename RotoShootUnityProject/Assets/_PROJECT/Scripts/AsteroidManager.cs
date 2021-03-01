@@ -1,11 +1,11 @@
 ﻿using System.Collections.Generic;
 using UnityEngine;
 
-public class AsteroidManager : MonoBehaviour
+public class AsteroidManager : ExtendedBehaviour
 {
   private GameObject asteroids1Instance, asteroids2Instance;
   public GameObject asteroids1Prefab, asteroids2Prefab;
-  private float travelSpeed = 7.5f;
+  private float travelSpeed = 10f;
 
   private bool asteroidsCanMove = false;
   private List<GameObject> asteroid1ChildrenObjects = new List<GameObject>();
@@ -16,6 +16,8 @@ public class AsteroidManager : MonoBehaviour
 
   private float timeToNextAsteroidShower;
   public int numAsteroidLanes = 2;
+  const int NUM_ASTEROIDS_IN_LANE = 6;
+  const int NUM_LANES_OF_ASTEROIDS = 3;
 
   private float startingHeight = 13f;
 
@@ -55,8 +57,8 @@ public class AsteroidManager : MonoBehaviour
 
   private void GenerateAsteroidStartPositions()
   {
-    List<int> asteroidLanes = new List<int>(3);
-    asteroidLanes = GetRandomNumbers(3);
+    List<int> asteroidLanes = new List<int>(NUM_LANES_OF_ASTEROIDS);
+    asteroidLanes = GetRandomNumbers(NUM_LANES_OF_ASTEROIDS);
 
     int i = 0;
     foreach (GameObject childObj in asteroid1ChildrenObjects)
@@ -80,7 +82,6 @@ public class AsteroidManager : MonoBehaviour
       i++;
     }
 
-
     //  for (int i = 0; i < 4; i++)
     //{
     //   pos1[i] = new Vector2(GameplayManager.Instance.shipLanes[UnityEngine.Random.Range(0, 4)].x, 14.0f + (i * 2));
@@ -88,6 +89,7 @@ public class AsteroidManager : MonoBehaviour
     //}
   }
 
+  // generate 'unique' i.e. non-repeating, random numbers
   public static List<int> GetRandomNumbers(int count)
   {
     List<int> randomNumbers = new List<int>();
@@ -106,7 +108,8 @@ public class AsteroidManager : MonoBehaviour
   }
   private void CreateAsteroids()
   {
-    for (int i = 0; i < 4; i++)
+    
+    for (int i = 0; i < NUM_ASTEROIDS_IN_LANE; i++)
     {
       int rnd = UnityEngine.Random.Range(0, 2);
       //print($"RND was {rnd}");
@@ -228,17 +231,26 @@ public class AsteroidManager : MonoBehaviour
 
   private void MoveAsteroids()
   {
+    //drop the 3 lanes of asteroids
     foreach (GameObject childObj in asteroid1ChildrenObjects)
     {
       childObj.transform.position -= transform.up * travelSpeed * Time.fixedDeltaTime;
     }
-    foreach (GameObject childObj in asteroid1ChildrenObjectsVariant)
-    {
-      childObj.transform.position -= transform.up * travelSpeed * Time.fixedDeltaTime * 1.25f;
-    }
-    foreach (GameObject childObj in asteroid2ChildrenObjects)
-    {
-      childObj.transform.position -= transform.up * travelSpeed * Time.fixedDeltaTime * 1.5f;
-    }
+
+    Wait(.5f, () => {
+      foreach (GameObject childObj in asteroid1ChildrenObjectsVariant)
+      {
+        childObj.transform.position -= transform.up * travelSpeed * Time.fixedDeltaTime * 1.25f;
+      }
+    });
+
+    Wait(.4f, () => {
+      foreach (GameObject childObj in asteroid2ChildrenObjects)
+      {
+        childObj.transform.position -= transform.up * travelSpeed * Time.fixedDeltaTime * 1.5f;
+      }
+    });
+
+
   }
 }
