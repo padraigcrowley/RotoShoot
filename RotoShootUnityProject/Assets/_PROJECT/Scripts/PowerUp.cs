@@ -7,6 +7,7 @@ public class PowerUp : MonoBehaviour
   public string powerUpName;
   [Tooltip("Tick true for power ups that are instant use, eg a health addition that has no delay before expiring")]
   public bool expiresImmediately;
+  public bool pulseWhileFalling;
   public GameObject specialEffect;
   public AudioClip soundEffect;
   public float travelSpeed;
@@ -34,7 +35,8 @@ public class PowerUp : MonoBehaviour
 
   protected virtual void Start()
   {
-    pulseTween = transform.DOScale(1.5f, 0.3f).SetLoops(50, LoopType.Yoyo);
+    if(pulseWhileFalling)
+      pulseTween = transform.DOScale(1.5f, 0.3f).SetLoops(50, LoopType.Yoyo);
     powerUpState = PowerUpState.InAttractMode;
   }
 
@@ -51,7 +53,8 @@ public class PowerUp : MonoBehaviour
     else if (other.gameObject.CompareTag("Atmosphere"))
     {
       print($"Collision entered with Atmos! ");
-      pulseTween.Kill();
+      if (pulseWhileFalling) 
+        pulseTween.Kill();
       travelSpeed /= 2.0f;
       dissolveAnim.Play("PowerUpDissolve");
       Destroy(gameObject, 1);
@@ -73,7 +76,8 @@ public class PowerUp : MonoBehaviour
     else if (other.gameObject.CompareTag("Atmosphere"))
     {
       //print($"Collision entered with Atmos! ");
-      pulseTween.Kill();
+      if (pulseWhileFalling)
+        pulseTween.Kill();
       travelSpeed /= 2.0f;
       dissolveAnim.Play("PowerUpDissolve");
       Destroy(gameObject, 1);
@@ -94,7 +98,8 @@ public class PowerUp : MonoBehaviour
       return;
     }
     powerUpState = PowerUpState.IsCollected;
-    pulseTween.Kill();
+    if (pulseWhileFalling) 
+      pulseTween.Kill();
 
     // We must have been collected by a player, store handle to player for later use      
     playerShip = gameObjectCollectingPowerUp.GetComponent<PlayerShip>();

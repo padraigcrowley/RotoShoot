@@ -101,6 +101,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   powerUpName: 
   expiresImmediately: 0
+  pulseWhileFalling: 1
   specialEffect: {fileID: 0}
   soundEffect: {fileID: 0}
   travelSpeed: 2

@@ -110,6 +110,8 @@ MonoBehaviour:
   - {fileID: 6977473367615493525, guid: b9a8e0a5335ee3e47b055b774a7f505d, type: 3}
   - {fileID: 2477514511899951309, guid: eb9180948b5035b43b6db1ba58a5f999, type: 3}
   - {fileID: 2477514511899951309, guid: d6549c779d86365478d15c7f13db6e81, type: 3}
+  - {fileID: 2477514511899951309, guid: 39a5b00a3a10b454fa0e0e7667c445bf, type: 3}
+  - {fileID: 2477514511899951309, guid: e457f74b2a0398c498d0848f8c96b5af, type: 3}
   powerUpInstance: {fileID: 0}
   playerShip: {fileID: 0}
   waypointPath: {fileID: 0}

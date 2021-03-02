@@ -16,7 +16,7 @@ GameObject:
   - component: {fileID: 8143604702004552976}
   - component: {fileID: -3939826440404866278}
   m_Layer: 0
-  m_Name: PowerUpRapidFireSingle
+  m_Name: PowerUpHealth
   m_TagString: PowerUp
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -76,7 +76,7 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
-  m_Sprite: {fileID: 21300000, guid: ab7ac71925f49b5419dd9c3e19cae690, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 122672a7a74070a48b684a44da112940, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -96,11 +96,11 @@ MonoBehaviour:
   m_GameObject: {fileID: 2477514511899951309}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 2838a1b353ae3804c9a6ccc5e584e6da, type: 3}
+  m_Script: {fileID: 11500000, guid: 31b9671d309e5264a836d3c3d69146cc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  powerUpName: HOT TAMALE!
-  expiresImmediately: 0
+  powerUpName: HEALTH!
+  expiresImmediately: 1
   pulseWhileFalling: 1
   specialEffect: {fileID: 0}
   soundEffect: {fileID: 0}
