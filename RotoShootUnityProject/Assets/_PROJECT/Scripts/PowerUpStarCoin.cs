@@ -11,7 +11,8 @@ public class PowerUpStarCoin : PowerUp
   {
     //do stuff specific to this PU//todo
     //playerShield.SetActive(true);
-    
+    GameplayManager.Instance.starCoinCount++;
+    UIManager.Instance.starCoinCountText.text = GameplayManager.Instance.starCoinCount.ToString();
     base.PowerUpPayload();
   }
 

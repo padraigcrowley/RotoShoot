@@ -5,7 +5,7 @@ using UnityEngine.UI;
 
 public class UIManager : Singleton<UIManager>
 {
-  public TextMeshProUGUI HighPlayerScoreText, CurrentPlayerScoreText, CurrentEnemyKillCount, RequiredEnemyKillCount, levelPlayTimeCounterText;
+  public TextMeshProUGUI HighPlayerScoreText, CurrentPlayerScoreText, CurrentEnemyKillCount, RequiredEnemyKillCount, levelPlayTimeCounterText, starCoinCountText;
   public Button gameRestartButton, gameExitButton;
   public Image playerHealthHeart03, playerHealthHeart02, playerHealthHeart01;
   [SerializeField] private GameObject LevelCompletePanel;
@@ -20,7 +20,7 @@ public class UIManager : Singleton<UIManager>
   }
 
   // Update is called once per frame
-  void Update()
+  void Update() 
   {
     switch (GameplayManager.Instance.currentGameState)
     {

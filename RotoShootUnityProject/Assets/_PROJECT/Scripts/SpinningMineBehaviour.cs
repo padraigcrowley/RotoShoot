@@ -19,6 +19,7 @@ public class SpinningMineBehaviour : ExtendedBehaviour
   public float waitTimeBeforeFirstSpawn, waitTimeBetweenSpawns;
   public float hpMultiplierFromSpawner;
   public float speedMultiplierFromSpawner;
+  private float rotationSpeed = 80f;
 
   public GameObject spinningMineMissile;
   private Quaternion rotation;
@@ -90,7 +91,7 @@ public class SpinningMineBehaviour : ExtendedBehaviour
       splineMoveScript.StartMove();
       firstTime = false;
     }
-    InvokeRepeating("RepeatBurstFire",0f,2f);
+    InvokeRepeating("RepeatBurstFire",0f,10f);
     enemyState = EnemyState.SPINNING_IN_COMPLETED;
 
     foreach (CapsuleCollider collider in ShootingPointCollidersArray)
@@ -171,19 +172,19 @@ public class SpinningMineBehaviour : ExtendedBehaviour
       case EnemyState.SPINNING_IN_IN_PROGRESS:
         break;
       case EnemyState.SPINNING_IN_COMPLETED:
-        transform.Rotate(new Vector3(0, 0, 40 * Time.deltaTime));
+        transform.Rotate(new Vector3(0, 0, rotationSpeed * Time.deltaTime));
         break;
       case EnemyState.SPINNING_OUT_STARTED:
-        transform.Rotate(new Vector3(0, 0, 40 * Time.deltaTime));
+        transform.Rotate(new Vector3(0, 0, rotationSpeed * Time.deltaTime));
         CancelInvoke();
         StartCoroutine(SpinOutEffect(1f));
         enemyState = EnemyState.SPINNING_OUT_IN_PROGRESS;
         break;
       case EnemyState.SPINNING_OUT_IN_PROGRESS:
-        transform.Rotate(new Vector3(0, 0, 40 * Time.deltaTime));
+        transform.Rotate(new Vector3(0, 0, rotationSpeed * Time.deltaTime));
         break;
       case EnemyState.SPINNING_OUT_COMPLETED:
-        transform.Rotate(new Vector3(0, 0, 40 * Time.deltaTime));
+        transform.Rotate(new Vector3(0, 0, rotationSpeed * Time.deltaTime));
         StartCoroutine(AlphaFadeTo(0f, .50f));
         waitingToRespawn = true;
         enemyState = EnemyState.WAITING_TO_SPAWN;
@@ -199,17 +200,21 @@ public class SpinningMineBehaviour : ExtendedBehaviour
 
   void RepeatBurstFire()
   {
-    StartCoroutine(BurstFire(15, .05f));
-    numBurstFires++;
+    StartCoroutine(BurstFire(5, .05f, 4, 1f));
   }
-  IEnumerator BurstFire(int numShots, float timeBetweenShots)
+  IEnumerator BurstFire(int numShots, float timeBetweenShots, int numTimesToRepeat, float intervalBetweenBursts)
   {
-    for (int i = 0; i < numShots; i++)
+    for (int repeat = 0; repeat < numTimesToRepeat; repeat++)
     {
-      FireMissile(false);
-      yield return new WaitForSeconds(timeBetweenShots);
+      for (int i = 0; i < numShots; i++)
+      {
+        FireMissile(false);
+        yield return new WaitForSeconds(timeBetweenShots);
+      }
+      yield return new WaitForSeconds(intervalBetweenBursts);
     }
-    //yield return new WaitForSeconds(timeBetweenBursts);
+    numBurstFires++;
+    print($"numBurstFires++ {numBurstFires}/{numBurstFiresBeforePause}");
   }
 
     public void FireMissile(bool fireAtPlayerPos)

@@ -1,25 +1,25 @@
 fileFormatVersion: 2
-guid: 3a13c18a5b201774bbeefedbf695d6c2
+guid: 4ac73b91f44cebd41966bc3f19c0b228
 TextureImporter:
   internalIDToNameTable:
   - first:
-      213: 8316714352252511849
-    second: 768x128_0
+      213: -5014706201123227918
+    second: strip_unevenly_spaced_0
   - first:
-      213: 609235995586931833
-    second: 768x128_1
+      213: 6459446115632975097
+    second: strip_unevenly_spaced_1
   - first:
-      213: 319755369368643247
-    second: 768x128_2
+      213: 8380924575692672688
+    second: strip_unevenly_spaced_2
   - first:
-      213: 6171633524512732604
-    second: 768x128_3
+      213: 8278216352663067214
+    second: strip_unevenly_spaced_3
   - first:
-      213: 4367122512122665847
-    second: 768x128_4
+      213: -1631857531458131779
+    second: strip_unevenly_spaced_4
   - first:
-      213: 590955040539095754
-    second: 768x128_5
+      213: -931376093142067969
+    second: strip_unevenly_spaced_5
   externalObjects: {}
   serializedVersion: 11
   mipmaps:
@@ -121,7 +121,7 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: 768x128_0
+      name: strip_unevenly_spaced_0
       rect:
         serializedVersion: 2
         x: 0
@@ -129,119 +129,119 @@ TextureImporter:
         width: 128
         height: 128
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 9666768b3a7ea6370800000000000000
-      internalID: 8316714352252511849
+      spriteID: 2f6f915774f286ab0800000000000000
+      internalID: -5014706201123227918
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: 768x128_1
+      name: strip_unevenly_spaced_1
       rect:
         serializedVersion: 2
-        x: 128
+        x: 127
         y: 0
-        width: 128
+        width: 112
         height: 128
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 97c275df8e0747800800000000000000
-      internalID: 609235995586931833
+      spriteID: 9fc8410c40094a950800000000000000
+      internalID: 6459446115632975097
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: 768x128_2
+      name: strip_unevenly_spaced_2
       rect:
         serializedVersion: 2
-        x: 256
+        x: 239
         y: 0
-        width: 128
+        width: 61
         height: 128
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: fa6ed3670dfff6400800000000000000
-      internalID: 319755369368643247
+      spriteID: 0bec08f5f760f4470800000000000000
+      internalID: 8380924575692672688
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: 768x128_3
+      name: strip_unevenly_spaced_3
       rect:
         serializedVersion: 2
-        x: 384
+        x: 299
         y: 0
-        width: 128
+        width: 21
         height: 128
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: cb53978edfb06a550800000000000000
-      internalID: 6171633524512732604
+      spriteID: e4adf42b9e122e270800000000000000
+      internalID: 8278216352663067214
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: 768x128_4
+      name: strip_unevenly_spaced_4
       rect:
         serializedVersion: 2
-        x: 512
+        x: 319
         y: 0
-        width: 128
+        width: 61
         height: 128
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 77bdea969c22b9c30800000000000000
-      internalID: 4367122512122665847
+      spriteID: db86469983a7a59e0800000000000000
+      internalID: -1631857531458131779
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: 768x128_5
+      name: strip_unevenly_spaced_5
       rect:
         serializedVersion: 2
-        x: 640
+        x: 379
         y: 0
-        width: 128
+        width: 112
         height: 128
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: ac23f857a7e733800800000000000000
-      internalID: 590955040539095754
+      spriteID: ff4d9ffb0661313f0800000000000000
+      internalID: -931376093142067969
       vertices: []
       indices: 
       edges: []
@@ -249,7 +249,7 @@ TextureImporter:
     outline: []
     physicsShape: []
     bones: []
-    spriteID: 24ae546dfb55be6489798eb8db7777b2
+    spriteID: adc64036fb90472438f58aaf8d5b8f8d
     internalID: 0
     vertices: []
     indices: 
