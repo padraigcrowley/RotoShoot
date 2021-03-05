@@ -19,14 +19,15 @@ public class SpinningMineBehaviour : ExtendedBehaviour
   public float waitTimeBeforeFirstSpawn, waitTimeBetweenSpawns;
   public float hpMultiplierFromSpawner;
   public float speedMultiplierFromSpawner;
-  private float rotationSpeed = 80f;
+  private float rotationSpeed = 200f;
+  
 
   public GameObject spinningMineMissile;
   private Quaternion rotation;
   private GameObject spinningMineMissilesParentPool;
   public float angle;
   private List<Transform> ShootingPointTransforms;
-  private Transform [] ShootingPointTransformsArray;
+  private Transform[] ShootingPointTransformsArray;
   private CapsuleCollider[] ShootingPointCollidersArray;
   private bool waitingToRespawn = true, waitingBeforeFirstSpawn = true;
   private bool firstTime = true;
@@ -51,7 +52,7 @@ public class SpinningMineBehaviour : ExtendedBehaviour
     enemyState = EnemyState.DOING_NOTHING;
     transform.position = new Vector2((UnityEngine.Random.Range(-3.2f, 3.2f)), (UnityEngine.Random.Range(2f, 8f)));
     spinningMineMissilesParentPool = new GameObject("spinningMineMissilesParentPoolObject");
-    
+
     splineMoveScript = GetComponent<splineMove>();
     if (splineMoveScript != null)
     {
@@ -59,6 +60,34 @@ public class SpinningMineBehaviour : ExtendedBehaviour
       splineMoveScript.speed *= this.speedMultiplierFromSpawner;
     }
   }
+
+  IEnumerator DoHitEffect()
+  {
+    float duration = .2f;
+    float elapsedTime = 0f;
+    float currentEffectBlendVal;
+    float startEffectBlendVal = 0;
+    float endEffectBlendVal = .4f;
+
+    while (elapsedTime <= duration)
+    {
+      currentEffectBlendVal = Mathf.Lerp(startEffectBlendVal, endEffectBlendVal, (elapsedTime / duration));
+      spriteMaterial.material.SetFloat("_HitEffectBlend", currentEffectBlendVal);
+      elapsedTime += Time.deltaTime;
+
+      yield return new WaitForEndOfFrame();
+    }
+    while (elapsedTime <= duration)
+    {
+      currentEffectBlendVal = Mathf.Lerp(endEffectBlendVal, startEffectBlendVal, (elapsedTime / duration));
+      spriteMaterial.material.SetFloat("_HitEffectBlend", currentEffectBlendVal);
+      elapsedTime += Time.deltaTime;
+
+      yield return new WaitForEndOfFrame();
+    }
+    spriteMaterial.material.SetFloat("_HitEffectBlend", startEffectBlendVal); // just to make sure it ends up back at its initial/start value
+  }
+
   IEnumerator AlphaFadeTo(float aValue, float aTime)
   {
     float alpha = spriteRenderer.material.color.a;
@@ -91,7 +120,7 @@ public class SpinningMineBehaviour : ExtendedBehaviour
       splineMoveScript.StartMove();
       firstTime = false;
     }
-    InvokeRepeating("RepeatBurstFire",0f,10f);
+    InvokeRepeating("RepeatBurstFire", 0f, 10f);
     enemyState = EnemyState.SPINNING_IN_COMPLETED;
 
     foreach (CapsuleCollider collider in ShootingPointCollidersArray)
@@ -99,7 +128,7 @@ public class SpinningMineBehaviour : ExtendedBehaviour
       collider.enabled = true;
     }
   }
-  
+
   IEnumerator SpinOutEffect(float duration)
   {
     float elapsedTime = 0f;
@@ -127,7 +156,7 @@ public class SpinningMineBehaviour : ExtendedBehaviour
   }
 
 
-    void Update()
+  void Update()
   {
 
     if (numBurstFires >= numBurstFiresBeforePause)
@@ -135,14 +164,15 @@ public class SpinningMineBehaviour : ExtendedBehaviour
       enemyState = EnemyState.SPINNING_OUT_STARTED;
       numBurstFires = 0;
     }
-    
+
     switch (enemyState)
     {
       case EnemyState.DOING_NOTHING:
         if (waitingBeforeFirstSpawn == true)
         {
           waitingBeforeFirstSpawn = false;
-          Wait(waitTimeBeforeFirstSpawn, () => {
+          Wait(waitTimeBeforeFirstSpawn, () =>
+          {
             enemyState = EnemyState.SPAWNING;
             //print($"Waited {waitTimeBeforeFirstSpawn} to first spawn");
           });
@@ -152,7 +182,8 @@ public class SpinningMineBehaviour : ExtendedBehaviour
         if (waitingToRespawn == true)
         {
           waitingToRespawn = false;
-          Wait(waitTimeBetweenSpawns, () => {
+          Wait(waitTimeBetweenSpawns, () =>
+          {
             enemyState = EnemyState.SPAWNING;
             //print($"Waited {waitTimeBetweenSpawns} to re-spawn");
           });
@@ -200,7 +231,7 @@ public class SpinningMineBehaviour : ExtendedBehaviour
 
   void RepeatBurstFire()
   {
-    StartCoroutine(BurstFire(5, .05f, 4, 1f));
+    StartCoroutine(BurstFire(5, .025f, 4, 1f));
   }
   IEnumerator BurstFire(int numShots, float timeBetweenShots, int numTimesToRepeat, float intervalBetweenBursts)
   {
@@ -217,12 +248,12 @@ public class SpinningMineBehaviour : ExtendedBehaviour
     print($"numBurstFires++ {numBurstFires}/{numBurstFiresBeforePause}");
   }
 
-    public void FireMissile(bool fireAtPlayerPos)
+  public void FireMissile(bool fireAtPlayerPos)
   {
     GameObject firedBullet;
 
-      //angle  = -90f;
-      //angle = transform.rotation.z * Mathf.Rad2Deg; //angle = -90f;
+    //angle  = -90f;
+    //angle = transform.rotation.z * Mathf.Rad2Deg; //angle = -90f;
 
     /* angle is a float, and it's 90 when you're aiming/firing directly above you, 
      * -90 when firing directly below, 
@@ -233,15 +264,15 @@ public class SpinningMineBehaviour : ExtendedBehaviour
 
     //shoot missile 90degrees to the right of (i.e. perpindicular to) the rotation direction of the transform
     //rotation.eulerAngles = new Vector3( -ShootingPointTransforms[1].transform.eulerAngles.z, 90, 0); 
-    
+
     //shoot missile in the rotation direction of the transform
     //rotation.eulerAngles = new Vector3( (-90 - transform.eulerAngles.z), 90, 0); 
-    
+
     //firedBullet = SimplePool.Spawn(spinningMineMissile, ShootingPointTransforms[1].transform.position, Quaternion.identity, spinningMineMissilesParentPool.transform);
-    
+
     //firedBullet.transform.localRotation = rotation; //v.important line!!!
 
-    foreach( Transform tr in ShootingPointTransformsArray) 
+    foreach (Transform tr in ShootingPointTransformsArray)
     {
       if (tr != this.transform) //Note that parent Transform ALSO gets returned from GetComponentsInChildren(), so need to check it and skip it
       {
@@ -253,9 +284,20 @@ public class SpinningMineBehaviour : ExtendedBehaviour
 
   }
 
+
+  private void OnTriggerEnter(Collider collision)
+  {
+    if (collision.gameObject.tag.Equals("PlayerMissile") && (enemyState == EnemyState.SPINNING_IN_COMPLETED) )
+    {
+      StartCoroutine(DoHitEffect());
+    }
+
+  }
 }
 
 
+/// DOING_NOTHING, WAITING_TO_SPAWN, SPAWNING, SPINNING_IN_STARTED, SPINNING_IN_IN_PROGRESS, SPINNING_IN_COMPLETED, FIRING, NOT_FIRING, SPINNING_OUT_STARTED, SPINNING_OUT_IN_PROGRESS, SPINNING_OUT_COMPLETED
+/// 
 /* Define a set of screen valid to appear within (topleft: -3.22, 8.0) (bottomright: 3.2, -2.0)
  * set the 5 shooting points
  * set the collision on the min body of the mine

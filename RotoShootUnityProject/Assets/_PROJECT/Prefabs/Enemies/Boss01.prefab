@@ -377,7 +377,7 @@ MonoBehaviour:
   reverse: 0
   startPoint: 0
   currentPoint: 0
-  closeLoop: 0
+  closeLoop: 1
   localType: 0
   lookAhead: 0
   sizeToAdd: 0
