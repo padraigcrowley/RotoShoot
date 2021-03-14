@@ -25,7 +25,7 @@ public class BossBehaviour01 : ExtendedBehaviour
   private bool damageFXReady = true;
   private Tween pulseTween;
 
-  public UltimateStatusBar statusBar;
+  ////public UltimateStatusBar statusBar;
   private Canvas HealthBarCanvas;
   public float bossMaxHealth = 100, bossCurrentHealth;
 
@@ -36,7 +36,7 @@ public class BossBehaviour01 : ExtendedBehaviour
   public GameObject bossDamageFX;
   private void Awake()
   {
-    HealthBarCanvas = statusBar.GetComponentInParent<Canvas>();
+    ////HealthBarCanvas = statusBar.GetComponentInParent<Canvas>();
     HealthBarCanvas.enabled = false;
   }
 
@@ -46,7 +46,7 @@ public class BossBehaviour01 : ExtendedBehaviour
     transform.position = new Vector3(startPosX, startPosY, 0f);
     bossMaxHealth *= hpMultiplierFromSpawner;
     bossCurrentHealth = 0;// we'll set off a coroutine to fill up the healthbar later.
-    UltimateStatusBar.UpdateStatus("BossStatusBar", "BossHealthBar", bossCurrentHealth, bossMaxHealth);
+    ///UltimateStatusBar.UpdateStatus("BossStatusBar", "BossHealthBar", bossCurrentHealth, bossMaxHealth);
     //bossCurrentHealth = bossMaxHealth;
 
     GameplayManager.Instance.playerShipFiring = false;
@@ -126,7 +126,7 @@ public class BossBehaviour01 : ExtendedBehaviour
       elapsedTime += Time.deltaTime;
       //bossCurrentHealth -= 10;
       //print($"bossCurrHealth: {bossCurrentHealth}");
-      UltimateStatusBar.UpdateStatus("BossStatusBar", "BossHealthBar", bossCurrentHealth, bossMaxHealth);
+      ///UltimateStatusBar.UpdateStatus("BossStatusBar", "BossHealthBar", bossCurrentHealth, bossMaxHealth);
       yield return null;
       //yield return new WaitForEndOfFrame();
     }
@@ -290,7 +290,7 @@ public class BossBehaviour01 : ExtendedBehaviour
         StartCoroutine(DamageFXCooldown(.5f));
       }
       bossCurrentHealth -= 10;
-      UltimateStatusBar.UpdateStatus("BossStatusBar", "BossHealthBar", bossCurrentHealth, bossMaxHealth);
+      ///UltimateStatusBar.UpdateStatus("BossStatusBar", "BossHealthBar", bossCurrentHealth, bossMaxHealth);
     }
   }
   void FireMissileAtPlayerPos()

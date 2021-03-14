@@ -20,7 +20,11 @@ public class AlternateStateHandlerEditor : Editor
 	
 	List<bool> AlternateStateAdvanced, DefaultColorHelp;
 	List<bool> AlternateStateNameError;
-	
+
+	GUIStyle headerDropdownStyle = new GUIStyle();
+
+	bool showDefaultInspector = false;
+
 
 	void OnEnable ()
 	{
@@ -43,22 +47,35 @@ public class AlternateStateHandlerEditor : Editor
 	{
 		StoreReferences();
 	}
-	
-	void DisplayHeaderDropdown ( string headerName, string editorPref )
+
+	bool DisplayHeaderDropdown ( string headerName, string editorPref )
 	{
-		EditorGUILayout.BeginVertical( "Toolbar" );
+		EditorGUILayout.Space();
+
 		GUILayout.BeginHorizontal();
-		EditorGUILayout.LabelField( headerName, EditorStyles.boldLabel );
-		if( GUILayout.Button( EditorPrefs.GetBool( editorPref ) == true ? "Hide" : "Show", EditorStyles.miniButton, GUILayout.Width( 50 ), GUILayout.Height( 14f ) ) )
-			EditorPrefs.SetBool( editorPref, EditorPrefs.GetBool( editorPref ) == true ? false : true );
+		GUILayout.Space( -10 );
+
+		EditorGUI.BeginChangeCheck();
+		GUILayout.Toggle( EditorPrefs.GetBool( editorPref ), ( EditorPrefs.GetBool( editorPref ) ? "▼" : "►" ) + headerName, headerDropdownStyle );
+		if( EditorGUI.EndChangeCheck() )
+			EditorPrefs.SetBool( editorPref, !EditorPrefs.GetBool( editorPref ) );
 
 		GUILayout.EndHorizontal();
-		EditorGUILayout.EndVertical();
+
+		if( EditorPrefs.GetBool( editorPref ) )
+		{
+			EditorGUILayout.Space();
+			return true;
+		}
+		return false;
 	}
-		
+
 	public override void OnInspectorGUI ()
 	{
 		serializedObject.Update();
+
+		headerDropdownStyle = new GUIStyle( EditorStyles.toolbarButton ) { alignment = TextAnchor.MiddleLeft, fontStyle = FontStyle.Bold, fontSize = 11 };
+
 		EditorGUILayout.Space();
 
 		EditorGUI.BeginChangeCheck();
@@ -89,11 +106,8 @@ public class AlternateStateHandlerEditor : Editor
 		
 		if( targ.ultimateStatusBar != null )
 		{
-			EditorGUILayout.Space();
-			
 			/* ---------------------------------- > ALTERNATE STATES < ---------------------------------- */
-			DisplayHeaderDropdown( "Alternate States", "UUI_ASH_AlternateStates" );
-			if( EditorPrefs.GetBool( "UUI_ASH_AlternateStates" ) )
+			if( DisplayHeaderDropdown( "Alternate States", "UUI_ASH_AlternateStates" ) )
 			{
 				for( int i = 0; i < targ.AlternateStateList.Count; i++ )
 				{
@@ -101,14 +115,14 @@ public class AlternateStateHandlerEditor : Editor
 					GUILayout.Space( 1 );
 
 					// ----- < STATE NAME > ----- //
-					if( alternateStateName[ i ].stringValue == string.Empty && Event.current.type == EventType.Repaint )
-					{
-						GUIStyle style = new GUIStyle( GUI.skin.textField );
-						style.normal.textColor = new Color( 0.5f, 0.5f, 0.5f, 0.75f );
-						EditorGUILayout.TextField( new GUIContent( "State Name", "The unique name to be used in reference to this state." ), "State Name", style );
-					}
-					else
-					{
+					//if( alternateStateName[ i ].stringValue == string.Empty && Event.current.type == EventType.Repaint )
+					//{
+					//	GUIStyle style = new GUIStyle( GUI.skin.textField );
+					//	style.normal.textColor = new Color( 0.5f, 0.5f, 0.5f, 0.75f );
+					//	EditorGUILayout.TextField( new GUIContent( "State Name", "The unique name to be used in reference to this state." ), "State Name", style );
+					//}
+					//else
+					//{
 						EditorGUI.BeginChangeCheck();
 						EditorGUILayout.PropertyField( alternateStateName[ i ], new GUIContent( "State Name", "The unique name to be used in reference to this state." ) );
 						if( EditorGUI.EndChangeCheck() )
@@ -117,7 +131,7 @@ public class AlternateStateHandlerEditor : Editor
 							StoreAlternateStates();
 							AlternateStateNameError[ i ] = DuplicateAlternateStateName( i );
 						}
-					}
+					//}
 
 					if( AlternateStateNameError[ i ] )
 					{
@@ -131,16 +145,16 @@ public class AlternateStateHandlerEditor : Editor
 					if( EditorGUI.EndChangeCheck() )
 					{
 						serializedObject.ApplyModifiedProperties();
-						DefaultColorHelp[ i ] = targ.ultimateStatusBar != null && targ.AlternateStateList[ i ].triggerOption != AlternateStateHandler.AlternateState.TriggerOption.Manual && targ.AlternateStateList[ i ].defaultStateColor != targ.ultimateStatusBar.UltimateStatusList[ targ.AlternateStateList[ i ].statusIndex ].statusColor;
+						DefaultColorHelp[ i ] = targ.ultimateStatusBar != null && targ.AlternateStateList[ i ].triggerOption != AlternateStateHandler.AlternateState.TriggerOption.Manual && targ.AlternateStateList[ i ].defaultStateColor != targ.ultimateStatusBar.UltimateStatusList[ targ.AlternateStateList[ i ].statusIndex ].color;
 					}
 
 					if( DefaultColorHelp[ i ] )
 					{
 						if( GUILayout.Button( "Copy Status Color", EditorStyles.miniButton ) )
 						{
-							defaultStateColor[ i ].colorValue = targ.ultimateStatusBar.UltimateStatusList[ targ.AlternateStateList[ i ].statusIndex ].statusColor;
+							defaultStateColor[ i ].colorValue = targ.ultimateStatusBar.UltimateStatusList[ targ.AlternateStateList[ i ].statusIndex ].color;
 							serializedObject.ApplyModifiedProperties();
-							DefaultColorHelp[ i ] = targ.ultimateStatusBar != null && targ.AlternateStateList[ i ].triggerOption != AlternateStateHandler.AlternateState.TriggerOption.Manual && targ.AlternateStateList[ i ].defaultStateColor != targ.ultimateStatusBar.UltimateStatusList[ targ.AlternateStateList[ i ].statusIndex ].statusColor;
+							DefaultColorHelp[ i ] = targ.ultimateStatusBar != null && targ.AlternateStateList[ i ].triggerOption != AlternateStateHandler.AlternateState.TriggerOption.Manual && targ.AlternateStateList[ i ].defaultStateColor != targ.ultimateStatusBar.UltimateStatusList[ targ.AlternateStateList[ i ].statusIndex ].color;
 						}
 					}
 
@@ -156,7 +170,7 @@ public class AlternateStateHandlerEditor : Editor
 						{
 							serializedObject.ApplyModifiedProperties();
 							StoreAlternateStates();
-							DefaultColorHelp[ i ] = targ.ultimateStatusBar != null && targ.AlternateStateList[ i ].triggerOption != AlternateStateHandler.AlternateState.TriggerOption.Manual && targ.AlternateStateList[ i ].defaultStateColor != targ.ultimateStatusBar.UltimateStatusList[ targ.AlternateStateList[ i ].statusIndex ].statusColor;
+							DefaultColorHelp[ i ] = targ.ultimateStatusBar != null && targ.AlternateStateList[ i ].triggerOption != AlternateStateHandler.AlternateState.TriggerOption.Manual && targ.AlternateStateList[ i ].defaultStateColor != targ.ultimateStatusBar.UltimateStatusList[ targ.AlternateStateList[ i ].statusIndex ].color;
 						}
 
 						if( targ.AlternateStateList[ i ].triggerOption == AlternateStateHandler.AlternateState.TriggerOption.Percentage )
@@ -180,7 +194,7 @@ public class AlternateStateHandlerEditor : Editor
 								if( EditorGUI.EndChangeCheck() )
 								{
 									serializedObject.ApplyModifiedProperties();
-									DefaultColorHelp[ i ] = targ.ultimateStatusBar != null && targ.AlternateStateList[ i ].triggerOption != AlternateStateHandler.AlternateState.TriggerOption.Manual && targ.AlternateStateList[ i ].defaultStateColor != targ.ultimateStatusBar.UltimateStatusList[ targ.AlternateStateList[ i ].statusIndex ].statusColor;
+									DefaultColorHelp[ i ] = targ.ultimateStatusBar != null && targ.AlternateStateList[ i ].triggerOption != AlternateStateHandler.AlternateState.TriggerOption.Manual && targ.AlternateStateList[ i ].defaultStateColor != targ.ultimateStatusBar.UltimateStatusList[ targ.AlternateStateList[ i ].statusIndex ].color;
 								}
 							}
 
@@ -279,20 +293,14 @@ public class AlternateStateHandlerEditor : Editor
 			}
 			/* -------------------------------- > END ALTERNATE STATES < -------------------------------- */
 			
-			EditorGUILayout.Space();
-
 			/* ---------------------------------- > SCRIPT REFERENCE < ---------------------------------- */
-			DisplayHeaderDropdown( "Script Reference", "UUI_ASH_ScriptReference" );
-			if( EditorPrefs.GetBool( "UUI_ASH_ScriptReference" ) )
+			if( DisplayHeaderDropdown( "Script Reference", "UUI_ASH_ScriptReference" ) )
 			{
-				EditorGUILayout.Space();
-				
-				if( targ.ultimateStatusBar.statusBarName == string.Empty )
-					EditorGUILayout.HelpBox( "The assigned Ultimate Status Bar has not been named.", MessageType.Error );
-
 				if( alternateStates.Count == 0 )
 					EditorGUILayout.HelpBox( "There are no named manual Alternate States to change through code.", MessageType.Warning );
-
+				else if( targ.ultimateStatusBar.statusBarName == string.Empty )
+					EditorGUILayout.HelpBox( "The assigned Ultimate Status Bar has not been named.", MessageType.Error );
+				
 				if( targ.ultimateStatusBar.statusBarName != string.Empty && alternateStates.Count > 0 )
 				{
 					EditorGUILayout.LabelField( "Ultimate Status Bar: " + ( targ.ultimateStatusBar.statusBarName == string.Empty ? "Unknown" : targ.ultimateStatusBar.statusBarName ) );
@@ -313,6 +321,22 @@ public class AlternateStateHandlerEditor : Editor
 				}
 			}
 			/* -------------------------------- > END SCRIPT REFERENCE < -------------------------------- */
+		}
+
+		if( EditorPrefs.GetBool( "UUI_DevelopmentMode" ) )
+		{
+			EditorGUILayout.Space();
+			GUIStyle developmentHeaderStyle = new GUIStyle( headerDropdownStyle ) { richText = true };
+			GUILayout.BeginHorizontal();
+			GUILayout.Space( -10 );
+			showDefaultInspector = GUILayout.Toggle( showDefaultInspector, ( showDefaultInspector ? "▼" : "►" ) + "<color=#ff0000ff>Development Inspector</color>", developmentHeaderStyle );
+			GUILayout.EndHorizontal();
+			if( showDefaultInspector )
+			{
+				EditorGUILayout.Space();
+
+				base.OnInspectorGUI();
+			}
 		}
 
 		EditorGUILayout.Space();
@@ -444,7 +468,7 @@ public class AlternateStateHandlerEditor : Editor
 			defaultStateColor.Add( serializedObject.FindProperty( string.Format( "AlternateStateList.Array.data[{0}].defaultStateColor", i ) ) );
 			flashingDuration.Add( serializedObject.FindProperty( string.Format( "AlternateStateList.Array.data[{0}].flashingDuration", i ) ) );
 			
-			DefaultColorHelp.Add( targ.ultimateStatusBar != null && targ.AlternateStateList[ i ].triggerOption != AlternateStateHandler.AlternateState.TriggerOption.Manual && targ.AlternateStateList[ i ].defaultStateColor != targ.ultimateStatusBar.UltimateStatusList[ targ.AlternateStateList[ i ].statusIndex ].statusColor );
+			DefaultColorHelp.Add( targ.ultimateStatusBar != null && targ.AlternateStateList[ i ].triggerOption != AlternateStateHandler.AlternateState.TriggerOption.Manual && targ.AlternateStateList[ i ].defaultStateColor != targ.ultimateStatusBar.UltimateStatusList[ targ.AlternateStateList[ i ].statusIndex ].color );
 
 			AlternateStateNameError.Add( targ.AlternateStateList[ i ].alternateStateName != string.Empty && DuplicateAlternateStateName( i ) );
 		}
