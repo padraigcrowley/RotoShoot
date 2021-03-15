@@ -15,7 +15,7 @@ GameObject:
   - component: {fileID: 659173352537727699}
   m_Layer: 0
   m_Name: Enemy_SpinningMine
-  m_TagString: Enemy01
+  m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -144,6 +144,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   waypointPath: {fileID: 0}
   splineMoveScript: {fileID: 2411896081061765968}
+  numBurstFires: 0
   numBurstFiresBeforePause: 4
   waitTimeBeforeFirstSpawn: 0
   waitTimeBetweenSpawns: 0

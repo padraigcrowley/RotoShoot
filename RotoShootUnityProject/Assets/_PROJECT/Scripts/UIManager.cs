@@ -10,14 +10,9 @@ public class UIManager : Singleton<UIManager>
   public Image playerHealthHeart03, playerHealthHeart02, playerHealthHeart01;
   [SerializeField] private GameObject LevelCompletePanel;
 
-  // Place this in your public variables and assign it in the inspector. //
-  //public UltimateStatusBar statusBar;
-
   // Start is called before the first frame update
   void Start()
   {
-    //UltimateStatusBar.UpdateStatus("PlayerHealthStatusBar", 75, 100);
-   
     CurrentPlayerScoreText.text = GameplayManager.Instance.currentPlayerScore.ToString();
     HighPlayerScoreText.text = GameplayManager.Instance.highPlayerScore.ToString();
     CurrentEnemyKillCount.text = LevelManager.Instance.numEnemyKillsInLevel.ToString();
@@ -37,8 +32,6 @@ public class UIManager : Singleton<UIManager>
         }
       case GameplayManager.GameState.LEVEL_IN_PROGRESS:
         {
-
-          ///UltimateStatusBar.UpdateStatus("PlayerHealthStatusBar", GameplayManager.Instance.currentPlayerHP, GameplayManager.Instance.MAX_PLAYER_HP);
 
           CurrentPlayerScoreText.text = (GameplayManager.Instance.currentPlayerScore).ToString();
           CurrentEnemyKillCount.text = LevelManager.Instance.numEnemyKillsInLevel.ToString();

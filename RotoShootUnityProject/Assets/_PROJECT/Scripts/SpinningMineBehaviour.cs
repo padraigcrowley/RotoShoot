@@ -63,7 +63,7 @@ public class SpinningMineBehaviour : ExtendedBehaviour
 
   IEnumerator DoHitEffect()
   {
-    float duration = .3f;
+    float duration = .2f;
     float elapsedTime = 0f;
     float currentEffectBlendVal;
     float startEffectBlendVal = 0;

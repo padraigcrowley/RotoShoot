@@ -3,6 +3,7 @@
 using UnityEngine;
 using UnityEditor;
 using System.Collections.Generic;
+using UnityEditor.AnimatedValues;
 
 [InitializeOnLoad]
 [CustomEditor( typeof( UltimateStatusBarReadme ) )]
@@ -26,82 +27,31 @@ public class UltimateStatusBarReadmeEditor : Editor
 	GUIStyle itemHeaderStyle = new GUIStyle();
 	GUIStyle paragraphStyle = new GUIStyle();
 	GUIStyle versionStyle = new GUIStyle();
+	static string menuTitle = "Product Manual";
 
 	class PageInformation
 	{
 		public string pageName = "";
+		public Vector2 scrollPosition = Vector2.zero;
 		public delegate void TargetMethod ();
 		public TargetMethod targetMethod;
 	}
+	static PageInformation mainMenu = new PageInformation() { pageName = "Product Manual" };
+	static PageInformation gettingStarted = new PageInformation() { pageName = "Getting Started" };
+	static PageInformation overview = new PageInformation() { pageName = "Overview" };
+	static PageInformation overview_USB = new PageInformation() { pageName = "Overview" };
+	static PageInformation overview_ASH = new PageInformation() { pageName = "Overview" };
+	static PageInformation overview_DSF = new PageInformation() { pageName = "Overview" };
+	static PageInformation overview_SFF = new PageInformation() { pageName = "Overview" };
+	static PageInformation documentation = new PageInformation() { pageName = "Documentation" };
+	static PageInformation documentation_USB = new PageInformation() { pageName = "Documentation" };
+	static PageInformation documentation_US = new PageInformation() { pageName = "Documentation" };
+	static PageInformation documentation_ASH = new PageInformation() { pageName = "Documentation" };
+	static PageInformation versionHistory = new PageInformation() { pageName = "Version History" };
+	static PageInformation importantChange = new PageInformation() { pageName = "Important Change" };
+	static PageInformation thankYou = new PageInformation() { pageName = "Thank You!" };
 	static List<PageInformation> pageHistory = new List<PageInformation>();
-	static PageInformation[] AllPages = new PageInformation[]
-	{
-		// MAIN MENU - 0 //
-		new PageInformation()
-		{
-			pageName = "Product Manual"
-		},
-		// Getting Started - 1 //
-		new PageInformation()
-		{
-			pageName = "Getting Started"
-		},
-		// Overview - 2 //
-		new PageInformation()
-		{
-			pageName = "Overview"
-		},
-		// Overview ASH - 3 //
-		new PageInformation()
-		{
-			pageName = "Overview"
-		},
-		// Overview: SFF - 4 //
-		new PageInformation()
-		{
-			pageName = "Overview"
-		},
-		// Documentation - 5 //
-		new PageInformation()
-		{
-			pageName = "Documentation"
-		},
-		// Documentation - USB - 6 //
-		new PageInformation()
-		{
-			pageName = "Documentation"
-		},
-		// Documentation - US - 7 //
-		new PageInformation()
-		{
-			pageName = "Documentation"
-		},
-		// Documentation - ASH - 8 //
-		new PageInformation()
-		{
-			pageName = "Documentation"
-		},
-		// Version History - 9 //
-		new PageInformation()
-		{
-			pageName = "Version History"
-		},
-		// Important Change - 10 //
-		new PageInformation()
-		{
-			pageName = "Important Change"
-		},
-		// Thank You! - 11 //
-		new PageInformation()
-		{
-			pageName = "Thank You!"
-		},
-		// Settings - 12 //
-		new PageInformation()
-		{
-			pageName = "Settings"
-		},
-	};
+	static PageInformation currentPage = new PageInformation();
 
 	class EndPageComment
 	{
@@ -136,16 +86,71 @@ public class UltimateStatusBarReadmeEditor : Editor
 	class DocumentationInfo
 	{
 		public string functionName = "";
-		public bool showMore = false;
+		public AnimBool showMore = new AnimBool( false );
 		public string[] parameter;
 		public string returnType = "";
 		public string description = "";
 		public string codeExample = "";
 	}
-	// ULTIMATE STATUS BAR DOCUMENTATION //
+	/* ULTIMATE STATUS BAR DOCUMENTATION */
 	DocumentationInfo[] UltimateStatusBar_PublicFunctions = new DocumentationInfo[]
 	{
-		// GetUltimateStatus
+		new DocumentationInfo()
+		{
+			functionName = "UpdateStatus()",
+			parameter = new string[]
+			{
+				"float currentValue - The current value of the status.",
+				"float maxValue - The maximum value of the status."
+			},
+			description = "This function will call the default status on the targeted Ultimate Status Bar. It updates the values of the status in order to display them to the user. This function has two parameters that need to be passed into it. The <i>currentValue</i> should be the current amount of the targeted status, whereas the <i>maxValue</i> should be the maximum amount that the status can be. These values must be passed into the function in order to correctly display them to the user.",
+			codeExample = "statusBar.UpdateStatus( current, max );"
+		},
+		new DocumentationInfo()
+		{
+			functionName = "UpdateStatus() *",
+			parameter = new string[]
+			{
+				"string statusName - The name of the targeted Ultimate Status.",
+				"float currentValue - The current value of the status.",
+				"float maxValue - The maximum value of the status.",
+			},
+			description = "This function will call the targeted Ultimate Status that has been registered with the <i>statusName</i> parameter. It updates the values of the status in order to display them to the user. The <i>currentValue</i> should be the current amount of the targeted status, whereas the <i>maxValue</i> should be the maximum amount that the status can be. These values must be passed into the function in order to correctly display them to the user.",
+			codeExample = "statusBar.UpdateStatus( \"Health\", current, max );"
+		},
+		new DocumentationInfo()
+		{
+			functionName = "GetStatusBarState",
+			returnType = "bool",
+			description = "Returns the current state of the Ultimate Status Bar visibility.",
+			codeExample = "if( statusBar.GetStatusBarState )\n{\n	// The status bar is visible, so do something!\n}"
+		},
+		new DocumentationInfo()
+		{
+			functionName = "UpdatePositioning()",
+			description = "This function updates the size and positioning of the Ultimate Status Bar on the screen. It's worth noting that this function will only work in the Screen Space option is selected for the Positioning setting.",
+			codeExample = "statusBar.screenSpaceOptions.statusBarSize = 5.0f;\nstatusBar.UpdatePositioning();"
+		},
+		new DocumentationInfo()
+		{
+			functionName = "UpdateStatusBarIcon()",
+			parameter = new string[]
+			{
+				"Sprite newIcon - The new icon to apply to the status bar icon.",
+			},
+			description = "This function updates the icon image associated with the Ultimate Status Bar with the <i>newIcon</i> sprite parameter.",
+			codeExample = "statusBar.UpdateStatusBarIcon( newIcon );"
+		},
+		new DocumentationInfo()
+		{
+			functionName = "UpdateStatusBarText()",
+			parameter = new string[]
+			{
+				"string newText - The new text to apply to the status bar.",
+			},
+			description = "This function will update the text component to display the <i>newText</i> string parameter.",
+			codeExample = "statusBar.UpdateStatusBarText( \"Character Name\" );"
+		},
 		new DocumentationInfo()
 		{
 			functionName = "GetUltimateStatus()",
@@ -157,94 +162,44 @@ public class UltimateStatusBarReadmeEditor : Editor
 			description = "This function returns the Ultimate Status class that has been registered with the <i>statusName</i> parameter.",
 			codeExample = "UltimateStatusBar.UltimateStatus healthStatus = statusBar.GetUltimateStatus( \"Health\" );"
 		},
-		// UpdatePositioning
-		new DocumentationInfo()
-		{
-			functionName = "UpdatePositioning()",
-			description = "This function updates the size and positioning of the Ultimate Status Bar on the screen.",
-			codeExample = "statusBar.screenSpaceOptions.statusBarSize = 5.0f;\nstatusBar.UpdatePositioning();"
-		},
-		// UpdateStatus
+	};
+	DocumentationInfo[] UltimateStatusBar_StaticFunctions = new DocumentationInfo[]
+	{
 		new DocumentationInfo()
 		{
 			functionName = "UpdateStatus()",
 			parameter = new string[]
 			{
-				"float currentValue - The current value of the status.",
-				"float maxValue - The maximum value of the status."
-			},
-			description = "This function will call the default status on the targeted Ultimate Status Bar. It updates the values of the status in order to display them to the user. This function has two parameters that need to be passed into it. The <i>currentValue</i> should be the current amount of the targeted status, whereas the <i>maxValue</i> should be the maximum amount that the status can be. These values must be passed into the function in order to correctly display them to the user.",
-			codeExample = "statusBar.UpdateStatus( currentValue, maxValue );"
-		},
-		// UpdateStatus Specific
-		new DocumentationInfo()
-		{
-			functionName = "UpdateStatus() *Specific Status",
-			parameter = new string[]
-			{
+				"string statusBarName - The name of the targeted Ultimate Status Bar.",
+				"string statusName - The name of the targeted Ultimate Status.",
 				"float currentValue - The current value of the status.",
 				"float maxValue - The maximum value of the status.",
-				"string statusName - The name of the targeted Ultimate Status.",
 			},
-			description = "This function will call the targeted Ultimate Status that has been registered with the <i>statusName</i> parameter. It updates the values of the status in order to display them to the user. The <i>currentValue</i> should be the current amount of the targeted status, whereas the <i>maxValue</i> should be the maximum amount that the status can be. These values must be passed into the function in order to correctly display them to the user.",
-			codeExample = "statusBar.UpdateStatus( currentValue, maxValue, \"Health\" );"
+			description = "This function will update the targeted Ultimate Status that has been registered on the Ultimate Status Bar component. See the UpdateStatus() function inside the Ultimate Status documentation for more details.",
+			codeExample = "UltimateStatusBar.UpdateStatus( \"Player\", \"Health\", current, max );"
 		},
-		// EnableStatusBar
 		new DocumentationInfo()
 		{
-			functionName = "EnableStatusBar()",
-			description = "Enables the status bar visually so that the player can see it.",
-			codeExample = "statusBar.EnableStatusBar();"
-		},
-		// DisableStatusBar
-		new DocumentationInfo()
-		{
-			functionName = "DisableStatusBar()",
-			description = "Disables the status bar visually so that the player can no longer see it",
-			codeExample = "statusBar.DisableStatusBar();"
-		},
-		// StartFollowTransform
-		new DocumentationInfo()
-		{
-			functionName = "StartFollowTransform()",
+			functionName = "UpdateStatusBarIcon()",
 			parameter = new string[]
 			{
-				"Transform transformToFollow - The Transform component of the object that the status bar should follow.",
-				"Camera camera - The camera component that should be used for calculations of the world objects position on the screen.",
-				"Vector3 positionModifier - This parameter allows you to specify the position in relation to the target transform for the status bar to follow.",
+				"string statusBarName - The name of the targeted Ultimate Status Bar.",
+				"Sprite newIcon - The new icon to apply to the status bar icon.",
 			},
-			description = "This function starts a coroutine that allows the status bar to follow a world objects position on the screen.",
-			codeExample = "statusBar.StartFollowTransform( enemyToFollow, playerCamera, 2 );"
+			description = "Calls the UpdateStatusBarIcon() function of the targeted Ultimate Status Bar. See the public function: UpdateStatusBarIcon(), for more details.",
+			codeExample = "UltimateStatusBar.UpdateStatusBarIcon( \"Player\", newIcon );"
 		},
-		// StopFollowTransform
 		new DocumentationInfo()
 		{
-			functionName = "StopFollowTransform()",
-			description = "This function stops the FollowTransform coroutine if it is running.",
-			codeExample = "statusBar.StopFollowTransform();"
-		},
-		// StartLookAtCamera
-		new DocumentationInfo()
-		{
-			functionName = "StartLookAtCamera()",
+			functionName = "UpdateStatusBarText()",
 			parameter = new string[]
 			{
-				"Camera camera - The camera component that the status bar canvas should look at.",
+				"string statusBarName - The name of the targeted Ultimate Status Bar.",
+				"string newText - The new text to apply to the status bar.",
 			},
-			description = "This function starts a coroutine that forces the canvas of the status bar to look at the camera.",
-			codeExample = "statusBar.StartLookAtCamera( playerCamera );"
+			description = "Calls the UpdateStatusBarText() function of the targeted Ultimate Status Bar. See the public function: UpdateStatusBarText(), for more details.",
+			codeExample = "UltimateStatusBar.UpdateStatusBarText( \"Player\", \"Character Name\" );"
 		},
-		// StopLookAtCamera
-		new DocumentationInfo()
-		{
-			functionName = "StopLookAtCamera()",
-			description = "This function stops the LookAtCamera coroutine if it is running.",
-			codeExample = "statusBar.StopLookAtCamera();"
-		},
-	};
-	DocumentationInfo[] UltimateStatusBar_StaticFunctions = new DocumentationInfo[]
-	{
-		// GetUltimateStatusBar
 		new DocumentationInfo()
 		{
 			functionName = "GetUltimateStatusBar()",
@@ -255,135 +210,6 @@ public class UltimateStatusBarReadmeEditor : Editor
 			},
 			description = "This function will return the Ultimate Status Bar component that has been registered with the <i>statusBarName</i> parameter.",
 			codeExample = "UltimateStatusBar playerStatusBar = UltimateStatusBar.GetUltimateStatusBar( \"Player\" );"
-		},
-		// UpdatePositioning
-		new DocumentationInfo()
-		{
-			functionName = "UpdatePositioning()",
-			parameter = new string[]
-			{
-				"string statusBarName - The name of the targeted Ultimate Status Bar.",
-			},
-			description = "This function will update the positioning of the Ultimate Status Bar on the canvas. This function is useful for if you have changed some of the position variables at runtime and want to apply them.",
-			codeExample = "UltimateStatusBar.UpdatePositioning( \"Player\" );"
-		},
-		// UpdateStatus
-		new DocumentationInfo()
-		{
-			functionName = "UpdateStatus()",
-			parameter = new string[]
-			{
-				"string statusBarName - The name of the targeted Ultimate Status Bar.",
-				"float currentValue - The current value of the status.",
-				"float maxValue - The maximum value of the status.",
-			},
-			description = "This function will update the default status on the Ultimate Status Bar component with the current and max values that you provided to it.",
-			codeExample = "UltimateStatusBar.UpdateStatus( \"Player\", currentValue, maxValue );"
-		},
-		// UpdateStatus Specific
-		new DocumentationInfo()
-		{
-			functionName = "UpdateStatus() *Specific Status",
-			parameter = new string[]
-			{
-				"string statusBarName - The name of the targeted Ultimate Status Bar.",
-				"float currentValue - The current value of the status.",
-				"float maxValue - The maximum value of the status.",
-				"string statusName - The name of the targeted Ultimate Status.",
-			},
-			description = "This function will update the targeted Ultimate Status that has been registered on the Ultimate Status Bar component. See the UpdateStatus() function inside the Ultimate Status documentation for more details.",
-			codeExample = "UltimateStatusBar.UpdateStatus( \"Player\", currentValue, maxValue, \"Health\" );"
-		},
-		// EnableStatusBar
-		new DocumentationInfo()
-		{
-			functionName = "EnableStatusBar()",
-			parameter = new string[]
-			{
-				"string statusBarName - The name of the targeted Ultimate Status Bar.",
-			},
-			description = "Enables the targeted Ultimate Status Bar so that it is visible to the player.",
-			codeExample = "UltimateStatusBar.EnableStatusBar( \"Player\" );"
-		},
-		// DisableStatusBar
-		new DocumentationInfo()
-		{
-			functionName = "DisableStatusBar()",
-			parameter = new string[]
-			{
-				"string statusBarName - The name of the targeted Ultimate Status Bar.",
-			},
-			description = "Disables the targeted Ultimate Status Bar so that it is no longer visible to the player.",
-			codeExample = "UltimateStatusBar.DisableStatusBar( \"Player\" );"
-		},
-	};
-	DocumentationInfo[] UltimateStatusBar_PublicAccessors = new DocumentationInfo[]
-	{
-		// ParentCanvas
-		new DocumentationInfo()
-		{
-			functionName = "ParentCanvas",
-			description = "The Canvas component that this status bar is a child of.",
-		},
-		// BaseTransform
-		new DocumentationInfo()
-		{
-			functionName = "BaseTransform",
-			description = "The base RectTransform component of this status bar.",
-		},
-		// IsEnabled
-		new DocumentationInfo()
-		{
-			functionName = "IsEnabled",
-			returnType = "bool",
-			description = "Returns the current visual state of the status bar.",
-		},
-		// IsFollowingTransform
-		new DocumentationInfo()
-		{
-			functionName = "IsFollowingTransform",
-			returnType = "bool",
-			description = "Returns if the status bar is following the position of a transform in the world.",
-		},
-		// IsFollowingCamera
-		new DocumentationInfo()
-		{
-			functionName = "IsFollowingCamera",
-			returnType = "bool",
-			description = "Returns if the status bar is following the camera rotation.",
-		},
-		// icon
-		new DocumentationInfo()
-		{
-			functionName = "icon",
-			description = "This accessor returns the current sprite that is used by the status bar icon, and you can set a new sprite by assigning a Sprite to this accessor.",
-		},
-		// text
-		new DocumentationInfo()
-		{
-			functionName = "text",
-			description = "This accessor returns the current string value of the text component for the status bar, and you can set a new string text by assigning a new string to this accessor.",
-		},
-	};
-	DocumentationInfo[] UltimateStatusBar_Callbacks = new DocumentationInfo[]
-	{
-		// OnUpdatePositioning
-		new DocumentationInfo()
-		{
-			functionName = "OnUpdatePositioning",
-			description = "This callback is invoked when the UpdatePositioning function has been called.",
-		},
-		// OnEnableStatusBar
-		new DocumentationInfo()
-		{
-			functionName = "OnEnableStatusBar",
-			description = "This callback is invoked when the status bar is enabled visually.",
-		},
-		// OnDisableStatusBar
-		new DocumentationInfo()
-		{
-			functionName = "OnDisableStatusBar",
-			description = "This callback is invoked when the status bar is disabled visually.",
 		},
 	};
 	DocumentationInfo[] UltimateStatus_PublicFunctions = new DocumentationInfo[]
@@ -399,49 +225,57 @@ public class UltimateStatusBarReadmeEditor : Editor
 			description = "This function will update the values of the status in order to display them to the user. This function has two parameters that need to be passed into it. The <i>currentValue</i> should be the current amount of the targeted status, whereas the <i>maxValue</i> should be the maximum amount that the status can be. These values must be passed into the function in order to correctly display them to the user. Using these values, the Ultimate Status will calculate out the percentage values and then display this information to the user according to the options set in the inspector.",
 			codeExample = "status.UpdateStatus( current, max );"
 		},
-	};
-	DocumentationInfo[] UltimateStatus_PublicAccessors = new DocumentationInfo[]
-	{
-		// ForceVisible
 		new DocumentationInfo()
 		{
-			functionName = "ForceVisible",
-			returnType = "bool",
-			description = "Returns the state of this status forcing the status bar to be visible determined by the users options.",
-		},
-		// CalculatedPercentage
-		new DocumentationInfo()
-		{
-			functionName = "CalculatedPercentage",
+			functionName = "GetCurrentFraction",
 			returnType = "float",
-			description = "The calculated percentage of the status bar percentage at this frame.",
+			description = "The GetCurrentFraction property will return the percentage value that was calculated when the status was updated. This number will not be current with the Smooth Fill option.",
+			codeExample = ""
 		},
-		// textColor
 		new DocumentationInfo()
 		{
-			functionName = "textColor",
-			returnType = "Color",
-			description = "Sets the text color to the provided value.",
+			functionName = "GetMaxValue",
+			returnType = "float",
+			description = "The GetMaxValue property will return the last known maximum value passed through the UpdateStatus function.",
+			codeExample = ""
 		},
-		// color
 		new DocumentationInfo()
 		{
-			functionName = "color",
-			returnType = "bool",
-			description = "Sets the status image color to the provided value.",
+			functionName = "GetTargetFill",
+			returnType = "float",
+			description = "The GetTargetFill property will return the target amount of fill for the image. This is used by other classes, such as the Dramatic Status Fill.",
+			codeExample = ""
 		},
-	};
-	DocumentationInfo[] UltimateStatus_Callbacks = new DocumentationInfo[]
-	{
-		// OnStatusUpdated
 		new DocumentationInfo()
 		{
-			functionName = "OnStatusUpdated<float>",
-			description = "This callback is invoked whenever this status is updated and sends the current calculated percentage of the status as the parameter.",
+			functionName = "GetCurrentCalculatedFraction",
+			returnType = "float",
+			description = "The GetCurrentCalculatedFraction property will return the current percentage of the status. This value is current with the Smooth Fill or Fill Constraint options.",
+			codeExample = ""
+		},
+		new DocumentationInfo()
+		{
+			functionName = "UpdateStatusColor()",
+			parameter = new string[]
+			{
+				"Color targetColor - The target color to apply to the status bar."
+			},
+			description = "This function will update the status color variable and apply the color immediately to the status image.",
+			codeExample = "status.UpdateStatusColor( Color.red );"
+		},
+		new DocumentationInfo()
+		{
+			functionName = "UpdateStatusTextColor()",
+			parameter = new string[]
+			{
+				"Color targetColor - The target color to apply to the status bar text component."
+			},
+			description = "This function will update the associated Text component's color value with the Color parameter.",
+			codeExample = "status.UpdateStatusTextColor( Color.red );"
 		},
 	};
 
-	// ALTERNATE STATE HANDLER DOCUMENTATION //
+	/* ALTERNATE STATE HANDLER DOCUMENTATION */
 	DocumentationInfo[] AlternateStateHandler_PublicFunctions = new DocumentationInfo[]
 	{
 		new DocumentationInfo()
@@ -492,17 +326,12 @@ public class UltimateStatusBarReadmeEditor : Editor
 		},
 	};
 
-	bool showStatusBarPositioning = false, showStatusBarOptions = false;
-	bool showStatusInformation = false, showScriptReference = false;
+	bool showStatusBarPositioning = false, showStatusBarSettings = false;
+	bool showRadialButtonSettings = false, showScriptReference = false;
 	bool showAlternateStates = false, altShowScriptRefernce = false;
 
-	enum NumberOfStatus
-	{
-		Single,
-		Multiple
-	}
-	NumberOfStatus numberOfStatus = NumberOfStatus.Single;
-	
+	bool navigateToVersionHistory = false;
+
 
 	static UltimateStatusBarReadmeEditor ()
 	{
@@ -519,7 +348,7 @@ public class UltimateStatusBarReadmeEditor : Editor
 		// If this is the first time that the user has downloaded this asset...
 		if( !EditorPrefs.HasKey( "UltimateStatusBarVersion" ) )
 		{
-			NavigateForward( 11 );
+			NavigateForward( thankYou );
 			EditorPrefs.SetInt( "UltimateStatusBarVersion", UltimateStatusBarReadme.ImportantChange );
 			var ids = AssetDatabase.FindAssets( "README t:UltimateStatusBarReadme" );
 			if( ids.Length == 1 )
@@ -531,7 +360,7 @@ public class UltimateStatusBarReadmeEditor : Editor
 		// Else if the version has been updated and there are important changes to display to the user...
 		else if( EditorPrefs.GetInt( "UltimateStatusBarVersion" ) < UltimateStatusBarReadme.ImportantChange )
 		{
-			NavigateForward( 10 );
+			NavigateForward( importantChange );
 			EditorPrefs.SetInt( "UltimateStatusBarVersion", UltimateStatusBarReadme.ImportantChange );
 			var ids = AssetDatabase.FindAssets( "README t:UltimateStatusBarReadme" );
 			if( ids.Length == 1 )
@@ -544,54 +373,30 @@ public class UltimateStatusBarReadmeEditor : Editor
 
 	void OnEnable ()
 	{
-		readme = ( UltimateStatusBarReadme )target;
+		if( !pageHistory.Contains( mainMenu ) )
+			pageHistory.Insert( 0, mainMenu );
 
-		//if( !pageHistory.Contains( mainMenu ) )
-		//	pageHistory.Insert( 0, mainMenu );
+		mainMenu.targetMethod = MainPage;
+		gettingStarted.targetMethod = GettingStarted;
+		overview.targetMethod = Overview;
+		overview_USB.targetMethod = Overview_UltimateStatusBar;
+		overview_ASH.targetMethod = Overview_AlternateStateHandler;
+		overview_DSF.targetMethod = Overview_DramaticStatusFill;
+		overview_SFF.targetMethod = Overview_StatusFillFollower;
+		documentation.targetMethod = Documentation;
+		documentation_US.targetMethod = Documentation_UltimateStatus;
+		documentation_USB.targetMethod = Documentation_UltimateStatusBar;
+		documentation_ASH.targetMethod = Documentation_AlternateStateHandler;
+		versionHistory.targetMethod = VersionHistory;
+		importantChange.targetMethod = ImportantChange;
+		thankYou.targetMethod = ThankYou;
 
-		//mainMenu.targetMethod = MainPage;
-		//gettingStarted.targetMethod = GettingStarted;
-		//overview.targetMethod = Overview;
-		//overview_ASH.targetMethod = Overview_AlternateStateHandler;
-		//overview_SFF.targetMethod = Overview_StatusFillFollower;
-		//documentation.targetMethod = Documentation;
-		//documentation_US.targetMethod = Documentation_UltimateStatus;
-		//documentation_USB.targetMethod = Documentation_UltimateStatusBar;
-		//documentation_ASH.targetMethod = Documentation_AlternateStateHandler;
-		//versionHistory.targetMethod = VersionHistory;
-		//importantChange.targetMethod = ImportantChange;
-		//thankYou.targetMethod = ThankYou;
-		//settings.targetMethod = Settings;
-
-		AllPages[ 0 ].targetMethod = MainPage;
-		AllPages[ 1 ].targetMethod = GettingStarted;
-		AllPages[ 2 ].targetMethod = Overview;
-		AllPages[ 3 ].targetMethod = Overview_AlternateStateHandler;
-		AllPages[ 4 ].targetMethod = Overview_StatusFillFollower;
-		AllPages[ 5 ].targetMethod = Documentation;
-		AllPages[ 6 ].targetMethod = Documentation_UltimateStatusBar;
-		AllPages[ 7 ].targetMethod = Documentation_UltimateStatus;
-		AllPages[ 8 ].targetMethod = Documentation_AlternateStateHandler;
-		AllPages[ 9 ].targetMethod = VersionHistory;
-		AllPages[ 10 ].targetMethod = ImportantChange;
-		AllPages[ 11 ].targetMethod = ThankYou;
-		AllPages[ 12 ].targetMethod = Settings;
-
-		pageHistory = new List<PageInformation>();
-		for( int i = 0; i < readme.pageHistory.Count; i++ )
-			pageHistory.Add( AllPages[ readme.pageHistory[ i ] ] );
-
-		if( !pageHistory.Contains( AllPages[ 0 ] ) )
-		{
-			pageHistory.Insert( 0, AllPages[ 0 ] );
-			readme.pageHistory.Insert( 0, 0 );
-		}
-
-		//if( pageHistory.Count == 1 )
-		//	currentPage = mainMenu;
+		if( pageHistory.Count == 1 )
+			currentPage = mainMenu;
 
 		randomComment = Random.Range( 0, endPageComments.Length );
 
+		readme = ( UltimateStatusBarReadme )target;
 	}
 
 	protected override void OnHeaderGUI ()
@@ -608,11 +413,11 @@ public class UltimateStatusBarReadmeEditor : Editor
 			GUILayout.BeginVertical();
 			GUILayout.Label( readme.icon, GUILayout.Width( iconWidth * ratio.x ), GUILayout.Height( iconWidth * ratio.y ) );
 			GUILayout.Space( -20 );
-			if( GUILayout.Button( readme.versionHistory[ 0 ].versionNumber, versionStyle ) && !pageHistory.Contains( AllPages[ 9 ] ) )
-				NavigateForward( 9 );
+			GUILayout.Label( readme.versionHistory[ 0 ].versionNumber, versionStyle );
 			var rect = GUILayoutUtility.GetLastRect();
-			if( pageHistory[ pageHistory.Count - 1 ] != AllPages[ 9 ] )
-				EditorGUIUtility.AddCursorRect( rect, MouseCursor.Link );
+			EditorGUIUtility.AddCursorRect( rect, MouseCursor.Link );
+			if( Event.current.type == EventType.MouseDown && rect.Contains( Event.current.mousePosition ) && !pageHistory.Contains( versionHistory ) )
+				navigateToVersionHistory = true;
 			GUILayout.EndVertical();
 			GUILayout.FlexibleSpace();
 		}
@@ -621,6 +426,7 @@ public class UltimateStatusBarReadmeEditor : Editor
 
 	public override void OnInspectorGUI ()
 	{
+		//base.OnInspectorGUI();
 		serializedObject.Update();
 
 		paragraphStyle = new GUIStyle( EditorStyles.label ) { wordWrap = true, richText = true, fontSize = 12 };
@@ -629,50 +435,35 @@ public class UltimateStatusBarReadmeEditor : Editor
 		titleStyle = new GUIStyle( paragraphStyle ) { fontSize = 16, fontStyle = FontStyle.Bold, alignment = TextAnchor.MiddleCenter };
 		versionStyle = new GUIStyle( paragraphStyle ) { alignment = TextAnchor.MiddleCenter, fontSize = 10 };
 
-		paragraphStyle.active.textColor = paragraphStyle.normal.textColor;
-
-		// SETTINGS BUTTON //
-		GUILayout.BeginVertical();
-		GUILayout.BeginHorizontal();
-		GUILayout.FlexibleSpace();
-		if( GUILayout.Button( readme.settings, versionStyle, GUILayout.Width( 24 ), GUILayout.Height( 24 ) ) && !pageHistory.Contains( AllPages[ 12 ] ) )
-			NavigateForward( 12 );
-		var rect = GUILayoutUtility.GetLastRect();
-		if( pageHistory[ pageHistory.Count - 1 ] != AllPages[ 12 ] )
-			EditorGUIUtility.AddCursorRect( rect, MouseCursor.Link );
-		GUILayout.EndHorizontal();
-		GUILayout.Space( -24 );
-		GUILayout.EndVertical();
-
-		// BACK BUTTON //
 		EditorGUILayout.BeginHorizontal();
-		EditorGUI.BeginDisabledGroup( pageHistory.Count <= 1 );
-		if( GUILayout.Button( "◄", titleStyle, GUILayout.Width( 24 ) ) )
-			NavigateBack();
 		if( pageHistory.Count > 1 )
 		{
-			rect = GUILayoutUtility.GetLastRect();
-			EditorGUIUtility.AddCursorRect( rect, MouseCursor.Link );
+			if( GUILayout.Button( "<", GUILayout.Width( 20 ) ) )
+				NavigateBack();
 		}
-		EditorGUI.EndDisabledGroup();
-		GUILayout.Space( -24 );
+		GUILayout.FlexibleSpace();
+		EditorGUILayout.LabelField( menuTitle, titleStyle );
+		GUILayout.FlexibleSpace();
+		if( pageHistory.Count > 1 )
+			GUILayout.Space( 20 );
 
-		// PAGE TITLE //
-		GUILayout.FlexibleSpace();
-		EditorGUILayout.LabelField( pageHistory[ pageHistory.Count - 1 ].pageName, titleStyle );
-		GUILayout.FlexibleSpace();
 		EditorGUILayout.EndHorizontal();
 
-		// DISPLAY PAGE //
-		if( pageHistory[ pageHistory.Count - 1 ].targetMethod != null )
-			pageHistory[ pageHistory.Count - 1 ].targetMethod();
+		if( currentPage.targetMethod != null )
+			currentPage.targetMethod();
+
+		if( navigateToVersionHistory && Event.current.type == EventType.Repaint )
+		{
+			navigateToVersionHistory = false;
+			NavigateForward( versionHistory );
+		}
 
 		Repaint();
 	}
 
-	void StartPage ()
+	void StartPage ( PageInformation pageInfo )
 	{
-		readme.scrollValue = EditorGUILayout.BeginScrollView( readme.scrollValue, false, false );
+		pageInfo.scrollPosition = EditorGUILayout.BeginScrollView( pageInfo.scrollPosition, false, false );
 		GUILayout.Space( 15 );
 	}
 
@@ -681,123 +472,94 @@ public class UltimateStatusBarReadmeEditor : Editor
 		EditorGUILayout.EndScrollView();
 	}
 
-	static void ClearFocusControl ()
-	{
-		GUI.FocusControl( "" );
-	}
-
 	static void NavigateBack ()
 	{
-		readme.pageHistory.RemoveAt( readme.pageHistory.Count - 1 );
 		pageHistory.RemoveAt( pageHistory.Count - 1 );
-		GUI.FocusControl( "" );
-
-		readme.scrollValue = Vector2.zero;
+		menuTitle = pageHistory[ pageHistory.Count - 1 ].pageName;
+		currentPage = pageHistory[ pageHistory.Count - 1 ];
 	}
 
-	static void NavigateForward ( int menuIndex )
+	static void NavigateForward ( PageInformation menu )
 	{
-		pageHistory.Add( AllPages[ menuIndex ] );
-		GUI.FocusControl( "" );
-
-		readme.pageHistory.Add( menuIndex );
-		readme.scrollValue = Vector2.zero;
+		pageHistory.Add( menu );
+		menuTitle = menu.pageName;
+		currentPage = menu;
 	}
 
 	void MainPage ()
 	{
-		StartPage();
-
 		EditorGUILayout.LabelField( "We hope that you are enjoying using the Ultimate Status Bar in your project! Here is a list of helpful resources for this asset:", paragraphStyle );
 
 		EditorGUILayout.Space();
 
-		if( GUILayout.Button( "  • Read the <b><color=blue>Getting Started</color></b> section of this README!", paragraphStyle ) )
-			NavigateForward( 1 );
+		EditorGUILayout.LabelField( "  • Read the <b><color=blue>Getting Started</color></b> section of this README!", paragraphStyle );
 		var rect = GUILayoutUtility.GetLastRect();
 		EditorGUIUtility.AddCursorRect( rect, MouseCursor.Link );
+		if( Event.current.type == EventType.MouseDown && rect.Contains( Event.current.mousePosition ) )
+			NavigateForward( gettingStarted );
 
 		EditorGUILayout.Space();
 
-		if( GUILayout.Button( "  • To learn more about the sections of the inspector, read the <b><color=blue>Overview</color></b> section!", paragraphStyle ) )
-			NavigateForward( 2 );
+		EditorGUILayout.LabelField( "  • To learn more about the options on the inspector, read the <b><color=blue>Overview</color></b> section!", paragraphStyle );
 		rect = GUILayoutUtility.GetLastRect();
 		EditorGUIUtility.AddCursorRect( rect, MouseCursor.Link );
+		if( Event.current.type == EventType.MouseDown && rect.Contains( Event.current.mousePosition ) )
+			NavigateForward( overview );
 
 		EditorGUILayout.Space();
 
-		if( GUILayout.Button( "  • Check out the <b><color=blue>Documentation</color></b> section!", paragraphStyle ) )
-			NavigateForward( 5 );
+		EditorGUILayout.LabelField( "  • Check out the <b><color=blue>Documentation</color></b> section!", paragraphStyle );
 		rect = GUILayoutUtility.GetLastRect();
 		EditorGUIUtility.AddCursorRect( rect, MouseCursor.Link );
+		if( Event.current.type == EventType.MouseDown && rect.Contains( Event.current.mousePosition ) )
+			NavigateForward( documentation );
 
 		EditorGUILayout.Space();
 
-		if( GUILayout.Button( "  • Watch our <b><color=blue>Video Tutorials</color></b> on the Ultimate Status Bar!", paragraphStyle ) )
+		EditorGUILayout.LabelField( "  • Watch our <b><color=blue>Video Tutorials</color></b> on the Ultimate Status Bar!", paragraphStyle );
+		rect = GUILayoutUtility.GetLastRect();
+		EditorGUIUtility.AddCursorRect( rect, MouseCursor.Link );
+		if( Event.current.type == EventType.MouseDown && rect.Contains( Event.current.mousePosition ) )
 		{
 			Debug.Log( "Ultimate Status Bar\nOpening YouTube Tutorials" );
 			Application.OpenURL( "https://www.youtube.com/playlist?list=PL7crd9xMJ9Tl0VRLpo3VoU2U-SbLgwB3-" );
 		}
-		rect = GUILayoutUtility.GetLastRect();
-		EditorGUIUtility.AddCursorRect( rect, MouseCursor.Link );
 
 		EditorGUILayout.Space();
 
-		if( GUILayout.Button( "  • Join our <b><color=blue>Discord Server</color></b> so that you can get live help from us and other community members.", paragraphStyle ) )
-		{
-			Debug.Log( "Ultimate Status Bar\nOpening Tank & Healer Studio Discord Server" );
-			Application.OpenURL( "https://discord.gg/RqwTFVs" );
-		}
+		EditorGUILayout.LabelField( "  • <b><color=blue>Contact Us</color></b> directly with your issue! We'll try to help you out as much as we can.", paragraphStyle );
 		rect = GUILayoutUtility.GetLastRect();
 		EditorGUIUtility.AddCursorRect( rect, MouseCursor.Link );
-
-		EditorGUILayout.Space();
-
-		if( GUILayout.Button( "  • <b><color=blue>Contact Us</color></b> directly with your issue! We'll try to help you out as much as we can.", paragraphStyle ) )
+		if( Event.current.type == EventType.MouseDown && rect.Contains( Event.current.mousePosition ) )
 		{
 			Debug.Log( "Ultimate Status Bar\nOpening Online Contact Form" );
 			Application.OpenURL( "https://www.tankandhealerstudio.com/contact-us.html" );
 		}
-		rect = GUILayoutUtility.GetLastRect();
-		EditorGUIUtility.AddCursorRect( rect, MouseCursor.Link );
 
 		EditorGUILayout.Space();
-
+		
 		EditorGUILayout.LabelField( "Now you have the tools you need to get the Ultimate Status Bar working in your project. Now get out there and make your awesome game!", paragraphStyle );
 
 		EditorGUILayout.Space();
 
 		EditorGUILayout.LabelField( "Happy Game Making,\n" + Indent + "Tank & Healer Studio", paragraphStyle );
 
-		GUILayout.Space( 20 );
+		GUILayout.Space( sectionSpace );
 
 		GUILayout.FlexibleSpace();
 
-		if( GUILayout.Button( endPageComments[ randomComment ].comment, paragraphStyle ) )
-			Application.OpenURL( endPageComments[ randomComment ].url );
+		EditorGUILayout.LabelField( endPageComments[ randomComment ].comment, paragraphStyle );
 		rect = GUILayoutUtility.GetLastRect();
 		EditorGUIUtility.AddCursorRect( rect, MouseCursor.Link );
-
-		EndPage();
+		if( Event.current.type == EventType.MouseDown && rect.Contains( Event.current.mousePosition ) )
+			Application.OpenURL( endPageComments[ randomComment ].url );
 	}
 
-	void GettingStarted ()// EDIT: I have edited up to the first EDIT: in this method.
+	void GettingStarted ()
 	{
-		StartPage();
+		StartPage( gettingStarted );
 
-		EditorGUILayout.LabelField( "Video Introduction", sectionHeaderStyle );
-
-		if( GUILayout.Button( Indent + "To begin, please watch the <b><color=blue>Introduction Video</color></b> from our website for the Ultimate Status Bar. This video will explain how to get started using the Ultimate Status Bar and help you understand how to implement it into your project.", paragraphStyle ) )
-		{
-			Debug.Log( "Ultimate Status Bar\nOpening Online Video Tutorials" );
-			Application.OpenURL( "https://www.tankandhealerstudio.com/ultimate-status-bar_documentation_video-tutorials.html" );
-		}
-		var rect = GUILayoutUtility.GetLastRect();
-		EditorGUIUtility.AddCursorRect( rect, MouseCursor.Link );
-
-		GUILayout.Space( sectionSpace );
-
-		EditorGUILayout.LabelField( "Written Introduction", sectionHeaderStyle );
+		EditorGUILayout.LabelField( "Introduction", sectionHeaderStyle );
 
 		EditorGUILayout.LabelField( Indent + "The Ultimate Status Bar has been built from the ground up with being easy to use and customize to make it work the way that you want.", paragraphStyle );
 
@@ -814,180 +576,214 @@ public class UltimateStatusBarReadmeEditor : Editor
 		GUILayout.Space( sectionSpace );
 
 		EditorGUILayout.LabelField( "How To Customize", sectionHeaderStyle );
-		EditorGUILayout.LabelField( Indent + "There are many ways to use the Ultimate Status Bar within your projects. The main Ultimate Status Bar component is used to display each status within your scene, while there are two subcomponents that are all used to enhance the visual display of the Ultimate Status Bar.", paragraphStyle );
+		EditorGUILayout.LabelField( Indent + "There are many ways to use the Ultimate Status Bar within your projects. The main Ultimate Status Bar component is used to display each status within your scene, while there are three subcomponents that are all used to enhance the visual display of the Ultimate Status Bar.", paragraphStyle );
 
 		GUILayout.Space( paragraphSpace );
 
-		EditorGUILayout.LabelField( "For more information about each of these scripts, please see the Overview and Documentation sections of this README. The Overview section explains how to get the components in your scene and what they do. The Documentation section explains each function available in these scripts.", paragraphStyle );
+		EditorGUILayout.LabelField( "For more information about each of these scripts, please see the Overview and Documentation sections of this README. The Overview section explains how to get the components in your scene and describes what options you can find in each section of the inspector. The Documentation section explains each function available in these scripts.", paragraphStyle );
 
 		GUILayout.Space( sectionSpace );
 
-		EditorGUILayout.LabelField( "How To Reference", sectionHeaderStyle );// EDIT: Make this a more simple example of just how to get a default status referenced. Then at the end show a quick example of another status that can be created.
+		EditorGUILayout.LabelField( "How To Reference", sectionHeaderStyle );
 
-		EditorGUILayout.LabelField( Indent + "The Ultimate Status Bar is very easy to get implemented into your scripts and can be implemented with one simple line of code. The one function that we are going to be using is the UpdateStatus() function, and there are several overloads of this function that make it easy to use more than one status on a single bar if need be. If you are looking for more information about the available functions in the Ultimate Status Bar class, please visit the Documentation section of this README.", paragraphStyle );
-
-		EditorGUILayout.BeginHorizontal();
-		EditorGUILayout.PrefixLabel( "How many status?", paragraphStyle );
-		numberOfStatus = ( NumberOfStatus )EditorGUILayout.EnumPopup( numberOfStatus );// EDIT: I could change this to button selection of Single and Multiple.
-		EditorGUILayout.EndHorizontal();
-		float imageWidth = Mathf.Min( EditorGUIUtility.currentViewWidth, 350f ) * 0.85f;
+		EditorGUILayout.LabelField( Indent + "The Ultimate Status Bar is incredibly easy to get implemented into your custom scripts. There are a few ways that you can reference the Ultimate Status Bar through code, and it all depends on how many different status sections you have created on that particular Ultimate Status Bar. For more information on how to reference the Ultimate Status Bar, please see the Documentation section of this README, or the Script Reference section of the Ultimate Status Bar inspector.", paragraphStyle );
 
 		GUILayout.Space( paragraphSpace );
 
-		if( numberOfStatus == NumberOfStatus.Single )
-		{
-			EditorGUILayout.LabelField( "For this example let's use the Ultimate Status Bar to display the value of the player's health. After creating this status bar in the scene, all we need to do to get it implemented is to go to the Script Reference section of the Ultimate Status Bar inspector and assign a name to be referenced through code. In this example let's use the name: Health.", paragraphStyle );
+		EditorGUILayout.LabelField( "For this example, we will create an Ultimate Status Bar for the Player of a simple game. Let's assume that the Player has several different status values that must be displayed. For this example, the Player will have a <i>Health</i> value, and a <i>Energy</i> value. These will need to be created inside the <b>Status Information</b> section in order to be referenced through code.", paragraphStyle );
 
-			//float imageWidth = Mathf.Min( EditorGUIUtility.currentViewWidth, 350f ) * 0.85f;
-			//Vector2 ratio = new Vector2( readme.statusInformation.width, readme.statusInformation.height ) / ( readme.statusInformation.width > readme.statusInformation.height ? readme.statusInformation.width : readme.statusInformation.height );
-			//EditorGUILayout.BeginHorizontal();
-			//GUILayout.FlexibleSpace();
-			//GUILayout.Label( readme.statusInformation, GUILayout.Width( imageWidth * ratio.x ), GUILayout.Height( imageWidth * ratio.y ) );
-			//GUILayout.FlexibleSpace();
-			//EditorGUILayout.EndHorizontal();
+		float imageWidth = Mathf.Min( EditorGUIUtility.currentViewWidth, 350f ) * 0.85f;
+		Vector2 ratio = new Vector2( readme.statusInformation.width, readme.statusInformation.height ) / ( readme.statusInformation.width > readme.statusInformation.height ? readme.statusInformation.width : readme.statusInformation.height );
+		EditorGUILayout.BeginHorizontal();
+		GUILayout.FlexibleSpace();
+		GUILayout.Label( readme.statusInformation, GUILayout.Width( imageWidth * ratio.x ), GUILayout.Height( imageWidth * ratio.y ) );
+		GUILayout.FlexibleSpace();
+		EditorGUILayout.EndHorizontal();
 
-			EditorGUILayout.LabelField( "After assigning the Status Bar Name you can copy the provided code into your script where you are modifying the players health, whether by damage or healing. Just make sure that you put the provided code after the health of the player has been modified. By doing this you will be sending in the most up to date value of the player's health. Of course, be sure to replace the currentValue and maxValue of the example code with your character's current and maximum health values. Whenever the character's health is updated, either by damage or healing done to the character, you will want to send the new information of the health's value to the Ultimate Status Bar.", paragraphStyle );
+		EditorGUILayout.LabelField( "After these have been created, we need to give the Ultimate Status Bar a unique name to be referenced through code. This is done in the <b>Script Reference</b> section located within the Inspector window. For this example, we are creating this status bar for the <i>Player</i>, so that's what we will name it.", paragraphStyle );
 
-			GUILayout.Space( paragraphSpace );
+		ratio = new Vector2( readme.scriptReference.width, readme.scriptReference.height ) / ( readme.scriptReference.width > readme.scriptReference.height ? readme.scriptReference.width : readme.scriptReference.height );
+		EditorGUILayout.BeginHorizontal();
+		GUILayout.FlexibleSpace();
+		GUILayout.Label( readme.scriptReference, GUILayout.Width( imageWidth * ratio.x ), GUILayout.Height( imageWidth * ratio.y ) );
+		GUILayout.FlexibleSpace();
+		EditorGUILayout.EndHorizontal();
 
-			EditorGUILayout.LabelField( "", paragraphStyle );
+		EditorGUILayout.LabelField( "Now that each status has been named, and the Ultimate Status Bar has a unique name that can be referenced, simply copy the code provided inside the <b>Script Reference</b> section for the desired status. Make sure that the Function option is set to: Update Status.", paragraphStyle );
 
-			GUILayout.Space( paragraphSpace );
+		GUILayout.Space( paragraphSpace );
 
-			EditorGUILayout.LabelField( "", paragraphStyle );
+		EditorGUILayout.LabelField( "After copying the code that is provided, find the function in <i>your player's health script</i> where your player is receiving damage from and paste the example code into the function. Be sure to put it after the damage or healing has modified the health value. Of course, be sure to replace the currentValue and maxValue of the example code with your character's current and maximum health values. Whenever the character's health is updated, either by damage or healing done to the character, you will want to send the new information of the health's value.", paragraphStyle );
 
-			GUILayout.Space( paragraphSpace );
+		GUILayout.Space( paragraphSpace );
 
-			EditorGUILayout.LabelField( "", paragraphStyle );
-		}
-		else
-		{
-			EditorGUILayout.LabelField( Indent + "The Ultimate Status Bar is incredibly easy to get implemented into your custom scripts. There are a few ways that you can reference the Ultimate Status Bar through code, and it all depends on how many different status sections you have created on that particular Ultimate Status Bar. For more information on how to reference the Ultimate Status Bar, please see the Documentation section of this README, or the Script Reference section of the Ultimate Status Bar inspector.", paragraphStyle );
+		EditorGUILayout.LabelField( "This process can be used for any status that you need to be displayed to the user. For more information about the individual functions available for the Ultimate Status Bar and other components, please refer to the Documentation section of this window.", paragraphStyle );
 
-			GUILayout.Space( paragraphSpace );
-
-			EditorGUILayout.LabelField( "For this example, we will create an Ultimate Status Bar for the Player of a simple game. Let's assume that the Player has several different status values that must be displayed. For this example, the Player will have a <i>Health</i> value, and a <i>Energy</i> value. These will need to be created inside the <b>Status Information</b> section in order to be referenced through code.", paragraphStyle );
-
-			Vector2 ratio = new Vector2( readme.statusInformation.width, readme.statusInformation.height ) / ( readme.statusInformation.width > readme.statusInformation.height ? readme.statusInformation.width : readme.statusInformation.height );
-			EditorGUILayout.BeginHorizontal();
-			GUILayout.FlexibleSpace();
-			GUILayout.Label( readme.statusInformation, GUILayout.Width( imageWidth * ratio.x ), GUILayout.Height( imageWidth * ratio.y ) );
-			GUILayout.FlexibleSpace();
-			EditorGUILayout.EndHorizontal();
-
-			EditorGUILayout.LabelField( "After these have been created, we need to give the Ultimate Status Bar a unique name to be referenced through code. This is done in the <b>Script Reference</b> section located within the Inspector window. For this example, we are creating this status bar for the <i>Player</i>, so that's what we will name it.", paragraphStyle );
-
-			ratio = new Vector2( readme.scriptReference.width, readme.scriptReference.height ) / ( readme.scriptReference.width > readme.scriptReference.height ? readme.scriptReference.width : readme.scriptReference.height );
-			EditorGUILayout.BeginHorizontal();
-			GUILayout.FlexibleSpace();
-			GUILayout.Label( readme.scriptReference, GUILayout.Width( imageWidth * ratio.x ), GUILayout.Height( imageWidth * ratio.y ) );
-			GUILayout.FlexibleSpace();
-			EditorGUILayout.EndHorizontal();
-
-			EditorGUILayout.LabelField( "Now that each status has been named, and the Ultimate Status Bar has a unique name that can be referenced, simply copy the code provided inside the <b>Script Reference</b> section for the desired status. Make sure that the Function option is set to: Update Status.", paragraphStyle );
-
-			GUILayout.Space( paragraphSpace );
-
-			EditorGUILayout.LabelField( "After copying the code that is provided, find the function in <i>your player's health script</i> where your player is receiving damage from and paste the example code into the function. Be sure to put it after the damage or healing has modified the health value. Of course, be sure to replace the currentValue and maxValue of the example code with your character's current and maximum health values. Whenever the character's health is updated, either by damage or healing done to the character, you will want to send the new information of the health's value.", paragraphStyle );
-
-			GUILayout.Space( paragraphSpace );
-
-			EditorGUILayout.LabelField( "This process can be used for any status that you need to be displayed to the user. For more information about the individual functions available for the Ultimate Status Bar and other components, please refer to the Documentation section of this window.", paragraphStyle );
-		}
-		
 		EndPage();
 	}
 
 	void Overview ()
 	{
-		StartPage();
+		StartPage( overview );
 
-		EditorGUILayout.LabelField( "Sections", sectionHeaderStyle );
+		EditorGUILayout.LabelField( "Introduction", sectionHeaderStyle );
+		EditorGUILayout.LabelField( Indent + "Welcome to the Ultimate Status Bar Overview section. This section will go over the different options that can be found on the inspector window for each script of the Ultimate Status Bar Asset Package. Please see each section below to learn more about each inspector individually.", paragraphStyle );
+
+		GUILayout.Space( sectionSpace );
+
+		// UltimateStatusBar.cs
+		EditorGUILayout.LabelField( "UltimateStatusBar.cs", itemHeaderStyle );
+		var rect = GUILayoutUtility.GetLastRect();
+		EditorGUIUtility.AddCursorRect( rect, MouseCursor.Link );
+		if( Event.current.type == EventType.MouseDown && rect.Contains( Event.current.mousePosition ) )
+		{
+			NavigateForward( overview_USB );
+			GUI.FocusControl( "" );
+		}
+
+		GUILayout.Space( paragraphSpace );
+
+		// AlternateStateHandler.cs
+		EditorGUILayout.LabelField( "AlternateStateHandler.cs", itemHeaderStyle );
+		rect = GUILayoutUtility.GetLastRect();
+		EditorGUIUtility.AddCursorRect( rect, MouseCursor.Link );
+		if( Event.current.type == EventType.MouseDown && rect.Contains( Event.current.mousePosition ) )
+		{
+			NavigateForward( overview_ASH );
+			GUI.FocusControl( "" );
+		}
+
+		GUILayout.Space( paragraphSpace );
+
+		// DramaticStatusFill.cs
+		EditorGUILayout.LabelField( "DramaticStatusFill.cs", itemHeaderStyle );
+		rect = GUILayoutUtility.GetLastRect();
+		EditorGUIUtility.AddCursorRect( rect, MouseCursor.Link );
+		if( Event.current.type == EventType.MouseDown && rect.Contains( Event.current.mousePosition ) )
+		{
+			NavigateForward( overview_DSF );
+			GUI.FocusControl( "" );
+		}
+
+		GUILayout.Space( paragraphSpace );
+
+		// StatusFillFollower.cs
+		EditorGUILayout.LabelField( "StatusFillFollower.cs", itemHeaderStyle );
+		rect = GUILayoutUtility.GetLastRect();
+		EditorGUIUtility.AddCursorRect( rect, MouseCursor.Link );
+		if( Event.current.type == EventType.MouseDown && rect.Contains( Event.current.mousePosition ) )
+		{
+			NavigateForward( overview_SFF );
+			GUI.FocusControl( "" );
+		}
+		
+		GUILayout.Space( sectionSpace );
+
+		EditorGUILayout.LabelField( "Inspector Tooltips", sectionHeaderStyle );
+		EditorGUILayout.LabelField( Indent + "To learn more about each option on any of the Ultimate Status Bar inspectors, please select the component in your scene and hover over each item to read the provided tooltip.", paragraphStyle );
+
+		EndPage();
+	}
+
+	void Overview_UltimateStatusBar ()
+	{
+		StartPage( overview_USB );
+
+		EditorGUILayout.LabelField( "UltimateStatusBar.cs", sectionHeaderStyle );
+		EditorGUILayout.LabelField( "Summary", sectionHeaderStyle );
+		EditorGUILayout.LabelField( Indent + "The <i>Ultimate Status Bar</i> can be used to display the status of anything from your Player and Enemies in your scene, to the Loading Bar when starting your game.", paragraphStyle );
+
+		GUILayout.Space( sectionSpace );
+
+		EditorGUILayout.LabelField( "Inspector", sectionHeaderStyle );
 		EditorGUILayout.LabelField( Indent + "The display below is mimicking the Ultimate Status Bar inspector. Expand each section to learn what each one is designed for.", paragraphStyle );
 
 		GUILayout.Space( paragraphSpace );
 
-		// STATUS BAR POSITIONING //
-		GUIStyle toolbarStyle = new GUIStyle( EditorStyles.toolbarButton ) { alignment = TextAnchor.MiddleLeft, fontStyle = FontStyle.Bold, fontSize = 11 };
+		/* //// --------------------------- < Status Bar Positioning > --------------------------- \\\\ */
+		EditorGUILayout.BeginVertical( "Toolbar" );
+		GUILayout.BeginHorizontal();
+		EditorGUILayout.LabelField( "Status Bar Positioning", EditorStyles.boldLabel );
+		if( GUILayout.Button( showStatusBarPositioning ? "Hide" : "Show", EditorStyles.miniButton, GUILayout.Width( 50 ), GUILayout.Height( 14f ) ) )
+			showStatusBarPositioning = !showStatusBarPositioning;
+		GUILayout.EndHorizontal();
+		EditorGUILayout.EndVertical();
 
-		showStatusBarPositioning = GUILayout.Toggle( showStatusBarPositioning, ( showStatusBarPositioning ? "▼" : "►" ) + "Status Bar Positioning", toolbarStyle );
 		if( showStatusBarPositioning )
 		{
 			GUILayout.Space( paragraphSpace );
-			EditorGUILayout.LabelField( "This section handles the positioning of the Ultimate Status Bar on the canvas.", paragraphStyle );
+			EditorGUILayout.LabelField( "This section handles the positioning of the Ultimate Status Bar on the screen or facing the camera if used in world space.", paragraphStyle );
 		}
-		
-		EditorGUILayout.Space();
-
-		// STATUS INFORMATION //
-		showStatusInformation = GUILayout.Toggle( showStatusInformation, ( showStatusInformation ? "▼" : "►" ) + "Status Information", toolbarStyle );
-		if( showStatusInformation )
-		{
-			GUILayout.Space( paragraphSpace );
-			EditorGUILayout.LabelField( "Here is where you can customize and edit each status individually. This is where you will want to create each status that needs to be a part of this status bar.", paragraphStyle );
-		}
+		/* \\\\ -------------------------- < End Status Bar Positioning > --------------------------- //// */
 
 		EditorGUILayout.Space();
 
-		// STATUS BAR OPTIONS //
-		showStatusBarOptions = GUILayout.Toggle( showStatusBarOptions, ( showStatusBarOptions ? "▼" : "►" ) + "Status Bar Options", toolbarStyle );
-		if( showStatusBarOptions )
+		/* //// ----------------------------- < Status Bar Options > ----------------------------- \\\\ */
+		EditorGUILayout.BeginVertical( "Toolbar" );
+		GUILayout.BeginHorizontal();
+		EditorGUILayout.LabelField( "Status Bar Options", EditorStyles.boldLabel );
+		if( GUILayout.Button( showStatusBarSettings ? "Hide" : "Show", EditorStyles.miniButton, GUILayout.Width( 50 ), GUILayout.Height( 14f ) ) )
+			showStatusBarSettings = !showStatusBarSettings;
+		GUILayout.EndHorizontal();
+		EditorGUILayout.EndVertical();
+
+		if( showStatusBarSettings )
 		{
 			GUILayout.Space( paragraphSpace );
 			EditorGUILayout.LabelField( "This section has options that affect the status bar as a whole. Settings for icon, text and visibility.", paragraphStyle );
 		}
+		/* //// --------------------------- < End Status Bar Options > --------------------------- \\\\ */
 
 		EditorGUILayout.Space();
 
-		// SCRIPT REFERENCE //
-		showScriptReference = GUILayout.Toggle( showScriptReference, ( showScriptReference ? "▼" : "►" ) + "Script Reference", toolbarStyle );
+		/* //// ----------------------------- < Status Information > ----------------------------- \\\\ */
+		EditorGUILayout.BeginVertical( "Toolbar" );
+		GUILayout.BeginHorizontal();
+		EditorGUILayout.LabelField( "Status Information", EditorStyles.boldLabel );
+		if( GUILayout.Button( showRadialButtonSettings ? "Hide" : "Show", EditorStyles.miniButton, GUILayout.Width( 50 ), GUILayout.Height( 14f ) ) )
+			showRadialButtonSettings = !showRadialButtonSettings;
+		GUILayout.EndHorizontal();
+		EditorGUILayout.EndVertical();
+
+		if( showRadialButtonSettings )
+		{
+			GUILayout.Space( paragraphSpace );
+
+			EditorGUILayout.LabelField( "Here is where you can customize and edit each status individually. This is where you will want to create each status that needs to be a part of this status bar.", paragraphStyle );
+		}
+		/* //// --------------------------- < End Status Information > --------------------------- \\\\ */
+
+		EditorGUILayout.Space();
+
+		/* //// ----------------------------- < Script Reference > ------------------------------ \\\\ */
+		EditorGUILayout.BeginVertical( "Toolbar" );
+		GUILayout.BeginHorizontal();
+		EditorGUILayout.LabelField( "Script Reference", EditorStyles.boldLabel );
+		if( GUILayout.Button( showScriptReference ? "Hide" : "Show", EditorStyles.miniButton, GUILayout.Width( 50 ), GUILayout.Height( 14f ) ) )
+			showScriptReference = !showScriptReference;
+		GUILayout.EndHorizontal();
+		EditorGUILayout.EndVertical();
+
 		if( showScriptReference )
 		{
 			GUILayout.Space( paragraphSpace );
 			EditorGUILayout.LabelField( "In this section you will be able to setup the reference to this Ultimate Status Bar, and you will be provided with code examples to be able to copy and paste into your own scripts.", paragraphStyle );
 		}
+		/* //// --------------------------- < End Script Reference > ---------------------------- \\\\ */
 
 		GUILayout.Space( sectionSpace );
 
-		// TOOLTIPS //
 		EditorGUILayout.LabelField( "Tooltips", sectionHeaderStyle );
-		EditorGUILayout.LabelField( Indent + "To learn more about each option in these sections, please select the Ultimate Status Bar in your scene, and hover over each property to read the provided tooltip.", paragraphStyle );
-
-		GUILayout.Space( sectionSpace );
-
-		// ADDITIONAL COMPONENTS //
-		EditorGUILayout.LabelField( "Additional Components", sectionHeaderStyle );
-		EditorGUILayout.LabelField( Indent + "The Ultimate Status Bar has two extra components that can help add to the visual display of your status bars. To learn more about these components, please visit the sections below.", paragraphStyle );
-
-		if( GUILayout.Button( "AlternateStateHandler.cs", itemHeaderStyle ) )
-		{
-			NavigateForward( 3 );
-			ClearFocusControl();
-		}
-		var rect = GUILayoutUtility.GetLastRect();
-		EditorGUIUtility.AddCursorRect( rect, MouseCursor.Link );
-
-		GUILayout.Space( paragraphSpace );
-
-		if( GUILayout.Button( "StatusFillFollower.cs", itemHeaderStyle ) )
-		{
-			NavigateForward( 4 );
-			ClearFocusControl();
-		}
-		rect = GUILayoutUtility.GetLastRect();
-		EditorGUIUtility.AddCursorRect( rect, MouseCursor.Link );
+		EditorGUILayout.LabelField( Indent + "To learn more about each option on this component, please select the Ultimate Status Bar in your scene and hover over each item to read the provided tooltip.", paragraphStyle );
 
 		EndPage();
 	}
 
 	void Overview_AlternateStateHandler ()
 	{
-		StartPage();
+		StartPage( overview_ASH );
 
 		EditorGUILayout.LabelField( "AlternateStateHandler.cs", sectionHeaderStyle );
-
-		GUILayout.Space( sectionSpace );
-
 		EditorGUILayout.LabelField( "Summary", sectionHeaderStyle );
 		EditorGUILayout.LabelField( Indent + "The <i>Alternate State Handler</i> component allows you to display different states for each status in your scene. This can be done using images or text. An example for this would be making the Health bar of the player flash when it is at a critical amount. However, you can use this component in what ever way your project needs.", paragraphStyle );
 
@@ -1004,25 +800,41 @@ public class UltimateStatusBarReadmeEditor : Editor
 
 		GUILayout.Space( paragraphSpace );
 
-		GUIStyle toolbarStyle = new GUIStyle( EditorStyles.toolbarButton ) { alignment = TextAnchor.MiddleLeft, fontStyle = FontStyle.Bold, fontSize = 11 };
-		
-		showAlternateStates = GUILayout.Toggle( showAlternateStates, ( showAlternateStates ? "▼" : "►" ) + "Alternate States", toolbarStyle );
+		/* //// ----------------------------- < Alternate States > ----------------------------- \\\\ */
+		EditorGUILayout.BeginVertical( "Toolbar" );
+		GUILayout.BeginHorizontal();
+		EditorGUILayout.LabelField( "Alternate States", EditorStyles.boldLabel );
+		if( GUILayout.Button( showAlternateStates ? "Hide" : "Show", EditorStyles.miniButton, GUILayout.Width( 50 ), GUILayout.Height( 14f ) ) )
+			showAlternateStates = !showAlternateStates;
+		GUILayout.EndHorizontal();
+		EditorGUILayout.EndVertical();
+
 		if( showAlternateStates )
 		{
 			GUILayout.Space( paragraphSpace );
 
 			EditorGUILayout.LabelField( "Here is where you can customize each state that you want for the status bar.", paragraphStyle );
 		}
+		/* //// --------------------------- < End Status Information > --------------------------- \\\\ */
 
 		EditorGUILayout.Space();
-		
-		altShowScriptRefernce = GUILayout.Toggle( altShowScriptRefernce, ( altShowScriptRefernce ? "▼" : "►" ) + "Script Reference", toolbarStyle );
+
+		/* //// ----------------------------- < Script Reference > ------------------------------ \\\\ */
+		EditorGUILayout.BeginVertical( "Toolbar" );
+		GUILayout.BeginHorizontal();
+		EditorGUILayout.LabelField( "Script Reference", EditorStyles.boldLabel );
+		if( GUILayout.Button( altShowScriptRefernce ? "Hide" : "Show", EditorStyles.miniButton, GUILayout.Width( 50 ), GUILayout.Height( 14f ) ) )
+			altShowScriptRefernce = !altShowScriptRefernce;
+		GUILayout.EndHorizontal();
+		EditorGUILayout.EndVertical();
+
 		if( altShowScriptRefernce )
 		{
 			GUILayout.Space( paragraphSpace );
 			EditorGUILayout.LabelField( "In this section you will be able to setup the reference to this Alternate State Handler, and you will be provided with code examples to be able to copy and paste into your own scripts.", paragraphStyle );
 		}
-		
+		/* //// --------------------------- < End Script Reference > ---------------------------- \\\\ */
+
 		GUILayout.Space( sectionSpace );
 
 		EditorGUILayout.LabelField( "Tooltips", sectionHeaderStyle );
@@ -1031,26 +843,40 @@ public class UltimateStatusBarReadmeEditor : Editor
 		EndPage();
 	}
 
-	void Overview_StatusFillFollower ()
+	void Overview_DramaticStatusFill ()
 	{
-		StartPage();
+		StartPage( overview_DSF );
 
-		EditorGUILayout.LabelField( "StatusFillFollower.cs", sectionHeaderStyle );
+		EditorGUILayout.LabelField( "DramaticStatusFill.cs", sectionHeaderStyle );
+		EditorGUILayout.LabelField( "Summary", sectionHeaderStyle );
+		EditorGUILayout.LabelField( Indent + "The <i>Dramatic Status Fill</i> component uses a second image to display a dramatic effect to the user. This component helps to draw attention to the change in status amount.", paragraphStyle );
 
 		GUILayout.Space( sectionSpace );
 
+		EditorGUILayout.LabelField( "How To Create", sectionHeaderStyle );
+		EditorGUILayout.LabelField( Indent + "In order to create a Dramatic Status Fill for a status on your Ultimate Status Bar you will need to select the GameObject that has the Image component for the status that you want. This can be found easily by clicking on the <b>Status Image</b> variable on the targeted status in the Ultimate Status Bar inspector. This will highlight the associated GameObject. Now that you know which GameObject has the image you want, duplicate that GameObject and add a Dramatic Status Fill component. This can be done by selecting: <i>Add Component / UI / Ultimate Status Bar / Dramatic Status Fill</i>.", paragraphStyle );
+
+		GUILayout.Space( sectionSpace );
+
+		EditorGUILayout.LabelField( "Inspector Tooltips", sectionHeaderStyle );
+		EditorGUILayout.LabelField( Indent + "To learn more about each option on this component, please select the Dramatic Status Fill in your scene and hover over each item to read the provided tooltip.", paragraphStyle );
+
+		EndPage();
+	}
+
+	void Overview_StatusFillFollower ()
+	{
+		StartPage( overview_SFF );
+
+		EditorGUILayout.LabelField( "StatusFillFollower.cs", sectionHeaderStyle );
 		EditorGUILayout.LabelField( "Summary", sectionHeaderStyle );
 		EditorGUILayout.LabelField( Indent + "The <i>Status Fill Follower</i> component can be used to follow the current fill of an image to draw attention to the amount that it is at.", paragraphStyle );
 
 		GUILayout.Space( sectionSpace );
-		
+
+		/* HOW TO CREATE */
 		EditorGUILayout.LabelField( "How To Create", sectionHeaderStyle );
-		EditorGUILayout.LabelField( Indent + "To create a Status Fill Follower for your Ultimate Status Bar you will need to create a new image or text that is a child of the Ultimate Status Bar. To do this, you can right click on the Ultimate Status Bar GameObject and select: <i>UI / Image (Text)</i>. Then simply add the Status Fill Follower component to the new GameObject. This can be done by selecting: <i>Add Component / UI / Ultimate Status Bar / Status Fill Follower.</i>", paragraphStyle );
-
-		GUILayout.Space( sectionSpace );
-
-		EditorGUILayout.LabelField( "Inspector", sectionHeaderStyle );
-		EditorGUILayout.LabelField( Indent + "Once you have created a Status Fill Follower within the Ultimate Status Bar game object, use the transform gizmo in the scene view to move the Status Fill Follower object to the minimum position that you want it to follow and click the 'Set' button in the Position Anchors box in the inspector. Then move the object to the maximum position and click the 'Set' button. Now you can adjust the Test Value slider and see the object moving as the status bar updates.", paragraphStyle );
+		EditorGUILayout.LabelField( Indent + "To create a Status Fill Follower for your Ultimate Status Bar you will need to create a new image that is a child of the Ultimate Status Bar. To do this, you can right click on the Ultimate Status Bar GameObject and select: <i>UI / Image</i>. Then simply add the Status Fill Follower component to the new GameObject. This can be done by selecting: <i>Add Component / UI / Ultimate Status Bar / Status Fill Follower.</i>", paragraphStyle );
 
 		GUILayout.Space( sectionSpace );
 
@@ -1062,11 +888,13 @@ public class UltimateStatusBarReadmeEditor : Editor
 
 	void Documentation ()
 	{
-		StartPage();
+		StartPage( documentation );
 
 		EditorGUILayout.LabelField( "Introduction", sectionHeaderStyle );
 		EditorGUILayout.LabelField( Indent + "Welcome to the Documentation section. This section will go over the various functions that you have available. Please click on the class to learn more about each function.", paragraphStyle );
-		
+
+		//EditorGUILayout.LabelField( "Please click on the class to learn more about the functions available.", paragraphStyle );
+
 		GUILayout.Space( sectionSpace );
 
 		// UltimateStatusBar.cs
@@ -1075,8 +903,8 @@ public class UltimateStatusBarReadmeEditor : Editor
 		EditorGUIUtility.AddCursorRect( rect, MouseCursor.Link );
 		if( Event.current.type == EventType.MouseDown && rect.Contains( Event.current.mousePosition ) )
 		{
-			NavigateForward( 6 );
-			ClearFocusControl();
+			NavigateForward( documentation_USB );
+			GUI.FocusControl( "" );
 		}
 		
 		// AlternateStateHandler.cs
@@ -1085,8 +913,8 @@ public class UltimateStatusBarReadmeEditor : Editor
 		EditorGUIUtility.AddCursorRect( rect, MouseCursor.Link );
 		if( Event.current.type == EventType.MouseDown && rect.Contains( Event.current.mousePosition ) )
 		{
-			NavigateForward( 8 );
-			ClearFocusControl();
+			NavigateForward( documentation_ASH );
+			GUI.FocusControl( "" );
 		}
 
 		EndPage();
@@ -1094,9 +922,9 @@ public class UltimateStatusBarReadmeEditor : Editor
 
 	void Documentation_UltimateStatusBar ()
 	{
-		StartPage();
+		StartPage( documentation_USB );
 		
-		// STATIC FUNCTIONS //
+		/* //// --------------------------- < STATIC FUNCTIONS > --------------------------- \\\\ */
 		EditorGUILayout.LabelField( "Static Functions", sectionHeaderStyle );
 
 		GUILayout.Space( paragraphSpace );
@@ -1120,7 +948,7 @@ public class UltimateStatusBarReadmeEditor : Editor
 
 		GUILayout.Space( sectionSpace );
 
-		// PUBLIC FUNCTIONS //
+		/* //// --------------------------- < PUBLIC FUNCTIONS > --------------------------- \\\\ */
 		EditorGUILayout.LabelField( "Public Functions", sectionHeaderStyle );
 
 		GUILayout.Space( paragraphSpace );
@@ -1140,48 +968,29 @@ public class UltimateStatusBarReadmeEditor : Editor
 
 		GUILayout.Space( sectionSpace );
 
-		// PUBLIC CLASSES //
+		/* //// --------------------------- < PUBLIC CLASSES > --------------------------- \\\\ */
 		EditorGUILayout.LabelField( "Public Classes", sectionHeaderStyle );
 
 		GUILayout.Space( itemHeaderSpace );
-		
+
+		// UltimateStatus
 		EditorGUILayout.LabelField( "UltimateStatus", itemHeaderStyle );
 		var rect = GUILayoutUtility.GetLastRect();
 		EditorGUIUtility.AddCursorRect( rect, MouseCursor.Link );
 		if( Event.current.type == EventType.MouseDown && rect.Contains( Event.current.mousePosition ) )
 		{
-			NavigateForward( 7 );
-			ClearFocusControl();
+			NavigateForward( documentation_US );
+			GUI.FocusControl( "" );
 		}
-
-		GUILayout.Space( sectionSpace );
-
-		// PUBLIC ACCESSORS //
-		EditorGUILayout.LabelField( "Public Accessors", sectionHeaderStyle );
-
-		GUILayout.Space( paragraphSpace );
-
-		for( int i = 0; i < UltimateStatusBar_PublicAccessors.Length; i++ )
-			ShowDocumentation( UltimateStatusBar_PublicAccessors[ i ] );
-
-		GUILayout.Space( sectionSpace );
-
-		// CALLBACKS //
-		EditorGUILayout.LabelField( "Callbacks", sectionHeaderStyle );
-
-		GUILayout.Space( paragraphSpace );
-
-		for( int i = 0; i < UltimateStatusBar_Callbacks.Length; i++ )
-			ShowDocumentation( UltimateStatusBar_Callbacks[ i ] );
-
+		
 		EndPage();
 	}
 
 	void Documentation_UltimateStatus ()
 	{
-		StartPage();
+		StartPage( documentation_US );
 
-		// PUBLIC FUNCTIONS //
+		/* //// --------------------------- < PUBLIC FUNCTIONS > --------------------------- \\\\ */
 		EditorGUILayout.LabelField( "Public Functions", sectionHeaderStyle );
 
 		GUILayout.Space( paragraphSpace );
@@ -1205,34 +1014,16 @@ public class UltimateStatusBarReadmeEditor : Editor
 		for( int i = 0; i < UltimateStatus_PublicFunctions.Length; i++ )
 			ShowDocumentation( UltimateStatus_PublicFunctions[ i ] );
 
-		GUILayout.Space( sectionSpace );
-
-		// PUBLIC ACCESSORS //
-		EditorGUILayout.LabelField( "Public Accessors", sectionHeaderStyle );
-
-		GUILayout.Space( paragraphSpace );
-
-		for( int i = 0; i < UltimateStatus_PublicAccessors.Length; i++ )
-			ShowDocumentation( UltimateStatus_PublicAccessors[ i ] );
-
-		GUILayout.Space( sectionSpace );
-
-		// CALLBACKS //
-		EditorGUILayout.LabelField( "Callbacks", sectionHeaderStyle );
-
-		GUILayout.Space( paragraphSpace );
-
-		for( int i = 0; i < UltimateStatus_Callbacks.Length; i++ )
-			ShowDocumentation( UltimateStatus_Callbacks[ i ] );
+		GUILayout.Space( itemHeaderSpace );
 
 		EndPage();
 	}
 
 	void Documentation_AlternateStateHandler ()
 	{
-		StartPage();
+		StartPage( documentation_ASH );
 
-		// STATIC FUNCTIONS //
+		/* //// --------------------------- < STATIC FUNCTIONS > --------------------------- \\\\ */
 		EditorGUILayout.LabelField( "Static Functions", sectionHeaderStyle );
 
 		GUILayout.Space( paragraphSpace );
@@ -1246,7 +1037,7 @@ public class UltimateStatusBarReadmeEditor : Editor
 
 		GUILayout.Space( sectionSpace );
 
-		// PUBLIC FUNCTIONS //
+		/* //// --------------------------- < PUBLIC FUNCTIONS > --------------------------- \\\\ */
 		EditorGUILayout.LabelField( "Public Functions", sectionHeaderStyle );
 
 		GUILayout.Space( paragraphSpace );
@@ -1269,7 +1060,7 @@ public class UltimateStatusBarReadmeEditor : Editor
 
 	void VersionHistory ()
 	{
-		StartPage();
+		StartPage( versionHistory );
 
 		for( int i = 0; i < readme.versionHistory.Length; i++ )
 		{
@@ -1285,45 +1076,34 @@ public class UltimateStatusBarReadmeEditor : Editor
 		EndPage();
 	}
 
-	void ImportantChange ()// EDIT: Just the video link now.
+	void ImportantChange ()
 	{
-		StartPage();
+		StartPage( importantChange );
 
-		EditorGUILayout.LabelField( Indent + "Thank you for downloading the most recent version of the Ultimate Status Bar. This update was very big and even though we tried our best to allow for existing projects to continue using the Ultimate Status Bar without any change, some of the previous functionality may have been removed which may cause issues with existing projects. Before you do anything, please take just a few moments to watch this video that we made to help you get the Ultimate Status Bar working in your project after the new update:", paragraphStyle );
-
-		GUILayout.Space( paragraphSpace );
-		if( GUILayout.Button( "Ultimate Status Bar - 3.0.0 Important Changes", itemHeaderStyle ) )
-		{
-			Debug.Log( "Ultimate Status Bar\nOpening 3.0.0 Important Changes Video" );
-			Application.OpenURL( "https://youtu.be/B6V6wgS2qpU" );// EDIT:
-		}
-		var rect = GUILayoutUtility.GetLastRect();
-		EditorGUIUtility.AddCursorRect( rect, MouseCursor.Link );
-
-		GUILayout.Space( sectionSpace );
-
-		EditorGUILayout.LabelField( "Depreciated Functions and Events", sectionHeaderStyle );
-		EditorGUILayout.LabelField( Indent + "The main function for referencing the Ultimate Status Bar has been depreciated. This means that it will still function as it did previously, but the new method should be implemented as soon as possible. The new method of referencing the Ultimate Status Bar is more straight forward and easier to use. Below is a list of the main functions that you may have been using, as well as a quick example of how to replace it with the new method.", paragraphStyle );
-
-		GUILayout.Space( itemHeaderSpace );
-
-		EditorGUILayout.LabelField( "public static void UpdateStatus()", itemHeaderStyle );
-		EditorGUILayout.LabelField( "This function allowed you to update a specific status of an Ultimate Status Bar. The only thing that changed about the new reference is the parameter order, which allows for all of the UpdateStatus functions to have a similar format which will hopefully make referencing easier to use. Here is an example:", paragraphStyle );
-		EditorGUILayout.LabelField( "UpdateStatus( \"Player\", currentHealth, maxHealth, \"Health\" );", paragraphStyle );
-
-		EditorGUILayout.LabelField( "Conclusion", sectionHeaderStyle );
-		EditorGUILayout.LabelField( "For a full list of changes please click on the version number in the title at the top of this README. There are a few more depreciated functions that you may have been using. As always, if you run into any issues with this asset, please contact us at:", paragraphStyle );
+		EditorGUILayout.LabelField( Indent + "Thank you for downloading the most recent version of the Ultimate Status Bar. If you are experiencing any errors, please completely remove the Ultimate Status Bar from your project and re-import it. As always, if you run into any issues with the Ultimate Status Bar, please contact us at:", paragraphStyle );
 
 		GUILayout.Space( paragraphSpace );
 		EditorGUILayout.SelectableLabel( "tankandhealerstudio@outlook.com", itemHeaderStyle, GUILayout.Height( 15 ) );
 		GUILayout.Space( sectionSpace );
+
+		EditorGUILayout.LabelField( "NEW FILES", sectionHeaderStyle );
+		EditorGUILayout.LabelField( "  • UltimateStatusBarReadme.cs", paragraphStyle );
+		EditorGUILayout.LabelField( "  • UltimateStatusBarReadmeEditor.cs", paragraphStyle );
+
+		GUILayout.Space( itemHeaderSpace );
+
+		EditorGUILayout.LabelField( "OLD FILES", sectionHeaderStyle );
+		EditorGUILayout.LabelField( "The file listed below is no longer used, and should be removed from your project. All the information that was previously inside this script is now included in the Ultimate Status Bar README.", paragraphStyle );
+		EditorGUILayout.LabelField( "  • UltimateStatusBarWindow.cs", paragraphStyle );
+
+		GUILayout.Space( itemHeaderSpace );
 
 		EditorGUILayout.BeginHorizontal();
 		GUILayout.FlexibleSpace();
 		if( GUILayout.Button( "Got it!", GUILayout.Width( Screen.width / 2 ) ) )
 			NavigateBack();
 
-		rect = GUILayoutUtility.GetLastRect();
+		var rect = GUILayoutUtility.GetLastRect();
 		EditorGUIUtility.AddCursorRect( rect, MouseCursor.Link );
 
 		GUILayout.FlexibleSpace();
@@ -1334,7 +1114,7 @@ public class UltimateStatusBarReadmeEditor : Editor
 
 	void ThankYou ()
 	{
-		StartPage();
+		StartPage( thankYou );
 
 		EditorGUILayout.LabelField( "The two of us at Tank & Healer Studio would like to thank you for purchasing the Ultimate Status Bar asset package from the Unity Asset Store.", paragraphStyle );
 
@@ -1369,54 +1149,21 @@ public class UltimateStatusBarReadmeEditor : Editor
 
 		EndPage();
 	}
-
-	void Settings ()
-	{
-		StartPage();
-		
-		if( EditorPrefs.GetBool( "UUI_DevelopmentMode" ) )
-		{
-			EditorGUILayout.Space();
-			EditorGUILayout.LabelField( "Development Mode", sectionHeaderStyle );
-			base.OnInspectorGUI();
-			EditorGUILayout.Space();
-		}
-
-		GUILayout.FlexibleSpace();
-
-		GUILayout.Space( sectionSpace );
-
-		EditorGUI.BeginChangeCheck();
-		GUILayout.Toggle( EditorPrefs.GetBool( "UUI_DevelopmentMode" ), ( EditorPrefs.GetBool( "UUI_DevelopmentMode" ) ? "Disable" : "Enable" ) + " Development Mode", EditorStyles.radioButton );
-		if( EditorGUI.EndChangeCheck() )
-		{
-			if( EditorPrefs.GetBool( "UUI_DevelopmentMode" ) == false )
-			{
-				if( EditorUtility.DisplayDialog( "Enable Development Mode", "Are you sure you want to enable development mode for Tank & Healer Studio assets? This mode will allow you to see the default inspector for this asset which is useful when adding variables to this script without having to edit the custom editor script.", "Enable", "Cancel" ) )
-				{
-					EditorPrefs.SetBool( "UUI_DevelopmentMode", !EditorPrefs.GetBool( "UUI_DevelopmentMode" ) );
-				}
-			}
-			else
-				EditorPrefs.SetBool( "UUI_DevelopmentMode", !EditorPrefs.GetBool( "UUI_DevelopmentMode" ) );
-		}
-
-		EndPage();
-	}
 	
 	void ShowDocumentation ( DocumentationInfo info )
 	{
 		GUILayout.Space( paragraphSpace );
 
-		if( GUILayout.Button( info.functionName, itemHeaderStyle ) )
-		{
-			info.showMore = !info.showMore;
-			GUI.FocusControl( "" );
-		}
+		EditorGUILayout.LabelField( info.functionName, itemHeaderStyle );
 		var rect = GUILayoutUtility.GetLastRect();
 		EditorGUIUtility.AddCursorRect( rect, MouseCursor.Link );
+		if( Event.current.type == EventType.MouseDown && rect.Contains( Event.current.mousePosition ) && ( info.showMore.faded == 0.0f || info.showMore.faded == 1.0f ) )
+		{
+			info.showMore.target = !info.showMore.target;
+			GUI.FocusControl( "" );
+		}
 
-		if( info.showMore )
+		if( EditorGUILayout.BeginFadeGroup( info.showMore.faded ) )
 		{
 			EditorGUILayout.LabelField( Indent + "<i>Description:</i> " + info.description, paragraphStyle );
 
@@ -1433,17 +1180,7 @@ public class UltimateStatusBarReadmeEditor : Editor
 
 			GUILayout.Space( paragraphSpace );
 		}
-	}
-
-	public static void OpenReadmeDocumentation ()
-	{
-		SelectReadmeFile();
-
-		if( !pageHistory.Contains( AllPages[ 3 ] ) )
-			NavigateForward( 5 );
-
-		if( !pageHistory.Contains( AllPages[ 4 ] ) )
-			NavigateForward( 6 );
+		EditorGUILayout.EndFadeGroup();
 	}
 
 	[MenuItem( "Window/Tank and Healer Studio/Ultimate Status Bar", false, 10 )]
@@ -1455,6 +1192,27 @@ public class UltimateStatusBarReadmeEditor : Editor
 			var readmeObject = AssetDatabase.LoadMainAssetAtPath( AssetDatabase.GUIDToAssetPath( ids[ 0 ] ) );
 			Selection.objects = new Object[] { readmeObject };
 			readme = ( UltimateStatusBarReadme )readmeObject;
+		}
+		else
+		{
+			Debug.LogError( "There is no README object in the Ultimate Status Bar folder." );
+		}
+	}
+
+	public static void OpenReadmeDocumentation ()
+	{
+		var ids = AssetDatabase.FindAssets( "README t:UltimateStatusBarReadme" );
+		if( ids.Length == 1 )
+		{
+			var readmeObject = AssetDatabase.LoadMainAssetAtPath( AssetDatabase.GUIDToAssetPath( ids[ 0 ] ) );
+			Selection.objects = new Object[] { readmeObject };
+			readme = ( UltimateStatusBarReadme )readmeObject;
+
+			if( !pageHistory.Contains( documentation ) )
+				NavigateForward( documentation );
+
+			if( !pageHistory.Contains( documentation_USB ) )
+				NavigateForward( documentation_USB );
 		}
 		else
 		{

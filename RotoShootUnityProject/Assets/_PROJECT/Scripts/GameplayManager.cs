@@ -11,7 +11,7 @@ public class GameplayManager : Singleton<GameplayManager>, IPowerUpEvents
   [HideInInspector] public enum PlayerFiringState { STRAIGHT_SINGLE, ANGLED_TRIPLE, STRAIGHT_TRIPLE, RAPID_FIRE_SINGLE }
   [HideInInspector] public int currentPlayerScore = 0;
   public int highPlayerScore = 0;
-  public int currentPlayerHP;
+  [HideInInspector] public int currentPlayerHP;
   [HideInInspector] public float screenEdgeX, screenEdgeY, screenCollisionBoundaryX, screenCollisionBoundaryY;
 
   public GameObject leftBoundary;                   //

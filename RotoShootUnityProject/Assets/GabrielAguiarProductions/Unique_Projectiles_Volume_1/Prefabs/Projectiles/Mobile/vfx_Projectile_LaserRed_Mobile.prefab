@@ -4950,4 +4950,5 @@ MonoBehaviour:
     type: 3}
   HitFXPrefab: {fileID: 1322770261676608, guid: e99d3587ab15a5c448892be3bd1f26dc,
     type: 3}
-  speed: 7.5
+  speed: 10
+  healthBar: {fileID: 0}

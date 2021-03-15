@@ -11,7 +11,6 @@ GameObject:
   - component: {fileID: 22252098}
   - component: {fileID: 11498032}
   - component: {fileID: 11444498}
-  - component: {fileID: 225138534157131368}
   m_Layer: 5
   m_Name: World Space Squared
   m_TagString: Untagged
@@ -153,16 +152,20 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5074157d2ca19604398aaa3ee1558c2f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  positioning: 0
-  scalingAxis: 1
-  statusBarSize: 1.75
-  imageAspectRatio: 0
-  targetImage: {fileID: 11498032}
-  xRatio: 1
-  yRatio: 1
-  horizontalPosition: 50
-  verticalPosition: 50
-  depthPosition: 0
+  positioningOption: 1
+  screenSpaceOptions:
+    scalingAxis: 1
+    statusBarSize: 2.5
+    imageAspectRatio: 0
+    targetImage: {fileID: 11498032}
+    xRatio: 1
+    yRatio: 0.244
+    xPosition: 2
+    yPosition: 98
+  worldSpaceOptions:
+    findBy: 2
+    targetName: Main Camera
+    cameraTransform: {fileID: 0}
   statusBarIcon: {fileID: 11436610}
   statusBarText: {fileID: 0}
   updateVisibility: 0
@@ -179,6 +182,7 @@ MonoBehaviour:
     statusName: 
     colorMode: 0
     statusImage: {fileID: 11498444}
+    statusColor: {r: 1, g: 0, b: 0, a: 1}
     statusGradient:
       serializedVersion: 2
       key0: {r: 1, g: 1, b: 1, a: 1}
@@ -208,27 +212,22 @@ MonoBehaviour:
       m_Mode: 0
       m_NumColorKeys: 2
       m_NumAlphaKeys: 2
-    fillConstraint: 0
-    fillConstraintMin: 0
-    fillConstraintMax: 1
-    fillConstraintTicks: 0
     displayText: 0
     statusText: {fileID: 0}
     additionalText: 
     smoothFill: 0
-    smoothFillSpeed: 1
+    smoothFillDuration: 1
+    isSmoothing: 0
+    fillConstraint: 0
+    fillConstraintMin: 0
+    fillConstraintMax: 1
     keepVisible: 0
     triggerValue: 0.25
-    useDramaticFill: 0
-    dramaticImage: {fileID: 0}
-    dramaticStyle: 1
-    secondsDelay: 0.1
-    resetSensitivity: 0.1
-    fillSpeed: 0.5
   - statusBar: {fileID: 0}
     statusName: 
     colorMode: 0
     statusImage: {fileID: 11435352}
+    statusColor: {r: 0, g: 0.33793116, b: 1, a: 1}
     statusGradient:
       serializedVersion: 2
       key0: {r: 1, g: 1, b: 1, a: 1}
@@ -258,23 +257,17 @@ MonoBehaviour:
       m_Mode: 0
       m_NumColorKeys: 2
       m_NumAlphaKeys: 2
-    fillConstraint: 0
-    fillConstraintMin: 0
-    fillConstraintMax: 1
-    fillConstraintTicks: 0
     displayText: 0
     statusText: {fileID: 0}
     additionalText: 
     smoothFill: 0
-    smoothFillSpeed: 1
+    smoothFillDuration: 1
+    isSmoothing: 0
+    fillConstraint: 0
+    fillConstraintMin: 0
+    fillConstraintMax: 1
     keepVisible: 0
     triggerValue: 0.25
-    useDramaticFill: 0
-    dramaticImage: {fileID: 0}
-    dramaticStyle: 1
-    secondsDelay: 0.1
-    resetSensitivity: 0.1
-    fillSpeed: 0.5
   statusBarName: 
 --- !u!114 &11445052
 MonoBehaviour:
@@ -504,14 +497,3 @@ Prefab:
   m_ParentPrefab: {fileID: 0}
   m_RootGameObject: {fileID: 105838}
   m_IsPrefabParent: 1
---- !u!225 &225138534157131368
-CanvasGroup:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 105838}
-  m_Enabled: 1
-  m_Alpha: 1
-  m_Interactable: 1
-  m_BlocksRaycasts: 1
-  m_IgnoreParentGroups: 0
