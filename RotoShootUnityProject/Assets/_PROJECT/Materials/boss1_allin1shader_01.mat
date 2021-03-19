@@ -83,8 +83,8 @@ Material:
     - _DistortTexYSpeed: 11.8
     - _FadeAmount: -0.1
     - _FadeBurnGlow: 1
-    - _FadeBurnTransition: 0.5
-    - _FadeBurnWidth: 0.117
+    - _FadeBurnTransition: 0.444
+    - _FadeBurnWidth: 0.281
     - _FishEyeUvAmount: 0.35
     - _FlickerAlpha: 0
     - _FlickerFreq: 0.2

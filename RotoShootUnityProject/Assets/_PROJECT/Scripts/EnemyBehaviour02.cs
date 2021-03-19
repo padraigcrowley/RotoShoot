@@ -2,7 +2,7 @@
 using DG.Tweening;
 using System;
 using SWS; //simple waypoints
-
+using System.Collections;
 
 public abstract class EnemyBehaviour02 : ExtendedBehaviour
 //https://answers.unity.com/questions/379440/a-simple-wait-function-without-coroutine-c.html
@@ -12,7 +12,7 @@ public abstract class EnemyBehaviour02 : ExtendedBehaviour
   public float speedMultiplierFromSpawner = 1f;
   public float hpMultiplierFromSpawner = 1f;
   private float respawnWaitDelay = 2.0f; //default value unless overridden by derived class
- 
+
   public float startPosX, startPosY, startPosZ = 0f;
   private float startScaleX, startScaleY, startScaleZ;
 
@@ -23,7 +23,11 @@ public abstract class EnemyBehaviour02 : ExtendedBehaviour
   private SpriteRenderer enemySpriteRenderer;
   private CapsuleCollider enemyCapsuleCollider;
   protected Vector3 upDirection;
-    
+
+  private Renderer spriteMaterial;
+  public GameObject deathExplosion;
+  public GameObject deathExplosionInstance;
+
   public enum EnemyState { ALIVE, TEMPORARILY_DEAD, WAITING_TO_RESPAWN, INVINCIBLE, FULLY_DEAD, HIT_BY_PLAYER_MISSILE, HIT_BY_PLAYER_SHIP, HIT_BY_ATMOSPHERE }
 
   public EnemyState enemyState;
@@ -56,7 +60,7 @@ public abstract class EnemyBehaviour02 : ExtendedBehaviour
   private void InitialSetup()
   {
     //todo - move this out to GameplayManager or to sub-class or enemy prefab??
-    
+
     hp = 1f;
     speed = 1f;
     speed *= speedMultiplierFromSpawner;
@@ -68,10 +72,11 @@ public abstract class EnemyBehaviour02 : ExtendedBehaviour
     startedWaiting = false;
 
     enemySpriteRenderer = GetComponent<SpriteRenderer>();
+    spriteMaterial = GetComponent<Renderer>();
     enemyCapsuleCollider = GetComponent<CapsuleCollider>();
 
     transform.position = new Vector2(startPosX, startPosY);
-    
+
     //startPosZ = transform.position.z;
     startScaleX = transform.localScale.x;
     startScaleY = transform.localScale.y;
@@ -105,6 +110,11 @@ public abstract class EnemyBehaviour02 : ExtendedBehaviour
 
   protected virtual void Update()
   {
+    if (Input.GetKeyDown(KeyCode.S))
+    {
+      TemporarilyDie();
+    }
+
     if (GameplayManager.Instance.currentGameState == GameplayManager.GameState.LEVEL_IN_PROGRESS)
     {
       switch (enemyState)
@@ -210,6 +220,29 @@ public abstract class EnemyBehaviour02 : ExtendedBehaviour
 
   private void TemporarilyDie()
   {
+    deathExplosionInstance = SimplePool.Spawn(deathExplosion, this.transform.position, this.transform.rotation/*, parentPool.transform*/);
+
+    int randScaleFlip = UnityEngine.Random.Range(0, 4);// not scaleflipped, scaledFlippedX, scaledFlippedY, scaledFlippedXandY
+    switch(randScaleFlip)
+    {
+      case (0):
+        deathExplosionInstance.transform.localScale = new Vector3(.5f, .5f, 1f);
+        break;
+      case (1):
+        deathExplosionInstance.transform.localScale = new Vector3(-.6f, .4f, 1f);
+        break;
+      case (2):
+        deathExplosionInstance.transform.localScale = new Vector3(.5f, -.6f, 1f);
+        break;
+      case (3):
+        deathExplosionInstance.transform.localScale = new Vector3(-.4f, -.4f, 1f);
+        break;
+      default:
+        break;
+    }
+
+    StartCoroutine(DoFadeEffect(.5f, 0f, 1f));
+    StopMovement();
     LevelManager.Instance.numEnemyKillsInLevel++;
     GameplayManager.Instance.totalEnemyKillCount++;
     //print($"totalEnemyKillCount {GameplayManager.Instance.totalEnemyKillCount}");
@@ -217,13 +250,27 @@ public abstract class EnemyBehaviour02 : ExtendedBehaviour
     {
       DropPowerUp();
     }
-    enemySpriteRenderer.enabled = false;
+
     enemyCapsuleCollider.enabled = false;
     waveRespawnWaitOver = false;
     startedWaiting = false;
 
-    StopMovement();
     enemyState = EnemyState.WAITING_TO_RESPAWN;
+  }
+
+  IEnumerator DoFadeEffect(float duration, float startVal, float endVal)
+  {
+    float elapsedTime = 0f;
+    float currentVal;
+
+    while (elapsedTime <= duration) //from normal to red
+    {
+      currentVal = Mathf.Lerp(0f, 1f, (elapsedTime / duration));
+      spriteMaterial.material.SetFloat("_FadeAmount", currentVal);
+      elapsedTime += Time.deltaTime;
+      yield return new WaitForEndOfFrame();
+    }
+    //enemySpriteRenderer.enabled = false;
   }
 
   private void Respawn()
@@ -237,6 +284,7 @@ public abstract class EnemyBehaviour02 : ExtendedBehaviour
     if (timeBetweenSpawnPassed)
     {
       //print($"waited for timeBetweenSpawn ({timeBetweenSpawn}) seconds");
+      spriteMaterial.material.SetFloat("_FadeAmount", 0f);
       hp = initialHP; //reset health and position
       transform.position = new Vector3(startPosX, startPosY, startPosZ);
       transform.localScale = new Vector3(startScaleX, startScaleX, startScaleX); // reset its scale back to original scale

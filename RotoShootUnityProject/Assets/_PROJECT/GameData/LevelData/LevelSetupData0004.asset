@@ -13,6 +13,9 @@ MonoBehaviour:
   m_Name: LevelSetupData0004
   m_EditorClassIdentifier: 
   levelNumber: 4
+  lccEnemyKills: 4000
+  lccSurviveTime: 4
+  lccKillBoss: 0
   numMaxActiveWaves: 3
   minTimeBetweenWaves: 2
   maxTimeBetweenWaves: 5
@@ -61,14 +64,26 @@ MonoBehaviour:
       type: 3}
     numEnemiesInWave: 2
     timeBetweenSpawn: 0.5
-  PlayerShipPos: {x: -1.28, y: -5, z: 0}
+  bossSpawnPointData:
+    bossPrefab: {fileID: 0}
+    startPos: {x: 0, y: 0}
+    speedMultiplier: 0
+    hpMultiplier: 0
+    waypointPath: {fileID: 0}
+  spinningMineSpawnPointData:
+    levelHasSpinningMine: 0
+    spinningMinePrefab: {fileID: 0}
+    speedMultiplier: 0
+    hpMultiplier: 0
+    waitTimeBeforeFirstSpawn: 0
+    waitTimeBetweenSpawns: 0
+    numBurstFiresBeforePause: 0
+    waypointPath: {fileID: 0}
+  PlayerShipPos: {x: -1.28, y: -6, z: 0}
   shipLanes:
-  - {x: -3.85, y: -5}
-  - {x: -1.29, y: -5}
-  - {x: 1.29, y: -5}
-  - {x: 3.84, y: -5}
+  - {x: -3.85, y: -6}
+  - {x: -1.29, y: -6}
+  - {x: 1.29, y: -6}
+  - {x: 3.84, y: -6}
   timeBetweenAsteroidShower: 30
-  lccEnemyKills: 4000
-  lccSurviveTime: 4
   levelControlType: 2
-  blockedPlayerShipRotationAngles: 

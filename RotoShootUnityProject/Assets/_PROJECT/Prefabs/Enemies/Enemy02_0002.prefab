@@ -55,7 +55,7 @@ SpriteRenderer:
   m_RenderingLayerMask: 4294967295
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 10754, guid: 0000000000000000f000000000000000, type: 0}
+  - {fileID: 2100000, guid: 3e7452d81d1d4cf4b825578dbc30dcbb, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -104,6 +104,10 @@ MonoBehaviour:
   startPosX: 0
   startPosY: 0
   startPosZ: 0
+  deathExplosion: {fileID: 5595871714586972966, guid: aa83ec4255e21cb4990b8016587a59ec,
+    type: 3}
+  deathExplosionInstance: {fileID: 5595871714586972966, guid: aa83ec4255e21cb4990b8016587a59ec,
+    type: 3}
   enemyState: 2
   waveRespawnWaitOver: 0
   timeBetweenSpawn: 0
