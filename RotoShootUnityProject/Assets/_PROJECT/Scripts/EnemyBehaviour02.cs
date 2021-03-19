@@ -27,6 +27,7 @@ public abstract class EnemyBehaviour02 : ExtendedBehaviour
   private Renderer spriteMaterial;
   public GameObject deathExplosion;
   public GameObject deathExplosionInstance;
+  public GameObject enemyExplosionsPool;
 
   public enum EnemyState { ALIVE, TEMPORARILY_DEAD, WAITING_TO_RESPAWN, INVINCIBLE, FULLY_DEAD, HIT_BY_PLAYER_MISSILE, HIT_BY_PLAYER_SHIP, HIT_BY_ATMOSPHERE }
 
@@ -86,6 +87,7 @@ public abstract class EnemyBehaviour02 : ExtendedBehaviour
 
     playerShip = GameObject.FindGameObjectWithTag("Player").GetComponent<PlayerShip>();
     upDirection = GameObject.FindGameObjectWithTag("Player").transform.up;
+    enemyExplosionsPool = GameObject.FindGameObjectWithTag("EnemyExplosionsPool");
 
     splineMoveScript = GetComponent<splineMove>();
     if (splineMoveScript != null)
@@ -220,7 +222,7 @@ public abstract class EnemyBehaviour02 : ExtendedBehaviour
 
   private void TemporarilyDie()
   {
-    deathExplosionInstance = SimplePool.Spawn(deathExplosion, this.transform.position, this.transform.rotation/*, parentPool.transform*/);
+    deathExplosionInstance = SimplePool.Spawn(deathExplosion, this.transform.position, this.transform.rotation, enemyExplosionsPool.transform);
 
     int randScaleFlip = UnityEngine.Random.Range(0, 4);// not scaleflipped, scaledFlippedX, scaledFlippedY, scaledFlippedXandY
     switch(randScaleFlip)
@@ -304,7 +306,7 @@ public abstract class EnemyBehaviour02 : ExtendedBehaviour
         missileObject = collision.gameObject;
         enemyState = EnemyState.HIT_BY_PLAYER_MISSILE;
       }
-      else if (collision.gameObject.tag.Equals("Player"))
+      else if ((collision.gameObject.tag.Equals("Player")) || (collision.gameObject.tag.Equals("PlayerShield")))
       {
         enemyState = EnemyState.HIT_BY_PLAYER_SHIP;
       }

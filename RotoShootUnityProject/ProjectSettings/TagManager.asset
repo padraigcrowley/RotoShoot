@@ -28,6 +28,7 @@ TagManager:
   - BoundaryTop
   - BoundaryBottom
   - PlayerShield
+  - EnemyExplosionsPool
   layers:
   - Default
   - TransparentFX

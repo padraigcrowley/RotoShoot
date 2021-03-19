@@ -763,11 +763,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 11433108, guid: 99d7216a19ca3154a816f37c1b5e2b1a, type: 3}
       propertyPath: UltimateStatusList.Array.data[0].statusGradient.ctime1
-      value: 23708
+      value: 65342
       objectReference: {fileID: 0}
     - target: {fileID: 11433108, guid: 99d7216a19ca3154a816f37c1b5e2b1a, type: 3}
       propertyPath: UltimateStatusList.Array.data[0].statusGradient.ctime2
-      value: 41056
+      value: 65342
       objectReference: {fileID: 0}
     - target: {fileID: 11433108, guid: 99d7216a19ca3154a816f37c1b5e2b1a, type: 3}
       propertyPath: UltimateStatusList.Array.data[0].statusGradient.ctime3
@@ -779,51 +779,59 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 11433108, guid: 99d7216a19ca3154a816f37c1b5e2b1a, type: 3}
       propertyPath: UltimateStatusList.Array.data[0].statusGradient.key0.b
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 11433108, guid: 99d7216a19ca3154a816f37c1b5e2b1a, type: 3}
-      propertyPath: UltimateStatusList.Array.data[0].statusGradient.key0.g
-      value: 0.037688043
-      objectReference: {fileID: 0}
-    - target: {fileID: 11433108, guid: 99d7216a19ca3154a816f37c1b5e2b1a, type: 3}
-      propertyPath: UltimateStatusList.Array.data[0].statusGradient.key0.r
       value: 0.99215686
       objectReference: {fileID: 0}
     - target: {fileID: 11433108, guid: 99d7216a19ca3154a816f37c1b5e2b1a, type: 3}
-      propertyPath: UltimateStatusList.Array.data[0].statusGradient.key1.b
+      propertyPath: UltimateStatusList.Array.data[0].statusGradient.key0.g
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 11433108, guid: 99d7216a19ca3154a816f37c1b5e2b1a, type: 3}
+      propertyPath: UltimateStatusList.Array.data[0].statusGradient.key0.r
+      value: 0.004872902
+      objectReference: {fileID: 0}
+    - target: {fileID: 11433108, guid: 99d7216a19ca3154a816f37c1b5e2b1a, type: 3}
+      propertyPath: UltimateStatusList.Array.data[0].statusGradient.key1.b
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 11433108, guid: 99d7216a19ca3154a816f37c1b5e2b1a, type: 3}
       propertyPath: UltimateStatusList.Array.data[0].statusGradient.key1.g
-      value: 0.43300706
+      value: 0.8857479
       objectReference: {fileID: 0}
     - target: {fileID: 11433108, guid: 99d7216a19ca3154a816f37c1b5e2b1a, type: 3}
       propertyPath: UltimateStatusList.Array.data[0].statusGradient.key1.r
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 11433108, guid: 99d7216a19ca3154a816f37c1b5e2b1a, type: 3}
       propertyPath: UltimateStatusList.Array.data[0].statusGradient.key2.a
       value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 11433108, guid: 99d7216a19ca3154a816f37c1b5e2b1a, type: 3}
+      propertyPath: UltimateStatusList.Array.data[0].statusGradient.key2.b
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 11433108, guid: 99d7216a19ca3154a816f37c1b5e2b1a, type: 3}
       propertyPath: UltimateStatusList.Array.data[0].statusGradient.key2.g
-      value: 0.5818834
+      value: 0.8857479
       objectReference: {fileID: 0}
     - target: {fileID: 11433108, guid: 99d7216a19ca3154a816f37c1b5e2b1a, type: 3}
       propertyPath: UltimateStatusList.Array.data[0].statusGradient.key2.r
-      value: 0.7431994
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 11433108, guid: 99d7216a19ca3154a816f37c1b5e2b1a, type: 3}
       propertyPath: UltimateStatusList.Array.data[0].statusGradient.key3.a
       value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 11433108, guid: 99d7216a19ca3154a816f37c1b5e2b1a, type: 3}
-      propertyPath: UltimateStatusList.Array.data[0].statusGradient.key3.g
+      propertyPath: UltimateStatusList.Array.data[0].statusGradient.key3.b
       value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 11433108, guid: 99d7216a19ca3154a816f37c1b5e2b1a, type: 3}
+      propertyPath: UltimateStatusList.Array.data[0].statusGradient.key3.g
+      value: 0.8857479
+      objectReference: {fileID: 0}
+    - target: {fileID: 11433108, guid: 99d7216a19ca3154a816f37c1b5e2b1a, type: 3}
       propertyPath: UltimateStatusList.Array.data[0].statusGradient.key3.r
-      value: 0.021979213
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 11433108, guid: 99d7216a19ca3154a816f37c1b5e2b1a, type: 3}
       propertyPath: UltimateStatusList.Array.data[0].statusGradient.key4.a
@@ -839,7 +847,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 11433108, guid: 99d7216a19ca3154a816f37c1b5e2b1a, type: 3}
       propertyPath: UltimateStatusList.Array.data[0].statusGradient.m_NumColorKeys
-      value: 4
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 11443520, guid: 99d7216a19ca3154a816f37c1b5e2b1a, type: 3}
       propertyPath: m_Sprite
@@ -848,15 +856,15 @@ PrefabInstance:
         type: 3}
     - target: {fileID: 11443520, guid: 99d7216a19ca3154a816f37c1b5e2b1a, type: 3}
       propertyPath: m_Color.b
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 11443520, guid: 99d7216a19ca3154a816f37c1b5e2b1a, type: 3}
-      propertyPath: m_Color.g
       value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 11443520, guid: 99d7216a19ca3154a816f37c1b5e2b1a, type: 3}
+      propertyPath: m_Color.g
+      value: 0.8857479
+      objectReference: {fileID: 0}
+    - target: {fileID: 11443520, guid: 99d7216a19ca3154a816f37c1b5e2b1a, type: 3}
       propertyPath: m_Color.r
-      value: 0.021979213
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 11443520, guid: 99d7216a19ca3154a816f37c1b5e2b1a, type: 3}
       propertyPath: m_FillAmount
