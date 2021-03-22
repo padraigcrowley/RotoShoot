@@ -97,17 +97,12 @@ public abstract class EnemyBehaviour02 : ExtendedBehaviour
       splineMoveScript.loopType = splineMove.LoopType.loop;
       splineMoveScript.closeLoop = true;
     }
-
-
-    //if (TryGetComponent<splineMove>(out splineMove splineMoveScript))
-    //{
-    //  splineMoveScript.pathContainer = waypointPath;
-    //  splineMoveScript.speed = this.speed;
-    //}
     //else
     //{
     //  Debug.LogError($"ERROR! no splineMove component found on {this.name}");
     //}
+
+    spriteMaterial.material.SetFloat("_FadeAmount", 0f);
   }
 
   protected virtual void Update()
@@ -243,7 +238,7 @@ public abstract class EnemyBehaviour02 : ExtendedBehaviour
         break;
     }
 
-    StartCoroutine(DoFadeEffect(.5f, 0f, 1f));
+    StartCoroutine(DoBurnFadeEffect(.75f, 0f, 1f));
     StopMovement();
     LevelManager.Instance.numEnemyKillsInLevel++;
     GameplayManager.Instance.totalEnemyKillCount++;
@@ -260,7 +255,7 @@ public abstract class EnemyBehaviour02 : ExtendedBehaviour
     enemyState = EnemyState.WAITING_TO_RESPAWN;
   }
 
-  IEnumerator DoFadeEffect(float duration, float startVal, float endVal)
+  IEnumerator DoBurnFadeEffect(float duration, float startVal, float endVal)
   {
     float elapsedTime = 0f;
     float currentVal;
