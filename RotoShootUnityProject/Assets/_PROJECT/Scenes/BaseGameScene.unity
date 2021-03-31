@@ -846,7 +846,7 @@ MonoBehaviour:
   playerShipMovementAllowed: 1
   maxEnemy0001HP: 0
   enemy0001BaseSpeed: 1
-  MAX_PLAYER_HP: 100
+  MAX_PLAYER_HP: 2591
   shipLanes:
   - {x: -3.85, y: -6}
   - {x: -1.29, y: -6}
@@ -5261,7 +5261,7 @@ MonoBehaviour:
     type: 3}
   m_PrefabInstance: {fileID: 1480090956}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
+  m_GameObject: {fileID: 2046205030}
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 5074157d2ca19604398aaa3ee1558c2f, type: 3}
@@ -5425,6 +5425,7 @@ MonoBehaviour:
   playerHealthHeart01: {fileID: 73649287}
   LevelCompletePanel: {fileID: 615974328}
   playerStatusBar: {fileID: 1362671393}
+  playerHealthBarObject: {fileID: 2046205030}
 --- !u!4 &1397508540
 Transform:
   m_ObjectHideFlags: 0
@@ -6109,44 +6110,84 @@ PrefabInstance:
       value: Simple Horizontal 00
       objectReference: {fileID: 0}
     - target: {fileID: 11433108, guid: 99d7216a19ca3154a816f37c1b5e2b1a, type: 3}
-      propertyPath: yRatio
-      value: 0.098
+      propertyPath: UltimateStatusList.Array.data[0].colorMode
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 11433108, guid: 99d7216a19ca3154a816f37c1b5e2b1a, type: 3}
-      propertyPath: initialState
+      propertyPath: UltimateStatusList.Array.data[0].smoothFill
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 11433108, guid: 99d7216a19ca3154a816f37c1b5e2b1a, type: 3}
+      propertyPath: UltimateStatusList.Array.data[0].useDramaticFill
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 11433108, guid: 99d7216a19ca3154a816f37c1b5e2b1a, type: 3}
-      propertyPath: statusBarName
-      value: playerStatusBar
+      propertyPath: UltimateStatusList.Array.data[0].statusGradient.ctime0
+      value: 8867
       objectReference: {fileID: 0}
     - target: {fileID: 11433108, guid: 99d7216a19ca3154a816f37c1b5e2b1a, type: 3}
-      propertyPath: statusBarSize
-      value: 4.11
+      propertyPath: UltimateStatusList.Array.data[0].statusGradient.ctime1
+      value: 21588
       objectReference: {fileID: 0}
     - target: {fileID: 11433108, guid: 99d7216a19ca3154a816f37c1b5e2b1a, type: 3}
-      propertyPath: verticalPosition
-      value: 95.6
+      propertyPath: UltimateStatusList.Array.data[0].statusGradient.ctime2
+      value: 65535
       objectReference: {fileID: 0}
     - target: {fileID: 11433108, guid: 99d7216a19ca3154a816f37c1b5e2b1a, type: 3}
-      propertyPath: horizontalPosition
-      value: 57
+      propertyPath: UltimateStatusList.Array.data[0].statusGradient.key0.b
+      value: 0.003915994
+      objectReference: {fileID: 0}
+    - target: {fileID: 11433108, guid: 99d7216a19ca3154a816f37c1b5e2b1a, type: 3}
+      propertyPath: UltimateStatusList.Array.data[0].statusGradient.key0.g
+      value: 0.003915994
+      objectReference: {fileID: 0}
+    - target: {fileID: 11433108, guid: 99d7216a19ca3154a816f37c1b5e2b1a, type: 3}
+      propertyPath: UltimateStatusList.Array.data[0].statusGradient.key0.r
+      value: 0.8301887
+      objectReference: {fileID: 0}
+    - target: {fileID: 11433108, guid: 99d7216a19ca3154a816f37c1b5e2b1a, type: 3}
+      propertyPath: UltimateStatusList.Array.data[0].statusGradient.key1.b
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 11433108, guid: 99d7216a19ca3154a816f37c1b5e2b1a, type: 3}
+      propertyPath: UltimateStatusList.Array.data[0].statusGradient.key1.g
+      value: 0.39902526
+      objectReference: {fileID: 0}
+    - target: {fileID: 11433108, guid: 99d7216a19ca3154a816f37c1b5e2b1a, type: 3}
+      propertyPath: UltimateStatusList.Array.data[0].statusGradient.key1.r
+      value: 0.9056604
+      objectReference: {fileID: 0}
+    - target: {fileID: 11433108, guid: 99d7216a19ca3154a816f37c1b5e2b1a, type: 3}
+      propertyPath: UltimateStatusList.Array.data[0].statusGradient.key2.b
+      value: 0.011480933
+      objectReference: {fileID: 0}
+    - target: {fileID: 11433108, guid: 99d7216a19ca3154a816f37c1b5e2b1a, type: 3}
+      propertyPath: UltimateStatusList.Array.data[0].statusGradient.key2.g
+      value: 0.8113208
+      objectReference: {fileID: 0}
+    - target: {fileID: 11433108, guid: 99d7216a19ca3154a816f37c1b5e2b1a, type: 3}
+      propertyPath: UltimateStatusList.Array.data[0].statusGradient.key2.r
+      value: 0.040110037
+      objectReference: {fileID: 0}
+    - target: {fileID: 11433108, guid: 99d7216a19ca3154a816f37c1b5e2b1a, type: 3}
+      propertyPath: UltimateStatusList.Array.data[0].statusGradient.m_NumColorKeys
+      value: 3
       objectReference: {fileID: 0}
     - target: {fileID: 11443520, guid: 99d7216a19ca3154a816f37c1b5e2b1a, type: 3}
       propertyPath: m_Color.b
-      value: 0.06132078
+      value: 0.003915994
       objectReference: {fileID: 0}
     - target: {fileID: 11443520, guid: 99d7216a19ca3154a816f37c1b5e2b1a, type: 3}
       propertyPath: m_Color.g
-      value: 0.8773585
+      value: 0.003915994
       objectReference: {fileID: 0}
     - target: {fileID: 11443520, guid: 99d7216a19ca3154a816f37c1b5e2b1a, type: 3}
       propertyPath: m_Color.r
-      value: 0.13478191
+      value: 0.8301887
       objectReference: {fileID: 0}
     - target: {fileID: 11443520, guid: 99d7216a19ca3154a816f37c1b5e2b1a, type: 3}
       propertyPath: m_FillAmount
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 22422498, guid: 99d7216a19ca3154a816f37c1b5e2b1a, type: 3}
       propertyPath: m_Pivot.x
@@ -6178,11 +6219,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 22422498, guid: 99d7216a19ca3154a816f37c1b5e2b1a, type: 3}
       propertyPath: m_SizeDelta.x
-      value: 443.88
+      value: 532.44
       objectReference: {fileID: 0}
     - target: {fileID: 22422498, guid: 99d7216a19ca3154a816f37c1b5e2b1a, type: 3}
       propertyPath: m_SizeDelta.y
-      value: 43.50024
+      value: 52.17912
       objectReference: {fileID: 0}
     - target: {fileID: 22422498, guid: 99d7216a19ca3154a816f37c1b5e2b1a, type: 3}
       propertyPath: m_LocalPosition.x
@@ -6214,11 +6255,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 22422498, guid: 99d7216a19ca3154a816f37c1b5e2b1a, type: 3}
       propertyPath: m_AnchoredPosition.x
-      value: 44.5284
+      value: 38.3292
       objectReference: {fileID: 0}
     - target: {fileID: 22422498, guid: 99d7216a19ca3154a816f37c1b5e2b1a, type: 3}
       propertyPath: m_AnchoredPosition.y
-      value: 855.68384
+      value: 851.72626
       objectReference: {fileID: 0}
     - target: {fileID: 22422498, guid: 99d7216a19ca3154a816f37c1b5e2b1a, type: 3}
       propertyPath: m_LocalEulerAnglesHint.x
@@ -6230,6 +6271,10 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 22422498, guid: 99d7216a19ca3154a816f37c1b5e2b1a, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1590516888, guid: 99d7216a19ca3154a816f37c1b5e2b1a, type: 3}
+      propertyPath: m_IsActive
       value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
@@ -7629,6 +7674,12 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2005314396}
   m_CullTransparentMesh: 0
+--- !u!1 &2046205030 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 177704, guid: 99d7216a19ca3154a816f37c1b5e2b1a,
+    type: 3}
+  m_PrefabInstance: {fileID: 1480090956}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &2068431447
 GameObject:
   m_ObjectHideFlags: 0

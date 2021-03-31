@@ -226,10 +226,10 @@ public abstract class EnemyBehaviour02 : ExtendedBehaviour
         deathExplosionInstance.transform.localScale = new Vector3(.5f, .5f, 1f);
         break;
       case (1):
-        deathExplosionInstance.transform.localScale = new Vector3(-.6f, .4f, 1f);
+        deathExplosionInstance.transform.localScale = new Vector3(-.5f, .4f, 1f);
         break;
       case (2):
-        deathExplosionInstance.transform.localScale = new Vector3(.5f, -.6f, 1f);
+        deathExplosionInstance.transform.localScale = new Vector3(.6f, -.6f, 1f);
         break;
       case (3):
         deathExplosionInstance.transform.localScale = new Vector3(-.4f, -.4f, 1f);

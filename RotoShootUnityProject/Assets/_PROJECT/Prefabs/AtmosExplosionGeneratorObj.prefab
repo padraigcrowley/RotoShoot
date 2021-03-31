@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 5595871714586972964}
   - component: {fileID: 5595871714586972965}
   m_Layer: 0
-  m_Name: ExplosionGeneratorObj
+  m_Name: AtmosExplosionGeneratorObj
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -45,7 +45,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   boomAnim: {fileID: 5595871716232567774}
-  sr: {fileID: 5595871716232567773}
 --- !u!1 &5595871716232567775
 GameObject:
   m_ObjectHideFlags: 0

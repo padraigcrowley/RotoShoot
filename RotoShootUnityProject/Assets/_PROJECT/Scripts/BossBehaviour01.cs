@@ -28,10 +28,16 @@ public class BossBehaviour01 : ExtendedBehaviour
   public UltimateStatusBar statusBar;
   private Canvas HealthBarCanvas;
   public float bossMaxHealth = 100, bossCurrentHealth;
+  public GameObject deathExplosion;
+  private GameObject deathExplosionInstance;
 
-  enum BossState { BOSS_INTRO_IN_PROGRESS, BOSS_INTRO_COMPLETED, BOSS_IN_PROGRESS, BOSS_OUTRO_IN_PROGRESS, BOSS_VULNERABLE, BOSS_INVULNERABLE, BOSS_FIRING, BOSS_NOT_FIRING, BOSS_LOWERING_EGG, BOSS_RAISING_EGG }
+  private bool bossHasStartedDying = false;
+  private bool eggFinishedRaising = false, eggFinishedLowering = false;
+  public bool bossHealthBarFinishedFillingUp = false;
 
-  BossState boss01State;
+  public enum BossState { BOSS_INTRO_IN_PROGRESS, BOSS_INTRO_COMPLETED, BOSS_IN_PROGRESS, BOSS_OUTRO_IN_PROGRESS, BOSS_VULNERABLE, BOSS_INVULNERABLE, BOSS_FIRING, BOSS_NOT_FIRING, BOSS_LOWERING_EGG, BOSS_RAISING_EGG, BOSS_DYING, BOSS_DEAD }
+
+  public BossState boss01State;
 
   public GameObject bossDamageFX;
   private void Awake()
@@ -42,11 +48,11 @@ public class BossBehaviour01 : ExtendedBehaviour
 
   void Start()
   {
-    
+
     transform.position = new Vector3(startPosX, startPosY, 0f);
     bossMaxHealth *= hpMultiplierFromSpawner;
-    bossCurrentHealth = 0;// we'll set off a coroutine to fill up the healthbar later.
-    UltimateStatusBar.UpdateStatus( "BossHealthBar", bossCurrentHealth, bossMaxHealth);
+    bossCurrentHealth = 1;// we'll set off a coroutine to fill up the healthbar later.
+    UltimateStatusBar.UpdateStatus("BossHealthBar", bossCurrentHealth, bossMaxHealth);
     //bossCurrentHealth = bossMaxHealth;
 
     GameplayManager.Instance.playerShipFiring = false;
@@ -68,7 +74,7 @@ public class BossBehaviour01 : ExtendedBehaviour
     StartCoroutine(BossAppearEffect(5f));
 
     damageFXReady = true;
-       
+
 
   }
 
@@ -79,39 +85,75 @@ public class BossBehaviour01 : ExtendedBehaviour
     //  fireAtPlayerPos = true;
     //  FireMissile(fireAtPlayerPos);
     //}
-
-    switch (boss01State)
+    if (GameplayManager.Instance.currentGameState == GameplayManager.GameState.LEVEL_IN_PROGRESS)
     {
-      case BossState.BOSS_INTRO_IN_PROGRESS:
-        break;
-      case BossState.BOSS_INTRO_COMPLETED:
-        {
-          HealthBarCanvas.enabled = true;
-          pulseTween = transform.DOScale(1.1f, 0.5f).SetLoops(50, LoopType.Yoyo );
-          StartCoroutine(FillHealthBar(5f,bossMaxHealth));
-          
-          boss01State = BossState.BOSS_INVULNERABLE;
+      switch (boss01State)
+      {
+        case BossState.BOSS_INTRO_IN_PROGRESS:
           break;
-        }
-      case BossState.BOSS_INVULNERABLE:
-        {
-          if (!waiting)
+        case BossState.BOSS_INTRO_COMPLETED:
           {
-            StartCoroutine(DelayedLowerEgg());
+            HealthBarCanvas.enabled = true;
+            pulseTween = transform.DOScale(1.1f, 0.5f).SetLoops(50, LoopType.Yoyo);
+            StartCoroutine(FillHealthBar(5f, bossMaxHealth));
+
+            boss01State = BossState.BOSS_INVULNERABLE;
+            break;
           }
-          break;
-        }
-      case BossState.BOSS_VULNERABLE:
-        {
-          
-          if (!waiting)
+        case BossState.BOSS_INVULNERABLE:
           {
-            StartCoroutine(DelayedRaiseEgg());
+            if (bossCurrentHealth <= 0)
+            {
+              boss01State = BossState.BOSS_DYING;
+              break;
+            }
+            if (!waiting)
+            {
+              StartCoroutine(DelayedLowerEgg());
+            }
+            break;
           }
+        case BossState.BOSS_VULNERABLE:
+          {
+            if (bossCurrentHealth <= 0)
+            {
+              boss01State = BossState.BOSS_DYING;
+              break;
+            }
+            if (!waiting)
+            {
+              StartCoroutine(DelayedRaiseEgg());
+            }
+            break;
+          }
+        case BossState.BOSS_DYING:
+          {
+            if (!bossHasStartedDying)
+            {
+              bossHasStartedDying = true;
+              StopCoroutine(DelayedLowerEgg());
+              StopCoroutine(DelayedRaiseEgg());
+              CancelInvoke();
+              splineMoveScript.Stop();
+              StartCoroutine(DoBossDeath());
+              bossEgg.SetActive(false);
+            }
+
+            break;
+          }
+        case BossState.BOSS_DEAD:
+          {
+            //TODO
+            //print("BOSS IS DEAD SEQUENCE");
+            break;
+          }
+        default:
           break;
-        }
-      default:
-        break;
+      }
+    }
+    else if (GameplayManager.Instance.currentGameState == GameplayManager.GameState.LEVEL_OUTRO_IN_PROGRESS)
+    {
+
     }
   }
   private IEnumerator FillHealthBar(float duration, float newHealthLevel)
@@ -120,18 +162,19 @@ public class BossBehaviour01 : ExtendedBehaviour
     //float currentVal;
     float bossStartHealth = bossCurrentHealth;
 
-    while (elapsedTime <= duration) 
+    while (elapsedTime <= duration)
     {
       bossCurrentHealth = Mathf.Lerp(bossStartHealth, newHealthLevel, (elapsedTime / duration));
       elapsedTime += Time.deltaTime;
       //bossCurrentHealth -= 10;
       //print($"bossCurrHealth: {bossCurrentHealth}");
-      UltimateStatusBar.UpdateStatus( "BossHealthBar", bossCurrentHealth, bossMaxHealth);
+      UltimateStatusBar.UpdateStatus("BossHealthBar", bossCurrentHealth, bossMaxHealth);
       yield return null;
       //yield return new WaitForEndOfFrame();
     }
+    bossHealthBarFinishedFillingUp = true;
   }
-  
+
   IEnumerator BossAppearEffect(float duration)
   {
     float elapsedTime = 0f;
@@ -165,66 +208,79 @@ public class BossBehaviour01 : ExtendedBehaviour
 
   private IEnumerator DelayedLowerEgg()
   {
-    waiting = true;
-    yield return new WaitForSeconds(5f);
-
-    if (firstTimeAppearance)
+    print("1st line of DelayedLowerEgg");
+      waiting = true;
+      yield return new WaitForSeconds(5f);
+    if ((boss01State != BossState.BOSS_DEAD) && (boss01State != BossState.BOSS_DEAD))
     {
-      pulseTween.Pause();
-      splineMoveScript.StartMove();
-      GameplayManager.Instance.playerShipFiring = true;
-      GameplayManager.Instance.playerShipMovementAllowed = true;
-      firstTimeAppearance = false;
-    }
 
-    CancelInvoke(); //stop firing at player
-    bossEggAnimator.Play("Boss01EggLower"); 
-    eggIsMoving = true;
-    while (eggIsMoving)
-    {
-      yield return null;
+      if (firstTimeAppearance)
+      {
+        pulseTween.Pause();
+        splineMoveScript.StartMove();
+        GameplayManager.Instance.playerShipFiring = true;
+        GameplayManager.Instance.playerShipMovementAllowed = true;
+        firstTimeAppearance = false;
+      }
+
+      CancelInvoke(); //stop firing at player
+      bossEggAnimator.Play("Boss01EggLower");
+      eggIsMoving = true;
+      while (eggIsMoving)
+      {
+        yield return null;
+      }
+
+      InvokeRepeating(nameof(this.FireMissileAtPlayerPos), 0, .75f);
+      //InvokeRepeating(nameof(this.FireMissileStraightDown), 1, 2f);
+
+      boss01State = BossState.BOSS_VULNERABLE;
+      waiting = false;
     }
-      
-    InvokeRepeating(nameof(this.FireMissileAtPlayerPos), 0, .75f);
-    //InvokeRepeating(nameof(this.FireMissileStraightDown), 1, 2f);
-    
-    boss01State = BossState.BOSS_VULNERABLE;
-    waiting = false;
   }
 
   private IEnumerator DelayedRaiseEgg()
   {
-    waiting = true;
-    yield return new WaitForSeconds(5f);
-    
-    //calculate how much to add back onto healthbar - 1/3 of what health the boss DOESN'T have (maxHealth - currentHealth)
-    float amountToRaiseTo = bossCurrentHealth + ((bossMaxHealth - bossCurrentHealth) / 3.0f);
-    print("StartCoroutine(FillHealthBar)");
-    pulseTween.Restart();
-    StartCoroutine(FillHealthBar(2.5f, amountToRaiseTo)); 
-    
-    CancelInvoke();//stop firing at player
-    bossEggAnimator.Play("Boss01EggRaise");
-    eggIsMoving = true;
-    while (eggIsMoving)
+      print("1st line of DelayedRaiseEgg");
+      waiting = true;
+      yield return new WaitForSeconds(5f);
+
+    if (bossCurrentHealth <= 0)
     {
-      yield return null;
+      boss01State = BossState.BOSS_DYING;
+      yield break;
     }
-    pulseTween.Pause();
 
-    //InvokeRepeating(nameof(this.FireMissileAtPlayerPos), 0, 1f);
-    InvokeRepeating(nameof(this.FireMissileAtPlayerPos), 0f, .5f);
-    InvokeRepeating(nameof(this.FireMissileStraightDown), .25f, .5f);
+    if ((boss01State != BossState.BOSS_DEAD) && (boss01State != BossState.BOSS_DEAD))
+    {
+      //calculate how much to add back onto healthbar - 1/3 of what health the boss DOESN'T have (maxHealth - currentHealth)
+      float amountToRaiseTo = bossCurrentHealth + ((bossMaxHealth - bossCurrentHealth) / 3.0f);
+      pulseTween.Restart();
+      ///StartCoroutine(FillHealthBar(2.5f, amountToRaiseTo)); 
 
-    boss01State = BossState.BOSS_INVULNERABLE;
-    waiting = false;
+      CancelInvoke();//stop firing at player
+      bossEggAnimator.Play("Boss01EggRaise");
+      eggIsMoving = true;
+      while (eggIsMoving)
+      {
+        yield return null;
+      }
+      pulseTween.Pause();
+
+      //InvokeRepeating(nameof(this.FireMissileAtPlayerPos), 0, 1f);
+      InvokeRepeating(nameof(this.FireMissileAtPlayerPos), 0f, .5f);
+      InvokeRepeating(nameof(this.FireMissileStraightDown), .25f, .5f);
+
+      boss01State = BossState.BOSS_INVULNERABLE;
+      waiting = false;
+    }
   }
 
   IEnumerator BossTakesDamageEffect(float halfDuration)
   {
     float elapsedTime = 0f;
     float currentVal;
-    
+
     while (elapsedTime <= halfDuration) //from normal to red
     {
       foreach (Renderer sr in bossSpriteMaterials)
@@ -275,24 +331,6 @@ public class BossBehaviour01 : ExtendedBehaviour
   }
 
   //custom method, gets called by ChildCollider.cs
-  public void OnChildTriggerEntered(Collider other, string childTag)
-  {
-    if (other.gameObject.CompareTag("PlayerMissile") && childTag.Equals("BossVulnerable"))
-    {
-      GameObject newParticleEffect = SimplePool.Spawn(bossDamageFX, other.gameObject.transform.position, bossDamageFX.transform.rotation, transform) as GameObject;
-      Wait(2, () => {
-        SimplePool.Despawn(newParticleEffect);
-      });
-      if (damageFXReady)
-      {
-        damageFXReady = false;
-        StartCoroutine(BossTakesDamageEffect(.25f)); //note: the param is half the overall duration
-        StartCoroutine(DamageFXCooldown(.5f));
-      }
-      bossCurrentHealth -= 10;
-      UltimateStatusBar.UpdateStatus( "BossHealthBar", bossCurrentHealth, bossMaxHealth);
-    }
-  }
   void FireMissileAtPlayerPos()
   {
     FireMissile(true);
@@ -317,12 +355,53 @@ public class BossBehaviour01 : ExtendedBehaviour
      * 0 to the right and
      * 180 (-180) to the left */
     if (angle > 180) angle -= 360;
-    
+
     rotation.eulerAngles = new Vector3(-angle, 90, 0); // use different values to lock on different axis
 
     firedBullet = SimplePool.Spawn(bossMissile, bossEgg.transform.position, Quaternion.identity, bossMissilesParentPool.transform);
     firedBullet.transform.localRotation = rotation; //v.important line!!!
 
+  }
+
+  IEnumerator DoBossDeath()
+  {
+    int numExplosions = 20;
+    float timeBetweenExplosions = .25f;
+
+    for (int i = 0; i < numExplosions; i++)
+    {
+      deathExplosionInstance = SimplePool.Spawn(deathExplosion, bossEgg.transform.position, bossEgg.transform.rotation);
+
+      //change the sorting order so the explosion is sorted over the boss sprite. the explosion sorting is set to default layer as that works best for enemy deaths - the enemy death effect doesn't get too obscured by the explosion. And yeah, I know I'm doing a GetComponent here, but it's on boss death so shouldn't matter if it's slow...
+      deathExplosionInstance.GetComponentInChildren<SpriteRenderer>().sortingLayerName = "VFX_OverPlayerShip";
+      yield return new WaitForSeconds(timeBetweenExplosions);
+
+    }
+
+    boss01State = BossState.BOSS_DEAD;
+  }
+
+  public void OnChildTriggerEntered(Collider other, string childTag)
+  {
+    if (other.gameObject.CompareTag("PlayerMissile") && childTag.Equals("BossVulnerable"))
+    {
+      GameObject newParticleEffect = SimplePool.Spawn(bossDamageFX, other.gameObject.transform.position, bossDamageFX.transform.rotation, transform) as GameObject;
+      Wait(2, () => {
+        SimplePool.Despawn(newParticleEffect);
+      });
+      if (damageFXReady)
+      {
+        damageFXReady = false;
+        StartCoroutine(BossTakesDamageEffect(.25f)); //note: the param is half the overall duration
+        StartCoroutine(DamageFXCooldown(.5f));
+      }
+      bossCurrentHealth -= 10;
+      UltimateStatusBar.UpdateStatus("BossHealthBar", bossCurrentHealth, bossMaxHealth);
+      if (bossCurrentHealth <= 0)
+      {
+        boss01State = BossState.BOSS_DYING;
+      }
+    }
   }
 
 }

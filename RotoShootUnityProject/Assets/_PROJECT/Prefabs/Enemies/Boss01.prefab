@@ -439,6 +439,8 @@ MonoBehaviour:
   statusBar: {fileID: 5568694837838794041}
   bossMaxHealth: 100
   bossCurrentHealth: 100
+  deathExplosion: {fileID: 5595871714586972966, guid: aa83ec4255e21cb4990b8016587a59ec,
+    type: 3}
   bossDamageFX: {fileID: 136094, guid: cbf6e26bfae3a4f48acb9bb79ce1e5da, type: 3}
 --- !u!54 &4304561565860451195
 Rigidbody:
@@ -936,11 +938,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 22422498, guid: 99d7216a19ca3154a816f37c1b5e2b1a, type: 3}
       propertyPath: m_AnchoredPosition.x
-      value: 0
+      value: 2.8035104
       objectReference: {fileID: 0}
     - target: {fileID: 22422498, guid: 99d7216a19ca3154a816f37c1b5e2b1a, type: 3}
       propertyPath: m_AnchoredPosition.y
-      value: 0
+      value: 7.1840277
       objectReference: {fileID: 0}
     - target: {fileID: 22422498, guid: 99d7216a19ca3154a816f37c1b5e2b1a, type: 3}
       propertyPath: m_LocalEulerAnglesHint.x

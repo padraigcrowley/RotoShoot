@@ -11,9 +11,12 @@ public class UIManager : Singleton<UIManager>
   [SerializeField] private GameObject LevelCompletePanel;
 
   public UltimateStatusBar playerStatusBar;
+  public GameObject playerHealthBarObject;
+
   // Start is called before the first frame update
   void Start()
   {
+    playerHealthBarObject.SetActive(false);
     CurrentPlayerScoreText.text = GameplayManager.Instance.currentPlayerScore.ToString();
     HighPlayerScoreText.text = GameplayManager.Instance.highPlayerScore.ToString();
     CurrentEnemyKillCount.text = LevelManager.Instance.numEnemyKillsInLevel.ToString();
@@ -34,8 +37,8 @@ public class UIManager : Singleton<UIManager>
         }
       case GameplayManager.GameState.LEVEL_IN_PROGRESS:
         {
-
-          UltimateStatusBar.UpdateStatus("playerStatusBar", GameplayManager.Instance.currentPlayerHP, GameplayManager.Instance.MAX_PLAYER_HP); ////TEST TEST TEST TEST
+          //playerHealthBarObject.SetActive(true);
+          //UltimateStatusBar.UpdateStatus("playerStatusBar", GameplayManager.Instance.currentPlayerHP, GameplayManager.Instance.MAX_PLAYER_HP); 
 
           CurrentPlayerScoreText.text = (GameplayManager.Instance.currentPlayerScore).ToString();
           CurrentEnemyKillCount.text = LevelManager.Instance.numEnemyKillsInLevel.ToString();

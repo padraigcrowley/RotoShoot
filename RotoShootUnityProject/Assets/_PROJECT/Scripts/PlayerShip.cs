@@ -294,7 +294,7 @@ public class PlayerShip : ExtendedBehaviour
   
   private void OnTriggerEnter(Collider collision)
   {
-    if(!invulnerable)
+    if(!GameplayManager.Instance.playerShipInvulnerable)
     {
       if (GameplayManager.Instance.currentGameState == GameplayManager.GameState.LEVEL_IN_PROGRESS)
       {
@@ -312,6 +312,7 @@ public class PlayerShip : ExtendedBehaviour
           //print($"collision between this {transform.position} and other {collision.gameObject.transform.position}");
           DoCameraShake();
           ChangeShipHP(-10);
+          UltimateStatusBar.UpdateStatus("playerStatusBar", GameplayManager.Instance.currentPlayerHP, GameplayManager.Instance.MAX_PLAYER_HP);
         }
 
         if ((collision.gameObject.tag.Equals("Asteroid")))

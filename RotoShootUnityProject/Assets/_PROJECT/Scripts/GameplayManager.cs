@@ -27,11 +27,12 @@ public class GameplayManager : Singleton<GameplayManager>, IPowerUpEvents
   public float currentPlayerMissileSpeedMultiplier;
   public float basePlayerMissileSpeedMultiplier;
 
+  public bool playerShipInvulnerable = false;
+  public bool playerShipMovementAllowed = true;
+  public bool playerShipFiring = true;
   public float currentPlayerShipFireRate; // the lower the number, the faster the rate.
   public float basePlayerShipFireRate; // the lower the number, the faster the rate.
-  public bool playerShipFiring = true;
-  public bool playerShipMovementAllowed = true;
-
+  
   public int maxEnemy0001HP; //set in the inspector
   public float enemy0001BaseSpeed = 1.0f;
 
