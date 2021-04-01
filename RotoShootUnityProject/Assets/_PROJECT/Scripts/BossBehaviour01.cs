@@ -131,12 +131,14 @@ public class BossBehaviour01 : ExtendedBehaviour
             if (!bossHasStartedDying)
             {
               bossHasStartedDying = true;
+              pulseTween.Kill();
               StopCoroutine(DelayedLowerEgg());
               StopCoroutine(DelayedRaiseEgg());
               CancelInvoke();
               splineMoveScript.Stop();
               StartCoroutine(DoBossDeath());
               bossEgg.SetActive(false);
+              StartCoroutine(DoBurnFadeEffect(15f));
             }
 
             break;
@@ -367,10 +369,16 @@ public class BossBehaviour01 : ExtendedBehaviour
   {
     int numExplosions = 20;
     float timeBetweenExplosions = .25f;
+    Vector3 explosionPos;
 
     for (int i = 0; i < numExplosions; i++)
     {
-      deathExplosionInstance = SimplePool.Spawn(deathExplosion, bossEgg.transform.position, bossEgg.transform.rotation);
+      explosionPos = new Vector3(bossEgg.transform.position.x + Random.Range(-2,2), 
+                                  bossEgg.transform.position.y + Random.Range(-1, 4), 
+                                  bossEgg.transform.position.z);
+      
+      deathExplosionInstance = SimplePool.Spawn(deathExplosion, explosionPos, bossEgg.transform.rotation);
+      GameObject newParticleEffect = SimplePool.Spawn(bossDamageFX, explosionPos, bossEgg.transform.rotation, transform) as GameObject;
 
       //change the sorting order so the explosion is sorted over the boss sprite. the explosion sorting is set to default layer as that works best for enemy deaths - the enemy death effect doesn't get too obscured by the explosion. And yeah, I know I'm doing a GetComponent here, but it's on boss death so shouldn't matter if it's slow...
       deathExplosionInstance.GetComponentInChildren<SpriteRenderer>().sortingLayerName = "VFX_OverPlayerShip";
@@ -379,6 +387,29 @@ public class BossBehaviour01 : ExtendedBehaviour
     }
 
     boss01State = BossState.BOSS_DEAD;
+  }
+
+  IEnumerator DoBurnFadeEffect(float duration)
+  {
+    float elapsedTime = 0f;
+    float currentVal;
+
+    while (elapsedTime <= duration)
+    {
+      foreach (Renderer sr in bossSpriteMaterials)
+      {
+        if (sr != null)
+        {
+          //sr.material.SetFloat("_ChromAberrAmount", 0f);
+          currentVal = Mathf.Lerp(0f, 1f, (elapsedTime / duration));
+          sr.material.SetFloat("_FadeAmount", currentVal);
+          elapsedTime += Time.deltaTime;
+        }
+      }
+      yield return null;
+      //yield return new WaitForEndOfFrame();
+    }
+   
   }
 
   public void OnChildTriggerEntered(Collider other, string childTag)
