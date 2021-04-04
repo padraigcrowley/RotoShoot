@@ -324,6 +324,7 @@ public class LevelManager : Singleton<LevelManager>
       else // level completion criteria = true
       {
         print("Level Completion Criteria TRUE!, Next Level is:" + (GameManagerX.Instance.currentLevel + 1));
+        
         GameplayManager.Instance.currentGameState = GameplayManager.GameState.LEVEL_OUTRO_IN_PROGRESS;
       }
     }    

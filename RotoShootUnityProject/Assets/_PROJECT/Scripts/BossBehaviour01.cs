@@ -139,6 +139,9 @@ public class BossBehaviour01 : ExtendedBehaviour
               StartCoroutine(DoBossDeath());
               bossEgg.SetActive(false);
               StartCoroutine(DoBurnFadeEffect(15f));
+              GameplayManager.Instance.playerShipFiring = false;
+              GameplayManager.Instance.playerShipMovementAllowed = false;
+              HealthBarCanvas.enabled = false;
             }
 
             break;
@@ -147,6 +150,8 @@ public class BossBehaviour01 : ExtendedBehaviour
           {
             //TODO
             //print("BOSS IS DEAD SEQUENCE");
+            LevelManager.Instance.bossHasBeenKilled = true;
+            Destroy(gameObject);
             break;
           }
         default:

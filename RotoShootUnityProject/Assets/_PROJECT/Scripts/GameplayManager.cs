@@ -73,6 +73,8 @@ public class GameplayManager : Singleton<GameplayManager>, IPowerUpEvents
     {
       case GameState.LEVEL_IN_PROGRESS:
         {
+          GameplayManager.Instance.playerShipFiring = true;
+          GameplayManager.Instance.playerShipMovementAllowed = true;
           if (currentPlayerScore > highPlayerScore)
           {
             highPlayerScore = currentPlayerScore;
@@ -83,6 +85,12 @@ public class GameplayManager : Singleton<GameplayManager>, IPowerUpEvents
             print("Game Over!");
             currentGameState = GameState.GAME_OVER_SCREEN;
           }
+          break;
+        }
+      case GameState.LEVEL_OUTRO_IN_PROGRESS:
+        {
+          GameplayManager.Instance.playerShipFiring = false;
+          GameplayManager.Instance.playerShipMovementAllowed = false;
           break;
         }
       case GameState.LEVEL_COMPLETE:
