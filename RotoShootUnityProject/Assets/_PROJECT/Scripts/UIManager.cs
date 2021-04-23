@@ -2,26 +2,68 @@
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
+using System.Collections;
 
 public class UIManager : Singleton<UIManager>
 {
-  public TextMeshProUGUI HighPlayerScoreText, CurrentPlayerScoreText, CurrentEnemyKillCount, RequiredEnemyKillCount, levelPlayTimeCounterText, starCoinCountText;
+  public TextMeshProUGUI HighPlayerScoreText, CurrentPlayerScoreText, CurrentEnemyKillCount, RequiredEnemyKillCount, levelPlayTimeCounterText, starCoinCountText, MissionStartLCCText;
+  public GameObject MissionStartLCCTextObject;
   public Button gameRestartButton, gameExitButton;
   public Image playerHealthHeart03, playerHealthHeart02, playerHealthHeart01;
   [SerializeField] private GameObject LevelCompletePanel;
 
   public UltimateStatusBar playerStatusBar;
   public GameObject playerHealthBarObject;
+  public Febucci.UI.TextAnimatorPlayer textAnimatorPlayer;
 
   // Start is called before the first frame update
   void Start()
   {
     playerHealthBarObject.SetActive(false);
+    //MissionStartLCCTextObject.SetActive(false);
     CurrentPlayerScoreText.text = GameplayManager.Instance.currentPlayerScore.ToString();
     HighPlayerScoreText.text = GameplayManager.Instance.highPlayerScore.ToString();
     CurrentEnemyKillCount.text = LevelManager.Instance.numEnemyKillsInLevel.ToString();
     RequiredEnemyKillCount.text = "/" + LevelManager.Instance.levelSetupData.lccEnemyKills.ToString();
+    
+  }
 
+  
+  public IEnumerator DoMissionStartLCCText(float appearDelay, float disappearDelay, string myText)
+  {
+    
+    float aValue = 0f, fadeOutDuration = 2f;
+    float alpha = MissionStartLCCText.color.a;
+
+    yield return new WaitForSeconds(appearDelay);
+    
+    MissionStartLCCTextObject.SetActive(true);
+    textAnimatorPlayer.ShowText(myText);
+        
+    yield return new WaitForSeconds(disappearDelay);
+    for (float t = 0.0f; t < 1.0f; t += Time.deltaTime / fadeOutDuration)
+    {
+      Color newColor = new Color(1, 1, 1, Mathf.Lerp(alpha, aValue, t));
+      MissionStartLCCText.color = newColor;
+      yield return null;
+    }
+
+    MissionStartLCCText.color = new Color (1,1,1,alpha); //reset the alpha back to the original value
+		//yield return new WaitForSeconds(appearDelay);
+  //  myText = "KILL\n999\nENEMIES";
+  //  //MissionStartLCCText.text = myText;
+  //  textAnimatorPlayer.ShowText(myText);
+    
+
+		//yield return new WaitForSeconds(disappearDelay);
+		//for (float t = 0.0f; t < 1.0f; t += Time.deltaTime / fadeOutDuration)
+		//{
+		//	Color newColor = new Color(1, 1, 1, Mathf.Lerp(alpha, aValue, t));
+		//	MissionStartLCCText.color = newColor;
+		//	yield return null;
+		//}
+
+		MissionStartLCCTextObject.SetActive(false);
   }
 
   // Update is called once per frame

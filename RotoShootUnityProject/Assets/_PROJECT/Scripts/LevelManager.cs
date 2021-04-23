@@ -16,6 +16,7 @@ public class LevelManager : Singleton<LevelManager>
   public float verticalDistBetweenEnemies = 2.0f; //todo: magic number
   public float horizontalDistBetweenEnemies = 2.0f; //todo: magic number
   public bool readyToFireAtPlayer = false;
+  
 
   // a list of lists of EnemyBehaviour02 scripts - for each enemy in each wave
   List<List<EnemyBehaviour02>> enemyWavesParentBehaviourScripts = new List<List<EnemyBehaviour02>>();
@@ -68,12 +69,15 @@ public class LevelManager : Singleton<LevelManager>
     if (levelSetupData.lccEnemyKills != -1)
     {
       SetupEnemies();
+      StartCoroutine(UIManager.Instance.DoMissionStartLCCText(2f, 2f, $"KILL\n{levelSetupData.lccEnemyKills}\nENEMIES!"));
     }
     if (levelSetupData.lccKillBoss)
     {
       SetupBoss();
+      StartCoroutine(UIManager.Instance.DoMissionStartLCCText(2f, 2f, "KILL\nTHE\nBOSS!"));
+
     }
-    if(levelSetupData.spinningMineSpawnPointData.levelHasSpinningMine)
+    if (levelSetupData.spinningMineSpawnPointData.levelHasSpinningMine)
     {
       SetupSpinningMine();
     }

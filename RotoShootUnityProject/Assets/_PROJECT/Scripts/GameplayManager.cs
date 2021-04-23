@@ -28,8 +28,8 @@ public class GameplayManager : Singleton<GameplayManager>, IPowerUpEvents
   public float basePlayerMissileSpeedMultiplier;
 
   public bool playerShipInvulnerable = false;
-  public bool playerShipMovementAllowed = true;
-  public bool playerShipFiring = true;
+  public bool playerShipMovementAllowed = false;
+  public bool playerShipFiring = false;
   public float currentPlayerShipFireRate; // the lower the number, the faster the rate.
   public float basePlayerShipFireRate; // the lower the number, the faster the rate.
   
@@ -73,8 +73,17 @@ public class GameplayManager : Singleton<GameplayManager>, IPowerUpEvents
     {
       case GameState.LEVEL_IN_PROGRESS:
         {
-          GameplayManager.Instance.playerShipFiring = true;
-          GameplayManager.Instance.playerShipMovementAllowed = true;
+          //if (Input.GetKey(KeyCode.Space))
+          //  Time.timeScale = 1f / 4f; //set time to 1/4 speed
+          
+
+          //if it's a boss level don't allow the player ship to move or fire just yet. The boss code will do it.
+          if(LevelManager.Instance.LevelCompletionCriteria.ContainsKey("KillBoss") == false)
+					{
+            playerShipFiring = true;
+            playerShipMovementAllowed = true;
+					}
+          
           if (currentPlayerScore > highPlayerScore)
           {
             highPlayerScore = currentPlayerScore;

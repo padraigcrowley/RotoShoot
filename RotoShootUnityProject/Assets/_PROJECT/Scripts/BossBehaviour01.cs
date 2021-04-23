@@ -96,6 +96,8 @@ public class BossBehaviour01 : ExtendedBehaviour
             HealthBarCanvas.enabled = true;
             pulseTween = transform.DOScale(1.1f, 0.5f).SetLoops(50, LoopType.Yoyo);
             StartCoroutine(FillHealthBar(5f, bossMaxHealth));
+            //GameplayManager.Instance.playerShipFiring = true;
+           // GameplayManager.Instance.playerShipMovementAllowed = true;
 
             boss01State = BossState.BOSS_INVULNERABLE;
             break;
