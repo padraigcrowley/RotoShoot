@@ -29,7 +29,7 @@ public abstract class EnemyBehaviour02 : ExtendedBehaviour
   public GameObject deathExplosionInstance;
   public GameObject enemyExplosionsPool;
 
-  public enum EnemyState { ALIVE, TEMPORARILY_DEAD, WAITING_TO_RESPAWN, INVINCIBLE, FULLY_DEAD, HIT_BY_PLAYER_MISSILE, HIT_BY_PLAYER_SHIP, HIT_BY_ATMOSPHERE }
+  public enum EnemyState { ALIVE, TEMPORARILY_DEAD, WAITING_TO_RESPAWN, INVINCIBLE, FULLY_DYING, FULLY_DEAD, HIT_BY_PLAYER_MISSILE, HIT_BY_PLAYER_SHIP, HIT_BY_ATMOSPHERE }
 
   public EnemyState enemyState;
   public bool waveRespawnWaitOver;
@@ -107,10 +107,10 @@ public abstract class EnemyBehaviour02 : ExtendedBehaviour
 
   protected virtual void Update()
   {
-    if (Input.GetKeyDown(KeyCode.S))
-    {
-      TemporarilyDie();
-    }
+    //if (Input.GetKeyDown(KeyCode.S))
+    //{
+    //  TemporarilyDie();
+    //}
 
     if (GameplayManager.Instance.currentGameState == GameplayManager.GameState.LEVEL_IN_PROGRESS)
     {
@@ -171,6 +171,11 @@ public abstract class EnemyBehaviour02 : ExtendedBehaviour
           {
             break;
           }
+        case EnemyState.FULLY_DYING:
+          {
+            
+            break;
+          }
         case EnemyState.FULLY_DEAD:
           {
             break;
@@ -183,7 +188,14 @@ public abstract class EnemyBehaviour02 : ExtendedBehaviour
     }
     else if (GameplayManager.Instance.currentGameState == GameplayManager.GameState.LEVEL_OUTRO_IN_PROGRESS)
     {
-      Destroy(gameObject);//todo, instead of just destroy, add some fancy sprite shader effect here, then destroy after delay.
+      if (enemyState == EnemyState.FULLY_DEAD)
+        return;
+      if (enemyState == EnemyState.ALIVE)
+      {
+        enemyState = EnemyState.FULLY_DYING;
+        FullyDie();
+      }
+
     }
     else if (GameplayManager.Instance.currentGameState == GameplayManager.GameState.GAME_OVER_SCREEN)
     {
@@ -253,6 +265,35 @@ public abstract class EnemyBehaviour02 : ExtendedBehaviour
     startedWaiting = false;
 
     enemyState = EnemyState.WAITING_TO_RESPAWN;
+  }
+
+  private void FullyDie()
+  {
+    //deathExplosionInstance = SimplePool.Spawn(deathExplosion, this.transform.position, this.transform.rotation, enemyExplosionsPool.transform);
+
+    //int randScaleFlip = UnityEngine.Random.Range(0, 4);// not scaleflipped, scaledFlippedX, scaledFlippedY, scaledFlippedXandY
+    //switch (randScaleFlip)
+    //{
+    //  case (0):
+    //    deathExplosionInstance.transform.localScale = new Vector3(.5f, .5f, 1f);
+    //    break;
+    //  case (1):
+    //    deathExplosionInstance.transform.localScale = new Vector3(-.5f, .4f, 1f);
+    //    break;
+    //  case (2):
+    //    deathExplosionInstance.transform.localScale = new Vector3(.6f, -.6f, 1f);
+    //    break;
+    //  case (3):
+    //    deathExplosionInstance.transform.localScale = new Vector3(-.4f, -.4f, 1f);
+    //    break;
+    //  default:
+    //    break;
+    //}
+
+    StartCoroutine(DoBurnFadeEffect(.75f, 0f, 1f));
+    StopMovement();
+    enemyState = EnemyState.FULLY_DEAD;
+    Destroy(gameObject,2f);
   }
 
   IEnumerator DoBurnFadeEffect(float duration, float startVal, float endVal)

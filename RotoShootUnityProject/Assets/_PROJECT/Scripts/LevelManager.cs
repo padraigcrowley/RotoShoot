@@ -39,7 +39,6 @@ public class LevelManager : Singleton<LevelManager>
     GameplayManager.Instance.levelControlType = levelSetupData.levelControlType;
     GameplayManager.Instance.shipLanes = levelSetupData.shipLanes;
     timeBetweenAsteroidShower = levelSetupData.timeBetweenAsteroidShower;
-
   }
 
   void InitializeLCC()
@@ -182,7 +181,7 @@ public class LevelManager : Singleton<LevelManager>
   void Update()
   {
     //if (Input.GetKeyDown(KeyCode.S))
-      //spinningMineInstance = Instantiate(spinningMine);
+    //spinningMineInstance = Instantiate(spinningMine);
 
     if (GameplayManager.Instance.currentGameState == GameplayManager.GameState.LEVEL_IN_PROGRESS)
     {
@@ -226,10 +225,11 @@ public class LevelManager : Singleton<LevelManager>
           }
         }
       }
-        CheckLCC(); // check LevelCompletionCriteria
-    }
-  }
 
+      CheckLCC(); // check LevelCompletionCriteria  
+    }
+    
+  }
   IEnumerator ActivateEnemyWave()
   {
     currentlyActivatingWave = true;
