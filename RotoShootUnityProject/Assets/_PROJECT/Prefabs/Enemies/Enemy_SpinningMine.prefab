@@ -144,7 +144,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   waypointPath: {fileID: 0}
   splineMoveScript: {fileID: 2411896081061765968}
-  numBurstFires: 0
   numBurstFiresBeforePause: 4
   waitTimeBeforeFirstSpawn: 0
   waitTimeBetweenSpawns: 0

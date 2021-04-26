@@ -24,7 +24,11 @@ public class PowerUpShield : PowerUp
 
   protected override void Update()
   {
-    if (powerUpState == PowerUpState.IsCollected)
+    if (GameplayManager.Instance.currentGameState == GameplayManager.GameState.LEVEL_OUTRO_IN_PROGRESS)
+    {
+      Destroy(gameObject);
+    }
+      if (powerUpState == PowerUpState.IsCollected)
     {
       durationSeconds -= Time.deltaTime;
       if (durationSeconds < 0)

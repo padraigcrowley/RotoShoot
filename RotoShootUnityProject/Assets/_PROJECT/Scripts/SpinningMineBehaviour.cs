@@ -7,7 +7,7 @@ using SWS; //simple waypoints
 public class SpinningMineBehaviour : ExtendedBehaviour
 {
 
-  enum EnemyState { DOING_NOTHING, WAITING_TO_SPAWN, SPAWNING, SPINNING_IN_STARTED, SPINNING_IN_IN_PROGRESS, SPINNING_IN_COMPLETED, FIRING, NOT_FIRING, SPINNING_OUT_STARTED, SPINNING_OUT_IN_PROGRESS, SPINNING_OUT_COMPLETED }
+  enum EnemyState { DOING_NOTHING, WAITING_TO_SPAWN, SPAWNING, SPINNING_IN_STARTED, SPINNING_IN_IN_PROGRESS, SPINNING_IN_COMPLETED, FIRING, NOT_FIRING, SPINNING_OUT_STARTED, SPINNING_OUT_IN_PROGRESS, SPINNING_OUT_COMPLETED, DYING_TEMPORARILY, DEAD_TEMPORARILY, DYING_FULLY, DEAD_FULLY }
   EnemyState enemyState;
   private Renderer spriteMaterial, spriteRenderer;
   private float minX = -3.22f, maxX = 3.2f, minY = -2f, maxY = 8f; //(topleft: -3.22, 8.0) (bottomright: 3.2, -2.0)
@@ -20,7 +20,6 @@ public class SpinningMineBehaviour : ExtendedBehaviour
   public float hpMultiplierFromSpawner;
   public float speedMultiplierFromSpawner;
   private float rotationSpeed = 200f;
-  
 
   public GameObject spinningMineMissile;
   private Quaternion rotation;
@@ -31,6 +30,8 @@ public class SpinningMineBehaviour : ExtendedBehaviour
   private CapsuleCollider[] ShootingPointCollidersArray;
   private bool waitingToRespawn = true, waitingBeforeFirstSpawn = true;
   private bool firstTime = true;
+
+  public UltimateStatusBar statusBar;
 
   private void Awake()
   {

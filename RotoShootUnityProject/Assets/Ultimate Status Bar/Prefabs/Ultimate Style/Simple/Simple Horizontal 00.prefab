@@ -58,7 +58,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 0.13072878, g: 0.8784314, b: 0.06274507, a: 1}
+  m_Color: {r: 1, g: 0, b: 0, a: 1}
   m_RaycastTarget: 1
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1
@@ -70,7 +70,7 @@ MonoBehaviour:
   m_PreserveAspect: 0
   m_FillCenter: 1
   m_FillMethod: 0
-  m_FillAmount: 0.935
+  m_FillAmount: 1
   m_FillClockwise: 1
   m_FillOrigin: 0
   m_UseSpriteMesh: 0
@@ -143,8 +143,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 1052562752432863323, guid: 1c94ad265144f4842af9a3e629570f85,
-    type: 3}
+  m_Sprite: {fileID: 21300000, guid: 8fe7ea9a8eb59c54cb0b421b2479d4db, type: 3}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
@@ -168,13 +167,13 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   positioning: 0
   scalingAxis: 1
-  statusBarSize: 4.93
+  statusBarSize: 1.75
   imageAspectRatio: 0
   targetImage: {fileID: 11422558}
   xRatio: 1
-  yRatio: 0.098
-  horizontalPosition: 57
-  verticalPosition: 95.6
+  yRatio: 1
+  horizontalPosition: 50
+  verticalPosition: 50
   depthPosition: 0
   statusBarIcon: {fileID: 0}
   statusBarText: {fileID: 0}
@@ -184,7 +183,7 @@ MonoBehaviour:
   disableDuration: 1
   enabledAlpha: 1
   disabledAlpha: 0
-  initialState: 0
+  initialState: 1
   statusBarAnimator: {fileID: 0}
   onStatusUpdated: 0
   UltimateStatusList:
@@ -232,13 +231,13 @@ MonoBehaviour:
     smoothFillSpeed: 1
     keepVisible: 0
     triggerValue: 0.25
-    useDramaticFill: 1
+    useDramaticFill: 0
     dramaticImage: {fileID: 0}
     dramaticStyle: 1
     secondsDelay: 0.1
     resetSensitivity: 0.1
     fillSpeed: 0.5
-  statusBarName: playerStatusBar
+  statusBarName: 
 --- !u!225 &225885155280685048
 CanvasGroup:
   m_ObjectHideFlags: 0

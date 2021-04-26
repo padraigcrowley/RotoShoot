@@ -23,6 +23,8 @@ public class AsteroidManager : ExtendedBehaviour
 
   private void Start()
   {
+    if (LevelManager.Instance.timeBetweenAsteroidShower <= 0) //it's been set to 0 in level setup => no asteroidshower in this level
+      return; 
     timeToNextAsteroidShower = LevelManager.Instance.timeBetweenAsteroidShower;
     if (timeToNextAsteroidShower > 0)
     {
@@ -35,6 +37,8 @@ public class AsteroidManager : ExtendedBehaviour
   // Update is called once per frame
   private void Update()
   {
+    if (LevelManager.Instance.timeBetweenAsteroidShower <= 0) //it's been set to 0 in level setup => no asteroidshower in this level
+      return;
     timeToNextAsteroidShower -= Time.deltaTime;
     if (timeToNextAsteroidShower <= 0)
     {

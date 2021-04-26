@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: LevelSetupData0002
   m_EditorClassIdentifier: 
   levelNumber: 2
-  lccEnemyKills: 2000
+  lccEnemyKills: 10
   lccSurviveTime: 4
   lccKillBoss: 0
   numMaxActiveWaves: 3
@@ -56,6 +56,15 @@ MonoBehaviour:
     startPos: {x: 0, y: 0}
     speedMultiplier: 0
     hpMultiplier: 0
+    waypointPath: {fileID: 0}
+  spinningMineSpawnPointData:
+    levelHasSpinningMine: 0
+    spinningMinePrefab: {fileID: 0}
+    speedMultiplier: 0
+    hpMultiplier: 0
+    waitTimeBeforeFirstSpawn: 0
+    waitTimeBetweenSpawns: 0
+    numBurstFiresBeforePause: 0
     waypointPath: {fileID: 0}
   PlayerShipPos: {x: -1.28, y: -5, z: 0}
   shipLanes:

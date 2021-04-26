@@ -6114,6 +6114,30 @@ PrefabInstance:
       value: Simple Horizontal 00
       objectReference: {fileID: 0}
     - target: {fileID: 11433108, guid: 99d7216a19ca3154a816f37c1b5e2b1a, type: 3}
+      propertyPath: yRatio
+      value: 0.098
+      objectReference: {fileID: 0}
+    - target: {fileID: 11433108, guid: 99d7216a19ca3154a816f37c1b5e2b1a, type: 3}
+      propertyPath: initialState
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 11433108, guid: 99d7216a19ca3154a816f37c1b5e2b1a, type: 3}
+      propertyPath: statusBarName
+      value: playerStatusBar
+      objectReference: {fileID: 0}
+    - target: {fileID: 11433108, guid: 99d7216a19ca3154a816f37c1b5e2b1a, type: 3}
+      propertyPath: statusBarSize
+      value: 4.51
+      objectReference: {fileID: 0}
+    - target: {fileID: 11433108, guid: 99d7216a19ca3154a816f37c1b5e2b1a, type: 3}
+      propertyPath: verticalPosition
+      value: 96.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 11433108, guid: 99d7216a19ca3154a816f37c1b5e2b1a, type: 3}
+      propertyPath: horizontalPosition
+      value: 56.8
+      objectReference: {fileID: 0}
+    - target: {fileID: 11433108, guid: 99d7216a19ca3154a816f37c1b5e2b1a, type: 3}
       propertyPath: UltimateStatusList.Array.data[0].colorMode
       value: 1
       objectReference: {fileID: 0}
@@ -6179,19 +6203,19 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 11443520, guid: 99d7216a19ca3154a816f37c1b5e2b1a, type: 3}
       propertyPath: m_Color.b
-      value: 0.003915994
+      value: 0.007851347
       objectReference: {fileID: 0}
     - target: {fileID: 11443520, guid: 99d7216a19ca3154a816f37c1b5e2b1a, type: 3}
       propertyPath: m_Color.g
-      value: 0.003915994
+      value: 0.6809776
       objectReference: {fileID: 0}
     - target: {fileID: 11443520, guid: 99d7216a19ca3154a816f37c1b5e2b1a, type: 3}
       propertyPath: m_Color.r
-      value: 0.8301887
+      value: 0.31374538
       objectReference: {fileID: 0}
     - target: {fileID: 11443520, guid: 99d7216a19ca3154a816f37c1b5e2b1a, type: 3}
       propertyPath: m_FillAmount
-      value: 0
+      value: 0.78800005
       objectReference: {fileID: 0}
     - target: {fileID: 22422498, guid: 99d7216a19ca3154a816f37c1b5e2b1a, type: 3}
       propertyPath: m_Pivot.x
@@ -6211,7 +6235,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 22422498, guid: 99d7216a19ca3154a816f37c1b5e2b1a, type: 3}
       propertyPath: m_AnchorMax.y
-      value: 0.5
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 22422498, guid: 99d7216a19ca3154a816f37c1b5e2b1a, type: 3}
       propertyPath: m_AnchorMin.x
@@ -6219,15 +6243,15 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 22422498, guid: 99d7216a19ca3154a816f37c1b5e2b1a, type: 3}
       propertyPath: m_AnchorMin.y
-      value: 0.5
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 22422498, guid: 99d7216a19ca3154a816f37c1b5e2b1a, type: 3}
       propertyPath: m_SizeDelta.x
-      value: 532.44
+      value: 487.08002
       objectReference: {fileID: 0}
     - target: {fileID: 22422498, guid: 99d7216a19ca3154a816f37c1b5e2b1a, type: 3}
       propertyPath: m_SizeDelta.y
-      value: 52.17912
+      value: 47.73384
       objectReference: {fileID: 0}
     - target: {fileID: 22422498, guid: 99d7216a19ca3154a816f37c1b5e2b1a, type: 3}
       propertyPath: m_LocalPosition.x
@@ -6259,11 +6283,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 22422498, guid: 99d7216a19ca3154a816f37c1b5e2b1a, type: 3}
       propertyPath: m_AnchoredPosition.x
-      value: 38.3292
+      value: 40.318554
       objectReference: {fileID: 0}
     - target: {fileID: 22422498, guid: 99d7216a19ca3154a816f37c1b5e2b1a, type: 3}
       propertyPath: m_AnchoredPosition.y
-      value: 961.16626
+      value: -97.67737
       objectReference: {fileID: 0}
     - target: {fileID: 22422498, guid: 99d7216a19ca3154a816f37c1b5e2b1a, type: 3}
       propertyPath: m_LocalEulerAnglesHint.x

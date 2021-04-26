@@ -190,12 +190,18 @@ public abstract class EnemyBehaviour02 : ExtendedBehaviour
     {
       if (enemyState == EnemyState.FULLY_DEAD)
         return;
-      if (enemyState == EnemyState.ALIVE)
+      if (enemyState == EnemyState.ALIVE) // if the enemy is still active, alive, visible on-screen - do the fade-out dissolve, then destroy
       {
         enemyState = EnemyState.FULLY_DYING;
         FullyDie();
+        return;
       }
-
+      if ((enemyState == EnemyState.TEMPORARILY_DEAD) || (enemyState == EnemyState.WAITING_TO_RESPAWN))
+      {
+        enemyState = EnemyState.FULLY_DEAD;
+        Destroy(gameObject);
+        return;
+      }
     }
     else if (GameplayManager.Instance.currentGameState == GameplayManager.GameState.GAME_OVER_SCREEN)
     {
@@ -269,31 +275,10 @@ public abstract class EnemyBehaviour02 : ExtendedBehaviour
 
   private void FullyDie()
   {
-    //deathExplosionInstance = SimplePool.Spawn(deathExplosion, this.transform.position, this.transform.rotation, enemyExplosionsPool.transform);
-
-    //int randScaleFlip = UnityEngine.Random.Range(0, 4);// not scaleflipped, scaledFlippedX, scaledFlippedY, scaledFlippedXandY
-    //switch (randScaleFlip)
-    //{
-    //  case (0):
-    //    deathExplosionInstance.transform.localScale = new Vector3(.5f, .5f, 1f);
-    //    break;
-    //  case (1):
-    //    deathExplosionInstance.transform.localScale = new Vector3(-.5f, .4f, 1f);
-    //    break;
-    //  case (2):
-    //    deathExplosionInstance.transform.localScale = new Vector3(.6f, -.6f, 1f);
-    //    break;
-    //  case (3):
-    //    deathExplosionInstance.transform.localScale = new Vector3(-.4f, -.4f, 1f);
-    //    break;
-    //  default:
-    //    break;
-    //}
-
     StartCoroutine(DoBurnFadeEffect(.75f, 0f, 1f));
     StopMovement();
     enemyState = EnemyState.FULLY_DEAD;
-    Destroy(gameObject,2f);
+    Destroy(gameObject);
   }
 
   IEnumerator DoBurnFadeEffect(float duration, float startVal, float endVal)

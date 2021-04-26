@@ -176,9 +176,16 @@ public class PowerUp : MonoBehaviour
 
   protected virtual void Update()
   {
-    
-      if(powerUpState == PowerUpState.InAttractMode)
-        DoMovement();
+    if(GameplayManager.Instance.currentGameState == GameplayManager.GameState.LEVEL_OUTRO_IN_PROGRESS)
+		{
+      if (pulseWhileFalling)
+        pulseTween.Kill();
+      travelSpeed /= 2.0f;
+      dissolveAnim.Play("PowerUpDissolve");
+      Destroy(gameObject, 1);
+    }
+    if(powerUpState == PowerUpState.InAttractMode)
+      DoMovement();
   }
 
   public void DoMovement()
