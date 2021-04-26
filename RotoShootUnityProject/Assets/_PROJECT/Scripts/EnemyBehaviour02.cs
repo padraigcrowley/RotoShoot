@@ -258,13 +258,16 @@ public abstract class EnemyBehaviour02 : ExtendedBehaviour
 
     StartCoroutine(DoBurnFadeEffect(.75f, 0f, 1f));
     StopMovement();
-    LevelManager.Instance.numEnemyKillsInLevel++;
-    GameplayManager.Instance.totalEnemyKillCount++;
-    //print($"totalEnemyKillCount {GameplayManager.Instance.totalEnemyKillCount}");
-    if (GameplayManager.Instance.totalEnemyKillCount % GameplayManager.Instance.enemyKillPowerUpDropFrequency == 0)
-    {
-      DropPowerUp();
-    }
+    if((enemyState != EnemyState.HIT_BY_ATMOSPHERE) && (enemyState != EnemyState.HIT_BY_PLAYER_SHIP) )
+		{
+      LevelManager.Instance.numEnemyKillsInLevel++;
+      GameplayManager.Instance.totalEnemyKillCount++;
+      //print($"totalEnemyKillCount {GameplayManager.Instance.totalEnemyKillCount}");
+      if (GameplayManager.Instance.totalEnemyKillCount % GameplayManager.Instance.enemyKillPowerUpDropFrequency == 0)
+      {
+        DropPowerUp();
+      }
+		}
 
     enemyCapsuleCollider.enabled = false;
     waveRespawnWaitOver = false;
@@ -342,9 +345,9 @@ public abstract class EnemyBehaviour02 : ExtendedBehaviour
   {
     if (GameplayManager.Instance.levelControlType != 1) // this doean't apply to circular enemies moving towards centre
     {
-      if (collision.gameObject.name == "Bottom Boundary")
+      if ( (collision.gameObject.CompareTag("BoundaryBottom")))
       {
-        enemyState = EnemyState.TEMPORARILY_DEAD;
+        enemyState = EnemyState.HIT_BY_ATMOSPHERE;
         //DOTween.Kill(myTweenID);
       }
     }

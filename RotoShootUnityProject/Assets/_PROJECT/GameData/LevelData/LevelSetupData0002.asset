@@ -58,7 +58,7 @@ MonoBehaviour:
     hpMultiplier: 0
     waypointPath: {fileID: 0}
   spinningMineSpawnPointData:
-    levelHasSpinningMine: 0
+    levelHasSpinningMine: 1
     spinningMinePrefab: {fileID: 0}
     speedMultiplier: 0
     hpMultiplier: 0

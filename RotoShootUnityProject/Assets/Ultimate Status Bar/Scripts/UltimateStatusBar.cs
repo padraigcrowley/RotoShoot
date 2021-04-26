@@ -558,7 +558,7 @@ public class UltimateStatusBar : MonoBehaviour
 
 	//******************** HACK!!!  *******************************//
 	void OnEnable () // seems to be a bug where I can't use Awake() as it doesn't get called when I run the game id [ExecuteInEditMode] is enabled, which is used for when setting up the statusbar
-		//void Awake()
+	//	void Awake()
 	{
 		// If the application is not playing, then return.
 		if( !Application.isPlaying )

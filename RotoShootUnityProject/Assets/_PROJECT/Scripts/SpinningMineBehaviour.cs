@@ -17,6 +17,9 @@ public class SpinningMineBehaviour : ExtendedBehaviour
   private int numBurstFires = 0;
   public int numBurstFiresBeforePause;
   public float waitTimeBeforeFirstSpawn, waitTimeBetweenSpawns;
+
+  float spinningMineMaxHealth = 100;  //todo - hard coded health?!?!
+  float spinningMineCurrentHealth;
   public float hpMultiplierFromSpawner;
   public float speedMultiplierFromSpawner;
   private float rotationSpeed = 200f;
@@ -31,7 +34,7 @@ public class SpinningMineBehaviour : ExtendedBehaviour
   private bool waitingToRespawn = true, waitingBeforeFirstSpawn = true;
   private bool firstTime = true;
 
-  public UltimateStatusBar statusBar;
+  public UltimateStatusBar SpinningMineStatusBar;
 
   private void Awake()
   {
@@ -60,6 +63,9 @@ public class SpinningMineBehaviour : ExtendedBehaviour
       splineMoveScript.pathContainer = waypointPath;
       splineMoveScript.speed *= this.speedMultiplierFromSpawner;
     }
+    spinningMineMaxHealth *= hpMultiplierFromSpawner;
+    spinningMineCurrentHealth = spinningMineMaxHealth;
+    UltimateStatusBar.UpdateStatus("SpinningMineStatusBar", spinningMineCurrentHealth, spinningMineMaxHealth);
   }
 
   IEnumerator DoHitEffect()
@@ -128,6 +134,10 @@ public class SpinningMineBehaviour : ExtendedBehaviour
     {
       collider.enabled = true;
     }
+
+    
+    SpinningMineStatusBar.EnableStatusBar();
+    UltimateStatusBar.UpdateStatus("SpinningMineStatusBar", spinningMineCurrentHealth, spinningMineMaxHealth);
   }
 
   IEnumerator SpinOutEffect(float duration)
@@ -160,10 +170,15 @@ public class SpinningMineBehaviour : ExtendedBehaviour
   void Update()
   {
 
-    if (numBurstFires >= numBurstFiresBeforePause)
+    //if (numBurstFires >= numBurstFiresBeforePause)
+    //{
+    //  enemyState = EnemyState.SPINNING_OUT_STARTED;
+    //  numBurstFires = 0;
+    //}
+    if(spinningMineCurrentHealth <= 0)
     {
       enemyState = EnemyState.SPINNING_OUT_STARTED;
-      numBurstFires = 0;
+      //UltimateStatusBar.UpdateStatus("SpinningMineStatusBar", spinningMineCurrentHealth, spinningMineMaxHealth);
     }
 
     switch (enemyState)
@@ -204,9 +219,12 @@ public class SpinningMineBehaviour : ExtendedBehaviour
       case EnemyState.SPINNING_IN_IN_PROGRESS:
         break;
       case EnemyState.SPINNING_IN_COMPLETED:
+        
         transform.Rotate(new Vector3(0, 0, rotationSpeed * Time.deltaTime));
         break;
       case EnemyState.SPINNING_OUT_STARTED:
+        SpinningMineStatusBar.DisableStatusBar();
+        spinningMineCurrentHealth = spinningMineMaxHealth;
         transform.Rotate(new Vector3(0, 0, rotationSpeed * Time.deltaTime));
         CancelInvoke();
         StartCoroutine(SpinOutEffect(1f));
@@ -291,6 +309,8 @@ public class SpinningMineBehaviour : ExtendedBehaviour
     if (collision.gameObject.tag.Equals("PlayerMissile") && (enemyState == EnemyState.SPINNING_IN_COMPLETED) )
     {
       StartCoroutine(DoHitEffect());
+      spinningMineCurrentHealth -= 10;  //todo - hard coded value?!?!
+      UltimateStatusBar.UpdateStatus("SpinningMineStatusBar", spinningMineCurrentHealth, spinningMineMaxHealth);
     }
 
   }

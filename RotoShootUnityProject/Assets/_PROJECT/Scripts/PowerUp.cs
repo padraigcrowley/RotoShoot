@@ -50,7 +50,7 @@ public class PowerUp : MonoBehaviour
       print($"PowerUp Collected!");
       PowerUpCollected(other.gameObject);
     }
-    else if (other.gameObject.CompareTag("Atmosphere"))
+    else if ( (other.gameObject.CompareTag("Atmosphere")) || (other.gameObject.CompareTag("BoundaryBottom")) )
     {
       print($"Collision entered with Atmos! ");
       if (pulseWhileFalling) 
@@ -73,7 +73,7 @@ public class PowerUp : MonoBehaviour
       //print($"PowerUp Collected!");
       PowerUpCollected(other.gameObject);
     }
-    else if (other.gameObject.CompareTag("Atmosphere"))
+    else if ((other.gameObject.CompareTag("Atmosphere")) || (other.gameObject.CompareTag("BoundaryBottom")))
     {
       //print($"Collision entered with Atmos! ");
       if (pulseWhileFalling)

@@ -27,7 +27,7 @@ public class BossBehaviour01 : ExtendedBehaviour
 
   public UltimateStatusBar statusBar;
   private Canvas HealthBarCanvas;
-  public float bossMaxHealth = 100, bossCurrentHealth;
+  public float bossMaxHealth = 100, bossCurrentHealth; //todo - hard coded health?!?!
   public GameObject deathExplosion;
   private GameObject deathExplosionInstance;
 

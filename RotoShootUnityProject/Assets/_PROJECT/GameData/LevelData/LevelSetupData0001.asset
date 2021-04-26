@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: LevelSetupData0001
   m_EditorClassIdentifier: 
   levelNumber: 1
-  lccEnemyKills: 2
+  lccEnemyKills: 20
   lccSurviveTime: 4
   lccKillBoss: 0
   numMaxActiveWaves: 3
@@ -64,7 +64,7 @@ MonoBehaviour:
     spinningMinePrefab: {fileID: 2411896081061765972, guid: 41a1b7e89cfaebb4e9e25449413c44bd,
       type: 3}
     speedMultiplier: 1
-    hpMultiplier: 0
+    hpMultiplier: 1
     waitTimeBeforeFirstSpawn: 20
     waitTimeBetweenSpawns: 5
     numBurstFiresBeforePause: 2

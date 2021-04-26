@@ -34,6 +34,9 @@ public class PlayerShip : ExtendedBehaviour
   Quaternion uniqueprojectileRotationLeftTurret = Quaternion.identity;
   Quaternion uniqueprojectileRotationRightTurret = Quaternion.identity;
 
+  public UltimateStatusBar playerStatusBar;
+  public UltimateStatusBar PlayerHPWorldSpaceStatusBar;
+
   void Start()
   {
 
@@ -88,6 +91,8 @@ public class PlayerShip : ExtendedBehaviour
           PlayerShipIntroAnimPlaying = false;
           playerShipExhaustSpriteRenderer.enabled = false;
           GameplayManager.Instance.currentGameState = GameplayManager.GameState.LEVEL_IN_PROGRESS;
+        PlayerHPWorldSpaceStatusBar.EnableStatusBar();
+          UltimateStatusBar.UpdateStatus("PlayerHPWorldSpaceStatusBar", GameplayManager.Instance.currentPlayerHP, GameplayManager.Instance.MAX_PLAYER_HP);
           //print("gamestate is now set to LEVEL_IN_PROGRESS! ");
         }
         break;
@@ -107,6 +112,7 @@ public class PlayerShip : ExtendedBehaviour
       case GameplayManager.GameState.LEVEL_OUTRO_IN_PROGRESS:
         if (PlayerShipOutroAnimPlaying == false)
         {
+          PlayerHPWorldSpaceStatusBar.DisableStatusBar();
           PlayerShipOutroAnimPlaying = true;
 
           //TODO: below make sure the angle is of the ship graphic, not the parent object
@@ -313,6 +319,7 @@ public class PlayerShip : ExtendedBehaviour
           DoCameraShake();
           ChangeShipHP(-10);
           UltimateStatusBar.UpdateStatus("playerStatusBar", GameplayManager.Instance.currentPlayerHP, GameplayManager.Instance.MAX_PLAYER_HP);
+          UltimateStatusBar.UpdateStatus("PlayerHPWorldSpaceStatusBar", GameplayManager.Instance.currentPlayerHP, GameplayManager.Instance.MAX_PLAYER_HP);
         }
 
         if ((collision.gameObject.tag.Equals("Asteroid")))

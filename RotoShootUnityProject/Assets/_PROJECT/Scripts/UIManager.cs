@@ -12,7 +12,9 @@ public class UIManager : Singleton<UIManager>
   public Image playerHealthHeart03, playerHealthHeart02, playerHealthHeart01;
   [SerializeField] private GameObject LevelCompletePanel;
 
-  public UltimateStatusBar playerStatusBar;
+  
+ 
+
   public GameObject playerHealthBarObject;
   public Febucci.UI.TextAnimatorPlayer textAnimatorPlayer;
 
