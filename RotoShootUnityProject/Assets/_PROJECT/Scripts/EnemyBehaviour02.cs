@@ -196,7 +196,7 @@ public abstract class EnemyBehaviour02 : ExtendedBehaviour
         FullyDie();
         return;
       }
-      if ((enemyState == EnemyState.TEMPORARILY_DEAD) || (enemyState == EnemyState.WAITING_TO_RESPAWN))
+      if ((enemyState == EnemyState.TEMPORARILY_DEAD) || (enemyState == EnemyState.WAITING_TO_RESPAWN) || (enemyState == EnemyState.HIT_BY_ATMOSPHERE))
       {
         enemyState = EnemyState.FULLY_DEAD;
         Destroy(gameObject);

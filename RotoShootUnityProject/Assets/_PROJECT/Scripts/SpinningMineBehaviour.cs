@@ -169,7 +169,11 @@ public class SpinningMineBehaviour : ExtendedBehaviour
 
   void Update()
   {
-    
+    if (GameplayManager.Instance.currentGameState == GameplayManager.GameState.LEVEL_OUTRO_IN_PROGRESS)
+    {
+      Destroy(gameObject);
+      return;
+    }
     //if (numBurstFires >= numBurstFiresBeforePause)
     //{
     //  enemyState = EnemyState.SPINNING_OUT_STARTED;

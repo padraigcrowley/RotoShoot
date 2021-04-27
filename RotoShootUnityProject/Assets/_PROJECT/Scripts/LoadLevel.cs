@@ -7,7 +7,7 @@ public class LoadLevel : MonoBehaviour
 {
   public void LoadSpecificLevel(int level)
   {
-    GameManagerX.Instance.currentLevel = level;
+    GameController.Instance.currentLevel = level;
     // TODO: This needs to be expanded to handle > 0009 levels
     string levelName = "Level000";
     //if (!SceneManager.GetSceneByName("BaseGameScene").isLoaded)
@@ -15,7 +15,12 @@ public class LoadLevel : MonoBehaviour
       SceneManager.LoadScene("BaseGameScene"); 
     }
     SceneManager.LoadScene(levelName+level.ToString(), LoadSceneMode.Additive);
-    
+
+    //SceneManager.SetActiveScene(SceneManager.GetSceneByName(levelName + level.ToString()));
+    // Ouput the name of the active Scene
+    // See now that the name is updated
+    //Debug.Log("Active Scene : " + SceneManager.GetActiveScene().name);
+
   }
 
   public void LoadNextLevel()
@@ -24,9 +29,9 @@ public class LoadLevel : MonoBehaviour
     string levelName = "Level000";
 
     //unload the current levelscene, if loaded
-    if (SceneManager.GetSceneByName(levelName + GameManagerX.Instance.currentLevel.ToString()).isLoaded)
+    if (SceneManager.GetSceneByName(levelName + GameController.Instance.currentLevel.ToString()).isLoaded)
     {
-      SceneManager.UnloadSceneAsync(levelName + GameManagerX.Instance.currentLevel.ToString());
+      SceneManager.UnloadSceneAsync(levelName + GameController.Instance.currentLevel.ToString());
     }
     
     
@@ -35,10 +40,10 @@ public class LoadLevel : MonoBehaviour
     {
       SceneManager.LoadScene("BaseGameScene");
     }
-    
+
     //set the level scene to the next level, load it
-    GameManagerX.Instance.currentLevel++;
-    SceneManager.LoadScene(levelName + GameManagerX.Instance.currentLevel.ToString(), LoadSceneMode.Additive);
+    GameController.Instance.currentLevel++;
+    SceneManager.LoadScene(levelName + GameController.Instance.currentLevel.ToString(), LoadSceneMode.Additive);
   }
 
 

@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class GameManagerX : Singleton<GameManagerX>
+public class GameController: Singleton<GameController>
 {
   public int currentLevel = 0;
   public int highestLevelPlayed = 1;

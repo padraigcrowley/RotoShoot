@@ -44,7 +44,22 @@ public class EnemyMissileMovement : MissileMovement
       });
     }
   }
-  void FixedUpdate()
+
+	private void Update()
+	{
+    if (GameplayManager.Instance.currentGameState == GameplayManager.GameState.LEVEL_OUTRO_IN_PROGRESS)
+    {
+      if (muzzleVFX != null)
+        SimplePool.Despawn(muzzleVFX);
+      if (hitVFX != null)
+        SimplePool.Despawn(hitVFX);
+      SimplePool.Despawn(gameObject);
+
+      return;
+    }
+  }
+
+	void FixedUpdate()
   {
 
     if (!collided)

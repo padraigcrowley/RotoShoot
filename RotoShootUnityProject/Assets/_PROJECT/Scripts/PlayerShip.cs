@@ -98,6 +98,7 @@ public class PlayerShip : ExtendedBehaviour
         break;
 
       case GameplayManager.GameState.LEVEL_IN_PROGRESS:
+        
         PlayerShipIntroAnimCompleted = false;
         ProcessInputQueue();
         
@@ -125,8 +126,9 @@ public class PlayerShip : ExtendedBehaviour
         }
         else if (PlayerShipOutroAnimCompleted == true)
         {
-          PlayerShipOutroAnimPlaying = false;
           GameplayManager.Instance.currentGameState = GameplayManager.GameState.LEVEL_COMPLETE;
+          PlayerShipOutroAnimPlaying = false;
+          PlayerShipOutroAnimCompleted = false;
         }
         break;
       case GameplayManager.GameState.LEVEL_COMPLETE:
