@@ -169,13 +169,13 @@ public class SpinningMineBehaviour : ExtendedBehaviour
 
   void Update()
   {
-
+    
     //if (numBurstFires >= numBurstFiresBeforePause)
     //{
     //  enemyState = EnemyState.SPINNING_OUT_STARTED;
     //  numBurstFires = 0;
     //}
-    if(spinningMineCurrentHealth <= 0)
+    if (spinningMineCurrentHealth <= 0)
     {
       enemyState = EnemyState.SPINNING_OUT_STARTED;
       //UltimateStatusBar.UpdateStatus("SpinningMineStatusBar", spinningMineCurrentHealth, spinningMineMaxHealth);
