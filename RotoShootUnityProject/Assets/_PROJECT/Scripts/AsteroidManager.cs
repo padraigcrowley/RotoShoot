@@ -37,25 +37,31 @@ public class AsteroidManager : ExtendedBehaviour
   // Update is called once per frame
   private void Update()
   {
-    if (LevelManager.Instance.timeBetweenAsteroidShower <= 0) //it's been set to 0 in level setup => no asteroidshower in this level
-      return;
-    timeToNextAsteroidShower -= Time.deltaTime;
-    if (timeToNextAsteroidShower <= 0)
+    if (GameplayManager.Instance.currentGameState == GameplayManager.GameState.LEVEL_IN_PROGRESS)
     {
-      GenerateAsteroidStartPositions();
-      asteroidsCanMove = true;
-      timeToNextAsteroidShower = LevelManager.Instance.timeBetweenAsteroidShower;
+      if (LevelManager.Instance.timeBetweenAsteroidShower <= 0) //it's been set to 0 in level setup => no asteroidshower in this level
+        return;
+      timeToNextAsteroidShower -= Time.deltaTime;
+      if (timeToNextAsteroidShower <= 0)
+      {
+        GenerateAsteroidStartPositions();
+        asteroidsCanMove = true;
+        timeToNextAsteroidShower = LevelManager.Instance.timeBetweenAsteroidShower;
+      }
+      //if ((Input.GetKeyDown(KeyCode.Space)) && (asteroidsCreated == false))
+      //{
+      //}
     }
-    //if ((Input.GetKeyDown(KeyCode.Space)) && (asteroidsCreated == false))
-    //{
-    //}
   }
 
   private void FixedUpdate()
   {
-    if (asteroidsCanMove)
+    //if (GameplayManager.Instance.currentGameState == GameplayManager.GameState.LEVEL_IN_PROGRESS)
     {
-      MoveAsteroids();
+      if (asteroidsCanMove)
+      {
+        MoveAsteroids();
+      }
     }
   }
 
@@ -238,20 +244,23 @@ public class AsteroidManager : ExtendedBehaviour
     //drop the 3 lanes of asteroids
     foreach (GameObject childObj in asteroid1ChildrenObjects)
     {
-      childObj.transform.position -= transform.up * travelSpeed * Time.fixedDeltaTime;
+      if(childObj.transform.position.y > -11) // don't move it if it's off the bottom of the screen
+        childObj.transform.position -= transform.up * travelSpeed * Time.fixedDeltaTime;
     }
 
     Wait(.5f, () => {
       foreach (GameObject childObj in asteroid1ChildrenObjectsVariant)
       {
-        childObj.transform.position -= transform.up * travelSpeed * Time.fixedDeltaTime * 1.25f;
+        if (childObj.transform.position.y > -11) // don't move it if it's off the bottom of the screen
+          childObj.transform.position -= transform.up * travelSpeed * Time.fixedDeltaTime * 1.25f;
       }
     });
 
     Wait(.4f, () => {
       foreach (GameObject childObj in asteroid2ChildrenObjects)
       {
-        childObj.transform.position -= transform.up * travelSpeed * Time.fixedDeltaTime * 1.5f;
+        if (childObj.transform.position.y > -11) // don't move it if it's off the bottom of the screen
+          childObj.transform.position -= transform.up * travelSpeed * Time.fixedDeltaTime * 1.5f;
       }
     });
 
