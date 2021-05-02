@@ -847,7 +847,7 @@ MonoBehaviour:
   basePlayerShipFireRate: 0.3
   maxEnemy0001HP: 0
   enemy0001BaseSpeed: 1
-  MAX_PLAYER_HP: 2591
+  MAX_PLAYER_HP: 100
   shipLanes:
   - {x: -3.85, y: -6}
   - {x: -1.29, y: -6}
@@ -6498,7 +6498,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 22422498, guid: 99d7216a19ca3154a816f37c1b5e2b1a, type: 3}
       propertyPath: m_AnchoredPosition.y
-      value: -97.67737
+      value: -89.38342
       objectReference: {fileID: 0}
     - target: {fileID: 22422498, guid: 99d7216a19ca3154a816f37c1b5e2b1a, type: 3}
       propertyPath: m_LocalEulerAnglesHint.x
