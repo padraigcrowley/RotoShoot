@@ -7,12 +7,14 @@ public class GameplayManager : Singleton<GameplayManager>, IPowerUpEvents
   public Queue mouseClickQueue;
   [HideInInspector] public bool playerShipRotating = false;
 
-  [HideInInspector] public enum GameState { WAITING_FOR_START_BUTTON, LEVEL_INTRO_IN_PROGRESS, LEVEL_IN_PROGRESS, LEVEL_FAILED, LEVEL_OUTRO_IN_PROGRESS, LEVEL_COMPLETE, GAME_OVER_SCREEN }
+  [HideInInspector] public enum GameState { WAITING_FOR_START_BUTTON, LEVEL_INTRO_IN_PROGRESS, LEVEL_IN_PROGRESS, LEVEL_FAILED, LEVEL_OUTRO_IN_PROGRESS, LEVEL_COMPLETE, GAME_OVER_SCREEN, PLAYER_DYING, PLAYER_DIED }
   [HideInInspector] public enum PlayerFiringState { STRAIGHT_SINGLE, ANGLED_TRIPLE, STRAIGHT_TRIPLE, RAPID_FIRE_SINGLE }
   [HideInInspector] public int currentPlayerScore = 0;
   public int highPlayerScore = 0;
    public int currentPlayerHP;
   [HideInInspector] public float screenEdgeX, screenEdgeY, screenCollisionBoundaryX, screenCollisionBoundaryY;
+
+  public GameObject playerShipObject;
 
   public GameObject leftBoundary;                   //
   public GameObject rightBoundary;                  // References to the screen bounds: Used to ensure the player
@@ -49,9 +51,13 @@ public class GameplayManager : Singleton<GameplayManager>, IPowerUpEvents
   public int enemyKillPowerUpDropFrequency = 5;
 
   public LoadLevel loadLevelScript;
+  public PlayerShip playerShipScript;
 
   public float powerupDurationSeconds, playerShieldPowerupDurationSeconds;
   public int starCoinCount;
+  private bool dyingInProgress = false;
+
+  public CapsuleCollider playerShipCollider;
 
   // Start is called before the first frame update
   void Start()
@@ -63,6 +69,7 @@ public class GameplayManager : Singleton<GameplayManager>, IPowerUpEvents
     currentPlayerShipFireRate = basePlayerShipFireRate;
     mouseClickQueue = new Queue();
     currentPlayerScore = 0;
+    
   }
 
   // Update is called once peer frame
@@ -71,6 +78,11 @@ public class GameplayManager : Singleton<GameplayManager>, IPowerUpEvents
 
     switch (currentGameState)
     {
+      case GameState.LEVEL_INTRO_IN_PROGRESS:
+        {
+          playerShipCollider.enabled = true;
+          break;
+        }
       case GameState.LEVEL_IN_PROGRESS:
         {
           //if (Input.GetKey(KeyCode.Space))
@@ -91,8 +103,7 @@ public class GameplayManager : Singleton<GameplayManager>, IPowerUpEvents
 
           if (currentPlayerHP <= 0)
           {
-            print("Game Over!");
-            currentGameState = GameState.GAME_OVER_SCREEN;
+            currentGameState = GameState.PLAYER_DYING;
           }
           break;
         }
@@ -106,6 +117,26 @@ public class GameplayManager : Singleton<GameplayManager>, IPowerUpEvents
         {
           break;
         }
+      
+      case GameState.PLAYER_DYING:
+        {
+          if (!dyingInProgress)
+          {
+            dyingInProgress = true;
+            playerShipCollider.enabled = false;
+            StartCoroutine(playerShipScript.DoPlayerDeath());
+          }
+          //currentGameState = GameState.PLAYER_DIED;
+          //PauseGame();
+          break;
+        }
+      case GameState.PLAYER_DIED:
+        {
+          dyingInProgress = false;
+          //playerShipObject.SetActive(false);
+          //PauseGame();
+          break;
+        }
       case GameState.LEVEL_FAILED:
         {
           print("Level Failed!");
@@ -116,6 +147,15 @@ public class GameplayManager : Singleton<GameplayManager>, IPowerUpEvents
     }
   }
 
+  public void PauseGame()
+  {
+    Time.timeScale = 0;
+  }
+
+  public void ResumeGame()
+  {
+    Time.timeScale = 1;
+  }
 
   public void initializeMainGameplayLoopForLevelRestart()
   {

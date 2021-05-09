@@ -31,7 +31,7 @@ public class PowerUpShield : PowerUp
       if (powerUpState == PowerUpState.IsCollected)
     {
       durationSeconds -= Time.deltaTime;
-      if (durationSeconds < 0)
+      if ((durationSeconds < 0) || (GameplayManager.Instance.currentGameState == GameplayManager.GameState.PLAYER_DYING))
       {
         PowerUpHasExpired();
       }

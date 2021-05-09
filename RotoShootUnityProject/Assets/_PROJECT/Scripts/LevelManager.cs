@@ -105,6 +105,7 @@ public class LevelManager : Singleton<LevelManager>
       if (sp.waypointPath != null)
       {
         pathInstance = Instantiate(sp.waypointPath, new Vector3(0f, 0f, 0f), Quaternion.identity);
+        
       }
 
       for (int i = 0; i < sp.numEnemiesInWave; i++)

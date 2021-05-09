@@ -116,7 +116,7 @@ public class UIManager : Singleton<UIManager>
 
           break;
         }
-      case GameplayManager.GameState.GAME_OVER_SCREEN:
+      case GameplayManager.GameState.PLAYER_DIED:
         {
           gameRestartButton.gameObject.SetActive(true);
           gameExitButton.gameObject.SetActive(true);
@@ -135,6 +135,7 @@ public class UIManager : Singleton<UIManager>
     gameRestartButton.gameObject.SetActive(false);
     gameExitButton.gameObject.SetActive(false);
     GameplayManager.Instance.initializeMainGameplayLoopForLevelRestart();
+    GameplayManager.Instance.ResumeGame();
   }
 
   public void handleGameExitButtonPress()

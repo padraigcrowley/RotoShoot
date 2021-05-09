@@ -95,7 +95,7 @@ public abstract class EnemyBehaviour02 : ExtendedBehaviour
       splineMoveScript.pathContainer = waypointPath;
       splineMoveScript.speed = this.speed;
       splineMoveScript.loopType = splineMove.LoopType.loop;
-      splineMoveScript.closeLoop = true;
+      //splineMoveScript.closeLoop = true;
     }
     //else
     //{

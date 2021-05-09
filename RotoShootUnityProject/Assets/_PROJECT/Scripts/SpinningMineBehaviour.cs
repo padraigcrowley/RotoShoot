@@ -268,7 +268,7 @@ public class SpinningMineBehaviour : ExtendedBehaviour
       yield return new WaitForSeconds(intervalBetweenBursts);
     }
     numBurstFires++;
-    print($"numBurstFires++ {numBurstFires}/{numBurstFiresBeforePause}");
+    //print($"numBurstFires++ {numBurstFires}/{numBurstFiresBeforePause}");
   }
 
   public void FireMissile(bool fireAtPlayerPos)

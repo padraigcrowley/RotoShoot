@@ -33,9 +33,14 @@ public class PlayerShip : ExtendedBehaviour
   Quaternion uniqueprojectileRotation = Quaternion.identity;
   Quaternion uniqueprojectileRotationLeftTurret = Quaternion.identity;
   Quaternion uniqueprojectileRotationRightTurret = Quaternion.identity;
+  private List<GameObject> playerDeathFXObjects = new List<GameObject>();
 
   public UltimateStatusBar playerStatusBar;
   public UltimateStatusBar PlayerHPWorldSpaceStatusBar;
+  public GameObject playerDeathFX;
+
+  public GameObject deathExplosion;
+  private GameObject deathExplosionInstance;
 
   void Start()
   {
@@ -89,11 +94,18 @@ public class PlayerShip : ExtendedBehaviour
         else if (PlayerShipIntroAnimCompleted == true)
         {
           PlayerShipIntroAnimPlaying = false;
+          PlayerShipIntroAnimCompleted = false;
           playerShipExhaustSpriteRenderer.enabled = false;
           GameplayManager.Instance.currentGameState = GameplayManager.GameState.LEVEL_IN_PROGRESS;
         PlayerHPWorldSpaceStatusBar.EnableStatusBar();
+          playerStatusBar.EnableStatusBar();
           UltimateStatusBar.UpdateStatus("PlayerHPWorldSpaceStatusBar", GameplayManager.Instance.currentPlayerHP, GameplayManager.Instance.MAX_PLAYER_HP);
-          //print("gamestate is now set to LEVEL_IN_PROGRESS! ");
+          
+          if (playerDeathFXObjects.Count != 0) //despawn the player death explosions from the previous playerdeath. slightly weird place to do it, I know but enough time has passed...
+					{
+            foreach (GameObject go in playerDeathFXObjects)
+              SimplePool.Despawn(go);
+					}
         }
         break;
 
@@ -131,11 +143,14 @@ public class PlayerShip : ExtendedBehaviour
           PlayerShipOutroAnimCompleted = false;
         }
         break;
+      case GameplayManager.GameState.PLAYER_DIED:
       case GameplayManager.GameState.LEVEL_COMPLETE:
           //transform.rotation = Quaternion.identity; // reset to face upwards, back to its original rotation.
           shipSpriteRenderer.gameObject.GetComponent<Renderer>().enabled = false;
           PlayerShipIntroAnimCompleted = false;
+          PlayerShipIntroAnimPlaying = false;
         break;
+      
       default:
         break;
     }
@@ -184,7 +199,36 @@ public class PlayerShip : ExtendedBehaviour
     }
   }
 
- 
+  public IEnumerator DoPlayerDeath()
+  {
+    print("In Player Death");
+    int numExplosions = 4;
+    float timeBetweenExplosions = .3f;
+    Vector3 explosionPos;
+
+    for (int i = 0; i < numExplosions; i++)
+    {
+      explosionPos = new Vector3(transform.position.x + Random.Range(-.5f, .5f),
+                                  transform.position.y + Random.Range(-.5f, .5f),
+                                  transform.position.z);
+
+      deathExplosionInstance = SimplePool.Spawn(deathExplosion, explosionPos, transform.rotation);
+      GameObject newParticleEffect = SimplePool.Spawn(playerDeathFX, explosionPos, transform.rotation, transform) as GameObject;
+      playerDeathFXObjects.Add(deathExplosionInstance);
+      playerDeathFXObjects.Add(newParticleEffect);
+
+      //change the sorting order so the explosion is sorted over the boss sprite. the explosion sorting is set to default layer as that works best for enemy deaths - the enemy death effect doesn't get too obscured by the explosion. And yeah, I know I'm doing a GetComponent here, but it's on boss death so shouldn't matter if it's slow...
+      deathExplosionInstance.GetComponentInChildren<SpriteRenderer>().sortingLayerName = "VFX_OverPlayerShip";
+      yield return new WaitForSeconds(timeBetweenExplosions);
+
+    }
+    
+    GameplayManager.Instance.currentGameState = GameplayManager.GameState.PLAYER_DIED;
+    shipSpriteRenderer.enabled = false;
+    playerStatusBar.DisableStatusBar();
+    PlayerHPWorldSpaceStatusBar.DisableStatusBar();
+}
+
   private void CreatePlayerBullets()
   {
     switch(GameplayManager.Instance.currentPlayerFiringState)

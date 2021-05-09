@@ -11,6 +11,8 @@ public class PowerUpHealth : PowerUp
 
     //do stuff specific to this PU//todo
     GameplayManager.Instance.currentPlayerHP += HPincrease;
+    UltimateStatusBar.UpdateStatus("playerStatusBar", GameplayManager.Instance.currentPlayerHP, GameplayManager.Instance.MAX_PLAYER_HP);
+    UltimateStatusBar.UpdateStatus("PlayerHPWorldSpaceStatusBar", GameplayManager.Instance.currentPlayerHP, GameplayManager.Instance.MAX_PLAYER_HP);
 
     base.PowerUpPayload();
   }
