@@ -112,7 +112,7 @@ public abstract class EnemyBehaviour02 : ExtendedBehaviour
     //  TemporarilyDie();
     //}
 
-    if (GameplayManager.Instance.currentGameState == GameplayManager.GameState.LEVEL_IN_PROGRESS)
+    if ((GameplayManager.Instance.currentGameState == GameplayManager.GameState.LEVEL_IN_PROGRESS) || (GameplayManager.Instance.currentGameState == GameplayManager.GameState.PLAYER_DYING) || (GameplayManager.Instance.currentGameState == GameplayManager.GameState.PLAYER_DIED) || (GameplayManager.Instance.currentGameState == GameplayManager.GameState.LEVEL_INTRO_IN_PROGRESS))
     {
       switch (enemyState)
       {
@@ -142,7 +142,7 @@ public abstract class EnemyBehaviour02 : ExtendedBehaviour
           }
         case EnemyState.HIT_BY_ATMOSPHERE:
           {
-            playerShip.ChangeShipHP(-10);
+            //playerShip.ChangeShipHP(-10);
             TemporarilyDie();
             break;
           }

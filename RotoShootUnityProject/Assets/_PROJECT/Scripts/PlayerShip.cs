@@ -364,8 +364,7 @@ public class PlayerShip : ExtendedBehaviour
           //print($"collision between this {transform.position} and other {collision.gameObject.transform.position}");
           DoCameraShake();
           ChangeShipHP(-10);
-          UltimateStatusBar.UpdateStatus("playerStatusBar", GameplayManager.Instance.currentPlayerHP, GameplayManager.Instance.MAX_PLAYER_HP);
-          UltimateStatusBar.UpdateStatus("PlayerHPWorldSpaceStatusBar", GameplayManager.Instance.currentPlayerHP, GameplayManager.Instance.MAX_PLAYER_HP);
+         
         }
 
         if ((collision.gameObject.tag.Equals("Asteroid")))
@@ -389,7 +388,9 @@ public class PlayerShip : ExtendedBehaviour
   public void ChangeShipHP(int hpChange)
     {
       GameplayManager.Instance.currentPlayerHP += hpChange; //looks weird but negattive numbers are passed in for a decrease in HP
-    }
+    UltimateStatusBar.UpdateStatus("playerStatusBar", GameplayManager.Instance.currentPlayerHP, GameplayManager.Instance.MAX_PLAYER_HP);
+    UltimateStatusBar.UpdateStatus("PlayerHPWorldSpaceStatusBar", GameplayManager.Instance.currentPlayerHP, GameplayManager.Instance.MAX_PLAYER_HP);
+  }
 
  
   void DoCameraShake()

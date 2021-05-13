@@ -207,6 +207,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3160081027698751598, guid: e1fd97ef0642bd44bbbf05a41d45aeee,
         type: 3}
+      propertyPath: scrollSpeed
+      value: 0.03
+      objectReference: {fileID: 0}
+    - target: {fileID: 3160081027698751598, guid: e1fd97ef0642bd44bbbf05a41d45aeee,
+        type: 3}
       propertyPath: diagonalScroll
       value: 1
       objectReference: {fileID: 0}
@@ -2310,6 +2315,7 @@ Material:
         m_Texture: {fileID: 0}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
+    m_Ints: []
     m_Floats:
     - _Alpha: 1
     - _AlphaCutoffValue: 0.25
