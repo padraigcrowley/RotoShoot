@@ -162,8 +162,8 @@ public abstract class EnemyBehaviour02 : ExtendedBehaviour
             //  });
             //  startedWaiting = true;
             //}
-            //if ((waveRespawnWaitOver) && (burnFadeEffectComplete == true))
-            if (waveRespawnWaitOver)
+            if ((waveRespawnWaitOver) && (burnFadeEffectComplete == true))
+            //if (waveRespawnWaitOver)
             {
               //if (timeBetweenSpawnPassed)
               {
@@ -240,6 +240,7 @@ public abstract class EnemyBehaviour02 : ExtendedBehaviour
 
   private void TemporarilyDie()
   {
+    print("TemporarilyDie() called");
     deathExplosionInstance = SimplePool.Spawn(deathExplosion, this.transform.position, this.transform.rotation, enemyExplosionsPool.transform);
 
     int randScaleFlip = UnityEngine.Random.Range(0, 4);// not scaleflipped, scaledFlippedX, scaledFlippedY, scaledFlippedXandY
