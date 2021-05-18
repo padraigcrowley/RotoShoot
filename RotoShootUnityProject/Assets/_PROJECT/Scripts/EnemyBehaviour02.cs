@@ -11,7 +11,7 @@ public abstract class EnemyBehaviour02 : ExtendedBehaviour
   private float hp;
   public float speedMultiplierFromSpawner = 1f;
   public float hpMultiplierFromSpawner = 1f;
-  private float respawnWaitDelay = 2.0f; //default value unless overridden by derived class
+  //private float respawnWaitDelay = 6.0f; //default value unless overridden by derived class - no longer used, handled in LeveManager
 
   public float startPosX, startPosY, startPosZ = 0f;
   private float startScaleX, startScaleY, startScaleZ;
@@ -37,6 +37,7 @@ public abstract class EnemyBehaviour02 : ExtendedBehaviour
   private bool startedWaiting;
   public float timeBetweenSpawn;
 
+  private bool burnFadeEffectComplete = true;
 
   public GameObject[] availablePowerUps;
   public GameObject powerUpInstance;
@@ -46,7 +47,7 @@ public abstract class EnemyBehaviour02 : ExtendedBehaviour
   public SWS.PathManager waypointPath;
   protected splineMove splineMoveScript;
 
-  virtual public float GetRespawnWaitDelay() => respawnWaitDelay;
+ // virtual public float GetRespawnWaitDelay() => respawnWaitDelay;
 
   public abstract void ReactToNonLethalPlayerMissileHit(); //each enemy variant has to implement their own
 
@@ -112,7 +113,10 @@ public abstract class EnemyBehaviour02 : ExtendedBehaviour
     //  TemporarilyDie();
     //}
 
-    if ((GameplayManager.Instance.currentGameState == GameplayManager.GameState.LEVEL_IN_PROGRESS) || (GameplayManager.Instance.currentGameState == GameplayManager.GameState.PLAYER_DYING) || (GameplayManager.Instance.currentGameState == GameplayManager.GameState.PLAYER_DIED) || (GameplayManager.Instance.currentGameState == GameplayManager.GameState.LEVEL_INTRO_IN_PROGRESS))
+    if ((GameplayManager.Instance.currentGameState == GameplayManager.GameState.LEVEL_IN_PROGRESS) || 
+        (GameplayManager.Instance.currentGameState == GameplayManager.GameState.PLAYER_DYING) || 
+        (GameplayManager.Instance.currentGameState == GameplayManager.GameState.PLAYER_DIED) || 
+        (GameplayManager.Instance.currentGameState == GameplayManager.GameState.LEVEL_INTRO_IN_PROGRESS))
     {
       switch (enemyState)
       {
@@ -158,6 +162,7 @@ public abstract class EnemyBehaviour02 : ExtendedBehaviour
             //  });
             //  startedWaiting = true;
             //}
+            //if ((waveRespawnWaitOver) && (burnFadeEffectComplete == true))
             if (waveRespawnWaitOver)
             {
               //if (timeBetweenSpawnPassed)
@@ -289,6 +294,8 @@ public abstract class EnemyBehaviour02 : ExtendedBehaviour
     float elapsedTime = 0f;
     float currentVal;
 
+    burnFadeEffectComplete = false;
+
     while (elapsedTime <= duration) //from normal to red
     {
       currentVal = Mathf.Lerp(0f, 1f, (elapsedTime / duration));
@@ -297,6 +304,7 @@ public abstract class EnemyBehaviour02 : ExtendedBehaviour
       yield return new WaitForEndOfFrame();
     }
     //enemySpriteRenderer.enabled = false;
+    burnFadeEffectComplete = true;
   }
 
   private void Respawn()
