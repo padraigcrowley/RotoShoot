@@ -10,8 +10,13 @@ public class PlayerShieldBehaviour : MonoBehaviour
 
   }
 
-  // Update is called once per frame
-  void Update()
+	private void OnEnable()
+	{
+		
+	}
+
+	// Update is called once per frame
+	void Update()
   {
     if(GameplayManager.Instance.currentGameState == GameplayManager.GameState.LEVEL_OUTRO_IN_PROGRESS)
 		{

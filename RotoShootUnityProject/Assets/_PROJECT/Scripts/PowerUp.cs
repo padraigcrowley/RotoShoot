@@ -144,7 +144,7 @@ public class PowerUp : MonoBehaviour
     //Debug.Log("Power Up collected, issuing payload for: " + gameObject.name);
     
     // If we're instant use we also expire self immediately
-    if (expiresImmediately)
+    if (expiresImmediately) // e.g. an "instant" effect, like HP increase.
     {
       PowerUpHasExpired();
     }
@@ -164,7 +164,7 @@ public class PowerUp : MonoBehaviour
       ExecuteEvents.Execute<IPowerUpEvents>(go, null, (x, y) => x.OnPowerUpExpired(this, playerShip));
     }
     //Debug.Log("Power Up has expired, removing after a delay for: " + gameObject.name);
-    DestroySelfAfterDelay();
+    //DestroySelfAfterDelay(); - /// not using this coz I'm pooling/reusing the powerups
   }
 
   protected virtual void DestroySelfAfterDelay()

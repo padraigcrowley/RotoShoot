@@ -7,18 +7,8 @@ using UnityEngine;
 public class ExplosionGenerator : ExtendedBehaviour
 {
   public Animator boomAnim;  
-  //public SpriteRenderer sr;
-  // Start is called before the first frame update
-    void Start()
-    {
-    //sr = GetComponent<SpriteRenderer>();
-    //sr.enabled = false;
-    //print("ALSO BOOM!");
-    boomAnim.Play("fireexplosion");
-    Wait(3, () => {
-      gameObject.Despawn();
-    });
-  }
+  
+  //Start() not needed because OnEnable()is called in initialization anyway, and we use OnEnable(), not Start() because we're pooling and despawning the object.
 
   void OnEnable()
   {
@@ -30,17 +20,5 @@ public class ExplosionGenerator : ExtendedBehaviour
       gameObject.Despawn();
     });
   }
-
-  // Update is called once per frame
-  //void Update()
-  //{
-
-  //  if (Input.GetKeyDown(KeyCode.Space))
-  //  {
-  //    //sr.enabled = true;
-  //    //print("ALSO BOOM!");
-  //    //boomAnim.Play("fireexplosion");
-
-  //  }
-  //}
+    
 }

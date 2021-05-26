@@ -5,6 +5,7 @@ Things to upgrade
 - GameplayManager: PlayerHP
 	Also:
 	- Powerup duration (global?)
+	- Amount of HP the HP pickup gives
 
 
 

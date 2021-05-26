@@ -29,7 +29,7 @@ public abstract class EnemyBehaviour02 : ExtendedBehaviour
   public GameObject deathExplosionInstance;
   public GameObject enemyExplosionsPool;
 
-  public enum EnemyState { ALIVE, TEMPORARILY_DEAD, WAITING_TO_RESPAWN, INVINCIBLE, FULLY_DYING, FULLY_DEAD, HIT_BY_PLAYER_MISSILE, HIT_BY_PLAYER_SHIP, HIT_BY_ATMOSPHERE }
+  public enum EnemyState { ALIVE, TEMPORARILY_DEAD, WAITING_TO_RESPAWN, INVINCIBLE, FULLY_DYING, FULLY_DEAD, HIT_BY_PLAYER_MISSILE, HIT_BY_PLAYER_SHIP, HIT_BY_PLAYER_SHIELD, HIT_BY_ATMOSPHERE }
 
   public EnemyState enemyState;
   public bool waveRespawnWaitOver;
@@ -108,16 +108,21 @@ public abstract class EnemyBehaviour02 : ExtendedBehaviour
 
   protected virtual void Update()
   {
-    //if (Input.GetKeyDown(KeyCode.S))
-    //{
-    //  TemporarilyDie();
-    //}
+		
 
-    if ((GameplayManager.Instance.currentGameState == GameplayManager.GameState.LEVEL_IN_PROGRESS) || 
-        (GameplayManager.Instance.currentGameState == GameplayManager.GameState.PLAYER_DYING) || 
-        (GameplayManager.Instance.currentGameState == GameplayManager.GameState.PLAYER_DIED) || 
-        (GameplayManager.Instance.currentGameState == GameplayManager.GameState.LEVEL_INTRO_IN_PROGRESS))
-    {
+		if ((GameplayManager.Instance.currentGameState == GameplayManager.GameState.LEVEL_IN_PROGRESS) ||
+				(GameplayManager.Instance.currentGameState == GameplayManager.GameState.PLAYER_DYING) ||
+				(GameplayManager.Instance.currentGameState == GameplayManager.GameState.PLAYER_DIED) ||
+				(GameplayManager.Instance.currentGameState == GameplayManager.GameState.LEVEL_INTRO_IN_PROGRESS))
+		//if (GameplayManager.Instance.currentGameState == GameplayManager.GameState.LEVEL_IN_PROGRESS) 
+		{
+
+      if (Input.GetKeyDown(KeyCode.S))
+      {
+        TemporarilyDie();
+      }
+
+
       switch (enemyState)
       {
         case EnemyState.ALIVE:
@@ -240,35 +245,40 @@ public abstract class EnemyBehaviour02 : ExtendedBehaviour
 
   private void TemporarilyDie()
   {
-    print("TemporarilyDie() called");
-    deathExplosionInstance = SimplePool.Spawn(deathExplosion, this.transform.position, this.transform.rotation, enemyExplosionsPool.transform);
-
-    int randScaleFlip = UnityEngine.Random.Range(0, 4);// not scaleflipped, scaledFlippedX, scaledFlippedY, scaledFlippedXandY
-    switch(randScaleFlip)
-    {
-      case (0):
-        deathExplosionInstance.transform.localScale = new Vector3(.5f, .5f, 1f);
-        break;
-      case (1):
-        deathExplosionInstance.transform.localScale = new Vector3(-.5f, .4f, 1f);
-        break;
-      case (2):
-        deathExplosionInstance.transform.localScale = new Vector3(.6f, -.6f, 1f);
-        break;
-      case (3):
-        deathExplosionInstance.transform.localScale = new Vector3(-.4f, -.4f, 1f);
-        break;
-      default:
-        break;
-    }
-
-    StartCoroutine(DoBurnFadeEffect(.75f, 0f, 1f));
     StopMovement();
-    if((enemyState != EnemyState.HIT_BY_ATMOSPHERE) && (enemyState != EnemyState.HIT_BY_PLAYER_SHIP) )
-		{
+
+    if (enemyState == EnemyState.HIT_BY_PLAYER_SHIELD)
+    { 
+      StartCoroutine(DoBurnFadeEffect(.75f, 0f, 1f));
       LevelManager.Instance.numEnemyKillsInLevel++;
       GameplayManager.Instance.totalEnemyKillCount++;
-      //print($"totalEnemyKillCount {GameplayManager.Instance.totalEnemyKillCount}");
+    }
+    else if(enemyState != EnemyState.HIT_BY_ATMOSPHERE)
+		{
+
+      StartCoroutine(DoBurnFadeEffect(.75f, 0f, 1f));
+      deathExplosionInstance = SimplePool.Spawn(deathExplosion, this.transform.position, this.transform.rotation, enemyExplosionsPool.transform);
+      int randScaleFlip = UnityEngine.Random.Range(0, 4);// not scaleflipped, scaledFlippedX, scaledFlippedY, scaledFlippedXandY
+      switch (randScaleFlip)
+      {
+        case (0):
+          deathExplosionInstance.transform.localScale = new Vector3(.5f, .5f, 1f);
+          break;
+        case (1):
+          deathExplosionInstance.transform.localScale = new Vector3(-.5f, .4f, 1f);
+          break;
+        case (2):
+          deathExplosionInstance.transform.localScale = new Vector3(.6f, -.6f, 1f);
+          break;
+        case (3):
+          deathExplosionInstance.transform.localScale = new Vector3(-.4f, -.4f, 1f);
+          break;
+        default:
+          break;
+      }
+
+      LevelManager.Instance.numEnemyKillsInLevel++;
+      GameplayManager.Instance.totalEnemyKillCount++;
       if (GameplayManager.Instance.totalEnemyKillCount % GameplayManager.Instance.enemyKillPowerUpDropFrequency == 0)
       {
         DropPowerUp();
@@ -339,9 +349,13 @@ public abstract class EnemyBehaviour02 : ExtendedBehaviour
         missileObject = collision.gameObject;
         enemyState = EnemyState.HIT_BY_PLAYER_MISSILE;
       }
-      else if ((collision.gameObject.tag.Equals("Player")) || (collision.gameObject.tag.Equals("PlayerShield")))
+      else if (collision.gameObject.tag.Equals("Player"))
       {
         enemyState = EnemyState.HIT_BY_PLAYER_SHIP;
+      }
+      else if (collision.gameObject.tag.Equals("PlayerShield"))
+      {
+        enemyState = EnemyState.HIT_BY_PLAYER_SHIELD;
       }
       else if (collision.gameObject.tag.Equals("Atmosphere"))
       {
