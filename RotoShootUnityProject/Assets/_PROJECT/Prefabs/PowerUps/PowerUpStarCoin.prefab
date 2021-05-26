@@ -11,7 +11,6 @@ GameObject:
   - component: {fileID: 5288227307620429712}
   - component: {fileID: 9206009594659184046}
   - component: {fileID: -1851889754244681069}
-  - component: {fileID: -4105950463894380294}
   - component: {fileID: 524294970427774196}
   - component: {fileID: 8143604702004552976}
   - component: {fileID: -3939826440404866278}
@@ -47,6 +46,7 @@ SpriteRenderer:
   m_CastShadows: 0
   m_ReceiveShadows: 0
   m_DynamicOccludee: 1
+  m_StaticShadowCaster: 0
   m_MotionVectors: 1
   m_LightProbeUsage: 1
   m_ReflectionProbeUsage: 1
@@ -110,18 +110,6 @@ MonoBehaviour:
   playerShieldPrefab: {fileID: 4628581462396991242, guid: f2759175ad1625948b264241c5525121,
     type: 3}
   playerShieldPrefabInstance: {fileID: 0}
---- !u!114 &-4105950463894380294
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2477514511899951309}
-  m_Enabled: 0
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: ee158225ee1e59f4791627785501d950, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!95 &524294970427774196
 Animator:
   serializedVersion: 3

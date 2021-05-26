@@ -17,27 +17,27 @@ public class PowerUpHealth : PowerUp
     base.PowerUpPayload();
   }
 
-  protected override void Start()
-  {
+  //protected override void Start()
+  //{
 
-    base.Start();
-  }
+  //  base.Start();
+  //}
 
-  protected override void Update()
-  {
-    //if (powerUpState == PowerUpState.IsCollected)
-    //{
-    //  durationSeconds -= Time.deltaTime;
-    //  if (durationSeconds < 0)
-    //  {
-    //    PowerUpHasExpired();
-    //  }
-    //}
-    base.Update();
-  }
-  protected override void PowerUpHasExpired()
-  {
+  //protected override void Update()
+  //{
+  //  //if (powerUpState == PowerUpState.IsCollected)
+  //  //{
+  //  //  durationSeconds -= Time.deltaTime;
+  //  //  if (durationSeconds < 0)
+  //  //  {
+  //  //    PowerUpHasExpired();
+  //  //  }
+  //  //}
+  //  base.Update();
+  //}
+  //protected override void PowerUpHasExpired()
+  //{
 
-    base.PowerUpHasExpired();
-  }
+  //  base.PowerUpHasExpired();
+  //}
 }

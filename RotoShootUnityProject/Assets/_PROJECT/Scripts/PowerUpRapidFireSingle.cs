@@ -15,10 +15,10 @@ public class PowerUpRapidFireSingle : PowerUp
     base.PowerUpPayload();
   }
 
-  protected override void Start()
+  protected override void OnEnable()
   {
     durationSeconds = GameplayManager.Instance.powerupDurationSeconds;
-    base.Start();
+    base.OnEnable();
   }
 
   protected override void Update()

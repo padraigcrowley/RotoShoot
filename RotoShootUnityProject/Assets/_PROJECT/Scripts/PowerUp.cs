@@ -2,7 +2,7 @@
 using UnityEngine.EventSystems;
 using DG.Tweening;
 
-public class PowerUp : MonoBehaviour
+public class PowerUp : ExtendedBehaviour
 {
   public string powerUpName;
   [Tooltip("Tick true for power ups that are instant use, eg a health addition that has no delay before expiring")]
@@ -33,7 +33,7 @@ public class PowerUp : MonoBehaviour
     spriteRenderer = GetComponent<SpriteRenderer>();
   }
 
-  protected virtual void Start()
+  protected virtual void OnEnable()
   {
     if(pulseWhileFalling)
       pulseTween = transform.DOScale(1.5f, 0.3f).SetLoops(50, LoopType.Yoyo);
@@ -57,7 +57,9 @@ public class PowerUp : MonoBehaviour
         pulseTween.Kill();
       travelSpeed /= 2.0f;
       dissolveAnim.Play("PowerUpDissolve");
-      Destroy(gameObject, 1);
+      
+      SimplePool.Despawn(gameObject);
+      //Destroy(gameObject, 1);
     }
 
 
@@ -80,7 +82,9 @@ public class PowerUp : MonoBehaviour
         pulseTween.Kill();
       travelSpeed /= 2.0f;
       dissolveAnim.Play("PowerUpDissolve");
-      Destroy(gameObject, 1);
+      
+      SimplePool.Despawn(gameObject);
+      //Destroy(gameObject, 1);
     }
   }
 
@@ -165,6 +169,8 @@ public class PowerUp : MonoBehaviour
     }
     //Debug.Log("Power Up has expired, removing after a delay for: " + gameObject.name);
     //DestroySelfAfterDelay(); - /// not using this coz I'm pooling/reusing the powerups
+    SimplePool.Despawn(gameObject);
+
   }
 
   protected virtual void DestroySelfAfterDelay()

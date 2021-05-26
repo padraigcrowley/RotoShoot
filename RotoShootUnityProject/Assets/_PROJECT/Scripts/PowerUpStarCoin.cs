@@ -16,9 +16,9 @@ public class PowerUpStarCoin : PowerUp
     base.PowerUpPayload();
   }
 
-  protected override void Start()
+  protected override void OnEnable()
   {
-    base.Start();
+    base.OnEnable();
   }
 
   protected override void Update()

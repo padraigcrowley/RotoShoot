@@ -26,7 +26,7 @@ public class PlayerShip : ExtendedBehaviour
   private bool playerShipMoving = false;
   public CameraShake camShakeScript;
   public GameObject playerShipMissilesParentPool;
-  public bool invulnerable = false;
+  //public bool invulnerable = false;
 
   public GameObject PlayerShipDamageLarge;
   private GameObject playerMissileInstance, playerMissileLeftTurretInstance, playerMissileRightTurretInstance;

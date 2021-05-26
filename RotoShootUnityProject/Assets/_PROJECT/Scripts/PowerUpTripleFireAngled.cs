@@ -16,10 +16,10 @@ public class PowerUpTripleFireAngled : PowerUp
 
 
 
-  protected override void Start()
+  protected override void OnEnable()
   {
     durationSeconds = GameplayManager.Instance.powerupDurationSeconds;
-    base.Start();
+    base.OnEnable();
   }
 
 
