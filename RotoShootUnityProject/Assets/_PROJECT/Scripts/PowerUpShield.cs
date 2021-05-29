@@ -11,7 +11,7 @@ public class PowerUpShield : PowerUp
     //do stuff specific to this PU//todo
     //playerShield.SetActive(true);
     Instantiate(playerShieldPrefab, playerShip.gameObject.transform.position, Quaternion.identity,playerShip.transform);
-   
+    print("PLAYER SHIELD INSTANTIATED!!!");
     
     base.PowerUpPayload();
   }

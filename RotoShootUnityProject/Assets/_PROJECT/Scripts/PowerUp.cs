@@ -33,38 +33,31 @@ public class PowerUp : ExtendedBehaviour
     spriteRenderer = GetComponent<SpriteRenderer>();
   }
 
-  protected virtual void OnEnable()
+	private void Start()
+	{
+    DOTween.logBehaviour = LogBehaviour.Verbose;
+  }
+
+	protected virtual void OnEnable()
   {
-    if(pulseWhileFalling)
-      pulseTween = transform.DOScale(1.5f, 0.3f).SetLoops(50, LoopType.Yoyo);
+    //spriteRenderer.enabled = true;
+    if (pulseWhileFalling)
+    {
+      bool isActive = pulseTween.IsActive();
+      if (!isActive)
+      {
+        pulseTween = transform.DOScale(1.5f, 0.3f).SetLoops(50, LoopType.Yoyo);
+        print("Tween wasn't active, kicking it off again.");
+      }
+			else
+			{
+        print("Tween was active, no need to kick off again...");
+      }
+      
+    }
     powerUpState = PowerUpState.InAttractMode;
   }
-
-  /// <summary>
-  /// 2D support
-  /// </summary>
-  protected virtual void OnTriggerEnter2D(Collider2D other)
-  {
-    if(other.tag == "Player")
-    {
-      print($"PowerUp Collected!");
-      PowerUpCollected(other.gameObject);
-    }
-    else if ( (other.gameObject.CompareTag("Atmosphere")) || (other.gameObject.CompareTag("BoundaryBottom")) )
-    {
-      print($"Collision entered with Atmos! ");
-      if (pulseWhileFalling) 
-        pulseTween.Kill();
-      travelSpeed /= 2.0f;
-      dissolveAnim.Play("PowerUpDissolve");
-      
-      SimplePool.Despawn(gameObject);
-      //Destroy(gameObject, 1);
-    }
-
-
-  }
-
+    
   /// <summary>
   /// 3D support
   /// </summary>
@@ -78,10 +71,10 @@ public class PowerUp : ExtendedBehaviour
     else if ((other.gameObject.CompareTag("Atmosphere")) || (other.gameObject.CompareTag("BoundaryBottom")))
     {
       //print($"Collision entered with Atmos! ");
-      if (pulseWhileFalling)
-        pulseTween.Kill();
-      travelSpeed /= 2.0f;
-      dissolveAnim.Play("PowerUpDissolve");
+      //if (pulseWhileFalling)
+      //  pulseTween.Kill();
+      //travelSpeed /= 2.0f;
+      //dissolveAnim.Play("PowerUpDissolve");
       
       SimplePool.Despawn(gameObject);
       //Destroy(gameObject, 1);
@@ -102,8 +95,8 @@ public class PowerUp : ExtendedBehaviour
       return;
     }
     powerUpState = PowerUpState.IsCollected;
-    if (pulseWhileFalling) 
-      pulseTween.Kill();
+    //if (pulseWhileFalling) 
+    //  pulseTween.Kill();
 
     // We must have been collected by a player, store handle to player for later use      
     playerShip = gameObjectCollectingPowerUp.GetComponent<PlayerShip>();
@@ -126,7 +119,8 @@ public class PowerUp : ExtendedBehaviour
     }
 
     // Now the power up visuals can go away
-    spriteRenderer.enabled = false;
+    //spriteRenderer.enabled = false;
+    //SimplePool.Despawn(gameObject);
   }
 
   protected virtual void PickupEffects()
@@ -184,9 +178,9 @@ public class PowerUp : ExtendedBehaviour
   {
     if(GameplayManager.Instance.currentGameState == GameplayManager.GameState.LEVEL_OUTRO_IN_PROGRESS)
 		{
-      if (pulseWhileFalling)
-        pulseTween.Kill();
-      travelSpeed /= 2.0f;
+      //if (pulseWhileFalling)
+      //  pulseTween.Kill();
+      //travelSpeed /= 2.0f;
       dissolveAnim.Play("PowerUpDissolve");
       Destroy(gameObject, 1);
     }

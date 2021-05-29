@@ -16,25 +16,25 @@ public class PowerUpStarCoin : PowerUp
     base.PowerUpPayload();
   }
 
-  protected override void OnEnable()
-  {
-    base.OnEnable();
-  }
+  //protected override void OnEnable()
+  //{
+  //  base.OnEnable();
+  //}
 
-  protected override void Update()
-  {
-    if (powerUpState == PowerUpState.IsCollected)
-    {
-      durationSeconds -= Time.deltaTime;
-      if (durationSeconds < 0)
-      {
-        PowerUpHasExpired();
-      }
-    }
-    base.Update();
-  }
-  protected override void PowerUpHasExpired()
-  {
-    base.PowerUpHasExpired();
-  }
+  //protected override void Update()
+  //{
+  //  if (powerUpState == PowerUpState.IsCollected)
+  //  {
+  //    durationSeconds -= Time.deltaTime;
+  //    if (durationSeconds < 0)
+  //    {
+  //      PowerUpHasExpired();
+  //    }
+  //  }
+  //  base.Update();
+  //}
+  //protected override void PowerUpHasExpired()
+  //{
+  //  base.PowerUpHasExpired();
+  //}
 }
