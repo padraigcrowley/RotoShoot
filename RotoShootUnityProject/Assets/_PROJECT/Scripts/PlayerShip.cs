@@ -386,8 +386,12 @@ public class PlayerShip : ExtendedBehaviour
 
   //could be increment or decrement;
   public void ChangeShipHP(int hpChange)
-    {
+  {
+    if ((GameplayManager.Instance.currentPlayerHP + hpChange) > GameplayManager.Instance.MAX_PLAYER_HP)
+      GameplayManager.Instance.currentPlayerHP = GameplayManager.Instance.MAX_PLAYER_HP;
+    else
       GameplayManager.Instance.currentPlayerHP += hpChange; //looks weird but negattive numbers are passed in for a decrease in HP
+    
     UltimateStatusBar.UpdateStatus("playerStatusBar", GameplayManager.Instance.currentPlayerHP, GameplayManager.Instance.MAX_PLAYER_HP);
     UltimateStatusBar.UpdateStatus("PlayerHPWorldSpaceStatusBar", GameplayManager.Instance.currentPlayerHP, GameplayManager.Instance.MAX_PLAYER_HP);
   }

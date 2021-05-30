@@ -35,7 +35,7 @@ public class PowerUp : ExtendedBehaviour
 
 	private void Start()
 	{
-    DOTween.logBehaviour = LogBehaviour.Verbose;
+    //DOTween.logBehaviour = LogBehaviour.Verbose;
   }
 
 	protected virtual void OnEnable()
@@ -46,7 +46,7 @@ public class PowerUp : ExtendedBehaviour
       bool isActive = pulseTween.IsActive();
       if (!isActive)
       {
-        pulseTween = transform.DOScale(1.5f, 0.3f).SetLoops(50, LoopType.Yoyo);
+        pulseTween = transform.DOScale(1.5f, 0.3f).SetLoops(-1, LoopType.Yoyo);
         print("Tween wasn't active, kicking it off again.");
       }
 			else
@@ -174,15 +174,29 @@ public class PowerUp : ExtendedBehaviour
     Destroy(gameObject, 10f);
   }
 
+  protected virtual void DespawnSelfAfterDelay(float delay)
+	{
+    Wait(delay, () =>
+    {
+      SimplePool.Despawn(gameObject);
+    });
+  }
+
+
+
   protected virtual void Update()
   {
-    if(GameplayManager.Instance.currentGameState == GameplayManager.GameState.LEVEL_OUTRO_IN_PROGRESS)
+    if((GameplayManager.Instance.currentGameState == GameplayManager.GameState.LEVEL_OUTRO_IN_PROGRESS) && (powerUpState == PowerUpState.InAttractMode))
 		{
-      //if (pulseWhileFalling)
-      //  pulseTween.Kill();
-      //travelSpeed /= 2.0f;
-      dissolveAnim.Play("PowerUpDissolve");
-      Destroy(gameObject, 1);
+      if (pulseWhileFalling)
+      {
+        pulseTween.Kill();
+      }
+			travelSpeed /= 2.0f;
+			dissolveAnim.Play("PowerUpDissolve");
+      //Destroy(gameObject, 1);
+      DespawnSelfAfterDelay(5f);
+      powerUpState = PowerUpState.IsExpiring;
     }
     if(powerUpState == PowerUpState.InAttractMode)
       DoMovement();

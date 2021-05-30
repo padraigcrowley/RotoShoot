@@ -8,12 +8,8 @@ public class PowerUpHealth : PowerUp
   public int HPincrease = 25;
   protected override void PowerUpPayload()
   {
-
     //do stuff specific to this PU//todo
-    GameplayManager.Instance.currentPlayerHP += HPincrease;
-    UltimateStatusBar.UpdateStatus("playerStatusBar", GameplayManager.Instance.currentPlayerHP, GameplayManager.Instance.MAX_PLAYER_HP);
-    UltimateStatusBar.UpdateStatus("PlayerHPWorldSpaceStatusBar", GameplayManager.Instance.currentPlayerHP, GameplayManager.Instance.MAX_PLAYER_HP);
-
+    playerShip.ChangeShipHP(HPincrease);
     base.PowerUpPayload();
   }
 
