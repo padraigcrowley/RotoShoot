@@ -141,6 +141,7 @@ public class PlayerShip : ExtendedBehaviour
           GameplayManager.Instance.currentGameState = GameplayManager.GameState.LEVEL_COMPLETE;
           PlayerShipOutroAnimPlaying = false;
           PlayerShipOutroAnimCompleted = false;
+          shipSpriteRenderer.gameObject.GetComponent<Renderer>().enabled = false;
         }
         break;
       case GameplayManager.GameState.PLAYER_DIED:

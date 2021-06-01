@@ -40,7 +40,7 @@ public class PowerUp : ExtendedBehaviour
 
 	protected virtual void OnEnable()
   {
-    //spriteRenderer.enabled = true;
+    spriteRenderer.enabled = true;
     if (pulseWhileFalling)
     {
       bool isActive = pulseTween.IsActive();
@@ -119,7 +119,7 @@ public class PowerUp : ExtendedBehaviour
     }
 
     // Now the power up visuals can go away
-    //spriteRenderer.enabled = false;
+    spriteRenderer.enabled = false;
     //SimplePool.Despawn(gameObject);
   }
 
