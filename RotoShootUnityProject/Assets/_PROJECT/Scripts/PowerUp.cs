@@ -35,7 +35,10 @@ public class PowerUp : ExtendedBehaviour
 
 	private void Start()
 	{
-    //DOTween.logBehaviour = LogBehaviour.Verbose;
+    if (pulseWhileFalling)
+    {
+      pulseTween = transform.DOScale(1.5f, 0.3f).SetLoops(-1, LoopType.Yoyo);
+    }
   }
 
 	protected virtual void OnEnable()
@@ -44,16 +47,19 @@ public class PowerUp : ExtendedBehaviour
     if (pulseWhileFalling)
     {
       bool isActive = pulseTween.IsActive();
-      if (!isActive)
+      if (isActive)
       {
-        pulseTween = transform.DOScale(1.5f, 0.3f).SetLoops(-1, LoopType.Yoyo);
-        print("Tween wasn't active, kicking it off again.");
+        bool isPlaying = pulseTween.IsPlaying();
+        if (!isPlaying)
+        {
+          pulseTween.Play();
+          print("Tween wasn't playing, kicking it off again.");
+        }
+        else
+        {
+          print("Tween was playing, no need to kick off again...");
+        }
       }
-			else
-			{
-        print("Tween was active, no need to kick off again...");
-      }
-      
     }
     powerUpState = PowerUpState.InAttractMode;
   }
@@ -75,7 +81,16 @@ public class PowerUp : ExtendedBehaviour
       //  pulseTween.Kill();
       //travelSpeed /= 2.0f;
       //dissolveAnim.Play("PowerUpDissolve");
-      
+
+      if (pulseWhileFalling)
+      {
+        bool isPlaying = pulseTween.IsPlaying();
+        if (isPlaying)
+        {
+          //print("caling KILL!");
+          pulseTween.Pause();
+        }
+      }
       SimplePool.Despawn(gameObject);
       //Destroy(gameObject, 1);
     }
@@ -163,6 +178,14 @@ public class PowerUp : ExtendedBehaviour
     }
     //Debug.Log("Power Up has expired, removing after a delay for: " + gameObject.name);
     //DestroySelfAfterDelay(); - /// not using this coz I'm pooling/reusing the powerups
+    if (pulseWhileFalling)
+    {
+      bool isPlaying = pulseTween.IsPlaying();
+      if (isPlaying)
+      {
+        pulseTween.Pause();
+      }
+    }
     SimplePool.Despawn(gameObject);
 
   }
@@ -178,6 +201,14 @@ public class PowerUp : ExtendedBehaviour
 	{
     Wait(delay, () =>
     {
+      if (pulseWhileFalling)
+      {
+        bool isPlaying = pulseTween.IsPlaying();
+        if (isPlaying)
+        {
+          pulseTween.Pause();
+        }
+      }
       SimplePool.Despawn(gameObject);
     });
   }
@@ -190,7 +221,12 @@ public class PowerUp : ExtendedBehaviour
 		{
       if (pulseWhileFalling)
       {
-        pulseTween.Kill();
+        bool isPlaying = pulseTween.IsPlaying();
+        if (isPlaying)
+        {
+          //print("caling KILL!");
+          pulseTween.Pause();
+        }
       }
 			travelSpeed /= 2.0f;
 			dissolveAnim.Play("PowerUpDissolve");
