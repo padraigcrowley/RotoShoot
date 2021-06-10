@@ -46,18 +46,16 @@ public class PowerUp : ExtendedBehaviour
     spriteRenderer.enabled = true;
     if (pulseWhileFalling)
     {
-      bool isActive = pulseTween.IsActive();
-      if (isActive)
+      if (pulseTween.IsActive())
       {
-        bool isPlaying = pulseTween.IsPlaying();
-        if (!isPlaying)
+        if (!pulseTween.IsPlaying())
         {
           pulseTween.Play();
-          print("Tween wasn't playing, kicking it off again.");
+          //print("Tween wasn't playing, kicking it off again.");
         }
         else
         {
-          print("Tween was playing, no need to kick off again...");
+          //print("Tween was playing, no need to kick off again...");
         }
       }
     }
@@ -69,7 +67,7 @@ public class PowerUp : ExtendedBehaviour
   /// </summary>
   protected virtual void OnTriggerEnter(Collider other)
   {
-    if (other.tag == "Player")
+    if ((other.tag == "Player") && (GameplayManager.Instance.currentGameState == GameplayManager.GameState.LEVEL_IN_PROGRESS))
     {
       //print($"PowerUp Collected!");
       PowerUpCollected(other.gameObject);
@@ -84,8 +82,7 @@ public class PowerUp : ExtendedBehaviour
 
       if (pulseWhileFalling)
       {
-        bool isPlaying = pulseTween.IsPlaying();
-        if (isPlaying)
+        if (pulseTween.IsPlaying())
         {
           //print("caling KILL!");
           pulseTween.Pause();
@@ -180,8 +177,7 @@ public class PowerUp : ExtendedBehaviour
     //DestroySelfAfterDelay(); - /// not using this coz I'm pooling/reusing the powerups
     if (pulseWhileFalling)
     {
-      bool isPlaying = pulseTween.IsPlaying();
-      if (isPlaying)
+      if (pulseTween.IsPlaying())
       {
         pulseTween.Pause();
       }
@@ -203,8 +199,7 @@ public class PowerUp : ExtendedBehaviour
     {
       if (pulseWhileFalling)
       {
-        bool isPlaying = pulseTween.IsPlaying();
-        if (isPlaying)
+        if (pulseTween.IsPlaying())
         {
           pulseTween.Pause();
         }
@@ -221,10 +216,8 @@ public class PowerUp : ExtendedBehaviour
 		{
       if (pulseWhileFalling)
       {
-        bool isPlaying = pulseTween.IsPlaying();
-        if (isPlaying)
+        if (pulseTween.IsPlaying())
         {
-          //print("caling KILL!");
           pulseTween.Pause();
         }
       }
@@ -234,6 +227,7 @@ public class PowerUp : ExtendedBehaviour
       DespawnSelfAfterDelay(5f);
       powerUpState = PowerUpState.IsExpiring;
     }
+
     if(powerUpState == PowerUpState.InAttractMode)
       DoMovement();
   }

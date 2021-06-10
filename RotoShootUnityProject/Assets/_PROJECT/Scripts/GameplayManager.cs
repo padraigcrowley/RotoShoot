@@ -59,6 +59,8 @@ public class GameplayManager : Singleton<GameplayManager>, IPowerUpEvents
 
   public CapsuleCollider playerShipCollider;
 
+  public float tripleFirePowerupRemainingDuration = -1;
+
   // Start is called before the first frame update
   void Start()
   {

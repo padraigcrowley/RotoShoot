@@ -26,6 +26,7 @@ public class PowerUpRapidFireSingle : PowerUp
     if (powerUpState == PowerUpState.IsCollected)
     {
       durationSeconds -= Time.deltaTime;
+      //print($"In {gameObject.ToString()} DURATION  = {durationSeconds}");
       if (durationSeconds < 0)
       {
         PowerUpHasExpired();

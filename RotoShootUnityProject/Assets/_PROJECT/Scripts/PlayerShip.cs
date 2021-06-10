@@ -41,7 +41,6 @@ public class PlayerShip : ExtendedBehaviour
 
   public GameObject deathExplosion;
   private GameObject deathExplosionInstance;
-
   void Start()
   {
 
@@ -104,7 +103,8 @@ public class PlayerShip : ExtendedBehaviour
           if (playerDeathFXObjects.Count != 0) //despawn the player death explosions from the previous playerdeath. slightly weird place to do it, I know but enough time has passed...
 					{
             foreach (GameObject go in playerDeathFXObjects)
-              SimplePool.Despawn(go);
+              if (go!=null)
+                SimplePool.Despawn(go);
 					}
         }
         break;
@@ -113,8 +113,19 @@ public class PlayerShip : ExtendedBehaviour
         
         PlayerShipIntroAnimCompleted = false;
         ProcessInputQueue();
-        
-        if ((Time.time > nextActionTime)  && (playerShipMoving == false))
+
+        if (GameplayManager.Instance.tripleFirePowerupRemainingDuration >= 0)
+				{
+          GameplayManager.Instance.currentPlayerFiringState = GameplayManager.PlayerFiringState.ANGLED_TRIPLE;
+          GameplayManager.Instance.tripleFirePowerupRemainingDuration -= Time.deltaTime;
+          //print($"In {gameObject.ToString()} DURATION  = {GameplayManager.Instance.tripleFirePowerupRemainingDuration}");
+        }
+        else
+				{
+          GameplayManager.Instance.currentPlayerFiringState = GameplayManager.PlayerFiringState.STRAIGHT_SINGLE;
+        }
+
+        if ((Time.time > nextActionTime))  //&& (playerShipMoving == false))
         {
           nextActionTime = Time.time + GameplayManager.Instance.currentPlayerShipFireRate;
           if(GameplayManager.Instance.playerShipFiring)

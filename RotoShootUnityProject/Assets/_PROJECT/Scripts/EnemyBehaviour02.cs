@@ -240,10 +240,7 @@ public abstract class EnemyBehaviour02 : ExtendedBehaviour
   private void DropPowerUp()
   {
     int index = UnityEngine.Random.Range(0, availablePowerUps.Length);
-    if (index == 2)
-    {
-      print(($"totalEnemyKillCount={GameplayManager.Instance.totalEnemyKillCount} ENEMY DROPPED SHIELD POWERUP!"));
-    }
+    index = 2;
     powerUpInstance = SimplePool.Spawn(availablePowerUps[index], transform.position, transform.rotation);
   }
 
