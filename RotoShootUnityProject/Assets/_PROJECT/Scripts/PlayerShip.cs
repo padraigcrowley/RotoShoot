@@ -41,6 +41,7 @@ public class PlayerShip : ExtendedBehaviour
 
   public GameObject deathExplosion;
   private GameObject deathExplosionInstance;
+  private Collider shipCollider;
   void Start()
   {
 
@@ -59,9 +60,10 @@ public class PlayerShip : ExtendedBehaviour
     transform.position = GameplayManager.Instance.playerShipPos;
     gameObject.SetActive(true);
     PlayerShipGFXAnim = GetComponentInChildren<Animator>();
+    shipCollider = GetComponent<Collider>();
     //shipSpriteRenderer.GetComponentInChildren<Renderer>();
     playerShipMissilesParentPool = new GameObject("PlayerShipMissilesParentPoolObject");
-
+    shipCollider.enabled = false;
   }
 
   void Update()
@@ -78,6 +80,8 @@ public class PlayerShip : ExtendedBehaviour
     switch (GameplayManager.Instance.currentGameState)
     {
       case GameplayManager.GameState.LEVEL_INTRO_IN_PROGRESS:
+
+        shipCollider.enabled = false;
         
         //PlayerShipGFXAnim.Play("PlayerShipExhaust");
         if (PlayerShipIntroAnimPlaying == false)
@@ -112,6 +116,7 @@ public class PlayerShip : ExtendedBehaviour
       case GameplayManager.GameState.LEVEL_IN_PROGRESS:
         
         PlayerShipIntroAnimCompleted = false;
+        shipCollider.enabled = true;
         ProcessInputQueue();
 
         if (GameplayManager.Instance.tripleFirePowerupRemainingDuration >= 0)
@@ -153,6 +158,7 @@ public class PlayerShip : ExtendedBehaviour
           PlayerShipOutroAnimPlaying = false;
           PlayerShipOutroAnimCompleted = false;
           shipSpriteRenderer.gameObject.GetComponent<Renderer>().enabled = false;
+          shipCollider.enabled = false;
         }
         break;
       case GameplayManager.GameState.PLAYER_DIED:
@@ -161,6 +167,7 @@ public class PlayerShip : ExtendedBehaviour
           shipSpriteRenderer.gameObject.GetComponent<Renderer>().enabled = false;
           PlayerShipIntroAnimCompleted = false;
           PlayerShipIntroAnimPlaying = false;
+        shipCollider.enabled = false;
         break;
       
       default:

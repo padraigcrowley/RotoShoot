@@ -47,6 +47,7 @@ SpriteRenderer:
   m_CastShadows: 0
   m_ReceiveShadows: 0
   m_DynamicOccludee: 1
+  m_StaticShadowCaster: 0
   m_MotionVectors: 1
   m_LightProbeUsage: 1
   m_ReflectionProbeUsage: 1
@@ -76,7 +77,7 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
-  m_Sprite: {fileID: 21300000, guid: 122672a7a74070a48b684a44da112940, type: 3}
+  m_Sprite: {fileID: 21300000, guid: bcc40b879c3bdd1469e14a1e60ebdd96, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -106,7 +107,7 @@ MonoBehaviour:
   soundEffect: {fileID: 0}
   travelSpeed: 2
   dissolveAnim: {fileID: 524294970427774196}
-  currentPlayerShipFireRateIncrease: 5
+  HPincrease: 25
 --- !u!114 &-4105950463894380294
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -149,8 +150,8 @@ BoxCollider:
   m_IsTrigger: 1
   m_Enabled: 1
   serializedVersion: 2
-  m_Size: {x: 0.46, y: 0.74, z: 0.2}
-  m_Center: {x: 0.05, y: 0, z: 0}
+  m_Size: {x: 0.48165467, y: 0.4927798, z: 0.2}
+  m_Center: {x: -0.009549305, y: 0.031579293, z: 0}
 --- !u!54 &-3939826440404866278
 Rigidbody:
   m_ObjectHideFlags: 0

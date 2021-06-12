@@ -240,7 +240,7 @@ public abstract class EnemyBehaviour02 : ExtendedBehaviour
   private void DropPowerUp()
   {
     int index = UnityEngine.Random.Range(0, availablePowerUps.Length);
-    index = 2;
+    //index = 2;
     powerUpInstance = SimplePool.Spawn(availablePowerUps[index], transform.position, transform.rotation);
   }
 

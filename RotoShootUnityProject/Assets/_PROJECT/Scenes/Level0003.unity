@@ -191,6 +191,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: atmosphere_surface_1080x252_01
       objectReference: {fileID: 0}
+    - target: {fileID: 7057503933059927056, guid: dc2ab252d46da1444afcccf1c9c9d5b0,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 7057503933059927057, guid: dc2ab252d46da1444afcccf1c9c9d5b0,
         type: 3}
       propertyPath: m_Color.a
@@ -306,6 +311,7 @@ SpriteRenderer:
   m_CastShadows: 0
   m_ReceiveShadows: 0
   m_DynamicOccludee: 1
+  m_StaticShadowCaster: 0
   m_MotionVectors: 1
   m_LightProbeUsage: 1
   m_ReflectionProbeUsage: 1
@@ -613,13 +619,23 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5617208959334405477, guid: 32f500706e927634f9878dc6ca6eccdb,
         type: 3}
+      propertyPath: m_LocalScale.x
+      value: 11.065172
+      objectReference: {fileID: 0}
+    - target: {fileID: 5617208959334405477, guid: 32f500706e927634f9878dc6ca6eccdb,
+        type: 3}
+      propertyPath: m_LocalScale.y
+      value: 19.348656
+      objectReference: {fileID: 0}
+    - target: {fileID: 5617208959334405477, guid: 32f500706e927634f9878dc6ca6eccdb,
+        type: 3}
       propertyPath: m_LocalPosition.x
-      value: -0.069
+      value: 0.0237
       objectReference: {fileID: 0}
     - target: {fileID: 5617208959334405477, guid: 32f500706e927634f9878dc6ca6eccdb,
         type: 3}
       propertyPath: m_LocalPosition.y
-      value: 1.431
+      value: 0.0253
       objectReference: {fileID: 0}
     - target: {fileID: 5617208959334405477, guid: 32f500706e927634f9878dc6ca6eccdb,
         type: 3}
@@ -682,13 +698,23 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7990008655099866932, guid: f0b2e6335d66ba24a86918d5a0fd9872,
         type: 3}
+      propertyPath: m_LocalScale.x
+      value: 11.350372
+      objectReference: {fileID: 0}
+    - target: {fileID: 7990008655099866932, guid: f0b2e6335d66ba24a86918d5a0fd9872,
+        type: 3}
+      propertyPath: m_LocalScale.y
+      value: 19.364712
+      objectReference: {fileID: 0}
+    - target: {fileID: 7990008655099866932, guid: f0b2e6335d66ba24a86918d5a0fd9872,
+        type: 3}
       propertyPath: m_LocalPosition.x
-      value: -0.096
+      value: 0.1975
       objectReference: {fileID: 0}
     - target: {fileID: 7990008655099866932, guid: f0b2e6335d66ba24a86918d5a0fd9872,
         type: 3}
       propertyPath: m_LocalPosition.y
-      value: 1.438
+      value: 0.0168
       objectReference: {fileID: 0}
     - target: {fileID: 7990008655099866932, guid: f0b2e6335d66ba24a86918d5a0fd9872,
         type: 3}
