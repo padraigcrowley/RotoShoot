@@ -77,7 +77,7 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
-  m_Sprite: {fileID: 21300000, guid: bcc40b879c3bdd1469e14a1e60ebdd96, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 88e508017e33aa2418dc8ec2962271c9, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -108,6 +108,8 @@ MonoBehaviour:
   travelSpeed: 2
   dissolveAnim: {fileID: 524294970427774196}
   HPincrease: 25
+  playerHPWorldspaceCanvasRect: {fileID: 0}
+  simpleShortStatusPrefabTransform: {fileID: 0}
 --- !u!114 &-4105950463894380294
 MonoBehaviour:
   m_ObjectHideFlags: 0

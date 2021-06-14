@@ -10,7 +10,7 @@ public class PowerUp : ExtendedBehaviour
   public bool pulseWhileFalling;
   public GameObject specialEffect;
   public AudioClip soundEffect;
-  public float travelSpeed;
+  public float travelSpeed, currentTravelSpeed;
 
   public Animator dissolveAnim;
 
@@ -33,7 +33,7 @@ public class PowerUp : ExtendedBehaviour
     spriteRenderer = GetComponent<SpriteRenderer>();
   }
 
-	private void Start()
+	protected virtual void Start()
 	{
     if (pulseWhileFalling)
     {
@@ -44,6 +44,8 @@ public class PowerUp : ExtendedBehaviour
 	protected virtual void OnEnable()
   {
     spriteRenderer.enabled = true;
+    currentTravelSpeed = travelSpeed; //reset current travel speed to original setting.
+
     if (pulseWhileFalling)
     {
       if (pulseTween.IsActive())
@@ -221,7 +223,7 @@ public class PowerUp : ExtendedBehaviour
           pulseTween.Pause();
         }
       }
-			travelSpeed /= 2.0f;
+      currentTravelSpeed /= 2.0f;
 			dissolveAnim.Play("PowerUpDissolve");
       //Destroy(gameObject, 1);
       DespawnSelfAfterDelay(5f);
@@ -234,7 +236,7 @@ public class PowerUp : ExtendedBehaviour
 
   public void DoMovement()
   {
-    float step = travelSpeed * Time.deltaTime; // calculate distance to move
+    float step = currentTravelSpeed * Time.deltaTime; // calculate distance to move
     transform.position = Vector3.MoveTowards(transform.position, new Vector2(transform.position.x, transform.position.y - 20f), step);
 
   }
