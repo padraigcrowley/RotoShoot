@@ -16,7 +16,7 @@ MonoBehaviour:
   lccEnemyKills: 40
   lccSurviveTime: 4
   lccKillBoss: 0
-  numMaxActiveWaves: 3
+  numMaxActiveWaves: 1
   minTimeBetweenWaves: 2
   maxTimeBetweenWaves: 5
   levelEnemySpawnPointData:
@@ -41,6 +41,17 @@ MonoBehaviour:
     waypointPath: {fileID: 3729171643158534044, guid: 2d06ac0a1c0e5df41a0481119688c1f4,
       type: 3}
     numEnemiesInWave: 8
+    timeBetweenSpawn: 0.5
+  - enemyPrefab: {fileID: 4342350733379744943, guid: 1dc6509eaa9363b45a849e9f37760db6,
+      type: 3}
+    startPos: {x: 1.29, y: 12}
+    verticalDistBetweenEnemies: 0
+    horizontalDistBetweenEnemies: 0
+    speedMultiplier: 4
+    hpMultiplier: 5
+    waypointPath: {fileID: 1174189899036793996, guid: 16c61ad4f7591694a8aed69ad1063f4c,
+      type: 3}
+    numEnemiesInWave: 1
     timeBetweenSpawn: 0.5
   bossSpawnPointData:
     bossPrefab: {fileID: 0}

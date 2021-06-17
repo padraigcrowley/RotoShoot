@@ -24,7 +24,7 @@ public abstract class EnemyBehaviour02 : ExtendedBehaviour
   private CapsuleCollider enemyCapsuleCollider;
   protected Vector3 upDirection;
 
-  private Renderer spriteMaterial;
+  protected Renderer spriteMaterial;
   public GameObject deathExplosion;
   public GameObject deathExplosionInstance;
   public GameObject enemyExplosionsPool;
@@ -95,7 +95,7 @@ public abstract class EnemyBehaviour02 : ExtendedBehaviour
     {
       splineMoveScript.pathContainer = waypointPath;
       splineMoveScript.speed = this.speed;
-      splineMoveScript.loopType = splineMove.LoopType.loop;
+      //splineMoveScript.loopType = splineMove.LoopType.loop;
       //splineMoveScript.closeLoop = true;
     }
     //else

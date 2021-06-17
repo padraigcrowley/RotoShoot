@@ -16,7 +16,7 @@ GameObject:
   - component: {fileID: 4775959602291852232}
   - component: {fileID: 4397442334849402655}
   m_Layer: 0
-  m_Name: Enemy02_0002
+  m_Name: Enemy02_0003
   m_TagString: Enemy01
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -77,12 +77,12 @@ SpriteRenderer:
   m_SortingLayerID: -1079083179
   m_SortingLayer: 1
   m_SortingOrder: 1
-  m_Sprite: {fileID: 21300000, guid: 671b275056161184d86ecabfcc822f7a, type: 3}
+  m_Sprite: {fileID: 21300000, guid: fc27823730c2db542b67eaaf72eb654a, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
-  m_Size: {x: 1, y: 1}
+  m_Size: {x: 2.56, y: 2.56}
   m_AdaptiveModeThreshold: 0.5
   m_SpriteTileMode: 0
   m_WasSpriteAssigned: 1
@@ -97,7 +97,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 4342350733379744943}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 2c42c8c5f3aca0640869f390e569f775, type: 3}
+  m_Script: {fileID: 11500000, guid: 8f53a2535163083449fa3b5faf7bf88c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   speedMultiplierFromSpawner: 1
@@ -132,10 +132,10 @@ MonoBehaviour:
   m_GameObject: {fileID: 4342350733379744943}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: e27d9b602b63ba847af2410f1494684b, type: 3}
+  m_Script: {fileID: 11500000, guid: d61f21d4a3bc6e8419d6fcc92a1f2f6f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  enemyMissile: {fileID: 1374267004960804, guid: ed8c5fb58e698c5418529f8aee4e4848,
+  enemyMissile: {fileID: 1607489160101874, guid: b7ba6c97a4ca1054192d87011b2d494d,
     type: 3}
 --- !u!114 &3734171053722212203
 MonoBehaviour:
@@ -167,7 +167,7 @@ MonoBehaviour:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
-  loopType: 1
+  loopType: 2
   waypoints: []
   events: []
   pathType: 1

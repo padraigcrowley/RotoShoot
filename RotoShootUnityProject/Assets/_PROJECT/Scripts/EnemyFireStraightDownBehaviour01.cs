@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class EnemyFireAtPlayerBehaviour01 : MonoBehaviour
+public class EnemyFireStraightDownBehaviour01 : MonoBehaviour
 {
   [SerializeField] private GameObject enemyMissile;
   private EnemyBehaviour02 eb;
@@ -37,21 +37,13 @@ public class EnemyFireAtPlayerBehaviour01 : MonoBehaviour
     GameObject firedBullet;
 
     Vector2 direction = GameplayManager.Instance.playerShipPos - transform.position;  //direction is a vector2 containing the (x,y) distance from the player ship to the firing gameobject (the enemy position)
-    float angle = Mathf.Atan2(direction.y, direction.x) * Mathf.Rad2Deg;
-    /* angle is a float, and it's 90 when you're aiming/firing directly above you, 
-     * -90 when firing directly below, 
-     * 0 to the right and
-     * 180 (-180) to the left */
-    if (angle > 180)
-      angle -= 360;
-    rotation.eulerAngles = new Vector3(-angle, 90, 0); // use different values to lock on different axis
-    //transform.rotation = rotation;
+    
+    float angle = -90f;
+    rotation.eulerAngles = new Vector3(-angle, 90, 0);
 
-    firedBullet = SimplePool.Spawn(enemyMissile, transform.position, Quaternion.identity, enemyMissilesParentPool.transform);
+    var adjustedPos = new Vector3(transform.position.x, transform.position.y - 1f, transform.position.z);
+    firedBullet = SimplePool.Spawn(enemyMissile, adjustedPos, Quaternion.identity, enemyMissilesParentPool.transform);
     firedBullet.transform.localRotation = rotation; //v.important line!!!
-
-
-    //firedBullet = SimplePool.Spawn(enemyMissile, transform.position, transform.rotation, enemyMissilesParentPool.transform);
 
   }
 }
