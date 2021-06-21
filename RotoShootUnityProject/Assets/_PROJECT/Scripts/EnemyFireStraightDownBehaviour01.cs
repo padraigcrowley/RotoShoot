@@ -41,7 +41,7 @@ public class EnemyFireStraightDownBehaviour01 : MonoBehaviour
     float angle = -90f;
     rotation.eulerAngles = new Vector3(-angle, 90, 0);
 
-    var adjustedPos = new Vector3(transform.position.x, transform.position.y - 1f, transform.position.z);
+    var adjustedPos = new Vector3(transform.position.x, transform.position.y /*- 1f*/, transform.position.z);
     firedBullet = SimplePool.Spawn(enemyMissile, adjustedPos, Quaternion.identity, enemyMissilesParentPool.transform);
     firedBullet.transform.localRotation = rotation; //v.important line!!!
 

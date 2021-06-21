@@ -258,25 +258,7 @@ public abstract class EnemyBehaviour02 : ExtendedBehaviour
 		{
 
       StartCoroutine(DoBurnFadeEffect(.75f, 0f, 1f));
-      deathExplosionInstance = SimplePool.Spawn(deathExplosion, this.transform.position, this.transform.rotation, enemyExplosionsPool.transform);
-      int randScaleFlip = UnityEngine.Random.Range(0, 4);// not scaleflipped, scaledFlippedX, scaledFlippedY, scaledFlippedXandY
-      switch (randScaleFlip)
-      {
-        case (0):
-          deathExplosionInstance.transform.localScale = new Vector3(.5f, .5f, 1f);
-          break;
-        case (1):
-          deathExplosionInstance.transform.localScale = new Vector3(-.5f, .4f, 1f);
-          break;
-        case (2):
-          deathExplosionInstance.transform.localScale = new Vector3(.6f, -.6f, 1f);
-          break;
-        case (3):
-          deathExplosionInstance.transform.localScale = new Vector3(-.4f, -.4f, 1f);
-          break;
-        default:
-          break;
-      }
+      DoExplode();
 
       LevelManager.Instance.numEnemyKillsInLevel++;
       GameplayManager.Instance.totalEnemyKillCount++;
@@ -293,6 +275,29 @@ public abstract class EnemyBehaviour02 : ExtendedBehaviour
     enemyState = EnemyState.WAITING_TO_RESPAWN;
   }
 
+  protected virtual void DoExplode()
+	{
+    deathExplosionInstance = SimplePool.Spawn(deathExplosion, this.transform.position, this.transform.rotation, enemyExplosionsPool.transform);
+    int randScaleFlip = UnityEngine.Random.Range(0, 4);// not scaleflipped, scaledFlippedX, scaledFlippedY, scaledFlippedXandY
+    switch (randScaleFlip)
+    {
+      case (0):
+        deathExplosionInstance.transform.localScale = new Vector3(.5f, .5f, 1f);
+        break;
+      case (1):
+        deathExplosionInstance.transform.localScale = new Vector3(-.5f, .4f, 1f);
+        break;
+      case (2):
+        deathExplosionInstance.transform.localScale = new Vector3(.6f, -.6f, 1f);
+        break;
+      case (3):
+        deathExplosionInstance.transform.localScale = new Vector3(-.4f, -.4f, 1f);
+        break;
+      default:
+        break;
+    }
+  }
+  
   private void FullyDie()
   {
     StartCoroutine(DoBurnFadeEffect(.75f, 0f, 1f));

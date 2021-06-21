@@ -40,6 +40,28 @@ public class Enemy02_0003 : EnemyBehaviour02
     startedOnPath = false;
   }
 
+  protected override void DoExplode()
+  {
+    deathExplosionInstance = SimplePool.Spawn(deathExplosion, this.transform.position, this.transform.rotation, enemyExplosionsPool.transform);
+    int randScaleFlip = UnityEngine.Random.Range(0, 4);// not scaleflipped, scaledFlippedX, scaledFlippedY, scaledFlippedXandY
+    switch (randScaleFlip)
+    {
+      case (0):
+        deathExplosionInstance.transform.localScale = new Vector3(1f, 1f, 1f);
+        break;
+      case (1):
+        deathExplosionInstance.transform.localScale = new Vector3(-1f, .9f, 1f);
+        break;
+      case (2):
+        deathExplosionInstance.transform.localScale = new Vector3(1.1f, -1.1f, 1f);
+        break;
+      case (3):
+        deathExplosionInstance.transform.localScale = new Vector3(-.9f, -.9f, 1f);
+        break;
+      default:
+        break;
+    }
+  }
   public override void ReactToNonLethalPlayerMissileHit()
   {
     StartCoroutine(DoHitEffect());
