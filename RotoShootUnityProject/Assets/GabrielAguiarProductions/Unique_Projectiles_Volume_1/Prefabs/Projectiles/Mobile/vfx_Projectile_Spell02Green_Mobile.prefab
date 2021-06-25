@@ -9737,7 +9737,7 @@ GameObject:
   - component: {fileID: 136003140227562884}
   m_Layer: 0
   m_Name: vfx_Projectile_Spell02Green_Mobile
-  m_TagString: PlayerMissile
+  m_TagString: EnemyMissile
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
