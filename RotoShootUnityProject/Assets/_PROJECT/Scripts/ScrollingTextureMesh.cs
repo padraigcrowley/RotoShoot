@@ -30,8 +30,8 @@ public class ScrollingTextureMesh : MonoBehaviour
     //float offset = Time.time * scrollSpeed;
     //_material.mainTextureOffset = new Vector2(0, offset);
     //less jerky than the above?  https://www.reddit.com/r/Unity3D/comments/9tfpli/odd_jitter_behavior_when_changing_speed_of/
-    _material.mainTextureOffset += new Vector2(0, 1) * scrollSpeed * Time.deltaTime;
-
+    _material.mainTextureOffset += new Vector2(0, 1) * scrollSpeed * Time.smoothDeltaTime;
+	//_material.mainTextureOffset += new Vector2(0, 1) * scrollSpeed * Time.deltaTime;
   }
 
 

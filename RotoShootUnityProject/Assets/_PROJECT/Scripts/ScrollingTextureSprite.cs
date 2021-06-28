@@ -32,9 +32,9 @@ public class ScrollingTextureSprite : MonoBehaviour
     //_material.mainTextureOffset = new Vector2(0, offset);
     //less jerky than the above?  https://www.reddit.com/r/Unity3D/comments/9tfpli/odd_jitter_behavior_when_changing_speed_of/
     if(!diagonalScroll)
-      _material.mainTextureOffset += new Vector2(0, 1) * scrollSpeed * Time.deltaTime;
+      _material.mainTextureOffset += new Vector2(0, 1) * scrollSpeed * Time.smoothDeltaTime;//Time.deltaTime;
     else
-      _material.mainTextureOffset += new Vector2(1, 1) * scrollSpeed * Time.deltaTime;
+      _material.mainTextureOffset += new Vector2(1, 1) * scrollSpeed * Time.smoothDeltaTime; //Time.deltaTime;
 
   }
 
