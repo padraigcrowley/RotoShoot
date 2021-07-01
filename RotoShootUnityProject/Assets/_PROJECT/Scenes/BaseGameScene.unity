@@ -1120,6 +1120,63 @@ RectTransform:
   m_AnchoredPosition: {x: -5, y: 0}
   m_SizeDelta: {x: -20, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
+--- !u!1 &254305517
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 254305519}
+  - component: {fileID: 254305518}
+  m_Layer: 0
+  m_Name: LevelManagerObject
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &254305518
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 254305517}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a153c759a5f9a6342aff8c39d5265dd2, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  numEnemyKillsInLevel: 0
+  TIME_BETWEEN_FIRING_AT_PLAYER: 2
+  currentTimeBetweenFiringAtPlayer: 0
+  levelSetupData: {fileID: 11400000, guid: 447b1c17ea8f7f1438ebbe2d8ededf42, type: 2}
+  levelPlayTimeElapsed: 0
+  verticalDistBetweenEnemies: 2
+  horizontalDistBetweenEnemies: 2
+  readyToFireAtPlayer: 0
+  enemyMissilesParentPool: {fileID: 0}
+  bossMissilesParentPool: {fileID: 0}
+  timeBetweenAsteroidShower: 0
+  bossHasBeenKilled: 0
+  spinningMine: {fileID: 2411896081061765975, guid: 41a1b7e89cfaebb4e9e25449413c44bd,
+    type: 3}
+--- !u!4 &254305519
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 254305517}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 27
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &260400408
 GameObject:
   m_ObjectHideFlags: 0
