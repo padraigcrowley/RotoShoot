@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0, g: 0, b: 0, a: 1}
+  m_IndirectSpecularColor: {r: 0.37311953, g: 0.38074014, b: 0.3587274, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -124,62 +124,6 @@ NavMeshSettings:
     debug:
       m_Flags: 0
   m_NavMeshData: {fileID: 0}
---- !u!1 &254305517
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 254305519}
-  - component: {fileID: 254305518}
-  m_Layer: 0
-  m_Name: LevelManagerObject
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!114 &254305518
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 254305517}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: a153c759a5f9a6342aff8c39d5265dd2, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  numEnemyKillsInLevel: 0
-  TIME_BETWEEN_FIRING_AT_PLAYER: 1
-  currentTimeBetweenFiringAtPlayer: 0
-  levelSetupData: {fileID: 11400000, guid: 5b034030755b0fc448796476870db2b5, type: 2}
-  levelPlayTimeElapsed: 0
-  verticalDistBetweenEnemies: 2
-  horizontalDistBetweenEnemies: 2
-  readyToFireAtPlayer: 0
-  enemyMissilesParentPool: {fileID: 0}
-  bossMissilesParentPool: {fileID: 0}
-  timeBetweenAsteroidShower: 0
-  bossHasBeenKilled: 0
-  spinningMine: {fileID: 0}
---- !u!4 &254305519
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 254305517}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 260.96002, y: 1083.76, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_Children: []
-  m_Father: {fileID: 0}
-  m_RootOrder: 0
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1001 &591093242
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -215,7 +159,7 @@ PrefabInstance:
     - target: {fileID: 7057503933059927058, guid: dc2ab252d46da1444afcccf1c9c9d5b0,
         type: 3}
       propertyPath: m_RootOrder
-      value: 2
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 7057503933059927058, guid: dc2ab252d46da1444afcccf1c9c9d5b0,
         type: 3}
@@ -279,7 +223,7 @@ PrefabInstance:
     - target: {fileID: 3160081027698751504, guid: e1fd97ef0642bd44bbbf05a41d45aeee,
         type: 3}
       propertyPath: m_RootOrder
-      value: 4
+      value: 3
       objectReference: {fileID: 0}
     - target: {fileID: 3160081027698751504, guid: e1fd97ef0642bd44bbbf05a41d45aeee,
         type: 3}
@@ -363,7 +307,7 @@ PrefabInstance:
     - target: {fileID: 5617208959334405477, guid: 32f500706e927634f9878dc6ca6eccdb,
         type: 3}
       propertyPath: m_RootOrder
-      value: 3
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 5617208959334405477, guid: 32f500706e927634f9878dc6ca6eccdb,
         type: 3}
@@ -432,7 +376,7 @@ PrefabInstance:
     - target: {fileID: 7990008655099866932, guid: f0b2e6335d66ba24a86918d5a0fd9872,
         type: 3}
       propertyPath: m_RootOrder
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 7990008655099866932, guid: f0b2e6335d66ba24a86918d5a0fd9872,
         type: 3}

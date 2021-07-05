@@ -862,7 +862,7 @@ MonoBehaviour:
   blockedPlayerShipRotationAngles: 
   totalEnemyKillCount: 0
   enemyKillPowerUpDropFrequency: 5
-  loadLevelScript: {fileID: 1849652819}
+  levelManagerScript: {fileID: 254305518}
   playerShipScript: {fileID: 1061970253}
   powerupDurationSeconds: 5
   playerShieldPowerupDurationSeconds: 5
@@ -1152,7 +1152,12 @@ MonoBehaviour:
   numEnemyKillsInLevel: 0
   TIME_BETWEEN_FIRING_AT_PLAYER: 2
   currentTimeBetweenFiringAtPlayer: 0
-  levelSetupData: {fileID: 11400000, guid: 447b1c17ea8f7f1438ebbe2d8ededf42, type: 2}
+  levelSetupDataArray:
+  - {fileID: 11400000, guid: 447b1c17ea8f7f1438ebbe2d8ededf42, type: 2}
+  - {fileID: 11400000, guid: 5b034030755b0fc448796476870db2b5, type: 2}
+  - {fileID: 11400000, guid: 97573bb39ce42774e9521893f17723b0, type: 2}
+  - {fileID: 11400000, guid: da53f01ad7a998a4e8cffe2526c33a6e, type: 2}
+  levelSetupData: {fileID: 0}
   levelPlayTimeElapsed: 0
   verticalDistBetweenEnemies: 2
   horizontalDistBetweenEnemies: 2
@@ -5958,7 +5963,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: 23.699951, y: -27.30066}
+  m_AnchoredPosition: {x: 23.699951, y: -27.300781}
   m_SizeDelta: {x: 346.3, y: 269.3}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1442814580
@@ -6267,7 +6272,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 22422498, guid: 99d7216a19ca3154a816f37c1b5e2b1a, type: 3}
       propertyPath: m_AnchoredPosition.y
-      value: -89.39624
+      value: -82.67621
       objectReference: {fileID: 0}
     - target: {fileID: 22422498, guid: 99d7216a19ca3154a816f37c1b5e2b1a, type: 3}
       propertyPath: m_LocalEulerAnglesHint.x
@@ -6664,7 +6669,7 @@ AudioListener:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1671541790}
-  m_Enabled: 1
+  m_Enabled: 0
 --- !u!124 &1671541792
 Behaviour:
   m_ObjectHideFlags: 0
@@ -6672,7 +6677,7 @@ Behaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1671541790}
-  m_Enabled: 1
+  m_Enabled: 0
 --- !u!20 &1671541794
 Camera:
   m_ObjectHideFlags: 0

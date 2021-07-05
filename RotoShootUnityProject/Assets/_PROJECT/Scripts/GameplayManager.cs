@@ -1,5 +1,6 @@
 ﻿using System.Collections;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class GameplayManager : Singleton<GameplayManager>, IPowerUpEvents
 {
@@ -50,7 +51,7 @@ public class GameplayManager : Singleton<GameplayManager>, IPowerUpEvents
   public int totalEnemyKillCount = 0;
   public int enemyKillPowerUpDropFrequency = 5;
 
-  public LoadLevel loadLevelScript;
+  public LevelManager levelManagerScript;
   public PlayerShip playerShipScript;
 
   public float powerupDurationSeconds, playerShieldPowerupDurationSeconds;
@@ -60,10 +61,16 @@ public class GameplayManager : Singleton<GameplayManager>, IPowerUpEvents
   public CapsuleCollider playerShipCollider;
 
   public float tripleFirePowerupRemainingDuration = -1;
-
+  
   // Start is called before the first frame update
   void Start()
   {
+    Debug.Log("<color=red> Active Scene : " + SceneManager.GetActiveScene().name + "</color>");
+    SceneManager.SetActiveScene(SceneManager.GetSceneByName("BaseGameScene"));
+    Debug.Log("<color=red> Active Scene : " + SceneManager.GetActiveScene().name + "</color>");
+
+    levelManagerScript.InitialiseLevel();
+
     currentPlayerFiringState = PlayerFiringState.STRAIGHT_SINGLE;
     currentGameState = GameState.LEVEL_INTRO_IN_PROGRESS;
     currentPlayerMissileSpeedMultiplier = basePlayerMissileSpeedMultiplier;
@@ -173,10 +180,13 @@ public class GameplayManager : Singleton<GameplayManager>, IPowerUpEvents
   public void initializeMainGameplayLoopForNextLevel()
   {
     //currentPlayerHP = MAX_PLAYER_HP;
+    GameController.Instance.UnloadSpecificLevel(GameController.Instance.currentLevel);
+    GameController.Instance.currentLevel++;
+    GameController.Instance.LoadSpecificLevelAndBaseGame(GameController.Instance.currentLevel);
+    
+    levelManagerScript.InitialiseLevel();
     mouseClickQueue = new Queue();
-
     currentGameState = GameState.LEVEL_INTRO_IN_PROGRESS;
-    loadLevelScript.LoadNextLevel();
   }
   void IPowerUpEvents.OnPowerUpCollected(PowerUp powerUp, PlayerShip player)
   {

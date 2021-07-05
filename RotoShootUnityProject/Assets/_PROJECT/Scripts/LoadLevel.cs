@@ -3,8 +3,10 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
-public class LoadLevel : MonoBehaviour
+public class LoadLevel : ExtendedBehaviour
 {
+  /*
+  
   public void LoadSpecificLevel(int level)
   {
     GameController.Instance.currentLevel = level;
@@ -33,18 +35,22 @@ public class LoadLevel : MonoBehaviour
     //{
     //  SceneManager.UnloadSceneAsync(levelName + GameController.Instance.currentLevel.ToString());
     //}
-    
-    
+
+    Debug.Log("<color=red> Active Scene : " + SceneManager.GetActiveScene().name + "</color>");
+
     //Check if the base scene is already loaded, if not, load it.
-    if(!SceneManager.GetSceneByName("BaseGameScene").isLoaded)
+    if (!SceneManager.GetSceneByName("BaseGameScene").isLoaded)
     {
       SceneManager.LoadScene("BaseGameScene", LoadSceneMode.Additive);
+      
     }
 
+    
+    
     ////set the level scene to the next level, load it
     //GameController.Instance.currentLevel++;
     //SceneManager.LoadScene(levelName + GameController.Instance.currentLevel.ToString(), LoadSceneMode.Additive);
   }
 
-
+  */
 }

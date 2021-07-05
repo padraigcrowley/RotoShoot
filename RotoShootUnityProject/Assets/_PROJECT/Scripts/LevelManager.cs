@@ -11,7 +11,9 @@ public class LevelManager : Singleton<LevelManager>
 
   public Dictionary<string, int> LevelCompletionCriteria = new Dictionary<string, int>();
   private bool lccMet; //levelcompletioncriteria
+  public LevelSetupData [] levelSetupDataArray;
   public LevelSetupData levelSetupData;
+
   public float levelPlayTimeElapsed;
   public float verticalDistBetweenEnemies = 2.0f; //todo: magic number
   public float horizontalDistBetweenEnemies = 2.0f; //todo: magic number
@@ -35,15 +37,19 @@ public class LevelManager : Singleton<LevelManager>
 
   private void Awake()
   {
-    GameplayManager.Instance.playerShipPos = levelSetupData.PlayerShipPos;
-    GameplayManager.Instance.levelControlType = levelSetupData.levelControlType;
-    GameplayManager.Instance.shipLanes = levelSetupData.shipLanes;
-    timeBetweenAsteroidShower = levelSetupData.timeBetweenAsteroidShower;
+    //GameplayManager.Instance.playerShipPos = levelSetupData.PlayerShipPos;
+    //GameplayManager.Instance.levelControlType = levelSetupData.levelControlType;
+    //GameplayManager.Instance.shipLanes = levelSetupData.shipLanes;
+    //timeBetweenAsteroidShower = levelSetupData.timeBetweenAsteroidShower;
   }
 
   void InitializeLCC()
   {
     lccMet = false;
+
+    //empty the lcc dictionary to clean it out
+    LevelCompletionCriteria.Clear();
+    
     //add the level completion criterias to the lcc dictionary
     if (levelSetupData.lccEnemyKills != -1) //checking if it's -1 beacase 0 could be a valid LCC number for enemykills
       LevelCompletionCriteria.Add("EnemyKills", levelSetupData.lccEnemyKills);
@@ -61,8 +67,17 @@ public class LevelManager : Singleton<LevelManager>
       }
     }
   }
-  void Start()
+
+  public void InitialiseLevel()
   {
+
+    levelSetupData = levelSetupDataArray[GameController.Instance.currentLevel - 1];
+
+    GameplayManager.Instance.playerShipPos = levelSetupData.PlayerShipPos;
+    GameplayManager.Instance.levelControlType = levelSetupData.levelControlType;
+    GameplayManager.Instance.shipLanes = levelSetupData.shipLanes;
+    timeBetweenAsteroidShower = levelSetupData.timeBetweenAsteroidShower;
+
     InitializeLCC();
 
     if (levelSetupData.lccEnemyKills != -1)
