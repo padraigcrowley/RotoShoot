@@ -43,31 +43,6 @@ public class LevelManager : Singleton<LevelManager>
     //timeBetweenAsteroidShower = levelSetupData.timeBetweenAsteroidShower;
   }
 
-  void InitializeLCC()
-  {
-    lccMet = false;
-
-    //empty the lcc dictionary to clean it out
-    LevelCompletionCriteria.Clear();
-    
-    //add the level completion criterias to the lcc dictionary
-    if (levelSetupData.lccEnemyKills != -1) //checking if it's -1 beacase 0 could be a valid LCC number for enemykills
-      LevelCompletionCriteria.Add("EnemyKills", levelSetupData.lccEnemyKills);
-    if (levelSetupData.lccSurviveTime != -1)
-      LevelCompletionCriteria.Add("SurviveTime", levelSetupData.lccSurviveTime);
-    if (levelSetupData.lccKillBoss == true)
-      LevelCompletionCriteria.Add("KillBoss", 1);
-
-    //process the particular level completion criteria(s)
-    foreach (string lccString in LevelCompletionCriteria.Keys)
-    {
-      if (lccString == "Enemy Kills")
-      {
-        UIManager.Instance.RequiredEnemyKillCount.text = "/" + LevelCompletionCriteria[lccString].ToString();
-      }
-    }
-  }
-
   public void InitialiseLevel()
   {
 
@@ -94,6 +69,31 @@ public class LevelManager : Singleton<LevelManager>
     if (levelSetupData.spinningMineSpawnPointData.levelHasSpinningMine)
     {
       SetupSpinningMine();
+    }
+  }
+
+  void InitializeLCC()
+  {
+    lccMet = false;
+
+    //empty the lcc dictionary to clean it out
+    LevelCompletionCriteria.Clear();
+    
+    //add the level completion criterias to the lcc dictionary
+    if (levelSetupData.lccEnemyKills != -1) //checking if it's -1 beacase 0 could be a valid LCC number for enemykills
+      LevelCompletionCriteria.Add("EnemyKills", levelSetupData.lccEnemyKills);
+    if (levelSetupData.lccSurviveTime != -1)
+      LevelCompletionCriteria.Add("SurviveTime", levelSetupData.lccSurviveTime);
+    if (levelSetupData.lccKillBoss == true)
+      LevelCompletionCriteria.Add("KillBoss", 1);
+
+    //process the particular level completion criteria(s)
+    foreach (string lccString in LevelCompletionCriteria.Keys)
+    {
+      if (lccString == "Enemy Kills")
+      {
+        UIManager.Instance.RequiredEnemyKillCount.text = "/" + LevelCompletionCriteria[lccString].ToString();
+      }
     }
   }
 
