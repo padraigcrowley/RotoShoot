@@ -36,6 +36,7 @@ public class GameplayManager : Singleton<GameplayManager>, IPowerUpEvents
   public bool playerShipInvulnerable = false;
   public bool playerShipMovementAllowed = false;
   public bool playerShipFiring = false;
+  public bool playerShieldVisible = false;
   public float currentPlayerShipFireRate; // the lower the number, the faster the rate.
   public float basePlayerShipFireRate; // the lower the number, the faster the rate.
   

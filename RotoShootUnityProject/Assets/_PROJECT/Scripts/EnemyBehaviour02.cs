@@ -149,7 +149,10 @@ public abstract class EnemyBehaviour02 : ExtendedBehaviour
           }
         case EnemyState.HIT_BY_PLAYER_SHIP:
           {
-            playerShip.ChangeShipHP(-20);
+            if ((!GameplayManager.Instance.playerShipInvulnerable) && (!GameplayManager.Instance.playerShieldVisible))
+            {
+              playerShip.ChangeShipHP(-20);
+            }
             TemporarilyDie();
             break;
           }

@@ -371,7 +371,7 @@ public class PlayerShip : ExtendedBehaviour
   
   private void OnTriggerEnter(Collider collision)
   {
-    if(!GameplayManager.Instance.playerShipInvulnerable)
+    if((!GameplayManager.Instance.playerShipInvulnerable) && (!GameplayManager.Instance.playerShieldVisible))
     {
       if (GameplayManager.Instance.currentGameState == GameplayManager.GameState.LEVEL_IN_PROGRESS)
       {
