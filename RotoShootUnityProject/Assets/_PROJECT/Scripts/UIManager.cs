@@ -110,13 +110,14 @@ public class UIManager : Singleton<UIManager>
 
           break;
         }
-      case GameplayManager.GameState.LEVEL_COMPLETE:
+      
+      case GameplayManager.GameState.WAITING_FOR_LEVELCOMPLETE_BUTTONS:
         {
           LevelCompletePanel.gameObject.SetActive(true);
 
           break;
         }
-      case GameplayManager.GameState.PLAYER_DIED:
+      case GameplayManager.GameState.WAITING_FOR_PLAYERDIED_BUTTONS:
         {
           gameRestartButton.gameObject.SetActive(true);
           gameExitButton.gameObject.SetActive(true);
@@ -135,7 +136,7 @@ public class UIManager : Singleton<UIManager>
     gameRestartButton.gameObject.SetActive(false);
     gameExitButton.gameObject.SetActive(false);
     GameplayManager.Instance.initializeMainGameplayLoopForLevelRestart();
-    GameplayManager.Instance.ResumeGame();
+    //GameplayManager.Instance.ResumeGame();
   }
 
   public void handleGameExitButtonPress()

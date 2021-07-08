@@ -82,7 +82,8 @@ public class PlayerShip : ExtendedBehaviour
       case GameplayManager.GameState.LEVEL_INTRO_IN_PROGRESS:
 
         shipCollider.enabled = false;
-        
+        GameplayManager.Instance.playerShipInvulnerable = true;
+
         //PlayerShipGFXAnim.Play("PlayerShipExhaust");
         if (PlayerShipIntroAnimPlaying == false)
         {
@@ -100,7 +101,8 @@ public class PlayerShip : ExtendedBehaviour
           PlayerShipIntroAnimCompleted = false;
           playerShipExhaustSpriteRenderer.enabled = false;
           GameplayManager.Instance.currentGameState = GameplayManager.GameState.LEVEL_IN_PROGRESS;
-        PlayerHPWorldSpaceStatusBar.EnableStatusBar();
+          
+          PlayerHPWorldSpaceStatusBar.EnableStatusBar();
           playerStatusBar.EnableStatusBar();
           UltimateStatusBar.UpdateStatus("PlayerHPWorldSpaceStatusBar", GameplayManager.Instance.currentPlayerHP, GameplayManager.Instance.MAX_PLAYER_HP);
           
@@ -117,6 +119,7 @@ public class PlayerShip : ExtendedBehaviour
         
         PlayerShipIntroAnimCompleted = false;
         shipCollider.enabled = true;
+        GameplayManager.Instance.playerShipInvulnerable = false;
         ProcessInputQueue();
 
         if (GameplayManager.Instance.tripleFirePowerupRemainingDuration >= 0)
@@ -162,12 +165,15 @@ public class PlayerShip : ExtendedBehaviour
         }
         break;
       case GameplayManager.GameState.PLAYER_DIED:
+        GameplayManager.Instance.currentGameState = GameplayManager.GameState.WAITING_FOR_PLAYERDIED_BUTTONS;
+        break;
       case GameplayManager.GameState.LEVEL_COMPLETE:
           //transform.rotation = Quaternion.identity; // reset to face upwards, back to its original rotation.
           shipSpriteRenderer.gameObject.GetComponent<Renderer>().enabled = false;
           PlayerShipIntroAnimCompleted = false;
           PlayerShipIntroAnimPlaying = false;
         shipCollider.enabled = false;
+        GameplayManager.Instance.currentGameState = GameplayManager.GameState.WAITING_FOR_LEVELCOMPLETE_BUTTONS;
         break;
       
       default:

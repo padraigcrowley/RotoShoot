@@ -29,7 +29,8 @@ public abstract class EnemyBehaviour02 : ExtendedBehaviour
   public GameObject deathExplosionInstance;
   public GameObject enemyExplosionsPool;
 
-  public enum EnemyState { ALIVE, TEMPORARILY_DEAD, WAITING_TO_RESPAWN, INVINCIBLE, FULLY_DYING, FULLY_DEAD, HIT_BY_PLAYER_MISSILE, HIT_BY_PLAYER_SHIP, HIT_BY_PLAYER_SHIELD, HIT_BY_ATMOSPHERE }
+  public enum EnemyState {  ALIVE, TEMPORARILY_DEAD, WAITING_TO_RESPAWN, INVINCIBLE, FULLY_DYING, FULLY_DEAD, HIT_BY_PLAYER_MISSILE, HIT_BY_PLAYER_SHIP, 
+                            HIT_BY_PLAYER_SHIELD, HIT_BY_ATMOSPHERE }
 
   public EnemyState enemyState;
   public bool waveRespawnWaitOver;
@@ -113,7 +114,8 @@ public abstract class EnemyBehaviour02 : ExtendedBehaviour
 		if ((GameplayManager.Instance.currentGameState == GameplayManager.GameState.LEVEL_IN_PROGRESS) ||
 				(GameplayManager.Instance.currentGameState == GameplayManager.GameState.PLAYER_DYING) ||
 				(GameplayManager.Instance.currentGameState == GameplayManager.GameState.PLAYER_DIED) ||
-				(GameplayManager.Instance.currentGameState == GameplayManager.GameState.LEVEL_INTRO_IN_PROGRESS))
+        (GameplayManager.Instance.currentGameState == GameplayManager.GameState.WAITING_FOR_PLAYERDIED_BUTTONS) ||
+        (GameplayManager.Instance.currentGameState == GameplayManager.GameState.LEVEL_INTRO_IN_PROGRESS))
 		//if (GameplayManager.Instance.currentGameState == GameplayManager.GameState.LEVEL_IN_PROGRESS) 
 		{
 
@@ -127,6 +129,8 @@ public abstract class EnemyBehaviour02 : ExtendedBehaviour
       {
         case EnemyState.ALIVE:
           {
+            enemyCapsuleCollider.enabled = true;
+            enemySpriteRenderer.enabled = true;
             DoMovement();
             break;
           }
@@ -157,16 +161,8 @@ public abstract class EnemyBehaviour02 : ExtendedBehaviour
           }
         case EnemyState.WAITING_TO_RESPAWN:
           {
-            ////https://answers.unity.com/questions/379440/a-simple-wait-function-without-coroutine-c.html
-            //if (!startedWaiting)
-            //{
-            //  Wait(GetRespawnWaitDelay(), () =>
-            //  {
-            //    waveRespawnWaitOver = true;
-            //    //Debug.Log(respawnWaitDelay + " waveRespawnWaitOver seconds passed");
-            //  });
-            //  startedWaiting = true;
-            //}
+            enemyCapsuleCollider.enabled = false;
+            enemySpriteRenderer.enabled = false;
             if ((waveRespawnWaitOver) && (burnFadeEffectComplete == true))
             //if (waveRespawnWaitOver)
             {

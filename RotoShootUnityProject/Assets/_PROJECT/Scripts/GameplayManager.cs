@@ -8,7 +8,9 @@ public class GameplayManager : Singleton<GameplayManager>, IPowerUpEvents
   public Queue mouseClickQueue;
   [HideInInspector] public bool playerShipRotating = false;
 
-  [HideInInspector] public enum GameState { WAITING_FOR_START_BUTTON, LEVEL_INTRO_IN_PROGRESS, LEVEL_IN_PROGRESS, LEVEL_FAILED, LEVEL_OUTRO_IN_PROGRESS, LEVEL_COMPLETE, GAME_OVER_SCREEN, PLAYER_DYING, PLAYER_DIED }
+  [HideInInspector] public enum GameState {
+    WAITING_FOR_LEVELCOMPLETE_BUTTONS, WAITING_FOR_PLAYERDIED_BUTTONS, WAITING_FOR_START_BUTTON, LEVEL_INTRO_IN_PROGRESS, LEVEL_IN_PROGRESS, LEVEL_FAILED, LEVEL_OUTRO_IN_PROGRESS, 
+                                            LEVEL_COMPLETE, GAME_OVER_SCREEN, PLAYER_DYING, PLAYER_DIED }
   [HideInInspector] public enum PlayerFiringState { STRAIGHT_SINGLE, ANGLED_TRIPLE, STRAIGHT_TRIPLE, RAPID_FIRE_SINGLE }
   [HideInInspector] public int currentPlayerScore = 0;
   public int highPlayerScore = 0;
@@ -16,6 +18,7 @@ public class GameplayManager : Singleton<GameplayManager>, IPowerUpEvents
   [HideInInspector] public float screenEdgeX, screenEdgeY, screenCollisionBoundaryX, screenCollisionBoundaryY;
 
   public GameObject playerShipObject;
+  public GameObject playerShipGFXObject;
 
   public GameObject leftBoundary;                   //
   public GameObject rightBoundary;                  // References to the screen bounds: Used to ensure the player
@@ -61,7 +64,10 @@ public class GameplayManager : Singleton<GameplayManager>, IPowerUpEvents
   public CapsuleCollider playerShipCollider;
 
   public float tripleFirePowerupRemainingDuration = -1;
-  
+
+  public GameObject playerShieldPrefab;
+
+
   // Start is called before the first frame update
   void Start()
   {
@@ -176,6 +182,10 @@ public class GameplayManager : Singleton<GameplayManager>, IPowerUpEvents
     //numEnemyKills = 0;
     enemy0001BaseSpeed = 1.0f;
     currentPlayerShipRotationDuration = basePlayerShipRotationDuration;
+
+    Wait(2.5f, () => {
+      Instantiate(playerShieldPrefab, playerShipGFXObject.transform.position, Quaternion.identity, playerShipGFXObject.transform);
+    });
   }
   public void initializeMainGameplayLoopForNextLevel()
   {

@@ -577,6 +577,36 @@ Transform:
   m_Father: {fileID: 517828548}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &110998330
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 110998331}
+  m_Layer: 0
+  m_Name: EnemyWavesParentGroupObject
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &110998331
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 110998330}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: -0.64686203, y: 8.056576, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 28
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &142707191
 GameObject:
   m_ObjectHideFlags: 0
@@ -833,6 +863,7 @@ MonoBehaviour:
   screenCollisionBoundaryX: 0
   screenCollisionBoundaryY: 0
   playerShipObject: {fileID: 1061970250}
+  playerShipGFXObject: {fileID: 191601459}
   leftBoundary: {fileID: 0}
   rightBoundary: {fileID: 0}
   topBoundary: {fileID: 0}
@@ -869,6 +900,8 @@ MonoBehaviour:
   starCoinCount: 0
   playerShipCollider: {fileID: 1061970251}
   tripleFirePowerupRemainingDuration: -1
+  playerShieldPrefab: {fileID: 4628581462396991242, guid: f2759175ad1625948b264241c5525121,
+    type: 3}
 --- !u!4 &191098412
 Transform:
   m_ObjectHideFlags: 0
@@ -1168,6 +1201,7 @@ MonoBehaviour:
   bossHasBeenKilled: 0
   spinningMine: {fileID: 2411896081061765975, guid: 41a1b7e89cfaebb4e9e25449413c44bd,
     type: 3}
+  enemyWavesParentGroupObject: {fileID: 110998330}
 --- !u!4 &254305519
 Transform:
   m_ObjectHideFlags: 0
@@ -6272,7 +6306,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 22422498, guid: 99d7216a19ca3154a816f37c1b5e2b1a, type: 3}
       propertyPath: m_AnchoredPosition.y
-      value: -82.67621
+      value: -89.39624
       objectReference: {fileID: 0}
     - target: {fileID: 22422498, guid: 99d7216a19ca3154a816f37c1b5e2b1a, type: 3}
       propertyPath: m_LocalEulerAnglesHint.x

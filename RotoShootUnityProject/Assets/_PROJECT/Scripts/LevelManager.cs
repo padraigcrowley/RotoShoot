@@ -18,7 +18,7 @@ public class LevelManager : Singleton<LevelManager>
   public float verticalDistBetweenEnemies = 2.0f; //todo: magic number
   public float horizontalDistBetweenEnemies = 2.0f; //todo: magic number
   public bool readyToFireAtPlayer = false;
-  
+
 
   // a list of lists of EnemyBehaviour02 scripts - for each enemy in each wave
   List<List<EnemyBehaviour02>> enemyWavesParentBehaviourScripts = new List<List<EnemyBehaviour02>>();
@@ -35,6 +35,8 @@ public class LevelManager : Singleton<LevelManager>
   private GameObject spinningMineInstance;
   private BossBehaviour01 bossScript;
 
+  public GameObject enemyWavesParentGroupObject;
+
   private void Awake()
   {
     //GameplayManager.Instance.playerShipPos = levelSetupData.PlayerShipPos;
@@ -43,10 +45,19 @@ public class LevelManager : Singleton<LevelManager>
     //timeBetweenAsteroidShower = levelSetupData.timeBetweenAsteroidShower;
   }
 
-  public void InitialiseLevel()
+	private void Start() // only the stuff that ever gets set up once across all levels here . Th eindividual actual levels setup per level is in InitialiseLevel()
+	{
+    enemyMissilesParentPool = new GameObject("enemyMissilesParentPoolObject");
+    enemyMissilesParentPool.tag = "enemyMissilesParentPoolObject";
+
+  }
+
+	public void InitialiseLevel()
   {
 
-    levelSetupData = levelSetupDataArray[GameController.Instance.currentLevel - 1];
+    enemyWavesParentBehaviourScripts.Clear();
+
+    levelSetupData = levelSetupDataArray[GameController.Instance.currentLevel - 1]; // get the relevant scriptable object setup file from the array.
 
     GameplayManager.Instance.playerShipPos = levelSetupData.PlayerShipPos;
     GameplayManager.Instance.levelControlType = levelSetupData.levelControlType;
@@ -70,6 +81,10 @@ public class LevelManager : Singleton<LevelManager>
     {
       SetupSpinningMine();
     }
+
+    numEnemyKillsInLevel = 0;
+    currentTimeBetweenFiringAtPlayer = TIME_BETWEEN_FIRING_AT_PLAYER;
+
   }
 
   void InitializeLCC()
@@ -99,11 +114,7 @@ public class LevelManager : Singleton<LevelManager>
 
   void SetupEnemies()
   {
-    enemyMissilesParentPool = new GameObject("enemyMissilesParentPoolObject");
-    enemyMissilesParentPool.tag = "enemyMissilesParentPoolObject";
-
-    numEnemyKillsInLevel = 0;
-    currentTimeBetweenFiringAtPlayer = TIME_BETWEEN_FIRING_AT_PLAYER;
+    
         
     int index = 0;
     foreach (EnemySpawnPointData sp in levelSetupData.levelEnemySpawnPointData)
@@ -111,6 +122,8 @@ public class LevelManager : Singleton<LevelManager>
       List<EnemyBehaviour02> enemyWavesChildrenBehaviourScripts = new List<EnemyBehaviour02>();
 
       var waveParentObject = new GameObject("EnemyWave_" + index);
+      waveParentObject.transform.parent = enemyWavesParentGroupObject.transform; // keep all the enemy waveparentobjects together in the hierarchy under EnemyWavesParentGroupObject
+
       waveParentObject.transform.position = new Vector2(sp.startPos.x, sp.startPos.y);
       enemyWaves.Add(waveParentObject);
 
@@ -244,7 +257,11 @@ public class LevelManager : Singleton<LevelManager>
 
       CheckLCC(); // check LevelCompletionCriteria  
     }
-    
+    else if (GameplayManager.Instance.currentGameState == GameplayManager.GameState.LEVEL_COMPLETE)
+    {
+      DestroyChildrenWaves(enemyWavesParentGroupObject.transform);
+    }
+
   }
   IEnumerator ActivateEnemyWave()
   {
@@ -285,24 +302,19 @@ public class LevelManager : Singleton<LevelManager>
         numActiveWaves++;
     }
     return numActiveWaves;
-  
-      
-    //int numActiveWaves = 0;
-    //bool activeWave = false;
-    //foreach (GameObject enemyWaveParentObject in enemyWaves)
-    //{
-    //  activeWave = false;
-    //  foreach (Transform enemyShipObjectTransform in enemyWaveParentObject.transform)
-    //  {
-    //    if (enemyShipObjectTransform.gameObject.GetComponent<EnemyBehaviour02>().enemyState != EnemyBehaviour02.EnemyState.WAITING_TO_RESPAWN)
-    //    {
-    //      activeWave = true;
-    //    }
-    //  }
-    //  if (activeWave)
-    //    numActiveWaves++;
-    //}
-    //return numActiveWaves;
+  }
+
+  /// <summary>
+  /// Calls GameObject.Destroy on all children of transform. and immediately detaches the children
+  /// from transform so after this call tranform.childCount is zero.
+  /// </summary>
+  public void DestroyChildrenWaves(Transform transform) //http://forum.unity3d.com/threads/deleting-all-chidlren-of-an-object.92827/#post-2058407
+  {
+    for (int i = transform.childCount - 1; i >= 0; --i)
+    {
+      GameObject.Destroy(transform.GetChild(i).gameObject);
+    }
+    transform.DetachChildren();
   }
 
   void CheckLCC() // check LevelCompletionCriteria
