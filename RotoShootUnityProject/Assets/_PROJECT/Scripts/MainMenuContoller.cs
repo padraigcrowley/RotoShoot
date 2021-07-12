@@ -8,6 +8,7 @@ using BeautifulTransitions.Scripts.Transitions.TransitionSteps;
 public class MainMenuContoller : MonoBehaviour
 {
   public GameObject MainMenuButtonTransitions;
+  public GameObject PlayButtonTransitions;
   public GameObject LogoImageTransitions;
   public GameObject logoGameObject;
 
@@ -15,12 +16,21 @@ public class MainMenuContoller : MonoBehaviour
   // Start is called before the first frame update
   void Start()
   {
-    TransitionHelper.TransitionIn(MainMenuButtonTransitions);
-    TransitionHelper.TransitionIn(LogoImageTransitions);
-  }
+		TransitionHelper.TransitionIn(MainMenuButtonTransitions);
+		TransitionHelper.TransitionIn(LogoImageTransitions);
+	}
   public void MainMenuStartButtonTransitionOut()
   {
     TransitionHelper.TransitionOut(MainMenuButtonTransitions);
+    //TransitionHelper.TransitionIn(LogoImageTransitions);
+  }
+
+  public void MainMenuPlayButtonTransitionOut()
+  {
+    var logoTransitionOut = new Move(logoGameObject, startPosition: logoGameObject.transform.localPosition , endPosition: new Vector3(0, 1520, 0), duration: .6f, delay:0f ,tweenType: TransitionHelper.TweenType.easeInBack , coordinateSpace: BeautifulTransitions.Scripts.Transitions.TransitionSteps.AbstractClasses.TransitionStep.CoordinateSpaceType.AnchoredPosition);
+    logoTransitionOut.Start();
+
+    TransitionHelper.TransitionOut(PlayButtonTransitions);
     //TransitionHelper.TransitionIn(LogoImageTransitions);
   }
   public void MainMenuUpgradesButtonTransitionOut()

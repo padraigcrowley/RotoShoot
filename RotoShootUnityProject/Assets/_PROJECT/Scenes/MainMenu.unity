@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.44657874, g: 0.49641258, b: 0.5748172, a: 1}
+  m_IndirectSpecularColor: {r: 0.44657898, g: 0.4964133, b: 0.5748178, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -736,6 +736,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   MainMenuButtonTransitions: {fileID: 1688115600}
+  PlayButtonTransitions: {fileID: 1020408257}
   LogoImageTransitions: {fileID: 1964626952}
   logoGameObject: {fileID: 1964626952}
 --- !u!1 &500455430
@@ -1027,7 +1028,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &1020408258
 RectTransform:
   m_ObjectHideFlags: 0
@@ -1049,7 +1050,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0}
   m_AnchorMax: {x: 0.5, y: 0}
-  m_AnchoredPosition: {x: 0, y: -336.43}
+  m_AnchoredPosition: {x: 0, y: 300.37}
   m_SizeDelta: {x: 1080, y: 594.93}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1020408259
@@ -1065,7 +1066,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   InitForTransitionIn: 1
-  AutoRun: 0
+  AutoRun: 1
   RepeatWhenEnabled: 0
   TransitionInConfig:
     AutoRun: 0
@@ -1114,9 +1115,9 @@ MonoBehaviour:
     TransitionChildren: 0
     MustTriggerDirect: 0
     Delay: 0
-    Duration: 0.3
+    Duration: 0.6
     TimeUpdateMethod: 0
-    TransitionType: 22
+    TransitionType: 27
     AnimationCurve:
       serializedVersion: 2
       m_Curve:
@@ -1158,10 +1159,10 @@ MonoBehaviour:
     MoveY: 1
     MoveZ: 0
   MoveOutConfig:
-    EndTarget: {fileID: 0}
-    MoveX: 1
+    EndTarget: {fileID: 131171028}
+    MoveX: 0
     MoveY: 1
-    MoveZ: 1
+    MoveZ: 0
 --- !u!114 &1020408260
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2072,6 +2073,18 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
+      - m_Target: {fileID: 338705555}
+        m_TargetAssemblyTypeName: MainMenuContoller, Assembly-CSharp
+        m_MethodName: MainMenuPlayButtonTransitionOut
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &1485229981
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2371,7 +2384,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   InitForTransitionIn: 1
-  AutoRun: 1
+  AutoRun: 0
   RepeatWhenEnabled: 0
   TransitionInConfig:
     AutoRun: 0
@@ -2414,20 +2427,7 @@ MonoBehaviour:
         m_Calls: []
     OnTransitionComplete:
       m_PersistentCalls:
-        m_Calls:
-        - m_Target: {fileID: 1020408259}
-          m_TargetAssemblyTypeName: BeautifulTransitions.Scripts.Transitions.Components.TransitionBase,
-            Assembly-CSharp
-          m_MethodName: TransitionIn
-          m_Mode: 1
-          m_Arguments:
-            m_ObjectArgument: {fileID: 0}
-            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-            m_IntArgument: 0
-            m_FloatArgument: 0
-            m_StringArgument: 
-            m_BoolArgument: 0
-          m_CallState: 2
+        m_Calls: []
   TransitionOutConfig:
     AutoRun: 0
     TransitionChildren: 0
@@ -2469,7 +2469,19 @@ MonoBehaviour:
         m_Calls: []
     OnTransitionComplete:
       m_PersistentCalls:
-        m_Calls: []
+        m_Calls:
+        - m_Target: {fileID: 1020408257}
+          m_TargetAssemblyTypeName: UnityEngine.GameObject, UnityEngine
+          m_MethodName: SetActive
+          m_Mode: 6
+          m_Arguments:
+            m_ObjectArgument: {fileID: 0}
+            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+            m_IntArgument: 0
+            m_FloatArgument: 0
+            m_StringArgument: 
+            m_BoolArgument: 1
+          m_CallState: 2
   Target: {fileID: 0}
   MoveInConfig:
     StartTarget: {fileID: 131171028}
@@ -3264,7 +3276,6 @@ GameObject:
   - component: {fileID: 1964626955}
   - component: {fileID: 1964626954}
   - component: {fileID: 1964626957}
-  - component: {fileID: 1964626958}
   m_Layer: 5
   m_Name: LogoImage
   m_TagString: Untagged
@@ -3445,116 +3456,6 @@ MonoBehaviour:
     StartScale: {x: 0, y: 0, z: 0}
   OutConfig:
     EndScale: {x: 0, y: 0, z: 0}
---- !u!114 &1964626958
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1964626952}
-  m_Enabled: 0
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: d2a93778f23f3e04f8bc8fda61deef8c, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  InitForTransitionIn: 0
-  AutoRun: 0
-  RepeatWhenEnabled: 0
-  TransitionInConfig:
-    AutoRun: 0
-    TransitionChildren: 0
-    MustTriggerDirect: 1
-    Delay: 0
-    Duration: 0.3
-    TimeUpdateMethod: 0
-    TransitionType: 22
-    AnimationCurve:
-      serializedVersion: 2
-      m_Curve:
-      - serializedVersion: 3
-        time: 0
-        value: 0
-        inSlope: 0
-        outSlope: 0
-        tangentMode: 0
-        weightedMode: 0
-        inWeight: 0
-        outWeight: 0
-      - serializedVersion: 3
-        time: 1
-        value: 1
-        inSlope: 0
-        outSlope: 0
-        tangentMode: 0
-        weightedMode: 0
-        inWeight: 0
-        outWeight: 0
-      m_PreInfinity: 2
-      m_PostInfinity: 2
-      m_RotationOrder: 4
-    LoopMode: 0
-    OnTransitionStart:
-      m_PersistentCalls:
-        m_Calls: []
-    OnTransitionUpdate:
-      m_PersistentCalls:
-        m_Calls: []
-    OnTransitionComplete:
-      m_PersistentCalls:
-        m_Calls: []
-  TransitionOutConfig:
-    AutoRun: 0
-    TransitionChildren: 0
-    MustTriggerDirect: 0
-    Delay: 0
-    Duration: 0.3
-    TimeUpdateMethod: 0
-    TransitionType: 22
-    AnimationCurve:
-      serializedVersion: 2
-      m_Curve:
-      - serializedVersion: 3
-        time: 0
-        value: 0
-        inSlope: 0
-        outSlope: 0
-        tangentMode: 0
-        weightedMode: 0
-        inWeight: 0
-        outWeight: 0
-      - serializedVersion: 3
-        time: 1
-        value: 1
-        inSlope: 0
-        outSlope: 0
-        tangentMode: 0
-        weightedMode: 0
-        inWeight: 0
-        outWeight: 0
-      m_PreInfinity: 2
-      m_PostInfinity: 2
-      m_RotationOrder: 4
-    LoopMode: 0
-    OnTransitionStart:
-      m_PersistentCalls:
-        m_Calls: []
-    OnTransitionUpdate:
-      m_PersistentCalls:
-        m_Calls: []
-    OnTransitionComplete:
-      m_PersistentCalls:
-        m_Calls: []
-  Target: {fileID: 0}
-  MoveInConfig:
-    StartTarget: {fileID: 0}
-    MoveX: 0
-    MoveY: 1
-    MoveZ: 0
-  MoveOutConfig:
-    EndTarget: {fileID: 0}
-    MoveX: 1
-    MoveY: 1
-    MoveZ: 1
 --- !u!1001 &1967577335
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -3712,6 +3613,6 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 0, y: 2000}
+  m_AnchoredPosition: {x: 0, y: 2100}
   m_SizeDelta: {x: 100, y: 100}
   m_Pivot: {x: 0.5, y: 0.5}

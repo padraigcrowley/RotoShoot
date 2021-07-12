@@ -69,7 +69,7 @@ public class GameController : Singleton<GameController>
     //Check if the base scene is already loaded, if not, load it.
     if (!SceneManager.GetSceneByName("BaseGameScene").isLoaded)
     {
-      SceneManager.LoadScene("BaseGameScene", LoadSceneMode.Additive);
+      SceneManager.LoadSceneAsync ("BaseGameScene", LoadSceneMode.Additive);
     }
   }
 }
