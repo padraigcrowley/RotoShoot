@@ -876,6 +876,7 @@ MonoBehaviour:
   playerShipInvulnerable: 0
   playerShipMovementAllowed: 1
   playerShipFiring: 1
+  playerShieldVisible: 0
   currentPlayerShipFireRate: 153.7
   basePlayerShipFireRate: 0.3
   maxEnemy0001HP: 0
@@ -5101,7 +5102,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!114 &1170804128
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -6306,7 +6307,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 22422498, guid: 99d7216a19ca3154a816f37c1b5e2b1a, type: 3}
       propertyPath: m_AnchoredPosition.y
-      value: -89.39624
+      value: -89.384705
       objectReference: {fileID: 0}
     - target: {fileID: 22422498, guid: 99d7216a19ca3154a816f37c1b5e2b1a, type: 3}
       propertyPath: m_LocalEulerAnglesHint.x

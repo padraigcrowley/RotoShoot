@@ -13,36 +13,36 @@ public class MainMenuContoller : MonoBehaviour
   public GameObject logoGameObject;
 
 
-  // Start is called before the first frame update
   void Start()
   {
-		TransitionHelper.TransitionIn(MainMenuButtonTransitions);
+    //See the "performance" section from: https://www.textanimator.febucci.com/docs/troubleshooting/#editor
+    Febucci.UI.Core.TAnimBuilder.InitializeGlobalDatabase();
+
+    TransitionHelper.TransitionIn(MainMenuButtonTransitions);
 		TransitionHelper.TransitionIn(LogoImageTransitions);
 	}
   public void MainMenuStartButtonTransitionOut()
   {
     TransitionHelper.TransitionOut(MainMenuButtonTransitions);
-    //TransitionHelper.TransitionIn(LogoImageTransitions);
+  }
+
+  public void DoLogoTransitionOut()
+  {
+    var logoTransitionOut = new Move(logoGameObject, startPosition: logoGameObject.transform.localPosition , endPosition: new Vector3(0, 1520, 0), duration: .6f, delay:0f ,tweenType: TransitionHelper.TweenType.easeInBack , coordinateSpace: BeautifulTransitions.Scripts.Transitions.TransitionSteps.AbstractClasses.TransitionStep.CoordinateSpaceType.AnchoredPosition);
+    logoTransitionOut.Start();
   }
 
   public void MainMenuPlayButtonTransitionOut()
   {
-    var logoTransitionOut = new Move(logoGameObject, startPosition: logoGameObject.transform.localPosition , endPosition: new Vector3(0, 1520, 0), duration: .6f, delay:0f ,tweenType: TransitionHelper.TweenType.easeInBack , coordinateSpace: BeautifulTransitions.Scripts.Transitions.TransitionSteps.AbstractClasses.TransitionStep.CoordinateSpaceType.AnchoredPosition);
-    logoTransitionOut.Start();
-
+    DoLogoTransitionOut();
     TransitionHelper.TransitionOut(PlayButtonTransitions);
-    //TransitionHelper.TransitionIn(LogoImageTransitions);
   }
   public void MainMenuUpgradesButtonTransitionOut()
   {
-    var logoTransitionOut = new Move(logoGameObject, endPosition:new Vector3(0,1520,0), duration:.6f, tweenType: TransitionHelper.TweenType.easeInBack, coordinateSpace: BeautifulTransitions.Scripts.Transitions.TransitionSteps.AbstractClasses.TransitionStep.CoordinateSpaceType.AnchoredPosition );
-    logoTransitionOut.Start();
-
+    DoLogoTransitionOut();
     TransitionHelper.TransitionOut(MainMenuButtonTransitions);
-    //TransitionHelper.TransitionIn(LogoImageTransitions);
   }
 
-  // Update is called once per frame
   void Update()
   {
 

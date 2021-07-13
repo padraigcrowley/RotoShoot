@@ -23,9 +23,6 @@ public class BootManager : Singleton<BootManager>
     //Load first game scene (probably main menu)
     //SceneManager.LoadScene("MainMenu", LoadSceneMode.Additive); // TODO: Does this need to be additive?
 
-    //See the "performance" section from: https://www.textanimator.febucci.com/docs/troubleshooting/#editor
-    Febucci.UI.Core.TAnimBuilder.InitializeGlobalDatabase();
-
     SceneManager.LoadScene("MainMenu");
   }
 }
