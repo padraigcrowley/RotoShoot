@@ -15,16 +15,16 @@ public class GameController : Singleton<GameController>
 
   void Start()
   {
-    // TODO: this needs expanding to detect and load the latest level played by the player, or if they can choose to play earlier levels, etc.
-    currentLevel = 1;
+
+    highestLevelPlayed = 4; // TODO: this needs expanding to detect and load the latest level played by the player, or if they can choose to play earlier levels, etc.
+    
+    currentLevel = highestLevelPlayed;
     LoadSpecificLevel(currentLevel);
   }
   public void LoadSpecificLevelAndBaseGame(int level)
   {
-    
     LoadSpecificLevel(level);
     LoadBaseGame();
-
   }
 	public void LoadSpecificLevel(int level)
   {

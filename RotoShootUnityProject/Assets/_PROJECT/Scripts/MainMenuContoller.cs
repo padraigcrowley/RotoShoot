@@ -5,6 +5,7 @@ using UnityEngine;
 using UnityEngine.UI;
 using BeautifulTransitions.Scripts.Transitions;
 using BeautifulTransitions.Scripts.Transitions.TransitionSteps;
+using TMPro;
 
 public class MainMenuContoller : MonoBehaviour
 {
@@ -15,7 +16,7 @@ public class MainMenuContoller : MonoBehaviour
 
   public Image logoImage;
   private Material logoImageMaterial;
-  
+  public TMP_Text selectedLevelText;
 
   void Start()
   {
@@ -24,13 +25,12 @@ public class MainMenuContoller : MonoBehaviour
 
     TransitionHelper.TransitionIn(MainMenuButtonTransitions);
 		TransitionHelper.TransitionIn(LogoImageTransitions);
-
     logoImageMaterial = logoImage.material;
-
-	}
+  }
   public void MainMenuStartButtonTransitionOut()
   {
     TransitionHelper.TransitionOut(MainMenuButtonTransitions);
+    selectedLevelText.text = "LEVEL " + GameController.Instance.currentLevel.ToString();
     
   }
 
@@ -56,37 +56,50 @@ public class MainMenuContoller : MonoBehaviour
     StartCoroutine(LogoShine());
   }
 
-  IEnumerator LogoShine(float duration = .5f, float interval = 5f, float delay = 0f)
+  IEnumerator LogoShine(float duration = 1f, float interval = 10f, float delay = 0f)
 	{
     float elapsedTime = 0f;
     float currentVal;
     if (delay > 0f) yield return new WaitForSeconds(delay);
 
-    var waithandle = new WaitForSeconds(interval);
-    while (true)  //https://forum.unity.com/threads/invokerepeating-or-coroutine.875965/
+    var waithandle = new WaitForSeconds(interval); // caches the WaitForSeconds(interval) insetad of having this repeatedly called within the while loop? // https://forum.unity.com/threads/invokerepeating-or-coroutine.875965/
+    while (true)  
     {
       elapsedTime = 0f;
       while (elapsedTime <= duration) //from normal to red
       {
-        //sr.material.SetFloat("_ChromAberrAmount", 0f);
         currentVal = Mathf.Lerp(0f, 1f, (elapsedTime / duration));
         logoImageMaterial.SetFloat("_ShineLocation", currentVal);
         elapsedTime += Time.deltaTime;
-
-        //yield return null;
         yield return new WaitForEndOfFrame();
       }
       elapsedTime = 0f;
       while (elapsedTime <= duration) //from normal to red
       {
-        //sr.material.SetFloat("_ChromAberrAmount", 0f);
         currentVal = Mathf.Lerp(1f, 0f, (elapsedTime / duration));
         logoImageMaterial.SetFloat("_ShineLocation", currentVal);
         elapsedTime += Time.deltaTime;
-
-        //yield return null;
         yield return new WaitForEndOfFrame();
       }
+      yield return waithandle;
+    }
+  }
+
+  public void IncrementCurrentSelectedLevel()
+	{
+    if((GameController.Instance.currentLevel + 1 <= GameController.Instance.highestLevelPlayed) &&(GameController.Instance.currentLevel+1 <= 100))
+		{
+      GameController.Instance.currentLevel++;
+      selectedLevelText.text = "LEVEL " + GameController.Instance.currentLevel.ToString();
+    }
+	}
+
+  public void DecrementCurrentSelectedLevel()
+  {
+    if (GameController.Instance.currentLevel - 1 >= 1)
+    {
+      GameController.Instance.currentLevel--;
+      selectedLevelText.text = "LEVEL " + GameController.Instance.currentLevel.ToString();
     }
   }
 
