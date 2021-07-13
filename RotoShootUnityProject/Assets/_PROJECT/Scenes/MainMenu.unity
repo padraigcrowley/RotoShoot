@@ -340,7 +340,7 @@ GameObject:
   m_Component:
   - component: {fileID: 131171029}
   m_Layer: 5
-  m_Name: OffscreenMainMenuButtonsTarget
+  m_Name: OffscreenMainMenuButtonsTargetObject
   m_TagString: Untagged
   m_Icon: {fileID: -5938655980376293919, guid: 0000000000000000d000000000000000, type: 0}
   m_NavMeshLayer: 0
@@ -739,6 +739,7 @@ MonoBehaviour:
   PlayButtonTransitions: {fileID: 1020408257}
   LogoImageTransitions: {fileID: 1964626952}
   logoGameObject: {fileID: 1964626952}
+  logoImage: {fileID: 1964626955}
 --- !u!1 &500455430
 GameObject:
   m_ObjectHideFlags: 0
@@ -1067,7 +1068,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   InitForTransitionIn: 1
   AutoRun: 1
-  RepeatWhenEnabled: 0
+  RepeatWhenEnabled: 1
   TransitionInConfig:
     AutoRun: 0
     TransitionChildren: 0
@@ -1151,7 +1152,19 @@ MonoBehaviour:
         m_Calls: []
     OnTransitionComplete:
       m_PersistentCalls:
-        m_Calls: []
+        m_Calls:
+        - m_Target: {fileID: 1020408257}
+          m_TargetAssemblyTypeName: UnityEngine.GameObject, UnityEngine
+          m_MethodName: SetActive
+          m_Mode: 6
+          m_Arguments:
+            m_ObjectArgument: {fileID: 0}
+            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+            m_IntArgument: 0
+            m_FloatArgument: 0
+            m_StringArgument: 
+            m_BoolArgument: 0
+          m_CallState: 2
   Target: {fileID: 0}
   MoveInConfig:
     StartTarget: {fileID: 1688115600}
@@ -2713,10 +2726,10 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 72
+  m_fontSize: 105.9
   m_fontSizeBase: 105.9
   m_fontWeight: 400
-  m_enableAutoSizing: 1
+  m_enableAutoSizing: 0
   m_fontSizeMin: 18
   m_fontSizeMax: 72
   m_fontStyle: 0
@@ -2971,7 +2984,7 @@ Material:
     - _ShakeUvX: 1.5
     - _ShakeUvY: 1
     - _ShineGlow: 1
-    - _ShineLocation: 0.452
+    - _ShineLocation: 0
     - _ShineWidth: 0.1
     - _TextureScrollXSpeed: 1
     - _TextureScrollYSpeed: 0
@@ -3155,7 +3168,7 @@ GameObject:
   - component: {fileID: 1929867965}
   - component: {fileID: 1929867964}
   m_Layer: 5
-  m_Name: LevelSelectorBackButton_01
+  m_Name: LevelSelectorBackButton
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -3224,7 +3237,33 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 1929867965}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 1020408259}
+        m_TargetAssemblyTypeName: BeautifulTransitions.Scripts.Transitions.Components.TransitionBase,
+          Assembly-CSharp
+        m_MethodName: TransitionOut
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+      - m_Target: {fileID: 1688115605}
+        m_TargetAssemblyTypeName: BeautifulTransitions.Scripts.Transitions.Components.TransitionBase,
+          Assembly-CSharp
+        m_MethodName: TransitionIn
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &1929867965
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3408,7 +3447,19 @@ MonoBehaviour:
         m_Calls: []
     OnTransitionComplete:
       m_PersistentCalls:
-        m_Calls: []
+        m_Calls:
+        - m_Target: {fileID: 338705555}
+          m_TargetAssemblyTypeName: MainMenuContoller, Assembly-CSharp
+          m_MethodName: DoLogoShine
+          m_Mode: 1
+          m_Arguments:
+            m_ObjectArgument: {fileID: 0}
+            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+            m_IntArgument: 0
+            m_FloatArgument: 0
+            m_StringArgument: 
+            m_BoolArgument: 0
+          m_CallState: 2
   TransitionOutConfig:
     AutoRun: 0
     TransitionChildren: 0
@@ -3591,7 +3642,7 @@ GameObject:
   m_Component:
   - component: {fileID: 2074213113}
   m_Layer: 5
-  m_Name: LogoImageMoveTarget
+  m_Name: LogoImageMoveTargetObject
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
