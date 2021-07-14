@@ -217,7 +217,6 @@ public class BossBehaviour01 : ExtendedBehaviour
 
   private IEnumerator DelayedLowerEgg()
   {
-    print("1st line of DelayedLowerEgg");
       waiting = true;
       yield return new WaitForSeconds(5f);
     if ((boss01State != BossState.BOSS_DEAD) && (boss01State != BossState.BOSS_DEAD))
@@ -250,7 +249,6 @@ public class BossBehaviour01 : ExtendedBehaviour
 
   private IEnumerator DelayedRaiseEgg()
   {
-      print("1st line of DelayedRaiseEgg");
       waiting = true;
       yield return new WaitForSeconds(5f);
 

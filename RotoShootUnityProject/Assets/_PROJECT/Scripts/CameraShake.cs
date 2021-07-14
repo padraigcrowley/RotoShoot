@@ -11,6 +11,7 @@ public class CameraShake : MonoBehaviour
   private void Awake()
   {
     myCamera = FindObjectOfType<Camera>();
+    isShaking = false;
   }
 
   public void CameraShakeOnPlayerHit()

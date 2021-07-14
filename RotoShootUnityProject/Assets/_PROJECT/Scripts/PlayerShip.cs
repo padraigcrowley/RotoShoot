@@ -103,7 +103,6 @@ public class PlayerShip : ExtendedBehaviour
           GameplayManager.Instance.currentGameState = GameplayManager.GameState.LEVEL_IN_PROGRESS;
           
           PlayerHPWorldSpaceStatusBar.EnableStatusBar();
-          playerStatusBar.EnableStatusBar();
           UltimateStatusBar.UpdateStatus("PlayerHPWorldSpaceStatusBar", GameplayManager.Instance.currentPlayerHP, GameplayManager.Instance.MAX_PLAYER_HP);
           
           if (playerDeathFXObjects.Count != 0) //despawn the player death explosions from the previous playerdeath. slightly weird place to do it, I know but enough time has passed...

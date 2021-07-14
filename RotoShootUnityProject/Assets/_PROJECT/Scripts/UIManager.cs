@@ -9,19 +9,13 @@ public class UIManager : Singleton<UIManager>
   public TextMeshProUGUI HighPlayerScoreText, CurrentPlayerScoreText, CurrentEnemyKillCount, RequiredEnemyKillCount, levelPlayTimeCounterText, starCoinCountText, MissionStartLCCText;
   public GameObject MissionStartLCCTextObject;
   public Button gameRestartButton, gameExitButton;
-  public Image playerHealthHeart03, playerHealthHeart02, playerHealthHeart01;
   [SerializeField] private GameObject LevelCompletePanel;
 
-  
- 
-
-  public GameObject playerHealthBarObject;
   public Febucci.UI.TextAnimatorPlayer textAnimatorPlayer;
 
   // Start is called before the first frame update
   void Start()
   {
-    playerHealthBarObject.SetActive(false);
     //MissionStartLCCTextObject.SetActive(false);
     CurrentPlayerScoreText.text = GameplayManager.Instance.currentPlayerScore.ToString();
     HighPlayerScoreText.text = GameplayManager.Instance.highPlayerScore.ToString();
@@ -88,26 +82,7 @@ public class UIManager : Singleton<UIManager>
           CurrentEnemyKillCount.text = LevelManager.Instance.numEnemyKillsInLevel.ToString();
           HighPlayerScoreText.text = "HI:" + GameplayManager.Instance.highPlayerScore.ToString();
           levelPlayTimeCounterText.text = LevelManager.Instance.levelPlayTimeElapsed.ToString("0.00");
-
-          if (GameplayManager.Instance.currentPlayerHP == 3)
-          {
-            playerHealthHeart03.enabled = true;
-            playerHealthHeart02.enabled = true;
-            playerHealthHeart01.enabled = true;
-          }
-          else if (GameplayManager.Instance.currentPlayerHP == 2)
-          {
-            playerHealthHeart03.enabled = false;
-          }
-          else if (GameplayManager.Instance.currentPlayerHP == 1)
-          {
-            playerHealthHeart02.enabled = false;
-          }
-          else if (GameplayManager.Instance.currentPlayerHP == 0)
-          {
-            playerHealthHeart01.enabled = false;
-          }
-
+          
           break;
         }
       

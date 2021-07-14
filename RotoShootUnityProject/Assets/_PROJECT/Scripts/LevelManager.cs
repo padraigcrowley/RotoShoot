@@ -216,14 +216,6 @@ public class LevelManager : Singleton<LevelManager>
     {
       if (levelSetupData.lccEnemyKills != -1)
       {
-        //if it's a standard level, turn on the player health bar (don't wait until Boss health bar has appeared
-        // if it's a boss level, the player health bar only appears AFTER the boss health bar does it's thing, which is handled lower down here
-        if (UIManager.Instance.playerHealthBarObject.activeSelf == false)
-        {
-          UIManager.Instance.playerHealthBarObject.SetActive(true);
-          UltimateStatusBar.UpdateStatus("playerStatusBar", GameplayManager.Instance.currentPlayerHP, GameplayManager.Instance.MAX_PLAYER_HP);
-        }
-
         //print($"NumActiveWaves = { GetNumActiveWaves()}");
         //if there are less than the number of maxwaves, activate another (random) wave
         int numActiveWaves = GetNumActiveWaves();
@@ -242,19 +234,7 @@ public class LevelManager : Singleton<LevelManager>
           }
         }
       }
-      // if it's a boss level, the player health bar only appears AFTER the boss health bar/Intro does it's thing.
-      else if (levelSetupData.lccKillBoss)
-      {
-        if (bossScript.bossHealthBarFinishedFillingUp == true)
-        {
-          if (UIManager.Instance.playerHealthBarObject.activeSelf == false)
-          {
-            UIManager.Instance.playerHealthBarObject.SetActive(true);
-            UltimateStatusBar.UpdateStatus("playerStatusBar", GameplayManager.Instance.currentPlayerHP, GameplayManager.Instance.MAX_PLAYER_HP);
-          }
-        }
-      }
-
+      
       CheckLCC(); // check LevelCompletionCriteria  
     }
     else if (GameplayManager.Instance.currentGameState == GameplayManager.GameState.LEVEL_COMPLETE)

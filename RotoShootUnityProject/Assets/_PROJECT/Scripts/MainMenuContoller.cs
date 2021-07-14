@@ -36,7 +36,7 @@ public class MainMenuContoller : MonoBehaviour
 
   public void DoLogoTransitionOut()
   {
-    var logoTransitionOut = new Move(logoGameObject, startPosition: logoGameObject.transform.localPosition , endPosition: new Vector3(0, 1520, 0), duration: .6f, delay:0f ,tweenType: TransitionHelper.TweenType.easeInBack , coordinateSpace: BeautifulTransitions.Scripts.Transitions.TransitionSteps.AbstractClasses.TransitionStep.CoordinateSpaceType.AnchoredPosition);
+    var logoTransitionOut = new Move(logoGameObject, startPosition: logoGameObject.transform.localPosition , endPosition: new Vector3(0, 1620, 0), duration: .6f, delay:0f ,tweenType: TransitionHelper.TweenType.easeInBack , coordinateSpace: BeautifulTransitions.Scripts.Transitions.TransitionSteps.AbstractClasses.TransitionStep.CoordinateSpaceType.AnchoredPosition);
     logoTransitionOut.Start();
   }
 
