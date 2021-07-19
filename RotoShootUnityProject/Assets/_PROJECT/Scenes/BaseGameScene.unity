@@ -3691,7 +3691,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1012484969}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -3.4931, y: 2.927, z: 0}
+  m_LocalPosition: {x: -3.401, y: 2.817, z: 0}
   m_LocalScale: {x: 0.25753763, y: 0.25753763, z: 0.25753763}
   m_Children: []
   m_Father: {fileID: 0}
@@ -4328,8 +4328,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -157.1, y: 72.5}
-  m_SizeDelta: {x: 545.446, y: 109.93}
+  m_AnchoredPosition: {x: -336.581, y: 72.893}
+  m_SizeDelta: {x: 480.225, y: 109.34}
   m_Pivot: {x: 0.5, y: 0.50000006}
 --- !u!114 &1105516975
 MonoBehaviour:
@@ -4351,7 +4351,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: 999
+  m_text: 999997
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 10d15e6bb5d70ac4198345ac8f83a770, type: 2}
   m_sharedMaterial: {fileID: 3070483639754226382, guid: 10d15e6bb5d70ac4198345ac8f83a770,
@@ -4386,7 +4386,7 @@ MonoBehaviour:
   m_fontSizeMin: 18
   m_fontSizeMax: 72
   m_fontStyle: 1
-  m_HorizontalAlignment: 2
+  m_HorizontalAlignment: 4
   m_VerticalAlignment: 512
   m_textAlignment: 65535
   m_characterSpacing: 0
@@ -5238,11 +5238,7 @@ MonoBehaviour:
   MissionStartLCCTextObject: {fileID: 1901585817}
   gameRestartButton: {fileID: 742868826}
   gameExitButton: {fileID: 996938936}
-  playerHealthHeart03: {fileID: 0}
-  playerHealthHeart02: {fileID: 0}
-  playerHealthHeart01: {fileID: 0}
   LevelCompletePanel: {fileID: 615974328}
-  playerHealthBarObject: {fileID: 0}
   textAnimatorPlayer: {fileID: 1901585822}
 --- !u!4 &1397508540
 Transform:
