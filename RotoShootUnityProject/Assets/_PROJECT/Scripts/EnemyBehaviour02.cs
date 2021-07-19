@@ -251,6 +251,7 @@ public abstract class EnemyBehaviour02 : ExtendedBehaviour
     { 
       StartCoroutine(DoBurnFadeEffect(.75f, 0f, 1f));
       LevelManager.Instance.numEnemyKillsInLevel++;
+      UIManager.Instance.CurrentEnemyKillCount.text = LevelManager.Instance.numEnemyKillsInLevel.ToString();
       GameplayManager.Instance.totalEnemyKillCount++;
     }
     else if(enemyState != EnemyState.HIT_BY_ATMOSPHERE)
@@ -261,6 +262,7 @@ public abstract class EnemyBehaviour02 : ExtendedBehaviour
 
       LevelManager.Instance.numEnemyKillsInLevel++;
       GameplayManager.Instance.totalEnemyKillCount++;
+      UIManager.Instance.CurrentEnemyKillCount.text = LevelManager.Instance.numEnemyKillsInLevel.ToString();
       if (GameplayManager.Instance.totalEnemyKillCount % GameplayManager.Instance.enemyKillPowerUpDropFrequency == 0)
       {
         DropPowerUp();

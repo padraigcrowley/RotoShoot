@@ -7,6 +7,7 @@ using System.Collections;
 public class UIManager : Singleton<UIManager>
 {
   public TextMeshProUGUI HighPlayerScoreText, CurrentPlayerScoreText, CurrentEnemyKillCount, RequiredEnemyKillCount, levelPlayTimeCounterText, starCoinCountText, MissionStartLCCText;
+  
   public GameObject MissionStartLCCTextObject;
   public Button gameRestartButton, gameExitButton;
   [SerializeField] private GameObject LevelCompletePanel;
@@ -21,7 +22,7 @@ public class UIManager : Singleton<UIManager>
     HighPlayerScoreText.text = GameplayManager.Instance.highPlayerScore.ToString();
     CurrentEnemyKillCount.text = LevelManager.Instance.numEnemyKillsInLevel.ToString();
     RequiredEnemyKillCount.text = "/" + LevelManager.Instance.levelSetupData.lccEnemyKills.ToString();
-    
+    starCoinCountText.text = GameController.Instance.starCoinCount.ToString();
   }
 
   
@@ -79,7 +80,7 @@ public class UIManager : Singleton<UIManager>
           //UltimateStatusBar.UpdateStatus("playerStatusBar", GameplayManager.Instance.currentPlayerHP, GameplayManager.Instance.MAX_PLAYER_HP); 
 
           CurrentPlayerScoreText.text = (GameplayManager.Instance.currentPlayerScore).ToString();
-          CurrentEnemyKillCount.text = LevelManager.Instance.numEnemyKillsInLevel.ToString();
+          //CurrentEnemyKillCount.text = LevelManager.Instance.numEnemyKillsInLevel.ToString();
           HighPlayerScoreText.text = "HI:" + GameplayManager.Instance.highPlayerScore.ToString();
           levelPlayTimeCounterText.text = LevelManager.Instance.levelPlayTimeElapsed.ToString("0.00");
           

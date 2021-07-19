@@ -249,7 +249,7 @@ public class PlayerShip : ExtendedBehaviour
     
     GameplayManager.Instance.currentGameState = GameplayManager.GameState.PLAYER_DIED;
     shipSpriteRenderer.enabled = false;
-    playerStatusBar.DisableStatusBar();
+    //playerStatusBar.DisableStatusBar();
     PlayerHPWorldSpaceStatusBar.DisableStatusBar();
 }
 

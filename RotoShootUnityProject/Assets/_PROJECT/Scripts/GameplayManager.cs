@@ -131,6 +131,7 @@ public class GameplayManager : Singleton<GameplayManager>, IPowerUpEvents
         }
       case GameState.LEVEL_COMPLETE:
         {
+          ES3.Save("starCoinCount", GameController.Instance.starCoinCount);
           break;
         }
       

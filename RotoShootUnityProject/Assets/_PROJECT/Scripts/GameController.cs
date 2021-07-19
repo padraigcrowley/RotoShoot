@@ -8,6 +8,7 @@ public class GameController : Singleton<GameController>
   public int currentLevel = 0;
   public int highestLevelPlayed = 1;
   public int weapon = 0;
+  public int starCoinCount;
   void Awake()
   {
     DontDestroyOnLoad(transform.gameObject);
@@ -15,6 +16,8 @@ public class GameController : Singleton<GameController>
 
   void Start()
   {
+    starCoinCount = ES3.Load("starCoinCount", 20);
+    
 
     highestLevelPlayed = 4; // TODO: this needs expanding to detect and load the latest level played by the player, or if they can choose to play earlier levels, etc.
     
