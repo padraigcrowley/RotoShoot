@@ -132,6 +132,12 @@ public class GameplayManager : Singleton<GameplayManager>, IPowerUpEvents
       case GameState.LEVEL_COMPLETE:
         {
           ES3.Save("starCoinCount", GameController.Instance.starCoinCount);
+          if (GameController.Instance.currentLevelPlaying+1 > GameController.Instance.highestLevelPlayed)
+          {
+            GameController.Instance.highestLevelPlayed = GameController.Instance.currentLevelPlaying+1;
+            ES3.Save("highestLevelPlayed", GameController.Instance.highestLevelPlayed);
+          }
+
           break;
         }
       
@@ -192,9 +198,9 @@ public class GameplayManager : Singleton<GameplayManager>, IPowerUpEvents
   public void initializeMainGameplayLoopForNextLevel()
   {
     //currentPlayerHP = MAX_PLAYER_HP;
-    GameController.Instance.UnloadSpecificLevel(GameController.Instance.currentLevel);
-    GameController.Instance.currentLevel++;
-    GameController.Instance.LoadSpecificLevelAndBaseGame(GameController.Instance.currentLevel);
+    GameController.Instance.UnloadSpecificLevel(GameController.Instance.currentLevelBackground);
+    GameController.Instance.currentLevelPlaying++;
+    GameController.Instance.LoadSpecificLevelAndBaseGame(GameController.Instance.currentLevelPlaying);
     
     levelManagerScript.InitialiseLevel();
     mouseClickQueue = new Queue();

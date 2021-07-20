@@ -117,7 +117,7 @@ public class UIManager : Singleton<UIManager>
 
   public void handleGameExitButtonPress()
   {
-    GameController.Instance.currentLevel = 0;
+    GameController.Instance.currentLevelPlaying = 0;
     SceneManager.LoadScene("MainMenu");
   }
 

@@ -57,7 +57,7 @@ public class LevelManager : Singleton<LevelManager>
 
     enemyWavesParentBehaviourScripts.Clear();
 
-    levelSetupData = levelSetupDataArray[GameController.Instance.currentLevel - 1]; // get the relevant scriptable object setup file from the array.
+    levelSetupData = levelSetupDataArray[GameController.Instance.currentLevelPlaying - 1]; // get the relevant scriptable object setup file from the array.
 
     GameplayManager.Instance.playerShipPos = levelSetupData.PlayerShipPos;
     GameplayManager.Instance.levelControlType = levelSetupData.levelControlType;
@@ -335,7 +335,7 @@ public class LevelManager : Singleton<LevelManager>
       }
       else // level completion criteria = true
       {
-        print("Level Completion Criteria TRUE!, Next Level is:" + (GameController.Instance.currentLevel + 1));
+        print("Level Completion Criteria TRUE!, Next Level is:" + (GameController.Instance.currentLevelPlaying + 1));
         
         GameplayManager.Instance.currentGameState = GameplayManager.GameState.LEVEL_OUTRO_IN_PROGRESS;
       }

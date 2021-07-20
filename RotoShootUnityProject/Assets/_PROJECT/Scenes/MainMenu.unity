@@ -752,6 +752,8 @@ MonoBehaviour:
   PlayButtonTransitions: {fileID: 1020408257}
   LogoImageTransitions: {fileID: 1964626952}
   logoGameObject: {fileID: 1964626952}
+  prevLevelButtonImage: {fileID: 179682495}
+  nextLevelButtonImage: {fileID: 1306058523}
   logoImage: {fileID: 1964626955}
   selectedLevelText: {fileID: 500455432}
 --- !u!1 &424932913
@@ -3114,9 +3116,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f2ff82ca25496bb439a0bc075322e952, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  currentLevel: 1
+  currentLevelPlaying: 1
+  currentLevelBackground: 1
   highestLevelPlayed: 1
   weapon: 0
+  starCoinCount: 0
 --- !u!4 &1721058262
 Transform:
   m_ObjectHideFlags: 0

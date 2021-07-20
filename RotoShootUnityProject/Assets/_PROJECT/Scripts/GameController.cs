@@ -5,10 +5,12 @@ using UnityEngine.SceneManagement;
 
 public class GameController : Singleton<GameController>
 {
-  public int currentLevel = 0;
+  public int currentLevelPlaying = 1;
+  public int currentLevelBackground = 1;
   public int highestLevelPlayed = 1;
   public int weapon = 0;
   public int starCoinCount;
+ 
   void Awake()
   {
     DontDestroyOnLoad(transform.gameObject);
@@ -17,12 +19,11 @@ public class GameController : Singleton<GameController>
   void Start()
   {
     starCoinCount = ES3.Load("starCoinCount", 20);
+    highestLevelPlayed = ES3.Load("highestLevelPlayed", 1);
+       
+    currentLevelPlaying = highestLevelPlayed;
     
-
-    highestLevelPlayed = 4; // TODO: this needs expanding to detect and load the latest level played by the player, or if they can choose to play earlier levels, etc.
-    
-    currentLevel = highestLevelPlayed;
-    LoadSpecificLevel(currentLevel);
+    LoadSpecificLevel(currentLevelPlaying);
   }
   public void LoadSpecificLevelAndBaseGame(int level)
   {
@@ -31,7 +32,7 @@ public class GameController : Singleton<GameController>
   }
 	public void LoadSpecificLevel(int level)
   {
-    GameController.Instance.currentLevel = level;
+    GameController.Instance.currentLevelPlaying = level;
 
     // handles up to 999 levels
     string levelName = "";
@@ -46,6 +47,7 @@ public class GameController : Singleton<GameController>
     if (!SceneManager.GetSceneByName(levelName + level.ToString()).isLoaded)
     {
       SceneManager.LoadScene(levelName + level.ToString(), LoadSceneMode.Additive);
+      currentLevelBackground = level;
     }
   }
 
@@ -64,6 +66,7 @@ public class GameController : Singleton<GameController>
     if (SceneManager.GetSceneByName(levelName + level.ToString()).isLoaded)
     {
       SceneManager.UnloadSceneAsync(levelName + level.ToString());
+      //currentLevelBackground = 0;
     }
   }
 

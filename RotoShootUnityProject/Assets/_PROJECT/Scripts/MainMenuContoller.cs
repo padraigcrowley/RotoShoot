@@ -14,6 +14,8 @@ public class MainMenuContoller : MonoBehaviour
   public GameObject LogoImageTransitions;
   public GameObject logoGameObject;
 
+  public Image prevLevelButtonImage;
+  public Image nextLevelButtonImage;
   public Image logoImage;
   private Material logoImageMaterial;
   public TMP_Text selectedLevelText;
@@ -26,12 +28,51 @@ public class MainMenuContoller : MonoBehaviour
     TransitionHelper.TransitionIn(MainMenuButtonTransitions);
 		TransitionHelper.TransitionIn(LogoImageTransitions);
     logoImageMaterial = logoImage.material;
+
+    
+
   }
   public void MainMenuStartButtonTransitionOut()
   {
     TransitionHelper.TransitionOut(MainMenuButtonTransitions);
-    selectedLevelText.text = "LEVEL " + GameController.Instance.currentLevel.ToString();
-    
+    selectedLevelText.text = "LEVEL " + GameController.Instance.currentLevelPlaying.ToString();
+    SetCorrectPrevNextLevelAlphaButtons();
+  }
+
+  void SetCorrectPrevNextLevelAlphaButtons()
+	{
+    if (GameController.Instance.currentLevelPlaying == 1)
+    {
+      SetButtonImageAlpha(prevLevelButtonImage, .3f);
+    }
+
+    if (GameController.Instance.highestLevelPlayed == 1)
+    {
+      SetButtonImageAlpha(nextLevelButtonImage, .3f);
+    }
+    if (GameController.Instance.currentLevelPlaying == GameController.Instance.highestLevelPlayed)
+    {
+      SetButtonImageAlpha(nextLevelButtonImage, .3f);
+    }
+    else
+    {
+      SetButtonImageAlpha(nextLevelButtonImage, 1f);
+    }
+    if (GameController.Instance.currentLevelPlaying == 1)
+    {
+      SetButtonImageAlpha(prevLevelButtonImage, .3f);
+    }
+    else
+    {
+      SetButtonImageAlpha(prevLevelButtonImage, 1f);
+    }
+  }
+
+  void SetButtonImageAlpha(Image ImageButton, float newAlpha)
+	{
+    var tempColor = ImageButton.color;
+    tempColor.a = newAlpha;
+    ImageButton.color = tempColor;
   }
 
   public void DoLogoTransitionOut()
@@ -87,19 +128,21 @@ public class MainMenuContoller : MonoBehaviour
 
   public void IncrementCurrentSelectedLevel()
 	{
-    if((GameController.Instance.currentLevel + 1 <= GameController.Instance.highestLevelPlayed) &&(GameController.Instance.currentLevel+1 <= 100))
+    if((GameController.Instance.currentLevelPlaying + 1 <= GameController.Instance.highestLevelPlayed) &&(GameController.Instance.currentLevelPlaying+1 <= 100))
 		{
-      GameController.Instance.currentLevel++;
-      selectedLevelText.text = "LEVEL " + GameController.Instance.currentLevel.ToString();
+      GameController.Instance.currentLevelPlaying++;
+      selectedLevelText.text = "LEVEL " + GameController.Instance.currentLevelPlaying.ToString();
+      SetCorrectPrevNextLevelAlphaButtons();
     }
 	}
 
   public void DecrementCurrentSelectedLevel()
   {
-    if (GameController.Instance.currentLevel - 1 >= 1)
+    if (GameController.Instance.currentLevelPlaying - 1 >= 1)
     {
-      GameController.Instance.currentLevel--;
-      selectedLevelText.text = "LEVEL " + GameController.Instance.currentLevel.ToString();
+      GameController.Instance.currentLevelPlaying--;
+      selectedLevelText.text = "LEVEL " + GameController.Instance.currentLevelPlaying.ToString();
+      SetCorrectPrevNextLevelAlphaButtons();
     }
   }
 
