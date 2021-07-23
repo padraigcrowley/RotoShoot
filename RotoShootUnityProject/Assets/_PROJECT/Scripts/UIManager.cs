@@ -11,6 +11,7 @@ public class UIManager : Singleton<UIManager>
   public GameObject MissionStartLCCTextObject;
   public Button gameRestartButton, gameExitButton;
   [SerializeField] private GameObject LevelCompletePanel;
+  public Image PauseButtonBGImage, PauseButtonFGImage;
 
   public Febucci.UI.TextAnimatorPlayer textAnimatorPlayer;
 
@@ -102,6 +103,29 @@ public class UIManager : Singleton<UIManager>
       default:
         break;
     }
+  }
+
+  public void handlePauseButtonPress()
+  {
+    if (GameplayManager.Instance.isGamePaused)
+    {
+      GameplayManager.Instance.UnpauseGame();
+      SetButtonImageAlpha(PauseButtonFGImage, .4f);
+      SetButtonImageAlpha(PauseButtonBGImage, .4f);
+    }
+    else
+    {
+      GameplayManager.Instance.PauseGame();
+      SetButtonImageAlpha(PauseButtonFGImage, 1f);
+      SetButtonImageAlpha(PauseButtonBGImage, 1f);
+    }
+  }
+
+  void SetButtonImageAlpha(Image ImageButton, float newAlpha)
+  {
+    var tempColor = ImageButton.color;
+    tempColor.a = newAlpha;
+    ImageButton.color = tempColor;
   }
 
   public void handleGameRestartButtonPress()

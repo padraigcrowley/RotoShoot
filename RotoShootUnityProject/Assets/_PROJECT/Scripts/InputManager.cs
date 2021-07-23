@@ -3,10 +3,15 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Events;
 
+// Adapted from:
+// http://2sa-studio.blogspot.com/2015/01/simulating-touch-events-from-mouse.html
+//
+
+/*
 [System.Serializable] //https://docs.unity3d.com/ScriptReference/Events.UnityEvent_1.html
 public class MyFloatEvent : UnityEvent<float>
 {
-}
+}*/
 
 public class InputManager : MonoBehaviour
 {

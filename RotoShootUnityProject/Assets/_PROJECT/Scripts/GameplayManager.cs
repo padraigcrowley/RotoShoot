@@ -33,6 +33,7 @@ public class GameplayManager : Singleton<GameplayManager>, IPowerUpEvents
   public float currentPlayerMissileSpeedMultiplier;
   public float basePlayerMissileSpeedMultiplier;
 
+  public bool isGamePaused = false;
   public bool playerShipInvulnerable = false;
   public bool playerShipMovementAllowed = false;
   public bool playerShipFiring = false;
@@ -173,11 +174,13 @@ public class GameplayManager : Singleton<GameplayManager>, IPowerUpEvents
   public void PauseGame()
   {
     Time.timeScale = 0;
+    isGamePaused = true;
   }
 
-  public void ResumeGame()
+  public void UnpauseGame()
   {
     Time.timeScale = 1;
+    isGamePaused = false;
   }
 
   public void initializeMainGameplayLoopForLevelRestart()
