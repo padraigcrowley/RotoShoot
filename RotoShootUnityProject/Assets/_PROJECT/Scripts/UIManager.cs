@@ -109,19 +109,22 @@ public class UIManager : Singleton<UIManager>
 
   public void handlePauseButtonPress()
   {
-    if (GameplayManager.Instance.isGamePaused)
+    if (GameplayManager.Instance.currentGameState == GameplayManager.GameState.LEVEL_INTRO_IN_PROGRESS || GameplayManager.Instance.currentGameState == GameplayManager.GameState.LEVEL_IN_PROGRESS)
     {
-      TransitionHelper.TransitionOut(MainPauseMenuButtonTransitions);
-      GameplayManager.Instance.UnpauseGame();
-      SetButtonImageAlpha(PauseButtonFGImage, .4f);
-      SetButtonImageAlpha(PauseButtonBGImage, .4f);
-    }
-    else
-    {
-      TransitionHelper.TransitionIn(MainPauseMenuButtonTransitions);
-      GameplayManager.Instance.PauseGame();
-      SetButtonImageAlpha(PauseButtonFGImage, 1f);
-      SetButtonImageAlpha(PauseButtonBGImage, 1f);
+      if (GameplayManager.Instance.isGamePaused)
+      {
+        TransitionHelper.TransitionOut(MainPauseMenuButtonTransitions);
+        GameplayManager.Instance.UnpauseGame();
+        SetButtonImageAlpha(PauseButtonFGImage, .4f);
+        SetButtonImageAlpha(PauseButtonBGImage, .4f);
+      }
+      else
+      {
+        TransitionHelper.TransitionIn(MainPauseMenuButtonTransitions);
+        GameplayManager.Instance.PauseGame();
+        SetButtonImageAlpha(PauseButtonFGImage, 1f);
+        SetButtonImageAlpha(PauseButtonBGImage, 1f);
+      }
     }
   }
 
