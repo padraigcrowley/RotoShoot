@@ -28,9 +28,6 @@ public class MainMenuContoller : MonoBehaviour
     TransitionHelper.TransitionIn(MainMenuButtonTransitions);
 		TransitionHelper.TransitionIn(LogoImageTransitions);
     logoImageMaterial = logoImage.material;
-
-    
-
   }
   public void MainMenuStartButtonTransitionOut()
   {

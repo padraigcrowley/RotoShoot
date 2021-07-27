@@ -3,7 +3,7 @@ using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 using System.Collections;
-
+using BeautifulTransitions.Scripts.Transitions;
 public class UIManager : Singleton<UIManager>
 {
   public TextMeshProUGUI HighPlayerScoreText, CurrentPlayerScoreText, CurrentEnemyKillCount, RequiredEnemyKillCount, levelPlayTimeCounterText, starCoinCountText, MissionStartLCCText;
@@ -14,6 +14,8 @@ public class UIManager : Singleton<UIManager>
   public Image PauseButtonBGImage, PauseButtonFGImage;
 
   public Febucci.UI.TextAnimatorPlayer textAnimatorPlayer;
+
+  public GameObject MainPauseMenuButtonTransitions;
 
   // Start is called before the first frame update
   void Start()
@@ -109,12 +111,14 @@ public class UIManager : Singleton<UIManager>
   {
     if (GameplayManager.Instance.isGamePaused)
     {
+      TransitionHelper.TransitionOut(MainPauseMenuButtonTransitions);
       GameplayManager.Instance.UnpauseGame();
       SetButtonImageAlpha(PauseButtonFGImage, .4f);
       SetButtonImageAlpha(PauseButtonBGImage, .4f);
     }
     else
     {
+      TransitionHelper.TransitionIn(MainPauseMenuButtonTransitions);
       GameplayManager.Instance.PauseGame();
       SetButtonImageAlpha(PauseButtonFGImage, 1f);
       SetButtonImageAlpha(PauseButtonBGImage, 1f);

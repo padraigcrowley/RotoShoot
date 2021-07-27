@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Events;
+using UnityEngine.EventSystems;
 
 // Adapted from:
 // http://2sa-studio.blogspot.com/2015/01/simulating-touch-events-from-mouse.html
@@ -39,7 +40,14 @@ public class InputManager : MonoBehaviour
     // Handle native touch events
     foreach (Touch touch in Input.touches)
     {
-      HandleTouch(touch.fingerId, Camera.main.ScreenToWorldPoint(touch.position), touch.phase);
+      //check touch isn't tapping on a UI gameobject
+      if (Input.touchCount > 0 && touch.phase == TouchPhase.Began)
+      {
+        if (EventSystem.current.IsPointerOverGameObject())
+          return;
+      else 
+          HandleTouch(touch.fingerId, Camera.main.ScreenToWorldPoint(touch.position), touch.phase);
+      }
     }
 
     // Simulate touch events from mouse events
@@ -47,15 +55,24 @@ public class InputManager : MonoBehaviour
     {
       if (Input.GetMouseButtonDown(0))
       {
-        HandleTouch(10, Camera.main.ScreenToWorldPoint(Input.mousePosition), TouchPhase.Began);
+        if (EventSystem.current.IsPointerOverGameObject())//check touch isn't tapping on a UI gameobject
+          return;
+        else
+          HandleTouch(10, Camera.main.ScreenToWorldPoint(Input.mousePosition), TouchPhase.Began);
       }
       if (Input.GetMouseButton(0))
       {
-        HandleTouch(10, Camera.main.ScreenToWorldPoint(Input.mousePosition), TouchPhase.Moved);
+        if (EventSystem.current.IsPointerOverGameObject())//check touch isn't tapping on a UI gameobject
+          return;
+        else
+          HandleTouch(10, Camera.main.ScreenToWorldPoint(Input.mousePosition), TouchPhase.Moved);
       }
       if (Input.GetMouseButtonUp(0))
       {
-        HandleTouch(10, Camera.main.ScreenToWorldPoint(Input.mousePosition), TouchPhase.Ended);
+        if (EventSystem.current.IsPointerOverGameObject())//check touch isn't tapping on a UI gameobject
+          return;
+        else
+          HandleTouch(10, Camera.main.ScreenToWorldPoint(Input.mousePosition), TouchPhase.Ended);
       }
     }
   }

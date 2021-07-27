@@ -480,9 +480,9 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 0}
-        m_TargetAssemblyTypeName: MainMenuContoller, Assembly-CSharp
-        m_MethodName: MainMenuStartButtonTransitionOut
+      - m_Target: {fileID: 1397508539}
+        m_TargetAssemblyTypeName: UIManager, Assembly-CSharp
+        m_MethodName: handlePauseButtonPress
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -1609,8 +1609,9 @@ GameObject:
   - component: {fileID: 334257922}
   - component: {fileID: 334257924}
   - component: {fileID: 334257923}
+  - component: {fileID: 334257926}
   m_Layer: 5
-  m_Name: PauseMenuPanel
+  m_Name: MainPauseMenuPanel
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1628,14 +1629,14 @@ RectTransform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 57579060}
-  - {fileID: 1284650093}
   - {fileID: 1462511537}
+  - {fileID: 1284650093}
   m_Father: {fileID: 1849652818}
   m_RootOrder: 15
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 0.0000095367, y: 43}
+  m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 735.83, y: 701.337}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &334257923
@@ -1676,6 +1677,113 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 334257921}
   m_CullTransparentMesh: 1
+--- !u!114 &334257926
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 334257921}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e64337308ae57d94ba8410d06ffe1403, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  InitForTransitionIn: 1
+  AutoRun: 0
+  RepeatWhenEnabled: 0
+  TransitionInConfig:
+    AutoRun: 0
+    TransitionChildren: 0
+    MustTriggerDirect: 0
+    Delay: 0
+    Duration: 0.6
+    TimeUpdateMethod: 1
+    TransitionType: 23
+    AnimationCurve:
+      serializedVersion: 2
+      m_Curve:
+      - serializedVersion: 3
+        time: 0
+        value: 0
+        inSlope: 0
+        outSlope: 0
+        tangentMode: 0
+        weightedMode: 0
+        inWeight: 0
+        outWeight: 0
+      - serializedVersion: 3
+        time: 1
+        value: 1
+        inSlope: 0
+        outSlope: 0
+        tangentMode: 0
+        weightedMode: 0
+        inWeight: 0
+        outWeight: 0
+      m_PreInfinity: 2
+      m_PostInfinity: 2
+      m_RotationOrder: 4
+    LoopMode: 0
+    OnTransitionStart:
+      m_PersistentCalls:
+        m_Calls: []
+    OnTransitionUpdate:
+      m_PersistentCalls:
+        m_Calls: []
+    OnTransitionComplete:
+      m_PersistentCalls:
+        m_Calls: []
+  TransitionOutConfig:
+    AutoRun: 0
+    TransitionChildren: 0
+    MustTriggerDirect: 0
+    Delay: 0
+    Duration: 0.3
+    TimeUpdateMethod: 1
+    TransitionType: 27
+    AnimationCurve:
+      serializedVersion: 2
+      m_Curve:
+      - serializedVersion: 3
+        time: 0
+        value: 0
+        inSlope: 0
+        outSlope: 0
+        tangentMode: 0
+        weightedMode: 0
+        inWeight: 0
+        outWeight: 0
+      - serializedVersion: 3
+        time: 1
+        value: 1
+        inSlope: 0
+        outSlope: 0
+        tangentMode: 0
+        weightedMode: 0
+        inWeight: 0
+        outWeight: 0
+      m_PreInfinity: 2
+      m_PostInfinity: 2
+      m_RotationOrder: 4
+    LoopMode: 0
+    OnTransitionStart:
+      m_PersistentCalls:
+        m_Calls: []
+    OnTransitionUpdate:
+      m_PersistentCalls:
+        m_Calls: []
+    OnTransitionComplete:
+      m_PersistentCalls:
+        m_Calls: []
+  Target: {fileID: 0}
+  MoveMode: 2
+  InConfig:
+    StartPositionType: 0
+    StartPosition: {x: -1100, y: 0, z: 0}
+  OutConfig:
+    EndPositionType: 0
+    EndPosition: {x: -1100, y: 0, z: 0}
 --- !u!1 &382187233
 GameObject:
   m_ObjectHideFlags: 0
@@ -5986,7 +6094,9 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: START
+  m_text: 'SETTINGS
+
+'
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 10d15e6bb5d70ac4198345ac8f83a770, type: 2}
   m_sharedMaterial: {fileID: 3070483639754226382, guid: 10d15e6bb5d70ac4198345ac8f83a770,
@@ -6113,7 +6223,7 @@ GameObject:
   - component: {fileID: 1284650095}
   - component: {fileID: 1284650094}
   m_Layer: 5
-  m_Name: StartButton (1)
+  m_Name: ExitButton
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -6132,7 +6242,7 @@ RectTransform:
   m_Children:
   - {fileID: 1096169836}
   m_Father: {fileID: 334257922}
-  m_RootOrder: 1
+  m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
@@ -6355,6 +6465,7 @@ MonoBehaviour:
   PauseButtonBGImage: {fileID: 843525625}
   PauseButtonFGImage: {fileID: 486308536}
   textAnimatorPlayer: {fileID: 1901585822}
+  MainPauseMenuButtonTransitions: {fileID: 334257921}
 --- !u!4 &1397508540
 Transform:
   m_ObjectHideFlags: 0
@@ -6905,7 +7016,7 @@ GameObject:
   - component: {fileID: 1462511539}
   - component: {fileID: 1462511538}
   m_Layer: 5
-  m_Name: StartButton (2)
+  m_Name: SettingsButton
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -6924,7 +7035,7 @@ RectTransform:
   m_Children:
   - {fileID: 1261254256}
   m_Father: {fileID: 334257922}
-  m_RootOrder: 2
+  m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
