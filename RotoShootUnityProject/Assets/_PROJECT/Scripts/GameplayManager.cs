@@ -200,6 +200,7 @@ public class GameplayManager : Singleton<GameplayManager>, IPowerUpEvents
   }
   public void initializeMainGameplayLoopForNextLevel()
   {
+    
     //currentPlayerHP = MAX_PLAYER_HP;
     GameController.Instance.UnloadSpecificLevel(GameController.Instance.currentLevelBackground);
     GameController.Instance.currentLevelPlaying++;

@@ -16,6 +16,9 @@ public class UIManager : Singleton<UIManager>
   public Febucci.UI.TextAnimatorPlayer textAnimatorPlayer;
 
   public GameObject MainPauseMenuButtonTransitions;
+  public GameObject TopInGameHUDTransitions;
+  public GameObject LevelCompletePanelTransitions;
+  private bool hudOn = false;
 
   // Start is called before the first frame update
   void Start()
@@ -73,12 +76,14 @@ public class UIManager : Singleton<UIManager>
     {
       case GameplayManager.GameState.LEVEL_INTRO_IN_PROGRESS:
         {
-          LevelCompletePanel.gameObject.SetActive(false);
+          
           RequiredEnemyKillCount.text = "/" + LevelManager.Instance.levelSetupData.lccEnemyKills.ToString();
           break;
         }
       case GameplayManager.GameState.LEVEL_IN_PROGRESS:
         {
+          LevelCompletePanel.gameObject.SetActive(false);// just so it will trigger on enable at level end 
+
           //playerHealthBarObject.SetActive(true);
           //UltimateStatusBar.UpdateStatus("playerStatusBar", GameplayManager.Instance.currentPlayerHP, GameplayManager.Instance.MAX_PLAYER_HP); 
 
@@ -86,10 +91,24 @@ public class UIManager : Singleton<UIManager>
           //CurrentEnemyKillCount.text = LevelManager.Instance.numEnemyKillsInLevel.ToString();
           HighPlayerScoreText.text = "HI:" + GameplayManager.Instance.highPlayerScore.ToString();
           levelPlayTimeCounterText.text = LevelManager.Instance.levelPlayTimeElapsed.ToString("0.00");
-          
+
+          if (!hudOn)
+          {
+            TransitionHelper.TransitionIn(TopInGameHUDTransitions);
+            hudOn = true;
+          }
+
           break;
         }
-      
+      /*case GameplayManager.GameState.LEVEL_OUTRO_IN_PROGRESS:
+        {
+          if (hudOn)
+          {
+            TransitionHelper.TransitionOut(TopInGameHUDTransitions);
+            hudOn = false;
+          }
+          break;
+        }*/
       case GameplayManager.GameState.WAITING_FOR_LEVELCOMPLETE_BUTTONS:
         {
           LevelCompletePanel.gameObject.SetActive(true);
@@ -105,6 +124,12 @@ public class UIManager : Singleton<UIManager>
       default:
         break;
     }
+  }
+
+  public void handleLevelCompletePanelOKButtonPress()
+	{
+    TransitionHelper.TransitionOut(LevelCompletePanelTransitions);
+    GameplayManager.Instance.initializeMainGameplayLoopForNextLevel();
   }
 
   public void handlePauseButtonPress()
