@@ -1,5 +1,12 @@
 {
   "dependencies": {
+    "com.alwaystoolate.playmode": {
+      "version": "https://github.com/AlwaysTooLate/AlwaysTooLate.PlayMode.git",
+      "depth": 0,
+      "source": "git",
+      "dependencies": {},
+      "hash": "b91367caaf99303669e5841aaef1fded3c26687f"
+    },
     "com.gameframe.sceneswitcher": {
       "version": "file:UnitySceneSwitcher-master",
       "depth": 0,
