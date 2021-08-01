@@ -18,11 +18,11 @@ public class InputManager : MonoBehaviour
 {
   private Vector3 startTouchPos, endTouchPos;
   private float minSwipeDistanceThreshold = 0.75f; //1.0f;
-  
-  
+
+
   void Start()
   {
-    
+
   }
 
   // Update is called once per frame
@@ -44,10 +44,12 @@ public class InputManager : MonoBehaviour
       if (Input.touchCount > 0 && touch.phase == TouchPhase.Began)
       {
         if (EventSystem.current.IsPointerOverGameObject())
+        {
+          //Debug.Log("TOUCHED GAME OBJECT, RETURNING");
           return;
-      else 
-          HandleTouch(touch.fingerId, Camera.main.ScreenToWorldPoint(touch.position), touch.phase);
+        }
       }
+      HandleTouch(touch.fingerId, Camera.main.ScreenToWorldPoint(touch.position), touch.phase);
     }
 
     // Simulate touch events from mouse events
@@ -93,7 +95,7 @@ public class InputManager : MonoBehaviour
     }
   }
 
-    private void HandleTouch(int touchFingerId, Vector3 touchPosition, TouchPhase touchPhase)
+  private void HandleTouch(int touchFingerId, Vector3 touchPosition, TouchPhase touchPhase)
   {
     int swipeDirection = 0;
 
@@ -115,15 +117,15 @@ public class InputManager : MonoBehaviour
 
         if ((swipeDirection = DetectSwipe(startTouchPos, endTouchPos)) != 0) //swipe
         {
-          //Debug.Log("Swiped!!");          
+          //Debug.Log("Swiped!!");
           if (swipeDirection == 1)
           {
-           GameplayManager.Instance.mouseClickQueue.Enqueue(-180f);
+            GameplayManager.Instance.mouseClickQueue.Enqueue(-180f);
             /*StartCoroutine(rotateObject(playerShipObj, new Vector3(0, 0, 180), rotationDuration * 2)); // have to multiply rotationDuration by something as it's very fast to do a full 180 degrees otherwise. technically it should be multiplied by 4 (4 separate rotations to reach 180) but that feels too slow
             PlayerShipGreenRotArrowObj.transform.Rotate(Vector3.forward * 180);
             PlayerShipRedRotArrowObj.transform.Rotate(Vector3.forward * 180);*/
           }
-          else 
+          else
           {
             GameplayManager.Instance.mouseClickQueue.Enqueue(180f);
             //StartCoroutine(rotateObject(playerShipObj, new Vector3(0, 0, -180), rotationDuration * 2)); // have to multiply rotationDuration by something as it's very fast to do a full 180 degrees otherwise. technically it should be multiplied by 4 (4 separate rotations to reach 180) but that feels too slow
@@ -174,5 +176,5 @@ public class InputManager : MonoBehaviour
       return 0;
   }
 
-  
+
 }

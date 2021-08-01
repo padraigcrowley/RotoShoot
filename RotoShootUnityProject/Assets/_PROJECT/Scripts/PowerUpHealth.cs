@@ -22,7 +22,7 @@ public class PowerUpHealth : PowerUp
 		{
 			playerHPWorldspaceCanvasRect = playerShip.gameObject.GetComponentInChildren<RectTransform>();
 		}
-		pulseTween = playerHPWorldspaceCanvasRect.DOScale(1.5f, 0.2f).SetLoops(3, LoopType.Yoyo);
+		pulseTween = playerHPWorldspaceCanvasRect.DOScale(1.5f, 0.2f).SetLoops(4, LoopType.Yoyo);
 		base.PickupEffects();
 	}
 

@@ -138,7 +138,7 @@ public class GameplayManager : Singleton<GameplayManager>, IPowerUpEvents
             GameController.Instance.highestLevelPlayed = GameController.Instance.currentLevelPlaying+1;
             ES3.Save("highestLevelPlayed", GameController.Instance.highestLevelPlayed);
           }
-
+          GameplayManager.Instance.currentGameState = GameplayManager.GameState.WAITING_FOR_LEVELCOMPLETE_BUTTONS;
           break;
         }
       

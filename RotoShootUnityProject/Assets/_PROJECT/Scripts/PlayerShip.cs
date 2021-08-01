@@ -171,8 +171,7 @@ public class PlayerShip : ExtendedBehaviour
           shipSpriteRenderer.gameObject.GetComponent<Renderer>().enabled = false;
           PlayerShipIntroAnimCompleted = false;
           PlayerShipIntroAnimPlaying = false;
-        shipCollider.enabled = false;
-        GameplayManager.Instance.currentGameState = GameplayManager.GameState.WAITING_FOR_LEVELCOMPLETE_BUTTONS;
+          shipCollider.enabled = false;
         break;
       
       default:
