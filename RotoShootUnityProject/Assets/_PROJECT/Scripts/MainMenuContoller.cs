@@ -19,6 +19,7 @@ public class MainMenuContoller : MonoBehaviour
   public Image logoImage;
   private Material logoImageMaterial;
   public TMP_Text selectedLevelText;
+  private Move logoTransitionOut;
 
   void Start()
   {
@@ -28,6 +29,8 @@ public class MainMenuContoller : MonoBehaviour
     TransitionHelper.TransitionIn(MainMenuButtonTransitions);
 		TransitionHelper.TransitionIn(LogoImageTransitions);
     logoImageMaterial = logoImage.material;
+
+    logoTransitionOut = new Move(logoGameObject, startPosition: logoGameObject.transform.localPosition, endPosition: new Vector3(0, 1620, 0), duration: .6f, delay: 0f, tweenType: TransitionHelper.TweenType.easeInBack, coordinateSpace: BeautifulTransitions.Scripts.Transitions.TransitionSteps.AbstractClasses.TransitionStep.CoordinateSpaceType.AnchoredPosition);
   }
   public void MainMenuStartButtonTransitionOut()
   {
@@ -74,7 +77,7 @@ public class MainMenuContoller : MonoBehaviour
 
   public void DoLogoTransitionOut()
   {
-    var logoTransitionOut = new Move(logoGameObject, startPosition: logoGameObject.transform.localPosition , endPosition: new Vector3(0, 1620, 0), duration: .6f, delay:0f ,tweenType: TransitionHelper.TweenType.easeInBack , coordinateSpace: BeautifulTransitions.Scripts.Transitions.TransitionSteps.AbstractClasses.TransitionStep.CoordinateSpaceType.AnchoredPosition);
+    
     logoTransitionOut.Start();
   }
 
