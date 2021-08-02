@@ -7,18 +7,22 @@ using BeautifulTransitions.Scripts.Transitions;
 public class UIManager : Singleton<UIManager>
 {
   public TextMeshProUGUI HighPlayerScoreText, CurrentPlayerScoreText, CurrentEnemyKillCount, RequiredEnemyKillCount, levelPlayTimeCounterText, starCoinCountText, MissionStartLCCText;
-  
+
+  public TMP_Text LeveCompleteTextObject;
+
   public GameObject MissionStartLCCTextObject;
   public Button gameRestartButton, gameExitButton;
   [SerializeField] private GameObject LevelCompletePanel;
   public Image PauseButtonBGImage, PauseButtonFGImage;
 
-  public Febucci.UI.TextAnimatorPlayer textAnimatorPlayer;
+  public Febucci.UI.TextAnimatorPlayer lccTextAnimatorPlayer;
+  public Febucci.UI.TextAnimatorPlayer levelCompleteTextAnimatorPlayer;
 
   public GameObject MainPauseMenuButtonTransitions;
   public GameObject TopInGameHUDTransitions;
   public GameObject LevelCompletePanelTransitions;
   private bool hudOn = false;
+  private bool doingLevelCompleteText = false;
 
   // Start is called before the first frame update
   void Start()
@@ -41,7 +45,7 @@ public class UIManager : Singleton<UIManager>
     yield return new WaitForSeconds(appearDelay);
     
     MissionStartLCCTextObject.SetActive(true);
-    textAnimatorPlayer.ShowText(myText);
+    lccTextAnimatorPlayer.ShowText(myText);
         
     yield return new WaitForSeconds(disappearDelay);
     for (float t = 0.0f; t < 1.0f; t += Time.deltaTime / fadeOutDuration)
@@ -55,7 +59,7 @@ public class UIManager : Singleton<UIManager>
 		//yield return new WaitForSeconds(appearDelay);
   //  myText = "KILL\n999\nENEMIES";
   //  //MissionStartLCCText.text = myText;
-  //  textAnimatorPlayer.ShowText(myText);
+  //  lccTextAnimatorPlayer.ShowText(myText);
     
 
 		//yield return new WaitForSeconds(disappearDelay);
@@ -78,11 +82,12 @@ public class UIManager : Singleton<UIManager>
         {
           
           RequiredEnemyKillCount.text = "/" + LevelManager.Instance.levelSetupData.lccEnemyKills.ToString();
+          doingLevelCompleteText = false;
           break;
         }
       case GameplayManager.GameState.LEVEL_IN_PROGRESS:
         {
-          LevelCompletePanel.gameObject.SetActive(false);// just so it will trigger on enable at level end 
+          //LevelCompletePanel.gameObject.SetActive(false);// just so it will trigger on enable at level end 
 
           //playerHealthBarObject.SetActive(true);
           //UltimateStatusBar.UpdateStatus("playerStatusBar", GameplayManager.Instance.currentPlayerHP, GameplayManager.Instance.MAX_PLAYER_HP); 
@@ -100,18 +105,26 @@ public class UIManager : Singleton<UIManager>
 
           break;
         }
-      /*case GameplayManager.GameState.LEVEL_OUTRO_IN_PROGRESS:
+      case GameplayManager.GameState.LEVEL_OUTRO_IN_PROGRESS:
         {
-          if (hudOn)
-          {
-            TransitionHelper.TransitionOut(TopInGameHUDTransitions);
-            hudOn = false;
-          }
+          //if (hudOn)
+          //{
+          //  TransitionHelper.TransitionOut(TopInGameHUDTransitions);
+          //  hudOn = false;
+          //}
+          //GameplayManager.Instance.currentGameState = GameplayManager.GameState.WAITING_FOR_LEVELCOMPLETE_BUTTONS;
+
           break;
-        }*/
+        }
       case GameplayManager.GameState.WAITING_FOR_LEVELCOMPLETE_BUTTONS:
         {
-          LevelCompletePanel.gameObject.SetActive(true);
+          if (doingLevelCompleteText == false)
+          {
+            LevelCompletePanel.gameObject.SetActive(true);
+            LeveCompleteTextObject.text = "MISSION\nCOMPLETE!";
+            doingLevelCompleteText = true;
+          }
+          //levelCompleteTextAnimatorPlayer.ShowText("MISSION\nCOMPLETE!");
 
           break;
         }
@@ -128,7 +141,8 @@ public class UIManager : Singleton<UIManager>
 
   public void handleLevelCompletePanelOKButtonPress()
 	{
-    TransitionHelper.TransitionOut(LevelCompletePanelTransitions);
+    //TransitionHelper.TransitionOut(LevelCompletePanelTransitions);
+    LevelCompletePanel.gameObject.SetActive(false);
     GameplayManager.Instance.initializeMainGameplayLoopForNextLevel();
   }
 
