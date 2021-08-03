@@ -91,6 +91,7 @@ public class PlayerShip : ExtendedBehaviour
  
           PlayerShipIntroAnimPlaying = true;
           shipSpriteRenderer.enabled = true;
+          playerShipExhaustSpriteRenderer.enabled = true;
           //PlayerShipGFXAnim.Play("PlayerShipIntro", -1, 0f);
           PlayerShipGFXAnim.Play("PlayerShipIntro",0);
         PlayerShipGFXAnim.Play("PlayerShipExhaust",1);
@@ -145,6 +146,7 @@ public class PlayerShip : ExtendedBehaviour
         {
           PlayerHPWorldSpaceStatusBar.DisableStatusBar();
           PlayerShipOutroAnimPlaying = true;
+          playerShipExhaustSpriteRenderer.enabled = true;
 
           //TODO: below make sure the angle is of the ship graphic, not the parent object
           //float angle = 0f - this.gameObject.transform.eulerAngles.z;
@@ -161,10 +163,10 @@ public class PlayerShip : ExtendedBehaviour
           PlayerShipOutroAnimCompleted = false;
           shipSpriteRenderer.gameObject.GetComponent<Renderer>().enabled = false;
           shipCollider.enabled = false;
+          playerShipExhaustSpriteRenderer.enabled = false;
         }
         break;
       case GameplayManager.GameState.PLAYER_DIED:
-        GameplayManager.Instance.currentGameState = GameplayManager.GameState.WAITING_FOR_PLAYERDIED_BUTTONS;
         break;
       case GameplayManager.GameState.LEVEL_COMPLETE:
           //transform.rotation = Quaternion.identity; // reset to face upwards, back to its original rotation.

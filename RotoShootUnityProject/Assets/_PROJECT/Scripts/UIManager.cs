@@ -12,6 +12,8 @@ public class UIManager : Singleton<UIManager>
 
   public GameObject MissionStartLCCTextObject;
   public Button gameRestartButton, gameExitButton;
+  public GameObject PlayerDiedPanel;
+
   [SerializeField] private GameObject LevelCompletePanel;
   public Image PauseButtonBGImage, PauseButtonFGImage;
 
@@ -36,6 +38,21 @@ public class UIManager : Singleton<UIManager>
   }
 
   
+  public IEnumerator FadeOutBigText(TMP_Text myTextObject, float fadeOutDuration = 1f)
+	{
+
+    float aValue = 0f;
+    float alpha = MissionStartLCCText.color.a;
+        
+    for (float t = 0.0f; t < 1.0f; t += Time.deltaTime / fadeOutDuration)
+    {
+      Color newColor = new Color(1, 1, 1, Mathf.Lerp(alpha, aValue, t));
+      myTextObject.color = newColor;
+      yield return null;
+    }
+        
+  }
+
   public IEnumerator DoMissionStartLCCText(float appearDelay, float disappearDelay, string myText)
   {
     
@@ -55,22 +72,8 @@ public class UIManager : Singleton<UIManager>
       yield return null;
     }
 
-    MissionStartLCCText.color = new Color (1,1,1,alpha); //reset the alpha back to the original value
-		//yield return new WaitForSeconds(appearDelay);
-  //  myText = "KILL\n999\nENEMIES";
-  //  //MissionStartLCCText.text = myText;
-  //  lccTextAnimatorPlayer.ShowText(myText);
-    
-
-		//yield return new WaitForSeconds(disappearDelay);
-		//for (float t = 0.0f; t < 1.0f; t += Time.deltaTime / fadeOutDuration)
-		//{
-		//	Color newColor = new Color(1, 1, 1, Mathf.Lerp(alpha, aValue, t));
-		//	MissionStartLCCText.color = newColor;
-		//	yield return null;
-		//}
-
 		MissionStartLCCTextObject.SetActive(false);
+    MissionStartLCCText.color = new Color (1,1,1,alpha); //reset the alpha back to the original value
   }
 
   // Update is called once per frame
@@ -120,7 +123,9 @@ public class UIManager : Singleton<UIManager>
         {
           if (doingLevelCompleteText == false)
           {
-            LevelCompletePanel.gameObject.SetActive(true);
+            //LevelCompletePanel.gameObject.SetActive(true);
+            LeveCompleteTextObject.gameObject.SetActive(true);
+            LeveCompleteTextObject.color = new Color(1, 1, 1, 1); //reset the alpha back to the original value
             LeveCompleteTextObject.text = "MISSION\nCOMPLETE!";
             doingLevelCompleteText = true;
           }
@@ -130,8 +135,7 @@ public class UIManager : Singleton<UIManager>
         }
       case GameplayManager.GameState.WAITING_FOR_PLAYERDIED_BUTTONS:
         {
-          gameRestartButton.gameObject.SetActive(true);
-          gameExitButton.gameObject.SetActive(true);
+          PlayerDiedPanel.SetActive(true);
           break;
         }
       default:
@@ -142,7 +146,8 @@ public class UIManager : Singleton<UIManager>
   public void handleLevelCompletePanelOKButtonPress()
 	{
     //TransitionHelper.TransitionOut(LevelCompletePanelTransitions);
-    LevelCompletePanel.gameObject.SetActive(false);
+    //LevelCompletePanel.gameObject.SetActive(false);
+    StartCoroutine(FadeOutBigText(LeveCompleteTextObject));
     GameplayManager.Instance.initializeMainGameplayLoopForNextLevel();
   }
 
@@ -179,8 +184,10 @@ public class UIManager : Singleton<UIManager>
     print("Start Button Pressed!");
     CurrentPlayerScoreText.text = "0";
     //GameplayManager.Instance.currentGameState = GameplayManager.GameState.LEVEL_INTRO_IN_PROGRESS;
-    gameRestartButton.gameObject.SetActive(false);
-    gameExitButton.gameObject.SetActive(false);
+
+    //PlayerDiedPanel.SetActive(false);
+    TransitionHelper.TransitionOut(PlayerDiedPanel);
+
     GameplayManager.Instance.initializeMainGameplayLoopForLevelRestart();
     //GameplayManager.Instance.ResumeGame();
   }
@@ -188,6 +195,7 @@ public class UIManager : Singleton<UIManager>
   public void handleGameExitButtonPress()
   {
     GameController.Instance.currentLevelPlaying = 0;
+    TransitionHelper.TransitionOut(PlayerDiedPanel);
     SceneManager.LoadScene("MainMenu");
   }
 

@@ -157,6 +157,7 @@ public class GameplayManager : Singleton<GameplayManager>, IPowerUpEvents
       case GameState.PLAYER_DIED:
         {
           dyingInProgress = false;
+          GameplayManager.Instance.currentGameState = GameplayManager.GameState.WAITING_FOR_PLAYERDIED_BUTTONS;
           //playerShipObject.SetActive(false);
           //PauseGame();
           break;
