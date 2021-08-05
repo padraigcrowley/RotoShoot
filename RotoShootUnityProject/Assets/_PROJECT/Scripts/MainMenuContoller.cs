@@ -7,7 +7,7 @@ using BeautifulTransitions.Scripts.Transitions;
 using BeautifulTransitions.Scripts.Transitions.TransitionSteps;
 using TMPro;
 
-public class MainMenuContoller : MonoBehaviour
+public class MainMenuContoller : ExtendedBehaviour
 {
   public GameObject MainMenuButtonTransitions;
   public GameObject PlayButtonTransitions;
@@ -40,7 +40,11 @@ public class MainMenuContoller : MonoBehaviour
     TransitionHelper.TransitionOut(MainMenuButtonTransitions);
     selectedLevelText.text = "LEVEL " + GameController.Instance.currentLevelPlaying.ToString();
     SetCorrectPrevNextLevelAlphaButtons();
+    
+    Wait(.6f, () => {
+      
     LevelSelectButtonsPanel.SetActive(true);
+    });
   }
   public void HandleMainMenuSettingsButtonPress()
   {
