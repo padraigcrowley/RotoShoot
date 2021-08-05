@@ -203,7 +203,7 @@ public class UIManager : Singleton<UIManager>
 
     TransitionHelper.TransitionOut(MainPauseMenuButtonTransitions);
 
-    //var transition = MainPauseMenuButtonTransitions.GetComponent<BeautifulTransitions.Scripts.Transitions.TransitionSteps.Move>();
+    ///var transition = XXX.GetComponent<Move>();
     //transition.AddOnCompleteAction(LoadMaiMenuCallback);
 
     SceneManager.LoadScene("MainMenu");
@@ -221,8 +221,8 @@ public class UIManager : Singleton<UIManager>
     //GameController.Instance.currentLevelPlaying = 0;
     TransitionHelper.TransitionOut(PlayerDiedPanel);
     
-    var transition = PlayerDiedPanel.GetComponent<Move>();
-    transition.AddOnCompleteAction(LoadMaiMenuCallback);
+    //exitMovetransition = PlayerDiedPanel.GetComponent<Move>();
+    //exitMovetransition.AddOnCompleteAction(LoadMaiMenuCallback);
 
     SceneManager.LoadScene("MainMenu");
 

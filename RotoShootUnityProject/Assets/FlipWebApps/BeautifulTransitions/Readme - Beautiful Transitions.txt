@@ -1,4 +1,4 @@
-Beautiful Transitions v5.1.2
+Beautiful Transitions v5.1.4
 
 Thank you for using Beautiful Transitions. 
 
@@ -22,8 +22,6 @@ QUICK START
 	   selecting the Beautiful Transitions option in the Game Framework Integrations Window (under the editor 
 	   Window Menu | Game Framework).
 
-NOTE: Unity 5.0 - 5.1 does not support the dropdown used in the ScreenCamera demo scene. The transitions work, but you will have to preview them manually.
-
 - - - - - - - - - -
 
 UPGRADE GUIDE
@@ -33,6 +31,14 @@ Please see the seperate Upgrade Guide for important information on upgrading fro
 - - - - - - - - - -
 
 CHANGE LOG
+
+v5.1.4
+	- Fixes for deprecation warnings in Unity 2019.3
+	- Minimum tested version bumped to 2018.4 (but will likely work with certain older versions)
+
+v5.1.3
+	Improvements
+	- Transitions: Added Wipe Transition
 
 v5.1.2
 	Improvements

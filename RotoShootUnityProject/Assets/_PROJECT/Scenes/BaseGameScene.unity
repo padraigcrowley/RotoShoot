@@ -7650,6 +7650,7 @@ MonoBehaviour:
   PauseButtonFGImage: {fileID: 486308536}
   lccTextAnimatorPlayer: {fileID: 1901585822}
   levelCompleteTextAnimatorPlayer: {fileID: 399288999}
+  XXX: {fileID: 334257921}
   MainPauseMenuButtonTransitions: {fileID: 334257921}
   TopInGameHUDTransitions: {fileID: 327111993}
   LevelCompletePanelTransitions: {fileID: 615974328}

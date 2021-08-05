@@ -13,6 +13,9 @@ public class MainMenuContoller : MonoBehaviour
   public GameObject PlayButtonTransitions;
   public GameObject LogoImageTransitions;
   public GameObject logoGameObject;
+  public GameObject MainMenuSettingsPanel;
+  public GameObject LevelSelectButtonsPanel;
+
 
   public Image prevLevelButtonImage;
   public Image nextLevelButtonImage;
@@ -37,9 +40,18 @@ public class MainMenuContoller : MonoBehaviour
     TransitionHelper.TransitionOut(MainMenuButtonTransitions);
     selectedLevelText.text = "LEVEL " + GameController.Instance.currentLevelPlaying.ToString();
     SetCorrectPrevNextLevelAlphaButtons();
+    LevelSelectButtonsPanel.SetActive(true);
+  }
+  public void HandleMainMenuSettingsButtonPress()
+  {
+    
+    DoLogoTransitionOut();
+    TransitionHelper.TransitionOut(MainMenuButtonTransitions);
+    TransitionHelper.TransitionIn(MainMenuSettingsPanel);
+
   }
 
-  void SetCorrectPrevNextLevelAlphaButtons()
+    void SetCorrectPrevNextLevelAlphaButtons()
 	{
     if (GameController.Instance.currentLevelPlaying == 1)
     {
