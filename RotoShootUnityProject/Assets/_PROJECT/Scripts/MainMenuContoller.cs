@@ -22,7 +22,9 @@ public class MainMenuContoller : ExtendedBehaviour
   public Image logoImage;
   private Material logoImageMaterial;
   public TMP_Text selectedLevelText;
-  private Move logoTransitionOut;
+  [SerializeField]
+  private Move logoMoveTransitionOut;
+  private Move logoMoveTransitionIn;
 
   void Start()
   {
@@ -33,7 +35,9 @@ public class MainMenuContoller : ExtendedBehaviour
 		TransitionHelper.TransitionIn(LogoImageTransitions);
     logoImageMaterial = logoImage.material;
 
-    logoTransitionOut = new Move(logoGameObject, startPosition: logoGameObject.transform.localPosition, endPosition: new Vector3(0, 1620, 0), duration: .6f, delay: 0f, tweenType: TransitionHelper.TweenType.easeInBack, coordinateSpace: BeautifulTransitions.Scripts.Transitions.TransitionSteps.AbstractClasses.TransitionStep.CoordinateSpaceType.AnchoredPosition);
+    logoMoveTransitionOut = new Move(logoGameObject, startPosition: logoGameObject.transform.localPosition, endPosition: new Vector3(0, 1620, 0), duration: .3f, delay: 0f, tweenType: TransitionHelper.TweenType.easeInBack, coordinateSpace: BeautifulTransitions.Scripts.Transitions.TransitionSteps.AbstractClasses.TransitionStep.CoordinateSpaceType.AnchoredPosition);
+    
+      logoMoveTransitionIn = new Move(logoGameObject, startPosition: new Vector3(0, 1620, 0), endPosition: new Vector3(0, 281, 0), duration: .3f, delay: 0f, tweenType: TransitionHelper.TweenType.spring, coordinateSpace: BeautifulTransitions.Scripts.Transitions.TransitionSteps.AbstractClasses.TransitionStep.CoordinateSpaceType.AnchoredPosition);
   }
   public void MainMenuStartButtonTransitionOut()
   {
@@ -49,7 +53,7 @@ public class MainMenuContoller : ExtendedBehaviour
   public void HandleMainMenuSettingsButtonPress()
   {
     
-    DoLogoTransitionOut();
+    DoLogoMoveTransitionOut();
     TransitionHelper.TransitionOut(MainMenuButtonTransitions);
     TransitionHelper.TransitionIn(MainMenuSettingsPanel);
 
@@ -91,20 +95,26 @@ public class MainMenuContoller : ExtendedBehaviour
     ImageButton.color = tempColor;
   }
 
-  public void DoLogoTransitionOut()
+  public void DoLogoMoveTransitionOut()
   {
     
-    logoTransitionOut.Start();
+    logoMoveTransitionOut.Start();
+  }
+
+  public void DoLogoMoveTransitionIn()
+  {
+
+    logoMoveTransitionIn.Start();
   }
 
   public void MainMenuPlayButtonTransitionOut()
   {
-    DoLogoTransitionOut();
+    DoLogoMoveTransitionOut();
     TransitionHelper.TransitionOut(PlayButtonTransitions);
   }
   public void MainMenuUpgradesButtonTransitionOut()
   {
-    DoLogoTransitionOut();
+    DoLogoMoveTransitionOut();
     TransitionHelper.TransitionOut(MainMenuButtonTransitions);
   }
 
