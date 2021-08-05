@@ -4,6 +4,7 @@ using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 using System.Collections;
 using BeautifulTransitions.Scripts.Transitions;
+using BeautifulTransitions.Scripts.Transitions.TransitionSteps;
 public class UIManager : Singleton<UIManager>
 {
   public TextMeshProUGUI HighPlayerScoreText, CurrentPlayerScoreText, CurrentEnemyKillCount, RequiredEnemyKillCount, levelPlayTimeCounterText, starCoinCountText, MissionStartLCCText;
@@ -192,11 +193,45 @@ public class UIManager : Singleton<UIManager>
     //GameplayManager.Instance.ResumeGame();
   }
 
-  public void handleGameExitButtonPress()
+  public void handlePauseMenuGameExitButtonPress() 
   {
-    GameController.Instance.currentLevelPlaying = 0;
-    TransitionHelper.TransitionOut(PlayerDiedPanel);
+    //GameController.Instance.currentLevelPlaying = 0;
+    if (GameplayManager.Instance.isGamePaused)
+    {
+      GameplayManager.Instance.UnpauseGame();
+    }
+
+    TransitionHelper.TransitionOut(MainPauseMenuButtonTransitions);
+
+    //var transition = MainPauseMenuButtonTransitions.GetComponent<BeautifulTransitions.Scripts.Transitions.TransitionSteps.Move>();
+    //transition.AddOnCompleteAction(LoadMaiMenuCallback);
+
     SceneManager.LoadScene("MainMenu");
+
+
   }
 
+  public void handlePlayerDiedMenuGameExitButtonPress() 
+  {
+    if (GameplayManager.Instance.isGamePaused)
+    {
+      GameplayManager.Instance.UnpauseGame();
+    }
+
+    //GameController.Instance.currentLevelPlaying = 0;
+    TransitionHelper.TransitionOut(PlayerDiedPanel);
+    
+    var transition = PlayerDiedPanel.GetComponent<Move>();
+    transition.AddOnCompleteAction(LoadMaiMenuCallback);
+
+    SceneManager.LoadScene("MainMenu");
+
+  }
+
+  void LoadMaiMenuCallback(object parameter)
+  {
+    SceneManager.LoadScene("MainMenu");
+    //Debug.Log("Complete with parameter: " + parameter);
+  }
+ 
 }

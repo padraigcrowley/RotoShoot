@@ -18,7 +18,7 @@ public class LevelManager : Singleton<LevelManager>
   public float verticalDistBetweenEnemies = 2.0f; //todo: magic number
   public float horizontalDistBetweenEnemies = 2.0f; //todo: magic number
   public bool readyToFireAtPlayer = false;
-
+  public Camera BaseGameSceneCamera; // see InitialiseLevel()
 
   // a list of lists of EnemyBehaviour02 scripts - for each enemy in each wave
   List<List<EnemyBehaviour02>> enemyWavesParentBehaviourScripts = new List<List<EnemyBehaviour02>>();
@@ -57,7 +57,15 @@ public class LevelManager : Singleton<LevelManager>
 
     enemyWavesParentBehaviourScripts.Clear();
 
-    levelSetupData = levelSetupDataArray[GameController.Instance.currentLevelPlaying - 1]; // get the relevant scriptable object setup file from the array.
+    if (GameController.Instance != null) //if testing the game by running it from BaseGameScene (rather than going through Boot/MainMenu, we need to hard code a safe fallback level to load. Also, need to enable BaseGameScene camera
+    {
+      levelSetupData = levelSetupDataArray[GameController.Instance.currentLevelPlaying - 1]; // get the relevant scriptable object setup file from the array.
+    }
+    else
+		{
+      levelSetupData = levelSetupDataArray[0];
+      BaseGameSceneCamera.enabled = true;
+    }
 
     GameplayManager.Instance.playerShipPos = levelSetupData.PlayerShipPos;
     GameplayManager.Instance.levelControlType = levelSetupData.levelControlType;

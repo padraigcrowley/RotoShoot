@@ -165,8 +165,11 @@ public abstract class EnemyBehaviour02 : ExtendedBehaviour
         case EnemyState.WAITING_TO_RESPAWN:
           {
             enemyCapsuleCollider.enabled = false;
-            enemySpriteRenderer.enabled = false;
-            if ((waveRespawnWaitOver) && (burnFadeEffectComplete == true))
+            if (burnFadeEffectComplete == true)
+              enemySpriteRenderer.enabled = false;
+            else
+              break;
+            if ((waveRespawnWaitOver))// && (burnFadeEffectComplete == true))
             //if (waveRespawnWaitOver)
             {
               //if (timeBetweenSpawnPassed)

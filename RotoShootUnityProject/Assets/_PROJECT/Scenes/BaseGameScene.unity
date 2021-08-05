@@ -641,7 +641,7 @@ Transform:
   m_LocalScale: {x: 0.12330927, y: 0.6518784, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 16
+  m_RootOrder: 17
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: -90}
 --- !u!1 &143183874
 GameObject:
@@ -911,7 +911,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 6
+  m_RootOrder: 7
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &191098410
 GameObject:
@@ -1205,7 +1205,7 @@ Transform:
   m_LocalScale: {x: 0.29909664, y: 0.29909664, z: 0.29909664}
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 26
+  m_RootOrder: 27
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &231095648
 GameObject:
@@ -1285,6 +1285,7 @@ MonoBehaviour:
   verticalDistBetweenEnemies: 2
   horizontalDistBetweenEnemies: 2
   readyToFireAtPlayer: 0
+  BaseGameSceneCamera: {fileID: 1671541794}
   enemyMissilesParentPool: {fileID: 0}
   bossMissilesParentPool: {fileID: 0}
   timeBetweenAsteroidShower: 0
@@ -1304,7 +1305,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 27
+  m_RootOrder: 4
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &260400408
 GameObject:
@@ -1521,7 +1522,7 @@ Transform:
   m_LocalScale: {x: 0.18889184, y: 0.18889184, z: 0.18889184}
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 15
+  m_RootOrder: 16
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &322237993
 GameObject:
@@ -1963,7 +1964,19 @@ MonoBehaviour:
         m_Calls: []
     OnTransitionComplete:
       m_PersistentCalls:
-        m_Calls: []
+        m_Calls:
+        - m_Target: {fileID: 1397508539}
+          m_TargetAssemblyTypeName: UIManager, Assembly-CSharp
+          m_MethodName: handleGameExitButtonPress
+          m_Mode: 1
+          m_Arguments:
+            m_ObjectArgument: {fileID: 0}
+            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+            m_IntArgument: 0
+            m_FloatArgument: 0
+            m_StringArgument: 
+            m_BoolArgument: 0
+          m_CallState: 2
   Target: {fileID: 0}
   MoveMode: 2
   InConfig:
@@ -2501,7 +2514,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 5
+  m_RootOrder: 6
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &431058554
 GameObject:
@@ -2925,7 +2938,7 @@ Transform:
   m_LocalScale: {x: 0.25023097, y: 0.39590007, z: 1.0484551}
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 17
+  m_RootOrder: 18
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 90}
 --- !u!1 &544381953
 GameObject:
@@ -3044,7 +3057,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 13
+  m_RootOrder: 14
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &561706199
 GameObject:
@@ -3131,12 +3144,12 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 1397508539}
         m_TargetAssemblyTypeName: UIManager, Assembly-CSharp
-        m_MethodName: handleGameExitButtonPress
+        m_MethodName: handlePlayerDiedMenuGameExitButtonPress
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 1
+          m_IntArgument: 0
           m_FloatArgument: 0
           m_StringArgument: 
           m_BoolArgument: 0
@@ -3435,7 +3448,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 0}
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 8
+  m_RootOrder: 9
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &615974328
 GameObject:
@@ -3854,7 +3867,7 @@ Transform:
   m_LocalScale: {x: 0.19831939, y: 0.19831939, z: 0.19831939}
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 23
+  m_RootOrder: 24
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &690413703
 GameObject:
@@ -3937,7 +3950,7 @@ Transform:
   m_LocalScale: {x: 0.20305888, y: 0.20305888, z: 0.20305888}
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 19
+  m_RootOrder: 20
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &703163057
 GameObject:
@@ -4197,7 +4210,7 @@ PrefabInstance:
     - target: {fileID: 5003807364923150143, guid: 1caa033e3f7a75b4f93bebf2fa5f752c,
         type: 3}
       propertyPath: m_RootOrder
-      value: 10
+      value: 11
       objectReference: {fileID: 0}
     - target: {fileID: 5003807364923150143, guid: 1caa033e3f7a75b4f93bebf2fa5f752c,
         type: 3}
@@ -4967,7 +4980,7 @@ Transform:
   m_LocalScale: {x: 0.24446595, y: 0.24446595, z: 0.24446595}
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 24
+  m_RootOrder: 25
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &943332581
 GameObject:
@@ -5073,7 +5086,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 22451668, guid: 0abab5bb77339e4428787a870eb31bd3, type: 3}
       propertyPath: m_RootOrder
-      value: 12
+      value: 13
       objectReference: {fileID: 0}
     - target: {fileID: 22451668, guid: 0abab5bb77339e4428787a870eb31bd3, type: 3}
       propertyPath: m_AnchorMax.x
@@ -5498,7 +5511,7 @@ Transform:
   m_LocalScale: {x: 0.25753763, y: 0.25753763, z: 0.25753763}
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 22
+  m_RootOrder: 23
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1016490783
 GameObject:
@@ -5771,7 +5784,7 @@ Transform:
   - {fileID: 703163058}
   - {fileID: 1177337288}
   m_Father: {fileID: 0}
-  m_RootOrder: 7
+  m_RootOrder: 8
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &1061970255
 MonoBehaviour:
@@ -6674,7 +6687,7 @@ Transform:
   m_LocalScale: {x: 0.3408143, y: 0.3408143, z: 0.3408143}
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 21
+  m_RootOrder: 22
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1162617850
 GameObject:
@@ -6811,7 +6824,19 @@ MonoBehaviour:
         m_Calls: []
     OnTransitionComplete:
       m_PersistentCalls:
-        m_Calls: []
+        m_Calls:
+        - m_Target: {fileID: 1397508539}
+          m_TargetAssemblyTypeName: UIManager, Assembly-CSharp
+          m_MethodName: handleGameExitButtonPress
+          m_Mode: 1
+          m_Arguments:
+            m_ObjectArgument: {fileID: 0}
+            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+            m_IntArgument: 0
+            m_FloatArgument: 0
+            m_StringArgument: 
+            m_BoolArgument: 0
+          m_CallState: 2
   TransitionOutConfig:
     AutoRun: 0
     TransitionChildren: 0
@@ -6936,7 +6961,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 9
+  m_RootOrder: 10
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &1170804131
 MonoBehaviour:
@@ -7192,7 +7217,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 14
+  m_RootOrder: 15
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1261254255
 GameObject:
@@ -7450,14 +7475,14 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 0}
-        m_TargetAssemblyTypeName: MainMenuContoller, Assembly-CSharp
-        m_MethodName: MainMenuStartButtonTransitionOut
+      - m_Target: {fileID: 1397508539}
+        m_TargetAssemblyTypeName: UIManager, Assembly-CSharp
+        m_MethodName: handlePauseMenuGameExitButtonPress
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 1
+          m_IntArgument: 0
           m_FloatArgument: 0
           m_StringArgument: 
           m_BoolArgument: 0
@@ -8703,7 +8728,7 @@ Transform:
   m_LocalScale: {x: 0.3311538, y: 0.3311538, z: 0.3311538}
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 20
+  m_RootOrder: 21
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1609688934
 GameObject:
@@ -8799,7 +8824,7 @@ MonoBehaviour:
       defaults:
         sizeDuration: 1
         sizeAmplitude: 10
-        fadeDuration: 2
+        fadeDuration: 1
         verticalExpandDuration: 0.3
         verticalFromBottom: 0
         horizontalExpandDuration: 0.3
@@ -9613,7 +9638,7 @@ Transform:
   m_LocalScale: {x: 0.31161883, y: 0.31161883, z: 0.31161883}
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 25
+  m_RootOrder: 26
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1790404726
 GameObject:
@@ -10825,7 +10850,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 4
+  m_RootOrder: 5
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &2099002078
 GameObject:
@@ -10938,7 +10963,7 @@ Transform:
   m_LocalScale: {x: 0.23681492, y: 0.23681492, z: 0.23681492}
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 18
+  m_RootOrder: 19
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!4 &1335106118655504890
 Transform:
@@ -11107,7 +11132,7 @@ Transform:
   - {fileID: 3122228305296451629}
   - {fileID: 6536516314229131363}
   m_Father: {fileID: 0}
-  m_RootOrder: 11
+  m_RootOrder: 12
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &5635434465431446354
 MonoBehaviour:
