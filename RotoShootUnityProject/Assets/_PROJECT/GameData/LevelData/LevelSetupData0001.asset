@@ -59,11 +59,11 @@ MonoBehaviour:
     numBurstFiresBeforePause: 2
     waypointPath: {fileID: 6067551397367185325, guid: e459773c5f4515341b709336466a6969,
       type: 3}
-  PlayerShipPos: {x: -1.28, y: -7, z: 0}
+  PlayerShipPos: {x: -1.28, y: -5, z: 0}
   shipLanes:
-  - {x: -3.85, y: -7}
-  - {x: -1.29, y: -7}
-  - {x: 1.29, y: -7}
-  - {x: 3.84, y: -7}
+  - {x: -3.85, y: -5}
+  - {x: -1.29, y: -5}
+  - {x: 1.29, y: -5}
+  - {x: 3.84, y: -5}
   timeBetweenAsteroidShower: 10000
   levelControlType: 2

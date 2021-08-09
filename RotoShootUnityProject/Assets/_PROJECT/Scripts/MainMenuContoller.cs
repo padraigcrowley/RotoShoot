@@ -59,6 +59,14 @@ public class MainMenuContoller : ExtendedBehaviour
 
   }
 
+  public void HandleLevelSelectorBackButtonPress()
+	{
+    TransitionHelper.TransitionOut(LevelSelectButtonsPanel);
+    Wait(.3f, () => {
+       TransitionHelper.TransitionIn(MainMenuButtonTransitions);
+    });
+  }
+
     void SetCorrectPrevNextLevelAlphaButtons()
 	{
     if (GameController.Instance.currentLevelPlaying == 1)

@@ -945,7 +945,7 @@ MonoBehaviour:
   playerShipRotating: 0
   currentPlayerScore: 1570
   highPlayerScore: 0
-  currentPlayerHP: 99973
+  currentPlayerHP: 0
   screenEdgeX: 0
   screenEdgeY: 0
   screenCollisionBoundaryX: 0
@@ -7650,7 +7650,6 @@ MonoBehaviour:
   PauseButtonFGImage: {fileID: 486308536}
   lccTextAnimatorPlayer: {fileID: 1901585822}
   levelCompleteTextAnimatorPlayer: {fileID: 399288999}
-  XXX: {fileID: 334257921}
   MainPauseMenuButtonTransitions: {fileID: 334257921}
   TopInGameHUDTransitions: {fileID: 327111993}
   LevelCompletePanelTransitions: {fileID: 615974328}
@@ -7712,6 +7711,10 @@ PrefabInstance:
       value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 11404630, guid: 0128a364868e98f40b3f3c9f7b70a8c3, type: 3}
+      propertyPath: UltimateStatusList.Array.data[0].smoothFillSpeed
+      value: 0.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 11404630, guid: 0128a364868e98f40b3f3c9f7b70a8c3, type: 3}
       propertyPath: UltimateStatusList.Array.data[0].statusGradient.ctime0
       value: 8867
       objectReference: {fileID: 0}
@@ -7765,19 +7768,19 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 11425960, guid: 0128a364868e98f40b3f3c9f7b70a8c3, type: 3}
       propertyPath: m_Color.b
-      value: 0.0013283644
+      value: 0.003915994
       objectReference: {fileID: 0}
     - target: {fileID: 11425960, guid: 0128a364868e98f40b3f3c9f7b70a8c3, type: 3}
       propertyPath: m_Color.g
-      value: 0.4467286
+      value: 0.003915994
       objectReference: {fileID: 0}
     - target: {fileID: 11425960, guid: 0128a364868e98f40b3f3c9f7b70a8c3, type: 3}
       propertyPath: m_Color.r
-      value: 0.8055147
+      value: 0.8301887
       objectReference: {fileID: 0}
     - target: {fileID: 11425960, guid: 0128a364868e98f40b3f3c9f7b70a8c3, type: 3}
       propertyPath: m_FillAmount
-      value: 0.407
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 22416816, guid: 0128a364868e98f40b3f3c9f7b70a8c3, type: 3}
       propertyPath: m_Pivot.x
