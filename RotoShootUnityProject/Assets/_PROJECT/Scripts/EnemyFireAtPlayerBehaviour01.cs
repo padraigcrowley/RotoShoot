@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using DG.Tweening;
 
 public class EnemyFireAtPlayerBehaviour01 : MonoBehaviour
 {
@@ -8,6 +9,7 @@ public class EnemyFireAtPlayerBehaviour01 : MonoBehaviour
   private EnemyBehaviour02 eb;
   private Quaternion rotation;
   private GameObject enemyMissilesParentPool;
+  Renderer enemySpriteMaterial;
 
   void Start()
   {
@@ -17,6 +19,8 @@ public class EnemyFireAtPlayerBehaviour01 : MonoBehaviour
       Debug.LogWarning("enemyMissilesParentPoolObject not found!");
     //enemyMissilesParentPool = new GameObject("enemyMissilesParentPoolObject");
     //InvokeRepeating(nameof(this.FireMissileAtPlayerPos), 3, 5);
+    enemySpriteMaterial = eb.gameObject.GetComponent<Renderer>();
+    
   }
 
   // Update is called once per frame
@@ -27,11 +31,20 @@ public class EnemyFireAtPlayerBehaviour01 : MonoBehaviour
     {
       //print($"{this.gameObject.name}: calling FireMissileAtPlayerPos()");
       FireMissileAtPlayerPos();
+      TempHueSaturationBoost();
       LevelManager.Instance.readyToFireAtPlayer = false;
       LevelManager.Instance.currentTimeBetweenFiringAtPlayer = LevelManager.Instance.TIME_BETWEEN_FIRING_AT_PLAYER;//todo: magic number
     }
   } 
 
+  private void TempHueSaturationBoost()
+	{
+    float duration = .1f;
+    float finishHueSatBoostValue = 2.0f;
+    //enemySpriteMaterial.material.SetFloat("_HsvBright", currHueSatBoostValue);
+    enemySpriteMaterial.material.DOFloat(finishHueSatBoostValue, "_HsvBright", duration).SetEase(Ease.OutQuart).SetLoops(2, LoopType.Yoyo);
+    enemySpriteMaterial.material.DOFloat(finishHueSatBoostValue, "_HsvSaturation", duration).SetEase(Ease.OutQuart).SetLoops(2, LoopType.Yoyo);
+  }
   private void FireMissileAtPlayerPos()
   {
     GameObject firedBullet;

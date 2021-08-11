@@ -38,9 +38,9 @@ public class Enemy02_0002 : EnemyBehaviour02
     startedOnPath = false;
   }
 
-  public override void ReactToNonLethalPlayerMissileHit()
-  {
-    transform.localScale *= 1.2f; // scale slightly up to show they've been shot
-  }
+  //public override void ReactToNonLethalPlayerMissileHit()
+  //{
+  //  transform.localScale *= 1.2f; // scale slightly up to show they've been shot
+  //}
 
 }

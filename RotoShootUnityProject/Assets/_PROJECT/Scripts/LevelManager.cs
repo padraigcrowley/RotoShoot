@@ -144,10 +144,13 @@ public class LevelManager : Singleton<LevelManager>
         
       }
 
+      int waveEnemyHueValue = Random.Range(1, 360);
+
       for (int i = 0; i < sp.numEnemiesInWave; i++)
       {
         Vector3 startingPosition = new Vector3(sp.startPos.x + (i * horizontalDistBetweenEnemies), sp.startPos.y + (i * verticalDistBetweenEnemies));
         GameObject enemy = Instantiate(sp.enemyPrefab, startingPosition, Quaternion.identity, waveParentObject.transform);
+        SetEnemyColour(enemy, waveEnemyHueValue);
         enemy.name = "Wave" + index + " Enemy" + i;
         EnemyBehaviour02 enemyScript = enemy.GetComponent<EnemyBehaviour02>();
         enemyWavesChildrenBehaviourScripts.Add(enemyScript);// add each of the enemies in the wave's behaviour scripts to a list
@@ -168,6 +171,12 @@ public class LevelManager : Singleton<LevelManager>
       enemyWavesParentBehaviourScripts.Add(enemyWavesChildrenBehaviourScripts);
       index++;
     }
+  }
+
+  void SetEnemyColour(GameObject enemy, float hueShaderValue)
+  {
+    Renderer spriteMaterial = enemy.GetComponent<Renderer>();
+    spriteMaterial.material.SetFloat("_HsvShift", hueShaderValue);
   }
 
   void SetupBoss()

@@ -48,10 +48,20 @@ public abstract class EnemyBehaviour02 : ExtendedBehaviour
   public SWS.PathManager waypointPath;
   protected splineMove splineMoveScript;
 
- // virtual public float GetRespawnWaitDelay() => respawnWaitDelay;
+  // virtual public float GetRespawnWaitDelay() => respawnWaitDelay;
 
-  public abstract void ReactToNonLethalPlayerMissileHit(); //each enemy variant has to implement their own
-
+  public virtual void ReactToNonLethalPlayerMissileHit()
+  {
+    TempHueSaturationBoost();
+  }
+  private void TempHueSaturationBoost()
+  {
+    float duration = .05f;
+    float finishHueSatBoostValue = 2.0f;
+    //enemySpriteMaterial.material.SetFloat("_HsvBright", currHueSatBoostValue);
+    spriteMaterial.material.DOFloat(finishHueSatBoostValue, "_HsvBright", duration).SetEase(Ease.OutQuart).SetLoops(2, LoopType.Yoyo);
+    spriteMaterial.material.DOFloat(finishHueSatBoostValue, "_HsvSaturation", duration).SetEase(Ease.OutQuart).SetLoops(2, LoopType.Yoyo);
+  }
   public abstract void DoMovement();
 
   public abstract void StopMovement();

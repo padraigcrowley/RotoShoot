@@ -15,6 +15,7 @@ GameObject:
   - component: {fileID: 3734171053722212203}
   - component: {fileID: 4775959602291852232}
   - component: {fileID: 4397442334849402655}
+  - component: {fileID: 3647770417160654788}
   m_Layer: 0
   m_Name: Enemy02_0002
   m_TagString: Enemy01
@@ -56,7 +57,7 @@ SpriteRenderer:
   m_RenderingLayerMask: 4294967295
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: c1c59934f773e0545a0b2be5b528fe9b, type: 2}
+  - {fileID: 2100000, guid: a75d2be5203fc4a43abf523bf62329ba, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -77,7 +78,7 @@ SpriteRenderer:
   m_SortingLayerID: -1079083179
   m_SortingLayer: 1
   m_SortingOrder: 1
-  m_Sprite: {fileID: 21300000, guid: 671b275056161184d86ecabfcc822f7a, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 201da8bd83cb6df43b5967ee3cf30ea1, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -207,3 +208,15 @@ CapsuleCollider:
   m_Height: 1.0200002
   m_Direction: 1
   m_Center: {x: 0, y: 0, z: 0}
+--- !u!114 &3647770417160654788
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4342350733379744943}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ee158225ee1e59f4791627785501d950, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
