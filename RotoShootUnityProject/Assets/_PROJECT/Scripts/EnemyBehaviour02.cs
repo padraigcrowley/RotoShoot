@@ -47,20 +47,23 @@ public abstract class EnemyBehaviour02 : ExtendedBehaviour
 
   public SWS.PathManager waypointPath;
   protected splineMove splineMoveScript;
+  private Tween tw1, tw2;
 
   // virtual public float GetRespawnWaitDelay() => respawnWaitDelay;
 
   public virtual void ReactToNonLethalPlayerMissileHit()
   {
-    TempHueSaturationBoost();
+    if ((tw1 != null) && (tw2 != null))
+      if ((!tw1.IsPlaying()) && (!tw2.IsPlaying()))
+        TempHueSaturationBoost();
   }
   private void TempHueSaturationBoost()
   {
     float duration = .05f;
     float finishHueSatBoostValue = 2.0f;
     //enemySpriteMaterial.material.SetFloat("_HsvBright", currHueSatBoostValue);
-    spriteMaterial.material.DOFloat(finishHueSatBoostValue, "_HsvBright", duration).SetEase(Ease.OutQuart).SetLoops(2, LoopType.Yoyo);
-    spriteMaterial.material.DOFloat(finishHueSatBoostValue, "_HsvSaturation", duration).SetEase(Ease.OutQuart).SetLoops(2, LoopType.Yoyo);
+    tw1 = spriteMaterial.material.DOFloat(finishHueSatBoostValue, "_HsvBright", duration).SetEase(Ease.OutQuart).SetLoops(2, LoopType.Yoyo);
+    tw2 = spriteMaterial.material.DOFloat(finishHueSatBoostValue, "_HsvSaturation", duration).SetEase(Ease.OutQuart).SetLoops(2, LoopType.Yoyo);
   }
   public abstract void DoMovement();
 
