@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: LevelSetupData0002
   m_EditorClassIdentifier: 
   levelNumber: 2
-  lccEnemyKills: 40
+  lccEnemyKills: 100
   lccSurviveTime: 4
   lccKillBoss: 0
   numMaxActiveWaves: 2
@@ -25,11 +25,11 @@ MonoBehaviour:
     startPos: {x: -3.8, y: 10}
     verticalDistBetweenEnemies: 1
     horizontalDistBetweenEnemies: 2.55
-    speedMultiplier: 5
+    speedMultiplier: 8
     hpMultiplier: 1
     waypointPath: {fileID: 4639713800137293240, guid: 799b3fa60793490498aaecc6ce7d6c42,
       type: 3}
-    numEnemiesInWave: 1
+    numEnemiesInWave: 4
     timeBetweenSpawn: 0.5
   - enemyPrefab: {fileID: 4342350733379744943, guid: 3bf3914ccf51ea64aa01feaa452f98f3,
       type: 3}

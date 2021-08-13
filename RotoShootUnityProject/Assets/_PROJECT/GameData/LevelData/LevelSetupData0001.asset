@@ -25,8 +25,8 @@ MonoBehaviour:
     startPos: {x: 0, y: 12}
     verticalDistBetweenEnemies: 0
     horizontalDistBetweenEnemies: 0
-    speedMultiplier: 4
-    hpMultiplier: 2
+    speedMultiplier: 8
+    hpMultiplier: 1
     waypointPath: {fileID: 3729171643158534044, guid: 0a2edb2ef98efcd498404c946bb49839,
       type: 3}
     numEnemiesInWave: 8
@@ -36,23 +36,23 @@ MonoBehaviour:
     startPos: {x: 1.29, y: 12}
     verticalDistBetweenEnemies: 0
     horizontalDistBetweenEnemies: 0
-    speedMultiplier: 4
-    hpMultiplier: 3
+    speedMultiplier: 8
+    hpMultiplier: 1
     waypointPath: {fileID: 3729171643158534044, guid: 58d94f7cde43bef4eae61740a75fa166,
       type: 3}
     numEnemiesInWave: 8
-    timeBetweenSpawn: 1
+    timeBetweenSpawn: 0.5
   - enemyPrefab: {fileID: 4342350733379744943, guid: 3bf3914ccf51ea64aa01feaa452f98f3,
       type: 3}
     startPos: {x: 1.29, y: 12}
     verticalDistBetweenEnemies: 0
     horizontalDistBetweenEnemies: 0
-    speedMultiplier: 8
-    hpMultiplier: 4
+    speedMultiplier: 4
+    hpMultiplier: 1
     waypointPath: {fileID: 3729171643158534044, guid: aadd2b92c1cf17e46bd22b1e24368141,
       type: 3}
     numEnemiesInWave: 8
-    timeBetweenSpawn: 0.2
+    timeBetweenSpawn: 0.5
   bossSpawnPointData:
     bossPrefab: {fileID: 0}
     startPos: {x: 0, y: 0}
@@ -60,7 +60,7 @@ MonoBehaviour:
     hpMultiplier: 0
     waypointPath: {fileID: 0}
   spinningMineSpawnPointData:
-    levelHasSpinningMine: 1
+    levelHasSpinningMine: 0
     spinningMinePrefab: {fileID: 2411896081061765972, guid: 41a1b7e89cfaebb4e9e25449413c44bd,
       type: 3}
     speedMultiplier: 1
