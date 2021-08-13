@@ -47,19 +47,38 @@ public abstract class EnemyBehaviour02 : ExtendedBehaviour
 
   public SWS.PathManager waypointPath;
   protected splineMove splineMoveScript;
-  private Tween tw1, tw2;
+  private Tween tw1, tw2, tw3;
+  bool previouslyDidAHitEffectTween = false;
 
   // virtual public float GetRespawnWaitDelay() => respawnWaitDelay;
 
-  public virtual void ReactToNonLethalPlayerMissileHit()
+  public virtual void ReactToPlayerMissileHit()
   {
-    if ((tw1 != null) && (tw2 != null))
-      if ((!tw1.IsPlaying()) && (!tw2.IsPlaying()))
-        TempHueSaturationBoost();
+    if (previouslyDidAHitEffectTween)
+    {
+      if (!tw3.IsPlaying())
+        DoHitEffect();
+    }
+		else
+		{
+      DoHitEffect();
+      previouslyDidAHitEffectTween = true;
+    }
+
+
   }
-  private void TempHueSaturationBoost()
+  private void DoHitEffect()
   {
     float duration = .05f;
+    float hitEffectBlendValue = 1f;
+    //enemySpriteMaterial.material.SetFloat("_HsvBright", currHueSatBoostValue);
+    tw3 = spriteMaterial.material.DOFloat(hitEffectBlendValue, "_HitEffectBlend", duration).SetEase(Ease.OutQuart).SetLoops(2, LoopType.Yoyo);
+    
+  }
+  
+  private void TempHueSaturationBoost()
+  {
+    float duration = .1f;
     float finishHueSatBoostValue = 2.0f;
     //enemySpriteMaterial.material.SetFloat("_HsvBright", currHueSatBoostValue);
     tw1 = spriteMaterial.material.DOFloat(finishHueSatBoostValue, "_HsvBright", duration).SetEase(Ease.OutQuart).SetLoops(2, LoopType.Yoyo);
@@ -156,6 +175,7 @@ public abstract class EnemyBehaviour02 : ExtendedBehaviour
           {
             //Destroy(missileObject);//destroy the missile object - should the missileObject itself be doing this or at least pass a message back to it?
             //missileObject.SetActive(false);
+            ReactToPlayerMissileHit();
             HandleDamage();
 
             break;
@@ -247,7 +267,7 @@ public abstract class EnemyBehaviour02 : ExtendedBehaviour
     else //non-lethal hit
     {
       hp--;
-      ReactToNonLethalPlayerMissileHit();
+      
       enemyState = EnemyState.ALIVE;
     }
   }

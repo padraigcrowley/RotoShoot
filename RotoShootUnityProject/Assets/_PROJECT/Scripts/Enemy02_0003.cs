@@ -62,7 +62,7 @@ public class Enemy02_0003 : EnemyBehaviour02
         break;
     }
   }
-  public override void ReactToNonLethalPlayerMissileHit()
+  public override void ReactToPlayerMissileHit()
   {
     StartCoroutine(DoHitEffect());
     //transform.localScale *= 1.2f; // scale slightly up to show they've been shot
