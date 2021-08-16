@@ -43,7 +43,7 @@ public class Boundary3D : MonoBehaviour
       barrier.size = new Vector3(Mathf.Abs(topLeft.x) + Mathf.Abs(topRight.x) + overhang, boundaryWidth, zDepth);
       //barrier.size = 
       //barrier.offset = new Vector2(0, boundaryWidth / 2);
-      barrier.center = new Vector3(barrier.center.x, barrier.center.y + 1.0f, barrier.center.z);
+      barrier.center = new Vector3(barrier.center.x, barrier.center.y , barrier.center.z);
       transform.position = Camera.main.ScreenToWorldPoint(new Vector3(Camera.main.pixelWidth / 2, Camera.main.pixelHeight, 1));
       
       //the line bafore this leaves the Z position in the worng place, fixing this in the next line.
