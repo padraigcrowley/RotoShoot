@@ -10,6 +10,7 @@ public class SpinningMineBehaviour : ExtendedBehaviour
   enum EnemyState { DOING_NOTHING, WAITING_TO_SPAWN, SPAWNING, SPINNING_IN_STARTED, SPINNING_IN_IN_PROGRESS, SPINNING_IN_COMPLETED, FIRING, NOT_FIRING, SPINNING_OUT_STARTED, SPINNING_OUT_IN_PROGRESS, SPINNING_OUT_COMPLETED, DYING_TEMPORARILY, DEAD_TEMPORARILY, DYING_FULLY, DEAD_FULLY }
   EnemyState enemyState;
   private Renderer spriteMaterial, spriteRenderer;
+  public SpriteRenderer centreOrbSpriteRenderer;
   private float minX = -3.22f, maxX = 3.2f, minY = -2f, maxY = 8f; //(topleft: -3.22, 8.0) (bottomright: 3.2, -2.0)
   private float xDelta = 2f, yDelta = 2f;
   public SWS.PathManager waypointPath;
@@ -45,6 +46,9 @@ public class SpinningMineBehaviour : ExtendedBehaviour
 
     //Note that parent Transform ALSO gets returned from GetComponentsInChildren, so need to do the following LINQ weirdness (from one of the answers here: https://forum.unity.com/threads/getcomponentsinchildren-not-parent-and-children.222009/#post-2955910 )
     //ShootingPointTransforms.AddRange(GetComponentsInChildren<Transform>().Where(x => x != this.transform));
+
+    centreOrbSpriteRenderer.enabled = false;
+
   }
 
 
@@ -138,12 +142,15 @@ public class SpinningMineBehaviour : ExtendedBehaviour
     
     SpinningMineStatusBar.EnableStatusBar();
     UltimateStatusBar.UpdateStatus("SpinningMineStatusBar", spinningMineCurrentHealth, spinningMineMaxHealth);
+
+    centreOrbSpriteRenderer.enabled = true;
   }
 
   IEnumerator SpinOutEffect(float duration)
   {
     float elapsedTime = 0f;
     float currentTwistVal, currentBlurVal;
+    centreOrbSpriteRenderer.enabled = false;
     while (elapsedTime <= duration)
     {
       currentTwistVal = Mathf.Lerp(3.14f, 1f, (elapsedTime / duration));
@@ -163,7 +170,6 @@ public class SpinningMineBehaviour : ExtendedBehaviour
     {
       collider.enabled = false;
     }
-
   }
 
 
