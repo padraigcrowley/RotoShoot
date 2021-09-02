@@ -281,7 +281,11 @@ public abstract class EnemyBehaviour02 : ExtendedBehaviour
 
   private void TemporarilyDie()
   {
-    StopMovement();
+    Wait(.4f, () => {
+      //Debug.Log("5 seconds is lost forever");
+      StopMovement();
+    });
+
 
     if (enemyState == EnemyState.HIT_BY_PLAYER_SHIELD)
     { 
@@ -383,6 +387,11 @@ public abstract class EnemyBehaviour02 : ExtendedBehaviour
     }
   }
 
+  private void ResetPositionToTop()
+	{
+    transform.position = new Vector3(startPosX, startPosY, startPosZ);
+  }
+
   private void OnTriggerEnter(Collider collision)
   {
     if (GameplayManager.Instance.currentGameState == GameplayManager.GameState.LEVEL_IN_PROGRESS)
@@ -413,8 +422,8 @@ public abstract class EnemyBehaviour02 : ExtendedBehaviour
     {
       if ( (collision.gameObject.CompareTag("BoundaryBottom")))
       {
+        //ResetPositionToTop();
         enemyState = EnemyState.HIT_BY_ATMOSPHERE;
-        //DOTween.Kill(myTweenID);
       }
     }
   }
