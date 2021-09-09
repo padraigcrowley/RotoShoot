@@ -50,6 +50,8 @@ public abstract class EnemyBehaviour02 : ExtendedBehaviour
   private Tween tw1, tw2, tw3;
   bool previouslyDidAHitEffectTween = false;
 
+  public EnemyFireStraightDownBehaviour01 enemyFireStraightDownBehaviour;
+
   // virtual public float GetRespawnWaitDelay() => respawnWaitDelay;
 
   public virtual void ReactToPlayerMissileHit()
@@ -64,7 +66,7 @@ public abstract class EnemyBehaviour02 : ExtendedBehaviour
       DoHitEffect();
       previouslyDidAHitEffectTween = true;
     }
-
+     
 
   }
   private void DoHitEffect()
@@ -96,7 +98,7 @@ public abstract class EnemyBehaviour02 : ExtendedBehaviour
   {
     //todo - move this out to GameplayManager or to sub-class or enemy prefab??
 
-    hp = 1f;
+    hp = 1f; // todo - read from CSV
     speed = 1f;
     speed *= speedMultiplierFromSpawner;
     initialHP = hp * hpMultiplierFromSpawner;
@@ -260,15 +262,15 @@ public abstract class EnemyBehaviour02 : ExtendedBehaviour
 
   private void HandleDamage()
   {
-    if (hp <= 1) //lethal hit
+    hp -= GameplayManager.Instance.PlayerMissileDamage;
+
+    if (hp <= 0) //lethal hit
     {
       enemyState = EnemyState.TEMPORARILY_DEAD;
     }
     else //non-lethal hit
     {
-      hp--;
-      
-      enemyState = EnemyState.ALIVE;
+      enemyState = EnemyState.ALIVE;  //??
     }
   }
 
@@ -281,7 +283,7 @@ public abstract class EnemyBehaviour02 : ExtendedBehaviour
 
   private void TemporarilyDie()
   {
-    Wait(.4f, () => {
+    Wait(.2f, () => {
       //Debug.Log("5 seconds is lost forever");
       StopMovement();
     });

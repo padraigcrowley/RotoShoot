@@ -967,6 +967,7 @@ MonoBehaviour:
   basePlayerShipRotationDuration: 0.23
   currentPlayerMissileSpeedMultiplier: 10
   basePlayerMissileSpeedMultiplier: 21
+  PlayerMissileDamage: 0
   isGamePaused: 0
   playerShipInvulnerable: 0
   playerShipMovementAllowed: 1
@@ -1287,6 +1288,11 @@ MonoBehaviour:
   - {fileID: 11400000, guid: 97573bb39ce42774e9521893f17723b0, type: 2}
   - {fileID: 11400000, guid: da53f01ad7a998a4e8cffe2526c33a6e, type: 2}
   - {fileID: 11400000, guid: 1924696e641fc7c44b900149a06e1802, type: 2}
+  - {fileID: 11400000, guid: 1924696e641fc7c44b900149a06e1802, type: 2}
+  - {fileID: 11400000, guid: 1924696e641fc7c44b900149a06e1802, type: 2}
+  - {fileID: 11400000, guid: 1924696e641fc7c44b900149a06e1802, type: 2}
+  - {fileID: 11400000, guid: 1924696e641fc7c44b900149a06e1802, type: 2}
+  - {fileID: 11400000, guid: 1924696e641fc7c44b900149a06e1802, type: 2}
   levelSetupData: {fileID: 0}
   levelPlayTimeElapsed: 0
   verticalDistBetweenEnemies: 2
@@ -1300,6 +1306,8 @@ MonoBehaviour:
   spinningMine: {fileID: 2411896081061765975, guid: 41a1b7e89cfaebb4e9e25449413c44bd,
     type: 3}
   enemyWavesParentGroupObject: {fileID: 110998330}
+  enemyRateOfFireMin: 0
+  enemyRateOfFireMax: 0
 --- !u!4 &254305519
 Transform:
   m_ObjectHideFlags: 0

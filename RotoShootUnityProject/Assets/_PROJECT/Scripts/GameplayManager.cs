@@ -32,6 +32,7 @@ public class GameplayManager : Singleton<GameplayManager>, IPowerUpEvents
 
   public float currentPlayerMissileSpeedMultiplier;
   public float basePlayerMissileSpeedMultiplier;
+  public float PlayerMissileDamage;
 
   public bool isGamePaused = false;
   public bool playerShipInvulnerable = false;
@@ -85,6 +86,9 @@ public class GameplayManager : Singleton<GameplayManager>, IPowerUpEvents
     currentPlayerHP = 0; //setting it to zero here, then its proper value in PlayerShip.CS, line, "GameplayManager.Instance.currentPlayerHP = GameplayManager.Instance.MAX_PLAYER_HP;"
                          //so the gradual fill-in of the health bar can kick in.
     currentPlayerShipFireRate = basePlayerShipFireRate;
+    
+    PlayerMissileDamage = 10f;//todo - read from CSV
+    
     mouseClickQueue = new Queue();
     currentPlayerScore = 0;
     

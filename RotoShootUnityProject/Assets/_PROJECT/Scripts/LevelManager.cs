@@ -2,6 +2,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+ 
 
 public class LevelManager : Singleton<LevelManager>
 {
@@ -37,6 +38,8 @@ public class LevelManager : Singleton<LevelManager>
 
   public GameObject enemyWavesParentGroupObject;
 
+  public float enemyRateOfFireMin, enemyRateOfFireMax;
+
   private void Awake()
   {
     //GameplayManager.Instance.playerShipPos = levelSetupData.PlayerShipPos;
@@ -71,6 +74,8 @@ public class LevelManager : Singleton<LevelManager>
     GameplayManager.Instance.levelControlType = levelSetupData.levelControlType;
     GameplayManager.Instance.shipLanes = levelSetupData.shipLanes;
     timeBetweenAsteroidShower = levelSetupData.timeBetweenAsteroidShower;
+    enemyRateOfFireMin = levelSetupData.enemyRateOfFireMin; // todo - read from CSV 
+    enemyRateOfFireMax = levelSetupData.enemyRateOfFireMax; // todo - read from CSV
 
     InitializeLCC();
 
@@ -91,7 +96,9 @@ public class LevelManager : Singleton<LevelManager>
     }
 
     numEnemyKillsInLevel = 0;
-    currentTimeBetweenFiringAtPlayer = TIME_BETWEEN_FIRING_AT_PLAYER;
+    //currentTimeBetweenFiringAtPlayer = TIME_BETWEEN_FIRING_AT_PLAYER;
+    currentTimeBetweenFiringAtPlayer = Random.Range(enemyRateOfFireMin, enemyRateOfFireMax);
+
 
   }
 
@@ -241,13 +248,21 @@ public class LevelManager : Singleton<LevelManager>
           StartCoroutine(ActivateEnemyWave());
         }
 
-        if (readyToFireAtPlayer == false)
-        {
+        if (currentTimeBetweenFiringAtPlayer > 0f)
           currentTimeBetweenFiringAtPlayer -= Time.deltaTime;
+        else
+        {
           if (currentTimeBetweenFiringAtPlayer <= 0f)
           {
             //print($"readyToFireAtPlayer = true");
-            readyToFireAtPlayer = true; // this is set back to false in Update() of EnemyFireAtPlayerBehaviour01.cs
+            //readyToFireAtPlayer = true; // this is set back to false in Update() of EnemyFireAtPlayerBehaviour01.cs
+            var aliveEnemy = GetRandomAliveEnemy();
+            if (aliveEnemy != null)
+            {
+              aliveEnemy.enemyFireStraightDownBehaviour.FireMissileAtPlayerPos();
+            }
+            //readyToFireAtPlayer = false;
+            currentTimeBetweenFiringAtPlayer = Random.Range(enemyRateOfFireMin, enemyRateOfFireMax);
           }
         }
       }
@@ -260,6 +275,35 @@ public class LevelManager : Singleton<LevelManager>
     }
 
   }
+
+  EnemyBehaviour02 GetRandomAliveEnemy()
+	{
+    List<EnemyBehaviour02> aliveEnemies = new List<EnemyBehaviour02>();
+    EnemyBehaviour02 aliveEnemy;
+
+    foreach (List<EnemyBehaviour02> enemyWaveParentBehaviourScripts in enemyWavesParentBehaviourScripts)
+    {
+      foreach (EnemyBehaviour02 enemyBehaviourScript in enemyWaveParentBehaviourScripts)
+      {
+        if (enemyBehaviourScript.enemyState == EnemyBehaviour02.EnemyState.ALIVE)
+        {
+          aliveEnemies.Add(enemyBehaviourScript);
+        }
+      }
+    }
+    
+    if (aliveEnemies.Count > 0)
+    {
+      aliveEnemy = aliveEnemies[Random.Range(0, aliveEnemies.Count)];
+      return aliveEnemy;
+    }
+		else 
+    {
+      return null;
+    }
+    
+  }
+
   IEnumerator ActivateEnemyWave()
   {
     currentlyActivatingWave = true;

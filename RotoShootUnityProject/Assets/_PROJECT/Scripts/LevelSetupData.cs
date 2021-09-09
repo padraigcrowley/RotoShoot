@@ -10,7 +10,9 @@ public class LevelSetupData : ScriptableObject
   public bool lccKillBoss = false;
   [Space(10)]
   public int numMaxActiveWaves;
-  public float minTimeBetweenWaves, maxTimeBetweenWaves;
+  public float TimeBetweenWavesMin, TimeBetweenWavesMax;
+  public float enemyRateOfFireMin = 1f;
+  public float enemyRateOfFireMax = 2f;
   [Space(10)]
   [Header("ENEMY WAVES DATA")]
   public EnemySpawnPointData[] levelEnemySpawnPointData;

@@ -123,6 +123,7 @@ MonoBehaviour:
   powerUpInstance: {fileID: 0}
   playerShip: {fileID: 0}
   waypointPath: {fileID: 0}
+  enemyFireStraightDownBehaviour: {fileID: 9154484834150509947}
   startedOnPath: 0
 --- !u!114 &9154484834150509947
 MonoBehaviour:
