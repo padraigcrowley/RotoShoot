@@ -139,7 +139,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   enemyMissile: {fileID: 1374267004960804, guid: ed8c5fb58e698c5418529f8aee4e4848,
     type: 3}
-  straightDown: 0
+  straightDown: 1
 --- !u!114 &3734171053722212203
 MonoBehaviour:
   m_ObjectHideFlags: 0

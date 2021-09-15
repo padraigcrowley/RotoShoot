@@ -120,6 +120,7 @@ MonoBehaviour:
   powerUpInstance: {fileID: 0}
   playerShip: {fileID: 0}
   waypointPath: {fileID: 0}
+  enemyFireAtPlayerBehaviour01: {fileID: 6390746695824494001}
 --- !u!114 &6390746695824494001
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -134,6 +135,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   enemyMissile: {fileID: 1374267004960804, guid: ea101576b4fe16348af97bd70798b596,
     type: 3}
+  straightDown: 0
 --- !u!136 &6752770792488037292
 CapsuleCollider:
   m_ObjectHideFlags: 0

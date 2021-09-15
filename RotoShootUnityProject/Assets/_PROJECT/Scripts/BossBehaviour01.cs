@@ -274,7 +274,7 @@ public class BossBehaviour01 : ExtendedBehaviour
       }
       pulseTween.Pause();
 
-      //InvokeRepeating(nameof(this.FireMissileAtPlayerPos), 0, 1f);
+      //InvokeRepeating(nameof(this.FireMissileAtPlayer), 0, 1f);
       InvokeRepeating(nameof(this.FireMissileAtPlayerPos), 0f, .5f);
       InvokeRepeating(nameof(this.FireMissileStraightDown), .25f, .5f);
 

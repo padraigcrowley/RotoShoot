@@ -28,16 +28,19 @@ public class GameController : Singleton<GameController>
   }
   public void LoadSpecificLevelAndBaseGame(int level)
   {
-    if (level > 10)
-      level = level % NUM_UNIQUE_LEVELS;
+    level = level % NUM_UNIQUE_LEVELS;
+    if (level == 0)
+      level = NUM_UNIQUE_LEVELS;
+
     LoadSpecificLevel(level % NUM_UNIQUE_LEVELS);
     LoadBaseGame();
   }
 	public void LoadSpecificLevel(int level)
   {
     GameController.Instance.currentLevelPlaying = level;
-    if (level > 10)
-      level = level % NUM_UNIQUE_LEVELS;
+    level = level % NUM_UNIQUE_LEVELS;
+    if (level == 0)
+      level = NUM_UNIQUE_LEVELS;
 
     // handles up to 999 levels
     string levelName = "";
@@ -59,8 +62,9 @@ public class GameController : Singleton<GameController>
   public void UnloadSpecificLevel(int level)
 	{
 
-    if (level > 10)
-      level = level % NUM_UNIQUE_LEVELS;
+   level = level % NUM_UNIQUE_LEVELS;
+   if (level == 0)
+      level = NUM_UNIQUE_LEVELS;
 
     // handles up to 999 levels
     string levelName = "";

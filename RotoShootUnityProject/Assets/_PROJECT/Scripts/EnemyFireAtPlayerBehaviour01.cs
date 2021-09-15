@@ -23,7 +23,7 @@ public class EnemyFireAtPlayerBehaviour01 : MonoBehaviour
   }
 
   
-  public void FireMissileAtPlayerPos()
+  public void FireMissileAtPlayer()
   {
     GameObject firedBullet;
     float angle;

@@ -15,7 +15,7 @@ public class Enemy02_0002 : EnemyBehaviour02
   {
     base.Start();
     //Debug.Log("Enemy02_0002 START method");
-    //InvokeRepeating("FireMissileAtPlayerPos", 3, 5);
+    //InvokeRepeating("FireMissileAtPlayer", 3, 5);
   }
   protected override  void Update()
   {
