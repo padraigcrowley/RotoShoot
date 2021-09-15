@@ -50,7 +50,7 @@ public abstract class EnemyBehaviour02 : ExtendedBehaviour
   private Tween tw1, tw2, tw3;
   bool previouslyDidAHitEffectTween = false;
 
-  public EnemyFireStraightDownBehaviour01 enemyFireStraightDownBehaviour;
+  public EnemyFireAtPlayerBehaviour01 enemyFireAtPlayerBehaviour01;
 
   // virtual public float GetRespawnWaitDelay() => respawnWaitDelay;
 

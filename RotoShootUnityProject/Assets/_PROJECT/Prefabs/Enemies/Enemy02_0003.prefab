@@ -123,6 +123,7 @@ MonoBehaviour:
   powerUpInstance: {fileID: 0}
   playerShip: {fileID: 0}
   waypointPath: {fileID: 0}
+  enemyFireAtPlayerBehaviour01: {fileID: 9154484834150509947}
   startedOnPath: 0
 --- !u!114 &9154484834150509947
 MonoBehaviour:
@@ -133,11 +134,12 @@ MonoBehaviour:
   m_GameObject: {fileID: 4342350733379744943}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: d61f21d4a3bc6e8419d6fcc92a1f2f6f, type: 3}
+  m_Script: {fileID: 11500000, guid: e27d9b602b63ba847af2410f1494684b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   enemyMissile: {fileID: 1229267938463966, guid: 81e7312c2f38f77499aff6b1a6bf6277,
     type: 3}
+  straightDown: 1
 --- !u!114 &3734171053722212203
 MonoBehaviour:
   m_ObjectHideFlags: 0

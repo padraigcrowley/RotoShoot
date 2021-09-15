@@ -266,7 +266,7 @@ public class LevelManager : Singleton<LevelManager>
             var aliveEnemy = GetRandomAliveEnemy();
             if (aliveEnemy != null)
             {
-              aliveEnemy.enemyFireStraightDownBehaviour.FireMissileAtPlayerPos();
+              aliveEnemy.enemyFireAtPlayerBehaviour01.FireMissileAtPlayerPos();
             }
             //readyToFireAtPlayer = false;
             currentTimeBetweenFiringAtPlayer = Random.Range(enemyRateOfFireMin, enemyRateOfFireMax);

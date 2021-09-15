@@ -15,23 +15,9 @@ public class EnemyFireStraightDownBehaviour01 : MonoBehaviour
     enemyMissilesParentPool = GameObject.FindWithTag("enemyMissilesParentPoolObject");
     if (enemyMissilesParentPool == null)
       Debug.LogWarning("enemyMissilesParentPoolObject not found!");
-    //enemyMissilesParentPool = new GameObject("enemyMissilesParentPoolObject");
-    //InvokeRepeating(nameof(this.FireMissileAtPlayerPos), 3, 5);
   }
 
-  // Update is called once per frame
-  //void Update()
-  //{
-  //  //Dont shoot if the y pos is almost same as playership
-  //  if ((LevelManager.Instance.readyToFireAtPlayer == true) && (eb.enemyState == EnemyBehaviour02.EnemyState.ALIVE) && (transform.position.y - 3 > GameplayManager.Instance.playerShipPos.y))
-  //  {
-  //    //print($"{this.gameObject.name}: calling FireMissileAtPlayerPos()");
-  //    FireMissileAtPlayerPos();
-  //    LevelManager.Instance.readyToFireAtPlayer = false;
-  //    LevelManager.Instance.currentTimeBetweenFiringAtPlayer = LevelManager.Instance.TIME_BETWEEN_FIRING_AT_PLAYER;//todo: magic number
-  //  }
-  //} 
-
+ 
   public  void FireMissileAtPlayerPos()
   {
     GameObject firedBullet;
