@@ -10,6 +10,7 @@ public class GameController : Singleton<GameController>
   public int highestLevelPlayed = 1;
   public int weapon = 0;
   public int starCoinCount;
+  public const int NUM_UNIQUE_LEVELS = 10;
  
   void Awake()
   {
@@ -27,12 +28,16 @@ public class GameController : Singleton<GameController>
   }
   public void LoadSpecificLevelAndBaseGame(int level)
   {
-    LoadSpecificLevel(level);
+    if (level > 10)
+      level = level % NUM_UNIQUE_LEVELS;
+    LoadSpecificLevel(level % NUM_UNIQUE_LEVELS);
     LoadBaseGame();
   }
 	public void LoadSpecificLevel(int level)
   {
     GameController.Instance.currentLevelPlaying = level;
+    if (level > 10)
+      level = level % NUM_UNIQUE_LEVELS;
 
     // handles up to 999 levels
     string levelName = "";
@@ -53,6 +58,10 @@ public class GameController : Singleton<GameController>
 
   public void UnloadSpecificLevel(int level)
 	{
+
+    if (level > 10)
+      level = level % NUM_UNIQUE_LEVELS;
+
     // handles up to 999 levels
     string levelName = "";
     if (level > 0 && level < 10)

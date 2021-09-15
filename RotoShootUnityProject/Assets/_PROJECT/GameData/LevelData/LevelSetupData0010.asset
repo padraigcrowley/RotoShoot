@@ -10,7 +10,7 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 31c73e25130abc541bc32d54c763ae60, type: 3}
-  m_Name: LevelSetupData0001
+  m_Name: LevelSetupData0010
   m_EditorClassIdentifier: 
   levelNumber: 1
   lccEnemyKills: 100
@@ -19,39 +19,28 @@ MonoBehaviour:
   numMaxActiveWaves: 3
   TimeBetweenWavesMin: 0
   TimeBetweenWavesMax: 0
-  enemyRateOfFireMin: 0.04
-  enemyRateOfFireMax: 0.19
+  enemyRateOfFireMin: 1
+  enemyRateOfFireMax: 2
   levelEnemySpawnPointData:
   - enemyPrefab: {fileID: 4342350733379744943, guid: 3bf3914ccf51ea64aa01feaa452f98f3,
       type: 3}
     startPos: {x: 0, y: 12}
     verticalDistBetweenEnemies: 0
     horizontalDistBetweenEnemies: 0
-    speedMultiplier: 8
-    hpMultiplier: 1
-    waypointPath: {fileID: 3729171643158534044, guid: 0a2edb2ef98efcd498404c946bb49839,
-      type: 3}
-    numEnemiesInWave: 8
-    timeBetweenSpawn: 0.5
-  - enemyPrefab: {fileID: 4342350733379744943, guid: 3bf3914ccf51ea64aa01feaa452f98f3,
-      type: 3}
-    startPos: {x: 1.29, y: 12}
-    verticalDistBetweenEnemies: 0
-    horizontalDistBetweenEnemies: 0
-    speedMultiplier: 8
-    hpMultiplier: 1
-    waypointPath: {fileID: 3729171643158534044, guid: 58d94f7cde43bef4eae61740a75fa166,
-      type: 3}
-    numEnemiesInWave: 8
-    timeBetweenSpawn: 0.5
-  - enemyPrefab: {fileID: 4342350733379744943, guid: 3bf3914ccf51ea64aa01feaa452f98f3,
-      type: 3}
-    startPos: {x: 1.29, y: 12}
-    verticalDistBetweenEnemies: 0
-    horizontalDistBetweenEnemies: 0
     speedMultiplier: 4
     hpMultiplier: 1
-    waypointPath: {fileID: 3729171643158534044, guid: aadd2b92c1cf17e46bd22b1e24368141,
+    waypointPath: {fileID: 4639713800137293240, guid: 799b3fa60793490498aaecc6ce7d6c42,
+      type: 3}
+    numEnemiesInWave: 8
+    timeBetweenSpawn: 0.5
+  - enemyPrefab: {fileID: 4342350733379744943, guid: 3bf3914ccf51ea64aa01feaa452f98f3,
+      type: 3}
+    startPos: {x: 1.29, y: 12}
+    verticalDistBetweenEnemies: 0
+    horizontalDistBetweenEnemies: 0
+    speedMultiplier: 8
+    hpMultiplier: 1
+    waypointPath: {fileID: 3729171643158534044, guid: 2d06ac0a1c0e5df41a0481119688c1f4,
       type: 3}
     numEnemiesInWave: 8
     timeBetweenSpawn: 0.5
@@ -62,7 +51,7 @@ MonoBehaviour:
     hpMultiplier: 0
     waypointPath: {fileID: 0}
   spinningMineSpawnPointData:
-    levelHasSpinningMine: 0
+    levelHasSpinningMine: 1
     spinningMinePrefab: {fileID: 2411896081061765972, guid: 41a1b7e89cfaebb4e9e25449413c44bd,
       type: 3}
     speedMultiplier: 1
@@ -78,5 +67,5 @@ MonoBehaviour:
   - {x: -1.29, y: -5}
   - {x: 1.29, y: -5}
   - {x: 3.84, y: -5}
-  timeBetweenAsteroidShower: 30
+  timeBetweenAsteroidShower: 10000
   levelControlType: 2

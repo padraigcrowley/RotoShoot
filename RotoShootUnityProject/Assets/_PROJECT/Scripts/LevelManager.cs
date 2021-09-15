@@ -62,10 +62,17 @@ public class LevelManager : Singleton<LevelManager>
 
     if (GameController.Instance != null) //if testing the game by running it from BaseGameScene (rather than going through Boot/MainMenu, we need to hard code a safe fallback level to load. Also, need to enable BaseGameScene camera
     {
-      levelSetupData = levelSetupDataArray[GameController.Instance.currentLevelPlaying - 1]; // get the relevant scriptable object setup file from the array.
+      if (GameController.Instance.currentLevelPlaying > 10)
+      {
+        levelSetupData = levelSetupDataArray[(GameController.Instance.currentLevelPlaying % GameController.NUM_UNIQUE_LEVELS) - 1]; // get the relevant scriptable object setup file from the array.
+      }
+      else
+      {
+        levelSetupData = levelSetupDataArray[GameController.Instance.currentLevelPlaying - 1]; // get the relevant scriptable object setup file from the array.
+      }
     }
     else
-		{
+    {
       levelSetupData = levelSetupDataArray[0];
       BaseGameSceneCamera.enabled = true;
     }

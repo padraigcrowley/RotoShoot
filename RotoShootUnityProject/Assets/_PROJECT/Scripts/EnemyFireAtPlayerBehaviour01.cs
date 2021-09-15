@@ -24,18 +24,18 @@ public class EnemyFireAtPlayerBehaviour01 : MonoBehaviour
   }
 
   // Update is called once per frame
-  void Update()
-  {
-    //Dont shoot if the y pos is almost same as playership
-    if ((LevelManager.Instance.readyToFireAtPlayer == true) && (eb.enemyState == EnemyBehaviour02.EnemyState.ALIVE) && (transform.position.y - 3 > GameplayManager.Instance.playerShipPos.y))
-    {
-      //print($"{this.gameObject.name}: calling FireMissileAtPlayerPos()");
-      FireMissileAtPlayerPos();
-      TempHueSaturationBoost();
-      LevelManager.Instance.readyToFireAtPlayer = false;
-      LevelManager.Instance.currentTimeBetweenFiringAtPlayer = LevelManager.Instance.TIME_BETWEEN_FIRING_AT_PLAYER;//todo: magic number
-    }
-  } 
+  //void Update()
+  //{
+  //  //Dont shoot if the y pos is almost same as playership
+  //  if ((LevelManager.Instance.readyToFireAtPlayer == true) && (eb.enemyState == EnemyBehaviour02.EnemyState.ALIVE) && (transform.position.y - 3 > GameplayManager.Instance.playerShipPos.y))
+  //  {
+  //    //print($"{this.gameObject.name}: calling FireMissileAtPlayerPos()");
+  //    FireMissileAtPlayerPos();
+  //    TempHueSaturationBoost();
+  //    LevelManager.Instance.readyToFireAtPlayer = false;
+  //    LevelManager.Instance.currentTimeBetweenFiringAtPlayer = LevelManager.Instance.TIME_BETWEEN_FIRING_AT_PLAYER;//todo: magic number
+  //  }
+  //} 
 
   private void TempHueSaturationBoost()
 	{
