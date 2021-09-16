@@ -58,8 +58,9 @@ public abstract class EnemyBehaviour02 : ExtendedBehaviour
   {
     if (previouslyDidAHitEffectTween)
     {
-      if (!tw3.IsPlaying())
-        DoHitEffect();
+      if (tw3.IsActive())
+        if (!tw3.IsPlaying())
+          DoHitEffect();
     }
 		else
 		{
