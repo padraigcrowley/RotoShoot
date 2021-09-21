@@ -1,7 +1,7 @@
 BasePlayerHP,BaseEnemyMissileDamage,BaseEnemyCollisionDamage,BasePlayerMissileDamage,,,,,,,,,,,,
 100,10,10,1,,,,,,,,,,,,
 ,,,,,,,,,,,,,,,
-Level #,EnemyHP,EnemyRateOfFire,EnemySpeed,EnemyMissileSpeed,EnemyMissileDamage,EnemyCollisionWithPlayerDamage,AsteroidBeltFrequency,AsteroidBeltDamage,AsteroidBeltSpeed,SpinningMineAppearFreq,SpinningMineHP,SpinningMineLaserDamage,Boss01HP,Boss01MissileDamage,Boss01MissileFreq
+Level#,EnemyHP,EnemyRateOfFire,EnemySpeed,EnemyMissileSpeed,EnemyMissileDamage,EnemyCollisionWithPlayerDamage,AsteroidBeltFrequency,AsteroidBeltDamage,AsteroidBeltSpeed,SpinningMineAppearFreq,SpinningMineHP,SpinningMineLaserDamage,Boss01HP,Boss01MissileDamage,Boss01MissileFreq
 1,1,,,,,,,25,,,,,,,
 2,,,,,,,,,,,,,,,
 3,,,,,,,,,,,,,,,
