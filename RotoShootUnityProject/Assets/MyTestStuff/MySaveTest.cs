@@ -10,7 +10,6 @@ public class MySaveTest : MonoBehaviour
   //public TMP_Text testNumber02Text;
 
   int testNumber01 = 1, testNumber02 = 2;
-  // Start is called before the first frame update
   void Start()
   {
     int num = 1;
@@ -32,14 +31,29 @@ public class MySaveTest : MonoBehaviour
 
     //sheet.Save("Assets/Resources/mySheet02.csv", settings);
 
-    var sheet2 = new ES3Spreadsheet();
+    var sheet = new ES3Spreadsheet();
     //sheet.Load("TestSheet_01.csv");
-    sheet2.Load("mySheet.csv", settings);
-    // Output the first row of the spreadsheet to console.
-    for (int col = 0; col < sheet2.ColumnCount; col++)
-      Debug.Log(sheet2.GetCell<int>(col, 0));
+    sheet.Load("mySheet.csv", settings);
+    
+    print ($"Sheet has  { sheet.ColumnCount } columns, { sheet.RowCount } rows");
+
+    for (int col = 0; col < sheet.ColumnCount; col++)
+    {
+      for (int row = 0; row < sheet.RowCount; row++)
+      {
+        string ID = sheet.GetCell<string>(col, row);
+        if (ID != null)
+          Debug.Log($"At col:{col} row:{row} TextID: {ID}");
+      }
+    }
+
 
   }
+
+ // float GetStatValue(string TextID, int LevelNumber)
+	//{
+    
+ // }
 
   // Update is called once per frame
   void Update()
