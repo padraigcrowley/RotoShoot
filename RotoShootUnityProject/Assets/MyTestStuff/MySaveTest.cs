@@ -6,6 +6,7 @@ using TMPro;
 public class MySaveTest : MonoBehaviour
 {
   public ES3Spreadsheet TestSheet;
+  ES3Spreadsheet sheet = new ES3Spreadsheet();
   //public TMP_Text testNumber01Text;
   //public TMP_Text testNumber02Text;
 
@@ -20,40 +21,69 @@ public class MySaveTest : MonoBehaviour
     settings.location = ES3.Location.Resources;
     print("settings.location = " + settings.location);
 
-    //var sheet = new ES3Spreadsheet();
-    //// Add data to cells in the spreadsheet.
-    //for (int col = 0; col < 10; col++)
-    //  for (int row = 0; row < 8; row++)
-    //  {
-    //    sheet.SetCell(col, row, num++);
-    //    //sheet.SetCell(col, row, "someData");
-    //  }
-
-    //sheet.Save("Assets/Resources/mySheet02.csv", settings);
-
-    var sheet = new ES3Spreadsheet();
-    //sheet.Load("TestSheet_01.csv");
+    sheet = new ES3Spreadsheet();
     sheet.Load("mySheet.csv", settings);
-    
+  
     print ($"Sheet has  { sheet.ColumnCount } columns, { sheet.RowCount } rows");
+    
+    
+    print($"BaseEnemyCollisionDamage = {(GetSheetStatValue("BaseEnemyCollisionDamage"))}");
 
+
+
+    print ($"EnemyHP at level 10 = {(GetSheetStatValue("EnemyHP", 10))}");
+    int HP = (int)GetSheetStatValue("EnemyHP", 10);
+
+    print($"EnemyRateOfFireMax at level 10 = {(GetSheetStatValue("EnemyRateOfFireMax", 10))}");
+    print($"EnemyRateOfFireMax at level 100 = {(GetSheetStatValue("EnemyRateOfFireMax", 100))}");
+    print($"EnemySpeed at level 4 = {(GetSheetStatValue("EnemySpeed", 4))}");
+
+
+
+    //for (int col = 0; col < sheet.ColumnCount; col++)
+    //{
+    //  for (int row = 0; row < sheet.RowCount; row++)
+    //  {
+    //    string ID = sheet.GetCell<string>(col, row);
+    //    if (ID != null)
+    //      Debug.Log($"At col:{col} row:{row} TextID: {ID}");
+    //  }
+    //}
+  }
+
+  float GetSheetStatValue(string TextID, int LevelNumber)
+  {
     for (int col = 0; col < sheet.ColumnCount; col++)
     {
       for (int row = 0; row < sheet.RowCount; row++)
       {
-        string ID = sheet.GetCell<string>(col, row);
-        if (ID != null)
-          Debug.Log($"At col:{col} row:{row} TextID: {ID}");
+        string cellContent = sheet.GetCell<string>(col, row);
+        if (cellContent == TextID)
+				{
+          Debug.Log($"At col:{col} row:{row} TextID: {cellContent}");
+          return sheet.GetCell<float>(col, row + LevelNumber);
+				}
       }
     }
-
-
+    return -1; //error
   }
 
- // float GetStatValue(string TextID, int LevelNumber)
-	//{
-    
- // }
+  float GetSheetStatValue(string TextID)
+  {
+    for (int col = 0; col < sheet.ColumnCount; col++)
+    {
+      for (int row = 0; row < sheet.RowCount; row++)
+      {
+        string cellContent = sheet.GetCell<string>(col, row);
+        if (cellContent == TextID)
+        {
+          Debug.Log($"At col:{col} row:{row} TextID: {cellContent}");
+          return sheet.GetCell<float>(col, row + 1);
+        }
+      }
+    }
+    return -1; //error
+  }
 
   // Update is called once per frame
   void Update()
