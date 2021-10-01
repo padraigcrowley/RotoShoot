@@ -39,8 +39,8 @@ public class Enemy02_0000 : EnemyBehaviour02
     return;
   }
 
-  public override void ReactToPlayerMissileHit()
-  {
-    transform.localScale *= 1.1f; // scale slightly up to show they've been shot
-  }
+  //public override void ReactToPlayerMissileHit()
+  //{
+  //  transform.localScale *= 1.1f; // scale slightly up to show they've been shot
+  //}
 }

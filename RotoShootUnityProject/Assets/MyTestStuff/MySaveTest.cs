@@ -25,7 +25,7 @@ public class MySaveTest : MonoBehaviour
 
     sheet = new ES3Spreadsheet();
     sheet.Load("mySheet.csv", settings);
-    print ($"Sheet has  { sheet.ColumnCount } columns, { sheet.RowCount } rows");
+    print($"Sheet has  { sheet.ColumnCount } columns, { sheet.RowCount } rows");
 
     //print($"BaseEnemyCollisionDamage = {(GetSheetStatValue("BaseEnemyCollisionDamage"))}");
     //print ($"EnemyHP at level 10 = {(GetSheetStatValue("EnemyHP", 10))}");
@@ -35,10 +35,13 @@ public class MySaveTest : MonoBehaviour
     //print($"EnemySpeed at level 4 = {(GetSheetStatValue("EnemySpeed", 4))}");
 
     GetLevelStats(1);
-    print($"Stats for level 1 =  { LevelStats}");
-    
-  }
+    GetLevelStats(100);
+    foreach (string statName in LevelStats.Keys)
+    {
+      print($"Stats for level 1:  {statName} = {LevelStats[statName] }");
 
+    }
+  }
   private void GetLevelStats(int levelNum)
   {
     LevelStats.Clear();

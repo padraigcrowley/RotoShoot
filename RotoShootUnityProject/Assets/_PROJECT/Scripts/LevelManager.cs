@@ -10,7 +10,7 @@ public class LevelManager : Singleton<LevelManager>
    public float TIME_BETWEEN_FIRING_AT_PLAYER = .05f; //todo: magic number
    public float currentTimeBetweenFiringAtPlayer; //todo: magic number
 
-  public Dictionary<string, int> LevelStats = new Dictionary<string, int>();
+  public Dictionary<string, float> LevelStats = new Dictionary<string, float>();
   
   public Dictionary<string, int> LevelCompletionCriteria = new Dictionary<string, int>();
   private bool lccMet; //levelcompletioncriteria
@@ -60,6 +60,12 @@ public class LevelManager : Singleton<LevelManager>
 	public void InitialiseLevel()
   {
 
+    GetLevelStats(GameController.Instance.currentLevelPlaying);
+    foreach (string statName in LevelStats.Keys)
+    {
+      print($"Stats for level {GameController.Instance.currentLevelPlaying} :  {statName} = {LevelStats[statName] }");
+
+    }
     enemyWavesParentBehaviourScripts.Clear();
 
     if (GameController.Instance != null) //if testing the game by running it from BaseGameScene (rather than going through Boot/MainMenu, we need to hard code a safe fallback level to load. Also, need to enable BaseGameScene camera
@@ -108,13 +114,35 @@ public class LevelManager : Singleton<LevelManager>
 
   }
 
-  private void GetLevelStats()
-	{
+  private void GetLevelStats(int levelNum)
+  {
     LevelStats.Clear();
+    for (int i = 0; i < GameController.Instance.statsSpreadsheet.ColumnCount; i++)
+    {
+      string statName = GameController.Instance.statsSpreadsheet.GetCell<string>(i, 0);
+      float statValue = GetSheetStatValue(statName, levelNum);
+      //print($"Stat:");
+      LevelStats.Add(statName, statValue);
 
+    }
 
   }
 
+  float GetSheetStatValue(string TextID, int LevelNumber)
+  {
+    for (int col = 0; col < GameController.Instance.statsSpreadsheet.ColumnCount; col++)
+    {
+      for (int row = 0; row < GameController.Instance.statsSpreadsheet.RowCount; row++)
+      {
+        string cellContent = GameController.Instance.statsSpreadsheet.GetCell<string>(col, row);
+        if (cellContent == TextID)
+        {
+          return GameController.Instance.statsSpreadsheet.GetCell<float>(col, row + LevelNumber);
+        }
+      }
+    }
+    return -1; //error
+  }
 
   void InitializeLCC()
   {

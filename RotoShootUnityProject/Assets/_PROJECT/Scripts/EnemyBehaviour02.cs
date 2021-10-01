@@ -59,8 +59,14 @@ public abstract class EnemyBehaviour02 : ExtendedBehaviour
     if (previouslyDidAHitEffectTween)
     {
       if (tw3.IsActive())
+      {
         if (!tw3.IsPlaying())
           DoHitEffect();
+      }
+			else
+			{
+        DoHitEffect();
+      }
     }
 		else
 		{
@@ -99,7 +105,8 @@ public abstract class EnemyBehaviour02 : ExtendedBehaviour
   {
     //todo - move this out to GameplayManager or to sub-class or enemy prefab??
 
-    hp = 1f; // todo - read from CSV
+    //hp = 1f; // todo - read from CSV
+    hp = LevelManager.Instance.LevelStats["EnemyHP"];
     speed = 1f;
     speed *= speedMultiplierFromSpawner;
     initialHP = hp * hpMultiplierFromSpawner;

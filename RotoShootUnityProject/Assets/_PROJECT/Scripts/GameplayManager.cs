@@ -87,7 +87,7 @@ public class GameplayManager : Singleton<GameplayManager>, IPowerUpEvents
                          //so the gradual fill-in of the health bar can kick in.
     currentPlayerShipFireRate = basePlayerShipFireRate;
     
-    PlayerMissileDamage = 10f;//todo - read from CSV
+    PlayerMissileDamage = 1f;//todo - read from CSV
     
     mouseClickQueue = new Queue();
     currentPlayerScore = 0;

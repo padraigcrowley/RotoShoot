@@ -21,11 +21,12 @@ public class GameController : Singleton<GameController>
 
   void Start()
   {
+    GetStatsSpreadsheetData();
     starCoinCount = ES3.Load("starCoinCount", 20);
     highestLevelPlayed = ES3.Load("highestLevelPlayed", 1);
        
     currentLevelPlaying = highestLevelPlayed;
-    
+
     LoadSpecificLevel(currentLevelPlaying);
   }
 
