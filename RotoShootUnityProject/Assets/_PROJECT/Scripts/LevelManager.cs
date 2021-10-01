@@ -10,6 +10,8 @@ public class LevelManager : Singleton<LevelManager>
    public float TIME_BETWEEN_FIRING_AT_PLAYER = .05f; //todo: magic number
    public float currentTimeBetweenFiringAtPlayer; //todo: magic number
 
+  public Dictionary<string, int> LevelStats = new Dictionary<string, int>();
+  
   public Dictionary<string, int> LevelCompletionCriteria = new Dictionary<string, int>();
   private bool lccMet; //levelcompletioncriteria
   public LevelSetupData [] levelSetupDataArray;
@@ -105,6 +107,14 @@ public class LevelManager : Singleton<LevelManager>
 
 
   }
+
+  private void GetLevelStats()
+	{
+    LevelStats.Clear();
+
+
+  }
+
 
   void InitializeLCC()
   {

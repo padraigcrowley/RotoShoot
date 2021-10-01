@@ -11,7 +11,9 @@ public class GameController : Singleton<GameController>
   public int weapon = 0;
   public int starCoinCount;
   public const int NUM_UNIQUE_LEVELS = 10;
- 
+
+ public ES3Spreadsheet statsSpreadsheet = new ES3Spreadsheet();
+
   void Awake()
   {
     DontDestroyOnLoad(transform.gameObject);
@@ -26,6 +28,22 @@ public class GameController : Singleton<GameController>
     
     LoadSpecificLevel(currentLevelPlaying);
   }
+
+  private void GetStatsSpreadsheetData()
+	{
+    print("ES3Settings.defaultSettings.path = " + ES3Settings.defaultSettings.path);
+
+    // Create an ES3Settings object to set the storage location to Resources.
+    var settings = new ES3Settings();
+    settings.location = ES3.Location.Resources;
+    print("settings.location = " + settings.location);
+
+    statsSpreadsheet = new ES3Spreadsheet();
+    statsSpreadsheet.Load("mySheet.csv", settings);
+
+    print($"Sheet has  { statsSpreadsheet.ColumnCount } columns, { statsSpreadsheet.RowCount } rows");
+  }
+
   public void LoadSpecificLevelAndBaseGame(int level)
   {
     level = level % NUM_UNIQUE_LEVELS;

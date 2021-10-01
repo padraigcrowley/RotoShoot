@@ -10,6 +10,8 @@ public class MySaveTest : MonoBehaviour
   //public TMP_Text testNumber01Text;
   //public TMP_Text testNumber02Text;
 
+  public Dictionary<string, float> LevelStats = new Dictionary<string, float>();
+
   int testNumber01 = 1, testNumber02 = 2;
   void Start()
   {
@@ -23,32 +25,32 @@ public class MySaveTest : MonoBehaviour
 
     sheet = new ES3Spreadsheet();
     sheet.Load("mySheet.csv", settings);
-  
     print ($"Sheet has  { sheet.ColumnCount } columns, { sheet.RowCount } rows");
+
+    //print($"BaseEnemyCollisionDamage = {(GetSheetStatValue("BaseEnemyCollisionDamage"))}");
+    //print ($"EnemyHP at level 10 = {(GetSheetStatValue("EnemyHP", 10))}");
+    //int HP = (int)GetSheetStatValue("EnemyHP", 10);
+    //print($"EnemyRateOfFireMax at level 10 = {(GetSheetStatValue("EnemyRateOfFireMax", 10))}");
+    //print($"EnemyRateOfFireMax at level 100 = {(GetSheetStatValue("EnemyRateOfFireMax", 100))}");
+    //print($"EnemySpeed at level 4 = {(GetSheetStatValue("EnemySpeed", 4))}");
+
+    GetLevelStats(1);
+    print($"Stats for level 1 =  { LevelStats}");
     
-    
-    print($"BaseEnemyCollisionDamage = {(GetSheetStatValue("BaseEnemyCollisionDamage"))}");
+  }
 
+  private void GetLevelStats(int levelNum)
+  {
+    LevelStats.Clear();
+		for (int i = 0; i < sheet.ColumnCount; i++)
+		{
+      string statName = sheet.GetCell<string>(i, 0);
+      float statValue = GetSheetStatValue(statName, levelNum);
+      //print($"Stat:");
+      LevelStats.Add(statName, statValue);
 
+    }
 
-    print ($"EnemyHP at level 10 = {(GetSheetStatValue("EnemyHP", 10))}");
-    int HP = (int)GetSheetStatValue("EnemyHP", 10);
-
-    print($"EnemyRateOfFireMax at level 10 = {(GetSheetStatValue("EnemyRateOfFireMax", 10))}");
-    print($"EnemyRateOfFireMax at level 100 = {(GetSheetStatValue("EnemyRateOfFireMax", 100))}");
-    print($"EnemySpeed at level 4 = {(GetSheetStatValue("EnemySpeed", 4))}");
-
-
-
-    //for (int col = 0; col < sheet.ColumnCount; col++)
-    //{
-    //  for (int row = 0; row < sheet.RowCount; row++)
-    //  {
-    //    string ID = sheet.GetCell<string>(col, row);
-    //    if (ID != null)
-    //      Debug.Log($"At col:{col} row:{row} TextID: {ID}");
-    //  }
-    //}
   }
 
   float GetSheetStatValue(string TextID, int LevelNumber)
