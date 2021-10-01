@@ -1,4 +1,4 @@
-﻿Level#,EnemyHP,EnemyRateOfFireMin,EnemyRateOfFireMax,EnemySpeed,EnemyMissileSpeed,EnemyMissileDamage,EnemyCollisionWithPlayerDamage,AsteroidBeltFrequency,AsteroidBeltDamage,AsteroidBeltSpeed,SpinningMineAppearFreq,SpinningMineHP,SpinningMineLaserDamage,Boss01HP,Boss01MissileDamage,Boss01MissileFreq
+Level#,EnemyHP,EnemyRateOfFireMin,EnemyRateOfFireMax,EnemySpeed,EnemyMissileSpeed,EnemyMissileDamage,EnemyCollisionWithPlayerDamage,AsteroidBeltFrequency,AsteroidBeltDamage,AsteroidBeltSpeed,SpinningMineAppearFreq,SpinningMineHP,SpinningMineLaserDamage,Boss01HP,Boss01MissileDamage,Boss01MissileFreq
 1,1,3,5,1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1
 2,2,2.970707071,4.952525253,3.01010101,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1
 3,3,2.941414141,4.905050505,5.02020202,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1
