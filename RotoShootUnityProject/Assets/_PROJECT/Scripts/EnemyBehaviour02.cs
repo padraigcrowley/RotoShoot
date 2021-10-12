@@ -107,7 +107,7 @@ public abstract class EnemyBehaviour02 : ExtendedBehaviour
 
     //hp = 1f; // todo - read from CSV
     hp = LevelManager.Instance.LevelStats["EnemyHP"];
-    speed = 1f;
+    speed = LevelManager.Instance.LevelStats["EnemySpeed"];
     speed *= speedMultiplierFromSpawner;
     initialHP = hp * hpMultiplierFromSpawner;
     hp = initialHP;
@@ -432,8 +432,8 @@ public abstract class EnemyBehaviour02 : ExtendedBehaviour
     {
       if ( (collision.gameObject.CompareTag("BoundaryBottom")))
       {
-        //ResetPositionToTop();
-        enemyState = EnemyState.HIT_BY_ATMOSPHERE;
+        ResetPositionToTop(); // don't kill them, or reset their HP, just pop them back to the top.
+        //enemyState = EnemyState.HIT_BY_ATMOSPHERE;
       }
     }
   }

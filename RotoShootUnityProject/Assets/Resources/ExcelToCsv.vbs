@@ -16,6 +16,10 @@ Set oExcel = CreateObject("Excel.Application")
 Dim oBook
 Set oBook = oExcel.Workbooks.Open(src_file)
 
+rem If Dir("d:\Programming\UnityProjects\RotoShoot\RotoShootUnityProject\Assets\Resources\mySheet.csv") <> "" Then
+rem     Kill "d:\Programming\UnityProjects\RotoShoot\RotoShootUnityProject\Assets\Resources\mySheet.csv"
+rem End If
+
 oBook.SaveAs dest_file, csv_format
 
 oBook.Close False

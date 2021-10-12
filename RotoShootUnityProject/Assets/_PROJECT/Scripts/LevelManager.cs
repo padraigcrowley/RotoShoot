@@ -86,8 +86,18 @@ public class LevelManager : Singleton<LevelManager>
     GameplayManager.Instance.levelControlType = levelSetupData.levelControlType;
     GameplayManager.Instance.shipLanes = levelSetupData.shipLanes;
     timeBetweenAsteroidShower = levelSetupData.timeBetweenAsteroidShower;
+    
     enemyRateOfFireMin = levelSetupData.enemyRateOfFireMin; // todo - read from CSV 
     enemyRateOfFireMax = levelSetupData.enemyRateOfFireMax; // todo - read from CSV
+    if (enemyRateOfFireMin == -1)
+		{
+      enemyRateOfFireMin = LevelStats["EnemyRateOfFireMin"];
+    }
+    if (enemyRateOfFireMax == -1)
+    {
+      enemyRateOfFireMax = LevelStats["EnemyRateOfFireMax"];
+    }
+
 
     InitializeLCC();
 

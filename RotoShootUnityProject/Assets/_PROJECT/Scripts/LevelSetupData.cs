@@ -11,8 +11,10 @@ public class LevelSetupData : ScriptableObject
   [Space(10)]
   public int numMaxActiveWaves;
   public float TimeBetweenWavesMin, TimeBetweenWavesMax;
-  public float enemyRateOfFireMin = 1f;
-  public float enemyRateOfFireMax = 2f;
+  [Tooltip("Will read from CSV if set to -1")]
+  public float enemyRateOfFireMin = -1f;
+  [Tooltip("Will read from CSV if set to -1")]
+  public float enemyRateOfFireMax = -1f;
   [Space(10)]
   [Header("ENEMY WAVES DATA")]
   public EnemySpawnPointData[] levelEnemySpawnPointData;
