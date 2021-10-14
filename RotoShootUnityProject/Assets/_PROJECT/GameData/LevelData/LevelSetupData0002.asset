@@ -27,7 +27,7 @@ MonoBehaviour:
     startPos: {x: -3.8, y: 10}
     verticalDistBetweenEnemies: 1
     horizontalDistBetweenEnemies: 2.55
-    speedMultiplier: 8
+    speedMultiplier: 1
     hpMultiplier: 1
     waypointPath: {fileID: 4639713800137293240, guid: 799b3fa60793490498aaecc6ce7d6c42,
       type: 3}
@@ -38,7 +38,7 @@ MonoBehaviour:
     startPos: {x: 1.29, y: 12}
     verticalDistBetweenEnemies: 0
     horizontalDistBetweenEnemies: 0
-    speedMultiplier: 8
+    speedMultiplier: 1
     hpMultiplier: 1
     waypointPath: {fileID: 3729171643158534044, guid: 2d06ac0a1c0e5df41a0481119688c1f4,
       type: 3}
@@ -49,7 +49,7 @@ MonoBehaviour:
     startPos: {x: 1.29, y: 12}
     verticalDistBetweenEnemies: 0
     horizontalDistBetweenEnemies: 0
-    speedMultiplier: 4
+    speedMultiplier: 1
     hpMultiplier: 1
     waypointPath: {fileID: 8566307812535118965, guid: 2ef20b9a363366941ac9e820af6b2854,
       type: 3}
