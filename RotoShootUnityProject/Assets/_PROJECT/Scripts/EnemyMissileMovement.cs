@@ -5,13 +5,22 @@ using UnityEngine;
 
 public class EnemyMissileMovement : MissileMovement
 {
-  public float speed;
+  public float speedMultiplier = 1;
+  private float enemyMissileSpeed;
 
   protected override void OnEnable()
   {
 
     base.OnEnable();
     //print("---PlayerMissilemovement OnEnable()---");
+  }
+
+  protected override void Start()
+  {
+    //upDirection = GameObject.FindGameObjectWithTag("PlayerShipFrontTurret").transform.up;
+    enemyMissileSpeed = LevelManager.Instance.LevelStats["EnemyMissileSpeed"] * speedMultiplier;
+    base.Start();
+    //print("---PlayerMissilemovement Start()---");
   }
   private void OnTriggerEnter(Collider co)
   {
@@ -63,7 +72,7 @@ public class EnemyMissileMovement : MissileMovement
   {
 
     if (!collided)
-      transform.position += transform.forward * speed * Time.fixedDeltaTime;
+      transform.position += transform.forward * enemyMissileSpeed * Time.fixedDeltaTime;
     //transform.position += movementVector * Time.fixedDeltaTime;
 
   }
