@@ -377,7 +377,7 @@ public class PlayerShip : ExtendedBehaviour
     {
       if (GameplayManager.Instance.currentGameState == GameplayManager.GameState.LEVEL_IN_PROGRESS)
       {
-        if ((collision.gameObject.tag.Equals("Enemy01")) || (collision.gameObject.tag.Equals("EnemyMissile")))
+        if ((collision.gameObject.tag.Equals("Enemy01")) || (collision.gameObject.tag.Equals("EnemyMissile")) || (collision.gameObject.tag.Equals("EnemyMissileLarge")))
         {
           //GameObject newParticleEffect = GameObject.Instantiate(PlayerShipDamageLarge, transform.position, PlayerShipDamageLarge.transform.rotation, transform ) as GameObject;
           GameObject newParticleEffect = SimplePool.Spawn(PlayerShipDamageLarge, collision.gameObject.transform.position, PlayerShipDamageLarge.transform.rotation, transform) as GameObject;
@@ -390,8 +390,12 @@ public class PlayerShip : ExtendedBehaviour
 
           //print($"collision between this {transform.position} and other {collision.gameObject.transform.position}");
           DoCameraShake();
-          ChangeShipHP(-10);
-         
+          if ((collision.gameObject.tag.Equals("Enemy01")) || (collision.gameObject.tag.Equals("EnemyMissile")))
+            ChangeShipHP(-10); // todo: read from CSV
+          else if (collision.gameObject.tag.Equals("EnemyMissileLarge"))
+            ChangeShipHP(-40); // todo: read from CSV
+
+
         }
 
         if ((collision.gameObject.tag.Equals("Asteroid")))
