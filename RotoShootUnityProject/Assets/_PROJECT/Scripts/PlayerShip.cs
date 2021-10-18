@@ -393,7 +393,9 @@ public class PlayerShip : ExtendedBehaviour
           if ((collision.gameObject.tag.Equals("Enemy01")) || (collision.gameObject.tag.Equals("EnemyMissile")))
             ChangeShipHP(-10); // todo: read from CSV
           else if (collision.gameObject.tag.Equals("EnemyMissileLarge"))
-            ChangeShipHP(-40); // todo: read from CSV
+            ChangeShipHP(-4000); // todo: read from CSV * 10
+          else if (collision.gameObject.tag.Equals("EnemyMissileMedium"))
+            ChangeShipHP(-4000); // todo: read from CSV * 2?
 
 
         }

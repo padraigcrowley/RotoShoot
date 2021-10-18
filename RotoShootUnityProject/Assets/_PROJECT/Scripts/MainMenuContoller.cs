@@ -42,7 +42,13 @@ public class MainMenuContoller : ExtendedBehaviour
   public void MainMenuStartButtonTransitionOut()
   {
     TransitionHelper.TransitionOut(MainMenuButtonTransitions);
-    selectedLevelText.text = "LEVEL " + GameController.Instance.currentLevelPlaying.ToString();
+    //selectedLevelText.text = "LEVEL " + GameController.Instance.currentLevelPlaying.ToString();
+
+    // start level count from 100 down to 1??
+    int levelFrom100Down = 100 - GameController.Instance.currentLevelPlaying+1;
+    selectedLevelText.text = "LEVEL " + levelFrom100Down.ToString();
+
+
     SetCorrectPrevNextLevelAlphaButtons();
     
     Wait(.6f, () => {
@@ -165,7 +171,12 @@ public class MainMenuContoller : ExtendedBehaviour
     if((GameController.Instance.currentLevelPlaying + 1 <= GameController.Instance.highestLevelPlayed) &&(GameController.Instance.currentLevelPlaying+1 <= 100))
 		{
       GameController.Instance.currentLevelPlaying++;
-      selectedLevelText.text = "LEVEL " + GameController.Instance.currentLevelPlaying.ToString();
+      //selectedLevelText.text = "LEVEL " + GameController.Instance.currentLevelPlaying.ToString();
+      
+      // start level count from 100 down to 1??
+      int levelFrom100Down = 100 - GameController.Instance.currentLevelPlaying+1;
+      selectedLevelText.text = "LEVEL " + levelFrom100Down.ToString();
+      
       SetCorrectPrevNextLevelAlphaButtons();
     }
 	}
@@ -175,7 +186,11 @@ public class MainMenuContoller : ExtendedBehaviour
     if (GameController.Instance.currentLevelPlaying - 1 >= 1)
     {
       GameController.Instance.currentLevelPlaying--;
-      selectedLevelText.text = "LEVEL " + GameController.Instance.currentLevelPlaying.ToString();
+      //selectedLevelText.text = "LEVEL " + GameController.Instance.currentLevelPlaying.ToString();
+      // start level count from 100 down to 1??
+      int levelFrom100Down = 100 - GameController.Instance.currentLevelPlaying+1;
+      selectedLevelText.text = "LEVEL " + levelFrom100Down.ToString();
+      
       SetCorrectPrevNextLevelAlphaButtons();
     }
   }
