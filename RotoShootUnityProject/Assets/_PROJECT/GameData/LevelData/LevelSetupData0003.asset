@@ -19,8 +19,8 @@ MonoBehaviour:
   numMaxActiveWaves: 1
   TimeBetweenWavesMin: 0
   TimeBetweenWavesMax: 0
-  enemyRateOfFireMin: 1
-  enemyRateOfFireMax: 2
+  enemyRateOfFireMin: -1
+  enemyRateOfFireMax: -1
   levelEnemySpawnPointData:
   - enemyPrefab: {fileID: 4342350733379744943, guid: 98337287636663844a798648967aa1c7,
       type: 3}

@@ -391,11 +391,11 @@ public class PlayerShip : ExtendedBehaviour
           //print($"collision between this {transform.position} and other {collision.gameObject.transform.position}");
           DoCameraShake();
           if ((collision.gameObject.tag.Equals("Enemy01")) || (collision.gameObject.tag.Equals("EnemyMissile")))
-            ChangeShipHP(-10); // todo: read from CSV
+            ChangeShipHP((int)LevelManager.Instance.LevelStats["EnemyMissileDamage"]); 
           else if (collision.gameObject.tag.Equals("EnemyMissileLarge"))
-            ChangeShipHP(-4000); // todo: read from CSV * 10
+            ChangeShipHP((int)LevelManager.Instance.LevelStats["EnemyMissileDamage"]*3); 
           else if (collision.gameObject.tag.Equals("EnemyMissileMedium"))
-            ChangeShipHP(-4000); // todo: read from CSV * 2?
+            ChangeShipHP((int)LevelManager.Instance.LevelStats["EnemyMissileDamage"]*10); 
 
 
         }
