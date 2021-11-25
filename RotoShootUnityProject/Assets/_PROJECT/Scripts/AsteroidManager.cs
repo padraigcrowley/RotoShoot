@@ -24,7 +24,8 @@ public class AsteroidManager : ExtendedBehaviour
   private void Start()
   {
     if (LevelManager.Instance.timeBetweenAsteroidShower <= 0) //it's been set to 0 in level setup => no asteroidshower in this level
-      return; 
+      return;
+    travelSpeed = LevelManager.Instance.LevelStats["AsteroidBeltSpeed"];
     timeToNextAsteroidShower = LevelManager.Instance.timeBetweenAsteroidShower;
     if (timeToNextAsteroidShower > 0)
     {

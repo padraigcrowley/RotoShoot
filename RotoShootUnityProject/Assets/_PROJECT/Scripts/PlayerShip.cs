@@ -105,8 +105,8 @@ public class PlayerShip : ExtendedBehaviour
           
           PlayerHPWorldSpaceStatusBar.EnableStatusBar();
           //UltimateStatusBar.UpdateStatus("PlayerHPWorldSpaceStatusBar", 0f, GameplayManager.Instance.MAX_PLAYER_HP);
-          GameplayManager.Instance.currentPlayerHP = GameplayManager.Instance.MAX_PLAYER_HP;
-          UltimateStatusBar.UpdateStatus("PlayerHPWorldSpaceStatusBar", GameplayManager.Instance.currentPlayerHP, GameplayManager.Instance.MAX_PLAYER_HP);
+          GameplayManager.Instance.currentPlayerHP = GameController.Instance.MAX_PLAYER_HP;
+          UltimateStatusBar.UpdateStatus("PlayerHPWorldSpaceStatusBar", GameplayManager.Instance.currentPlayerHP, GameController.Instance.MAX_PLAYER_HP);
           
           if (playerDeathFXObjects.Count != 0) //despawn the player death explosions from the previous playerdeath. slightly weird place to do it, I know but enough time has passed...
 					{
@@ -411,7 +411,7 @@ public class PlayerShip : ExtendedBehaviour
           });
           //print($"collision between this {transform.position} and asteroid {collision.gameObject.transform.position}");
           DoCameraShake();
-          ChangeShipHP(-25);
+          ChangeShipHP(-(int)LevelManager.Instance.LevelStats["EnemyMissileDamage"]);
         }
       }
     }
@@ -420,13 +420,13 @@ public class PlayerShip : ExtendedBehaviour
   //could be increment or decrement;
   public void ChangeShipHP(int hpChange)
   {
-    if ((GameplayManager.Instance.currentPlayerHP + hpChange) > GameplayManager.Instance.MAX_PLAYER_HP)
-      GameplayManager.Instance.currentPlayerHP = GameplayManager.Instance.MAX_PLAYER_HP;
+    if ((GameplayManager.Instance.currentPlayerHP + hpChange) > GameController.Instance.MAX_PLAYER_HP)
+      GameplayManager.Instance.currentPlayerHP = GameController.Instance.MAX_PLAYER_HP; 
     else
       GameplayManager.Instance.currentPlayerHP += hpChange; //looks weird but negattive numbers are passed in for a decrease in HP
     
     //UltimateStatusBar.UpdateStatus("playerStatusBar", GameplayManager.Instance.currentPlayerHP, GameplayManager.Instance.MAX_PLAYER_HP);
-    UltimateStatusBar.UpdateStatus("PlayerHPWorldSpaceStatusBar", GameplayManager.Instance.currentPlayerHP, GameplayManager.Instance.MAX_PLAYER_HP);
+    UltimateStatusBar.UpdateStatus("PlayerHPWorldSpaceStatusBar", GameplayManager.Instance.currentPlayerHP, GameController.Instance.MAX_PLAYER_HP);
   }
 
  

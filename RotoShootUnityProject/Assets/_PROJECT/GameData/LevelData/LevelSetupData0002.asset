@@ -76,5 +76,5 @@ MonoBehaviour:
   - {x: -1.29, y: -5}
   - {x: 1.29, y: -5}
   - {x: 3.84, y: -5}
-  timeBetweenAsteroidShower: 10
+  timeBetweenAsteroidShower: 20
   levelControlType: 2

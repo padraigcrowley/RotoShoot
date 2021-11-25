@@ -45,7 +45,7 @@ public class GameplayManager : Singleton<GameplayManager>, IPowerUpEvents
   public int maxEnemy0001HP; //set in the inspector
   public float enemy0001BaseSpeed = 1.0f;
 
-  public int MAX_PLAYER_HP = 100;
+  
 
   public Vector2[] shipLanes;// = new[] { new Vector2(-3.85f, -6f), new Vector2(-1.29f, -6f), new Vector2(1.29f, -6f), new Vector2(3.84f, -6f) };
 
@@ -86,9 +86,10 @@ public class GameplayManager : Singleton<GameplayManager>, IPowerUpEvents
     currentPlayerHP = 0; //setting it to zero here, then its proper value in PlayerShip.CS, line, "GameplayManager.Instance.currentPlayerHP = GameplayManager.Instance.MAX_PLAYER_HP;"
                          //so the gradual fill-in of the health bar can kick in.
     currentPlayerShipFireRate = basePlayerShipFireRate;
-    
-    PlayerMissileDamage = 1f;//todo - read from CSV
-    
+
+    PlayerMissileDamage = GameController.Instance.PlayerMissileDamage;
+
+
     mouseClickQueue = new Queue();
     currentPlayerScore = 0;
     
@@ -191,7 +192,7 @@ public class GameplayManager : Singleton<GameplayManager>, IPowerUpEvents
 
   public void initializeMainGameplayLoopForLevelRestart()
   {
-    currentPlayerHP = MAX_PLAYER_HP;
+    currentPlayerHP = GameController.Instance.MAX_PLAYER_HP;
     //gameState = 0;
     mouseClickQueue = new Queue();
     currentGameState = GameState.LEVEL_INTRO_IN_PROGRESS;

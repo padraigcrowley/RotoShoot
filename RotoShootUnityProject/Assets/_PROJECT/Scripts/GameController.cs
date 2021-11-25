@@ -5,12 +5,15 @@ using UnityEngine.SceneManagement;
 
 public class GameController : Singleton<GameController>
 {
+  public const int NUM_UNIQUE_LEVELS = 10;
   public int currentLevelPlaying = 1;
   public int currentLevelBackground = 1;
+  
   public int highestLevelPlayed = 1;
   public int weapon = 0;
-  public int starCoinCount;
-  public const int NUM_UNIQUE_LEVELS = 10;
+  public int starCoinCount = 0;
+  public int MAX_PLAYER_HP = 1;
+  public float PlayerMissileDamage = 1f;
 
  public ES3Spreadsheet statsSpreadsheet = new ES3Spreadsheet();
 
@@ -22,9 +25,11 @@ public class GameController : Singleton<GameController>
   void Start()
   {
     GetStatsSpreadsheetData();
-    starCoinCount = ES3.Load("starCoinCount", 20);
+    starCoinCount = ES3.Load("starCoinCount", 0);
     highestLevelPlayed = ES3.Load("highestLevelPlayed", 1);
-       
+    MAX_PLAYER_HP = ES3.Load("MAX_PLAYER_HP", 50);
+    PlayerMissileDamage = ES3.Load("PlayerMissileDamage", 1f);
+
     currentLevelPlaying = highestLevelPlayed;
 
     LoadSpecificLevel(currentLevelPlaying);
