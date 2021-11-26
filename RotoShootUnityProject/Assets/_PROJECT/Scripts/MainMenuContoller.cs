@@ -14,6 +14,7 @@ public class MainMenuContoller : ExtendedBehaviour
   public GameObject LogoImageTransitions;
   public GameObject logoGameObject;
   public GameObject MainMenuSettingsPanel;
+  public GameObject MainMenuUpgradesPanel;
   public GameObject LevelSelectButtonsPanel;
 
 
@@ -62,6 +63,14 @@ public class MainMenuContoller : ExtendedBehaviour
     DoLogoMoveTransitionOut();
     TransitionHelper.TransitionOut(MainMenuButtonTransitions);
     TransitionHelper.TransitionIn(MainMenuSettingsPanel);
+
+  }
+  public void HandleMainMenuUpgradesButtonPress()
+  {
+    
+    DoLogoMoveTransitionOut();
+    TransitionHelper.TransitionOut(MainMenuButtonTransitions);
+    TransitionHelper.TransitionIn(MainMenuUpgradesPanel);
 
   }
 
