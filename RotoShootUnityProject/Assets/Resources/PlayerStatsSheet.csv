@@ -1,4 +1,4 @@
-﻿Level#,starCoinCost,playerMissileDamage,maxPlayerHP,powerupdDuration,shieldDuration,EnemyMissileDamage,EnemyCollisionWithPlayerDamage,AsteroidBeltFrequency,AsteroidBeltDamage,AsteroidBeltSpeed,SpinningMineAppearFreq,SpinningMineHP,SpinningMineLaserDamage,Boss01HP,Boss01MissileDamage,Boss01MissileFreq
+Level#,starCoinCost,playerMissileDamage,maxPlayerHP,powerupDuration,shieldDuration,EnemyMissileDamage,EnemyCollisionWithPlayerDamage,AsteroidBeltFrequency,AsteroidBeltDamage,AsteroidBeltSpeed,SpinningMineAppearFreq,SpinningMineHP,SpinningMineLaserDamage,Boss01HP,Boss01MissileDamage,Boss01MissileFreq
 1,1,1,50,5,5,10,-1,-1,-1,5,-1,-1,-1,-1,-1,-1
 2,2,2,51.51515152,5.05,5.05,10.90909091,-1,-1,-1,5.151515152,-1,-1,-1,-1,-1,-1
 3,3,3,53.03030303,5.10,5.10,11.81818182,-1,-1,-1,5.303030303,-1,-1,-1,-1,-1,-1

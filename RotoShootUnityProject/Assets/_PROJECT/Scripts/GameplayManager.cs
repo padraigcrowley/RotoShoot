@@ -45,8 +45,6 @@ public class GameplayManager : Singleton<GameplayManager>, IPowerUpEvents
   public int maxEnemy0001HP; //set in the inspector
   public float enemy0001BaseSpeed = 1.0f;
 
-  
-
   public Vector2[] shipLanes;// = new[] { new Vector2(-3.85f, -6f), new Vector2(-1.29f, -6f), new Vector2(1.29f, -6f), new Vector2(3.84f, -6f) };
 
   public GameState currentGameState;
@@ -60,7 +58,6 @@ public class GameplayManager : Singleton<GameplayManager>, IPowerUpEvents
   public LevelManager levelManagerScript;
   public PlayerShip playerShipScript;
 
-  public float powerupDurationSeconds, playerShieldPowerupDurationSeconds;
   public int starCoinCount;
   private bool dyingInProgress = false;
 

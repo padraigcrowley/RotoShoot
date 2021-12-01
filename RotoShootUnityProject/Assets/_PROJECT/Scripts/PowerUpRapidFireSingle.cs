@@ -17,7 +17,7 @@ public class PowerUpRapidFireSingle : PowerUp
 
   protected override void OnEnable()
   {
-    durationSeconds = GameplayManager.Instance.powerupDurationSeconds;
+    durationSeconds = GameController.Instance.powerupDuration;
     base.OnEnable();
   }
 

@@ -19,6 +19,8 @@ public abstract class EnemyBehaviour02 : ExtendedBehaviour
   protected float initialHP, initialSpeed; //"protected" to allow abstract sub-class to access it
   private bool enemyHitByPlayerMissile;
 
+  public bool ignoreHueShift;
+
   private GameObject missileObject;
   private SpriteRenderer enemySpriteRenderer;
   private CapsuleCollider enemyCapsuleCollider;
@@ -270,7 +272,8 @@ public abstract class EnemyBehaviour02 : ExtendedBehaviour
 
   private void HandleDamage()
   {
-    hp -= GameplayManager.Instance.PlayerMissileDamage;
+    //hp -= GameplayManager.Instance.PlayerMissileDamage;
+    hp -= GameController.Instance.playerMissileDamage;
 
     if (hp <= 0) //lethal hit
     {

@@ -209,9 +209,10 @@ public class LevelManager : Singleton<LevelManager>
       {
         Vector3 startingPosition = new Vector3(sp.startPos.x + (i * horizontalDistBetweenEnemies), sp.startPos.y + (i * verticalDistBetweenEnemies));
         GameObject enemy = Instantiate(sp.enemyPrefab, startingPosition, Quaternion.identity, waveParentObject.transform);
-        SetEnemyColour(enemy, waveEnemyHueValue);
         enemy.name = "Wave" + index + " Enemy" + i;
         EnemyBehaviour02 enemyScript = enemy.GetComponent<EnemyBehaviour02>();
+        if(enemyScript.ignoreHueShift == false)
+          SetEnemyColour(enemy, waveEnemyHueValue);
         enemyWavesChildrenBehaviourScripts.Add(enemyScript);// add each of the enemies in the wave's behaviour scripts to a list
         enemyScript.startPosX = startingPosition.x;
         enemyScript.startPosY = startingPosition.y;

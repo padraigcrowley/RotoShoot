@@ -9,7 +9,6 @@ public class BossBehaviour01 : ExtendedBehaviour
   protected splineMove splineMoveScript;
   private Renderer[] bossSpriteMaterials;
   public float startPosX, startPosY, startPosZ;
-  public float bossHP = 1;
   public float hpMultiplierFromSpawner;
   public float speedMultiplierFromSpawner;
 
@@ -27,7 +26,7 @@ public class BossBehaviour01 : ExtendedBehaviour
 
   public UltimateStatusBar statusBar;
   private Canvas HealthBarCanvas;
-  public float bossMaxHealth = 100, bossCurrentHealth; //todo - hard coded health?!?!
+  public float bossMaxHealth , bossCurrentHealth; //todo - hard coded health?!?!
   public GameObject deathExplosion;
   private GameObject deathExplosionInstance;
 
@@ -50,6 +49,7 @@ public class BossBehaviour01 : ExtendedBehaviour
   {
 
     transform.position = new Vector3(startPosX, startPosY, 0f);
+    bossMaxHealth = LevelManager.Instance.LevelStats["Boss01HP"];
     bossMaxHealth *= hpMultiplierFromSpawner;
     bossCurrentHealth = 1;// we'll set off a coroutine to fill up the healthbar later.
     UltimateStatusBar.UpdateStatus("BossHealthBar", bossCurrentHealth, bossMaxHealth);
@@ -431,7 +431,7 @@ public class BossBehaviour01 : ExtendedBehaviour
         StartCoroutine(BossTakesDamageEffect(.25f)); //note: the param is half the overall duration
         StartCoroutine(DamageFXCooldown(.5f));
       }
-      bossCurrentHealth -= 10;
+      bossCurrentHealth -= GameController.Instance.playerMissileDamage;
       UltimateStatusBar.UpdateStatus("BossHealthBar", bossCurrentHealth, bossMaxHealth);
       if (bossCurrentHealth <= 0)
       {

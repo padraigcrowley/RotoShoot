@@ -18,11 +18,11 @@ public class GameController : Singleton<GameController>
   public int maxPlayerHPLevel = 1;
   public int playerMissileDamageLevel = 1;
   public int shieldDurationLevel = 1;
-  public int powerupdDurationLevel = 1;
+  public int powerupDurationLevel = 1;
   public float maxPlayerHP = 1;
   public float playerMissileDamage = 1;
   public float shieldDuration = 1;
-  public float powerupdDuration = 1;
+  public float powerupDuration = 1;
 
 
   public ES3Spreadsheet statsSpreadsheet = new ES3Spreadsheet();
@@ -41,7 +41,7 @@ public class GameController : Singleton<GameController>
 		maxPlayerHPLevel = ES3.Load("maxPlayerHPLevel", maxPlayerHPLevel);
 		playerMissileDamageLevel = ES3.Load("playerMissileDamageLevel", playerMissileDamageLevel);
 		shieldDurationLevel = ES3.Load("shieldDurationLevel", shieldDurationLevel);
-		powerupdDurationLevel = ES3.Load("powerupdDurationLevel", powerupdDurationLevel);
+		powerupDurationLevel = ES3.Load("powerupdDurationLevel", powerupDurationLevel);
 
 		currentLevelPlaying = highestLevelPlayed;
 
@@ -56,7 +56,7 @@ public class GameController : Singleton<GameController>
     maxPlayerHP = GetSheetStatValue("maxPlayerHP", maxPlayerHPLevel);
     playerMissileDamage = GetSheetStatValue("playerMissileDamage", playerMissileDamageLevel);
     shieldDuration = GetSheetStatValue("shieldDuration", shieldDurationLevel);
-    powerupdDuration = GetSheetStatValue("powerupdDuration", powerupdDurationLevel);
+    powerupDuration = GetSheetStatValue("powerupDuration", powerupDurationLevel);
   }
 
     private void GetStatsSpreadsheetData()
