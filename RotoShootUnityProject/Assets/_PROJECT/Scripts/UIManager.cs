@@ -94,7 +94,7 @@ public class UIManager : Singleton<UIManager>
           //LevelCompletePanel.gameObject.SetActive(false);// just so it will trigger on enable at level end 
 
           //playerHealthBarObject.SetActive(true);
-          //UltimateStatusBar.UpdateStatus("playerStatusBar", GameplayManager.Instance.currentPlayerHP, GameplayManager.Instance.MAX_PLAYER_HP); 
+          //UltimateStatusBar.UpdateStatus("playerStatusBar", GameplayManager.Instance.currentPlayerHP, GameplayManager.Instance.maxPlayerHP); 
 
           CurrentPlayerScoreText.text = (GameplayManager.Instance.currentPlayerScore).ToString();
           //CurrentEnemyKillCount.text = LevelManager.Instance.numEnemyKillsInLevel.ToString();
