@@ -219,8 +219,6 @@ public class LevelManager : Singleton<LevelManager>
         enemyScript.speedMultiplierFromSpawner = sp.speedMultiplier;
         enemyScript.hpMultiplierFromSpawner = sp.hpMultiplier;
         enemyScript.timeBetweenSpawn = sp.timeBetweenSpawn;
-        
-        
 
         if (pathInstance != null)
         {
