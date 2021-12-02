@@ -38,7 +38,7 @@ public class MainMenuContoller : ExtendedBehaviour
 
     logoMoveTransitionOut = new Move(logoGameObject, startPosition: logoGameObject.transform.localPosition, endPosition: new Vector3(0, 1620, 0), duration: .3f, delay: 0f, tweenType: TransitionHelper.TweenType.easeInBack, coordinateSpace: BeautifulTransitions.Scripts.Transitions.TransitionSteps.AbstractClasses.TransitionStep.CoordinateSpaceType.AnchoredPosition);
     
-      logoMoveTransitionIn = new Move(logoGameObject, startPosition: new Vector3(0, 1620, 0), endPosition: new Vector3(0, 281, 0), duration: .3f, delay: 0f, tweenType: TransitionHelper.TweenType.spring, coordinateSpace: BeautifulTransitions.Scripts.Transitions.TransitionSteps.AbstractClasses.TransitionStep.CoordinateSpaceType.AnchoredPosition);
+      logoMoveTransitionIn = new Move(logoGameObject, startPosition: new Vector3(0, 1620, 0), endPosition: new Vector3(0, 281, 0), duration: .5f, delay: 0f, tweenType: TransitionHelper.TweenType.spring, coordinateSpace: BeautifulTransitions.Scripts.Transitions.TransitionSteps.AbstractClasses.TransitionStep.CoordinateSpaceType.AnchoredPosition);
   }
   public void MainMenuStartButtonTransitionOut()
   {

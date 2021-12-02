@@ -5167,10 +5167,15 @@ MonoBehaviour:
   currentLevelPlaying: 1
   currentLevelBackground: 1
   highestLevelPlayed: 1
-  weapon: 0
   starCoinCount: 0
-  MAX_PLAYER_HP: 1
-  PlayerMissileDamage: 1
+  maxPlayerHPLevel: 1
+  playerMissileDamageLevel: 1
+  shieldDurationLevel: 1
+  powerupDurationLevel: 1
+  maxPlayerHP: 1
+  playerMissileDamage: 1
+  shieldDuration: 1
+  powerupDuration: 1
 --- !u!4 &1721058262
 Transform:
   m_ObjectHideFlags: 0
@@ -6438,8 +6443,8 @@ MonoBehaviour:
     AutoRun: 0
     TransitionChildren: 0
     MustTriggerDirect: 0
-    Delay: 0
-    Duration: 0.4
+    Delay: 0.01
+    Duration: 0.6
     TimeUpdateMethod: 0
     TransitionType: 23
     AnimationCurve:

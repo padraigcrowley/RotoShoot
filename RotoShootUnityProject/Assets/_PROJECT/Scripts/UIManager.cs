@@ -27,6 +27,8 @@ public class UIManager : Singleton<UIManager>
   private bool hudOn = false;
   private bool doingLevelCompleteText = false;
 
+  public GameObject CanvasAndMenuController;
+  public MainMenuContoller mainMenuContoller;
   // Start is called before the first frame update
   void Start()
   {
@@ -36,6 +38,8 @@ public class UIManager : Singleton<UIManager>
     CurrentEnemyKillCount.text = LevelManager.Instance.numEnemyKillsInLevel.ToString();
     RequiredEnemyKillCount.text = "/" + LevelManager.Instance.levelSetupData.lccEnemyKills.ToString();
     starCoinCountText.text = GameController.Instance.starCoinCount.ToString();
+    CanvasAndMenuController = GameObject.Find("CanvasAndMenuController");
+    mainMenuContoller = CanvasAndMenuController.GetComponent<MainMenuContoller>();
   }
 
   
@@ -195,7 +199,6 @@ public class UIManager : Singleton<UIManager>
 
   public void handlePauseMenuGameExitButtonPress() 
   {
-    //GameController.Instance.currentLevelPlaying = 0;
     if (GameplayManager.Instance.isGamePaused)
     {
       GameplayManager.Instance.UnpauseGame();
@@ -203,11 +206,12 @@ public class UIManager : Singleton<UIManager>
 
     TransitionHelper.TransitionOut(MainPauseMenuButtonTransitions);
 
-    ///var transition = XXX.GetComponent<Move>();
-    //transition.AddOnCompleteAction(LoadMaiMenuCallback);
-
-    SceneManager.LoadScene("MainMenu");
-
+    if (SceneManager.GetSceneByName("BaseGameScene").isLoaded)
+    {
+      SceneManager.UnloadSceneAsync("BaseGameScene");
+    }
+    mainMenuContoller.DoLogoMoveTransitionIn();
+    TransitionHelper.TransitionIn(mainMenuContoller.MainMenuButtonTransitions);
 
   }
   
@@ -218,20 +222,32 @@ public class UIManager : Singleton<UIManager>
       GameplayManager.Instance.UnpauseGame();
     }
 
-    //GameController.Instance.currentLevelPlaying = 0;
     TransitionHelper.TransitionOut(PlayerDiedPanel);
-    
-    //exitMovetransition = PlayerDiedPanel.GetComponent<Move>();
-    //exitMovetransition.AddOnCompleteAction(LoadMaiMenuCallback);
 
-    SceneManager.LoadScene("MainMenu");
+    if (SceneManager.GetSceneByName("BaseGameScene").isLoaded)
+    {
+      SceneManager.UnloadSceneAsync("BaseGameScene");
+    }
+    mainMenuContoller.DoLogoMoveTransitionIn();
+    TransitionHelper.TransitionIn(mainMenuContoller.MainMenuButtonTransitions);
 
   }
-
-  void LoadMaiMenuCallback(object parameter)
+  public void handlePlayerDiedMenuUpgradesButtonPress()
   {
-    SceneManager.LoadScene("MainMenu");
-    //Debug.Log("Complete with parameter: " + parameter);
+    if (GameplayManager.Instance.isGamePaused)
+    {
+      GameplayManager.Instance.UnpauseGame();
+    }
+
+    TransitionHelper.TransitionOut(PlayerDiedPanel);
+
+    if (SceneManager.GetSceneByName("BaseGameScene").isLoaded)
+    {
+      SceneManager.UnloadSceneAsync("BaseGameScene");
+    }
+    //mainMenuContoller.DoLogoMoveTransitionIn();
+    //TransitionHelper.TransitionIn(mainMenuContoller.MainMenuButtonTransitions);
+    TransitionHelper.TransitionIn(mainMenuContoller.MainMenuUpgradesPanel);
+    
   }
- 
 }

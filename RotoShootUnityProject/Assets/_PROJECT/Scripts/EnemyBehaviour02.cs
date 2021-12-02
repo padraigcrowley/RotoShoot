@@ -193,11 +193,12 @@ public abstract class EnemyBehaviour02 : ExtendedBehaviour
             break;
           }
         case EnemyState.HIT_BY_PLAYER_SHIP:
+        case EnemyState.HIT_BY_PLAYER_SHIELD:
           {
-            if ((!GameplayManager.Instance.playerShipInvulnerable) && (!GameplayManager.Instance.playerShieldVisible))
-            {
-              playerShip.ChangeShipHP(-20);
-            }
+            //if ((!GameplayManager.Instance.playerShipInvulnerable) && (!GameplayManager.Instance.playerShieldVisible))
+            //{
+            //  playerShip.ChangeShipHP(-20);
+            //}
             TemporarilyDie();
             break;
           }
@@ -303,6 +304,8 @@ public abstract class EnemyBehaviour02 : ExtendedBehaviour
     if (enemyState == EnemyState.HIT_BY_PLAYER_SHIELD)
     { 
       StartCoroutine(DoBurnFadeEffect(.75f, 0f, 1f));
+      DoExplode();
+
       LevelManager.Instance.numEnemyKillsInLevel++;
       UIManager.Instance.CurrentEnemyKillCount.text = LevelManager.Instance.numEnemyKillsInLevel.ToString();
       GameplayManager.Instance.totalEnemyKillCount++;
