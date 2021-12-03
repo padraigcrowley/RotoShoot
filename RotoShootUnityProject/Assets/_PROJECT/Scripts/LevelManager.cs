@@ -130,7 +130,7 @@ public class LevelManager : Singleton<LevelManager>
     for (int i = 0; i < GameController.Instance.statsSpreadsheet.ColumnCount; i++)
     {
       string statName = GameController.Instance.statsSpreadsheet.GetCell<string>(i, 0);
-      float statValue = GetSheetStatValue(statName, levelNum);
+      float statValue = GameController.Instance.GetSheetStatValue(statName, levelNum);
       //print($"Stat:");
       LevelStats.Add(statName, statValue);
 
@@ -138,21 +138,21 @@ public class LevelManager : Singleton<LevelManager>
 
   }
 
-  float GetSheetStatValue(string TextID, int LevelNumber)
-  {
-    for (int col = 0; col < GameController.Instance.statsSpreadsheet.ColumnCount; col++)
-    {
-      for (int row = 0; row < GameController.Instance.statsSpreadsheet.RowCount; row++)
-      {
-        string cellContent = GameController.Instance.statsSpreadsheet.GetCell<string>(col, row);
-        if (cellContent == TextID)
-        {
-          return GameController.Instance.statsSpreadsheet.GetCell<float>(col, row + LevelNumber);
-        }
-      }
-    }
-    return -1; //error
-  }
+  //float GetSheetStatValue(string TextID, int LevelNumber)
+  //{
+  //  for (int col = 0; col < GameController.Instance.statsSpreadsheet.ColumnCount; col++)
+  //  {
+  //    for (int row = 0; row < GameController.Instance.statsSpreadsheet.RowCount; row++)
+  //    {
+  //      string cellContent = GameController.Instance.statsSpreadsheet.GetCell<string>(col, row);
+  //      if (cellContent == TextID)
+  //      {
+  //        return GameController.Instance.statsSpreadsheet.GetCell<float>(col, row + LevelNumber);
+  //      }
+  //    }
+  //  }
+  //  return -1; //error
+  //}
 
   void InitializeLCC()
   {

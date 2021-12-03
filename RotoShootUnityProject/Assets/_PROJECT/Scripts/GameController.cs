@@ -31,6 +31,8 @@ public class GameController : Singleton<GameController>
   void Awake()
   {
     DontDestroyOnLoad(transform.gameObject);
+    GetStatsSpreadsheetData();
+    GetPlayerStatsSpreadsheetData();
   }
 
   void Start()
@@ -45,8 +47,6 @@ public class GameController : Singleton<GameController>
 
 		currentLevelPlaying = highestLevelPlayed;
 
-    GetStatsSpreadsheetData();
-    GetPlayerStatsSpreadsheetData();
 
     LoadSpecificLevel(currentLevelPlaying);
   }
@@ -77,7 +77,7 @@ public class GameController : Singleton<GameController>
     print($"PlayerStatSheet has  { playerStatsSpreadsheet.ColumnCount } columns, { playerStatsSpreadsheet.RowCount } rows");
   }
 
-  float GetSheetStatValue(string TextID, int LevelNumber)
+  public float GetSheetStatValue(string TextID, int LevelNumber)
   {
     for (int col = 0; col < playerStatsSpreadsheet.ColumnCount; col++)
     {
