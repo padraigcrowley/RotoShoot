@@ -217,7 +217,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: 'Level : 1'
+  m_text: 'Level : 0'
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 10d15e6bb5d70ac4198345ac8f83a770, type: 2}
   m_sharedMaterial: {fileID: 3070483639754226382, guid: 10d15e6bb5d70ac4198345ac8f83a770,
@@ -749,7 +749,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: 562
+  m_text: 0
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 10d15e6bb5d70ac4198345ac8f83a770, type: 2}
   m_sharedMaterial: {fileID: 3070483639754226382, guid: 10d15e6bb5d70ac4198345ac8f83a770,
@@ -880,7 +880,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
-  m_RaycastTarget: 0
+  m_RaycastTarget: 1
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1
   m_OnCullStateChanged:
@@ -928,7 +928,7 @@ MonoBehaviour:
     m_HighlightedSprite: {fileID: 21300000, guid: 9dfa926737a98014bb39adf975b06c60,
       type: 3}
     m_PressedSprite: {fileID: 21300000, guid: 9dfa926737a98014bb39adf975b06c60, type: 3}
-    m_SelectedSprite: {fileID: 21300000, guid: 9dfa926737a98014bb39adf975b06c60, type: 3}
+    m_SelectedSprite: {fileID: 0}
     m_DisabledSprite: {fileID: 21300000, guid: 26c825562a27c5c4cba10d10c43735d4, type: 3}
   m_AnimationTriggers:
     m_NormalTrigger: Normal
@@ -943,7 +943,7 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 0}
         m_TargetAssemblyTypeName: MainMenuContoller, Assembly-CSharp
-        m_MethodName: HandleUpgradeItem0UpgradeButtonPress
+        m_MethodName: HandleUpgradeItemUpgradeButtonPress
         m_Mode: 3
         m_Arguments:
           m_ObjectArgument: {fileID: 0}

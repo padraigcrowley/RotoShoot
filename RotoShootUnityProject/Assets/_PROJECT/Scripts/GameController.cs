@@ -25,7 +25,7 @@ public class GameController : Singleton<GameController>
   public float powerupDuration = 1;
 
 
-  public ES3Spreadsheet statsSpreadsheet = new ES3Spreadsheet();
+  public ES3Spreadsheet levelStatsSpreadsheet = new ES3Spreadsheet();
  public ES3Spreadsheet playerStatsSpreadsheet = new ES3Spreadsheet();
 
   void Awake()
@@ -33,30 +33,26 @@ public class GameController : Singleton<GameController>
     DontDestroyOnLoad(transform.gameObject);
     GetStatsSpreadsheetData();
     GetPlayerStatsSpreadsheetData();
-  }
-
-  void Start()
-  {
-
     highestLevelPlayed = ES3.Load("highestLevelPlayed", 1);
     starCoinCount = ES3.Load("starCoinCount", starCoinCount);
 		maxPlayerHPLevel = ES3.Load("maxPlayerHPLevel", maxPlayerHPLevel);
 		playerMissileDamageLevel = ES3.Load("playerMissileDamageLevel", playerMissileDamageLevel);
 		shieldDurationLevel = ES3.Load("shieldDurationLevel", shieldDurationLevel);
 		powerupDurationLevel = ES3.Load("powerupdDurationLevel", powerupDurationLevel);
-
 		currentLevelPlaying = highestLevelPlayed;
+  }
 
-
+  void Start()
+  {
     LoadSpecificLevel(currentLevelPlaying);
   }
 
   private void GetPlayerStatsSpreadsheetData()
   {
-    maxPlayerHP = GetSheetStatValue("maxPlayerHP", maxPlayerHPLevel);
-    playerMissileDamage = GetSheetStatValue("playerMissileDamage", playerMissileDamageLevel);
-    shieldDuration = GetSheetStatValue("shieldDuration", shieldDurationLevel);
-    powerupDuration = GetSheetStatValue("powerupDuration", powerupDurationLevel);
+    maxPlayerHP = GetSheetStatValue(playerStatsSpreadsheet, "maxPlayerHP", maxPlayerHPLevel);
+    playerMissileDamage = GetSheetStatValue(playerStatsSpreadsheet, "playerMissileDamage", playerMissileDamageLevel);
+    shieldDuration = GetSheetStatValue(playerStatsSpreadsheet, "shieldDuration", shieldDurationLevel);
+    powerupDuration = GetSheetStatValue(playerStatsSpreadsheet, "powerupDuration", powerupDurationLevel);
   }
 
     private void GetStatsSpreadsheetData()
@@ -68,25 +64,25 @@ public class GameController : Singleton<GameController>
     settings.location = ES3.Location.Resources;
     print("settings.location = " + settings.location);
 
-    statsSpreadsheet = new ES3Spreadsheet();
-    statsSpreadsheet.Load("mySheet.csv", settings);
+    levelStatsSpreadsheet = new ES3Spreadsheet();
+    levelStatsSpreadsheet.Load("mySheet.csv", settings);
     playerStatsSpreadsheet = new ES3Spreadsheet();
     playerStatsSpreadsheet.Load("PlayerStatsSheet.csv", settings);
 
-    print($"StatsSheet has  { statsSpreadsheet.ColumnCount } columns, { statsSpreadsheet.RowCount } rows");
+    print($"StatsSheet has  { levelStatsSpreadsheet.ColumnCount } columns, { levelStatsSpreadsheet.RowCount } rows");
     print($"PlayerStatSheet has  { playerStatsSpreadsheet.ColumnCount } columns, { playerStatsSpreadsheet.RowCount } rows");
   }
 
-  public float GetSheetStatValue(string TextID, int LevelNumber)
+  public float GetSheetStatValue(ES3Spreadsheet spreadSheet, string TextID, int LevelNumber)
   {
-    for (int col = 0; col < playerStatsSpreadsheet.ColumnCount; col++)
+    for (int row = 0; row < spreadSheet.RowCount; row++)
     {
-      for (int row = 0; row < playerStatsSpreadsheet.RowCount; row++)
-      {
-        string cellContent = playerStatsSpreadsheet.GetCell<string>(col, row);
+      for (int col = 0; col < spreadSheet.ColumnCount; col++)
+        {
+        string cellContent = spreadSheet.GetCell<string>(col, row);
         if (cellContent == TextID)
         {
-          return playerStatsSpreadsheet.GetCell<float>(col, row + LevelNumber);
+          return spreadSheet.GetCell<float>(col, row + LevelNumber);
         }
       }
     }
