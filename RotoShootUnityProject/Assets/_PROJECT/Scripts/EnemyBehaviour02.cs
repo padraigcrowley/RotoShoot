@@ -19,6 +19,8 @@ public abstract class EnemyBehaviour02 : ExtendedBehaviour
   protected float initialHP, initialSpeed; //"protected" to allow abstract sub-class to access it
   private bool enemyHitByPlayerMissile;
 
+  public bool ignoreHueShift;
+
   private GameObject missileObject;
   private SpriteRenderer enemySpriteRenderer;
   private CapsuleCollider enemyCapsuleCollider;
@@ -191,11 +193,12 @@ public abstract class EnemyBehaviour02 : ExtendedBehaviour
             break;
           }
         case EnemyState.HIT_BY_PLAYER_SHIP:
+        case EnemyState.HIT_BY_PLAYER_SHIELD:
           {
-            if ((!GameplayManager.Instance.playerShipInvulnerable) && (!GameplayManager.Instance.playerShieldVisible))
-            {
-              playerShip.ChangeShipHP(-20);
-            }
+            //if ((!GameplayManager.Instance.playerShipInvulnerable) && (!GameplayManager.Instance.playerShieldVisible))
+            //{
+            //  playerShip.ChangeShipHP(-20);
+            //}
             TemporarilyDie();
             break;
           }
@@ -270,7 +273,8 @@ public abstract class EnemyBehaviour02 : ExtendedBehaviour
 
   private void HandleDamage()
   {
-    hp -= GameplayManager.Instance.PlayerMissileDamage;
+    //hp -= GameplayManager.Instance.PlayerMissileDamage;
+    hp -= GameController.Instance.playerMissileDamage;
 
     if (hp <= 0) //lethal hit
     {
@@ -300,6 +304,8 @@ public abstract class EnemyBehaviour02 : ExtendedBehaviour
     if (enemyState == EnemyState.HIT_BY_PLAYER_SHIELD)
     { 
       StartCoroutine(DoBurnFadeEffect(.75f, 0f, 1f));
+      DoExplode();
+
       LevelManager.Instance.numEnemyKillsInLevel++;
       UIManager.Instance.CurrentEnemyKillCount.text = LevelManager.Instance.numEnemyKillsInLevel.ToString();
       GameplayManager.Instance.totalEnemyKillCount++;

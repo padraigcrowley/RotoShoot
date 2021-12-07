@@ -104,6 +104,7 @@ MonoBehaviour:
   startPosX: 0
   startPosY: 0
   startPosZ: 0
+  ignoreHueShift: 1
   deathExplosion: {fileID: 5595871714586972966, guid: aa83ec4255e21cb4990b8016587a59ec,
     type: 3}
   deathExplosionInstance: {fileID: 0}

@@ -127,10 +127,10 @@ public class LevelManager : Singleton<LevelManager>
   private void GetLevelStats(int levelNum)
   {
     LevelStats.Clear();
-    for (int i = 0; i < GameController.Instance.statsSpreadsheet.ColumnCount; i++)
+    for (int i = 0; i < GameController.Instance.levelStatsSpreadsheet.ColumnCount; i++)
     {
-      string statName = GameController.Instance.statsSpreadsheet.GetCell<string>(i, 0);
-      float statValue = GetSheetStatValue(statName, levelNum);
+      string statName = GameController.Instance.levelStatsSpreadsheet.GetCell<string>(i, 0);
+      float statValue = GameController.Instance.GetSheetStatValue(GameController.Instance.levelStatsSpreadsheet, statName, levelNum);
       //print($"Stat:");
       LevelStats.Add(statName, statValue);
 
@@ -138,21 +138,21 @@ public class LevelManager : Singleton<LevelManager>
 
   }
 
-  float GetSheetStatValue(string TextID, int LevelNumber)
-  {
-    for (int col = 0; col < GameController.Instance.statsSpreadsheet.ColumnCount; col++)
-    {
-      for (int row = 0; row < GameController.Instance.statsSpreadsheet.RowCount; row++)
-      {
-        string cellContent = GameController.Instance.statsSpreadsheet.GetCell<string>(col, row);
-        if (cellContent == TextID)
-        {
-          return GameController.Instance.statsSpreadsheet.GetCell<float>(col, row + LevelNumber);
-        }
-      }
-    }
-    return -1; //error
-  }
+  //float GetSheetStatValue(string TextID, int LevelNumber)
+  //{
+  //  for (int col = 0; col < GameController.Instance.levelStatsSpreadsheet.ColumnCount; col++)
+  //  {
+  //    for (int row = 0; row < GameController.Instance.levelStatsSpreadsheet.RowCount; row++)
+  //    {
+  //      string cellContent = GameController.Instance.levelStatsSpreadsheet.GetCell<string>(col, row);
+  //      if (cellContent == TextID)
+  //      {
+  //        return GameController.Instance.levelStatsSpreadsheet.GetCell<float>(col, row + LevelNumber);
+  //      }
+  //    }
+  //  }
+  //  return -1; //error
+  //}
 
   void InitializeLCC()
   {
@@ -209,17 +209,16 @@ public class LevelManager : Singleton<LevelManager>
       {
         Vector3 startingPosition = new Vector3(sp.startPos.x + (i * horizontalDistBetweenEnemies), sp.startPos.y + (i * verticalDistBetweenEnemies));
         GameObject enemy = Instantiate(sp.enemyPrefab, startingPosition, Quaternion.identity, waveParentObject.transform);
-        SetEnemyColour(enemy, waveEnemyHueValue);
         enemy.name = "Wave" + index + " Enemy" + i;
         EnemyBehaviour02 enemyScript = enemy.GetComponent<EnemyBehaviour02>();
+        if(enemyScript.ignoreHueShift == false)
+          SetEnemyColour(enemy, waveEnemyHueValue);
         enemyWavesChildrenBehaviourScripts.Add(enemyScript);// add each of the enemies in the wave's behaviour scripts to a list
         enemyScript.startPosX = startingPosition.x;
         enemyScript.startPosY = startingPosition.y;
         enemyScript.speedMultiplierFromSpawner = sp.speedMultiplier;
         enemyScript.hpMultiplierFromSpawner = sp.hpMultiplier;
         enemyScript.timeBetweenSpawn = sp.timeBetweenSpawn;
-        
-        
 
         if (pathInstance != null)
         {

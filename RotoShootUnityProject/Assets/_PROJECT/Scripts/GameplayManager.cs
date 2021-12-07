@@ -14,7 +14,7 @@ public class GameplayManager : Singleton<GameplayManager>, IPowerUpEvents
   [HideInInspector] public enum PlayerFiringState { STRAIGHT_SINGLE, ANGLED_TRIPLE, STRAIGHT_TRIPLE, RAPID_FIRE_SINGLE }
   [HideInInspector] public int currentPlayerScore = 0;
   public int highPlayerScore = 0;
-   public int currentPlayerHP;
+   public float currentPlayerHP;
   [HideInInspector] public float screenEdgeX, screenEdgeY, screenCollisionBoundaryX, screenCollisionBoundaryY;
 
   public GameObject playerShipObject;
@@ -45,8 +45,6 @@ public class GameplayManager : Singleton<GameplayManager>, IPowerUpEvents
   public int maxEnemy0001HP; //set in the inspector
   public float enemy0001BaseSpeed = 1.0f;
 
-  
-
   public Vector2[] shipLanes;// = new[] { new Vector2(-3.85f, -6f), new Vector2(-1.29f, -6f), new Vector2(1.29f, -6f), new Vector2(3.84f, -6f) };
 
   public GameState currentGameState;
@@ -60,7 +58,6 @@ public class GameplayManager : Singleton<GameplayManager>, IPowerUpEvents
   public LevelManager levelManagerScript;
   public PlayerShip playerShipScript;
 
-  public float powerupDurationSeconds, playerShieldPowerupDurationSeconds;
   public int starCoinCount;
   private bool dyingInProgress = false;
 
@@ -83,11 +80,11 @@ public class GameplayManager : Singleton<GameplayManager>, IPowerUpEvents
     currentPlayerFiringState = PlayerFiringState.STRAIGHT_SINGLE;
     currentGameState = GameState.LEVEL_INTRO_IN_PROGRESS;
     currentPlayerMissileSpeedMultiplier = basePlayerMissileSpeedMultiplier;
-    currentPlayerHP = 0; //setting it to zero here, then its proper value in PlayerShip.CS, line, "GameplayManager.Instance.currentPlayerHP = GameplayManager.Instance.MAX_PLAYER_HP;"
+    currentPlayerHP = 0; //setting it to zero here, then its proper value in PlayerShip.CS, line, "GameplayManager.Instance.currentPlayerHP = GameplayManager.Instance.maxPlayerHPLevel;"
                          //so the gradual fill-in of the health bar can kick in.
     currentPlayerShipFireRate = basePlayerShipFireRate;
 
-    PlayerMissileDamage = GameController.Instance.PlayerMissileDamage;
+    PlayerMissileDamage = GameController.Instance.playerMissileDamageLevel;
 
 
     mouseClickQueue = new Queue();
@@ -192,7 +189,7 @@ public class GameplayManager : Singleton<GameplayManager>, IPowerUpEvents
 
   public void initializeMainGameplayLoopForLevelRestart()
   {
-    currentPlayerHP = GameController.Instance.MAX_PLAYER_HP;
+    currentPlayerHP = GameController.Instance.maxPlayerHP;
     //gameState = 0;
     mouseClickQueue = new Queue();
     currentGameState = GameState.LEVEL_INTRO_IN_PROGRESS;
@@ -208,7 +205,7 @@ public class GameplayManager : Singleton<GameplayManager>, IPowerUpEvents
   public void initializeMainGameplayLoopForNextLevel()
   {
     
-    //currentPlayerHP = MAX_PLAYER_HP;
+    //currentPlayerHP = maxPlayerHP;
     GameController.Instance.UnloadSpecificLevel(GameController.Instance.currentLevelBackground);
     GameController.Instance.currentLevelPlaying++;
     GameController.Instance.LoadSpecificLevelAndBaseGame(GameController.Instance.currentLevelPlaying);

@@ -22,7 +22,7 @@ public class PlayerShieldBehaviour : MonoBehaviour
     playerShieldSpriteRenderer = GetComponent<SpriteRenderer>();
     //playerShieldSpriteRenderer.enabled = true;
 
-    durationSeconds = GameplayManager.Instance.playerShieldPowerupDurationSeconds;
+    durationSeconds = GameController.Instance.shieldDuration;
   }
 
   // Update is called once per frame

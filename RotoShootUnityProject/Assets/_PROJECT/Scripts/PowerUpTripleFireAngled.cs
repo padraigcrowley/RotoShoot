@@ -9,7 +9,7 @@ public class PowerUpTripleFireAngled : PowerUp
   protected override void PowerUpPayload()
   {
     //do stuff specific to this PU//todo
-    GameplayManager.Instance.tripleFirePowerupRemainingDuration +=  GameplayManager.Instance.powerupDurationSeconds;
+    GameplayManager.Instance.tripleFirePowerupRemainingDuration += GameController.Instance.powerupDuration;
     
     base.PowerUpPayload();
   }

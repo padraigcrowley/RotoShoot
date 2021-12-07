@@ -67,6 +67,7 @@ public class SpinningMineBehaviour : ExtendedBehaviour
       splineMoveScript.pathContainer = waypointPath;
       splineMoveScript.speed *= this.speedMultiplierFromSpawner;
     }
+    spinningMineMaxHealth = LevelManager.Instance.LevelStats["SpinningMineHP"];
     spinningMineMaxHealth *= hpMultiplierFromSpawner;
     spinningMineCurrentHealth = spinningMineMaxHealth;
     UltimateStatusBar.UpdateStatus("SpinningMineStatusBar", spinningMineCurrentHealth, spinningMineMaxHealth);
@@ -319,7 +320,7 @@ public class SpinningMineBehaviour : ExtendedBehaviour
     if (collision.gameObject.tag.Equals("PlayerMissile") && (enemyState == EnemyState.SPINNING_IN_COMPLETED) )
     {
       StartCoroutine(DoHitEffect());
-      spinningMineCurrentHealth -= 10;  //todo - hard coded value?!?!
+      spinningMineCurrentHealth -= GameController.Instance.playerMissileDamage;
       UltimateStatusBar.UpdateStatus("SpinningMineStatusBar", spinningMineCurrentHealth, spinningMineMaxHealth);
     }
 

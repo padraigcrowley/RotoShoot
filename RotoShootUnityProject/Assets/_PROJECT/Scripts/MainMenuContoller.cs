@@ -14,17 +14,24 @@ public class MainMenuContoller : ExtendedBehaviour
   public GameObject LogoImageTransitions;
   public GameObject logoGameObject;
   public GameObject MainMenuSettingsPanel;
+  public GameObject MainMenuUpgradesPanel;
   public GameObject LevelSelectButtonsPanel;
 
+  public enum ShopItems { MISSILE_POWER, SHIP_DEFENCES , SHIELD_DURATION, POWERUP_DURATION}
 
   public Image prevLevelButtonImage;
   public Image nextLevelButtonImage;
   public Image logoImage;
   private Material logoImageMaterial;
   public TMP_Text selectedLevelText;
+  
   [SerializeField]
   private Move logoMoveTransitionOut;
   private Move logoMoveTransitionIn;
+
+  public TMP_Text UpgradesItem0LevelText, UpgradesItem1LevelText, UpgradesItem2LevelText, UpgradesItem3LevelText;
+  public TMP_Text UpgradesItem0UpgradeCostText, UpgradesItem1UpgradeCostText, UpgradesItem2UpgradeCostText, UpgradesItem3UpgradeCostText;
+  public TMP_Text starCoinCountText;
 
   void Start()
   {
@@ -35,10 +42,86 @@ public class MainMenuContoller : ExtendedBehaviour
 		TransitionHelper.TransitionIn(LogoImageTransitions);
     logoImageMaterial = logoImage.material;
 
+    //we're not running these 2 transitions now, just setting them up for future use.
     logoMoveTransitionOut = new Move(logoGameObject, startPosition: logoGameObject.transform.localPosition, endPosition: new Vector3(0, 1620, 0), duration: .3f, delay: 0f, tweenType: TransitionHelper.TweenType.easeInBack, coordinateSpace: BeautifulTransitions.Scripts.Transitions.TransitionSteps.AbstractClasses.TransitionStep.CoordinateSpaceType.AnchoredPosition);
     
-      logoMoveTransitionIn = new Move(logoGameObject, startPosition: new Vector3(0, 1620, 0), endPosition: new Vector3(0, 281, 0), duration: .3f, delay: 0f, tweenType: TransitionHelper.TweenType.spring, coordinateSpace: BeautifulTransitions.Scripts.Transitions.TransitionSteps.AbstractClasses.TransitionStep.CoordinateSpaceType.AnchoredPosition);
+    logoMoveTransitionIn = new Move(logoGameObject, startPosition: new Vector3(0, 1620, 0), endPosition: new Vector3(0, 281, 0), duration: .5f, delay: 0f, tweenType: TransitionHelper.TweenType.spring, coordinateSpace: BeautifulTransitions.Scripts.Transitions.TransitionSteps.AbstractClasses.TransitionStep.CoordinateSpaceType.AnchoredPosition);
+
+    UpdateUpgradesMenuStatsText();
   }
+
+  public void UpdateUpgradesMenuStatsText()
+	{
+    UpgradesItem0LevelText.text = $"Level : {GameController.Instance.playerMissileDamageLevel}";
+    UpgradesItem1LevelText.text = $"Level : {GameController.Instance.maxPlayerHPLevel}";
+    UpgradesItem2LevelText.text = $"Level : {GameController.Instance.shieldDurationLevel}";
+    UpgradesItem3LevelText.text = $"Level : {GameController.Instance.powerupDurationLevel}";
+
+    
+    UpgradesItem0UpgradeCostText.text = $"{ GameController.Instance.GetSheetStatValue(GameController.Instance.playerStatsSpreadsheet, "starCoinCost", GameController.Instance.playerMissileDamageLevel + 1) }";
+    UpgradesItem1UpgradeCostText.text = $"{ GameController.Instance.GetSheetStatValue(GameController.Instance.playerStatsSpreadsheet, "starCoinCost", GameController.Instance.maxPlayerHPLevel+ 1) }";
+    UpgradesItem2UpgradeCostText.text = $"{ GameController.Instance.GetSheetStatValue(GameController.Instance.playerStatsSpreadsheet, "starCoinCost", GameController.Instance.shieldDurationLevel + 1) }";
+    UpgradesItem3UpgradeCostText.text = $"{ GameController.Instance.GetSheetStatValue(GameController.Instance.playerStatsSpreadsheet, "starCoinCost", GameController.Instance.powerupDurationLevel + 1) }";
+    
+    starCoinCountText.text = (""+GameController.Instance.starCoinCount);
+
+    //TODO - HANDLE WHAT TO DO/DISPLAY WHEN ITEM IS MAX UPGRADED
+
+  }
+
+  public void HandleUpgradeItemUpgradeButtonPress(int buttonPressed)
+	{
+
+    //TODO - HANDLE WHAT TO DO/DISPLAY WHEN ITEM IS MAX UPGRADED
+
+    switch (buttonPressed)
+		{
+      case 0:
+        //TODO - HANDLE WHAT TO DO/DISPLAY WHEN ITEM IS MAX UPGRADED
+        print("Upgrade Item0 pressed");
+        if (GameController.Instance.starCoinCount >= GameController.Instance.GetSheetStatValue(GameController.Instance.playerStatsSpreadsheet, "starCoinCost", GameController.Instance.playerMissileDamageLevel + 1))
+        {
+          GameController.Instance.starCoinCount -= (int)GameController.Instance.GetSheetStatValue(GameController.Instance.playerStatsSpreadsheet, "starCoinCost", GameController.Instance.playerMissileDamageLevel + 1);
+          GameController.Instance.playerMissileDamageLevel++;
+          UpdateUpgradesMenuStatsText();
+          ES3.Save("starCoinCount", GameController.Instance.starCoinCount);
+          ES3.Save("playerMissileDamageLevel", GameController.Instance.playerMissileDamageLevel);
+        }
+        else
+        {
+          //AskPlayerToGetMoreCoins();
+        }
+        break;
+        
+      case 1:
+        print("Upgrade Item1 pressed");
+        if (GameController.Instance.starCoinCount >= GameController.Instance.GetSheetStatValue(GameController.Instance.playerStatsSpreadsheet, "starCoinCost", GameController.Instance.maxPlayerHPLevel + 1))
+        {
+          GameController.Instance.starCoinCount -= (int)GameController.Instance.GetSheetStatValue(GameController.Instance.playerStatsSpreadsheet, "starCoinCost", GameController.Instance.maxPlayerHPLevel + 1);
+          GameController.Instance.maxPlayerHPLevel++;
+          UpdateUpgradesMenuStatsText();
+          ES3.Save("starCoinCount", GameController.Instance.starCoinCount);
+          ES3.Save("maxPlayerHPLevel", GameController.Instance.maxPlayerHPLevel);
+        }
+				else
+				{
+          //AskPlayerToGetMoreCoins();
+				}
+        break;
+      
+      case 2:
+        break;
+      case 3:
+        break;
+      default:
+        break;
+		}
+    void TryUpgradeItem() //local function
+    { 
+
+    }
+	}
+
   public void MainMenuStartButtonTransitionOut()
   {
     TransitionHelper.TransitionOut(MainMenuButtonTransitions);
@@ -52,8 +135,7 @@ public class MainMenuContoller : ExtendedBehaviour
     SetCorrectPrevNextLevelAlphaButtons();
     
     Wait(.6f, () => {
-      
-    LevelSelectButtonsPanel.SetActive(true);
+      LevelSelectButtonsPanel.SetActive(true);
     });
   }
   public void HandleMainMenuSettingsButtonPress()
@@ -62,6 +144,14 @@ public class MainMenuContoller : ExtendedBehaviour
     DoLogoMoveTransitionOut();
     TransitionHelper.TransitionOut(MainMenuButtonTransitions);
     TransitionHelper.TransitionIn(MainMenuSettingsPanel);
+
+  }
+  public void HandleMainMenuUpgradesButtonPress()
+  {
+    UpdateUpgradesMenuStatsText();
+    DoLogoMoveTransitionOut();
+    TransitionHelper.TransitionOut(MainMenuButtonTransitions);
+    TransitionHelper.TransitionIn(MainMenuUpgradesPanel);
 
   }
 

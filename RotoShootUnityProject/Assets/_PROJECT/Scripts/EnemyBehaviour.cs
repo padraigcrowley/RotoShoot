@@ -87,7 +87,6 @@ public abstract class EnemyBehaviour : ExtendedBehaviour
           }
         case EnemyState.HIT_BY_PLAYER_SHIP:
           {
-            GameplayManager.Instance.currentPlayerHP--;
             TemporarilyDie();
             //hp = initialHP; //reset health and position
             //transform.position = new Vector3(startPosX, startPosY, startPosZ);
