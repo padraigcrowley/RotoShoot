@@ -50,8 +50,8 @@ public class GameController : Singleton<GameController>
   {
     maxPlayerHP = GetSheetStatValue(playerStatsSpreadsheet, "maxPlayerHP", maxPlayerHPLevel);
     playerMissileDamage = GetSheetStatValue(playerStatsSpreadsheet, "playerMissileDamage", playerMissileDamageLevel);
-    shieldDuration = GetSheetStatValue(playerStatsSpreadsheet, "shieldDuration", shieldDurationLevel);
-    powerupDuration = GetSheetStatValue(playerStatsSpreadsheet, "powerupDuration", powerupDurationLevel);
+    shieldDuration = GetSheetStatValue(playerStatsSpreadsheet, "shieldDuration", shieldDurationLevel); 
+     powerupDuration = GetSheetStatValue(playerStatsSpreadsheet, "powerupDuration", powerupDurationLevel);
   }
 
     private void GetStatsSpreadsheetData()
@@ -79,7 +79,7 @@ public class GameController : Singleton<GameController>
       for (int col = 0; col < spreadSheet.ColumnCount; col++)
         {
         string cellContent = spreadSheet.GetCell<string>(col, row);
-        if (cellContent == TextID)
+        if (cellContent.Contains(TextID))
         {
           return spreadSheet.GetCell<float>(col, row + LevelNumber);
         }

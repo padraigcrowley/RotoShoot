@@ -78,56 +78,47 @@ public class MainMenuContoller : ExtendedBehaviour
 		{
       case 0:
         //TODO - HANDLE WHAT TO DO/DISPLAY WHEN ITEM IS MAX UPGRADED
-        print("Upgrade Item0 pressed");
-        if (GameController.Instance.starCoinCount >= GameController.Instance.GetSheetStatValue(GameController.Instance.playerStatsSpreadsheet, "starCoinCost", GameController.Instance.playerMissileDamageLevel + 1))
-        {
-          GameController.Instance.playerMissileDamageLevel++;
-          GameController.Instance.starCoinCount -= (int)GameController.Instance.GetSheetStatValue(GameController.Instance.playerStatsSpreadsheet, "starCoinCost", GameController.Instance.playerMissileDamageLevel);
-          
-          GameController.Instance.playerMissileDamage = (int) GameController.Instance.GetSheetStatValue(GameController.Instance.playerStatsSpreadsheet, "playerMissileDamageLevel", GameController.Instance.playerMissileDamageLevel);
-
-          UpdateUpgradesMenuStatsText();
-          ES3.Save("starCoinCount", GameController.Instance.starCoinCount);
-          ES3.Save("playerMissileDamageLevel", GameController.Instance.playerMissileDamageLevel);
-        }
-        else
-        {
-          //AskPlayerToGetMoreCoins();
-        }
+        print("Upgrade Item0 playerMissileDamage pressed");
+        TryToUpgrade(ref  GameController.Instance.playerMissileDamageLevel, ref  GameController.Instance.playerMissileDamage, "playerMissileDamage", "playerMissileDamageLevel");
+        
         break;
         
       case 1:
-        print("Upgrade Item1 pressed");
-        if (GameController.Instance.starCoinCount >= GameController.Instance.GetSheetStatValue(GameController.Instance.playerStatsSpreadsheet, "starCoinCost", GameController.Instance.maxPlayerHPLevel + 1))
-        {
-          GameController.Instance.maxPlayerHPLevel++;
-          GameController.Instance.starCoinCount -= (int)GameController.Instance.GetSheetStatValue(GameController.Instance.playerStatsSpreadsheet, "starCoinCost", GameController.Instance.maxPlayerHPLevel + 1);
+        print("Upgrade Item1 maxPlayerHPLevel pressed");
+        TryToUpgrade(ref GameController.Instance.maxPlayerHPLevel, ref GameController.Instance.maxPlayerHP, "maxPlayerHP", "maxPlayerHPLevel");
 
-          GameController.Instance.maxPlayerHP = (int)GameController.Instance.GetSheetStatValue(GameController.Instance.playerStatsSpreadsheet, "maxPlayerHPLevel", GameController.Instance.maxPlayerHPLevel);
-
-          UpdateUpgradesMenuStatsText();
-          ES3.Save("starCoinCount", GameController.Instance.starCoinCount);
-          ES3.Save("maxPlayerHPLevel", GameController.Instance.maxPlayerHPLevel);
-        }
-				else
-				{
-          //AskPlayerToGetMoreCoins();
-				}
         break;
       
       case 2:
+        print("Upgrade Item2 shieldDurationLevel pressed");
+        TryToUpgrade(ref GameController.Instance.shieldDurationLevel, ref GameController.Instance.shieldDuration, "shieldDuration", "shieldDurationLevel");
         break;
       case 3:
+        print("Upgrade Item3 powerupDurationLevel pressed");
+        TryToUpgrade(ref GameController.Instance.powerupDurationLevel, ref GameController.Instance.powerupDuration, "powerupDuration", "powerupDurationLevel");
         break;
       default:
         break;
 		}
-    void TryUpgradeItem() //local function
-    { 
-
-    }
+    
 	}
-
+  public void TryToUpgrade(ref int itemLevel, ref float ItemValue, string itemNameString, string itemLevelString)
+  {
+    if (GameController.Instance.starCoinCount >= GameController.Instance.GetSheetStatValue(GameController.Instance.playerStatsSpreadsheet, "starCoinCost", itemLevel + 1))
+    {
+      itemLevel++;
+      GameController.Instance.starCoinCount -= (int)GameController.Instance.GetSheetStatValue(GameController.Instance.playerStatsSpreadsheet, "starCoinCost", itemLevel);
+      ItemValue = (int)GameController.Instance.GetSheetStatValue(GameController.Instance.playerStatsSpreadsheet, itemNameString, itemLevel);
+      UpdateUpgradesMenuStatsText();
+      ES3.Save("starCoinCount", GameController.Instance.starCoinCount);
+      ES3.Save(itemLevelString, itemLevel);
+    }
+    else
+    {
+      //AskPlayerToGetMoreCoins();
+    }
+  }
+  
   public void MainMenuStartButtonTransitionOut()
   {
     TransitionHelper.TransitionOut(MainMenuButtonTransitions);
