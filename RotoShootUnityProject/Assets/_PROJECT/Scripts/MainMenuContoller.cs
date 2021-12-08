@@ -81,8 +81,11 @@ public class MainMenuContoller : ExtendedBehaviour
         print("Upgrade Item0 pressed");
         if (GameController.Instance.starCoinCount >= GameController.Instance.GetSheetStatValue(GameController.Instance.playerStatsSpreadsheet, "starCoinCost", GameController.Instance.playerMissileDamageLevel + 1))
         {
-          GameController.Instance.starCoinCount -= (int)GameController.Instance.GetSheetStatValue(GameController.Instance.playerStatsSpreadsheet, "starCoinCost", GameController.Instance.playerMissileDamageLevel + 1);
           GameController.Instance.playerMissileDamageLevel++;
+          GameController.Instance.starCoinCount -= (int)GameController.Instance.GetSheetStatValue(GameController.Instance.playerStatsSpreadsheet, "starCoinCost", GameController.Instance.playerMissileDamageLevel);
+          
+          GameController.Instance.playerMissileDamage = (int) GameController.Instance.GetSheetStatValue(GameController.Instance.playerStatsSpreadsheet, "playerMissileDamageLevel", GameController.Instance.playerMissileDamageLevel);
+
           UpdateUpgradesMenuStatsText();
           ES3.Save("starCoinCount", GameController.Instance.starCoinCount);
           ES3.Save("playerMissileDamageLevel", GameController.Instance.playerMissileDamageLevel);
@@ -97,8 +100,11 @@ public class MainMenuContoller : ExtendedBehaviour
         print("Upgrade Item1 pressed");
         if (GameController.Instance.starCoinCount >= GameController.Instance.GetSheetStatValue(GameController.Instance.playerStatsSpreadsheet, "starCoinCost", GameController.Instance.maxPlayerHPLevel + 1))
         {
-          GameController.Instance.starCoinCount -= (int)GameController.Instance.GetSheetStatValue(GameController.Instance.playerStatsSpreadsheet, "starCoinCost", GameController.Instance.maxPlayerHPLevel + 1);
           GameController.Instance.maxPlayerHPLevel++;
+          GameController.Instance.starCoinCount -= (int)GameController.Instance.GetSheetStatValue(GameController.Instance.playerStatsSpreadsheet, "starCoinCost", GameController.Instance.maxPlayerHPLevel + 1);
+
+          GameController.Instance.maxPlayerHP = (int)GameController.Instance.GetSheetStatValue(GameController.Instance.playerStatsSpreadsheet, "maxPlayerHPLevel", GameController.Instance.maxPlayerHPLevel);
+
           UpdateUpgradesMenuStatsText();
           ES3.Save("starCoinCount", GameController.Instance.starCoinCount);
           ES3.Save("maxPlayerHPLevel", GameController.Instance.maxPlayerHPLevel);

@@ -30,9 +30,6 @@ public class GameController : Singleton<GameController>
 
   void Awake()
   {
-    DontDestroyOnLoad(transform.gameObject);
-    GetStatsSpreadsheetData();
-    GetPlayerStatsSpreadsheetData();
     highestLevelPlayed = ES3.Load("highestLevelPlayed", 1);
     starCoinCount = ES3.Load("starCoinCount", starCoinCount);
 		maxPlayerHPLevel = ES3.Load("maxPlayerHPLevel", maxPlayerHPLevel);
@@ -40,6 +37,8 @@ public class GameController : Singleton<GameController>
 		shieldDurationLevel = ES3.Load("shieldDurationLevel", shieldDurationLevel);
 		powerupDurationLevel = ES3.Load("powerupdDurationLevel", powerupDurationLevel);
 		currentLevelPlaying = highestLevelPlayed;
+    GetStatsSpreadsheetData();
+    GetPlayerStatsSpreadsheetData();
   }
 
   void Start()
