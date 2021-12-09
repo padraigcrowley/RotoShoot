@@ -293,7 +293,7 @@ public abstract class EnemyBehaviour02 : ExtendedBehaviour
     powerUpInstance = SimplePool.Spawn(availablePowerUps[index], transform.position, transform.rotation);
   }
 
-  private void TemporarilyDie()
+  public void TemporarilyDie()
   {
     Wait(.2f, () => {
       //Debug.Log("5 seconds is lost forever");

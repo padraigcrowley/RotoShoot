@@ -106,6 +106,7 @@ MonoBehaviour:
   startPosX: 0
   startPosY: 0
   startPosZ: 0
+  ignoreHueShift: 0
   deathExplosion: {fileID: 5595871714586972966, guid: aa83ec4255e21cb4990b8016587a59ec,
     type: 3}
   deathExplosionInstance: {fileID: 5595871714586972966, guid: aa83ec4255e21cb4990b8016587a59ec,
@@ -120,6 +121,7 @@ MonoBehaviour:
   - {fileID: 2477514511899951309, guid: d6549c779d86365478d15c7f13db6e81, type: 3}
   - {fileID: 2477514511899951309, guid: 39a5b00a3a10b454fa0e0e7667c445bf, type: 3}
   - {fileID: 2477514511899951309, guid: e457f74b2a0398c498d0848f8c96b5af, type: 3}
+  - {fileID: 2477514511899951309, guid: b5dd287b3db9ed549801be885584b372, type: 3}
   powerUpInstance: {fileID: 0}
   playerShip: {fileID: 0}
   waypointPath: {fileID: 0}

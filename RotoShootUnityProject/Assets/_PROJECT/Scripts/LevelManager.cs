@@ -396,6 +396,25 @@ public class LevelManager : Singleton<LevelManager>
     return numActiveWaves;
   }
 
+  public int KillActiveEnemies()
+  {
+    int numActiveWaves = 0;
+
+    foreach (List<EnemyBehaviour02> enemyWaveParentBehaviourScripts in enemyWavesParentBehaviourScripts)
+    {
+      foreach (EnemyBehaviour02 enemyBehaviourScript in enemyWaveParentBehaviourScripts)
+      {
+        if (enemyBehaviourScript.enemyState == EnemyBehaviour02.EnemyState.ALIVE)
+        {
+          enemyBehaviourScript.TemporarilyDie();
+          //break;// we've found at least 1 active enemy in that wave, so no need to check any further - break;
+        }
+      }
+      
+    }
+    return numActiveWaves;
+  }
+
   /// <summary>
   /// Calls GameObject.Destroy on all children of transform. and immediately detaches the children
   /// from transform so after this call tranform.childCount is zero.
