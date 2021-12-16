@@ -118,7 +118,7 @@ public class MainMenuContoller : ExtendedBehaviour
     }
     else
     {
-      //AskPlayerToGetMoreCoins();
+      HandleGetMoreCoinsInitiate();
     }
   }
 
