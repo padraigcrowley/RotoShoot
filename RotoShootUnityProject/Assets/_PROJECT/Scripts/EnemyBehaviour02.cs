@@ -295,7 +295,7 @@ public abstract class EnemyBehaviour02 : ExtendedBehaviour
 
   public void TemporarilyDie()
   {
-    Wait(.2f, () => {
+    Wait(.05f, () => {
       //Debug.Log("5 seconds is lost forever");
       StopMovement();
     });

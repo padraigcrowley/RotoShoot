@@ -5,6 +5,8 @@ using UnityEngine;
 using UnityEngine.UI;
 using BeautifulTransitions.Scripts.Transitions;
 using BeautifulTransitions.Scripts.Transitions.TransitionSteps;
+using BeautifulTransitions.Scripts.Transitions.Components;
+using BeautifulTransitions.Scripts.Transitions.TransitionSteps.AbstractClasses;
 using TMPro;
 
 public class MainMenuContoller : ExtendedBehaviour
@@ -16,6 +18,7 @@ public class MainMenuContoller : ExtendedBehaviour
   public GameObject MainMenuSettingsPanel;
   public GameObject MainMenuUpgradesPanel;
   public GameObject LevelSelectButtonsPanel;
+  public GameObject GetMoreCoinsPanel;
 
   public enum ShopItems { MISSILE_POWER, SHIP_DEFENCES , SHIELD_DURATION, POWERUP_DURATION}
 
@@ -118,7 +121,35 @@ public class MainMenuContoller : ExtendedBehaviour
       //AskPlayerToGetMoreCoins();
     }
   }
-  
+
+  public void HandleGetMoreCoinsInitiate()
+	{
+    //var startPosition = new Vector3(10, 0, 0);
+    //var endPosition = Vector3.zero;
+    //var transition = new Move(MainMenuUpgradesPanel, startPosition, endPosition, 1, 3);
+    var moveTransitionOut = new Move (MainMenuUpgradesPanel, startPosition: MainMenuUpgradesPanel.transform.localPosition, endPosition: new Vector3(-1200, 0, 0), duration: .5f, delay: 0f, tweenType: TransitionHelper.TweenType.easeInBack, coordinateSpace: BeautifulTransitions.Scripts.Transitions.TransitionSteps.AbstractClasses.TransitionStep.CoordinateSpaceType.AnchoredPosition);
+    moveTransitionOut.Start();
+    //TransitionHelper.TransitionOut(MainMenuUpgradesPanel);
+    //TransitionHelper.TransitionIn(GetMoreCoinsPanel);
+
+    var moveTransitionIn = new Move(GetMoreCoinsPanel, startPosition: GetMoreCoinsPanel.transform.localPosition, endPosition: new Vector3(0, 0, 0), duration: .5f, delay: .5f, tweenType: TransitionHelper.TweenType.spring, coordinateSpace: BeautifulTransitions.Scripts.Transitions.TransitionSteps.AbstractClasses.TransitionStep.CoordinateSpaceType.AnchoredPosition);
+    moveTransitionIn.Start();
+
+
+  }
+
+  public void HandleGetMoreCoinsCloseButtonPress()
+  {
+    
+    var moveTransitionIn = new Move(MainMenuUpgradesPanel, startPosition: MainMenuUpgradesPanel.transform.localPosition, endPosition: new Vector3(0, 0, 0), duration: .5f, delay: .5f, tweenType: TransitionHelper.TweenType.spring, coordinateSpace: BeautifulTransitions.Scripts.Transitions.TransitionSteps.AbstractClasses.TransitionStep.CoordinateSpaceType.AnchoredPosition);
+    moveTransitionIn.Start();
+    
+    var moveTransitionOut = new Move(GetMoreCoinsPanel, startPosition: GetMoreCoinsPanel.transform.localPosition, endPosition: new Vector3(1200, 0, 0), duration: .5f, delay: 0f, tweenType: TransitionHelper.TweenType.easeInBack, coordinateSpace: BeautifulTransitions.Scripts.Transitions.TransitionSteps.AbstractClasses.TransitionStep.CoordinateSpaceType.AnchoredPosition);
+    moveTransitionOut.Start();
+
+
+  }
+
   public void MainMenuStartButtonTransitionOut()
   {
     TransitionHelper.TransitionOut(MainMenuButtonTransitions);
@@ -150,6 +181,30 @@ public class MainMenuContoller : ExtendedBehaviour
     TransitionHelper.TransitionOut(MainMenuButtonTransitions);
     TransitionHelper.TransitionIn(MainMenuUpgradesPanel);
 
+  }
+
+
+  public void HandleUpgradeMenuCloseButtonPress()
+	{
+
+    var trans = MainMenuUpgradesPanel.GetComponent<TransitionBase>();
+    trans.TransitionOutConfig.OnTransitionComplete.AddListener(FrontEndTransitioIn);
+
+    //do the transition out
+    trans.TransitionOut();
+
+    //oncomplete:
+    
+  }
+
+  void FrontEndTransitioIn(object parameter)
+  {
+    
+    DoLogoMoveTransitionIn();
+    //Do MainManuButtonsPanel -> MoveTraget.TransitionIn
+    TransitionHelper.TransitionIn(MainMenuButtonTransitions);
+    
+    Debug.Log("Complete with parameter: " + parameter);
   }
 
   public void HandleLevelSelectorBackButtonPress()
@@ -213,6 +268,8 @@ public class MainMenuContoller : ExtendedBehaviour
     DoLogoMoveTransitionOut();
     TransitionHelper.TransitionOut(PlayButtonTransitions);
   }
+  
+  
   public void MainMenuUpgradesButtonTransitionOut()
   {
     DoLogoMoveTransitionOut();

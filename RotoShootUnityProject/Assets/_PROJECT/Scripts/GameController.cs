@@ -35,7 +35,7 @@ public class GameController : Singleton<GameController>
 		maxPlayerHPLevel = ES3.Load("maxPlayerHPLevel", maxPlayerHPLevel);
 		playerMissileDamageLevel = ES3.Load("playerMissileDamageLevel", playerMissileDamageLevel);
 		shieldDurationLevel = ES3.Load("shieldDurationLevel", shieldDurationLevel);
-		powerupDurationLevel = ES3.Load("powerupdDurationLevel", powerupDurationLevel);
+		powerupDurationLevel = ES3.Load("powerupDurationLevel", powerupDurationLevel);
 		currentLevelPlaying = highestLevelPlayed;
     GetStatsSpreadsheetData();
     GetPlayerStatsSpreadsheetData();

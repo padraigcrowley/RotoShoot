@@ -14,6 +14,7 @@ public class UIManager : Singleton<UIManager>
   public GameObject MissionStartLCCTextObject;
   public Button gameRestartButton, gameExitButton;
   public GameObject PlayerDiedPanel;
+  public GameObject EncourageUpgradePanel;
 
   [SerializeField] private GameObject LevelCompletePanel;
   public Image PauseButtonBGImage, PauseButtonFGImage;
@@ -141,6 +142,7 @@ public class UIManager : Singleton<UIManager>
       case GameplayManager.GameState.WAITING_FOR_PLAYERDIED_BUTTONS:
         {
           PlayerDiedPanel.SetActive(true);
+          EncourageUpgradePanel.SetActive(true);
           break;
         }
       default:
@@ -192,6 +194,7 @@ public class UIManager : Singleton<UIManager>
 
     //PlayerDiedPanel.SetActive(false);
     TransitionHelper.TransitionOut(PlayerDiedPanel);
+    TransitionHelper.TransitionOut(EncourageUpgradePanel);
 
     GameplayManager.Instance.initializeMainGameplayLoopForLevelRestart();
     //GameplayManager.Instance.ResumeGame();
@@ -223,6 +226,7 @@ public class UIManager : Singleton<UIManager>
     }
 
     TransitionHelper.TransitionOut(PlayerDiedPanel);
+    TransitionHelper.TransitionOut(EncourageUpgradePanel);
 
     if (SceneManager.GetSceneByName("BaseGameScene").isLoaded)
     {
@@ -240,6 +244,7 @@ public class UIManager : Singleton<UIManager>
     }
 
     TransitionHelper.TransitionOut(PlayerDiedPanel);
+    TransitionHelper.TransitionOut(EncourageUpgradePanel);
 
     if (SceneManager.GetSceneByName("BaseGameScene").isLoaded)
     {
