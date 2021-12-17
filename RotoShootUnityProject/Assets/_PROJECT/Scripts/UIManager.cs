@@ -143,8 +143,11 @@ public class UIManager : Singleton<UIManager>
         {
           PlayerDiedPanel.SetActive(true);
           EncourageUpgradePanel.SetActive(true);
+          GameplayManager.Instance.currentGameState = GameplayManager.GameState.EXITING_LEVEL;
           break;
         }
+      case GameplayManager.GameState.EXITING_LEVEL:
+        break;
       default:
         break;
     }
@@ -246,13 +249,16 @@ public class UIManager : Singleton<UIManager>
     TransitionHelper.TransitionOut(PlayerDiedPanel);
     TransitionHelper.TransitionOut(EncourageUpgradePanel);
 
-    if (SceneManager.GetSceneByName("BaseGameScene").isLoaded)
-    {
-      SceneManager.UnloadSceneAsync("BaseGameScene");
-    }
-    //mainMenuContoller.DoLogoMoveTransitionIn();
-    //TransitionHelper.TransitionIn(mainMenuContoller.MainMenuButtonTransitions);
-    TransitionHelper.TransitionIn(mainMenuContoller.MainMenuUpgradesPanel);
+    Wait(.5f, () => {
+      if (SceneManager.GetSceneByName("BaseGameScene").isLoaded)
+      {
+        SceneManager.UnloadSceneAsync("BaseGameScene");
+      }
+      //mainMenuContoller.DoLogoMoveTransitionIn();
+      //TransitionHelper.TransitionIn(mainMenuContoller.MainMenuButtonTransitions);
+      TransitionHelper.TransitionIn(mainMenuContoller.MainMenuUpgradesPanel);
+    });
+
     
   }
 }
