@@ -19,6 +19,7 @@ public class MainMenuContoller : ExtendedBehaviour
   public GameObject MainMenuUpgradesPanel;
   public GameObject LevelSelectButtonsPanel;
   public GameObject GetMoreCoinsPanel;
+  
 
   public enum ShopItems { MISSILE_POWER, SHIP_DEFENCES , SHIELD_DURATION, POWERUP_DURATION}
 
