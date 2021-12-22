@@ -407,7 +407,6 @@ public class LevelManager : Singleton<LevelManager>
         if (enemyBehaviourScript.enemyState == EnemyBehaviour02.EnemyState.ALIVE)
         {
           enemyBehaviourScript.TemporarilyDie();
-          //break;// we've found at least 1 active enemy in that wave, so no need to check any further - break;
         }
       }
       

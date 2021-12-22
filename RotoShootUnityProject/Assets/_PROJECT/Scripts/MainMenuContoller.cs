@@ -36,6 +36,7 @@ public class MainMenuContoller : ExtendedBehaviour
   public TMP_Text UpgradesItem0LevelText, UpgradesItem1LevelText, UpgradesItem2LevelText, UpgradesItem3LevelText;
   public TMP_Text UpgradesItem0UpgradeCostText, UpgradesItem1UpgradeCostText, UpgradesItem2UpgradeCostText, UpgradesItem3UpgradeCostText;
   public TMP_Text starCoinCountText;
+  public TMP_Text getMoreCoinsPanelStarCoinCountText;
 
   void Start()
   {
@@ -68,6 +69,7 @@ public class MainMenuContoller : ExtendedBehaviour
     UpgradesItem3UpgradeCostText.text = $"{ GameController.Instance.GetSheetStatValue(GameController.Instance.playerStatsSpreadsheet, "starCoinCost", GameController.Instance.powerupDurationLevel + 1) }";
     
     starCoinCountText.text = (""+GameController.Instance.starCoinCount);
+    getMoreCoinsPanelStarCoinCountText.text = ("" + GameController.Instance.starCoinCount);
 
     //TODO - HANDLE WHAT TO DO/DISPLAY WHEN ITEM IS MAX UPGRADED
 

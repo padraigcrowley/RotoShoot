@@ -6,7 +6,7 @@ using DG.Tweening;
 public class PowerUpHealth : PowerUp
 {
   private float durationSeconds;
-  public int HPincrease = 25;
+  public int HPincrease = 99999; // basically, refill the players health
 	public RectTransform playerHPWorldspaceCanvasRect;
 	private Tween pulseTween;
 	protected override void PowerUpPayload()
