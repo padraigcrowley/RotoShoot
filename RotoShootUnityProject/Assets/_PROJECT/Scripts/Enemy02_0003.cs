@@ -13,11 +13,10 @@ public class Enemy02_0003 : EnemyBehaviour02
   //private Renderer spriteMaterial;
   protected override void Start()
   {
-
-    //spriteMaterial = GetComponent<Renderer>();
     base.Start();
-    //Debug.Log("Enemy02_0002 START method");
-    //InvokeRepeating("FireMissileAtPlayer", 3, 5);
+    var HPMultiplier = 10.0f; //this particular enemy should be 10 times tougher than normal ones
+    initialHP *= HPMultiplier;
+    hp = initialHP;
   }
   protected override  void Update()
   {

@@ -8,7 +8,13 @@ using UnityEngine;
 
 public class Enemy02_0001 : EnemyBehaviour02
 {
-
+  protected override void Start()
+  {
+    base.Start();
+    var HPMultiplier = 4.0f; //this particular enemy should be 4 times tougher than normal ones
+    initialHP *= HPMultiplier;
+    hp = initialHP;
+  }
   public override void DoMovement()
   {
     float step = speed * Time.deltaTime; // calculate distance to move

@@ -105,9 +105,14 @@ public class LevelManager : Singleton<LevelManager>
     {
       SetupEnemies();
       StartCoroutine(UIManager.Instance.DoMissionStartLCCText(2f, 2f, $"KILL\n{levelSetupData.lccEnemyKills}\nENEMIES!"));
+      UIManager.Instance.CurrentEnemyKillCount.enabled = true;
+      UIManager.Instance.CurrentEnemyKillCount.text = "0";
+      UIManager.Instance.RequiredEnemyKillCount.enabled = true;
     }
     if (levelSetupData.lccKillBoss)
     {
+      UIManager.Instance.CurrentEnemyKillCount.enabled = false;
+      UIManager.Instance.RequiredEnemyKillCount.enabled = false;
       SetupBoss();
       StartCoroutine(UIManager.Instance.DoMissionStartLCCText(2f, 2f, "KILL\nTHE\nBOSS!"));
 
@@ -336,7 +341,7 @@ public class LevelManager : Singleton<LevelManager>
     {
       foreach (EnemyBehaviour02 enemyBehaviourScript in enemyWaveParentBehaviourScripts)
       {
-        if (enemyBehaviourScript.enemyState == EnemyBehaviour02.EnemyState.ALIVE)
+        if ((enemyBehaviourScript.enemyState == EnemyBehaviour02.EnemyState.ALIVE) && (enemyBehaviourScript.gameObject.transform.position.y - 3 > GameplayManager.Instance.playerShipPos.y)) //Not a valid enemy to fire at player if the y pos is almost same as playership
         {
           aliveEnemies.Add(enemyBehaviourScript);
         }

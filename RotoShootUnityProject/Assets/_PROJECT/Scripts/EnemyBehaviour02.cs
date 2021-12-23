@@ -8,7 +8,7 @@ public abstract class EnemyBehaviour02 : ExtendedBehaviour
 //https://answers.unity.com/questions/379440/a-simple-wait-function-without-coroutine-c.html
 {
   protected float speed; //"protected" to allow abstract sub-class to access it
-  private float hp;
+  protected float hp;
   public float speedMultiplierFromSpawner = 1f;
   public float hpMultiplierFromSpawner = 1f;
   //private float respawnWaitDelay = 6.0f; //default value unless overridden by derived class - no longer used, handled in LeveManager
@@ -106,8 +106,7 @@ public abstract class EnemyBehaviour02 : ExtendedBehaviour
   private void InitialSetup()
   {
     //todo - move this out to GameplayManager or to sub-class or enemy prefab??
-
-    //hp = 1f; // todo - read from CSV
+        
     hp = LevelManager.Instance.LevelStats["EnemyHP"];
     speed = LevelManager.Instance.LevelStats["EnemySpeed"];
     speed *= speedMultiplierFromSpawner;

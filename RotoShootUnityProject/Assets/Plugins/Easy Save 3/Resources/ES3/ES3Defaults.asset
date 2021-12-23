@@ -31,8 +31,10 @@ MonoBehaviour:
     assemblyNames:
     - Assembly-CSharp
     - Assembly-CSharp-firstpass
+    - Purchasing.Common
     - VSSettingsProvider
     - com.gameframe.sceneswitcher.Editor
+    - AlwaysTooLate.PlayMode
     showAdvancedSettings: 1
   addMgrToSceneAutomatically: 0
   autoUpdateReferences: 1

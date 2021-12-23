@@ -293,9 +293,44 @@ MonoBehaviour:
     mSimulateAppleAskToBuy: 0
     mInterceptApplePromotionalPurchases: 0
     mEnableAmazonSandboxTesting: 0
-    mValidateAppleReceipt: 1
-    mValidateGooglePlayReceipt: 1
-    mProducts: []
+    mValidateAppleReceipt: 0
+    mValidateGooglePlayReceipt: 0
+    mProducts:
+    - _name: iap_coins_0099
+      _type: 0
+      _id: iap_coins_0099
+      _price: 
+      _description: 
+      _storeSpecificIds: []
+      _isEditingAdvanced: 1
+    - _name: iap_coins_0399
+      _type: 0
+      _id: iap_coins_0399
+      _price: 
+      _description: 
+      _storeSpecificIds: []
+      _isEditingAdvanced: 1
+    - _name: iap_coins_0499
+      _type: 0
+      _id: iap_coins_0499
+      _price: 
+      _description: 
+      _storeSpecificIds: []
+      _isEditingAdvanced: 1
+    - _name: iap_coins_0999
+      _type: 0
+      _id: iap_coins_0999
+      _price: 
+      _description: 
+      _storeSpecificIds: []
+      _isEditingAdvanced: 1
+    - _name: iap_coins_0199
+      _type: 0
+      _id: iap_coins_0199
+      _price: 
+      _description: 
+      _storeSpecificIds: []
+      _isEditingAdvanced: 1
   mNotificationSettings:
     mAutoInit: 1
     mAutoInitDelay: 0
@@ -394,9 +429,9 @@ MonoBehaviour:
         mValue: '[Your usage description]'
   mRuntimeAutoInitialization: 1
   mIsAdModuleEnable: 1
-  mIsIAPModuleEnable: 0
+  mIsIAPModuleEnable: 1
   mIsGameServiceModuleEnable: 0
   mIsNotificationModuleEnable: 0
   mIsSharingModuleEnable: 0
-  mActiveModuleIndex: 0
+  mActiveModuleIndex: 3
   mIsSelectingModule: 0
