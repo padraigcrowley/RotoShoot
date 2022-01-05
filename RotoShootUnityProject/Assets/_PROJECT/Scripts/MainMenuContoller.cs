@@ -57,10 +57,10 @@ public class MainMenuContoller : ExtendedBehaviour
 
   public void UpdateUpgradesMenuStatsText()
 	{
-    UpgradesItem0LevelText.text = $"Level : {GameController.Instance.playerMissileDamageLevel}";
-    UpgradesItem1LevelText.text = $"Level : {GameController.Instance.maxPlayerHPLevel}";
-    UpgradesItem2LevelText.text = $"Level : {GameController.Instance.shieldDurationLevel}";
-    UpgradesItem3LevelText.text = $"Level : {GameController.Instance.powerupDurationLevel}";
+    UpgradesItem0LevelText.text = $"{GameController.Instance.playerMissileDamageLevel}";
+    UpgradesItem1LevelText.text = $"{GameController.Instance.maxPlayerHPLevel}";
+    UpgradesItem2LevelText.text = $"{GameController.Instance.shieldDurationLevel}";
+    UpgradesItem3LevelText.text = $"{GameController.Instance.powerupDurationLevel}";
 
     
     UpgradesItem0UpgradeCostText.text = $"{ GameController.Instance.GetSheetStatValue(GameController.Instance.playerStatsSpreadsheet, "starCoinCost", GameController.Instance.playerMissileDamageLevel + 1) }";
@@ -85,37 +85,58 @@ public class MainMenuContoller : ExtendedBehaviour
       case 0:
         //TODO - HANDLE WHAT TO DO/DISPLAY WHEN ITEM IS MAX UPGRADED
         print("Upgrade Item0 playerMissileDamage pressed");
-        TryToUpgrade(ref  GameController.Instance.playerMissileDamageLevel, ref  GameController.Instance.playerMissileDamage, "playerMissileDamage", "playerMissileDamageLevel");
+        TryToUpgrade(ref  GameController.Instance.playerMissileDamageLevel, ref  GameController.Instance.playerMissileDamage, "playerMissileDamage", "playerMissileDamageLevel", buttonPressed);
         
         break;
         
       case 1:
         print("Upgrade Item1 maxPlayerHPLevel pressed");
-        TryToUpgrade(ref GameController.Instance.maxPlayerHPLevel, ref GameController.Instance.maxPlayerHP, "maxPlayerHP", "maxPlayerHPLevel");
+        TryToUpgrade(ref GameController.Instance.maxPlayerHPLevel, ref GameController.Instance.maxPlayerHP, "maxPlayerHP", "maxPlayerHPLevel", buttonPressed);
 
         break;
       
       case 2:
         print("Upgrade Item2 shieldDurationLevel pressed");
-        TryToUpgrade(ref GameController.Instance.shieldDurationLevel, ref GameController.Instance.shieldDuration, "shieldDuration", "shieldDurationLevel");
+        TryToUpgrade(ref GameController.Instance.shieldDurationLevel, ref GameController.Instance.shieldDuration, "shieldDuration", "shieldDurationLevel", buttonPressed);
         break;
       case 3:
         print("Upgrade Item3 powerupDurationLevel pressed");
-        TryToUpgrade(ref GameController.Instance.powerupDurationLevel, ref GameController.Instance.powerupDuration, "powerupDuration", "powerupDurationLevel");
+        TryToUpgrade(ref GameController.Instance.powerupDurationLevel, ref GameController.Instance.powerupDuration, "powerupDuration", "powerupDurationLevel", buttonPressed);
         break;
       default:
         break;
 		}
     
 	}
-  public void TryToUpgrade(ref int itemLevel, ref float ItemValue, string itemNameString, string itemLevelString)
+  public void TryToUpgrade(ref int itemLevel, ref float ItemValue, string itemNameString, string itemLevelString, int itemMenuNum)
   {
     if (GameController.Instance.starCoinCount >= GameController.Instance.GetSheetStatValue(GameController.Instance.playerStatsSpreadsheet, "starCoinCost", itemLevel + 1))
     {
       itemLevel++;
       GameController.Instance.starCoinCount -= (int)GameController.Instance.GetSheetStatValue(GameController.Instance.playerStatsSpreadsheet, "starCoinCost", itemLevel);
       ItemValue = (int)GameController.Instance.GetSheetStatValue(GameController.Instance.playerStatsSpreadsheet, itemNameString, itemLevel);
-      UpdateUpgradesMenuStatsText();
+      
+      //UpdateUpgradesMenuStatsText();
+      switch (itemMenuNum)
+      {
+        case 0:
+          UpgradesItem0LevelText.text = $"{GameController.Instance.playerMissileDamageLevel}";
+          break;
+        case 1:
+          UpgradesItem1LevelText.text = $"{GameController.Instance.maxPlayerHPLevel}";
+          break;
+        case 2:
+          UpgradesItem2LevelText.text = $"{GameController.Instance.shieldDurationLevel}";
+          break;
+        case 3:
+          UpgradesItem3LevelText.text = $"{GameController.Instance.powerupDurationLevel}";
+          break;
+        default:
+          break;
+      }
+      starCoinCountText.text = ("" + GameController.Instance.starCoinCount);
+      getMoreCoinsPanelStarCoinCountText.text = ("" + GameController.Instance.starCoinCount);
+
       ES3.Save("starCoinCount", GameController.Instance.starCoinCount);
       ES3.Save(itemLevelString, itemLevel);
     }
