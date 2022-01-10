@@ -221,6 +221,19 @@ public class MainMenuContoller : ExtendedBehaviour
     
   }
 
+  public void HandleSettingsResetProgressYesButtonPress()
+  {
+    //ES3.Save("starCoinCount", GameController.Instance.starCoinCount); -> 0
+    //ES3.Save("highestLevelPlayed", GameController.Instance.highestLevelPlayed); ->1
+    //playerMissileDamageLevel ->1
+    //maxPlayerHPLevel ->1
+    //shieldDurationLevel ->1
+    //powerupDurationLevel ->1
+
+    //MainMenuControllerScript.UpdateUpgradesMenuStatsText();
+  }
+
+
   void FrontEndTransitioIn(object parameter)
   {
     
