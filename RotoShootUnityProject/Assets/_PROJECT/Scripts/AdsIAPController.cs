@@ -6,19 +6,53 @@ using EasyMobile;
 using UnityEngine.Purchasing;
 #endif
 
-public class AdsIAPController : MonoBehaviour
+public class AdsIAPController : Singleton<AdsIAPController>
 {
-  public bool isReady;
   const int FREE_ADS_STARCOIN_AMOUNT = 10;
+  public string[] iapIDs = { "iap_coins_0199", "iap_coins_0899", "iap_coins_4999" };
+  public int[] iapCoinAmounts = { 50,475,5050 };
+  
+  public bool isReady;
+  public IAPProduct[] iaps;
+  private static int iapBeingBought = 0; // 0, 1 or 2
+  public Dictionary<string, string> iapsLocalizedPrices = new Dictionary<string, string>(); //<productIDstring, LocalizedPriceString>
   public MainMenuContoller MainMenuControllerScript;
 
-  // Start is called before the first frame update
+  public TMPro.TMP_Text starCoinCountText;
+  public TMPro.TMP_Text getMoreCoinsPanelStarCoinCountText;
   void Start()
-    {
-    Advertising.Initialize();
-    InAppPurchasing.InitializePurchasing();
+  {
+    StartCoroutine(DelayInitialization());
   }
 
+  private IEnumerator DelayInitialization()
+  {
+    yield return new WaitForSeconds(4);
+
+    Advertising.Initialize();
+    InAppPurchasing.InitializePurchasing();
+    IAPProduct[] iaps = InAppPurchasing.GetAllIAPProducts();
+    foreach (IAPProduct iap in iaps)
+    {
+      Debug.LogWarning("--------------------rabbitbadger----------------------------------------");
+      Debug.LogWarning("Product name: " + iap.Name);
+      Debug.LogWarning("Product ID: " + iap.Id);
+      Debug.LogWarning("Product price: " + iap.Price );
+#if EM_UIAP
+      // EM_IAPConstants.Sample_Product is the generated name constant of a product named "Sample Product"
+      Product sampleProduct = InAppPurchasing.GetProduct(iap.Id);
+      Debug.LogWarning("IAP Metadata localizedPriceString: " + sampleProduct.metadata.localizedPriceString.ToString());
+      iapsLocalizedPrices.Add(iap.Id, sampleProduct.metadata.localizedPriceString.ToString());
+#endif
+    }
+  }
+
+  public void BuyIAP(int iapNumber) // 0, 1 or 2
+  {
+    iapBeingBought = iapNumber;
+    InAppPurchasing.Purchase(iapIDs[iapNumber]);
+
+  }
 
   public void ShowRewardedAd()
   {
@@ -29,11 +63,11 @@ public class AdsIAPController : MonoBehaviour
     if (isReady)
     {
       Advertising.ShowRewardedAd();
-      print("Showing ad");
+      //print("Showing ad");
     }
     else
     {
-      print("Not Ready");
+      //print("Not Ready");
     }
   }
 
@@ -42,8 +76,8 @@ public class AdsIAPController : MonoBehaviour
     Advertising.RewardedAdCompleted += RewardedAdCompletedHandler;
     Advertising.RewardedAdSkipped += RewardedAdSkippedHandler;
 
-    //InAppPurchasing.PurchaseCompleted += PurchaseCompletedHandler;
-    //InAppPurchasing.PurchaseFailed += PurchaseFailedHandler;
+    InAppPurchasing.PurchaseCompleted += PurchaseCompletedHandler;
+    InAppPurchasing.PurchaseFailed += PurchaseFailedHandler;
   }
 
   void OnDisable()
@@ -51,9 +85,52 @@ public class AdsIAPController : MonoBehaviour
     Advertising.RewardedAdCompleted -= RewardedAdCompletedHandler;
     Advertising.RewardedAdSkipped -= RewardedAdSkippedHandler;
 
-    //InAppPurchasing.PurchaseCompleted -= PurchaseCompletedHandler;
-    //InAppPurchasing.PurchaseFailed -= PurchaseFailedHandler;
+    InAppPurchasing.PurchaseCompleted -= PurchaseCompletedHandler;
+    InAppPurchasing.PurchaseFailed -= PurchaseFailedHandler;
   }
+  void PurchaseCompletedHandler(IAPProduct product)
+  {
+
+    GetSampleProduct(product.Name);
+    GameController.Instance.starCoinCount += iapCoinAmounts[iapBeingBought];
+    starCoinCountText.text = ("" + GameController.Instance.starCoinCount);
+    getMoreCoinsPanelStarCoinCountText.text = ("" + GameController.Instance.starCoinCount);
+
+  }
+
+  public void GetSampleProduct(string productID)
+  {
+#if EM_UIAP
+    // EM_IAPConstants.Sample_Product is the generated name constant of a product named "Sample Product"
+    Product sampleProduct = InAppPurchasing.GetProduct(productID);
+
+    if (sampleProduct != null)
+    {
+
+      ProductMetadata data = InAppPurchasing.GetProductLocalizedData(productID);
+      if (data != null)
+      {
+        Debug.LogWarning("Localized title: " + data.localizedTitle);
+        Debug.LogWarning("Localized description: " + data.localizedDescription);
+        Debug.LogWarning("Localized price string: " + data.localizedPriceString);
+      }
+
+
+      if (sampleProduct.hasReceipt)
+      {
+        Debug.LogWarning("Receipt: " + sampleProduct.receipt);
+      }
+
+    }
+#endif
+  }
+
+  // Failed purchase handler
+  void PurchaseFailedHandler(IAPProduct product, string failureReason)
+  {
+    Debug.LogWarning("The purchase of product " + product.Name + " has failed with reason: " + failureReason);
+  }
+
 
   void RewardedAdCompletedHandler(RewardedAdNetwork network, AdPlacement placement)
   {
@@ -69,9 +146,5 @@ public class AdsIAPController : MonoBehaviour
     Debug.LogWarning("Rewarded ad was skipped. The user should NOT be rewarded.");
   }
 
-  // Update is called once per frame
-  void Update()
-    {
-        
-    }
+  
 }

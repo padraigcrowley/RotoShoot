@@ -19,7 +19,10 @@ public class MainMenuContoller : ExtendedBehaviour
   public GameObject MainMenuUpgradesPanel;
   public GameObject LevelSelectButtonsPanel;
   public GameObject GetMoreCoinsPanel;
-  
+
+  public Text iap0199PriceText;
+  public Text iap0899PriceText;
+  public Text iap4999PriceText;
 
   public enum ShopItems { MISSILE_POWER, SHIP_DEFENCES , SHIELD_DURATION, POWERUP_DURATION}
 
@@ -148,18 +151,15 @@ public class MainMenuContoller : ExtendedBehaviour
 
   public void HandleGetMoreCoinsInitiate()
 	{
-    //var startPosition = new Vector3(10, 0, 0);
-    //var endPosition = Vector3.zero;
-    //var transition = new Move(MainMenuUpgradesPanel, startPosition, endPosition, 1, 3);
+    iap0199PriceText.text = AdsIAPController.Instance.iapsLocalizedPrices["iap_coins_0199"];
+    iap0899PriceText.text = AdsIAPController.Instance.iapsLocalizedPrices["iap_coins_0899"];
+    iap4999PriceText.text = AdsIAPController.Instance.iapsLocalizedPrices["iap_coins_4999"];
+
     var moveTransitionOut = new Move (MainMenuUpgradesPanel, startPosition: MainMenuUpgradesPanel.transform.localPosition, endPosition: new Vector3(-1200, 0, 0), duration: .5f, delay: 0f, tweenType: TransitionHelper.TweenType.easeInBack, coordinateSpace: BeautifulTransitions.Scripts.Transitions.TransitionSteps.AbstractClasses.TransitionStep.CoordinateSpaceType.AnchoredPosition);
     moveTransitionOut.Start();
-    //TransitionHelper.TransitionOut(MainMenuUpgradesPanel);
-    //TransitionHelper.TransitionIn(GetMoreCoinsPanel);
 
     var moveTransitionIn = new Move(GetMoreCoinsPanel, startPosition: GetMoreCoinsPanel.transform.localPosition, endPosition: new Vector3(0, 0, 0), duration: .5f, delay: .5f, tweenType: TransitionHelper.TweenType.spring, coordinateSpace: BeautifulTransitions.Scripts.Transitions.TransitionSteps.AbstractClasses.TransitionStep.CoordinateSpaceType.AnchoredPosition);
     moveTransitionIn.Start();
-
-
   }
 
   public void HandleGetMoreCoinsCloseButtonPress()
