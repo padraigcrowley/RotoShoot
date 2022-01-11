@@ -395,7 +395,9 @@ public class PlayerShip : ExtendedBehaviour
           else if (collision.gameObject.tag.Equals("EnemyMissileLarge"))
             ChangeShipHP(-(int)LevelManager.Instance.LevelStats["EnemyMissileDamage"]*10); 
           else if (collision.gameObject.tag.Equals("EnemyMissileMedium"))
-            ChangeShipHP(-(int)LevelManager.Instance.LevelStats["EnemyMissileDamage"]*3); 
+            ChangeShipHP(-(int)LevelManager.Instance.LevelStats["EnemyMissileDamage"]*2);
+          else if (collision.gameObject.tag.Equals("EnemyMissileSmall"))
+            ChangeShipHP(-(int)LevelManager.Instance.LevelStats["EnemyMissileDamage"] / 3);
 
 
         }

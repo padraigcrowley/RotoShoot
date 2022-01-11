@@ -223,14 +223,25 @@ public class MainMenuContoller : ExtendedBehaviour
 
   public void HandleSettingsResetProgressYesButtonPress()
   {
-    //ES3.Save("starCoinCount", GameController.Instance.starCoinCount); -> 0
-    //ES3.Save("highestLevelPlayed", GameController.Instance.highestLevelPlayed); ->1
-    //playerMissileDamageLevel ->1
-    //maxPlayerHPLevel ->1
-    //shieldDurationLevel ->1
-    //powerupDurationLevel ->1
+    GameController.Instance.starCoinCount = 0;
+    
+    GameController.Instance.highestLevelPlayed = 1;
+    GameController.Instance.currentLevelPlaying = 1;
 
-    //MainMenuControllerScript.UpdateUpgradesMenuStatsText();
+		GameController.Instance.playerMissileDamageLevel = 1;
+		GameController.Instance.maxPlayerHPLevel = 1;
+		GameController.Instance.shieldDurationLevel = 1;
+		GameController.Instance.powerupDurationLevel = 1;
+
+    ES3.Save("starCoinCount", GameController.Instance.starCoinCount);
+    ES3.Save("highestLevelPlayed", GameController.Instance.highestLevelPlayed);
+    ES3.Save("playerMissileDamageLevel", GameController.Instance.playerMissileDamageLevel);
+    ES3.Save("maxPlayerHPLevel", GameController.Instance.maxPlayerHPLevel);
+    ES3.Save("shieldDurationLevel", GameController.Instance.shieldDurationLevel);
+    ES3.Save("powerupDurationLevel", GameController.Instance.powerupDurationLevel);
+
+    UpdateUpgradesMenuStatsText();
+    SetCorrectPrevNextLevelAlphaButtons();
   }
 
 

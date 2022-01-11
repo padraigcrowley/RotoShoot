@@ -8452,6 +8452,7 @@ MonoBehaviour:
   gameExitButton: {fileID: 0}
   PlayerDiedPanel: {fileID: 1162617850}
   EncourageUpgradePanel: {fileID: 140423352}
+  EncourageUpgradePanelText: {fileID: 149952563}
   LevelCompletePanel: {fileID: 615974328}
   PauseButtonBGImage: {fileID: 843525625}
   PauseButtonFGImage: {fileID: 486308536}

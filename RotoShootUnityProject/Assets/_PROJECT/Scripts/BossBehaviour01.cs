@@ -85,6 +85,12 @@ public class BossBehaviour01 : ExtendedBehaviour
     //  fireAtPlayerPos = true;
     //  FireMissile(fireAtPlayerPos);
     //}
+
+    if (Input.GetKeyDown(KeyCode.S)) //todo
+    {
+      bossCurrentHealth = 0;
+    }
+
     if (GameplayManager.Instance.currentGameState == GameplayManager.GameState.LEVEL_IN_PROGRESS)
     {
       switch (boss01State)

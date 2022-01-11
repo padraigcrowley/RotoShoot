@@ -15,6 +15,7 @@ public class UIManager : Singleton<UIManager>
   public Button gameRestartButton, gameExitButton;
   public GameObject PlayerDiedPanel;
   public GameObject EncourageUpgradePanel;
+  public TMP_Text EncourageUpgradePanelText;
 
   [SerializeField] private GameObject LevelCompletePanel;
   public Image PauseButtonBGImage, PauseButtonFGImage;
@@ -142,7 +143,12 @@ public class UIManager : Singleton<UIManager>
       case GameplayManager.GameState.WAITING_FOR_PLAYERDIED_BUTTONS:
         {
           PlayerDiedPanel.SetActive(true);
-          EncourageUpgradePanel.SetActive(true);
+
+          if ((GameController.Instance.playerMissileDamage < LevelManager.Instance.LevelStats["EnemyHP"]) && (LevelManager.Instance.levelSetupData.lccKillBoss == false))
+          {
+            EncourageUpgradePanel.SetActive(true);
+            EncourageUpgradePanelText.text = "Enemies are getting tougher...\nYou should upgrade your ship!"; // just to refresh the teletype text effect
+          }
           GameplayManager.Instance.currentGameState = GameplayManager.GameState.EXITING_LEVEL;
           break;
         }

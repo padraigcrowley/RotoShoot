@@ -4,7 +4,7 @@ using UnityEngine.SceneManagement;
 
 public class GameplayManager : Singleton<GameplayManager>, IPowerUpEvents
 {
-
+  const int INTERSTITIAL_AD_LEVEL_COMPLETE_FREQUENCY = 3;
   public Queue mouseClickQueue;
   [HideInInspector] public bool playerShipRotating = false;
 
@@ -59,7 +59,7 @@ public class GameplayManager : Singleton<GameplayManager>, IPowerUpEvents
 
   public int starCoinCount;
   private bool dyingInProgress = false;
-
+ 
   public CapsuleCollider playerShipCollider;
 
   public float tripleFirePowerupRemainingDuration = -1;
@@ -135,12 +135,22 @@ public class GameplayManager : Singleton<GameplayManager>, IPowerUpEvents
       case GameState.LEVEL_COMPLETE:
         {
           ES3.Save("starCoinCount", GameController.Instance.starCoinCount);
-          if (GameController.Instance.currentLevelPlaying+1 > GameController.Instance.highestLevelPlayed)
+          if (GameController.Instance.currentLevelPlaying + 1 > GameController.Instance.highestLevelPlayed) 
           {
             GameController.Instance.highestLevelPlayed = GameController.Instance.currentLevelPlaying+1;
             ES3.Save("highestLevelPlayed", GameController.Instance.highestLevelPlayed);
           }
           GameplayManager.Instance.currentGameState = GameplayManager.GameState.WAITING_FOR_LEVELCOMPLETE_BUTTONS;
+          if (GameController.Instance.currentLevelPlaying % INTERSTITIAL_AD_LEVEL_COMPLETE_FREQUENCY == 0)
+          {
+            bool isReady = EasyMobile.Advertising.IsInterstitialAdReady();
+
+            // Show it if it's ready
+            if (isReady)
+            {
+              EasyMobile.Advertising.ShowInterstitialAd();
+            }
+          }
           break;
         }
       

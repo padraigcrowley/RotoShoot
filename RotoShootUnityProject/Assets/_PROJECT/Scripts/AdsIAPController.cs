@@ -76,6 +76,8 @@ public class AdsIAPController : Singleton<AdsIAPController>
     Advertising.RewardedAdCompleted += RewardedAdCompletedHandler;
     Advertising.RewardedAdSkipped += RewardedAdSkippedHandler;
 
+    Advertising.InterstitialAdCompleted += InterstitialAdCompletedHandler;
+
     InAppPurchasing.PurchaseCompleted += PurchaseCompletedHandler;
     InAppPurchasing.PurchaseFailed += PurchaseFailedHandler;
   }
@@ -84,6 +86,8 @@ public class AdsIAPController : Singleton<AdsIAPController>
   {
     Advertising.RewardedAdCompleted -= RewardedAdCompletedHandler;
     Advertising.RewardedAdSkipped -= RewardedAdSkippedHandler;
+
+    Advertising.InterstitialAdCompleted -= InterstitialAdCompletedHandler;
 
     InAppPurchasing.PurchaseCompleted -= PurchaseCompletedHandler;
     InAppPurchasing.PurchaseFailed -= PurchaseFailedHandler;
@@ -96,6 +100,10 @@ public class AdsIAPController : Singleton<AdsIAPController>
     starCoinCountText.text = ("" + GameController.Instance.starCoinCount);
     getMoreCoinsPanelStarCoinCountText.text = ("" + GameController.Instance.starCoinCount);
 
+  }
+  void InterstitialAdCompletedHandler(InterstitialAdNetwork network, AdPlacement placement)
+  {
+    Debug.Log("Interstitial ad has been closed.");
   }
 
   public void GetSampleProduct(string productID)
