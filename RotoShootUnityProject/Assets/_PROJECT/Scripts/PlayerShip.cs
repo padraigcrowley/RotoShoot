@@ -377,7 +377,7 @@ public class PlayerShip : ExtendedBehaviour
     {
       if (GameplayManager.Instance.currentGameState == GameplayManager.GameState.LEVEL_IN_PROGRESS)
       {
-        if ((collision.gameObject.tag.Equals("Enemy01")) || (collision.gameObject.tag.Equals("EnemyMissile")) || (collision.gameObject.tag.Equals("EnemyMissileMedium")) || (collision.gameObject.tag.Equals("EnemyMissileLarge")))
+        if ((collision.gameObject.tag.Equals("Enemy01")) || (collision.gameObject.tag.Equals("EnemyMissile")) || (collision.gameObject.tag.Equals("EnemyMissileMedium")) || (collision.gameObject.tag.Equals("EnemyMissileSmall")) || (collision.gameObject.tag.Equals("EnemyMissileLarge")))
         {
           //GameObject newParticleEffect = GameObject.Instantiate(PlayerShipDamageLarge, transform.position, PlayerShipDamageLarge.transform.rotation, transform ) as GameObject;
           GameObject newParticleEffect = SimplePool.Spawn(PlayerShipDamageLarge, collision.gameObject.transform.position, PlayerShipDamageLarge.transform.rotation, transform) as GameObject;
