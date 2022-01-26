@@ -124,15 +124,19 @@ public class MainMenuContoller : ExtendedBehaviour
       {
         case 0:
           UpgradesItem0LevelText.text = $"{GameController.Instance.playerMissileDamageLevel}";
+          UpgradesItem0UpgradeCostText.text = $"{ GameController.Instance.GetSheetStatValue(GameController.Instance.playerStatsSpreadsheet, "starCoinCost", GameController.Instance.playerMissileDamageLevel + 1) }";
           break;
         case 1:
           UpgradesItem1LevelText.text = $"{GameController.Instance.maxPlayerHPLevel}";
+          UpgradesItem1UpgradeCostText.text = $"{ GameController.Instance.GetSheetStatValue(GameController.Instance.playerStatsSpreadsheet, "starCoinCost", GameController.Instance.maxPlayerHPLevel + 1) }";
           break;
         case 2:
           UpgradesItem2LevelText.text = $"{GameController.Instance.shieldDurationLevel}";
+          UpgradesItem2UpgradeCostText.text = $"{ GameController.Instance.GetSheetStatValue(GameController.Instance.playerStatsSpreadsheet, "starCoinCost", GameController.Instance.shieldDurationLevel + 1) }";
           break;
         case 3:
           UpgradesItem3LevelText.text = $"{GameController.Instance.powerupDurationLevel}";
+          UpgradesItem3UpgradeCostText.text = $"{ GameController.Instance.GetSheetStatValue(GameController.Instance.playerStatsSpreadsheet, "starCoinCost", GameController.Instance.powerupDurationLevel + 1) }";
           break;
         default:
           break;

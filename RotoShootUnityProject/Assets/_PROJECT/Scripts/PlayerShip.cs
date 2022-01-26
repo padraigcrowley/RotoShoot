@@ -102,7 +102,8 @@ public class PlayerShip : ExtendedBehaviour
           PlayerShipIntroAnimCompleted = false;
           playerShipExhaustSpriteRenderer.enabled = false;
           GameplayManager.Instance.currentGameState = GameplayManager.GameState.LEVEL_IN_PROGRESS;
-          
+          GameplayManager.Instance.playerShipInvulnerable = false;
+
           PlayerHPWorldSpaceStatusBar.EnableStatusBar();
           //UltimateStatusBar.UpdateStatus("PlayerHPWorldSpaceStatusBar", 0f, GameplayManager.Instance.maxPlayerHPLevel);
           GameplayManager.Instance.currentPlayerHP = GameController.Instance.maxPlayerHP;
@@ -121,7 +122,7 @@ public class PlayerShip : ExtendedBehaviour
         
         PlayerShipIntroAnimCompleted = false;
         shipCollider.enabled = true;
-        GameplayManager.Instance.playerShipInvulnerable = false;
+        
         ProcessInputQueue();
 
         if (GameplayManager.Instance.tripleFirePowerupRemainingDuration >= 0)

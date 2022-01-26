@@ -138,6 +138,7 @@ public class BossBehaviour01 : ExtendedBehaviour
           {
             if (!bossHasStartedDying)
             {
+              GameplayManager.Instance.playerShipInvulnerable = true;
               bossHasStartedDying = true;
               pulseTween.Kill();
               StopCoroutine(DelayedLowerEgg());
