@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: LevelSetupData0004
   m_EditorClassIdentifier: 
   levelNumber: 4
-  lccEnemyKills: 40
+  lccEnemyKills: 80
   lccSurviveTime: 4
   lccKillBoss: 0
   numMaxActiveWaves: 3

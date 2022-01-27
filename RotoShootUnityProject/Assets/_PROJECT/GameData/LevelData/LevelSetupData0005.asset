@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: LevelSetupData0005
   m_EditorClassIdentifier: 
   levelNumber: 1
-  lccEnemyKills: 100
+  lccEnemyKills: 80
   lccSurviveTime: 4
   lccKillBoss: 0
   numMaxActiveWaves: 3
@@ -67,5 +67,5 @@ MonoBehaviour:
   - {x: -1.29, y: -5}
   - {x: 1.29, y: -5}
   - {x: 3.84, y: -5}
-  timeBetweenAsteroidShower: 25
+  timeBetweenAsteroidShower: 250
   levelControlType: 2

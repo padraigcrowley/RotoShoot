@@ -4,7 +4,7 @@ using UnityEngine.SceneManagement;
 
 public class GameplayManager : Singleton<GameplayManager>, IPowerUpEvents
 {
-  const int INTERSTITIAL_AD_LEVEL_COMPLETE_FREQUENCY = 4;
+  const int INTERSTITIAL_AD_LEVEL_COMPLETE_FREQUENCY = 3;
   public Queue mouseClickQueue;
   [HideInInspector] public bool playerShipRotating = false;
 

@@ -158,6 +158,7 @@ public abstract class EnemyBehaviour02 : ExtendedBehaviour
 				(GameplayManager.Instance.currentGameState == GameplayManager.GameState.PLAYER_DYING) ||
 				(GameplayManager.Instance.currentGameState == GameplayManager.GameState.PLAYER_DIED) ||
         (GameplayManager.Instance.currentGameState == GameplayManager.GameState.WAITING_FOR_PLAYERDIED_BUTTONS) ||
+        (GameplayManager.Instance.currentGameState == GameplayManager.GameState.EXITING_LEVEL) ||
         (GameplayManager.Instance.currentGameState == GameplayManager.GameState.LEVEL_INTRO_IN_PROGRESS))
 		//if (GameplayManager.Instance.currentGameState == GameplayManager.GameState.LEVEL_IN_PROGRESS) 
 		{

@@ -23,7 +23,7 @@ public class PlayerShieldBehaviour : MonoBehaviour
     //playerShieldSpriteRenderer.enabled = true;
 
     durationSeconds = GameController.Instance.shieldDuration;
-    durationSeconds = 10000; // todo: just a test, delete me
+    //durationSeconds = 10000; // todo: just a test, delete me
   }
 
   // Update is called once per frame

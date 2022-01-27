@@ -269,15 +269,13 @@ public class MainMenuContoller : ExtendedBehaviour
 
     void SetCorrectPrevNextLevelAlphaButtons()
 	{
-    if (GameController.Instance.currentLevelPlaying == 1)
-    {
-      SetButtonImageAlpha(prevLevelButtonImage, .3f);
-    }
+    
 
     if (GameController.Instance.highestLevelPlayed == 1)
     {
       SetButtonImageAlpha(nextLevelButtonImage, .3f);
     }
+   
     if (GameController.Instance.currentLevelPlaying == GameController.Instance.highestLevelPlayed)
     {
       SetButtonImageAlpha(nextLevelButtonImage, .3f);
@@ -286,9 +284,10 @@ public class MainMenuContoller : ExtendedBehaviour
     {
       SetButtonImageAlpha(nextLevelButtonImage, 1f);
     }
+    
     if (GameController.Instance.currentLevelPlaying == 1)
     {
-      SetButtonImageAlpha(prevLevelButtonImage, .3f);
+      SetButtonImageAlpha(prevLevelButtonImage, 0f);
     }
     else
     {
