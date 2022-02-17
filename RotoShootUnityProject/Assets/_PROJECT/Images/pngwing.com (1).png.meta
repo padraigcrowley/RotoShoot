@@ -162,6 +162,7 @@ TextureImporter:
   streamingMipmaps: 0
   streamingMipmapsPriority: 0
   vTOnly: 0
+  ignoreMasterTextureLimit: 0
   grayScaleToAlpha: 0
   generateCubemap: 6
   cubemapConvolution: 0
@@ -170,12 +171,12 @@ TextureImporter:
   maxTextureSize: 2048
   textureSettings:
     serializedVersion: 2
-    filterMode: -1
-    aniso: -1
-    mipBias: -100
+    filterMode: 1
+    aniso: 1
+    mipBias: 0
     wrapU: 1
     wrapV: 1
-    wrapW: -1
+    wrapW: 0
   nPOTScale: 0
   lightmap: 0
   compressionQuality: 50
@@ -193,6 +194,8 @@ TextureImporter:
   textureType: 8
   textureShape: 1
   singleChannelComponent: 0
+  flipbookRows: 1
+  flipbookColumns: 1
   maxTextureSizeSet: 0
   compressionQualitySet: 0
   textureFormatSet: 0
@@ -668,6 +671,27 @@ TextureImporter:
     edges: []
     weights: []
     secondaryTextures: []
+    nameFileIdTable:
+      pngwing.com (1)_7: 4448114402505400171
+      pngwing.com (1)_13: 5421518398256149227
+      pngwing.com (1)_6: -5717961006076924687
+      pngwing.com (1)_19: -1649559610020993742
+      pngwing.com (1)_14: -1202453591004087696
+      pngwing.com (1)_3: -1837194645368780668
+      pngwing.com (1)_0: 4954345118388884524
+      pngwing.com (1)_11: 2574092885646407854
+      pngwing.com (1)_9: 3732925130397117083
+      pngwing.com (1)_12: -7939680474575138942
+      pngwing.com (1)_2: 3049275563153414171
+      pngwing.com (1)_8: 1221291196794073474
+      pngwing.com (1)_16: 6858955080900563806
+      pngwing.com (1)_18: -5147083252161374968
+      pngwing.com (1)_4: -5447422357347314932
+      pngwing.com (1)_10: 1959238727383368803
+      pngwing.com (1)_15: -5336139460593315229
+      pngwing.com (1)_1: 7073813113543266139
+      pngwing.com (1)_5: -3426014183138558913
+      pngwing.com (1)_17: 3225105203328668200
   spritePackingTag: 
   pSDRemoveMatte: 0
   pSDShowRemoveMatteOption: 0

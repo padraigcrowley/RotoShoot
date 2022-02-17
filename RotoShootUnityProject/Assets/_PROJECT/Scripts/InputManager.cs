@@ -7,6 +7,8 @@ using UnityEngine.EventSystems;
 // Adapted from:
 // http://2sa-studio.blogspot.com/2015/01/simulating-touch-events-from-mouse.html
 //
+// See bottom of this file for the original code from above
+//
 
 /*
 [System.Serializable] //https://docs.unity3d.com/ScriptReference/Events.UnityEvent_1.html
@@ -30,6 +32,11 @@ public class InputManager : MonoBehaviour
   {
     if (GameplayManager.Instance.currentGameState == GameplayManager.GameState.LEVEL_IN_PROGRESS)
     {
+      if (Helpers.IsOverUi())// todo - if this works here, remove it from all the other places below
+      {
+        //Debug.Log("TOUCHED UI OBJECT, RETURNING");
+        return;
+      }
       DetectTouch(); //detect and handle the screen touch/mouse clicks
       DetectKeys();
     }
@@ -43,9 +50,9 @@ public class InputManager : MonoBehaviour
       //check touch isn't tapping on a UI gameobject
       if (Input.touchCount > 0 && touch.phase == TouchPhase.Began)
       {
-        if (EventSystem.current.IsPointerOverGameObject())
+        if (Helpers.IsOverUi())
         {
-          //Debug.Log("TOUCHED GAME OBJECT, RETURNING");
+          //Debug.Log("TOUCHED UI OBJECT, RETURNING");
           return;
         }
       }
@@ -53,26 +60,35 @@ public class InputManager : MonoBehaviour
     }
 
     // Simulate touch events from mouse events
-    if (Input.touchCount == 0)
+    if (Input.touchCount == 0) // so you don't detect both touches AND mouse-clicks?
     {
       if (Input.GetMouseButtonDown(0))
       {
-        if (EventSystem.current.IsPointerOverGameObject())//check touch isn't tapping on a UI gameobject
+        if (Helpers.IsOverUi())
+        {
+          //Debug.Log(" 111 TOUCHED UI OBJECT, RETURNING");
           return;
+        }
         else
           HandleTouch(10, Camera.main.ScreenToWorldPoint(Input.mousePosition), TouchPhase.Began);
       }
       if (Input.GetMouseButton(0))
       {
-        if (EventSystem.current.IsPointerOverGameObject())//check touch isn't tapping on a UI gameobject
+        if (Helpers.IsOverUi())//check touch isn't tapping on a UI gameobject
+        {
+          //Debug.Log("222 TOUCHED UI OBJECT, RETURNING");
           return;
+        }
         else
           HandleTouch(10, Camera.main.ScreenToWorldPoint(Input.mousePosition), TouchPhase.Moved);
       }
       if (Input.GetMouseButtonUp(0))
       {
-        if (EventSystem.current.IsPointerOverGameObject())//check touch isn't tapping on a UI gameobject
+        if (Helpers.IsOverUi())//check touch isn't tapping on a UI gameobject
+        {
+          //Debug.Log("333 TOUCHED UI OBJECT, RETURNING");
           return;
+        }
         else
           HandleTouch(10, Camera.main.ScreenToWorldPoint(Input.mousePosition), TouchPhase.Ended);
       }
@@ -178,3 +194,53 @@ public class InputManager : MonoBehaviour
 
 
 }
+
+/*
+When building a game targetting touch devices, your scripts obviously handle touch events.
+
+The problem is that, when running the game in Unity editor, only mouse events are triggered, and I could not find any option that would allow to simulate touch events from the mouse interactions performed in the Game view.
+
+So I finally came up with this simple pattern that somehow simulates touch events from the mouse events (language is C#), to have one single processing piece of code focused on touch events only:
+
+
+void Update () {
+  // Handle native touch events
+  foreach (Touch touch in Input.touches)
+  {
+    HandleTouch(touch.fingerId, Camera.main.ScreenToWorldPoint(touch.position), touch.phase);
+  }
+
+  // Simulate touch events from mouse events
+  if (Input.touchCount == 0)
+  {
+    if (Input.GetMouseButtonDown(0))
+    {
+      HandleTouch(10, Camera.main.ScreenToWorldPoint(Input.mousePosition), TouchPhase.Began);
+    }
+    if (Input.GetMouseButton(0))
+    {
+      HandleTouch(10, Camera.main.ScreenToWorldPoint(Input.mousePosition), TouchPhase.Moved);
+    }
+    if (Input.GetMouseButtonUp(0))
+    {
+      HandleTouch(10, Camera.main.ScreenToWorldPoint(Input.mousePosition), TouchPhase.Ended);
+    }
+  }
+}
+
+private void HandleTouch(int touchFingerId, Vector3 touchPosition, TouchPhase touchPhase)
+{
+  switch (touchPhase)
+  {
+    case TouchPhase.Began:
+      // TODO
+      break;
+    case TouchPhase.Moved:
+      // TODO
+      break;
+    case TouchPhase.Ended:
+      // TODO
+      break;
+  }
+}
+*/

@@ -8,11 +8,10 @@ public class PowerUpSmartBomb : PowerUp
 
   protected override void PowerUpPayload()
   {
-    //do stuff specific to this PU//todo
-    //playerShield.SetActive(true);
-    //GameController.Instance.starCoinCount++;
-    //UIManager.Instance.starCoinCountText.text = GameController.Instance.starCoinCount.ToString();
-    LevelManager.Instance.KillActiveEnemies();
+    //LevelManager.Instance.KillActiveEnemies();
+    //above now done in TriggerPowerUpSmartBomb
+    
+    UIManager.Instance.ShowTriggerSmartBombButton();
     base.PowerUpPayload();
   }
 

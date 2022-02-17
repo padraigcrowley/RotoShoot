@@ -8,6 +8,9 @@ public class TriggerPowerUpShield : MonoBehaviour
   public GameObject playerShip;
   public void DoTriggerPowerUpShield()
 	{
-    Instantiate(playerShieldPrefab, playerShip.gameObject.transform.position, Quaternion.identity, playerShip.transform);
+    Instantiate(playerShieldPrefab, playerShip.gameObject.transform.position, Quaternion.identity, playerShip.transform); // instantiate the shield prefab (and it's associated script behaviour)
+    UIManager.Instance.HideTriggerShieldButton();
+
+
   }
 }

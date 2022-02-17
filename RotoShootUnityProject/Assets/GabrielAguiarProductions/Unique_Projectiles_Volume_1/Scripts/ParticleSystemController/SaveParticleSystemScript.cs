@@ -88,7 +88,7 @@ namespace GAP_ParticleSystemController
         static string GetPrefabFolder2018_3 (GameObject prefabVFX)
         {
 #if UNITY_EDITOR
-			string prefabPath = UnityEditor.Experimental.SceneManagement.PrefabStageUtility.GetPrefabStage(prefabVFX).prefabAssetPath;
+			string prefabPath = UnityEditor.SceneManagement.PrefabStageUtility.GetPrefabStage(prefabVFX).prefabAssetPath;
 			string prefabFolderPath = Path.GetDirectoryName (prefabPath);
 			return prefabFolderPath;
 #else
@@ -101,7 +101,7 @@ namespace GAP_ParticleSystemController
         public static void SaveNestedPrefab(GameObject prefab)
         {
 #if UNITY_EDITOR
-            var prefabStage = UnityEditor.Experimental.SceneManagement.PrefabStageUtility.GetPrefabStage(prefab);
+            var prefabStage = UnityEditor.SceneManagement.PrefabStageUtility.GetPrefabStage(prefab);
             UnityEditor.PrefabUtility.SaveAsPrefabAsset(prefabStage.prefabContentsRoot, prefabStage.prefabAssetPath);
 #endif
         }

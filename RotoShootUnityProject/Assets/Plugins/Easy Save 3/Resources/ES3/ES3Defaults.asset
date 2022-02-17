@@ -32,7 +32,6 @@ MonoBehaviour:
     - Assembly-CSharp
     - Assembly-CSharp-firstpass
     - Purchasing.Common
-    - VSSettingsProvider
     - com.gameframe.sceneswitcher.Editor
     - AlwaysTooLate.PlayMode
     showAdvancedSettings: 1

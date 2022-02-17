@@ -1,0 +1,93 @@
+Follow these steps:
+
+https://thehardestwork.com/2020/10/29/debug-unity-on-android/    (text pasted at bottom just in case)
+Note: My ADB path was C:\Program Files\Unity\Hub\Editor\2021.2.11f1\Editor\Data\PlaybackEngines\AndroidPlayer\SDK\platform-tools
+
+Also, I needed to do the following from  https://answers.unity.com/questions/1320966/android-debug-usb.html?page=1&pageSize=5&sort=votes
+
+I tried everything that was suggested here and spent a whole day dealing with this S***
+The final missing part was the empty "Preferred Android Sdk Root" path.
+After copying the sdk path from Unity->preferences->external tools to VisualStudio->Tools->Options->ToolsForUnity->Debugging->Preferred Android Sdk Root the AndroidPlayer(USB) finally poped up in the Debug->SelectUnityInstance Menu and debugging finally works!
+When the path is left blank, it should take the one that's set in Unity, but this seems bugged.
+
+
+sdkroot.png (32.7 kB)
+This worked for me. Thanks, your post saved me a day of work... or even more.
+
+This! I had been frustrated for years and almost gave up on debugging via USB, and someone finally gave me a real solution! In fact, I failed at first and immediately thought this wasn't the answer either, but after trying some more times, it worked. Try again after killing the current adb process. Restarting Visual Studio and your Android app may help too.
+
+Yesss! After hunting high & low, this was the missing part of the puzzle for me!
+
+
+
+
+
+
+
+
+
+
+
+
+
+https://thehardestwork.com/2020/10/29/debug-unity-on-android/
+Oh my goodness this was far too difficult… so I had to write it up! This guide assumes you have some experience with Unity, debugging in Visual Studio, and building APK’s (let me know if you don’t in the comments!).
+
+If you’re using Unity, you’re coding in C#, and you’re using Visual Studio… Here’s how you can setup a remote debugger to debug your APK on an Android device.
+
+Email Address:
+Enter your email address
+
+SUBSCRIBE
+
+I’m currently using the following tools but the steps are generally the same:
+
+Unity v2020.1.7f1
+
+Visual Studio Community 2019
+
+Android Studio v3.5 & SDK
+
+Samsung Galaxy S9
+
+Step 1: When you build your APK you’ll want to tick 2 boxes on the build settings menu. ‘Development Build‘ & ‘Script Debugging‘
+
+
+Step 2: Create your build as usual and copy the build to your Android device. Connect your Android Device to your PC via USB. Be sure your machine and Android device are connected to the same wifi network.
+
+Step 3: If you haven’t previously, Enable USB Debugging on your Android Device.
+
+Open Settings
+Select System
+Scroll to the bottom and select About Phone
+Scroll to the bottom and tap ‘Build Number’ 7 times
+Return to the previous screen and find ‘Developer Options’ near the bottom
+Scroll down and select to enable ‘USB Debugging’
+Advertisements
+Step 4: Back on your computer, open up a cmd prompt (or terminal) as an administrator and change your directory to:
+
+1
+C:\Users\[user]\AppData\Local\Android\sdk\platform-tools
+
+Step 5: Back on your Android Device, find the Android Device’s IP by going to:
+
+Go to Settings
+Go to ‘About Phone’
+Got to ‘Status’
+Find ‘IP Address’
+Write it down…
+Step 6: Back in your command prompt enter the following command:
+
+adb tcpip 5555
+If you need some extra help see the Unity Documentation here
+
+Step 7: Connect to your Device with this command using your IP from Step 5:
+
+adb connect [YourIpAddress]:5555
+Advertisements
+Step 8: Open Visual Studio from within Unity and go to the ‘Debug’ menu option. Select ‘Attach Unity Debugger’
+
+
+Step 9: You should see a small menu popup and it should display both your computer and your connected Android device. Select your Android device, set some break points in your code, and have fun!
+
+Hopefully this guide saves you some time and headache on trying to figure this out. If you need more information on connecting your device that this guide doesn’t provide let me know so I can update it!

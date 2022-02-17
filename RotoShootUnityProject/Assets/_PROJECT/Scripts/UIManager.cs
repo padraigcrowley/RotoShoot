@@ -31,7 +31,10 @@ public class UIManager : Singleton<UIManager>
 
   public GameObject CanvasAndMenuController;
   public MainMenuContoller mainMenuContoller;
-  // Start is called before the first frame update
+
+  public GameObject TriggerShieldButton;
+  public GameObject TriggerSmartBombButton;
+
   void Start()
   {
     //MissionStartLCCTextObject.SetActive(false);
@@ -44,7 +47,31 @@ public class UIManager : Singleton<UIManager>
     mainMenuContoller = CanvasAndMenuController.GetComponent<MainMenuContoller>();
   }
 
+
+  public void ShowTriggerShieldButton()
+  {
+    //TriggerShieldButton.SetActive(true);
+    TransitionHelper.TransitionIn(TriggerShieldButton);
+  }
   
+  public void HideTriggerShieldButton()
+  {
+    //TriggerShieldButton.SetActive(false);
+    TransitionHelper.TransitionOut(TriggerShieldButton);
+  }
+
+  public void ShowTriggerSmartBombButton()
+  {
+    //TriggerShieldButton.SetActive(true);
+    TransitionHelper.TransitionIn(TriggerSmartBombButton);
+  }
+
+  public void HideTriggerSmartBombButton()
+  {
+    //TriggerShieldButton.SetActive(false);
+    TransitionHelper.TransitionOut(TriggerSmartBombButton);
+  }
+
   public IEnumerator FadeOutBigText(TMP_Text myTextObject, float fadeOutDuration = 1f)
 	{
 

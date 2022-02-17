@@ -408,6 +408,7 @@ TextureImporter:
   streamingMipmaps: 0
   streamingMipmapsPriority: 0
   vTOnly: 0
+  ignoreMasterTextureLimit: 0
   grayScaleToAlpha: 0
   generateCubemap: 6
   cubemapConvolution: 0
@@ -416,12 +417,12 @@ TextureImporter:
   maxTextureSize: 2048
   textureSettings:
     serializedVersion: 2
-    filterMode: -1
-    aniso: -1
-    mipBias: -100
+    filterMode: 1
+    aniso: 1
+    mipBias: 0
     wrapU: 1
     wrapV: 1
-    wrapW: -1
+    wrapW: 0
   nPOTScale: 0
   lightmap: 0
   compressionQuality: 50
@@ -439,6 +440,8 @@ TextureImporter:
   textureType: 8
   textureShape: 1
   singleChannelComponent: 0
+  flipbookRows: 1
+  flipbookColumns: 1
   maxTextureSizeSet: 0
   compressionQualitySet: 0
   textureFormatSet: 0
@@ -1166,6 +1169,39 @@ TextureImporter:
     edges: []
     weights: []
     secondaryTextures: []
+    nameFileIdTable:
+      asteroids_pngegg 2_53: 3263776065827868259
+      asteroids_pngegg 2_60: 3709939925623404183
+      asteroids_pngegg 2_56: -5342504747929790838
+      asteroids_pngegg 2_52: -5628815172176545259
+      asteroids_pngegg 2_58: 72192882338260241
+      asteroids_pngegg 2_45: 2106027361843276195
+      asteroids_pngegg 2_49: 6514748319263067906
+      asteroids_pngegg 2_61: -832890790157043161
+      asteroids_pngegg 2_47: -1778529066030046871
+      asteroids_pngegg 2_51: -6305637267004149050
+      asteroids_pngegg 2_54: -8227695968323599074
+      asteroids_pngegg 2_55: 998514438582334998
+      asteroids_pngegg 2_57: 4719961448913455414
+      asteroids_pngegg 2_35: 1627150997701546996
+      asteroids_pngegg 2_59: 7228180218404121604
+      asteroids_pngegg 2_39: -7454861771731131693
+      asteroids_pngegg 2_44: 7480639610372150691
+      asteroids_pngegg 2_37: 4405287631208046191
+      asteroids_pngegg 2_38: -3460343981636328479
+      asteroids_pngegg 2_34: 8440754169615074380
+      asteroids_pngegg 2_36: -6899052112119137057
+      asteroids_pngegg 2_40: -9075749183007231442
+      asteroids_pngegg 2_33: -7621275065118021919
+      asteroids_pngegg 2_50: 7740051719574698596
+      asteroids_pngegg 2_46: 874617965055674415
+      asteroids_pngegg 2_41: -7390149558314660366
+      asteroids_pngegg 2_62: -5263540744616405374
+      asteroids_pngegg 2_63: 8880799211678194082
+      asteroids_pngegg 2_48: -8002575790260744496
+      asteroids_pngegg 2_42: -1627571127565715662
+      asteroids_pngegg 2_32: 5441410320204531114
+      asteroids_pngegg 2_43: -2480864001334011281
   spritePackingTag: 
   pSDRemoveMatte: 0
   pSDShowRemoveMatteOption: 0

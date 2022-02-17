@@ -114,6 +114,7 @@ TextureImporter:
   streamingMipmaps: 0
   streamingMipmapsPriority: 0
   vTOnly: 0
+  ignoreMasterTextureLimit: 0
   grayScaleToAlpha: 0
   generateCubemap: 6
   cubemapConvolution: 0
@@ -122,9 +123,9 @@ TextureImporter:
   maxTextureSize: 2048
   textureSettings:
     serializedVersion: 2
-    filterMode: -1
+    filterMode: 1
     aniso: 1
-    mipBias: -100
+    mipBias: 0
     wrapU: 1
     wrapV: 1
     wrapW: 1
@@ -856,6 +857,37 @@ TextureImporter:
     edges: []
     weights: []
     secondaryTextures: []
+    nameFileIdTable:
+      Idle_19: 21300038
+      Idle_28: 21300056
+      Idle_4: 21300008
+      Idle_26: 21300052
+      Idle_12: 21300024
+      Idle_22: 21300044
+      Idle_17: 21300034
+      Idle_1: 21300002
+      Idle_21: 21300042
+      Idle_14: 21300028
+      Idle_10: 21300020
+      Idle_8: 21300016
+      Idle_3: 21300006
+      Idle_16: 21300032
+      Idle_25: 21300050
+      Idle_5: 21300010
+      Idle_29: 21300058
+      Idle_0: 21300000
+      Idle_6: 21300012
+      Idle_7: 21300014
+      Idle_20: 21300040
+      Idle_13: 21300026
+      Idle_24: 21300048
+      Idle_23: 21300046
+      Idle_11: 21300022
+      Idle_15: 21300030
+      Idle_2: 21300004
+      Idle_9: 21300018
+      Idle_27: 21300054
+      Idle_18: 21300036
   spritePackingTag: 
   pSDRemoveMatte: 0
   pSDShowRemoveMatteOption: 0

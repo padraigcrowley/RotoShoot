@@ -5,21 +5,20 @@ using UnityEngine;
 public class PowerUpShield : PowerUp
 {
   public GameObject playerShieldPrefab;
+  public GameObject TriggerShieldButton;
 
   protected override void PowerUpPayload()
   {
-    //do stuff specific to this PU//todo
-    //playerShield.SetActive(true);
-    Instantiate(playerShieldPrefab, playerShip.gameObject.transform.position, Quaternion.identity,playerShip.transform);
-    print("PLAYER SHIELD INSTANTIATED!!!");
-    
+    //Instantiate(playerShieldPrefab, playerShip.gameObject.transform.position, Quaternion.identity,playerShip.transform);
+    //print("PLAYER SHIELD INSTANTIATED!!!");
+
+    UIManager.Instance.ShowTriggerShieldButton();
     base.PowerUpPayload();
   }
 
   //protected override void Start()
   //{
-   
-
+            
   //  base.Start();
   //}
 
