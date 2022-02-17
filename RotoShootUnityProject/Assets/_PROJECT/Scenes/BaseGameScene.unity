@@ -357,7 +357,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0}
   m_AnchorMax: {x: 0.5, y: 0}
-  m_AnchoredPosition: {x: 0, y: 130.9}
+  m_AnchoredPosition: {x: 0, y: 131}
   m_SizeDelta: {x: 100, y: 100}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &41499183
@@ -761,7 +761,7 @@ RectTransform:
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 429914929}
-  m_RootOrder: 1
+  m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
@@ -2717,7 +2717,7 @@ RectTransform:
   m_Children:
   - {fileID: 1068971052}
   m_Father: {fileID: 429914929}
-  m_RootOrder: 0
+  m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
@@ -2747,7 +2747,7 @@ MonoBehaviour:
   m_Colors:
     m_NormalColor: {r: 1, g: 1, b: 1, a: 1}
     m_HighlightedColor: {r: 0.9607843, g: 0.9607843, b: 0.9607843, a: 1}
-    m_PressedColor: {r: 1, g: 0, b: 0, a: 1}
+    m_PressedColor: {r: 0.78431374, g: 0.78431374, b: 0.78431374, a: 1}
     m_SelectedColor: {r: 0.9607843, g: 0.9607843, b: 0.9607843, a: 1}
     m_DisabledColor: {r: 0.78431374, g: 0.78431374, b: 0.78431374, a: 0.5019608}
     m_ColorMultiplier: 1
@@ -3597,14 +3597,14 @@ RectTransform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
-  - {fileID: 332227513}
   - {fileID: 117924680}
+  - {fileID: 332227513}
   m_Father: {fileID: 41499181}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -100, y: 0}
+  m_AnchoredPosition: {x: -133, y: 0}
   m_SizeDelta: {x: 100, y: 100}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &429914930
@@ -3627,7 +3627,7 @@ MonoBehaviour:
     TransitionChildren: 0
     MustTriggerDirect: 0
     Delay: 0
-    Duration: 0.6
+    Duration: 0.4
     TimeUpdateMethod: 0
     TransitionType: 23
     AnimationCurve:
@@ -3669,9 +3669,9 @@ MonoBehaviour:
     TransitionChildren: 0
     MustTriggerDirect: 0
     Delay: 0
-    Duration: 0.6
+    Duration: 0.4
     TimeUpdateMethod: 0
-    TransitionType: 28
+    TransitionType: 27
     AnimationCurve:
       serializedVersion: 2
       m_Curve:
@@ -5211,7 +5211,7 @@ RectTransform:
   m_Children:
   - {fileID: 115318953}
   m_Father: {fileID: 1783331038}
-  m_RootOrder: 0
+  m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
@@ -11647,7 +11647,7 @@ RectTransform:
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 1783331038}
-  m_RootOrder: 1
+  m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
@@ -11926,14 +11926,14 @@ RectTransform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
-  - {fileID: 681833322}
   - {fileID: 1737660690}
+  - {fileID: 681833322}
   m_Father: {fileID: 41499181}
   m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 100, y: 0}
+  m_AnchoredPosition: {x: 133, y: 0}
   m_SizeDelta: {x: 100, y: 100}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1783331039
@@ -11956,7 +11956,7 @@ MonoBehaviour:
     TransitionChildren: 0
     MustTriggerDirect: 0
     Delay: 0
-    Duration: 0.6
+    Duration: 0.4
     TimeUpdateMethod: 0
     TransitionType: 23
     AnimationCurve:
@@ -11998,9 +11998,9 @@ MonoBehaviour:
     TransitionChildren: 0
     MustTriggerDirect: 0
     Delay: 0
-    Duration: 0.6
+    Duration: 0.4
     TimeUpdateMethod: 0
-    TransitionType: 28
+    TransitionType: 27
     AnimationCurve:
       serializedVersion: 2
       m_Curve:

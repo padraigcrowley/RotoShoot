@@ -34,6 +34,8 @@ public class UIManager : Singleton<UIManager>
 
   public GameObject TriggerShieldButton;
   public GameObject TriggerSmartBombButton;
+  private bool isTriggerShieldButtonVisible = false;
+  private bool isTriggerSmartBombButtonVisible = false;
 
   void Start()
   {
@@ -51,25 +53,39 @@ public class UIManager : Singleton<UIManager>
   public void ShowTriggerShieldButton()
   {
     //TriggerShieldButton.SetActive(true);
-    TransitionHelper.TransitionIn(TriggerShieldButton);
+    if (isTriggerShieldButtonVisible == false)
+    {
+      TransitionHelper.TransitionIn(TriggerShieldButton);
+      isTriggerShieldButtonVisible = true;
+    }
   }
   
   public void HideTriggerShieldButton()
   {
-    //TriggerShieldButton.SetActive(false);
-    TransitionHelper.TransitionOut(TriggerShieldButton);
+    if (isTriggerShieldButtonVisible == true)
+    {
+      TransitionHelper.TransitionOut(TriggerShieldButton);
+      isTriggerShieldButtonVisible = false;
+    }
   }
 
   public void ShowTriggerSmartBombButton()
   {
     //TriggerShieldButton.SetActive(true);
-    TransitionHelper.TransitionIn(TriggerSmartBombButton);
+    if (isTriggerSmartBombButtonVisible == false)
+    {
+      TransitionHelper.TransitionIn(TriggerSmartBombButton);
+      isTriggerSmartBombButtonVisible = true;
+    }
   }
 
   public void HideTriggerSmartBombButton()
   {
-    //TriggerShieldButton.SetActive(false);
-    TransitionHelper.TransitionOut(TriggerSmartBombButton);
+    if (isTriggerSmartBombButtonVisible == true)
+    {
+      TransitionHelper.TransitionOut(TriggerSmartBombButton);
+      isTriggerSmartBombButtonVisible = false;
+    }
   }
 
   public IEnumerator FadeOutBigText(TMP_Text myTextObject, float fadeOutDuration = 1f)
