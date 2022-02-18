@@ -54,6 +54,9 @@ public abstract class EnemyBehaviour02 : ExtendedBehaviour
 
   public EnemyFireAtPlayerBehaviour01 enemyFireAtPlayerBehaviour01;
 
+  public UltimateStatusBar Enemy02HPWorldSpaceStatusBar;
+
+
   // virtual public float GetRespawnWaitDelay() => respawnWaitDelay;
 
   public virtual void ReactToPlayerMissileHit()
@@ -148,6 +151,10 @@ public abstract class EnemyBehaviour02 : ExtendedBehaviour
     //}
 
     spriteMaterial.material.SetFloat("_FadeAmount", 0f);
+   
+
+
+
   }
 
   protected virtual void Update()
@@ -276,6 +283,8 @@ public abstract class EnemyBehaviour02 : ExtendedBehaviour
     //hp -= GameplayManager.Instance.PlayerMissileDamage;
     hp -= GameController.Instance.playerMissileDamage;
 
+    Enemy02HPWorldSpaceStatusBar.UpdateStatus(hp, initialHP);
+
     if (hp <= 0) //lethal hit
     {
       enemyState = EnemyState.TEMPORARILY_DEAD;
@@ -283,6 +292,8 @@ public abstract class EnemyBehaviour02 : ExtendedBehaviour
     else //non-lethal hit
     {
       enemyState = EnemyState.ALIVE;  //??
+      Enemy02HPWorldSpaceStatusBar.EnableStatusBar();
+      Enemy02HPWorldSpaceStatusBar.UpdateStatus(hp, initialHP);
     }
   }
 
@@ -300,6 +311,7 @@ public abstract class EnemyBehaviour02 : ExtendedBehaviour
       StopMovement();
     });
 
+    Enemy02HPWorldSpaceStatusBar.DisableStatusBar();
 
     if (enemyState == EnemyState.HIT_BY_PLAYER_SHIELD)
     { 

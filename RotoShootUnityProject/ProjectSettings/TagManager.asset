@@ -30,6 +30,8 @@ TagManager:
   - PlayerShield
   - EnemyExplosionsPool
   - EnemyMissileLarge
+  - EnemyMissileMedium
+  - EnemyMissileSmall
   layers:
   - Default
   - TransparentFX
