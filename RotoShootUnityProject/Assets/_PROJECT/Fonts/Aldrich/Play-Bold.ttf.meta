@@ -8,12 +8,16 @@ TrueTypeFontImporter:
   characterSpacing: 0
   characterPadding: 1
   includeFontData: 1
-  fontName: Play
   fontNames:
   - Play
-  fallbackFontReferences: []
+  fallbackFontReferences:
+  - {fileID: 12800000, guid: 673f0a31ee2df194288aff568a127fd6, type: 3}
+  - {fileID: 12800000, guid: 385dce3fc9f7d434cb640e4d4d497263, type: 3}
+  - {fileID: 12800000, guid: f0948598579bc104cbe15bd905976a90, type: 3}
+  - {fileID: 12800000, guid: a4e6aa990f706bb48ac73f4b4b5ca12e, type: 3}
+  - {fileID: 12800000, guid: 31e9027949eff3b40a1e5d085e0a9935, type: 3}
   customCharacters: 
-  fontRenderingMode: 0
+  fontRenderingMode: 3
   ascentCalculationMode: 1
   useLegacyBoundsCalculation: 0
   shouldRoundAdvanceValue: 1
