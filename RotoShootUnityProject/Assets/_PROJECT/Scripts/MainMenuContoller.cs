@@ -20,9 +20,9 @@ public class MainMenuContoller : ExtendedBehaviour
   public GameObject LevelSelectButtonsPanel;
   public GameObject GetMoreCoinsPanel;
 
-  public Text iap0199PriceText;
-  public Text iap0899PriceText;
-  public Text iap4999PriceText;
+  public TMP_Text iap0199PriceText;
+  public TMP_Text iap0899PriceText;
+  public TMP_Text iap4999PriceText;
 
   public enum ShopItems { MISSILE_POWER, SHIP_DEFENCES , SHIELD_DURATION, POWERUP_DURATION}
 

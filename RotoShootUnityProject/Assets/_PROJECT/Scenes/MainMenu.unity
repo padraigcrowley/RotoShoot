@@ -1832,9 +1832,9 @@ MonoBehaviour:
   MainMenuUpgradesPanel: {fileID: 849319761}
   LevelSelectButtonsPanel: {fileID: 1020408257}
   GetMoreCoinsPanel: {fileID: 43916378}
-  iap0199PriceText: {fileID: 0}
-  iap0899PriceText: {fileID: 0}
-  iap4999PriceText: {fileID: 0}
+  iap0199PriceText: {fileID: 201317684}
+  iap0899PriceText: {fileID: 441835907}
+  iap4999PriceText: {fileID: 1680457626}
   prevLevelButtonImage: {fileID: 179682495}
   nextLevelButtonImage: {fileID: 1306058523}
   logoImage: {fileID: 1964626955}
