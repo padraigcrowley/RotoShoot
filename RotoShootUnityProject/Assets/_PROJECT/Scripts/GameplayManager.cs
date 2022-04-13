@@ -65,7 +65,7 @@ public class GameplayManager : Singleton<GameplayManager>, IPowerUpEvents
   public float tripleFirePowerupRemainingDuration = -1;
 
   public GameObject playerShieldPrefab;
-
+  
 
   // Start is called before the first frame update
   void Start()

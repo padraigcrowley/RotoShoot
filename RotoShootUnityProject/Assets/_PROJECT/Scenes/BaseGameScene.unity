@@ -1723,6 +1723,7 @@ GameObject:
   m_Component:
   - component: {fileID: 191098412}
   - component: {fileID: 191098411}
+  - component: {fileID: 191098413}
   m_Layer: 0
   m_Name: GameplayManagerObject
   m_TagString: Listener
@@ -1805,6 +1806,21 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &191098413
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 191098410}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1d4a85b8c4f75ec41af4b53401da75ff, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  activationKey: 0
+  targetColor: {r: 0, g: 0, b: 0, a: 0}
+  duration: 0
 --- !u!1 &191601459
 GameObject:
   m_ObjectHideFlags: 0
@@ -5203,6 +5219,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9c87870d2313c62438b74725d250f845, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  cameraFlashDamage: {fileID: 191098413}
 --- !u!114 &681833325
 MonoBehaviour:
   m_ObjectHideFlags: 0
