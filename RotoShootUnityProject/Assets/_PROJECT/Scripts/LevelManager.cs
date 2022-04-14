@@ -405,6 +405,11 @@ public class LevelManager : Singleton<LevelManager>
   {
     int numActiveWaves = 0;
 
+    if (levelSetupData.lccKillBoss) // very hacky way to get the smartbomb to take SOME damage from the boss
+    {
+      bossScript.BossLoseHP(bossScript.bossCurrentHealth *.2f); // takes 20% HP
+    }
+
     foreach (List<EnemyBehaviour02> enemyWaveParentBehaviourScripts in enemyWavesParentBehaviourScripts)
     {
       foreach (EnemyBehaviour02 enemyBehaviourScript in enemyWaveParentBehaviourScripts)

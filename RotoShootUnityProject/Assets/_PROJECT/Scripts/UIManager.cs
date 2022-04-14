@@ -5,6 +5,7 @@ using UnityEngine.UI;
 using System.Collections;
 using BeautifulTransitions.Scripts.Transitions;
 using BeautifulTransitions.Scripts.Transitions.TransitionSteps;
+using DG.Tweening;
 public class UIManager : Singleton<UIManager>
 {
   public TextMeshProUGUI HighPlayerScoreText, CurrentPlayerScoreText, CurrentEnemyKillCount, RequiredEnemyKillCount, levelPlayTimeCounterText, starCoinCountText, MissionStartLCCText;
@@ -25,6 +26,7 @@ public class UIManager : Singleton<UIManager>
 
   public GameObject MainPauseMenuButtonTransitions;
   public GameObject TopInGameHUDTransitions;
+  public GameObject BottomInGameHUDTransitions;
   public GameObject LevelCompletePanelTransitions;
   private bool hudOn = false;
   private bool doingLevelCompleteText = false;
@@ -37,6 +39,7 @@ public class UIManager : Singleton<UIManager>
   private bool isTriggerShieldButtonVisible = false;
   private bool isTriggerSmartBombButtonVisible = false;
 
+  public SpriteRenderer lanesSprite;
   void Start()
   {
     //MissionStartLCCTextObject.SetActive(false);
@@ -153,19 +156,23 @@ public class UIManager : Singleton<UIManager>
           if (!hudOn)
           {
             TransitionHelper.TransitionIn(TopInGameHUDTransitions);
+            TransitionHelper.TransitionIn(BottomInGameHUDTransitions);
             hudOn = true;
           }
+            Tween lanesTween = lanesSprite.DOFade(.07f, 2f);
 
           break;
         }
       case GameplayManager.GameState.LEVEL_OUTRO_IN_PROGRESS:
         {
-          //if (hudOn)
-          //{
-          //  TransitionHelper.TransitionOut(TopInGameHUDTransitions);
-          //  hudOn = false;
-          //}
+          if (hudOn)
+          {
+            TransitionHelper.TransitionOut(TopInGameHUDTransitions);
+            TransitionHelper.TransitionOut(BottomInGameHUDTransitions);
+            hudOn = false;
+          }
           //GameplayManager.Instance.currentGameState = GameplayManager.GameState.WAITING_FOR_LEVELCOMPLETE_BUTTONS;
+          Tween lanesTween = lanesSprite.DOFade(0f, 2f);
 
           break;
         }

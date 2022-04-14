@@ -331,6 +331,7 @@ GameObject:
   - component: {fileID: 41499181}
   - component: {fileID: 41499184}
   - component: {fileID: 41499183}
+  - component: {fileID: 41499185}
   m_Layer: 5
   m_Name: BottomInGameHUD
   m_TagString: Untagged
@@ -398,6 +399,113 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 41499180}
   m_CullTransparentMesh: 1
+--- !u!114 &41499185
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 41499180}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e64337308ae57d94ba8410d06ffe1403, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  InitForTransitionIn: 1
+  AutoRun: 0
+  RepeatWhenEnabled: 0
+  TransitionInConfig:
+    AutoRun: 0
+    TransitionChildren: 0
+    MustTriggerDirect: 0
+    Delay: 0.3
+    Duration: 1
+    TimeUpdateMethod: 0
+    TransitionType: 2
+    AnimationCurve:
+      serializedVersion: 2
+      m_Curve:
+      - serializedVersion: 3
+        time: 0
+        value: 0
+        inSlope: 0
+        outSlope: 0
+        tangentMode: 0
+        weightedMode: 0
+        inWeight: 0
+        outWeight: 0
+      - serializedVersion: 3
+        time: 1
+        value: 1
+        inSlope: 0
+        outSlope: 0
+        tangentMode: 0
+        weightedMode: 0
+        inWeight: 0
+        outWeight: 0
+      m_PreInfinity: 2
+      m_PostInfinity: 2
+      m_RotationOrder: 4
+    LoopMode: 0
+    OnTransitionStart:
+      m_PersistentCalls:
+        m_Calls: []
+    OnTransitionUpdate:
+      m_PersistentCalls:
+        m_Calls: []
+    OnTransitionComplete:
+      m_PersistentCalls:
+        m_Calls: []
+  TransitionOutConfig:
+    AutoRun: 0
+    TransitionChildren: 0
+    MustTriggerDirect: 0
+    Delay: 0.3
+    Duration: 0.4
+    TimeUpdateMethod: 0
+    TransitionType: 27
+    AnimationCurve:
+      serializedVersion: 2
+      m_Curve:
+      - serializedVersion: 3
+        time: 0
+        value: 0
+        inSlope: 0
+        outSlope: 0
+        tangentMode: 0
+        weightedMode: 0
+        inWeight: 0
+        outWeight: 0
+      - serializedVersion: 3
+        time: 1
+        value: 1
+        inSlope: 0
+        outSlope: 0
+        tangentMode: 0
+        weightedMode: 0
+        inWeight: 0
+        outWeight: 0
+      m_PreInfinity: 2
+      m_PostInfinity: 2
+      m_RotationOrder: 4
+    LoopMode: 0
+    OnTransitionStart:
+      m_PersistentCalls:
+        m_Calls: []
+    OnTransitionUpdate:
+      m_PersistentCalls:
+        m_Calls: []
+    OnTransitionComplete:
+      m_PersistentCalls:
+        m_Calls: []
+  Target: {fileID: 0}
+  MoveMode: 2
+  InConfig:
+    StartPositionType: 1
+    StartPosition: {x: 0, y: -400, z: 0}
+  OutConfig:
+    EndPositionType: 0
+    EndPosition: {x: 0, y: -400, z: 0}
 --- !u!1 &44160080
 GameObject:
   m_ObjectHideFlags: 0
@@ -2510,10 +2618,10 @@ MonoBehaviour:
     AutoRun: 0
     TransitionChildren: 0
     MustTriggerDirect: 0
-    Delay: 0.5
-    Duration: 1
+    Delay: 0.3
+    Duration: 0.4
     TimeUpdateMethod: 0
-    TransitionType: 1
+    TransitionType: 27
     AnimationCurve:
       serializedVersion: 2
       m_Curve:
@@ -2551,11 +2659,11 @@ MonoBehaviour:
   Target: {fileID: 0}
   MoveMode: 2
   InConfig:
-    StartPositionType: 0
-    StartPosition: {x: 0, y: 200, z: 0}
+    StartPositionType: 1
+    StartPosition: {x: 0, y: 400, z: 0}
   OutConfig:
-    EndPositionType: 0
-    EndPosition: {x: 0, y: 200, z: 0}
+    EndPositionType: 1
+    EndPosition: {x: 0, y: 400, z: 0}
 --- !u!114 &327111995
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2614,10 +2722,10 @@ RectTransform:
   m_Father: {fileID: 1849652818}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0, y: 0}
-  m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: 0, y: 0}
+  m_AnchorMin: {x: 0.5, y: 1}
+  m_AnchorMax: {x: 0.5, y: 1}
+  m_AnchoredPosition: {x: 0, y: -960.5}
+  m_SizeDelta: {x: 1080, y: 1921}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!1 &332227512
 GameObject:
@@ -9332,11 +9440,13 @@ MonoBehaviour:
   levelCompleteTextAnimatorPlayer: {fileID: 399288999}
   MainPauseMenuButtonTransitions: {fileID: 334257921}
   TopInGameHUDTransitions: {fileID: 327111993}
+  BottomInGameHUDTransitions: {fileID: 41499180}
   LevelCompletePanelTransitions: {fileID: 615974328}
   CanvasAndMenuController: {fileID: 0}
   mainMenuContoller: {fileID: 0}
   TriggerShieldButton: {fileID: 429914928}
   TriggerSmartBombButton: {fileID: 1783331037}
+  lanesSprite: {fileID: 1598777129}
 --- !u!4 &1397508540
 Transform:
   m_ObjectHideFlags: 0
@@ -10322,7 +10432,7 @@ SpriteRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_Sprite: {fileID: 21300000, guid: 0b96bc375665c44448419ff18f22d443, type: 3}
-  m_Color: {r: 1, g: 1, b: 1, a: 0.07058824}
+  m_Color: {r: 1, g: 1, b: 1, a: 0}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0

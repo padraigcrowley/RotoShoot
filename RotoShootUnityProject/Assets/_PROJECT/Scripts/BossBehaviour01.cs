@@ -438,13 +438,18 @@ public class BossBehaviour01 : ExtendedBehaviour
         StartCoroutine(BossTakesDamageEffect(.25f)); //note: the param is half the overall duration
         StartCoroutine(DamageFXCooldown(.5f));
       }
-      bossCurrentHealth -= GameController.Instance.playerMissileDamage;
-      UltimateStatusBar.UpdateStatus("BossHealthBar", bossCurrentHealth, bossMaxHealth);
+      BossLoseHP(GameController.Instance.playerMissileDamage);
       if (bossCurrentHealth <= 0)
       {
         boss01State = BossState.BOSS_DYING;
       }
     }
+  }
+
+  public void BossLoseHP(float damage)
+  {
+    bossCurrentHealth -= damage;
+    UltimateStatusBar.UpdateStatus("BossHealthBar", bossCurrentHealth, bossMaxHealth);
   }
 
 }
