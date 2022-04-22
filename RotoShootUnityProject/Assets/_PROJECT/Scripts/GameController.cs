@@ -99,7 +99,7 @@ public class GameController : Singleton<GameController>
   }
 	public void LoadSpecificLevel(int level)
   {
-    GameController.Instance.currentLevelPlaying = level;
+    //GameController.Instance.currentLevelPlaying = level;
     level = level % NUM_UNIQUE_LEVELS;
     if (level == 0)
       level = NUM_UNIQUE_LEVELS;
