@@ -247,7 +247,7 @@ public class UIManager : Singleton<UIManager>
 
   public void handleGameRestartButtonPress()
   {
-    print("Start Button Pressed!");
+    //print("Start Button Pressed!");
     CurrentPlayerScoreText.text = "0";
     //GameplayManager.Instance.currentGameState = GameplayManager.GameState.LEVEL_INTRO_IN_PROGRESS;
 

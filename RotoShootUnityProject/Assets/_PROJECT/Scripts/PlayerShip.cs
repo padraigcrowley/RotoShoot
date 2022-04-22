@@ -229,7 +229,7 @@ public class PlayerShip : ExtendedBehaviour
 
   public IEnumerator DoPlayerDeath()
   {
-    print("In Player Death");
+    //print("In Player Death");
     int numExplosions = 4;
     float timeBetweenExplosions = .3f;
     Vector3 explosionPos;

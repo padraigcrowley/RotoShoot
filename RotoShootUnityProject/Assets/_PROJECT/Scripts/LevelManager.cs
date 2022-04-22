@@ -63,7 +63,7 @@ public class LevelManager : Singleton<LevelManager>
     GetLevelStats(GameController.Instance.currentLevelPlaying);
     foreach (string statName in LevelStats.Keys)
     {
-      print($"Stats for level {GameController.Instance.currentLevelPlaying} :  {statName} = {LevelStats[statName] }");
+      //print($"Stats for level {GameController.Instance.currentLevelPlaying} :  {statName} = {LevelStats[statName] }");
 
     }
     enemyWavesParentBehaviourScripts.Clear();
