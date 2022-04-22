@@ -2208,11 +2208,11 @@ MonoBehaviour:
   - {fileID: 11400000, guid: 97573bb39ce42774e9521893f17723b0, type: 2}
   - {fileID: 11400000, guid: da53f01ad7a998a4e8cffe2526c33a6e, type: 2}
   - {fileID: 11400000, guid: 1924696e641fc7c44b900149a06e1802, type: 2}
-  - {fileID: 11400000, guid: 1924696e641fc7c44b900149a06e1802, type: 2}
-  - {fileID: 11400000, guid: 1924696e641fc7c44b900149a06e1802, type: 2}
-  - {fileID: 11400000, guid: 1924696e641fc7c44b900149a06e1802, type: 2}
-  - {fileID: 11400000, guid: 1924696e641fc7c44b900149a06e1802, type: 2}
-  - {fileID: 11400000, guid: 1924696e641fc7c44b900149a06e1802, type: 2}
+  - {fileID: 11400000, guid: ba0db5c2998fe7c4095cee3e5e4338dc, type: 2}
+  - {fileID: 11400000, guid: ef7fbc1cb87df734db8df9b4ebb9ce69, type: 2}
+  - {fileID: 11400000, guid: e0e57ba8d753c764999fb9a09b5d99c0, type: 2}
+  - {fileID: 11400000, guid: d274a977dc982f845815aec642dc3e4c, type: 2}
+  - {fileID: 11400000, guid: 9520e799cd097364db6a9eb748e23bbf, type: 2}
   levelSetupData: {fileID: 0}
   levelPlayTimeElapsed: 0
   verticalDistBetweenEnemies: 2

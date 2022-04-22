@@ -34,7 +34,7 @@ public class LevelManager : Singleton<LevelManager>
     SWS.PathManager pathInstance = null;
   public bool bossHasBeenKilled = false;
 
-  public SpinningMineBehaviour spinningMine;
+  public SpinningMineBehaviour spinningMineScript;
   private GameObject spinningMineInstance;
   private BossBehaviour01 bossScript;
 
@@ -270,7 +270,7 @@ public class LevelManager : Singleton<LevelManager>
     
     spinningMineInstance = Instantiate(levelSetupData.spinningMineSpawnPointData.spinningMinePrefab);
 
-    SpinningMineBehaviour spinningMineScript = spinningMineInstance.GetComponent<SpinningMineBehaviour>();
+    spinningMineScript = spinningMineInstance.GetComponent<SpinningMineBehaviour>();
 
     if (levelSetupData.spinningMineSpawnPointData.waypointPath != null)
     {
@@ -407,8 +407,15 @@ public class LevelManager : Singleton<LevelManager>
 
     if (levelSetupData.lccKillBoss) // very hacky way to get the smartbomb to take SOME damage from the boss
     {
-      bossScript.BossLoseHP(bossScript.bossCurrentHealth *.2f); // takes 20% HP
+      bossScript.BossLoseHP(bossScript.bossMaxHealth *.2f); // takes 20% HP
     }
+
+    // very hacky way to get the smartbomb to take SOME damage from the boss
+    if ((levelSetupData.spinningMineSpawnPointData.levelHasSpinningMine == true) && (spinningMineScript.enemyState == SpinningMineBehaviour.EnemyState.SPINNING_IN_COMPLETED))
+    {
+      spinningMineScript.LoseHP(spinningMineScript.spinningMineMaxHealth * .2f); // takes 20% HP
+    }
+
 
     foreach (List<EnemyBehaviour02> enemyWaveParentBehaviourScripts in enemyWavesParentBehaviourScripts)
     {

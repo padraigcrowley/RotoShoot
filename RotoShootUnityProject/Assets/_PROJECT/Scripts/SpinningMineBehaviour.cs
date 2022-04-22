@@ -7,8 +7,8 @@ using SWS; //simple waypoints
 public class SpinningMineBehaviour : ExtendedBehaviour
 {
 
-  enum EnemyState { DOING_NOTHING, WAITING_TO_SPAWN, SPAWNING, SPINNING_IN_STARTED, SPINNING_IN_IN_PROGRESS, SPINNING_IN_COMPLETED, FIRING, NOT_FIRING, SPINNING_OUT_STARTED, SPINNING_OUT_IN_PROGRESS, SPINNING_OUT_COMPLETED, DYING_TEMPORARILY, DEAD_TEMPORARILY, DYING_FULLY, DEAD_FULLY }
-  EnemyState enemyState;
+  public enum EnemyState { DOING_NOTHING, WAITING_TO_SPAWN, SPAWNING, SPINNING_IN_STARTED, SPINNING_IN_IN_PROGRESS, SPINNING_IN_COMPLETED, FIRING, NOT_FIRING, SPINNING_OUT_STARTED, SPINNING_OUT_IN_PROGRESS, SPINNING_OUT_COMPLETED, DYING_TEMPORARILY, DEAD_TEMPORARILY, DYING_FULLY, DEAD_FULLY }
+  public EnemyState enemyState;
   private Renderer spriteMaterial, spriteRenderer;
   public SpriteRenderer centreOrbSpriteRenderer;
   private float minX = -3.22f, maxX = 3.2f, minY = -2f, maxY = 8f; //(topleft: -3.22, 8.0) (bottomright: 3.2, -2.0)
@@ -19,7 +19,7 @@ public class SpinningMineBehaviour : ExtendedBehaviour
   public int numBurstFiresBeforePause;
   public float waitTimeBeforeFirstSpawn, waitTimeBetweenSpawns;
 
-  float spinningMineMaxHealth = 100;  //todo - hard coded health?!?!
+  public float spinningMineMaxHealth = 100;  //todo - hard coded health?!?!
   float spinningMineCurrentHealth;
   public float hpMultiplierFromSpawner;
   public float speedMultiplierFromSpawner;
@@ -34,6 +34,9 @@ public class SpinningMineBehaviour : ExtendedBehaviour
   private CapsuleCollider[] ShootingPointCollidersArray;
   private bool waitingToRespawn = true, waitingBeforeFirstSpawn = true;
   private bool firstTime = true;
+
+  public GameObject deathExplosion;
+  private GameObject deathExplosionInstance;
 
   public UltimateStatusBar SpinningMineStatusBar;
 
@@ -238,7 +241,10 @@ public class SpinningMineBehaviour : ExtendedBehaviour
         spinningMineCurrentHealth = spinningMineMaxHealth;
         transform.Rotate(new Vector3(0, 0, rotationSpeed * Time.deltaTime));
         CancelInvoke();
-        StartCoroutine(SpinOutEffect(1f));
+        StartCoroutine(SpinOutEffect(2f));
+        StartCoroutine(DoDeath());
+        LevelManager.Instance.numEnemyKillsInLevel++;
+        UIManager.Instance.CurrentEnemyKillCount.text = LevelManager.Instance.numEnemyKillsInLevel.ToString();
         enemyState = EnemyState.SPINNING_OUT_IN_PROGRESS;
         break;
       case EnemyState.SPINNING_OUT_IN_PROGRESS:
@@ -253,6 +259,29 @@ public class SpinningMineBehaviour : ExtendedBehaviour
       default:
         break;
     }
+  }
+
+  IEnumerator DoDeath()
+  {
+    int numExplosions = 4;
+    float timeBetweenExplosions = .05f;
+    Vector3 explosionPos;
+
+    for (int i = 0; i < numExplosions; i++)
+    {      explosionPos = new Vector3(transform.position.x + Random.Range(-2, 2),
+                                 transform.position.y + Random.Range(-1, 4),
+                                 transform.position.z);
+
+      deathExplosionInstance = SimplePool.Spawn(deathExplosion, explosionPos, transform.rotation);
+      //GameObject newParticleEffect = SimplePool.Spawn(bossDamageFX, explosionPos, bossEgg.transform.rotation, transform) as GameObject;
+
+      //change the sorting order so the explosion is sorted over the boss sprite. the explosion sorting is set to default layer as that works best for enemy deaths - the enemy death effect doesn't get too obscured by the explosion. And yeah, I know I'm doing a GetComponent here, but it's on boss death so shouldn't matter if it's slow...
+      deathExplosionInstance.GetComponentInChildren<SpriteRenderer>().sortingLayerName = "VFX_OverPlayerShip";
+      yield return new WaitForSeconds(timeBetweenExplosions);
+
+    }
+
+    
   }
   void Spawn()
   {
@@ -320,11 +349,17 @@ public class SpinningMineBehaviour : ExtendedBehaviour
     if (collision.gameObject.tag.Equals("PlayerMissile") && (enemyState == EnemyState.SPINNING_IN_COMPLETED) )
     {
       StartCoroutine(DoHitEffect());
-      spinningMineCurrentHealth -= GameController.Instance.playerMissileDamage;
-      UltimateStatusBar.UpdateStatus("SpinningMineStatusBar", spinningMineCurrentHealth, spinningMineMaxHealth);
+      LoseHP(GameController.Instance.playerMissileDamage);
     }
 
   }
+
+  public void LoseHP(float damage)
+  {
+    spinningMineCurrentHealth -= damage;
+    UltimateStatusBar.UpdateStatus("SpinningMineStatusBar", spinningMineCurrentHealth, spinningMineMaxHealth);
+  }
+
 }
 
 
