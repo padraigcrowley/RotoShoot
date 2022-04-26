@@ -3,6 +3,7 @@ using DG.Tweening;
 using System;
 using SWS; //simple waypoints
 using System.Collections;
+using DarkTonic.MasterAudio;
 
 public abstract class EnemyBehaviour02 : ExtendedBehaviour
 //https://answers.unity.com/questions/379440/a-simple-wait-function-without-coroutine-c.html
@@ -306,6 +307,8 @@ public abstract class EnemyBehaviour02 : ExtendedBehaviour
 
   public void TemporarilyDie()
   {
+    MasterAudio.PlaySound("EnemyDeath01");
+
     Wait(.05f, () => {
       //Debug.Log("5 seconds is lost forever");
       StopMovement();

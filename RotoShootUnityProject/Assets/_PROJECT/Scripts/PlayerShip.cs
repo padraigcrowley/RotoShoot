@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using DG.Tweening;
 using DG.Tweening.Plugins.Core;
+using DarkTonic.MasterAudio;
 
 public class PlayerShip : ExtendedBehaviour
 {
@@ -259,7 +260,8 @@ public class PlayerShip : ExtendedBehaviour
 
   private void CreatePlayerBullets()
   {
-    switch(GameplayManager.Instance.currentPlayerFiringState)
+    MasterAudio.PlaySound("ShipMissile");
+    switch (GameplayManager.Instance.currentPlayerFiringState)
     {
       case GameplayManager.PlayerFiringState.STRAIGHT_SINGLE:
       case GameplayManager.PlayerFiringState.RAPID_FIRE_SINGLE:
