@@ -8,6 +8,7 @@ using BeautifulTransitions.Scripts.Transitions.TransitionSteps;
 using BeautifulTransitions.Scripts.Transitions.Components;
 using BeautifulTransitions.Scripts.Transitions.TransitionSteps.AbstractClasses;
 using TMPro;
+using DarkTonic.MasterAudio;
 
 public class MainMenuContoller : ExtendedBehaviour
 {
@@ -41,8 +42,12 @@ public class MainMenuContoller : ExtendedBehaviour
   public TMP_Text starCoinCountText;
   public TMP_Text getMoreCoinsPanelStarCoinCountText;
 
+  public Slider musicSlider, soundsSlider;
+
   void Start()
   {
+    musicSlider.value = GameController.Instance.musicVolume;
+    soundsSlider.value = GameController.Instance.soundsVolume;
     //See the "performance" section from: https://www.textanimator.febucci.com/docs/troubleshooting/#editor
     Febucci.UI.Core.TAnimBuilder.InitializeGlobalDatabase();
 
@@ -388,6 +393,21 @@ public class MainMenuContoller : ExtendedBehaviour
       
       SetCorrectPrevNextLevelAlphaButtons();
     }
+  }
+
+  public void HandleMusicSliderChange()
+  {
+    print($"Music slider changed. Value now: {musicSlider.value} Converted: {Mathf.Log10(musicSlider.value) * 20}");
+    MasterAudio.PlaylistMasterVolume = musicSlider.value;
+    ES3.Save("musicVolume", musicSlider.value);
+    //MasterAudio.PlaylistMasterVolume = Mathf.Log10(musicSlider.value) * 20; //no logarethmic conversion needed, handled by MasterAudio
+  }
+  public void HandleSoundsSliderChange()
+  {
+    print($"Sound slider changed. Value now: {soundsSlider.value} Converted: {Mathf.Log10(soundsSlider.value) * 20}");
+    MasterAudio.MasterVolumeLevel = soundsSlider.value;
+    ES3.Save("soundsVolume", soundsSlider.value);
+    //MasterAudio.MasterVolumeLevel = Mathf.Log10(soundsSlider.value) * 20; //no logarethmic conversion needed, handled by MasterAudio
   }
 
   void Update()

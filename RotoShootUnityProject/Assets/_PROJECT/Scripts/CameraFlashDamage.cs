@@ -33,7 +33,7 @@ public class CameraFlashDamage : MonoBehaviour
     panel.AddComponent<CanvasRenderer>();
     panel.AddComponent<Image>();
     RectTransform rt = panel.GetComponent<RectTransform>();
-    rt.sizeDelta = new Vector2(2000, 2000);
+    rt.sizeDelta = new Vector2(2000, 3000);
     panel.transform.SetParent(myCanvas.transform, false);
     flashView.SetActive(false);
   }

@@ -23,6 +23,8 @@ public class GameController : Singleton<GameController>
   public float playerMissileDamage = 1;
   public float shieldDuration = 1;
   public float powerupDuration = 1;
+  public float musicVolume = .8f;
+  public float soundsVolume = .8f;
 
 
   public ES3Spreadsheet levelStatsSpreadsheet = new ES3Spreadsheet();
@@ -36,6 +38,8 @@ public class GameController : Singleton<GameController>
 		playerMissileDamageLevel = ES3.Load("playerMissileDamageLevel", playerMissileDamageLevel);
 		shieldDurationLevel = ES3.Load("shieldDurationLevel", shieldDurationLevel);
 		powerupDurationLevel = ES3.Load("powerupDurationLevel", powerupDurationLevel);
+    musicVolume = ES3.Load("musicVolume", 0.8f);
+    soundsVolume = ES3.Load("soundsVolume", 0.8f);
 		currentLevelPlaying = highestLevelPlayed;
     GetStatsSpreadsheetData();
     GetPlayerStatsSpreadsheetData();
