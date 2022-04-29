@@ -20,6 +20,7 @@ public class MainMenuContoller : ExtendedBehaviour
   public GameObject MainMenuUpgradesPanel;
   public GameObject LevelSelectButtonsPanel;
   public GameObject GetMoreCoinsPanel;
+  public GameObject ConfirmQuitGamePanel;
 
   public TMP_Text iap0199PriceText;
   public TMP_Text iap0899PriceText;
@@ -44,8 +45,12 @@ public class MainMenuContoller : ExtendedBehaviour
 
   public Slider musicSlider, soundsSlider;
 
+  public bool onMainMenu = true;
+
   void Start()
   {
+    onMainMenu = true;
+
     musicSlider.value = GameController.Instance.musicVolume;
     soundsSlider.value = GameController.Instance.soundsVolume;
     //See the "performance" section from: https://www.textanimator.febucci.com/docs/troubleshooting/#editor
@@ -185,6 +190,7 @@ public class MainMenuContoller : ExtendedBehaviour
 
   public void MainMenuStartButtonTransitionOut()
   {
+    onMainMenu = false;
     TransitionHelper.TransitionOut(MainMenuButtonTransitions);
     //selectedLevelText.text = "LEVEL " + GameController.Instance.currentLevelPlaying.ToString();
 
@@ -201,7 +207,7 @@ public class MainMenuContoller : ExtendedBehaviour
   }
   public void HandleMainMenuSettingsButtonPress()
   {
-    
+    onMainMenu = false;
     DoLogoMoveTransitionOut();
     TransitionHelper.TransitionOut(MainMenuButtonTransitions);
     TransitionHelper.TransitionIn(MainMenuSettingsPanel);
@@ -209,6 +215,7 @@ public class MainMenuContoller : ExtendedBehaviour
   }
   public void HandleMainMenuUpgradesButtonPress()
   {
+    onMainMenu = false;
     UpdateUpgradesMenuStatsText();
     DoLogoMoveTransitionOut();
     TransitionHelper.TransitionOut(MainMenuButtonTransitions);
@@ -317,6 +324,7 @@ public class MainMenuContoller : ExtendedBehaviour
   {
 
     logoMoveTransitionIn.Start();
+    onMainMenu = true;
   }
 
   public void MainMenuPlayButtonTransitionOut()
@@ -399,6 +407,7 @@ public class MainMenuContoller : ExtendedBehaviour
   {
     print($"Music slider changed. Value now: {musicSlider.value} Converted: {Mathf.Log10(musicSlider.value) * 20}");
     MasterAudio.PlaylistMasterVolume = musicSlider.value;
+    GameController.Instance.musicVolume = musicSlider.value;
     ES3.Save("musicVolume", musicSlider.value);
     //MasterAudio.PlaylistMasterVolume = Mathf.Log10(musicSlider.value) * 20; //no logarethmic conversion needed, handled by MasterAudio
   }
@@ -406,13 +415,30 @@ public class MainMenuContoller : ExtendedBehaviour
   {
     print($"Sound slider changed. Value now: {soundsSlider.value} Converted: {Mathf.Log10(soundsSlider.value) * 20}");
     MasterAudio.MasterVolumeLevel = soundsSlider.value;
+    GameController.Instance.soundsVolume = soundsSlider.value;
     ES3.Save("soundsVolume", soundsSlider.value);
     //MasterAudio.MasterVolumeLevel = Mathf.Log10(soundsSlider.value) * 20; //no logarethmic conversion needed, handled by MasterAudio
   }
 
+  public void QuitGame()
+  {
+    print($"QuitGame() called");
+#if UNITY_EDITOR
+    UnityEditor.EditorApplication.isPlaying = false;
+#else
+    //Application.Quit();
+    System.Diagnostics.Process.GetCurrentProcess().Kill();
+#endif
+  }
+
+
+
   void Update()
   {
-
+    if (Input.GetKeyDown(KeyCode.Escape) && onMainMenu == true)
+    {
+      TransitionHelper.TransitionIn(ConfirmQuitGamePanel);
+    }
   }
 }
 

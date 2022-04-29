@@ -6,6 +6,8 @@ using System.Collections;
 using BeautifulTransitions.Scripts.Transitions;
 using BeautifulTransitions.Scripts.Transitions.TransitionSteps;
 using DG.Tweening;
+using DarkTonic.MasterAudio;
+
 public class UIManager : Singleton<UIManager>
 {
   public TextMeshProUGUI HighPlayerScoreText, CurrentPlayerScoreText, CurrentEnemyKillCount, RequiredEnemyKillCount, levelPlayTimeCounterText, starCoinCountText, MissionStartLCCText;
@@ -227,6 +229,7 @@ public class UIManager : Singleton<UIManager>
         GameplayManager.Instance.UnpauseGame();
         SetButtonImageAlpha(PauseButtonFGImage, .4f);
         SetButtonImageAlpha(PauseButtonBGImage, .4f);
+        MasterAudio.PlaylistMasterVolume = GameController.Instance.musicVolume;
       }
       else
       {
@@ -234,7 +237,24 @@ public class UIManager : Singleton<UIManager>
         GameplayManager.Instance.PauseGame();
         SetButtonImageAlpha(PauseButtonFGImage, 1f);
         SetButtonImageAlpha(PauseButtonBGImage, 1f);
+        MasterAudio.PlaylistMasterVolume = 0f;
+
       }
+    }
+  }
+
+  void OnApplicationPause(bool _bool)
+  {
+    if (_bool)
+    {
+      print("paused");
+      if (!GameplayManager.Instance.isGamePaused)
+        handlePauseButtonPress();
+
+    }
+    else
+    {
+      print("resumed");
     }
   }
 
@@ -274,6 +294,9 @@ public class UIManager : Singleton<UIManager>
     }
     mainMenuContoller.DoLogoMoveTransitionIn();
     TransitionHelper.TransitionIn(mainMenuContoller.MainMenuButtonTransitions);
+
+    //"unpause" the music that's been "paused" on the pause screen
+    MasterAudio.PlaylistMasterVolume = GameController.Instance.musicVolume;
 
   }
   
