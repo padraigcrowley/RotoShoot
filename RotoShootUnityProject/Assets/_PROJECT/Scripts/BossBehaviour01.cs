@@ -2,6 +2,7 @@
 using System.Collections;
 using UnityEngine;
 using DG.Tweening;
+using DarkTonic.MasterAudio;
 
 public class BossBehaviour01 : ExtendedBehaviour
 {
@@ -151,6 +152,7 @@ public class BossBehaviour01 : ExtendedBehaviour
               GameplayManager.Instance.playerShipFiring = false;
               GameplayManager.Instance.playerShipMovementAllowed = false;
               HealthBarCanvas.enabled = false;
+              MasterAudio.PlaySound("Boss01Die");
             }
 
             break;
@@ -374,6 +376,7 @@ public class BossBehaviour01 : ExtendedBehaviour
 
     firedBullet = SimplePool.Spawn(bossMissile, bossEgg.transform.position, Quaternion.identity, bossMissilesParentPool.transform);
     firedBullet.transform.localRotation = rotation; //v.important line!!!
+    MasterAudio.PlaySound("Boss01Missile");
 
   }
 
@@ -450,6 +453,8 @@ public class BossBehaviour01 : ExtendedBehaviour
   {
     bossCurrentHealth -= damage;
     UltimateStatusBar.UpdateStatus("BossHealthBar", bossCurrentHealth, bossMaxHealth);
+    MasterAudio.PlaySound("Boss01Hit");
+
   }
 
 }

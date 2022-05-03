@@ -231,6 +231,7 @@ public class PlayerShip : ExtendedBehaviour
   public IEnumerator DoPlayerDeath()
   {
     //print("In Player Death");
+    MasterAudio.PlaySound("PlayerShipHitFatal");
     int numExplosions = 4;
     float timeBetweenExplosions = .3f;
     Vector3 explosionPos;
@@ -432,6 +433,8 @@ public class PlayerShip : ExtendedBehaviour
     
     //UltimateStatusBar.UpdateStatus("playerStatusBar", GameplayManager.Instance.currentPlayerHP, GameplayManager.Instance.maxPlayerHP);
     UltimateStatusBar.UpdateStatus("PlayerHPWorldSpaceStatusBar", GameplayManager.Instance.currentPlayerHP, GameController.Instance.maxPlayerHP);
+    if(hpChange < 0)
+      MasterAudio.PlaySound("PlayerShipHitNonFatal");
   }
 
  
