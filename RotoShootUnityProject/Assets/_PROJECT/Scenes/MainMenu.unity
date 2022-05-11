@@ -30683,7 +30683,7 @@ AudioSource:
   m_audioClip: {fileID: 0}
   m_PlayOnAwake: 0
   m_Volume: 1
-  m_Pitch: 1.022343
+  m_Pitch: 1.0012558
   Loop: 0
   Mute: 0
   Spatialize: 0
@@ -31298,7 +31298,7 @@ MonoBehaviour:
   soundPlayedEventActive: 0
   soundPlayedCustomEvent: 
   willCleanUpDelegatesAfterStop: 1
-  frames: 628
+  frames: 733
 --- !u!1 &1485229978
 GameObject:
   m_ObjectHideFlags: 0
@@ -41724,7 +41724,7 @@ AudioSource:
   OutputAudioMixerGroup: {fileID: 0}
   m_audioClip: {fileID: 8300000, guid: 66d143bb7da76ba4a87672816b7412b2, type: 3}
   m_PlayOnAwake: 0
-  m_Volume: 0.546
+  m_Volume: 0.331
   m_Pitch: 1
   Loop: 0
   Mute: 0
@@ -41924,7 +41924,7 @@ MonoBehaviour:
   soundPlayedEventActive: 0
   soundPlayedCustomEvent: 
   willCleanUpDelegatesAfterStop: 1
-  frames: 8420
+  frames: 8848
 --- !u!1001 &1899537938
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -48631,7 +48631,7 @@ AudioSource:
   OutputAudioMixerGroup: {fileID: 0}
   m_audioClip: {fileID: 8300000, guid: c17c465f8e76be0448981ae753396721, type: 3}
   m_PlayOnAwake: 0
-  m_Volume: 1
+  m_Volume: 0.699
   m_Pitch: 1
   Loop: 0
   Mute: 0

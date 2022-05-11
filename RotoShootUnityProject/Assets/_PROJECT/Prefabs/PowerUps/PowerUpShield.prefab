@@ -32,6 +32,7 @@ Transform:
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 0
@@ -106,10 +107,11 @@ MonoBehaviour:
   specialEffect: {fileID: 0}
   soundEffect: {fileID: 0}
   travelSpeed: 2
+  currentTravelSpeed: 0
   dissolveAnim: {fileID: 524294970427774196}
   playerShieldPrefab: {fileID: 4628581462396991242, guid: f2759175ad1625948b264241c5525121,
     type: 3}
-  playerShieldPrefabInstance: {fileID: 0}
+  TriggerShieldButton: {fileID: 0}
 --- !u!114 &-4105950463894380294
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -124,7 +126,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
 --- !u!95 &524294970427774196
 Animator:
-  serializedVersion: 3
+  serializedVersion: 4
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
@@ -137,6 +139,7 @@ Animator:
   m_UpdateMode: 0
   m_ApplyRootMotion: 0
   m_LinearVelocityBlending: 0
+  m_StabilizeFeet: 0
   m_WarningMessage: 
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
@@ -152,8 +155,8 @@ BoxCollider:
   m_IsTrigger: 1
   m_Enabled: 1
   serializedVersion: 2
-  m_Size: {x: 0.46, y: 0.74, z: 0.2}
-  m_Center: {x: 0.05, y: 0, z: 0}
+  m_Size: {x: 0.62, y: 0.74, z: 0.2}
+  m_Center: {x: 0, y: 0, z: 0}
 --- !u!54 &-3939826440404866278
 Rigidbody:
   m_ObjectHideFlags: 0

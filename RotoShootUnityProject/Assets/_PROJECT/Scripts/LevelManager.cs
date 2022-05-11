@@ -313,12 +313,13 @@ public class LevelManager : Singleton<LevelManager>
             //print($"readyToFireAtPlayer = true");
             //readyToFireAtPlayer = true; // this is set back to false in Update() of EnemyFireAtPlayerBehaviour01.cs
             var aliveEnemy = GetRandomAliveEnemy();
-            if (aliveEnemy != null)
+            //enemy position is onscreen AND not too low (close to player)
+            if ((aliveEnemy != null) && (aliveEnemy.transform.position.y >= -1.5f) && (aliveEnemy.transform.position.y <= 9))
             {
               aliveEnemy.enemyFireAtPlayerBehaviour01.FireMissileAtPlayer();
+            currentTimeBetweenFiringAtPlayer = Random.Range(enemyRateOfFireMin, enemyRateOfFireMax);
             }
             //readyToFireAtPlayer = false;
-            currentTimeBetweenFiringAtPlayer = Random.Range(enemyRateOfFireMin, enemyRateOfFireMax);
           }
         }
       }

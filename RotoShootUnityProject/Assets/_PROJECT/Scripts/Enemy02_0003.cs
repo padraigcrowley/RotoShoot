@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 
 /// <summary>
-/// Enemy type that follows waypoint path
+/// Enemy type that follows waypoint path - it's the "mystery UFO" one....
 /// </summary>
 
 public class Enemy02_0003 : EnemyBehaviour02
