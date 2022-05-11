@@ -101,7 +101,16 @@ public class LevelManager : Singleton<LevelManager>
 
     InitializeLCC();
 
-    if (levelSetupData.lccEnemyKills != -1)
+    if (levelSetupData.lccKillBoss)
+    {
+      UIManager.Instance.CurrentEnemyKillCount.enabled = false;
+      UIManager.Instance.RequiredEnemyKillCount.enabled = false;
+      SetupBoss();
+      SetupEnemies();
+      StartCoroutine(UIManager.Instance.DoMissionStartLCCText(2f, 2f, "KILL\nTHE\nBOSS!"));
+
+    }
+    else if (levelSetupData.lccEnemyKills != -1)
     {
       SetupEnemies();
       StartCoroutine(UIManager.Instance.DoMissionStartLCCText(2f, 2f, $"KILL\n{levelSetupData.lccEnemyKills}\nENEMIES!"));
@@ -109,14 +118,7 @@ public class LevelManager : Singleton<LevelManager>
       UIManager.Instance.CurrentEnemyKillCount.text = "0";
       UIManager.Instance.RequiredEnemyKillCount.enabled = true;
     }
-    if (levelSetupData.lccKillBoss)
-    {
-      UIManager.Instance.CurrentEnemyKillCount.enabled = false;
-      UIManager.Instance.RequiredEnemyKillCount.enabled = false;
-      SetupBoss();
-      StartCoroutine(UIManager.Instance.DoMissionStartLCCText(2f, 2f, "KILL\nTHE\nBOSS!"));
 
-    }
     if (levelSetupData.spinningMineSpawnPointData.levelHasSpinningMine)
     {
       SetupSpinningMine();

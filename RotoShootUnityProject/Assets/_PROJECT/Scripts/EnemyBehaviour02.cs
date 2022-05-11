@@ -427,7 +427,7 @@ public abstract class EnemyBehaviour02 : ExtendedBehaviour
   {
     if (GameplayManager.Instance.currentGameState == GameplayManager.GameState.LEVEL_IN_PROGRESS)
     {
-      if (collision.gameObject.tag.Equals("PlayerMissile"))
+      if ((collision.gameObject.tag.Equals("PlayerMissile")) && (transform.position.y <= 9.0f)) //enemy is visible on-screen  
       {
         missileObject = collision.gameObject;
         enemyState = EnemyState.HIT_BY_PLAYER_MISSILE;

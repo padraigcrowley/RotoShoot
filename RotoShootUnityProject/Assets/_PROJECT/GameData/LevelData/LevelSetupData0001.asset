@@ -13,10 +13,10 @@ MonoBehaviour:
   m_Name: LevelSetupData0001
   m_EditorClassIdentifier: 
   levelNumber: 1
-  lccEnemyKills: 100
+  lccEnemyKills: 50
   lccSurviveTime: 4
   lccKillBoss: 0
-  numMaxActiveWaves: 3
+  numMaxActiveWaves: 2
   TimeBetweenWavesMin: 0
   TimeBetweenWavesMax: 0
   enemyRateOfFireMin: -1
@@ -29,7 +29,7 @@ MonoBehaviour:
     horizontalDistBetweenEnemies: 0
     speedMultiplier: 1
     hpMultiplier: 1
-    waypointPath: {fileID: 3729171643158534044, guid: 0a2edb2ef98efcd498404c946bb49839,
+    waypointPath: {fileID: 4358290136698238957, guid: 0a2edb2ef98efcd498404c946bb49839,
       type: 3}
     numEnemiesInWave: 8
     timeBetweenSpawn: 0.5
@@ -40,7 +40,7 @@ MonoBehaviour:
     horizontalDistBetweenEnemies: 0
     speedMultiplier: 1
     hpMultiplier: 1
-    waypointPath: {fileID: 3729171643158534044, guid: 58d94f7cde43bef4eae61740a75fa166,
+    waypointPath: {fileID: 2537412665192699248, guid: aadd2b92c1cf17e46bd22b1e24368141,
       type: 3}
     numEnemiesInWave: 8
     timeBetweenSpawn: 0.5
@@ -51,7 +51,7 @@ MonoBehaviour:
     horizontalDistBetweenEnemies: 0
     speedMultiplier: 1
     hpMultiplier: 1
-    waypointPath: {fileID: 3729171643158534044, guid: aadd2b92c1cf17e46bd22b1e24368141,
+    waypointPath: {fileID: 3927980405404299936, guid: 9b4a81d4333da564cbfa32a9d29fe0ff,
       type: 3}
     numEnemiesInWave: 8
     timeBetweenSpawn: 0.5
@@ -78,5 +78,5 @@ MonoBehaviour:
   - {x: -1.29, y: -5}
   - {x: 1.29, y: -5}
   - {x: 3.84, y: -5}
-  timeBetweenAsteroidShower: 30
+  timeBetweenAsteroidShower: -1
   levelControlType: 2
