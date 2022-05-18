@@ -292,14 +292,15 @@ public class SpinningMineBehaviour : ExtendedBehaviour
 
   void RepeatBurstFire()
   {
-    StartCoroutine(BurstFire(5, .025f, 4, 1f));
-    MasterAudio.PlaySound("spinning_mine_fire_01");
+    //StartCoroutine(BurstFire(5, .025f, 4, 1f));
+    StartCoroutine(BurstFire(4, .01f, 4, 1f));
 
   }
   IEnumerator BurstFire(int numShots, float timeBetweenShots, int numTimesToRepeat, float intervalBetweenBursts)
   {
     for (int repeat = 0; repeat < numTimesToRepeat; repeat++)
     {
+      MasterAudio.PlaySound("spinning_mine_fire_01");
       for (int i = 0; i < numShots; i++)
       {
         FireMissile(false);

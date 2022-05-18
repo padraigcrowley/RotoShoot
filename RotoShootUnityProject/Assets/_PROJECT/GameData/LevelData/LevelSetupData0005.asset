@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: LevelSetupData0005
   m_EditorClassIdentifier: 
   levelNumber: 1
-  lccEnemyKills: 81
+  lccEnemyKills: 40
   lccSurviveTime: 4
   lccKillBoss: 0
   numMaxActiveWaves: 3
@@ -25,24 +25,13 @@ MonoBehaviour:
   - enemyPrefab: {fileID: 4342350733379744943, guid: 3bf3914ccf51ea64aa01feaa452f98f3,
       type: 3}
     startPos: {x: 0, y: 12}
-    verticalDistBetweenEnemies: 0
-    horizontalDistBetweenEnemies: 0
+    verticalDistBetweenEnemies: 3
+    horizontalDistBetweenEnemies: 3
     speedMultiplier: 1
     hpMultiplier: 1
-    waypointPath: {fileID: 4639713800137293240, guid: 799b3fa60793490498aaecc6ce7d6c42,
+    waypointPath: {fileID: 6894582719787879626, guid: 7fc59ff80295f5d4dade795fdb5df514,
       type: 3}
-    numEnemiesInWave: 8
-    timeBetweenSpawn: 0.5
-  - enemyPrefab: {fileID: 4342350733379744943, guid: 3bf3914ccf51ea64aa01feaa452f98f3,
-      type: 3}
-    startPos: {x: 1.29, y: 12}
-    verticalDistBetweenEnemies: 0
-    horizontalDistBetweenEnemies: 0
-    speedMultiplier: 1
-    hpMultiplier: 1
-    waypointPath: {fileID: 3729171643158534044, guid: 2d06ac0a1c0e5df41a0481119688c1f4,
-      type: 3}
-    numEnemiesInWave: 8
+    numEnemiesInWave: 4
     timeBetweenSpawn: 0.5
   bossSpawnPointData:
     bossPrefab: {fileID: 0}
