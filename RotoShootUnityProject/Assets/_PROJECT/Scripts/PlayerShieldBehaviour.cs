@@ -1,8 +1,10 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using DarkTonic.MasterAudio;
 
-public class PlayerShieldBehaviour : MonoBehaviour
+
+public class PlayerShieldBehaviour : ExtendedBehaviour
 {
 
   private float durationSeconds, timeoutWarningFlashThreshold = 2.0f, timeoutWarningFlashDuration = 0.2f;
@@ -23,7 +25,10 @@ public class PlayerShieldBehaviour : MonoBehaviour
     //playerShieldSpriteRenderer.enabled = true;
 
     durationSeconds = GameController.Instance.shieldDuration;
-    //durationSeconds = 10000; // todo: just a test, delete me
+
+    MasterAudio.PlaySound("player_shield_active_01");
+
+
   }
 
   // Update is called once per frame
@@ -42,9 +47,11 @@ public class PlayerShieldBehaviour : MonoBehaviour
     {
       GameplayManager.Instance.playerShipInvulnerable = false;
       GameplayManager.Instance.playerShieldVisible = false;
-
-      Destroy(gameObject);
-      //playerShieldSpriteRenderer.enabled = false;
+      
+      MasterAudio.FadeOutAllOfSound("player_shield_active_01", .1f);
+      Wait(.12f, () => {
+        Destroy(gameObject);
+      });
     }
 
 

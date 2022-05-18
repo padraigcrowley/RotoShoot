@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using DG.Tweening;
+using DarkTonic.MasterAudio;
 
 public class PowerUpHealth : PowerUp
 {
@@ -24,6 +25,7 @@ public class PowerUpHealth : PowerUp
 		}
 		pulseTween = playerHPWorldspaceCanvasRect.DOScale(1.5f, 0.2f).SetLoops(4, LoopType.Yoyo);
 		base.PickupEffects();
+		MasterAudio.PlaySound("playership_collect_powerup");
 	}
 
 

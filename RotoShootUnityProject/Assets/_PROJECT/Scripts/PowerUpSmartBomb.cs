@@ -1,6 +1,8 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using DarkTonic.MasterAudio;
+
 public class PowerUpSmartBomb : PowerUp
 {
   private float durationSeconds;
@@ -14,7 +16,11 @@ public class PowerUpSmartBomb : PowerUp
     UIManager.Instance.ShowTriggerSmartBombButton();
     base.PowerUpPayload();
   }
-
+  protected override void PickupEffects()
+  {
+    base.PickupEffects();
+    MasterAudio.PlaySound("playership_collect_powerup");
+  }
   //protected override void OnEnable()
   //{
   //  base.OnEnable();

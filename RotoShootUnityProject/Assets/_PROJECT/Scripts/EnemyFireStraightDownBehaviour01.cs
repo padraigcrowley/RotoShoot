@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using DarkTonic.MasterAudio;
 
 public class EnemyFireStraightDownBehaviour01 : MonoBehaviour
 {
@@ -30,6 +31,6 @@ public class EnemyFireStraightDownBehaviour01 : MonoBehaviour
     var adjustedPos = new Vector3(transform.position.x, transform.position.y /*- 1f*/, transform.position.z);
     firedBullet = SimplePool.Spawn(enemyMissile, adjustedPos, Quaternion.identity, enemyMissilesParentPool.transform);
     firedBullet.transform.localRotation = rotation; //v.important line!!!
-
+    MasterAudio.PlaySound("EnemyMissile03_01");
   }
 }

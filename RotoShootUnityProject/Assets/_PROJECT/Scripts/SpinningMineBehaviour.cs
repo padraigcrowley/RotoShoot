@@ -3,6 +3,8 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using SWS; //simple waypoints
+using DarkTonic.MasterAudio;
+
 
 public class SpinningMineBehaviour : ExtendedBehaviour
 {
@@ -291,6 +293,8 @@ public class SpinningMineBehaviour : ExtendedBehaviour
   void RepeatBurstFire()
   {
     StartCoroutine(BurstFire(5, .025f, 4, 1f));
+    MasterAudio.PlaySound("spinning_mine_fire_01");
+
   }
   IEnumerator BurstFire(int numShots, float timeBetweenShots, int numTimesToRepeat, float intervalBetweenBursts)
   {
@@ -349,6 +353,8 @@ public class SpinningMineBehaviour : ExtendedBehaviour
     if (collision.gameObject.tag.Equals("PlayerMissile") && (enemyState == EnemyState.SPINNING_IN_COMPLETED) )
     {
       StartCoroutine(DoHitEffect());
+      MasterAudio.PlaySound("Boss01Hit");
+
       LoseHP(GameController.Instance.playerMissileDamage);
     }
 

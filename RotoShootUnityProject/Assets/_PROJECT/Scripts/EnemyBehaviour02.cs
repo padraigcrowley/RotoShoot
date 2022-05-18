@@ -295,6 +295,7 @@ public abstract class EnemyBehaviour02 : ExtendedBehaviour
       enemyState = EnemyState.ALIVE;  //??
       Enemy02HPWorldSpaceStatusBar.EnableStatusBar();
       Enemy02HPWorldSpaceStatusBar.UpdateStatus(hp, initialHP);
+      MasterAudio.PlaySound("enemy_light_hit_01");
     }
   }
 

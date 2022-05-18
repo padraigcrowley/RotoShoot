@@ -1,6 +1,8 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using DarkTonic.MasterAudio;
+
 
 public class PowerUpStarCoin : PowerUp
 {
@@ -14,6 +16,12 @@ public class PowerUpStarCoin : PowerUp
     GameController.Instance.starCoinCount++;
     UIManager.Instance.starCoinCountText.text = GameController.Instance.starCoinCount.ToString();
     base.PowerUpPayload();
+  }
+
+  protected override void PickupEffects()
+  {
+    base.PickupEffects();
+    MasterAudio.PlaySound("coin_collect");
   }
 
   //protected override void OnEnable()

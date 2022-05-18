@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using DarkTonic.MasterAudio;
 
 public class PowerUpShield : PowerUp
 {
@@ -16,9 +17,14 @@ public class PowerUpShield : PowerUp
     base.PowerUpPayload();
   }
 
+  protected override void PickupEffects()
+  {
+    base.PickupEffects();
+    MasterAudio.PlaySound("playership_collect_powerup");
+  }
   //protected override void Start()
   //{
-            
+
   //  base.Start();
   //}
 
@@ -28,18 +34,18 @@ public class PowerUpShield : PowerUp
   //  //{
   //  //  Destroy(gameObject);
   //  //}
-    
-   
+
+
   //  base.Update();
   //}
   //protected override void PowerUpHasExpired()
   //{
   //  SimplePool.Despawn(playerShieldPrefabInstance);
-   
+
   //  base.PowerUpHasExpired();
   //}
 
 
- 
 
-  }
+
+}
