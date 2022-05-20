@@ -2634,7 +2634,7 @@ MonoBehaviour:
   soundPlayedEventActive: 0
   soundPlayedCustomEvent: 
   willCleanUpDelegatesAfterStop: 1
-  frames: 2822
+  frames: 3314
 --- !u!1 &164015396
 GameObject:
   m_ObjectHideFlags: 0
@@ -11992,7 +11992,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 931518f9ca6c3844891dee74db8ed494, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  weight: 1
+  weight: 2
   probabilityToPlay: 100
   importance: 5
   isUninterruptible: 0
@@ -18439,7 +18439,7 @@ MonoBehaviour:
   soundPlayedEventActive: 0
   soundPlayedCustomEvent: 
   willCleanUpDelegatesAfterStop: 1
-  frames: 2791
+  frames: 4624
 --- !u!1 &687446024
 GameObject:
   m_ObjectHideFlags: 0
@@ -24772,7 +24772,7 @@ MonoBehaviour:
   soundPlayedEventActive: 0
   soundPlayedCustomEvent: 
   willCleanUpDelegatesAfterStop: 1
-  frames: 302
+  frames: 1030
 --- !u!1 &1064010170
 GameObject:
   m_ObjectHideFlags: 0
@@ -24949,7 +24949,7 @@ MonoBehaviour:
   soundPlayedEventActive: 0
   soundPlayedCustomEvent: 
   willCleanUpDelegatesAfterStop: 1
-  frames: 178
+  frames: 324
 --- !u!1 &1102468370
 GameObject:
   m_ObjectHideFlags: 0
@@ -25048,7 +25048,7 @@ MonoBehaviour:
   soundPlayedEventActive: 0
   soundPlayedCustomEvent: 
   willCleanUpDelegatesAfterStop: 1
-  frames: 271
+  frames: 640
 --- !u!1 &1124595346
 GameObject:
   m_ObjectHideFlags: 0
@@ -26387,7 +26387,7 @@ MonoBehaviour:
   soundPlayedEventActive: 0
   soundPlayedCustomEvent: 
   willCleanUpDelegatesAfterStop: 1
-  frames: 3990
+  frames: 4661
 --- !u!1 &1242643018
 GameObject:
   m_ObjectHideFlags: 0
@@ -32961,7 +32961,7 @@ MonoBehaviour:
   soundPlayedEventActive: 0
   soundPlayedCustomEvent: 
   willCleanUpDelegatesAfterStop: 1
-  frames: 733
+  frames: 779
 --- !u!1 &1485229978
 GameObject:
   m_ObjectHideFlags: 0
@@ -34808,7 +34808,7 @@ MonoBehaviour:
   soundPlayedEventActive: 0
   soundPlayedCustomEvent: 
   willCleanUpDelegatesAfterStop: 1
-  frames: 391
+  frames: 1231
 --- !u!1 &1524674621
 GameObject:
   m_ObjectHideFlags: 0
@@ -38577,7 +38577,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 931518f9ca6c3844891dee74db8ed494, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  weight: 1
+  weight: 2
   probabilityToPlay: 100
   importance: 5
   isUninterruptible: 0
@@ -38627,7 +38627,7 @@ AudioSource:
   OutputAudioMixerGroup: {fileID: 0}
   m_audioClip: {fileID: 8300000, guid: 503865937de3e42419d9c460b6df3c91, type: 3}
   m_PlayOnAwake: 0
-  m_Volume: 0.9
+  m_Volume: 1
   m_Pitch: 1
   Loop: 0
   Mute: 0
