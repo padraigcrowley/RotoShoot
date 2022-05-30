@@ -426,7 +426,8 @@ public class MainMenuContoller : ExtendedBehaviour
 #if UNITY_EDITOR
     UnityEditor.EditorApplication.isPlaying = false;
 #else
-    //Application.Quit();
+    Debug.Log("RABBITBADGER - Thanks for playing!");
+    Application.Quit();
     System.Diagnostics.Process.GetCurrentProcess().Kill();
 #endif
   }
