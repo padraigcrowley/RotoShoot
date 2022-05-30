@@ -99,6 +99,8 @@ public class AdsIAPController : Singleton<AdsIAPController>
     GameController.Instance.starCoinCount += iapCoinAmounts[iapBeingBought];
     starCoinCountText.text = ("" + GameController.Instance.starCoinCount);
     getMoreCoinsPanelStarCoinCountText.text = ("" + GameController.Instance.starCoinCount);
+    ES3.Save("hasBoughtAnIAP", true);
+    GameController.Instance.hasBoughtAnIAP = true;
 
   }
   void InterstitialAdCompletedHandler(InterstitialAdNetwork network, AdPlacement placement)

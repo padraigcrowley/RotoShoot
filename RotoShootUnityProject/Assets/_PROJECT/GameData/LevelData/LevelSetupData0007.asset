@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: LevelSetupData0007
   m_EditorClassIdentifier: 
   levelNumber: 1
-  lccEnemyKills: 70
+  lccEnemyKills: 60
   lccSurviveTime: 4
   lccKillBoss: 0
   numMaxActiveWaves: 2
@@ -59,7 +59,7 @@ MonoBehaviour:
     waitTimeBeforeFirstSpawn: 5
     waitTimeBetweenSpawns: 5
     numBurstFiresBeforePause: 2
-    waypointPath: {fileID: 2102224866908703905, guid: 43e0e08ba8aee6d46bda17de6baa5137,
+    waypointPath: {fileID: 6067551397367185325, guid: e459773c5f4515341b709336466a6969,
       type: 3}
   PlayerShipPos: {x: -1.28, y: -5, z: 0}
   shipLanes:

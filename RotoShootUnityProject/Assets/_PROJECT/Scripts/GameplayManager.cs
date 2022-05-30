@@ -141,7 +141,9 @@ public class GameplayManager : Singleton<GameplayManager>, IPowerUpEvents
             ES3.Save("highestLevelPlayed", GameController.Instance.highestLevelPlayed);
           }
           GameplayManager.Instance.currentGameState = GameplayManager.GameState.WAITING_FOR_LEVELCOMPLETE_BUTTONS;
-          if (GameController.Instance.currentLevelPlaying % INTERSTITIAL_AD_LEVEL_COMPLETE_FREQUENCY == 0)
+
+          //if an iap has been bought, don't show interstitials
+          if (GameController.Instance.currentLevelPlaying % INTERSTITIAL_AD_LEVEL_COMPLETE_FREQUENCY == 0 && GameController.Instance.hasBoughtAnIAP == false)
           {
             bool isReady = EasyMobile.Advertising.IsInterstitialAdReady();
 

@@ -13,36 +13,69 @@ MonoBehaviour:
   m_Name: LevelSetupData0010
   m_EditorClassIdentifier: 
   levelNumber: 1
-  lccEnemyKills: 20
+  lccEnemyKills: 40
   lccSurviveTime: -1
   lccKillBoss: 0
-  numMaxActiveWaves: 1
+  numMaxActiveWaves: 4
   TimeBetweenWavesMin: 0
   TimeBetweenWavesMax: 0
   enemyRateOfFireMin: -1
   enemyRateOfFireMax: -1
   levelEnemySpawnPointData:
-  - enemyPrefab: {fileID: 4342350733379744943, guid: 3bf3914ccf51ea64aa01feaa452f98f3,
+  - enemyPrefab: {fileID: 4342350733379744943, guid: 1dc6509eaa9363b45a849e9f37760db6,
       type: 3}
-    startPos: {x: 0, y: 12}
-    verticalDistBetweenEnemies: 5
-    horizontalDistBetweenEnemies: 5
+    startPos: {x: 1.29, y: 12}
+    verticalDistBetweenEnemies: 1
+    horizontalDistBetweenEnemies: 1
     speedMultiplier: 1
     hpMultiplier: 1
-    waypointPath: {fileID: 3729171643158534044, guid: aadd2b92c1cf17e46bd22b1e24368141,
+    waypointPath: {fileID: 8511949620431489576, guid: b2070e3e7fdfc6a4b9798d0b7d321d88,
       type: 3}
-    numEnemiesInWave: 2
+    numEnemiesInWave: 1
     timeBetweenSpawn: 1
-  - enemyPrefab: {fileID: 4342350733379744943, guid: 3bf3914ccf51ea64aa01feaa452f98f3,
+  - enemyPrefab: {fileID: 4342350733379744943, guid: 1dc6509eaa9363b45a849e9f37760db6,
       type: 3}
-    startPos: {x: 0, y: 12}
-    verticalDistBetweenEnemies: 5
-    horizontalDistBetweenEnemies: 5
+    startPos: {x: 1.29, y: 12}
+    verticalDistBetweenEnemies: 1
+    horizontalDistBetweenEnemies: 1
     speedMultiplier: 1
     hpMultiplier: 1
-    waypointPath: {fileID: 5274756834654318759, guid: ab91d6b29252c224a9fb17e61ff10a98,
+    waypointPath: {fileID: 2483977959137305356, guid: a19261ac09e8018498f0c340ef0d09b1,
       type: 3}
-    numEnemiesInWave: 2
+    numEnemiesInWave: 1
+    timeBetweenSpawn: 1
+  - enemyPrefab: {fileID: 4342350733379744943, guid: 1dc6509eaa9363b45a849e9f37760db6,
+      type: 3}
+    startPos: {x: 1.29, y: 12}
+    verticalDistBetweenEnemies: 1
+    horizontalDistBetweenEnemies: 1
+    speedMultiplier: 1
+    hpMultiplier: 1
+    waypointPath: {fileID: 6894582719787879626, guid: 7fc59ff80295f5d4dade795fdb5df514,
+      type: 3}
+    numEnemiesInWave: 1
+    timeBetweenSpawn: 1
+  - enemyPrefab: {fileID: 4342350733379744943, guid: 1dc6509eaa9363b45a849e9f37760db6,
+      type: 3}
+    startPos: {x: 1.29, y: 12}
+    verticalDistBetweenEnemies: 1
+    horizontalDistBetweenEnemies: 1
+    speedMultiplier: 1
+    hpMultiplier: 1
+    waypointPath: {fileID: 2102224866908703905, guid: 43e0e08ba8aee6d46bda17de6baa5137,
+      type: 3}
+    numEnemiesInWave: 1
+    timeBetweenSpawn: 1
+  - enemyPrefab: {fileID: 4342350733379744943, guid: 1dc6509eaa9363b45a849e9f37760db6,
+      type: 3}
+    startPos: {x: 1.29, y: 12}
+    verticalDistBetweenEnemies: 1
+    horizontalDistBetweenEnemies: 1
+    speedMultiplier: 1
+    hpMultiplier: 1
+    waypointPath: {fileID: 3325159811196965634, guid: 3d8bb3e9424fc0648856c1d2bae92068,
+      type: 3}
+    numEnemiesInWave: 1
     timeBetweenSpawn: 1
   bossSpawnPointData:
     bossPrefab: {fileID: 6173529639553121559, guid: 6459c582cfcd1344286a7a952db94fc2,
@@ -58,9 +91,9 @@ MonoBehaviour:
       type: 3}
     speedMultiplier: 1
     hpMultiplier: 1
-    waitTimeBeforeFirstSpawn: 5
-    waitTimeBetweenSpawns: 5
-    numBurstFiresBeforePause: 2
+    waitTimeBeforeFirstSpawn: 15
+    waitTimeBetweenSpawns: 10
+    numBurstFiresBeforePause: 1
     waypointPath: {fileID: 6067551397367185325, guid: e459773c5f4515341b709336466a6969,
       type: 3}
   PlayerShipPos: {x: -1.28, y: -5, z: 0}

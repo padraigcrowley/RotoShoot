@@ -13,36 +13,36 @@ MonoBehaviour:
   m_Name: LevelSetupData0009
   m_EditorClassIdentifier: 
   levelNumber: 1
-  lccEnemyKills: 100
+  lccEnemyKills: 60
   lccSurviveTime: 4
   lccKillBoss: 0
-  numMaxActiveWaves: 3
+  numMaxActiveWaves: 2
   TimeBetweenWavesMin: 0
   TimeBetweenWavesMax: 0
   enemyRateOfFireMin: -1
   enemyRateOfFireMax: -1
   levelEnemySpawnPointData:
-  - enemyPrefab: {fileID: 4342350733379744943, guid: 3bf3914ccf51ea64aa01feaa452f98f3,
+  - enemyPrefab: {fileID: 4342350733379744943, guid: 98337287636663844a798648967aa1c7,
       type: 3}
-    startPos: {x: 0, y: 12}
-    verticalDistBetweenEnemies: 0
-    horizontalDistBetweenEnemies: 0
-    speedMultiplier: 1
+    startPos: {x: -3.8, y: 10}
+    verticalDistBetweenEnemies: 1
+    horizontalDistBetweenEnemies: 2.55
+    speedMultiplier: 2
     hpMultiplier: 1
-    waypointPath: {fileID: 4639713800137293240, guid: 799b3fa60793490498aaecc6ce7d6c42,
+    waypointPath: {fileID: 4358290136698238957, guid: 0a2edb2ef98efcd498404c946bb49839,
       type: 3}
     numEnemiesInWave: 8
     timeBetweenSpawn: 0.5
-  - enemyPrefab: {fileID: 4342350733379744943, guid: 3bf3914ccf51ea64aa01feaa452f98f3,
+  - enemyPrefab: {fileID: 4342350733379744943, guid: 1dc6509eaa9363b45a849e9f37760db6,
       type: 3}
     startPos: {x: 1.29, y: 12}
-    verticalDistBetweenEnemies: 0
-    horizontalDistBetweenEnemies: 0
+    verticalDistBetweenEnemies: 3
+    horizontalDistBetweenEnemies: 3
     speedMultiplier: 1
     hpMultiplier: 1
-    waypointPath: {fileID: 3729171643158534044, guid: 2d06ac0a1c0e5df41a0481119688c1f4,
+    waypointPath: {fileID: 8566307812535118965, guid: 2ef20b9a363366941ac9e820af6b2854,
       type: 3}
-    numEnemiesInWave: 8
+    numEnemiesInWave: 1
     timeBetweenSpawn: 0.5
   bossSpawnPointData:
     bossPrefab: {fileID: 0}
@@ -51,7 +51,7 @@ MonoBehaviour:
     hpMultiplier: 0
     waypointPath: {fileID: 0}
   spinningMineSpawnPointData:
-    levelHasSpinningMine: 1
+    levelHasSpinningMine: 0
     spinningMinePrefab: {fileID: 2411896081061765972, guid: 41a1b7e89cfaebb4e9e25449413c44bd,
       type: 3}
     speedMultiplier: 1
@@ -67,5 +67,5 @@ MonoBehaviour:
   - {x: -1.29, y: -5}
   - {x: 1.29, y: -5}
   - {x: 3.84, y: -5}
-  timeBetweenAsteroidShower: 20
+  timeBetweenAsteroidShower: 10
   levelControlType: 2

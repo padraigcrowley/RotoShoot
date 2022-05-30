@@ -22,6 +22,7 @@ public class LevelManager : Singleton<LevelManager>
   public float horizontalDistBetweenEnemies = 2.0f; //todo: magic number
   public bool readyToFireAtPlayer = false;
   public Camera BaseGameSceneCamera; // see InitialiseLevel()
+  private float delayBeforeActivatingEnemiesOnBossLevels;
 
   // a list of lists of EnemyBehaviour02 scripts - for each enemy in each wave
   List<List<EnemyBehaviour02>> enemyWavesParentBehaviourScripts = new List<List<EnemyBehaviour02>>();
@@ -54,10 +55,12 @@ public class LevelManager : Singleton<LevelManager>
 	{
     enemyMissilesParentPool = new GameObject("enemyMissilesParentPoolObject");
     enemyMissilesParentPool.tag = "enemyMissilesParentPoolObject";
+    delayBeforeActivatingEnemiesOnBossLevels = 10.0f;
+
 
   }
 
-	public void InitialiseLevel()
+  public void InitialiseLevel()
   {
 
     GetLevelStats(GameController.Instance.currentLevelPlaying);
@@ -291,12 +294,19 @@ public class LevelManager : Singleton<LevelManager>
 
   void Update()
   {
-    //if (Input.GetKeyDown(KeyCode.S))
-    //spinningMineInstance = Instantiate(spinningMine);
+
+    if ((levelSetupData.lccKillBoss) && delayBeforeActivatingEnemiesOnBossLevels > 0)
+    {
+      delayBeforeActivatingEnemiesOnBossLevels -= Time.deltaTime;
+      if(bossScript.boss01State == BossBehaviour01.BossState.BOSS_IN_PROGRESS) //stop the countdown if boss is already in progress
+        delayBeforeActivatingEnemiesOnBossLevels = 0;
+      return;
+    }
+        
 
     if (GameplayManager.Instance.currentGameState == GameplayManager.GameState.LEVEL_IN_PROGRESS)
     {
-      if (levelSetupData.lccEnemyKills != -1)
+      //if (levelSetupData.lccEnemyKills != -1) // removed this to allow regular enemies in boss levels
       {
         //print($"NumActiveWaves = { GetNumActiveWaves()}");
         //if there are less than the number of maxwaves, activate another (random) wave

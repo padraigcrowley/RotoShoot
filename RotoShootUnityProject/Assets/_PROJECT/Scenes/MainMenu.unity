@@ -19059,11 +19059,11 @@ MonoBehaviour:
   isExpanded: 1
   isChecked: 1
   useFades: 1
-  fadeInTime: 0
-  fadeOutTime: 0.21
-  useCustomLooping: 0
+  fadeInTime: 0.53
+  fadeOutTime: 0.53
+  useCustomLooping: 1
   minCustomLoops: 1
-  maxCustomLoops: 5
+  maxCustomLoops: 3
   useRandomStartTime: 0
   randomStartMinPercent: 0
   randomStartMaxPercent: 0
@@ -19088,7 +19088,7 @@ AudioSource:
   OutputAudioMixerGroup: {fileID: 0}
   m_audioClip: {fileID: 8300000, guid: 4f89dcac66b019944a102af4d4aaf41d, type: 3}
   m_PlayOnAwake: 0
-  m_Volume: 0.476
+  m_Volume: 0.42
   m_Pitch: 0.67
   Loop: 1
   Mute: 0
@@ -32346,7 +32346,7 @@ AudioSource:
   m_audioClip: {fileID: 0}
   m_PlayOnAwake: 0
   m_Volume: 1
-  m_Pitch: 1
+  m_Pitch: 0.67
   Loop: 0
   Mute: 0
   Spatialize: 0
@@ -41077,7 +41077,7 @@ MonoBehaviour:
   soundPlayedEventActive: 0
   soundPlayedCustomEvent: 
   willCleanUpDelegatesAfterStop: 1
-  frames: 12628
+  frames: 15248
 --- !u!1 &1721058260
 GameObject:
   m_ObjectHideFlags: 0
