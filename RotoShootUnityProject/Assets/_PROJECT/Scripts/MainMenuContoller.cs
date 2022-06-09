@@ -273,6 +273,7 @@ public class MainMenuContoller : ExtendedBehaviour
 
   public void HandleLevelSelectorBackButtonPress()
 	{
+    onMainMenu = true;
     TransitionHelper.TransitionOut(LevelSelectButtonsPanel);
     Wait(.3f, () => {
        TransitionHelper.TransitionIn(MainMenuButtonTransitions);
