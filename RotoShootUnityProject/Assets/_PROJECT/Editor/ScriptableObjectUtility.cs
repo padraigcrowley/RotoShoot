@@ -2,6 +2,7 @@
 using UnityEditor;
 using System.IO;
 
+// Archived page: http://web.archive.org/web/20201028192837/http://wiki.unity3d.com/index.php/CreateScriptableObjectAsset
 
 /// http://wiki.unity3d.com/index.php?title=CreateScriptableObjectAsset
 /// This is a method to easily create a new asset file instance of a ScriptableObject-derived class. The asset is uniquely named and placed in the currently selected project path; this mimics the way Unity's built-in assets are created....
